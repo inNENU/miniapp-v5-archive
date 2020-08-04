@@ -1,0 +1,24 @@
+<view class="phone-wrapper">
+  <!-- 电话图标 -->
+  <image class="phone-icon" mode="widthFix" src="./phone.svg" />
+  <!-- 电话号码 -->
+  <view class="number">{{config.num}}</view>
+  <!-- 拨打电话按钮 -->
+  <view
+    class="call"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    catch:tap="call"
+  >
+    <image class="icon" mode="widthFix" src="./call.svg" />
+  </view>
+  <!-- 添加联系人按钮 -->
+  <view
+    class="add"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    catch:tap="addContact"
+  >
+    <image class="icon" mode="widthFix" src="./add.svg" />
+  </view>
+</view>

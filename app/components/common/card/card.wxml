@@ -1,0 +1,11 @@
+<view class="card" hover-class="button-hover" catch:tap="tap">
+  <image class="img" src="{{config.src}}" mode="aspectFill" />
+  <view class="detail">
+    <view wx:if="{{config.logo}}" class="icon">
+      <image class="logo" src="{{config.logo}}" />
+      <view class="name">{{config.name}}</view>
+    </view>
+    <view class="title">{{config.title}}</view>
+    <view class="desc">{{config.desc}}</view>
+  </view>
+</view>

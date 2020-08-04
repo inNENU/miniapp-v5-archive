@@ -1,0 +1,24 @@
+<swiper
+  class="{{config.class || 'swiper'}}"
+  style="{{config.style}}"
+  indicator-dots="{{config.indicatorDots !== false}}"
+  indicator-color="{{config.dotColor || '#ffffff88'}}"
+  indicator-active-color="{{config.dotActiveColor || '#fff'}}"
+  autoplay="{{config.autoplay !== false}}"
+  interval="{{config.interval || '5000'}}"
+  duration="{{config.duration || '500'}}"
+  circular="{{config.circular !== false}}"
+  vertical="{{config.vertical}}"
+  previous-margin="{{config.preMargin || '0px'}}"
+  next-margin="{{config.nextMargin || '0px'}}"
+  catch:change="change"
+  catch:animationfinish="animation"
+>
+  <swiper-item wx:for="{{config.url}}" wx:key="*this">
+    <image
+      class="{{config.imgClass || 'image'}}"
+      mode="{{config.imgmode || 'aspectFill'}}"
+      src="{{item}}"
+    />
+  </swiper-item>
+</swiper>

@@ -1,0 +1,10 @@
+/* audio */
+.audio {
+  margin: 20px 10%;
+}
+
+/* video */
+.video {
+  height: 388.125rpx;
+  margin: 20px 4%;
+}

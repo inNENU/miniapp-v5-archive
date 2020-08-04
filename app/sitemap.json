@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "action": "allow",
+      "page": "module/page",
+      "matching": "inclusive",
+      "priority": 100
+    },
+    { "action": "allow", "page": "*", "priority": 100 }
+  ]
+}

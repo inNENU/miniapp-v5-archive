@@ -1,0 +1,25 @@
+.infoCtn {
+  display: flex;
+  padding: 10px 20px;
+  align-items: flex-start;
+}
+
+.avator {
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.nickName {
+  text-align: left;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.detail {
+  text-align: left;
+  line-height: 1.5;
+}

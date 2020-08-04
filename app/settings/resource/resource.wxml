@@ -1,0 +1,8 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<template is="page" data="{{page, theme, darkmode, event}}" />

@@ -1,0 +1,6 @@
+module.exports = {
+  /** 导航 */
+  navigate: function (event) {
+    event.instance.callMethod("$route", event.currentTarget.dataset.url);
+  },
+};

@@ -1,0 +1,91 @@
+<wxs src="./share.wxs" module="share" />
+<!-- 分享按钮 -->
+<view
+  wx:if="{{share.isShowed(config)}}"
+  class="share-button"
+  hover-class="hover"
+  hover-stay-time="200"
+  catch:touchstart="{{share.button}}"
+  catch:touchmove="{{share.button}}"
+  catch:touchend="{{share.button}}"
+>
+  <image class="icon" src="./share.svg" />
+</view>
+<!-- 分享菜单 -->
+<view class="share-wrapper" catch:tap="{{share.hideMenu}}">
+  <!-- 背景蒙层 -->
+  <view class="mask" />
+  <!-- 分享按钮列表 -->
+  <view class="share-menu">
+    <block wx:if="{{config.shareable}}">
+      <button
+        class="button"
+        hover-class="button-hover"
+        hover-start-time="0"
+        open-type="share"
+        share-type="{{1}}"
+      >
+        分享给好友
+      </button>
+      <button
+        wx:if="{{env === 'qq'}}"
+        class="button"
+        hover-class="button-hover"
+        hover-start-time="0"
+        open-type="share"
+        share-type="{{2}}"
+      >
+        分享到空间
+      </button>
+      <button
+        wx:if="{{env === 'qq'}}"
+        class="button"
+        hover-class="button-hover"
+        hover-start-time="0"
+        open-type="share"
+        share-type="{{16}}"
+      >
+        分享到朋友圈
+      </button>
+      <button
+        wx:if="{{env === 'qq'}}"
+        class="button"
+        hover-class="button-hover"
+        hover-start-time="0"
+        open-type="share"
+        share-type="{{8}}"
+      >
+        分享到微信好友
+      </button>
+    </block>
+    <button
+      wx:if="{{config.shareable && env === 'wx'}}"
+      class="button"
+      hover-class="button-hover"
+      hover-start-time="0"
+      bind:tap="download"
+    >
+      保存页面二维码
+    </button>
+    <button
+      wx:if="{{config.contact !== false}}"
+      class="button"
+      hover-class="button-hover"
+      hover-start-time="0"
+      open-type="contact"
+      bind:tap="contact"
+    >
+      联系 Mr.Hope
+    </button>
+    <button
+      wx:if="{{config.feedback !== false && env === 'wx'}}"
+      class="button"
+      hover-class="button-hover"
+      hover-start-time="0"
+      open-type="feedback"
+    >
+      意见反馈
+    </button>
+    <button class="cancel-button" hover-class="button-hover">取消</button>
+  </view>
+</view>

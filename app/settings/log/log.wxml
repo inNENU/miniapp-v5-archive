@@ -1,0 +1,10 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+>
+  <navigation-bar title="更新日志" />
+</page-meta>
+<template is="page" data="{{page, theme, darkmode}}" />

@@ -1,0 +1,25 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}}">
+  <template is="nav" data="{{...nav, theme}}" />
+  <view class="desc">点击对应学期可查看详情</view>
+  <view class="calendar-wrapper">
+    <time-line config="{{calendar}}" catch:active="display" />
+  </view>
+  <footer />
+</view>
+
+<!-- 校历详情 -->
+<popup
+  config="{{popupConfig}}"
+  show="{{display}}"
+  catch:confirm="close"
+  catch:close="close"
+>
+  <time-line config="{{calendarDetail}}" />
+</popup>

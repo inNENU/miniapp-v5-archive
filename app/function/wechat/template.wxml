@@ -1,0 +1,34 @@
+<template name="wechat-logo">
+  <view
+    class="wechat-logo"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    data-path="{{config.path}}"
+    catch:tap="navigate"
+  >
+    <image class="logo" src="{{config.logo}}" />
+    <view class="name">{{config.name}}</view>
+    <view class="desc">{{config.desc}}</view>
+  </view>
+</template>
+
+<template name="wechat-card">
+  <view
+    class="card"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    data-title="{{config.title}}"
+    data-url="{{config.url}}"
+    catch:tap="cardTap"
+  >
+    <image class="img" src="{{config.cover}}" mode="aspectFill" />
+    <view class="detail">
+      <view wx:if="{{config.logo}}" class="icon">
+        <image class="logo" src="{{config.logo}}" />
+        <view class="name">{{config.name}}</view>
+      </view>
+      <view class="title">{{config.title}}</view>
+      <view class="desc">{{config.desc}}</view>
+    </view>
+  </view>
+</template>

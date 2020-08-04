@@ -1,0 +1,60 @@
+.doc-wrapper {
+  display: flex;
+  position: relative;
+
+  max-width: 517px;
+  margin: 2px 15px;
+  padding: 8px 10px 8px 15px;
+  background-color: var(--block-bgcolor);
+  border-radius: 8px;
+
+  color: var(--text-color);
+  line-height: 1.2;
+  align-items: center;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: light) {
+  .doc-wrapper {
+    background-color: var(--bgcolor-grey);
+  }
+
+  .grey .doc-wrapper {
+    background-color: var(--block-bgcolor);
+  }
+}
+
+@media (min-width: 547px) {
+  .doc-wrapper {
+    margin: 0 auto;
+  }
+}
+
+/* 文档图标 */
+.doc-wrapper .doc-icon {
+  width: 32px;
+  height: 32px;
+  margin-right: 15px;
+  flex: none;
+}
+
+.doc-wrapper .name {
+  text-align: left;
+  font-size: 17px;
+  flex: 1 1 auto;
+}
+
+.doc-wrapper .download,
+.doc-wrapper .view {
+  width: 26px;
+  height: 26px;
+  margin: 0 4px;
+  border-radius: 13px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.doc-wrapper .icon {
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,13 @@
+.action {
+  position: absolute;
+  top: calc(50% - 50px);
+  left: calc(50% - 80px);
+  width: 160px !important;
+}
+
+.back {
+  position: absolute;
+  top: calc(50% + 10px);
+  left: calc(50% - 80px);
+  width: 160px !important;
+}

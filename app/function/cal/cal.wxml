@@ -1,0 +1,86 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}}">
+  <template is="body" data="{{page, theme}}" />
+  <view class="gradeHeader">
+    <scroll-view scroll-x class="picker">
+      新计算
+      <button />
+    </scroll-view>
+    <view class="edit" catch:tap="edit">{{editText}}</view>
+  </view>
+  <view class="gradeinputerF">
+    <view
+      wx:for="{{grade}}"
+      wx:for-item="Grade"
+      class="courseContainer"
+      id="{{Grade.id}}"
+    >
+      <button
+        class="sort {{display? '': 'hide'}}"
+        id="sort{{Grade.id}}"
+        catch:touchmove="sort"
+      >
+        <text class="sortText">↕</text>
+      </button>
+      <input
+        class="course"
+        type="text"
+        confirm-type="next"
+        value="{{Grade.course}}"
+        placeholder="  课程{{Grade.id+1}}"
+        maxlength="8"
+        focus="{{Grade.courseFocus}}"
+        data-class="course"
+        data-id="{{Grade.id}}"
+        data-maxlength="8"
+        catch:input="input"
+        catch:confirm="next"
+      />
+      <input
+        class="grade"
+        type="number"
+        value="{{Grade.grade}}"
+        placeholder="  成绩"
+        maxlength="4"
+        catch:input="input"
+        focus="{{Grade.gradeFocus}}"
+        data-class="grade"
+        data-id="{{Grade.id}}"
+        data-maxlength="4"
+      />
+      <input
+        class="credit"
+        type="digit"
+        value="{{Grade.credit}}"
+        placeholder="  学分"
+        maxlength="3"
+        focus="{{Grade.courseFocus}}"
+        data-class="credit"
+        data-id="{{Grade.id}}"
+        data-maxlength="3"
+        catch:input="input"
+      />
+      <button
+        class="remove {{display?'':'hide'}}"
+        data-action="remove"
+        data-id="{{Grade.id}}"
+        catch:tap="remove"
+      >
+        <text class="removeText">-</text>
+      </button>
+    </view>
+    <view class="btnCtn">
+      <button catch:tap="addNew">新增</button>
+      <button catch:tap="calculate">计算</button>
+    </view>
+  </view>
+  <view wx:if="{{gradePointAverage}}" class="gradeDisplay">
+    总学分：{{totalCredit}}\n 平均绩点：{{gradePointAverage}}
+  </view>
+</view>

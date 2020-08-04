@@ -1,0 +1,49 @@
+.tab-wrapper {
+  position: relative;
+  padding-top: 36.8px;
+}
+
+.tab-bar-wrapper {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  width: 100%;
+}
+
+.tab-bar {
+  display: flex;
+
+  min-width: 100%;
+  background: var(--bgcolor);
+
+  white-space: nowrap;
+
+  flex-wrap: nowrap;
+  align-items: center;
+
+  transition: all 0.3s;
+}
+
+.tab-bar .item {
+  padding: 8px 16px 6px;
+  border-bottom: 2px solid var(--bgcolor);
+  color: var(--grey-three);
+
+  flex: 1 0;
+}
+
+.tab-bar .item.active {
+  border-color: var(--dark-grey);
+  color: var(--text-color);
+}
+
+.page-wrapper {
+  height: 200px;
+}
+
+.page-wrapper .tab-page {
+  overflow-y: scroll;
+}

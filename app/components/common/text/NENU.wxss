@@ -1,0 +1,23 @@
+/* NENU */
+.NENU .paragraph-title {
+  min-height: 36px;
+  padding: 12px 15px 4px 15px;
+
+  text-align: left;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.NENU-title + .paragraph-title {
+  padding-top: 2px;
+}
+
+.grey.NENU .paragraph-title {
+  min-height: 37px;
+  margin: 0 10px;
+  padding: 23px 15px 5px 15px;
+
+  color: var(--dark-grey);
+  font-size: 13px;
+  font-weight: 400;
+}

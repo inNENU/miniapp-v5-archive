@@ -1,0 +1,169 @@
+/* ---Android theme made by Mr.Hope--- */
+
+/* V 1.0.0 */
+
+/* 安卓容器 */
+
+.Android,
+.Androidgrey {
+  width: 100%;
+  min-height: 100%;
+  background-color: #f8f8f8;
+
+  color: var(--text-color);
+  text-align: center;
+  font-family:
+    'Helvetica Neue',
+    FZKTJW,
+    -apple-system-font,
+    'PingFang SC',
+    Helvetica,
+    STHeiti,
+    Tahoma,
+    Simsun,
+    sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android {
+    background-color: #000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android.grey {
+    background-color: #10110b;
+  }
+}
+
+/* 导航 */
+
+.Android-navigationBar,
+.Android-navPlaceHolder {
+  width: 100%;
+  background-color: #f8f8f8;
+}
+
+.Android-navigationBar {
+  display: flex;
+  position: fixed;
+  z-index: 99;
+
+  box-sizing: content-box;
+  height: 44px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.AndroidNavShadow {
+  box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
+}
+
+@media (prefers-color-scheme: dark) {
+  .AndroidNavShadow {
+    box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+  }
+}
+
+.Android-navPlaceHolder {
+  position: relative;
+  height: 69px;
+  color: #d9d9d9;
+  font-size: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-navigationBar,
+  .Android-navPlaceHolder {
+    background-color: #000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .grey .Android-navigationBar,
+  .grey .Android-navPlaceHolder {
+    background-color: #10110b;
+  }
+}
+
+.Android-titletext {
+  position: absolute;
+  z-index: 100;
+
+  width: 100%;
+
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.Android-navBack {
+  display: flex;
+  position: relative;
+  z-index: 101;
+
+  min-width: 10 !important;
+  min-height: 16 !important;
+  margin: 0 3% !important;
+  padding: 8px 5px !important;
+  background-color: rgba(0, 0, 0, 0) !important;
+  border: none !important;
+
+  line-height: 2.4;
+  align-items: center;
+}
+
+.Android-backArrow {
+  width: 11px;
+  height: 11px;
+  border-width: 0 0 3px 3px;
+  border-style: solid;
+  border-color: black;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-backArrow {
+    border-color: white;
+  }
+}
+
+.Android-leftText {
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-leftText {
+    color: #cacaca;
+  }
+}
+
+.Android-head {
+  padding: 25px 40px;
+}
+
+.Android-nav-title {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.Android-desc {
+  margin-top: 5px;
+  color: #888;
+  text-align: left;
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-desc {
+    color: #777;
+  }
+}
+
+.Android-title {
+  margin: 0.66em 15px 0.34em 15px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.6;
+}

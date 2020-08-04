@@ -1,0 +1,54 @@
+page {
+  --text-color: #000;
+  --bgcolor: #fff;
+  --bgcolor-grey: #f3f3f8;
+  --block-bgcolor: #fff;
+  --border-color: #cccccf;
+  --grey: #888;
+  --grey-three: #333;
+  --grey-four: #444;
+  --dark-grey: #666;
+  --light-grey: #999;
+  --border-color-light: #d9d9d9;
+  --arrow-color: #c5c5c7;
+  --hover: rgba(0, 0, 0, 0.1);
+  --card-shadow: rgba(191, 192, 195, 0.15);
+}
+
+@media (prefers-color-scheme: light) {
+  page {
+    --text-color: #000;
+    --bgcolor: #fff;
+    --bgcolor-grey: #f3f3f8;
+    --block-bgcolor: #fff;
+    --border-color: #cccccf;
+    --grey: #888;
+    --grey-three: #333;
+    --grey-four: #444;
+    --dark-grey: #666;
+    --light-grey: #999;
+    --border-color-light: #d9d9d9;
+    --arrow-color: #c5c5c7;
+    --hover: rgba(0, 0, 0, 0.1);
+    --card-shadow: rgba(191, 192, 195, 0.15);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  page {
+    --text-color: #fff;
+    --bgcolor: #000;
+    --bgcolor-grey: #000;
+    --block-bgcolor: #1c1c1e;
+    --border-color: #3a3a3d;
+    --grey: #777;
+    --grey-three: #ccc;
+    --grey-four: #bbb;
+    --dark-grey: #999;
+    --light-grey: #666;
+    --arrow-color: #5a5a5f;
+    --border-color-light: #000;
+    --hover: rgba(255, 255, 255, 0.1);
+    --card-shadow: rgba(64, 63, 60, 0.15);
+  }
+}

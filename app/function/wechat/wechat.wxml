@@ -1,0 +1,32 @@
+<import src="/components/template" />
+<import src="./template" />
+
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+
+<view class="{{theme}} {{grey? 'grey': ''}}">
+  <template is="nav" data="{{...nav, theme}}" />
+  <view wx:if="{{homePage}}" class="wechat-logo-wrapper">
+    <template
+      wx:for="{{wechat}}"
+      wx:key="name"
+      wx:for-item="config"
+      is="wechat-logo"
+      data="{{config}}"
+    />
+  </view>
+  <view wx:else class="wechat-wrapper">
+    <template
+      is="wechat-card"
+      wx:for="{{wechat.content}}"
+      wx:key="title"
+      wx:for-item="config"
+      data="{{config}}"
+    />
+  </view>
+  <footer config="{{footer}}" />
+</view>

@@ -1,0 +1,29 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}} grey">
+  <template is="nav" data="{{...nav, theme}}" />
+
+  <search
+    words="{{words}}"
+    searchword="{{searchword}}"
+    catch:searching="searching"
+    catch:search="search"
+  />
+
+  <template is="body" data="{{page, theme}}" />
+
+  <title config="{{ { text: '搜索结果' } }}" />
+
+  <view wx:if="{{result.content.length === 0 }}" class="info"
+    >Oops... 没有找到任何结果</view
+  >
+
+  <list wx:else config="{{result}}" />
+
+  <foot />
+</view>

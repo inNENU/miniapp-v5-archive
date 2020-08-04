@@ -1,0 +1,44 @@
+/* --------------
+    iOS grid
+-------------- */
+
+.iOS .grid-wrapper {
+  width: 100%;
+  padding: 0 6px;
+}
+
+.iOS .grid-wrapper .grid {
+  width: calc(25% - 10px);
+  margin: 5px;
+  padding: 10px 0;
+  background-color: var(--block-bgcolor);
+  border-radius: 6px;
+}
+
+.iOS .grid-wrapper .icon {
+  width: 28px;
+  height: 28px;
+}
+
+.iOS .grid-wrapper .text {
+  color: var(--grey-four);
+  font-size: 14px;
+}
+
+@media (min-width: 480px) {
+  .iOS .grid-wrapper .grid {
+    width: calc(16.666% - 10px);
+  }
+}
+
+@media (min-width: 768px) {
+  .iOS .grid-wrapper {
+    padding: 0 10px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .iOS .grid-wrapper .grid {
+    width: calc(12.5% - 10px);
+  }
+}

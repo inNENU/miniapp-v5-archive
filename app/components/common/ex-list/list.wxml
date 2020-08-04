@@ -1,0 +1,150 @@
+<wxs src="./list.wxs" module="list" />
+<!-- 列表头部注释文字 -->
+<view wx:if="{{config.header !== false}}" class="list-header"
+  >{{config.header}}</view
+>
+<!-- 列表主体 -->
+<view class="list-wrapper">
+  <block wx:for="{{config.content}}" wx:for-item="listItem" wx:key="text">
+    <block wx:if="{{!listItem.hidden}}">
+      <!-- 导航链接 -->
+      <view
+        wx:if="{{listItem.url}}"
+        id="{{index}}"
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        catch:tap="{{list.navigate}}"
+      >
+        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <view class="text">{{listItem.text}}</view>
+        <view class="desc access">{{listItem.desc}}</view>
+      </view>
+      <!-- 按钮、嵌入选择器与滑块 -->
+      <button
+        wx:elif="{{list.isButton(listItem)}}"
+        id="{{index}}"
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        disabled="{{listItem.disabled}}"
+        plain
+        data-item="{{listItem}}"
+        catch:tap="{{list.button}}"
+        capture-bind:tap="{{listItem.pickerValue ? 'pickerTap' : listItem.slider ? 'sliderTap' : ''}}"
+      >
+        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <!-- 按钮文字为蓝色 -->
+        <view class="text" style="{{listItem.button? 'color: #3478f7;': ''}}">
+          {{listItem.text}}
+        </view>
+        <!-- 显示滑块值 -->
+        <view wx:if="{{listItem.slider}}" class="desc">{{listItem.value}}</view>
+        <!-- 显示行内选择器值 -->
+        <view wx:elif="{{listItem.pickerValue}}" class="desc">
+          <block wx:if="{{listItem.single}}">{{listItem.value}}</block>
+          <block wx:else>
+            <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
+          </block>
+        </view>
+      </button>
+      <!-- 非嵌入选择器 -->
+      <picker
+        wx:elif="{{listItem.pickerValue}}"
+        id="{{index}}"
+        class="list picker"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        value="{{listItem.currentValue}}"
+        range="{{listItem.pickerValue}}"
+        header-text="{{listItem.header || listItem.text}}"
+        catch:change="pickerChange"
+      >
+        <view class="text">{{listItem.text}}</view>
+        <view wx:if="{{listItem.pickerValue}}" class="desc">
+          <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
+        </view>
+      </picker>
+      <!-- navigator -->
+      <navigator
+        wx:elif="{{listItem.navigate}}"
+        id="{{index}}"
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        url="{{listItem.navigate}}"
+        openType="{{listItem.openType}}"
+        target="{{listItem.target}}"
+      >
+        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <view class="text">{{listItem.text}}</view>
+        <view class="desc {{listItem.url? 'access': ''}}"
+          >{{listItem.desc}}</view
+        >
+      </navigator>
+      <!-- 普通文字段落与开关 -->
+      <view wx:else id="{{index}}" class="list">
+        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <text class="text" decode selectable space="nbsp"
+          >{{listItem.text}}</text
+        >
+        <view class="desc">
+          {{listItem.desc}}
+          <switch
+            wx:if="{{listItem.swiKey}}"
+            checked="{{listItem.status}}"
+            color="{{color}}"
+            data-id="{{index}}"
+            catch:change="switch"
+          />
+        </view>
+      </view>
+      <!-- 滑块与嵌入式选择器显示 -->
+      <block wx:if="{{listItem.visible}}">
+        <!-- 分割线 -->
+        <view class="divline" />
+        <!-- 滑块显示 -->
+        <slider
+          wx:if="{{listItem.slider}}"
+          class="slider"
+          min="{{listItem.min? listItem.min: '0'}}"
+          max="{{listItem.max? listItem.max: '100'}}"
+          value="{{listItem.value}}"
+          step="{{listItem.step? listItem.step: '1'}}"
+          data-id="{{index}}"
+          catch:changing="sliderChange"
+          catch:change="sliderChange"
+        />
+        <!-- 嵌入式选择器显示 -->
+        <picker-view
+          wx:if="{{listItem.pickerValue}}"
+          class="picker-view"
+          indicator-class="pickSelected"
+          value="{{listItem.currentValue}}"
+          mask-class="pickerMask"
+          data-id="{{index}}"
+          catch:change="pickerChange"
+        >
+          <picker-view-column wx:if="{{listItem.single}}" class="column">
+            <view wx:for="{{listItem.pickerValue}}" wx:key="*this" class="item"
+              >{{item}}</view
+            >
+          </picker-view-column>
+          <block wx:else>
+            <block wx:for="{{listItem.pickerValue}}" wx:key>
+              <picker-view-column class="column">
+                <view wx:for="{{item}}" wx:key="*this" class="item"
+                  >{{item}}</view
+                >
+              </picker-view-column>
+            </block>
+          </block>
+        </picker-view>
+      </block>
+      <!-- 分割线显示 -->
+      <view class="{{listItem.icon? 'icon ' :''}}divline" />
+    </block>
+  </block>
+</view>
+<!-- 列表尾部注释文字 -->
+<view wx:if="{{config.footer}}" class="list-footer">{{config.footer}}</view>

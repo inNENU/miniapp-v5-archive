@@ -1,0 +1,70 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}} grey">
+  <template is="nav" data="{{...nav, theme}}" />
+  <view class="infoCtn">
+    <view class="avator">
+      <open-data type="userAvatarUrl" />
+    </view>
+    <view>
+      <view class="nickName">
+        <open-data type="userNickName" />
+      </view>
+      <view class="detail">
+        <open-data type="userGender" lang="zh_CN" />
+        <text decode>&ensp;</text>
+        <open-data type="userProvince" lang="zh_CN" />
+        <text decode>&ensp;</text>
+        <open-data type="userCity" lang="zh_CN" />
+      </view>
+    </view>
+  </view>
+  <official-account />
+  <template is="body" data="{{page, theme}}" />
+  <view class="list-header" />
+  <view class="list-wrapper">
+    <button
+      class="list"
+      hover-class="button-hover"
+      hover-stay-time="100"
+      open-type="share"
+      plain
+    >
+      <image class="icon" src="/icon/tabPage/share.svg" />
+      <view class="text">分享小程序</view>
+    </button>
+    <view class="icon divline" />
+    <button
+      class="list"
+      hover-class="button-hover"
+      hover-stay-time="100"
+      open-type="feedback"
+      plain
+    >
+      <image class="icon" src="/icon/tabPage/bug.svg" />
+      <view class="text">bug反馈</view>
+    </button>
+    <block wx:if="{{env === 'wx'}}">
+      <view class="icon divline" />
+      <button
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        open-type="contact"
+        plain
+      >
+        <image class="icon" src="/icon/tabPage/contact.svg" />
+        <view class="text"
+          >联系{{appID === 'wx9ce37d9662499df3'? '校会君': 'Mr.Hope'}}</view
+        >
+      </button>
+    </block>
+  </view>
+  <footer config="{{footer}}" />
+</view>
+<add-tip />

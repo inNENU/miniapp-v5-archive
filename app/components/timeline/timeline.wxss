@@ -1,0 +1,203 @@
+.timelineCtn {
+  padding: 8px 15px;
+}
+
+.timeline {
+  box-sizing: border-box;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+.timeline,
+.timeline-item {
+  margin: 0;
+  font-size: 14px;
+  list-style: none;
+}
+
+.timeline-item {
+  position: relative;
+  padding: 0 0 20px;
+}
+
+.timeline-item-tail {
+  position: absolute;
+  top: 0.75em;
+  left: 4px;
+
+  height: 100%;
+  border-left: 2px solid #e8e8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline-item-tail {
+    border-left: 2px solid #181818;
+  }
+}
+
+.timeline-item-pending .timeline-item-head {
+  font-size: 12px;
+}
+
+.timeline-item-pending .timeline-item-tail {
+  display: none;
+}
+
+.timeline-item-head {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  border-radius: 100px;
+}
+
+.timeline-item-head-blue {
+  border-color: #1890ff;
+  color: #1890ff;
+}
+
+.timeline-item-head-red {
+  border-color: #f5222d;
+  color: #f5222d;
+}
+
+.timeline-item-head-green {
+  border-color: #52c41a;
+  color: #52c41a;
+}
+
+.timeline-item-head-custom {
+  position: absolute;
+  top: 5.5px;
+  left: 5px;
+
+  width: auto;
+  height: auto;
+  margin-top: 0;
+  padding: 3px 1px;
+  border: 0;
+  border-radius: 0;
+
+  text-align: center;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+}
+
+.timeline-item-content {
+  position: relative;
+  top: -6px;
+  margin: 0 0 0 18px;
+}
+
+.timeline-item-last {
+  padding-bottom: 0;
+}
+
+.timeline-item-last .timeline-item-tail {
+  display: none;
+}
+
+.timeline-item-last .timeline-item-content {
+  min-height: 48px;
+}
+
+.timeline.timeline-alternate .timeline-item-head,
+.timeline.timeline-alternate .timeline-item-head-custom,
+.timeline.timeline-alternate .timeline-item-tail,
+.timeline.timeline-right .timeline-item-head,
+.timeline.timeline-right .timeline-item-head-custom,
+.timeline.timeline-right .timeline-item-tail {
+  left: 50%;
+}
+
+.timeline.timeline-alternate .timeline-item-head,
+.timeline.timeline-right .timeline-item-head {
+  margin-left: -4px;
+}
+
+.timeline.timeline-alternate .timeline-item-head-custom,
+.timeline.timeline-right .timeline-item-head-custom {
+  margin-left: 1px;
+}
+
+.timeline.timeline-alternate .timeline-item-left .timeline-item-content,
+.timeline.timeline-right .timeline-item-left .timeline-item-content {
+  left: 50%;
+  width: 50%;
+  text-align: left;
+}
+
+.timeline.timeline-left .timeline-item .timeline-item-content {
+  text-align: left;
+}
+
+.timeline.timeline-alternate .timeline-item-right .timeline-item-content,
+.timeline.timeline-right .timeline-item-right .timeline-item-content {
+  left: -30px;
+  right: 50%;
+
+  width: 50%;
+  margin-right: 18px;
+
+  text-align: right;
+}
+
+.timeline.timeline-right .timeline-item-right .timeline-item-head,
+.timeline.timeline-right .timeline-item-right .timeline-item-head-custom,
+.timeline.timeline-right .timeline-item-right .timeline-item-tail {
+  left: 100%;
+}
+
+.timeline.timeline-right .timeline-item-right .timeline-item-content {
+  left: -30px;
+  right: 0;
+  width: 100%;
+}
+
+.timeline.timeline-pending .timeline-item-last .timeline-item-tail {
+  display: block;
+  border-left: 2px dotted #e8e8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline.timeline-pending .timeline-item-last .timeline-item-tail {
+    border-left: 2px dotted #181818;
+  }
+}
+
+.timeline.timeline-reverse .timeline-item-last .timeline-item-tail {
+  display: none;
+}
+
+.timeline.timeline-reverse .timeline-item-pending .timeline-item-tail {
+  display: block;
+  border-left: 2px dotted #e8e8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  .timeline.timeline-reverse .timeline-item-pending .timeline-item-tail {
+    border-left: 2px dotted #181818;
+  }
+}
+
+.timeline.timeline-reverse .timeline-item-pending .timeline-item-content {
+  min-height: 48px;
+}
+
+.timeline-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.timeline-title {
+  color: var(--text-color);
+  font-size: 16px;
+}

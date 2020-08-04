@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "popup": "/components/popup/popup",
+    "time-line": "/components/timeline/timeline"
+  }
+}

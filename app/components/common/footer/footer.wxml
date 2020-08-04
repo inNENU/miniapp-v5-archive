@@ -1,0 +1,10 @@
+<view class="footer-wrapper">
+  <text wx:if="{{config.desc}}" decode>{{config.desc}}</text>
+  <view class="info">
+    <text wx:if="{{config.author}}" decode>作者: {{config.author}}</text>
+    <text wx:if="{{config.time}}" decode>最后更新于: {{config.time}}</text>
+  </view>
+
+  <view class="footer">{{text}}</view>
+  <view class="copyright">Copyright © 2017-2020 HopeStudio</view>
+</view>

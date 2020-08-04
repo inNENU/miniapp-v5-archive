@@ -1,0 +1,67 @@
+/******************
+      通用样式
+ *****************/
+.paragraph {
+  max-width: 517px;
+
+  margin: 0 auto;
+  padding: 0 15px;
+
+  text-align: justify;
+  font-size: 16px;
+  line-height: 1.6;
+  word-break: break-all;
+
+  word-wrap: break-word;
+}
+
+@media (min-width: 768px) {
+  .paragraph {
+    font-size: 17px;
+  }
+}
+
+.grey .paragraph {
+  position: relative;
+
+  max-width: unset;
+
+  margin: 0 10px;
+  padding: 10px 15px;
+  background-color: var(--block-bgcolor);
+  border-radius: 8px;
+
+  color: var(--text-color);
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .grey .paragraph {
+    margin: 0 15px;
+  }
+}
+
+.paragraph .list {
+  display: flex;
+}
+
+.paragraph .list .head {
+  padding: 0 0.5em;
+  flex-shrink: 0;
+}
+
+.grey .paragraph .list .head {
+  padding: 0 0.5em 0 0;
+}
+
+.paragraph .text {
+  display: block;
+}
+
+@import "iOS.wxss";
+@import "Android.wxss";
+@import "NENU.wxss";
+@import "weui.wxss";

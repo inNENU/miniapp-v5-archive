@@ -1,0 +1,23 @@
+<!-- 加载错误显示 -->
+<view wx:if="{{error}}" class="status-wrapper">
+  <icon type="warn" size="32" style="margin-bottom: 5px;" />
+  <text>图片加载失败</text>
+</view>
+<!-- 加载中显示 -->
+<view wx:elif="{{!load}}" class="status-wrapper">
+  <image class="loading" src="/icon/loading.svg" lazy-load />
+  <text>加载中...</text>
+</view>
+<!-- 图片 -->
+<image
+  class="img"
+  style="{{load? '':'height: 0px;'}}"
+  lazy-load="{{config.lazy !== false}}"
+  mode="{{config.imgMode || 'widthFix'}}"
+  src="{{config.src}}"
+  catch:load="load"
+  catch:error="error"
+  catch:tap="view"
+/>
+<!-- 图片解释文字 -->
+<view wx:if="{{config.desc}}" class="img-desc">▲{{config.desc}}</view>

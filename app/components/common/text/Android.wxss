@@ -1,0 +1,31 @@
+/* Android */
+.Android .paragraph-title {
+  max-width: 517px;
+  margin: 0.33em 25px 0.17em 25px;
+
+  text-align: left;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@media (min-width: 630px) {
+  .Android .paragraph-title {
+    margin: 0.33em auto 0.17em auto;
+  }
+}
+
+.grey.Android .paragraph-title {
+  max-width: unset;
+  min-height: 10px;
+  margin: 0.77em 0 0.3em 0;
+  padding: 0 15px;
+
+  color: var(--light-grey);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.Android .paragraph {
+  font-size: 15px;
+}

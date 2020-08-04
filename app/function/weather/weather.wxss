@@ -1,0 +1,478 @@
+.wrapper {
+  width: 100%;
+  background-color: var(--bgcolor-grey);
+  color: var(--text-color);
+}
+
+/* 天气基本信息 */
+.weather-wrapper {
+  display: flex;
+  position: relative;
+
+  box-sizing: border-box;
+  width: 100%;
+  height: 470px;
+  background-image: linear-gradient(-90deg, #3bbcff, #4af4ff);
+
+  color: #fff;
+  text-align: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: hidden;
+}
+
+.share {
+  position: absolute;
+  z-index: 99;
+  top: 120px;
+  right: 15px;
+
+  width: auto !important;
+  padding: 4px 12px !important;
+  background-color: orange !important;
+  border: none !important;
+  border-radius: 16px;
+
+  color: #fff !important;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+.location {
+  width: 76%;
+  height: 16px;
+  margin: 18px 12%;
+
+  font-size: 16px;
+  line-height: 1;
+}
+
+.weather-wrapper .temperature {
+  margin-top: 60px;
+  padding-left: 22px;
+  font-size: 62px;
+  line-height: 1.2;
+}
+
+.weather-wrapper .type {
+  font-size: 22px;
+  line-height: 2;
+}
+
+.weather-wrapper .detail {
+  text-align: justify;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.tip {
+  z-index: 2;
+  margin-top: 16px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* 今明天预报 */
+.forecast {
+  position: relative;
+
+  height: 80px;
+  margin-bottom: 10px;
+  padding: 15px 0;
+  background-color: var(--block-bgcolor);
+}
+
+.forecast .item {
+  float: left;
+
+  width: 50%;
+  padding: 0 20px;
+
+  color: var(--grey-four);
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.forecast .top {
+  height: 12px;
+  margin-bottom: 13px;
+}
+
+.forecast .date {
+  float: left;
+}
+
+.forecast .temperature {
+  float: right;
+}
+
+.forecast .bottom {
+  height: 22px;
+}
+
+.forecast .weather {
+  float: left;
+  height: 22px;
+  line-height: 22px;
+}
+
+.forecast .icon {
+  float: right;
+  width: 22px;
+  height: 22px;
+}
+
+.flex {
+  display: flex;
+}
+
+/* 小时预报 */
+.hours {
+  display: flex;
+
+  height: 110px;
+  margin: 20px 0;
+  background-color: var(--block-bgcolor);
+  align-items: stretch;
+}
+
+.hours .item {
+  display: flex;
+
+  width: 58px;
+  padding: 10px 0;
+
+  text-align: center;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.hours .time {
+  color: var(--light-grey);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.hours .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.hours .degree {
+  color: var(--grey-four);
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+/* 天预报 */
+.days {
+  display: flex;
+  position: relative;
+
+  width: 100%;
+  height: 400px;
+  background-color: var(--block-bgcolor);
+}
+
+.days .item {
+  display: flex;
+
+  width: 20vw;
+  padding: 20px 0;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.days .day {
+  color: var(--light-grey);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.days .date {
+  color: var(--light-grey);
+  font-size: 12px;
+  line-height: 1.2;
+}
+
+.days .weather {
+  color: var(--grey-four);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.days .icon {
+  width: 24px;
+  height: 24px;
+  margin: 8px auto;
+}
+
+.days .placeholder {
+  height: 148px;
+}
+
+.days .wind {
+  width: 40px;
+  color: #b2b2b2;
+  font-size: 12px;
+  line-height: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .days .wind {
+    color: #434343;
+  }
+}
+
+/* 画布 */
+.temperature.canvas {
+  position: absolute;
+  top: 126px;
+  width: 160%;
+  height: 148px;
+}
+
+/* 其他信息 */
+.info {
+  height: 188px;
+}
+
+.info .item {
+  float: left;
+
+  width: 25%;
+  height: 94px;
+  background-color: #fff;
+  border-right: 1px solid #e6e6e6;
+  border-bottom: 1px solid #e6e6e6;
+
+  text-align: center;
+}
+
+.info .icon {
+  display: block;
+
+  width: 24px;
+  height: 24px;
+  margin: 15px auto 10px;
+
+  background-size: 24px;
+}
+
+.info .content {
+  height: 14px;
+  margin-bottom: 6px;
+
+  color: #434343;
+  font-size: 14px;
+  line-height: 14px;
+}
+
+.info .title {
+  height: 12px;
+  color: #999;
+  line-height: 12px;
+}
+
+/* 背景相关 */
+.background {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+}
+
+.weather-wrapper .background {
+  z-index: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+.weather-wrapper .background,
+.weather-wrapper .background .layer {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+}
+
+.weather-wrapper .background .layer {
+  content: "";
+  left: -6%;
+  right: -6%;
+
+  background-position: bottom;
+  transition: all 0.2s;
+
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+
+.weather-wrapper.night {
+  background-image: linear-gradient(-90deg, #313877, #44abec);
+}
+
+.weather-wrapper.night .layer1 {
+  z-index: 3;
+  background-image: url(https://v3.mp.innenu.com/img/weather/ground-night.png);
+}
+
+.weather-wrapper.night .layer2 {
+  z-index: 2;
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-night.png);
+}
+
+.weather-wrapper.night .layer3 {
+  z-index: 1;
+  background-image: url(https://v3.mp.innenu.com/img/weather/mountain-night.png);
+}
+
+.weather-wrapper.night.C9 {
+  background-image: linear-gradient(-90deg, #313877, #44abec);
+}
+
+.weather-wrapper.night.C9 .layer1 {
+  z-index: 3;
+  background-image: url(https://v3.mp.innenu.com/img/weather/ground-night.png);
+}
+
+.weather-wrapper.night.C9 .layer2 {
+  z-index: 2;
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-night.png);
+}
+
+.weather-wrapper.night.C9 .layer3 {
+  z-index: 1;
+  background-image: url(https://v3.mp.innenu.com/img/weather/mountain-night2.png);
+}
+
+.weather-wrapper .layer1 {
+  z-index: 3;
+  background-image: url(https://v3.mp.innenu.com/img/weather/ground-day.png);
+}
+
+.weather-wrapper .layer2 {
+  z-index: 2;
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-day.png);
+}
+
+.weather-wrapper .layer3 {
+  z-index: 1;
+  background-image: url(https://v3.mp.innenu.com/img/weather/layer3.png);
+}
+
+.weather-wrapper.C1 {
+  background-image: linear-gradient(-90deg, #86c3ca, #b5e9e8);
+}
+
+.weather-wrapper.C1 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud-day2.png);
+}
+
+.weather-wrapper.C1 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-day2.png);
+}
+
+.weather-wrapper.C1 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C1-layer3.png);
+}
+
+.weather-wrapper.C3 {
+  background-image: linear-gradient(-90deg, #43697f, #abd2d7);
+}
+
+.weather-wrapper.C3 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud-day3.png);
+}
+
+.weather-wrapper.C3 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-day3.png);
+}
+
+.weather-wrapper.C3 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C3-layer3.png);
+}
+
+.weather-wrapper.C4 {
+  background-image: linear-gradient(-90deg, #67a1dc, #a8e0f7);
+}
+
+.weather-wrapper.C4 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud-snow.png);
+}
+
+.weather-wrapper.C4 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake-snow.png);
+}
+
+.weather-wrapper.C4 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C4-layer3.png);
+}
+
+.weather-wrapper.C5 {
+  background-image: linear-gradient(-90deg, #81aedc, #a9def1);
+}
+
+.weather-wrapper.C5 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud5.png);
+}
+
+.weather-wrapper.C5 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake5.png);
+}
+
+.weather-wrapper.C5 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C4-layer3.png);
+}
+
+.weather-wrapper.C6 {
+  background-image: linear-gradient(-90deg, #9b9b96, #c1c1bc);
+}
+
+.weather-wrapper.C6 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud6.png);
+}
+
+.weather-wrapper.C6 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake6.png);
+}
+
+.weather-wrapper.C6 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C6-layer3.png);
+}
+
+.weather-wrapper.C7 {
+  background-image: linear-gradient(-90deg, #c09461, #eedfa1);
+}
+
+.weather-wrapper.C7 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud7.png);
+}
+
+.weather-wrapper.C7 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake7.png);
+}
+
+.weather-wrapper.C7 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/C7-layer3.png);
+}
+
+.weather-wrapper.C9 {
+  background-image: linear-gradient(-90deg, #50ade8, #7ae0fa);
+}
+
+.weather-wrapper.C9 .layer1 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/groud9.png);
+}
+
+.weather-wrapper.C9 .layer2 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/lake9.png);
+}
+
+.weather-wrapper.C9 .layer3 {
+  background-image: url(https://v3.mp.innenu.com/img/weather/windy.png);
+}

@@ -1,0 +1,83 @@
+<wxs src="./map.wxs" module="schoolMap" />
+<map
+  id="map"
+  subkey="NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4"
+  longitude="{{map.longitude}}"
+  latitude="{{map.latitude}}"
+  scale="{{map.scale}}"
+  markers="{{schoolMap.genMarker(markers)}}"
+  setting="{{darkmode? schoolMap.nightMapSettings: schoolMap.dayMapSettings}}"
+  catch:markertap="markers"
+  catch:callouttap="markers"
+  catch:updated="update"
+  catch:regionchange="regionChange"
+/>
+<!-- 返回按钮 -->
+<view
+  class="back-button"
+  style="top:{{info.statusBarHeight + 5}}px;"
+  hover-class="button-hover"
+  catch:tap="back"
+>
+  <image
+    class="back-icon"
+    src="/icon/{{firstPage? 'home': 'back'}}{{darkmode? 'White': ''}}.svg"
+  />
+</view>
+<!-- 放大按钮 -->
+<view
+  class="scale-button zoomin"
+  hover-class="button-hover"
+  data-action="enlarge"
+  catch:tap="scale"
+>
+  <text>+</text>
+</view>
+<!-- 缩小按钮 -->
+<view
+  class="scale-button zoomout"
+  hover-class="button-hover"
+  data-action="narrow"
+  catch:tap="scale"
+>
+  <text>-</text>
+</view>
+<!-- 点位按钮 -->
+<view
+  class="point-button"
+  hover-class="button-hover"
+  hover-stay-time="100"
+  catch:tap="point"
+>
+  <image class="icon" src="./icon/point.svg" />
+</view>
+<!-- 分类按钮 -->
+<view class="select-wrapper {{pointDisplay? 'move-left-in': 'move-left-out'}}">
+  <view
+    wx:for="{{category}}"
+    wx:key="path"
+    class="button{{selectItem === item.path? ' active': ''}} borderB"
+    hover-class="button-hover"
+    data-index="{{index}}"
+    catch:tap="select"
+  >
+    {{item.name}}
+  </view>
+</view>
+<!-- 自定义tab栏 -->
+<view class="tab" id="mapTab">
+  <view
+    class="locate-button"
+    hover-class="button-hover"
+    catch:tap="moveToLocation"
+  >
+    <image class="icon" src="./icon/locate.png" />
+  </view>
+  <view class="switch" catch:tap="changeArea">
+    <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
+    <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
+  </view>
+  <view class="list-button" catch:tap="showList">
+    <image class="icon" src="./icon/list.png" />
+  </view>
+</view>

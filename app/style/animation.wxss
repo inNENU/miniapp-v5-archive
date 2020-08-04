@@ -1,0 +1,41 @@
+/* animation */
+
+.fadeIn,
+.fadeOut {
+  transition: opacity 0.8s !important;
+}
+
+.fadeIn {
+  opacity: 1 !important;
+}
+
+.fadeOut {
+  opacity: 0 !important;
+}
+
+.move-left-in,
+.move-left-out,
+.move-right-in,
+.move-right-out,
+.move-down-in,
+.move-down-out,
+.move-up-in,
+.move-up-out {
+  transition: all 0.8s !important;
+}
+
+.move-left-out {
+  transform: translateX(100vw);
+}
+
+.move-right-out {
+  transform: translateX(-100vw);
+}
+
+.move-down-out {
+  transform: translateY(-100vh);
+}
+
+.move-up-out {
+  transform: translateY(100vh);
+}

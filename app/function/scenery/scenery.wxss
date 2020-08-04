@@ -1,0 +1,47 @@
+.imgCtn {
+  display: flex;
+
+  width: 100%;
+  height: 80%;
+  min-height: 80%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lastBtn {
+  width: 80rpx;
+  padding: 0 10rpx 0 10rpx;
+  opacity: 0.6;
+}
+
+.nextBtn {
+  width: 80rpx;
+  padding: 0 10rpx 0 10rpx;
+  opacity: 0.6;
+}
+
+.btnImg {
+  width: 100%;
+}
+
+.showCtn {
+  width: 590rpx;
+}
+
+.showImg {
+  width: 100%;
+}
+
+.imgGroup {
+  width: 100%;
+  padding: 10px 20px 50px 20px;
+}
+
+.click {
+  opacity: 0.8;
+}
+
+.imgPreview {
+  width: auto;
+  height: 80%;
+}

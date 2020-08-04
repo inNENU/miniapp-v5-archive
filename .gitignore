@@ -1,0 +1,8 @@
+app/miniprogram_npm/
+app/**/*.js
+app/**/*.js.map
+doc/**
+node_modules/**
+
+!app/node_modules/**/*.js
+!app/node_modules/**/*.js.map

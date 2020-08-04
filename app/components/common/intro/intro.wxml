@@ -1,0 +1,12 @@
+<view class="intro-wrapper">
+  <!-- 高斯模糊背景 -->
+  <image class="background" src="{{config.logo}}" mode="aspectFill" />
+  <view class="intro">
+    <!-- 图标 -->
+    <image class="icon" src="{{config.logo}}" />
+    <!-- 名称 -->
+    <view class="name">{{config.name}}</view>
+    <!-- 详情介绍 -->
+    <view class="desc">{{config.desc}}</view>
+  </view>
+</view>

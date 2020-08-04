@@ -1,0 +1,11 @@
+<view
+  wx:if="{{showTop}}"
+  class="addtip-wrapper"
+  style="top:{{36 + statusBarHeight}}px;"
+>
+  <view class="arrow" />
+  <view class="body"
+    >{{text}}
+    <text class="icon-button close" catch:tap="close" />
+  </view>
+</view>

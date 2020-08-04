@@ -1,0 +1,139 @@
+.search-bar {
+  display: flex;
+  position: relative;
+
+  padding: 8px;
+  background-color: #f3f3f8;
+
+  color: var(--text-color);
+  align-items: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-bar {
+    background-color: #000;
+  }
+}
+
+.search-wrapper {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 4px;
+  flex-shrink: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-wrapper {
+    background-color: #121212;
+  }
+}
+
+.input-wrapper {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding: 0 32px;
+}
+
+.search-bar .input-wrapper .search-icon {
+  left: 12px;
+  margin-left: 0;
+}
+
+.search-bar .search-icon {
+  position: absolute;
+  top: 50%;
+  margin-top: -8px;
+  margin-left: -20px;
+}
+
+.search-bar .input {
+  height: 32px;
+  margin-left: 4px;
+
+  text-align: left;
+  font-size: 14px;
+  line-height: 32px;
+}
+
+.search-bar .placeholder-wrapper {
+  display: flex;
+
+  color: var(--grey);
+  line-height: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-bar .placeholder {
+  position: relative;
+  padding-left: 24px;
+  font-size: 14px;
+}
+
+.search-bar .clear-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  padding: 0 12px;
+}
+
+.search-bar .clear {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  margin-top: -8px;
+}
+
+.search-bar .cancel {
+  margin-left: 8px;
+  color: #576b95;
+  line-height: 32px;
+  white-space: nowrap;
+}
+
+.search-bar .word-wrapper {
+  position: absolute;
+  z-index: 2;
+  top: 42px;
+  left: 8px;
+  right: 46px;
+
+  max-height: 60vh;
+
+  background-color: var(--block-bgcolor);
+  border-radius: 6px;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
+
+  overflow-y: scroll;
+}
+
+.search-bar .word {
+  position: relative;
+
+  padding: 4px 32px;
+
+  color: var(--grey-four);
+  text-align: left;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.search-bar .word::after {
+  content: " ";
+  position: absolute;
+  left: 15px;
+  right: 0;
+  bottom: 0;
+
+  height: 1px;
+  border-bottom: 1px solid var(--border-color);
+  transform: scaleY(0.4);
+  transform-origin: 0 100%;
+}
+
+.search-bar .word:last-child::after {
+  display: none;
+}

@@ -1,0 +1,9 @@
+{
+  "out": "./doc",
+  "name": "in东师",
+  "includes": "./app/utils",
+  "includeDeclarations": false,
+  "excludeExternals": true,
+  "excludeNotExported": false,
+  "hideGenerator": true
+}

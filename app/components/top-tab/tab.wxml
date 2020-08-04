@@ -1,0 +1,33 @@
+<view class="tab-wrapper">
+  <scroll-view
+    class="tab-bar-wrapper"
+    scroll-x
+    scroll-into-view="tab-bar{{current}}"
+  >
+    <view class="tab-bar" enable-flex>
+      <view
+        wx:for="{{navList}}"
+        wx:key="index"
+        class="item {{index === current? 'active': ''}}"
+        id="tab-bar{{index}}"
+        data-index="{{index}}"
+        catch:tap="changeTab"
+      >
+        {{item}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <swiper
+    class="page-wrapper"
+    style="{{height? 'height:' + (height - 37) + 'px;': ''}}"
+    current="{{current}}"
+    bindchange="change"
+    bindtransition="transition"
+    bindanimationfinish="aminationFinish"
+  >
+    <swiper-item class="tab-page" wx:for="{{navList}}" wx:key="index">
+      <slot name="page{{index + 1}}" />
+    </swiper-item>
+  </swiper>
+</view>

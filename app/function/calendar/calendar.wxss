@@ -1,0 +1,10 @@
+.desc {
+  margin: 12px 20px;
+  color: var(--grey);
+  text-align: right;
+  font-size: 14px;
+}
+
+.calendar-wrapper {
+  padding: 10px 15px;
+}

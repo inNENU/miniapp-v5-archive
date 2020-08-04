@@ -1,0 +1,206 @@
+{
+  "description": "项目配置文件",
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "suffix",
+        "value": "md"
+      },
+      {
+        "type": "suffix",
+        "value": "bak"
+      }
+    ]
+  },
+  "miniprogramRoot": "app/",
+  "compileType": "miniprogram",
+  "libVersion": "2.12.0",
+  "appid": "wx9ce37d9662499df3",
+  "qqLibVersion": "1.17.0",
+  "qqappid": "1109559721",
+  "projectname": "in%E4%B8%9C%E5%B8%88",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": false,
+    "scopeDataCheck": false,
+    "uglifyFileName": true,
+    "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "bundle": true,
+    "useIsolateContext": true,
+    "useCompilerModule": true,
+    "userConfirmedUseCompilerModuleSwitch": true,
+    "useMultiFrameRuntime": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "remoteDebugLogEnable": false
+  },
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "scripts": {
+    "beforeCompile": "",
+    "beforePreview": "",
+    "beforeUpload": ""
+  },
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
+    "plugin": {
+      "current": -1,
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "current": -1,
+      "list": []
+    },
+    "miniprogram": {
+      "current": -1,
+      "list": [
+        {
+          "id": 2,
+          "name": "分享",
+          "pathName": "module/page",
+          "query": "id=card/office",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "二维码分享",
+          "pathName": "module/page",
+          "query": "scene=life/express/index",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "天气",
+          "pathName": "function/weather/weather",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 12,
+          "name": "地图",
+          "pathName": "function/map/map",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 13,
+          "name": "地点介绍",
+          "pathName": "function/situs/situs",
+          "query": "xiaoqu=benbu&id=benbu46",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "体测计算器",
+          "pathName": "function/PEcal/PEcal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "校历",
+          "pathName": "function/calendar/calendar",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "播放器",
+          "pathName": "function/player/player",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "特定歌曲",
+          "pathName": "function/player/player",
+          "query": "index=17",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "客服",
+          "pathName": "module/function",
+          "query": "action=contact",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "初始化小程序",
+          "pathName": "module/function",
+          "query": "action=reset",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "赞赏",
+          "pathName": "settings/donate/donate",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 14,
+          "name": "小程序资源",
+          "pathName": "settings/resource/resource",
+          "query": "action=redirect&from=主页",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "视频",
+          "pathName": "function/video/video",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "特定视频",
+          "pathName": "function/video/video",
+          "query": "name=东师版 “好想你” MV",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "公众号",
+          "pathName": "function/wechat/wechat",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "特定公众号",
+          "pathName": "function/wechat/wechat",
+          "query": "path=nenuyouth",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,150 @@
+extends: stylelint-config-standard
+
+plugins:
+  - stylelint-order
+
+rules:
+  declaration-empty-line-before: null
+
+  no-descending-specificity: null
+
+  selector-type-no-unknown:
+    - true
+    - ignore:
+        - custom-elements
+      ignoreTypes:
+        - page
+        - view
+        - text
+        - image
+        - icon
+        - navigator
+        - picker
+        - swiper
+        - slider
+
+  unit-no-unknown:
+    - true
+    - ignoreUnits:
+        - rpx
+
+  order/order:
+    - declarations
+    - custom-properties
+
+  order/properties-order:
+    - - content
+
+      - groupName: display
+        properties:
+          - display
+          - float
+          - clear
+          - vertical-align
+
+      - groupName: position
+        emptyLineBefore: threshold
+        noEmptyLineBetween: true
+        properties:
+          - position
+          - z-index
+          - top
+          - left
+          - right
+          - bottom
+
+      - groupName: dimensions
+        emptyLineBefore: threshold
+        noEmptyLineBetween: true
+        properties:
+          - box-sizing
+          - width
+          - min-width
+          - max-width
+          - height
+          - min-height
+          - max-height
+
+      - groupName: content-box
+        noEmptyLineBetween: true
+        properties:
+          - margin
+          - margin-top
+          - margin-left
+          - margin-right
+          - margin-bottom
+          - padding
+          - padding-top
+          - padding-left
+          - padding-right
+          - padding-bottom
+
+      - groupName: background
+        properties:
+          - background-color
+          - background
+          - background-image
+          - background-position
+
+      - groupName: border
+        properties:
+          - border
+          - border-top
+          - border-left
+          - border-right
+          - border-bottom
+          - border-width
+          - border-style
+          - border-color
+          - border-radius
+          - border-top-left-radius
+          - border-top-right-radius
+          - border-bottom-left-radius
+          - border-bottom-right-radius
+          - box-shadow
+
+      - groupName: font
+        emptyLineBefore: threshold
+        noEmptyLineBetween: true
+        properties:
+          - color
+          - text-align
+          - font-size
+          - font-weight
+          - font-family
+          - line-height
+          - word-break
+          - white-space
+          - text-shadow
+
+      - groupName: flex
+        emptyLineBefore: threshold
+        noEmptyLineBetween: true
+        properties:
+          - flex-direction
+          - flex-wrap
+          - flex-flow
+          - justify-content
+          - align-items
+          - align-content
+          - flex
+          - order
+          - flex-grow
+          - flex-shrink
+          - flex-basis
+          - justify-self
+          - align-self
+
+      - groupName: others
+        emptyLineBefore: threshold
+        properties:
+          - opacity
+          - overflow
+          - transform
+          - transition
+          - transform-origin
+          - animation
+
+    - unspecified: bottomAlphabetical
+      emptyLineBeforeUnspecified: threshold
+      emptyLineMinimumPropertyThreshold: 5

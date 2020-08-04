@@ -1,0 +1,40 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}} {{page.grey? 'grey': ''}}">
+  <template wx:if="{{page.error}}" is="{{theme}}error" data="{{...page}}" />
+  <block wx:else>
+    <view
+      class="back-button {{page.titleDisplay? 'fadeOut': 'fadeIn'}}"
+      style="top:{{page.statusBarHeight + 5.5}}px;"
+      hover-class="button-hover"
+      catch:tap="back"
+    >
+      <image
+        class="back-icon"
+        src="/icon/{{firstPage? 'home': 'back'}}{{darkmode? 'White': ''}}.svg"
+      />
+    </view>
+    <view
+      class="NENUnav {{page.borderDisplay? 'fadeIn': 'fadeOut'}}"
+      style="background-color:{{page.color}}; padding-top:{{page.statusBarHeight}}px;"
+    >
+      <button
+        class="iOS-navBack"
+        hover-class="back-button-hover"
+        style="position: absolute; left: 0;"
+        plain
+        catch:tap="back"
+      >
+        <view class="iOS-backArrow" style="border-color: #fff;" />
+        <text class="iOS-nav-text" style="color: #fff;">返回</text>
+      </button>
+      <view class="NENU-navText">{{page.title}}</view>
+    </view>
+    <template is="body" data="{{page, theme}}" />
+  </block>
+</view>

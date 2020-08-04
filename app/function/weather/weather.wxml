@@ -1,0 +1,113 @@
+<wxs src="./weather.wxs" module="tool" />
+<view class="wrapper">
+  <view
+    class="weather-wrapper {{night? 'night': 'day'}}"
+    style="padding-top: {{info.statusBarHeight}}px;"
+  >
+    <view
+      class="back-button"
+      style="top: {{info.statusBarHeight + 5.5}}px;"
+      hover-class="button-hover"
+      catch:tap="back"
+    >
+      <image
+        class="back-icon"
+        src="/icon/{{firstPage? 'home': 'back'}}{{darkmode? 'White': ''}}.svg"
+      />
+    </view>
+    <button
+      class="button share icon-forwardfill"
+      hover-class="button-hover"
+      hover-start-time="0"
+      open-type="share"
+      plain
+    >
+      分享
+    </button>
+
+    <!-- 背景蒙层 -->
+    <view class="background">
+      <view class="layer layer1" animation="{{animation1}}" />
+      <view class="layer layer2" animation="{{animation2}}" />
+      <view class="layer layer3" animation="{{animation3}}" />
+    </view>
+
+    <view class="location icon-location">长春市 南关区</view>
+    <view class="temperature">{{weather.observe.degree}}°</view>
+    <view class="type">{{weather.observe.weather}}</view>
+    <view class="detail">湿度 {{weather.observe.humidity}}%</view>
+    <view class="detail"
+      >{{tool.getDirection(weather)}}风 {{weather.observe.wind_power}}级</view
+    >
+    <view class="tip" catch:tap="refresh"
+      >{{weather.tips.observe[tipIndex]}}</view
+    >
+  </view>
+  <view class="forecast borderB">
+    <view class="item">
+      <view class="top">
+        <text class="date">今天</text>
+        <text class="temperature"
+          >{{tool.getTemperature(weather.dayForecast[1])}}</text
+        >
+      </view>
+      <view class="bottom">
+        <text class="weather">{{tool.getWeather(weather.dayForecast[1])}}</text>
+        <image
+          class="icon"
+          src="{{tool.getIcon(weather.dayForecast[1].day_weather_code)}}"
+        />
+      </view>
+    </view>
+    <view class="item">
+      <view class="top">
+        <text class="date">明天</text>
+        <text class="temperature"
+          >{{tool.getTemperature(weather.dayForecast[2])}}</text
+        >
+      </view>
+      <view class="bottom">
+        <text class="weather">{{tool.getWeather(weather.dayForecast[2])}}</text>
+        <image
+          class="icon"
+          src="{{tool.getIcon(weather.dayForecast[2].day_weather_code)}}"
+        />
+      </view>
+    </view>
+  </view>
+  <!-- 小时预报 -->
+  <scroll-view class="hours borderTB" enable-flex scroll-x>
+    <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
+      <text class="time">{{tool.getTime(item)}}</text>
+      <image class="icon" src="{{tool.getIcon(item.weather_code)}}" />
+      <text class="degree">{{item.degree}}°</text>
+    </view>
+  </scroll-view>
+  <!-- 日预报 -->
+  <scroll-view class="days borderTB" enable-flex scroll-x>
+    <view wx:for="{{weather.dayForecast}}" class="item" wx:key="weekday">
+      <view class="day">{{item.weekday}}</view>
+      <view class="date">{{tool.getDate(item)}}</view>
+      <view class="weather">{{item.day_weather_short}}</view>
+      <image class="icon" src="{{tool.getIcon(item.day_weather_code)}}" />
+      <view class="placeholder" />
+      <image class="icon" src="{{tool.getIcon(item.night_weather_code)}}" />
+      <view class="weather">{{item.night_weather_short}}</view>
+      <view class="wind">{{item.night_wind_direction}}</view>
+      <view class="wind">{{item.night_wind_power}}级</view>
+    </view>
+    <!-- 温度曲线 -->
+    <canvas type="2d" class="canvas temperature" canvas-id="weather" />
+  </scroll-view>
+  <!-- 其他信息 -->
+  <!-- <swiper class="info" indicator-dots="false">
+  <swiper-item class="" item-id="0">
+    <view class="item">
+      <text class="icon icon_xianhao"></text>
+      <view class="content">{{weather.index.clothes.info}}</view>
+      <view class="title">{{weather.index.clothes.name}}</view>
+    </view>
+  </swiper-item>
+  <swiper-item class="" item-id="1"></swiper-item>
+</swiper> -->
+</view>

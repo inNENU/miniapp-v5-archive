@@ -1,0 +1,41 @@
+<!-- 段落标题 -->
+<view wx:if="{{config.heading}}" class="paragraph-title"
+  >{{config.heading}}</view
+>
+<!-- 段落主体 -->
+<view class="paragraph" style="{{config.align}}">
+  <block wx:if="{{config.type === 'ol'}}">
+    <view
+      wx:for="{{config.text}}"
+      wx:key="*this"
+      class="list"
+      style="{{config.style || ''}}"
+    >
+      <view class="head">{{index + 1}}.</view>
+      <text class="text" decode selectable space="nbsp">{{item}}</text>
+    </view>
+  </block>
+  <block wx:elif="{{config.type === 'ul'}}">
+    <view
+      wx:for="{{config.text}}"
+      wx:key="*this"
+      class="list"
+      style="{{config.style || ''}}"
+    >
+      <view class="head">·</view>
+      <text class="text" decode selectable space="nbsp">{{item}}</text>
+    </view>
+  </block>
+  <block wx:else>
+    <text
+      wx:for="{{config.text}}"
+      wx:key="*this"
+      class="text"
+      style="{{config.style || ''}}"
+      decode
+      selectable
+      space="nbsp"
+      >{{item}}</text
+    >
+  </block>
+</view>
