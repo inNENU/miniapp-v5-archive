@@ -246,13 +246,11 @@ $register("music", {
     while (id < lyrics.length && this.data.currentTime > lyrics[id].time)
       id += 1;
 
-    if (currentLyricId !== id - 1 && id !== 0) {
-      console.log("set", id);
+    if (currentLyricId !== id - 1 && id !== 0)
       this.setData({
         currentLyricId: id - 1,
-        currentLyric: lyrics[id - 1].text,
+        currentLyric: lyrics[id - 1].text || " ",
       });
-    }
   },
 
   loadCover(event: WXEvent.ImageLoad) {

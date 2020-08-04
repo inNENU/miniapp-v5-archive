@@ -9,7 +9,7 @@ import {
 import { version } from "./utils/config";
 import { PageConfig } from "../typings";
 
-interface InitGlobalData {
+export interface GlobalData {
   /** 小程序运行环境 */
   env: string;
   /** 版本号 */
@@ -30,19 +30,6 @@ interface InitGlobalData {
   };
   /** 启动时间 */
   date: number;
-  /** 正在应用的主题 */
-  theme?: string;
-  /** 夜间模式开启状态 */
-  darkmode?: boolean;
-  /** 设备信息 */
-  info?: WechatMiniprogram.GetSystemInfoSyncResult;
-  /** 小程序appid */
-  appID?: string;
-  /** 地图点位 */
-  marker: any;
-}
-
-export interface GlobalData extends InitGlobalData {
   /** 正在应用的主题 */
   theme: string;
   /** 夜间模式开启状态 */

@@ -69,7 +69,8 @@
 }
 
 .display-wrapper {
-  height: 50%;
+  margin: 25px 0;
+  flex: 1;
 }
 
 .cover-view {
@@ -105,7 +106,7 @@
 }
 
 .lyric-wrapper {
-  height: 50vh;
+  height: 100%;
   text-align: center;
 }
 
