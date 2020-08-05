@@ -13,6 +13,12 @@ interface WechatConfig {
   path: string;
 }
 
+interface WechatDetail {
+  name: string;
+  authorized?: boolean;
+  content: WechatConfig[];
+}
+
 $register("wechat", {
   data: {
     theme: globalData.theme,
@@ -23,6 +29,10 @@ $register("wechat", {
       statusBarHeight: globalData.info.statusBarHeight,
       from: "功能大厅",
     },
+
+    wechat: [] as WechatConfig[],
+
+    config: {} as WechatDetail,
 
     footer: {
       desc: "公众号入驻，请联系 QQ 1178522294",
@@ -44,7 +54,7 @@ $register("wechat", {
           homePage: path === "index",
           color: getColor(path !== "index"),
           theme: globalData.theme,
-          wechat: wechat as WechatConfig[],
+          [path === "index" ? "wechat" : "config"]: wechat,
           grey: path !== "index",
           "nav.title":
             path === "index"
@@ -100,13 +110,13 @@ $register("wechat", {
     const { title, url } = currentTarget.dataset;
 
     // 无法跳转，复制链接到剪切板
-    if (globalData.env === "qq")
+    if (this.data.config.authorized === false || globalData.env === "qq")
       wx.setClipboardData({
         data: url,
         success: () => {
           modal(
             "无法跳转",
-            "该小程序无法跳转网页，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+            "目前暂不支持跳转到该微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
           );
         },
       });

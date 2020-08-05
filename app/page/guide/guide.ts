@@ -19,6 +19,7 @@ $register("guide", {
       action: false,
       statusBarHeight: globalData.info.statusBarHeight,
     },
+
     page: {
       title: "东师指南",
       grey: true,
@@ -174,15 +175,22 @@ $register("guide", {
           header: "新生你好",
           content: [
             {
-              text: "SIM卡",
+              text: "SIM 卡",
               color: "blue",
               name: "SIM",
               icon: "/icon/tabPage/sim.svg",
               path: "sim/index",
             },
             {
-              text: "新生报到",
+              text: "FAQ",
               color: "orange",
+              name: "FAQ",
+              icon: "/icon/tabPage/faq.svg",
+              path: "FAQ/index",
+            },
+            {
+              text: "新生报到",
+              color: "red",
               name: "Check",
               icon: "/icon/tabPage/check.svg",
               path: "check/index",
