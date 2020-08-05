@@ -3,7 +3,7 @@ import { AppOption } from "../../../app";
 import { modal } from "../../../utils/wx";
 const {
   globalData: { appID },
-} = getApp<AppOption>(); // 获得当前小程序ID
+} = getApp<AppOption>();
 
 $register.C({
   properties: {

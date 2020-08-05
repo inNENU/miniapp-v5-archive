@@ -38,16 +38,16 @@
 
 /* 导航 */
 
-.Android-navigationBar,
-.Android-navPlaceHolder {
+.Android-navigation-bar,
+.Android-nav-placeholder {
   width: 100%;
   background-color: #f8f8f8;
 }
 
-.Android-navigationBar {
+.Android-navigation-bar {
   display: flex;
   position: fixed;
-  z-index: 99;
+  z-index: 1000;
 
   box-sizing: content-box;
   height: 44px;
@@ -65,7 +65,7 @@
   }
 }
 
-.Android-navPlaceHolder {
+.Android-nav-placeholder {
   position: relative;
   height: 69px;
   color: #d9d9d9;
@@ -73,15 +73,15 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .Android-navigationBar,
-  .Android-navPlaceHolder {
+  .Android-navigation-bar,
+  .Android-nav-placeholder {
     background-color: #000;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .grey .Android-navigationBar,
-  .grey .Android-navPlaceHolder {
+  .grey .Android-navigation-bar,
+  .grey .Android-nav-placeholder {
     background-color: #10110b;
   }
 }

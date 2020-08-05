@@ -19,16 +19,16 @@
 
 /* iOS Head */
 
-.iOS-navigationBar,
-.iOS-navPlaceHolder {
+.iOS-navigation-bar,
+.iOS-nav-placeholder {
   width: 100%;
   text-align: center;
 }
 
-.iOS-navigationBar {
+.iOS-navigation-bar {
   display: flex;
   position: fixed;
-  z-index: 99;
+  z-index: 1000;
   top: 0;
 
   box-sizing: content-box;
@@ -41,7 +41,7 @@
   backdrop-filter: saturate(180%) blur(20px);
 }
 
-.iOS-navPlaceHolder {
+.iOS-nav-placeholder {
   height: 44px;
   background-color: #f8f8f8;
   color: #acacb0;
@@ -49,11 +49,11 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .iOS-navigationBar {
+  .iOS-navigation-bar {
     background-color: rgba(0, 0, 0, 0.6);
   }
 
-  .iOS-navPlaceHolder {
+  .iOS-nav-placeholder {
     background-color: #000;
     color: #555;
   }
@@ -62,7 +62,7 @@
 .iOS-navBack {
   display: flex;
   position: relative;
-  z-index: 101;
+  z-index: 510;
 
   min-width: 10px !important;
   min-height: 0 !important;

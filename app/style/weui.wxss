@@ -2256,11 +2256,11 @@ icon[type='success']::before {
   background-color: #10aeff;
 }
 
-.weui-navigationBar {
+.weui-navigation-bar {
   display: -webkit-flex;
   display: flex;
   position: fixed;
-  z-index: 99;
+  z-index: 1000;
 
   box-sizing: content-box;
   width: 100%;
@@ -2271,18 +2271,18 @@ icon[type='success']::before {
 }
 
 @media (prefers-color-scheme: dark) {
-  .weui-navigationBar {
+  .weui-navigation-bar {
     background-color: #000;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .grey .weui-navigationBar {
+  .grey .weui-navigation-bar {
     background-color: #10110b;
   }
 }
 
-.weui-navigationBar-backbutton {
+.weui-navigation-bar-backbutton {
   display: inline-block;
   vertical-align: middle;
 
@@ -2299,7 +2299,7 @@ icon[type='success']::before {
 }
 
 @media (prefers-color-scheme: dark) {
-  .weui-navigationBar-backbutton {
+  .weui-navigation-bar-backbutton {
     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='24' viewBox='0 0 12 24'%3E  %3Cpath fill='white' fill-opacity='.9' fill-rule='evenodd' d='M10 19.438L8.955 20.5l-7.666-7.79a1.02 1.02 0 0 1 0-1.42L8.955 3.5 10 4.563 2.682 12 10 19.438z'/%3E%3C/svg%3E");
   }
 }

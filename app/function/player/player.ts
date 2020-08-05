@@ -6,6 +6,7 @@ import { tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
 
+/** 音频管理器 */
 const manager = wx.getBackgroundAudioManager();
 
 $register("music", {
@@ -24,8 +25,8 @@ $register("music", {
     currentSong: {} as any,
     /** 是否展示歌曲列表 */
     showSongList: false,
-    /** 是否展示歌曲列表歌曲列表 */
-    songList: [] as any[],
+    /** 歌曲列表 */
+    songList: [] as SongDetail[],
     /** 播放模式 */
     mode: "列表循环" as PlayMode,
 
@@ -90,6 +91,13 @@ $register("music", {
           globalData.music.index = (songList as SongDetail[]).findIndex(
             (song) => song.title === name
           );
+        } else {
+          const name = wx.getStorageSync("music");
+
+          if (name)
+            globalData.music.index = (songList as SongDetail[]).findIndex(
+              (song) => song.title === name
+            );
         }
 
         const { index } = globalData.music;
@@ -387,6 +395,8 @@ $register("music", {
       globalData.music.index = Number(index);
 
       this.initLyric();
+
+      wx.setStorageSync("music", currentSong.title);
     }
   },
 

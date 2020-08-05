@@ -99,7 +99,7 @@
   <share config="{{page}}" />
 </template>
 <!-- ******************************************
-Here are common template used by all theme
+  Here are common template used by all theme
 ********************************************* -->
 <!-- 标题 -->
 <template name="title">
@@ -108,7 +108,7 @@ Here are common template used by all theme
   >
 </template>
 <!-- ******************************************
-Here are  different template used by diferent theme
+  Here are  different template used by diferent theme
 ********************************************* -->
 <!-- 导航栏 -->
 <template name="nav">
@@ -120,14 +120,13 @@ Here are  different template used by diferent theme
   </block>
 </template>
 <!-- ******************************************
-Below are  different themes template.
-********************************************* -->
-<!-- ******************************************
-iOS theme
+    Below are  different themes template.
+
+    iOS theme
 ********************************************* -->
 <!-- iOS导航栏 -->
 <template name="iOSNav">
-  <view class="iOS-navigationBar" style="padding-top:{{statusBarHeight}}px;">
+  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
     <view wx:if="{{titleDisplay}}" class="iOS-titletext">{{title}}</view>
     <button
       wx:if="{{action !== false}}"
@@ -149,14 +148,14 @@ iOS theme
     class="iOSnavDl"
     style="top:{{statusBarHeight + 44}}px;"
   />
-  <view class="iOS-navPlaceHolder" style="height:{{statusBarHeight + 44}}px;">
+  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
   </view>
   <view class="iOS-head">{{title}}</view>
 </template>
 <!-- iOS错误 -->
 <template name="iOSerror">
-  <view class="iOS-navigationBar" style="padding-top:{{statusBarHeight}}px;">
+  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
     <view class="iOS-titletext">页面出错</view>
     <button
       wx:if="{{action !== false}}"
@@ -171,7 +170,7 @@ iOS theme
     </button>
   </view>
   <view class="iOSnavDl" style="top:{{statusBarHeight + 44}}px;" />
-  <view class="iOS-navPlaceHolder" style="height:{{statusBarHeight + 44}}px;">
+  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
   </view>
   <view class="errorCtn">
@@ -198,12 +197,12 @@ iOS theme
   </view>
 </template>
 <!-- ******************************************
-Android theme
+        Android theme
 ********************************************* -->
 <!-- Android导航栏 -->
 <template name="AndroidNav">
   <view
-    class="Android-navigationBar {{shadow? 'AndroidNavShadow': ''}}"
+    class="Android-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">{{title}}</view>
@@ -223,7 +222,7 @@ Android theme
     </button>
   </view>
   <view
-    class="Android-navPlaceHolder"
+    class="Android-nav-placeholder"
     style="height:{{statusBarHeight + 44}}px;"
   >
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
@@ -236,7 +235,7 @@ Android theme
 <!-- Android错误页面 -->
 <template name="Androiderror">
   <view
-    class="Android-navigationBar"
+    class="Android-navigation-bar"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">页面出错</view>
@@ -252,7 +251,7 @@ Android theme
     </button>
   </view>
   <view
-    class="Android-navPlaceHolder"
+    class="Android-nav-placeholder"
     style="height:{{statusBarHeight + 44}}px;"
   >
     <text>到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮</text>
@@ -408,7 +407,7 @@ Author: Mr.Hope
 <!-- weui导航栏 -->
 <template name="weuiNav">
   <view
-    class="weui-navigationBar {{shadow?'AndroidNavShadow':''}}"
+    class="weui-navigation-bar {{shadow?'AndroidNavShadow':''}}"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">{{title}}</view>
@@ -422,13 +421,13 @@ Author: Mr.Hope
     >
       <view
         wx:if="{{action === undefined || action === 'redirect'}}"
-        class="weui-navigationBar-backbutton"
+        class="weui-navigation-bar-backbutton"
       />
       <view class="Android-leftText">{{from}}</view>
     </button>
   </view>
   <view
-    class="Android-navPlaceHolder"
+    class="Android-nav-placeholder"
     style="height:{{statusBarHeight + 44}}px;"
   >
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
@@ -441,7 +440,7 @@ Author: Mr.Hope
 <!-- Weui错误页面 -->
 <template name="weuierror">
   <view
-    class="weui-navigationBar {{shadow? 'AndroidNavShadow': ''}}"
+    class="weui-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">页面出错</view>
@@ -452,12 +451,12 @@ Author: Mr.Hope
       plain
       catch:tap="$back"
     >
-      <view class="weui-navigationBar-backbutton" />
+      <view class="weui-navigation-bar-backbutton" />
       <view class="Android-leftText">返回</view>
     </button>
   </view>
   <view
-    class="Android-navPlaceHolder"
+    class="Android-nav-placeholder"
     style="height:{{statusBarHeight + 44}}px;"
   >
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮

@@ -8,7 +8,7 @@ $register.C({
   properties: {
     /** 提示文字 */
     text: { type: String, value: "点击「添加小程序」，下次访问更便捷" },
-    /** 关闭时延，单位ms，默认5000 */
+    /** 关闭延时，单位 ms，默认 5000 */
     duration: { type: Number, value: 5000 },
   },
 
@@ -37,6 +37,7 @@ $register.C({
   },
 
   methods: {
+    /** 关闭显示 */
     close(): void {
       this.setData({ showTop: false });
 
