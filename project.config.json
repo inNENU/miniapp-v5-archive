@@ -14,7 +14,7 @@
   },
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
-  "libVersion": "2.12.0",
+  "libVersion": "2.12.1",
   "appid": "wx9ce37d9662499df3",
   "qqLibVersion": "1.17.0",
   "qqappid": "1109559721",
