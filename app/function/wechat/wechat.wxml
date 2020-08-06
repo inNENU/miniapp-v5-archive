@@ -22,10 +22,9 @@
   <view wx:else class="wechat-wrapper">
     <template
       is="wechat-card"
-      wx:for="{{wechat.content}}"
+      wx:for="{{config.content}}"
       wx:key="title"
-      wx:for-item="config"
-      data="{{config}}"
+      data="{{item}}"
     />
   </view>
   <footer config="{{footer}}" />

@@ -17,18 +17,18 @@
     class="card"
     hover-class="button-hover"
     hover-stay-time="100"
-    data-title="{{config.title}}"
-    data-url="{{config.url}}"
+    data-title="{{item.title}}"
+    data-url="{{item.url}}"
     catch:tap="cardTap"
   >
-    <image class="img" src="{{config.cover}}" mode="aspectFill" />
+    <image class="img" src="{{item.cover}}" mode="aspectFill" />
     <view class="detail">
-      <view wx:if="{{config.logo}}" class="icon">
-        <image class="logo" src="{{config.logo}}" />
-        <view class="name">{{config.name}}</view>
+      <view wx:if="{{item.logo}}" class="icon">
+        <image class="logo" src="{{item.logo}}" />
+        <view class="name">{{item.name}}</view>
       </view>
-      <view class="title">{{config.title}}</view>
-      <view class="desc">{{config.desc}}</view>
+      <view class="title">{{item.title}}</view>
+      <view class="desc">{{item.desc}}</view>
     </view>
   </view>
 </template>

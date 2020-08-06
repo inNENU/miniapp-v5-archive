@@ -16,7 +16,7 @@
 
       <block wx:if="{{page.content}}">
         <block wx:for="{{page.content}}" wx:key="id">
-          <p config="{{item}}" wx:if="{{item.tag === 'text'}}" />
+          <my-text config="{{item}}" wx:if="{{item.tag === 'text'}}" />
           <img
             wx:elif="{{item.tag === 'img'}}"
             config="{{item}}"
@@ -73,7 +73,7 @@
 <!-- page without navigation bar -->
 <template name="body">
   <block wx:if="{{theme}}" wx:for="{{page.content}}" wx:key="id">
-    <p config="{{item}}" wx:if="{{item.tag === 'text'}}" />
+    <my-text config="{{item}}" wx:if="{{item.tag === 'text'}}" />
     <img
       wx:elif="{{item.tag === 'img'}}"
       config="{{item}}"

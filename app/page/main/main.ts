@@ -69,7 +69,7 @@ $register("main", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("app-inited")) checkResUpdate("guide", "410K");
+    if (wx.getStorageSync("app-inited")) checkResUpdate("guide", "450K");
 
     // 执行 tab 页预加载
     ["guide", "function"].forEach((x) => {

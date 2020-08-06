@@ -86,7 +86,7 @@ $register("wechat", {
   onShareAppMessage() {
     return {
       title: "校园公众号",
-      path: `/funtion/wechat/wechat?path=${this.state.path}&from=${this.data.nav.title}`,
+      path: `/function/wechat/wechat?path=${this.state.path}&from=${this.data.nav.title}`,
     };
   },
 
@@ -110,13 +110,23 @@ $register("wechat", {
     const { title, url } = currentTarget.dataset;
 
     // 无法跳转，复制链接到剪切板
-    if (this.data.config.authorized === false || globalData.env === "qq")
+    if (this.data.config.authorized === false)
+      wx.setClipboardData({
+        data: url,
+        success: () => {
+          modal(
+            "尚未授权",
+            "目前暂不支持跳转到该微信公众号图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+          );
+        },
+      });
+    else if (globalData.env === "qq")
       wx.setClipboardData({
         data: url,
         success: () => {
           modal(
             "无法跳转",
-            "目前暂不支持跳转到该微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+            "当前小程序并不支持跳转微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
           );
         },
       });

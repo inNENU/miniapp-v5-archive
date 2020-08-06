@@ -123,7 +123,7 @@
     "intro": "/components/common/intro/intro",
     "list": "/components/common/list/list",
     "media": "/components/common/media/media",
-    "p": "/components/common/text/text",
+    "my-text": "/components/common/text/text",
     "phone": "/components/common/phone/phone",
     "share": "/components/common/share/share",
     "my-swiper": "/components/common/swiper/swiper"

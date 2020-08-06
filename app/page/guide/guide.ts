@@ -217,7 +217,7 @@ $register("guide", {
       this.$take("guide") || this.data.page
     );
     popNotice("guide");
-    checkResUpdate("guide", "410K");
+    checkResUpdate("guide", "450K");
   },
 
   onReady() {
@@ -233,7 +233,7 @@ $register("guide", {
 
   onPullDownRefresh() {
     refreshPage("guide", this, globalData);
-    checkResUpdate("guide", "410K");
+    checkResUpdate("guide", "450K");
     wx.stopPullDownRefresh();
   },
 
