@@ -2,9 +2,10 @@
   <scroll-view
     class="tab-bar-wrapper"
     scroll-x
-    scroll-into-view="tab-bar{{current}}"
+    scroll-into-view="tab-bar{{activeTab}}"
+    scroll-with-animation
   >
-    <view class="tab-bar" enable-flex>
+    <view class="tab-bar">
       <view
         wx:for="{{navList}}"
         wx:key="index"
@@ -13,7 +14,7 @@
         data-index="{{index}}"
         catch:tap="changeTab"
       >
-        {{item}}
+        <view class="text">{{item}}</view>
       </view>
     </view>
   </scroll-view>

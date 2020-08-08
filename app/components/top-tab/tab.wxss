@@ -17,6 +17,7 @@
   display: flex;
 
   min-width: 100%;
+  padding: 0 4px;
   background: var(--bgcolor);
 
   white-space: nowrap;
@@ -28,16 +29,24 @@
 }
 
 .tab-bar .item {
-  padding: 8px 16px 6px;
-  border-bottom: 2px solid var(--bgcolor);
+  padding: 0 10px;
   color: var(--grey-three);
-
   flex: 1 0;
 }
 
+.tab-bar .item .text {
+  padding: 2px 0;
+  border-bottom: 2px solid var(--bgcolor);
+}
+
 .tab-bar .item.active {
-  border-color: var(--dark-grey);
   color: var(--text-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.tab-bar .item.active .text {
+  border-color: #07c160;
 }
 
 .page-wrapper {

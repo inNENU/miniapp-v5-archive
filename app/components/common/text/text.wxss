@@ -26,7 +26,7 @@
 
   max-width: unset;
 
-  margin: 0 10px;
+  margin: 0 15px;
   padding: 10px 15px;
   background-color: var(--block-bgcolor);
   border-radius: 8px;
@@ -38,10 +38,8 @@
   overflow: hidden;
 }
 
-@media (min-width: 768px) {
-  .grey .paragraph {
-    margin: 0 15px;
-  }
+.paragraph .text {
+  display: block;
 }
 
 .paragraph .list {

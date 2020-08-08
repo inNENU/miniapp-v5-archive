@@ -45,6 +45,7 @@
         </block>
       </block>
       <share config="{{page}}" />
+      <footer config="{{page}}" wx:if="{{page.footer !== false}}" />
     </view>
   </block>
   <block wx:else>

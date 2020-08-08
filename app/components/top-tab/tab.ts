@@ -38,13 +38,19 @@ Component({
       this.setData({
         barleft:
           (detail.dx + globalData.info.screenWidth * currentSwipe) /
-          this.properties.navList.length,
+          this.data.navList.length,
       });
     },
 
     aminationFinish({ detail: { current } }: any): void {
       currentSwipe = current;
-      if (!this.properties.immediate) this.setData({ current });
+      if (!this.data.immediate) this.setData({ current });
+    },
+  },
+
+  observers: {
+    current(index): void {
+      this.setData({ activeTab: index === 0 ? 0 : index - 1 });
     },
   },
 
