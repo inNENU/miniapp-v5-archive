@@ -2,7 +2,7 @@
 
 [![作者: Mr.Hope](https://img.shields.io/badge/作者-Mr.Hope-blue.svg?style=for-the-badge)](https://mrhope.site)
 
-> 请注意，此项目只是公开了源代码，并不包含任何开源协议。请勿以为本项目代码可随意使用。
+> 请注意，此项目虽然公开了源代码，但是包含了对应的[协议](https://github.com/Hope-Studio/innenu-miniprogram/blob/master/LICENSE)进行限制。请勿以为本项目代码可随意使用。
 
 <!--
 wx9ce37d9662499df3

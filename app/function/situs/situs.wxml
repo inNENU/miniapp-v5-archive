@@ -24,13 +24,13 @@
       style="background-color:{{page.color}}; padding-top:{{page.statusBarHeight}}px;"
     >
       <button
-        class="iOS-navBack"
+        class="iOS-nav-back-button"
         hover-class="back-button-hover"
         style="position: absolute; left: 0;"
         plain
         catch:tap="back"
       >
-        <view class="iOS-backArrow" style="border-color: #fff;" />
+        <view class="iOS-back-arrow" style="border-color: #fff;" />
         <text class="iOS-nav-text" style="color: #fff;">返回</text>
       </button>
       <view class="NENU-navText">{{page.title}}</view>

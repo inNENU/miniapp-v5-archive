@@ -27,32 +27,66 @@ $register("guide", {
       content: [
         {
           tag: "grid",
+          header: "新生你好",
+          content: [
+            {
+              text: "新生报到",
+              color: "red",
+              name: "Check",
+              icon: "/icon/tabPage/check.svg",
+              path: "check/index",
+            },
+            {
+              text: "FAQ",
+              color: "orange",
+              name: "FAQ",
+              icon: "/icon/tabPage/faq.svg",
+              path: "FAQ/index",
+            },
+          ],
+        },
+        {
+          tag: "grid",
           header: "学在东师",
           content: [
             {
-              text: "课程",
+              text: "学位",
               color: "blue",
+              name: "Course",
+              icon: "/icon/tabPage/degree.svg",
+              path: "course/index",
+            },
+            {
+              text: "课程",
+              color: "orange",
               name: "Course",
               icon: "/icon/tabPage/course.svg",
               path: "course/index",
             },
             {
               text: "学习",
-              color: "orange",
+              color: "red",
               name: "Study",
               icon: "/icon/tabPage/study.svg",
               path: "study/index",
             },
             {
+              text: "选课",
+              color: "purple",
+              name: "Select",
+              icon: "/icon/tabPage/select.svg",
+              path: "select/index",
+            },
+            {
               text: "图书馆",
-              color: "red",
+              color: "cyan",
               name: "Library",
               icon: "/icon/tabPage/library.svg",
               path: "library/index",
             },
             {
               text: "考试",
-              color: "purple",
+              color: "olive",
               name: "Exam",
               icon: "/icon/tabPage/test.svg",
               path: "exam/index",
@@ -112,6 +146,13 @@ $register("guide", {
               icon: "/icon/tabPage/subsidize.svg",
               path: "subsidize/index",
             },
+            {
+              text: "SIM 卡",
+              color: "blue",
+              name: "SIM",
+              icon: "/icon/tabPage/sim.svg",
+              path: "sim/index",
+            },
           ],
         },
         {
@@ -147,7 +188,6 @@ $register("guide", {
               path: "life/nearby/index",
             },
           ],
-          footer: " ",
         },
         {
           tag: "grid",
@@ -158,44 +198,24 @@ $register("guide", {
               color: "blue",
               name: "Description",
               icon: "/icon/tabPage/about.svg",
-              path: "about0",
+              path: "about/index",
+            },
+            {
+              text: "学院介绍",
+              color: "orange",
+              name: "School",
+              icon: "/icon/tabPage/school.svg",
+              path: "school/index",
             },
             {
               text: "学校机构",
-              color: "orange",
+              color: "red",
               name: "Apartment",
               icon: "/icon/tabPage/apartment.svg",
               path: "apartment/index",
             },
           ],
           footer: " ",
-        },
-        {
-          tag: "grid",
-          header: "新生你好",
-          content: [
-            {
-              text: "SIM 卡",
-              color: "blue",
-              name: "SIM",
-              icon: "/icon/tabPage/sim.svg",
-              path: "sim/index",
-            },
-            {
-              text: "FAQ",
-              color: "orange",
-              name: "FAQ",
-              icon: "/icon/tabPage/faq.svg",
-              path: "FAQ/index",
-            },
-            {
-              text: "新生报到",
-              color: "red",
-              name: "Check",
-              icon: "/icon/tabPage/check.svg",
-              path: "check/index",
-            },
-          ],
         },
       ],
     },
@@ -217,7 +237,7 @@ $register("guide", {
       this.$take("guide") || this.data.page
     );
     popNotice("guide");
-    checkResUpdate("guide", "450K");
+    checkResUpdate("guide", "580K");
   },
 
   onReady() {
@@ -233,7 +253,7 @@ $register("guide", {
 
   onPullDownRefresh() {
     refreshPage("guide", this, globalData);
-    checkResUpdate("guide", "450K");
+    checkResUpdate("guide", "580K");
     wx.stopPullDownRefresh();
   },
 

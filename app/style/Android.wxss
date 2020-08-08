@@ -13,10 +13,10 @@
   color: var(--text-color);
   text-align: center;
   font-family:
-    'Helvetica Neue',
+    "Helvetica Neue",
     FZKTJW,
     -apple-system-font,
-    'PingFang SC',
+    "PingFang SC",
     Helvetica,
     STHeiti,
     Tahoma,
@@ -51,7 +51,7 @@
 
   box-sizing: content-box;
   height: 44px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 
@@ -90,30 +90,30 @@
   position: absolute;
   z-index: 100;
 
-  width: 100%;
+  max-width: 50%;
 
   font-size: 17px;
   font-weight: 500;
   line-height: 1;
 }
 
-.Android-navBack {
+.Android-nav-back-button {
   display: flex;
-  position: relative;
+  position: absolute;
   z-index: 101;
+  left: 0;
 
-  min-width: 10 !important;
-  min-height: 16 !important;
-  margin: 0 3% !important;
-  padding: 8px 5px !important;
-  background-color: rgba(0, 0, 0, 0) !important;
-  border: none !important;
+  min-width: 10px;
+  max-width: 30%;
+  min-height: 0;
+  margin: 0 3%;
+  padding: 8px 5px;
 
   line-height: 2.4;
   align-items: center;
 }
 
-.Android-backArrow {
+.Android-back-arrow {
   width: 11px;
   height: 11px;
   border-width: 0 0 3px 3px;
@@ -123,17 +123,20 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .Android-backArrow {
+  .Android-back-arrow {
     border-color: white;
   }
 }
 
-.Android-leftText {
+.Android-back-text {
   font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (prefers-color-scheme: dark) {
-  .Android-leftText {
+  .Android-back-text {
     color: #cacaca;
   }
 }

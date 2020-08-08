@@ -19,7 +19,8 @@
       >
         <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
         <view class="text">{{listItem.text}}</view>
-        <view class="desc access">{{listItem.desc}}</view>
+        <view class="desc">{{listItem.desc}}</view>
+        <view class="access" />
       </view>
       <!-- 普通文字段落 -->
       <view wx:else class="list">

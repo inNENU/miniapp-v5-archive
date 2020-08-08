@@ -14,7 +14,7 @@
 .grey .list-header {
   max-width: unset;
   min-height: 37px;
-  margin: 0 10px;
+  margin: 0 15px;
   padding: 23px 15px 5px 15px;
 
   color: var(--dark-grey);
@@ -25,7 +25,7 @@
 .list-footer {
   max-width: 517px;
   min-height: 16px;
-  margin: 0 10px;
+  margin: 0 15px;
   padding: 5px 15px 0 15px;
 
   color: var(--dark-grey);
@@ -41,7 +41,7 @@
   position: relative;
 
   max-width: 517px;
-  margin: 0 10px;
+  margin: 0 15px;
   background-color: var(--block-bgcolor);
   border-radius: 8px;
   overflow: hidden;
@@ -54,14 +54,6 @@
 @media (min-width: 537px) {
   .list-wrapper {
     margin: 0 auto;
-  }
-}
-
-@media (min-width: 768px) {
-  .grey .list-header,
-  .grey .list-footer,
-  .grey .list-wrapper {
-    margin: 0 15px;
   }
 }
 
@@ -112,9 +104,15 @@
 }
 
 .list-wrapper .desc {
+  max-width: 40%;
+
   color: #8a8a8e;
   text-align: right;
+  white-space: nowrap;
   flex-shrink: 1;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -136,9 +134,9 @@
   top: 50%;
   right: 2px;
 
-  width: 9px;
-  height: 9px;
-  margin-top: -5px;
+  width: 7px;
+  height: 7px;
+  margin-top: -4px;
   border-width: 2px 2px 0 0;
   border-style: solid;
   border-color: var(--arrow-color);
