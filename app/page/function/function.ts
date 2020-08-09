@@ -79,8 +79,12 @@ $register("function", {
       { option: { id: "function" }, ctx: this },
       this.$take("function") || this.data.page
     );
-    popNotice("function");
     checkResUpdate("function", "130K");
+  },
+
+  onShow() {
+    refreshPage("function", this, globalData);
+    popNotice("function");
   },
 
   onReady() {

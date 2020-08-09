@@ -44,7 +44,6 @@ $register("authorize", {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
     page: {
-      tag: "head",
       title: "授权设置",
       grey: true,
       content: [
@@ -78,7 +77,6 @@ $register("authorize", {
           ],
           foot: " ",
         },
-        { tag: "footer", author: "" },
       ],
     },
 

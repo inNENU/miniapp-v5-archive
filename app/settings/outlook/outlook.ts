@@ -38,7 +38,6 @@ $register("setting", {
             { text: "指南资源更新提示", swiKey: "guideResNotify" },
           ],
         },
-        { tag: "footer", author: "" },
       ],
     },
   },

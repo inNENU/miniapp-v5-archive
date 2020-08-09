@@ -14,6 +14,7 @@ $register("resource", {
     darkmode: globalData.darkmode,
     page: {
       title: "资源说明",
+      shareable: true,
       content: [
         { tag: "title", text: "小程序页面资源" },
         {
@@ -44,10 +45,7 @@ $register("resource", {
             { text: "物理学", button: "physics" },
           ],
         },
-        { tag: "footer" },
       ],
-      shareable: true,
-      from: "返回",
     },
   },
 
@@ -55,7 +53,7 @@ $register("resource", {
     this.setData({
       color: getColor(),
       "page.action": options.action,
-      "page.from": options.from || this.data.page.from,
+      "page.from": options.from || "返回",
       "page.statusBarHeight": globalData.info.statusBarHeight,
     });
 

@@ -22,9 +22,10 @@ $register("storage", {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
     page: {
-      tag: "head",
       title: "存储设置",
+      desc: `当前版本：${globalData.version}`,
       grey: true,
+      feedback: true,
       content: [
         {
           tag: "List",
@@ -60,10 +61,7 @@ $register("storage", {
             },
           ],
         },
-        { tag: "footer", author: "", desc: `当前版本：${globalData.version}` },
       ],
-      feedback: true,
-      contact: true,
     },
   },
 

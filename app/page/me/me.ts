@@ -20,7 +20,6 @@ $register("me", {
       statusBarHeight: globalData.info.statusBarHeight,
     },
     page: {
-      tag: "head",
       title: "我的东师",
       grey: true,
       hidden: true,

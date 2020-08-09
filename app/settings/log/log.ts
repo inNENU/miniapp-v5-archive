@@ -12,9 +12,10 @@ $register("log", {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
     page: {
-      tag: "head",
       title: "更新日志",
+      desc: `当前版本: ${globalData.version}`,
       grey: true,
+      feedback: true,
       content: [
         {
           tag: "list",
@@ -39,10 +40,7 @@ $register("log", {
             { text: "查看详细日志", url: "page?path=other/log/index" },
           ],
         },
-        { tag: "footer", author: "", desc: `当前版本: ${globalData.version}` },
       ],
-      feedback: true,
-      contact: true,
     },
   },
 
@@ -68,7 +66,7 @@ $register("log", {
           { option: { id: "更新日志" }, ctx: this },
           {
             ...this.data.page,
-            content: data.concat(this.data.page.content.slice(-1)),
+            content: data,
           }
         );
       }

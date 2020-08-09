@@ -54,7 +54,7 @@ $register("guide", {
               color: "blue",
               name: "Course",
               icon: "/icon/tabPage/degree.svg",
-              path: "course/index",
+              path: "degree/index",
             },
             {
               text: "课程",
@@ -241,6 +241,11 @@ $register("guide", {
     checkResUpdate("guide", "580K");
   },
 
+  onShow() {
+    refreshPage("guide", this, globalData);
+    popNotice("guide");
+  },
+
   onReady() {
     // 注册事件监听器
     this.$on("theme", (theme: string) => {
@@ -248,8 +253,6 @@ $register("guide", {
     });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
-
-    popNotice("calendar");
   },
 
   onPullDownRefresh() {

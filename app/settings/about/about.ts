@@ -14,9 +14,10 @@ $register("about", {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
     page: {
-      tag: "head",
       title: "关于",
+      desc: `当前版本：${globalData.version}`,
       grey: true,
+      feedback: true,
       content: [
         {
           tag: "List",
@@ -48,10 +49,7 @@ $register("about", {
             { text: "小程序功能太少?", aim: "MrHope2" },
           ],
         },
-        { tag: "footer", author: "", desc: `当前版本：${globalData.version}` },
       ],
-      feedback: true,
-      contact: true,
     },
   },
 
@@ -101,10 +99,7 @@ $register("about", {
             ...this.data.page,
             content: this.data.page.content
               .slice(0, 1)
-              .concat(
-                data,
-                this.data.page.content.slice(-1)
-              ) as PageConfig["content"],
+              .concat(data) as PageConfig["content"],
           }
         );
       }
