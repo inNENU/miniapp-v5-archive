@@ -104,12 +104,12 @@ export const listFile = (path: string): string[] => {
   try {
     const fileList = fileManager.readdirSync(`${userPath}/${path}`);
 
-    info(`${path} 文件夹下文件为：`, fileList); // 调试
+    info(`${path} 文件夹下文件为: `, fileList); // 调试
 
     return fileList;
   } catch (err) {
     // 调试
-    error(`列出 ${path} 文件夹下文件错误：`, err);
+    error(`列出 ${path} 文件夹下文件错误: `, err);
 
     return [];
   }
@@ -197,7 +197,7 @@ export const saveFile = (tempFilePath: string, path: string): void => {
     fileManager.saveFileSync(tempFilePath, `${userPath}/${path}`);
   } catch (err) {
     // 调试
-    error(`保存文件到 ${path} 失败：`, err);
+    error(`保存文件到 ${path} 失败:`, err);
   }
 };
 

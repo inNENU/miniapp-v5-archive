@@ -58,7 +58,7 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
   const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
 
   // 调试
-  debug(`${name}通知状态为${notify}`, `本地版本文件为：${localVersion}`);
+  debug(`${name}通知状态为${notify}`, `本地版本文件为: ${localVersion}`);
   debug(`${name}更新于${localTime}, 现在时间是${currentTime}`);
 
   if (notify || currentTime > Number(localTime) + 604800)
@@ -100,7 +100,7 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
                         if (choice2.cancel)
                           modal(
                             "更新提示已关闭",
-                            "您可以在设置中重新打开提示。请注意：为保障正常运行，小程序会每周对资源进行强制更新。",
+                            "您可以在设置中重新打开提示。请注意:为保障正常运行，小程序会每周对资源进行强制更新。",
                             // 关闭更新提示
                             () => {
                               wx.setStorageSync(`${name}ResNotify`, false);

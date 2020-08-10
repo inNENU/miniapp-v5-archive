@@ -91,7 +91,7 @@ const disposePage = (
     // 调试
     info(`${page.id} 处理完毕`);
   }
-  // 调试：未传入 page
+  // 调试: 未传入 page
   else error("页面数据不存在");
 
   return page; // 返回处理后的 page
@@ -123,11 +123,11 @@ const preGetPage = (page: PageConfig): void => {
 /**
  * **简介:**
  *
- * - 描述：预处理页面数据写入全局数据
+ * - 描述: 预处理页面数据写入全局数据
  *
- * - 用法：在页面 `onNavigate` 时调用
+ * - 用法: 在页面 `onNavigate` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param option 页面跳转参数
  * @param page page 数组
@@ -148,7 +148,7 @@ export const resolvePage = (
   page?: PageConfig,
   setGlobal = true
 ): PageConfig | null => {
-  info("将要跳转：", option); // 控制台输出参数
+  info("将要跳转: ", option); // 控制台输出参数
   let pageData = null;
 
   if (page) pageData = disposePage(page, option.query);
@@ -177,11 +177,11 @@ export interface ColorConfig {
 /**
  * **简介:**
  *
- * - 描述：设置胶囊与背景颜色
+ * - 描述: 设置胶囊与背景颜色
  *
- * - 用法：在页面 `onShow` 时调用
+ * - 用法: 在页面 `onShow` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param grey 页面是否为灰色背景
  *
@@ -256,12 +256,12 @@ interface SetPageOption {
 /**
  *  **简介:**
  *
- * - 描述：设置本地界面数据，如果传入 `page` 参数，则根据 `handle` 的值决定是否在 `setData` 前处理 `page`。
+ * - 描述: 设置本地界面数据，如果传入 `page` 参数，则根据 `handle` 的值决定是否在 `setData` 前处理 `page`。
  * 如果没有传入 `page`，则使用 `PageOption.data.page`。之后根据 `preload` 的值决定是否对页面链接进行预加载。
  *
- * - 用法：在页面 `onLoad` 时调用
+ * - 用法: 在页面 `onLoad` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param object 配置对象
  * - option 页面传参
@@ -328,11 +328,11 @@ export const setPage = (
 /**
  * **简介:**
  *
- * - 描述：弹出通知
+ * - 描述: 弹出通知
  *
- * - 用法：在页面 `onLoad` 时调用
+ * - 用法: 在页面 `onLoad` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param id 当前界面的标识符
  */
@@ -354,11 +354,11 @@ export const popNotice = (id: string): void => {
 /**
  * **简介:**
  *
- * - 描述：设置在线界面数据
+ * - 描述: 设置在线界面数据
  *
- * - 用法：在页面 `onLoad` 时调用
+ * - 用法: 在页面 `onLoad` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param option 页面传参
  * @param ctx 页面指针
@@ -392,14 +392,14 @@ export const setOnlinePage = (
     );
   } else if (option.id) {
     // 需要重新载入界面
-    info(`${option.id} onLoad开始，参数为：`, option);
+    info(`${option.id} onLoad开始，参数为: `, option);
     const page = readJSON(`guide/${option.id}`);
 
     // 如果本地存储中含有 page 直接处理
     if (page) {
       setPage({ option, ctx }, page);
       popNotice(option.id);
-      info(`${option.id} onLoad 成功：`, ctx.data);
+      info(`${option.id} onLoad 成功: `, ctx.data);
       wx.reportMonitor("0", 1);
 
       // 如果需要执行预加载，则执行
@@ -465,11 +465,11 @@ export const setOnlinePage = (
 /**
  * **简介:**
  *
- * - 描述：载入在线界面数据
+ * - 描述: 载入在线界面数据
  *
- * - 用法：在页面 `onLoad` 时调用
+ * - 用法: 在页面 `onLoad` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param option 页面传参
  * @param ctx 页面指针
@@ -483,14 +483,14 @@ export const loadOnlinePage = (
 ): void => {
   if (option.path) {
     // 需要重新载入界面
-    info(`${option.path} onLoad 开始，参数为：`, option);
+    info(`${option.path} onLoad 开始，参数为:`, option);
     requestJSON(
       `resource/${option.path}`,
       (page) => {
         if (page) {
           setPage({ option, ctx }, page as PageConfig);
           popNotice(option.path);
-          info(`${option.path} onLoad 成功：`, ctx.data);
+          info(`${option.path} onLoad 成功:`, ctx.data);
           wx.reportMonitor("0", 1);
         }
       },
@@ -540,15 +540,15 @@ export const loadFont = (theme: string): void => {
 /**
  * **简介:**
  *
- * - 描述：导航栏动态改变
+ * - 描述: 导航栏动态改变
  *
- * - 用法：在页面`onPageScroll`时调用
+ * - 用法: 在页面 `onPageScroll` 时调用
  *
- * - 性质：同步函数
+ * - 性质: 同步函数
  *
  * @param option 组件参数
  * @param ctx 页面指针
- * @param headName 导航栏配置对象在`data`中的名称
+ * @param headName 导航栏配置对象在 `data` 中的名称
  *
  * **案例:**
  *

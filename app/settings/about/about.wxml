@@ -12,7 +12,7 @@
   catch:tap="cancelInput"
 />
 <view wx:if="{{debug}}" class="password">
-  <view class="hint">请输入密码：</view>
+  <view class="hint">请输入密码:</view>
   <input
     type="number"
     password

@@ -12,11 +12,11 @@
   </view>
   <view class="score-wrapper">
     <view class="BMI">
-      <view class="title">BMI：</view>
+      <view class="title">BMI:</view>
       <view class="result">{{BMI.score}} {{BMI.state}}</view>
     </view>
     <view class="score">
-      <view class="title">体测成绩：</view>
+      <view class="title">体测成绩:</view>
       <view class="result">{{PE.score}} {{PE.state}}</view>
     </view>
   </view>

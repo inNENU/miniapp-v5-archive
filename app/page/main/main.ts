@@ -46,7 +46,7 @@ $register("main", {
   },
 
   onPageLaunch() {
-    console.info("主页面启动：", new Date().getTime() - globalData.date, "ms");
+    console.info("主页面启动: ", new Date().getTime() - globalData.date, "ms");
     const page = wx.getStorageSync("main");
 
     resolvePage({ query: { id: "main" } }, page ? page : this.data.page);

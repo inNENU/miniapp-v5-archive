@@ -265,7 +265,7 @@ export const appUpdate = (globalData: GlobalData): void => {
 export const login = (appID: string): void => {
   const openid = wx.getStorageSync("openid");
 
-  if (openid) console.info(`openid为：${openid}`);
+  if (openid) console.info(`openid为: ${openid}`);
   else
     wx.login({
       success: (res) => {
@@ -277,7 +277,7 @@ export const login = (appID: string): void => {
             enableHttp2: true,
             success: (res2) => {
               wx.setStorageSync("openid", (res2.data as any).openid);
-              console.info(`openid为：${(res2.data as any).openid}`);
+              console.info(`openid为:${(res2.data as any).openid}`);
             },
           });
       },

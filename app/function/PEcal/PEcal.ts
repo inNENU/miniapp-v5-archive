@@ -349,7 +349,7 @@ $register("PEcal", {
     const { result } = this.data;
 
     wx.showLoading({ title: "计算中...", mask: true });
-    console.info("输入结果为：", result);
+    console.info("输入结果为: ", result);
 
     if (result.gender && result.grade) {
       // 可以计算

@@ -106,7 +106,7 @@ $register.A<AppOption>({
   },
 
   onError(errorMsg) {
-    console.error("出错信息为：", errorMsg);
+    console.error("出错信息为: ", errorMsg);
   },
 
   onPageNotFound(msg) {

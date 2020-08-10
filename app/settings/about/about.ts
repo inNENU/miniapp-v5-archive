@@ -15,7 +15,7 @@ $register("about", {
     darkmode: globalData.darkmode,
     page: {
       title: "关于",
-      desc: `当前版本：${globalData.version}`,
+      desc: `当前版本: ${globalData.version}`,
       grey: true,
       feedback: true,
       content: [

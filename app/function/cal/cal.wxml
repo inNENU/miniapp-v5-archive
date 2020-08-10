@@ -81,6 +81,6 @@
     </view>
   </view>
   <view wx:if="{{gradePointAverage}}" class="gradeDisplay">
-    总学分：{{totalCredit}}\n 平均绩点：{{gradePointAverage}}
+    总学分:{{totalCredit}}\n 平均绩点: {{gradePointAverage}}
   </view>
 </view>

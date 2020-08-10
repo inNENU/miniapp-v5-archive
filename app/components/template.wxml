@@ -180,7 +180,7 @@
     <view class="errorDesc">
       <view class="errorDesc">
         <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-        <text>错误原因有以下几种可能：\n\n </text>
+        <text>错误原因有以下几种可能:\n\n </text>
         <text> 1. 服务器负载过重；\n</text>
         <text> 2. 设备可能无法访问互联网;\n</text>
         <text> 3. 导航页面路径错误；\n\n</text>
@@ -262,7 +262,7 @@
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
       <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能：\n\n </text>
+      <text>错误原因有以下几种可能:\n\n </text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>
@@ -365,7 +365,7 @@ Author: Mr.Hope
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
       <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能：\n\n </text>
+      <text>错误原因有以下几种可能:\n\n </text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>
@@ -467,7 +467,7 @@ Author: Mr.Hope
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
       <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能：\n\n </text>
+      <text>错误原因有以下几种可能:\n\n </text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>

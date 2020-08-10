@@ -37,6 +37,8 @@
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
+    "useMultiFrameRuntime": false,
+    "useApiHook": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -46,7 +48,6 @@
     "useIsolateContext": true,
     "useCompilerModule": true,
     "userConfirmedUseCompilerModuleSwitch": true,
-    "useMultiFrameRuntime": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "remoteDebugLogEnable": false

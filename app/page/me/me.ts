@@ -74,7 +74,7 @@ $register("me", {
 
     footer: {
       author: "",
-      desc: `当前版本：${globalData.version}\n小程序由${
+      desc: `当前版本: ${globalData.version}\n小程序由${
         globalData.appID === "wx9ce37d9662499df3"
           ? "校学生会委托 Mr.Hope "
           : " Mr.Hope 个人"

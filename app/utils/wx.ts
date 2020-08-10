@@ -125,7 +125,7 @@ export const requestJSON = <T = Record<string, any>>(
       else {
         tip("服务器出现问题，请稍后重试");
         // 调试
-        warn(`请求 ${path} 失败：${res.statusCode}`);
+        warn(`请求 ${path} 失败: ${res.statusCode}`);
         wx.reportMonitor("3", 1);
 
         if (errorFunc) errorFunc(res.statusCode);
