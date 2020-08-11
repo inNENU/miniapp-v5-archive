@@ -4,6 +4,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, getColor } from "../../utils/page";
 import { search, searching } from "../../utils/search";
 import { AppOption } from "../../app";
+import { server } from "../../utils/config";
 const { globalData } = getApp<AppOption>();
 
 $register("search", {
@@ -58,7 +59,7 @@ $register("search", {
   onShareAppMessage: () => ({
     title: "搜索",
     path: "/page/search/search",
-    imageUrl: `https://v3.mp.innenu.com/img/${
+    imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,
   }),

@@ -2,6 +2,7 @@
 import $register = require("wxpage");
 import { changeNav, popNotice, getColor } from "../../utils/page";
 import { requestJSON, savePhoto } from "../../utils/wx";
+import { server } from "../../utils/config";
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
 
@@ -42,43 +43,6 @@ $register("donate", {
       shareable: true,
       from: "返回",
     },
-    donate2019: [
-      ["小迷妹", 52.13],
-      ["东方逸仙", 23.36],
-      ["望竹", 25],
-      ["羊焓熙", 20],
-      ["小黄", 20],
-      ["佚名", 20],
-      ["佚名", 15.54],
-      ["李念真", 14.48],
-      ["老炮", 11.11],
-      ["佚名", 11.11],
-      ["范静怡", 10],
-      ["李文雯", 10],
-      ["卢大帅", 10],
-      ["南棠", 10],
-      ["王昊", 10],
-      ["张雨衫", 10],
-      ["佚名", 10],
-      ["吴亚坤", 9.99],
-      ["育明", 8.88],
-      ["佚名", 7],
-      ["佚名", 6.88],
-      ["佚名", 6.66],
-      ["白晶", 6.66],
-      ["伍洁婷", 6.66],
-      ["佚名", 6],
-      ["佚名", 6],
-      ["...", 5],
-      ["等你很久了.", 5],
-      ["佚名", 5],
-      ["佚名", 2.5],
-      ["佚名", 2],
-      ["佚名", 2],
-      ["佚名", 2],
-    ],
-    sum2019: 370.96,
-    income2019: -229.04,
   },
 
   onLoad() {
@@ -92,6 +56,20 @@ $register("donate", {
         "page.from": "主页",
         "page.action": "redirect",
       });
+
+    // 获取赞赏支持列表数据
+    requestJSON("resource/config/donate/2019", (donateList) => {
+      let sum2019 = 0;
+
+      ((donateList as unknown) as DonateList).forEach((element) => {
+        sum2019 += element[1];
+      });
+
+      this.setData({
+        donate2019: donateList,
+        sum2019: Math.floor(100 * sum2019) / 100,
+      });
+    });
 
     // 获取赞赏支持列表数据
     requestJSON("resource/config/donate/2020", (donateList) => {
@@ -119,7 +97,7 @@ $register("donate", {
   onShareAppMessage: () => ({
     title: "支持 Mr.Hope",
     path: "/settings/donate/donate",
-    imageUrl: `https://v3.mp.innenu.com/img/${
+    imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,
   }),

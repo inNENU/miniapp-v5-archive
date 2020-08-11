@@ -1,0 +1,11 @@
+<import src="/components/template" />
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+/>
+<view class="{{theme}} grey">
+  <template is="nav" data="{{...nav, theme}}" />
+  <template is="body" data="{{page, theme}}" />
+</view>

@@ -11,6 +11,7 @@ import { checkResUpdate, refreshPage } from "../../utils/tab";
 import { searching } from "../../utils/search";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
+import { server } from "../../utils/config";
 import { PageConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
@@ -96,7 +97,7 @@ $register("main", {
   onShareAppMessage: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
     path: "/page/main/main",
-    imageUrl: `https://v3.mp.innenu.com/img/${
+    imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,
   }),

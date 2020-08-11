@@ -5,6 +5,7 @@ import { modal, requestJSON } from "./wx";
 import { AppOption } from "../app";
 import { Notice } from "./app";
 import { PageOption, PageConfig } from "../../typings/pageData";
+import { server } from "./config";
 
 /** 全局数据 */
 const { globalData } = getApp<AppOption>();
@@ -521,7 +522,7 @@ export const loadFont = (theme: string): void => {
   if (theme === "Android")
     wx.loadFontFace({
       family: "FZKTJW",
-      source: 'url("https://v3.mp.innenu.com/fonts/FZKTJW.ttf")',
+      source: `url("${server}fonts/FZKTJW.ttf")`,
       complete: (res) => {
         info("楷体字体", res); // 调试
       },
@@ -529,7 +530,7 @@ export const loadFont = (theme: string): void => {
   else if (theme === "NENU")
     wx.loadFontFace({
       family: "FZSSJW",
-      source: 'url("https://v3.mp.innenu.com/fonts/FZSSJW.ttf")',
+      source: `url("${server}fonts/FZSSJW.ttf")`,
       complete: (res) => {
         info("宋体字体", res); // 调试
       },

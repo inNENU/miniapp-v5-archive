@@ -2,6 +2,7 @@
   "entryPagePath": "page/main/main",
   "pages": [
     "page/main/main",
+    "page/enroll/enroll",
     "page/function/function",
     "page/guide/guide",
     "page/me/me",
@@ -80,16 +81,22 @@
         "selectedIconPath": "icon/tab/@Home.png"
       },
       {
-        "pagePath": "page/function/function",
-        "text": "功能",
-        "iconPath": "icon/tab/function.png",
-        "selectedIconPath": "icon/tab/@Function.png"
+        "pagePath": "page/enroll/enroll",
+        "text": "招生报考",
+        "iconPath": "icon/tab/enroll.png",
+        "selectedIconPath": "icon/tab/@Enroll.png"
       },
       {
         "pagePath": "page/guide/guide",
         "text": "东师指南",
         "iconPath": "icon/tab/guide.png",
         "selectedIconPath": "icon/tab/@Guide.png"
+      },
+      {
+        "pagePath": "page/function/function",
+        "text": "功能",
+        "iconPath": "icon/tab/function.png",
+        "selectedIconPath": "icon/tab/@Function.png"
       },
       {
         "pagePath": "page/me/me",

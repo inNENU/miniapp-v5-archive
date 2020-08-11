@@ -2,6 +2,7 @@ import $register = require("wxpage");
 import { Lyric, PlayMode, SongDetail } from "./typings";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
+import { server } from "../../utils/config";
 import { tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
@@ -60,7 +61,7 @@ $register("music", {
     // 加载字体
     wx.loadFontFace({
       family: "FZSSJW",
-      source: 'url("https://v3.mp.innenu.com/fonts/FZSSJW.ttf")',
+      source: `url("${server}fonts/FZSSJW.ttf")`,
       complete: (res) => {
         console.info("宋体字体", res); // 调试
       },

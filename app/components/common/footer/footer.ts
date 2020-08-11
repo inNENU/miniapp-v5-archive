@@ -1,4 +1,5 @@
 import { AppOption } from "../../../app";
+import { server } from "../../../utils/config";
 const {
   globalData: { appID },
 } = getApp<AppOption>(); // 获得当前小程序ID
@@ -10,7 +11,7 @@ Component({
   },
 
   data: {
-    icon: `https://v3.mp.innenu.com/img/${
+    icon: `${server}img/${
       appID === "wx9ce37d9662499df3" ? "logo" : "inNENU"
     }.png`,
     text:

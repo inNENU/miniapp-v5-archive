@@ -13,7 +13,7 @@
       class="QRCode1"
       lazy-load
       mode="widthFix"
-      src="https://v3.mp.innenu.com/img/donate/Wechat.jpg"
+      src="https://mp.innenu.com/img/donate/Wechat.jpg"
       data-name="Wechat"
       catch:tap="save"
     />
@@ -21,7 +21,7 @@
       class="QRCode2"
       lazy-load
       mode="widthFix"
-      src="https://v3.mp.innenu.com/img/donate/Alipay.jpg"
+      src="https://mp.innenu.com/img/donate/Alipay.jpg"
       data-name="Alipay"
       catch:tap="save"
     />
@@ -47,7 +47,7 @@
         赞赏 {{item[1]}} 元
       </view>
       <view class="result">共计: {{sum2019}} 元</view>
-      <view class="result">结余: {{income2019}} 元</view>
+      <view class="result">结余: {{sum2019 - 600}} 元</view>
     </block>
     <view wx:else>暂无赞赏支持</view>
   </view>

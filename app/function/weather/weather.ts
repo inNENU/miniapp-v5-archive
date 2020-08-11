@@ -1,6 +1,7 @@
 import $register = require("wxpage");
 import { WeatherData, WeatherDetail } from "../../components/weather/typings";
 import { AppOption } from "../../app";
+import { server } from "../../utils/config";
 import weatherHandler from "../../components/weather/handler";
 
 const { globalData } = getApp<AppOption>();
@@ -36,7 +37,7 @@ $register("weather", {
     } // 否则需要重新获取并处理
     else
       wx.request({
-        url: "https://v3.mp.innenu.com/service/weather.php",
+        url: `${server}service/weather.php`,
         enableHttp2: true,
         success: (res) => {
           const weather = weatherHandler((res.data as WeatherData).data);

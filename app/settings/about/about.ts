@@ -4,6 +4,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { requestJSON, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
+import { server } from "../../utils/config";
 import { PageConfig, AdvancedListComponentConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
@@ -113,7 +114,7 @@ $register("about", {
   onShareAppMessage: () => ({
     title: "关于",
     path: "/settings/about/about",
-    imageUrl: `https://v3.mp.innenu.com/img/${
+    imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,
   }),
