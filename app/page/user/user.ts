@@ -31,39 +31,39 @@ $register("me", {
           content: [
             {
               text: "外观设置",
-              icon: "/icon/tabPage/setting.svg",
+              icon: "/icon/user/setting.svg",
               url: "outlook",
             },
             {
               text: "权限设置",
-              icon: "/icon/tabPage/setting.svg",
+              icon: "/icon/user/setting.svg",
               url: "auth",
             },
             {
               text: "存储设置",
-              icon: "/icon/tabPage/setting.svg",
+              icon: "/icon/user/setting.svg",
               url: "storage",
             },
             {
               text: "更新日志",
-              icon: "/icon/tabPage/about.svg",
+              icon: "/icon/about.svg",
               url: "log",
               desc: globalData.version,
             },
             {
               text: "小程序内容",
               desc: "帮助更新?",
-              icon: "/icon/tabPage/about.svg",
+              icon: "/icon/about.svg",
               url: "resource",
             },
             {
               text: "关于",
-              icon: "/icon/tabPage/about.svg",
+              icon: "/icon/about.svg",
               url: "about",
             },
             {
               text: "赞赏支持 Mr.Hope",
-              icon: "/icon/tabPage/donate.svg",
+              icon: "/icon/user/donate.svg",
               desc: "了解详情",
               url: "donate",
               hidden: globalData.appID === "wx9ce37d9662499df3",

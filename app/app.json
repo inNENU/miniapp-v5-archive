@@ -2,10 +2,10 @@
   "entryPagePath": "page/main/main",
   "pages": [
     "page/main/main",
-    "page/enroll/enroll",
     "page/function/function",
     "page/guide/guide",
-    "page/me/me",
+    "page/intro/intro",
+    "page/user/user",
     "page/search/search"
   ],
   "subPackages": [
@@ -50,7 +50,7 @@
       "network": "all",
       "packages": ["function"]
     },
-    "page/me/me": {
+    "page/user/user": {
       "network": "all",
       "packages": ["settings"]
     }
@@ -69,7 +69,7 @@
   "tabBar": {
     "custom": false,
     "color": "#8a8a8a",
-    "selectedColor": "#3cc51f",
+    "selectedColor": "#2ecc71",
     "borderStyle": "@tabBorderStyle",
     "backgroundColor": "@tabBgColor",
     "position": "bottom",
@@ -78,31 +78,31 @@
         "pagePath": "page/main/main",
         "text": "首页",
         "iconPath": "icon/tab/home.png",
-        "selectedIconPath": "icon/tab/@Home.png"
+        "selectedIconPath": "icon/tab/@home.png"
       },
       {
-        "pagePath": "page/enroll/enroll",
-        "text": "招生报考",
-        "iconPath": "icon/tab/enroll.png",
-        "selectedIconPath": "icon/tab/@Enroll.png"
+        "pagePath": "page/intro/intro",
+        "text": "东师介绍",
+        "iconPath": "icon/tab/intro.png",
+        "selectedIconPath": "icon/tab/@intro.png"
       },
       {
         "pagePath": "page/guide/guide",
         "text": "东师指南",
         "iconPath": "icon/tab/guide.png",
-        "selectedIconPath": "icon/tab/@Guide.png"
+        "selectedIconPath": "icon/tab/@guide.png"
       },
       {
         "pagePath": "page/function/function",
         "text": "功能",
         "iconPath": "icon/tab/function.png",
-        "selectedIconPath": "icon/tab/@Function.png"
+        "selectedIconPath": "icon/tab/@function.png"
       },
       {
-        "pagePath": "page/me/me",
+        "pagePath": "page/user/user",
         "text": "我的东师",
-        "iconPath": "icon/tab/me.png",
-        "selectedIconPath": "icon/tab/@Me.png"
+        "iconPath": "icon/tab/user.png",
+        "selectedIconPath": "icon/tab/@user.png"
       }
     ]
   },

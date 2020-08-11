@@ -35,7 +35,7 @@
       open-type="share"
       plain
     >
-      <image class="icon" src="/icon/tabPage/share.svg" />
+      <image class="icon" src="/icon/user/share.svg" />
       <view class="text">分享小程序</view>
     </button>
     <view class="icon divline" />
@@ -46,7 +46,7 @@
       open-type="feedback"
       plain
     >
-      <image class="icon" src="/icon/tabPage/bug.svg" />
+      <image class="icon" src="/icon/user/bug.svg" />
       <view class="text">bug反馈</view>
     </button>
     <block wx:if="{{env === 'wx'}}">
@@ -58,7 +58,7 @@
         open-type="contact"
         plain
       >
-        <image class="icon" src="/icon/tabPage/contact.svg" />
+        <image class="icon" src="/icon/user/contact.svg" />
         <view class="text"
           >联系{{appID === 'wx9ce37d9662499df3'? '校会君': 'Mr.Hope'}}</view
         >

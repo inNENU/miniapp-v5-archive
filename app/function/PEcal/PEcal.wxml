@@ -6,7 +6,7 @@
   <template is="nav" data="{{...page, theme}}" />
   <view class="desc-wrapper">
     <view class="desc-button" hover-class="button-hover" catch:tap="navigate">
-      <image src="/icon/tabPage/about.svg" class="icon" />
+      <image src="/icon/about.svg" class="icon" />
       <view class="text">体测说明</view>
     </view>
   </view>

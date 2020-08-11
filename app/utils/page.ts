@@ -111,8 +111,8 @@ const preGetPage = (page: PageConfig): void => {
         component.content.forEach((element: any) => {
           if ("path" in element)
             ensureJSON({
-              path: `guide/${element.path}`,
-              url: `resource/guide/${element.path}`,
+              path: `${element.path}`,
+              url: `resource/${element.path}`,
             });
         });
     });
@@ -154,7 +154,7 @@ export const resolvePage = (
 
   if (page) pageData = disposePage(page, option.query);
   else if (option.query.id) {
-    const jsonContent: PageConfig = readJSON(`guide/${option.query.id}`);
+    const jsonContent: PageConfig = readJSON(`${option.query.id}`);
 
     if (jsonContent) pageData = disposePage(jsonContent, option.query);
     else warn(`${option.query.id} 文件不存在，处理失败`);
@@ -394,7 +394,7 @@ export const setOnlinePage = (
   } else if (option.id) {
     // 需要重新载入界面
     info(`${option.id} onLoad开始，参数为: `, option);
-    const page = readJSON(`guide/${option.id}`);
+    const page = readJSON(`${option.id}`);
 
     // 如果本地存储中含有 page 直接处理
     if (page) {
@@ -412,10 +412,10 @@ export const setOnlinePage = (
     // 请求页面Json
     else
       requestJSON(
-        `resource/guide/${option.id}`,
+        `resource/${option.id}`,
         (data) => {
           // 非分享界面下将页面数据写入存储
-          if (option.from !== "share") writeJSON(`guide/${option.id}`, data);
+          if (option.from !== "share") writeJSON(`${option.id}`, data);
 
           // 设置界面
           setPage({ option, ctx }, data as PageConfig);
