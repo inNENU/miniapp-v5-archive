@@ -93,11 +93,8 @@ $register("search", {
     wx.showLoading({ title: "搜索中..." });
 
     search(value, this.state.name, (result) => {
-      console.warn(result);
       this.setData({ result });
-
       this.state.value = value;
-
       wx.hideLoading();
     });
   },
