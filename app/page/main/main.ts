@@ -70,7 +70,11 @@ $register("main", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("app-inited")) checkResUpdate("guide", "580K");
+    if (wx.getStorageSync("app-inited")) {
+      checkResUpdate("function", "功能大厅", "130K");
+      checkResUpdate("guide", "东师指南", "280K");
+      checkResUpdate("intro", "东师介绍", "180K");
+    }
 
     // 执行 tab 页预加载
     ["function", "guide", "intro"].forEach((x) => {

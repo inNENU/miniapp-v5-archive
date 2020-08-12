@@ -7,5 +7,6 @@
 />
 <view class="{{theme}} grey">
   <template is="nav" data="{{...nav, theme}}" />
+  <search words="{{words}}" catch:searching="searching" catch:search="search" />
   <template is="body" data="{{page, theme}}" />
 </view>

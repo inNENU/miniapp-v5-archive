@@ -47,14 +47,19 @@ export const resDownload = (name: string): void => {
 /**
  * 检查资源更新
  *
+ * @param path 检查资源的路径
  * @param name 检查资源的名称
  * @param dataUsage 消耗的数据流量
  */
 // eslint-disable-next-line max-lines-per-function
-export const checkResUpdate = (name: string, dataUsage: string): void => {
-  const notify = wx.getStorageSync(`${name}ResNotify`); // 资源提醒
-  const localVersion = readJSON(`${name}Version`); // 读取本地Version文件
-  const localTime = wx.getStorageSync(`${name}UpdateTime`);
+export const checkResUpdate = (
+  path: string,
+  name: string,
+  dataUsage: string
+): void => {
+  const notify = wx.getStorageSync(`${path}ResNotify`); // 资源提醒
+  const localVersion = readJSON(`${path}Version`); // 读取本地Version文件
+  const localTime = wx.getStorageSync(`${path}UpdateTime`);
   const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
 
   // 调试
@@ -64,7 +69,7 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
   if (notify || currentTime > Number(localTime) + 604800)
     // 如果需要更新
     wx.request({
-      url: `${server}service/resVersion.php?res=${name}`,
+      url: `${server}service/resVersion.php?res=${path}`,
       enableHttp2: true,
       success: (res) => {
         // 资源为最新
@@ -79,14 +84,14 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
             // 如果需要提醒，则弹窗
             if (notify)
               wx.showModal({
-                title: "资源有更新",
+                title: `${name}有更新`,
                 content: `请更新资源以获得最新功能与内容。(会消耗${dataUsage}流量)`,
                 cancelText: "取消",
                 cancelColor: "#ff0000",
                 confirmText: "更新",
                 success: (choice) => {
                   // 用户确认，下载更新
-                  if (choice.confirm) resDownload(name);
+                  if (choice.confirm) resDownload(path);
                   // 用户取消，询问是否关闭更新提示
                   else if (choice.cancel)
                     wx.showModal({
@@ -103,7 +108,7 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
                             "您可以在设置中重新打开提示。请注意:为保障正常运行，小程序会每周对资源进行强制更新。",
                             // 关闭更新提示
                             () => {
-                              wx.setStorageSync(`${name}ResNotify`, false);
+                              wx.setStorageSync(`${path}ResNotify`, false);
                             }
                           );
                       },
@@ -111,7 +116,7 @@ export const checkResUpdate = (name: string, dataUsage: string): void => {
                 },
               });
             // 距上次更新已经半个月了，强制更新
-            else resDownload(name);
+            else resDownload(path);
           }
         else tip("服务器出现问题");
       },

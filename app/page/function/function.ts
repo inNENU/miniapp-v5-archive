@@ -36,7 +36,7 @@ $register("function", {
       { option: { id: "function" }, ctx: this },
       this.$take("function") || this.data.page
     );
-    checkResUpdate("function", "130K");
+    checkResUpdate("function", "功能大厅", "130K");
   },
 
   onShow() {
@@ -55,7 +55,7 @@ $register("function", {
 
   onPullDownRefresh() {
     refreshPage("function", this, globalData);
-    checkResUpdate("function", "130K");
+    checkResUpdate("function", "功能大厅", "130K");
     wx.stopPullDownRefresh();
   },
 
