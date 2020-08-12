@@ -13,6 +13,7 @@ type ListAction =
   | "getStorage"
   | "refreshGuide"
   | "refreshFunc"
+  | "refreshIntro"
   | "deleteData"
   | "deleteData"
   | "resetApp";
@@ -42,6 +43,7 @@ $register("storage", {
           header: "资源刷新",
           foot: "如果页面显示出现问题请刷新资源",
           content: [
+            { text: "刷新介绍资源", button: "refreshIntro" },
             { text: "刷新功能资源", button: "refreshFunc" },
             { text: "刷新指南资源", button: "refreshGuide" },
           ],
@@ -135,6 +137,13 @@ $register("storage", {
   refreshFunc() {
     confirm("刷新功能资源", () => {
       resDownload("function");
+    });
+  },
+
+  /** 刷新功能资源 */
+  refreshIntro() {
+    confirm("刷新介绍资源", () => {
+      resDownload("intro");
     });
   },
 

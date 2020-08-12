@@ -6,6 +6,6 @@
       "matching": "inclusive",
       "priority": 100
     },
-    { "action": "allow", "page": "*", "priority": 100 }
+    { "action": "allow", "page": "*", "priority": 99 }
   ]
 }

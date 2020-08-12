@@ -103,7 +103,7 @@ export const appInit = (): void => {
     wx.setStorageSync(data, appOption[data]);
   });
 
-  resDownload(["function", "guide"], () => {
+  resDownload(["function", "guide", "intro"], () => {
     // 成功初始化
     wx.setStorageSync("app-inited", true);
     wx.hideLoading();

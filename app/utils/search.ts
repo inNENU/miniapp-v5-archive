@@ -1,19 +1,28 @@
-import { getJSON } from "./file";
 import { SearchInfo } from "../../typings";
+import { requestJSON } from "./wx";
 
-/** 搜索权重 */
-interface SearchResultWeight {
-  [jsonName: string]: number;
+/** 搜索匹配详情 */
+interface SearchContentDetail {
+  type: "title" | "heading" | "text" | "card" | "doc";
+  [props: string]: any;
+}
+
+/** 搜索内容 */
+interface SearchContent {
+  /** 权重 */
+  weight: number;
+  /** 搜索内容 */
+  content: SearchContentDetail[];
 }
 
 /** 搜索结果 */
-interface SearchResult {
-  /** 地址 */
-  url: string;
-  /** 文字 */
-  text: string;
-  /** 详情 */
-  desc?: string;
+export interface SearchResult {
+  /** 页面标题 */
+  title: string;
+  /** 页面标识 */
+  id: string;
+  /** 搜索内容 */
+  content?: SearchContentDetail[];
 }
 
 interface WordInfo {
@@ -26,14 +35,12 @@ const genWords = (word: string): WordInfo[] => {
 
   if (length === 1) return [{ text: word, weight: 1 }];
   const result: WordInfo[] = [];
-  for (let wordNumber = 2; wordNumber <= length; wordNumber++)
+  for (let wordNumber = length; wordNumber > 1; wordNumber--)
     for (let start = 0; start < length - wordNumber + 1; start++)
       result.push({
         text: word.slice(start, start + wordNumber),
         weight: wordNumber,
       });
-
-  console.log(result);
 
   return result;
 };
@@ -47,51 +54,46 @@ const genWords = (word: string): WordInfo[] => {
  */
 export const searching = (
   searchWord: string,
+  name: string,
   callback: (words: string[]) => void
 ): void => {
   const words: string[] = [];
 
-  getJSON({
-    path: "guide/search",
-    url: "resource/guide/search",
-    success: (data) => {
-      const keywords = data as SearchInfo;
+  requestJSON(`resource/${name}-search`, (data) => {
+    const keywords = data as SearchInfo;
 
-      if (searchWord)
-        Object.keys(keywords).forEach((jsonName) => {
-          const { title } = keywords[jsonName];
+    if (searchWord)
+      Object.keys(keywords).forEach((jsonName) => {
+        const { name = "", desc = "", title, heading } = keywords[jsonName];
 
-          // 检查标题是否包含了 searchWord
+        // 检查标题是否包含了 searchWord
+        if (name.indexOf(searchWord) !== -1 && words.indexOf(name) === -1)
+          words.push(name);
+
+        // 检查描述是否包含了 searchWord
+        if (desc.indexOf(searchWord) !== -1 && desc.indexOf(name) === -1)
+          words.push(name);
+
+        // 检查大标题是否包含了 searchWord
+        title.forEach((keyword) => {
           if (
-            title &&
-            title.indexOf(searchWord) !== -1 &&
-            words.indexOf(title) === -1
+            keyword.indexOf(searchWord) !== -1 &&
+            words.indexOf(keyword) === -1
           )
-            words.push(title);
-
-          // 检查每个关键词是否包含了 searchWord
-          if (keywords[jsonName].keywords)
-            keywords[jsonName].keywords.forEach((keyword) => {
-              if (
-                keyword.indexOf(searchWord) !== -1 &&
-                words.indexOf(keyword) === -1
-              )
-                words.push(keyword);
-            });
-
-          // 检查描述是否包含了 searchWord
-          if (keywords[jsonName].desc)
-            keywords[jsonName].desc.forEach((keyword) => {
-              if (
-                keyword.indexOf(searchWord) !== -1 &&
-                words.indexOf(keyword) === -1
-              )
-                words.push(keyword);
-            });
+            words.push(keyword);
         });
 
-      callback(words);
-    },
+        // 检查小标题是否包含了 searchWord
+        heading.forEach((keyword) => {
+          if (
+            keyword.indexOf(searchWord) !== -1 &&
+            words.indexOf(keyword) === -1
+          )
+            words.push(keyword);
+        });
+      });
+
+    callback(words);
   });
 };
 
@@ -105,76 +107,126 @@ export const searching = (
 // eslint-disable-next-line max-lines-per-function
 export const search = (
   searchWord: string,
+  name: string,
   callback: (result: SearchResult[]) => void
 ): void => {
   const wordsInfo = genWords(searchWord);
-  const weight: SearchResultWeight = {};
-  const desc: Record<string, any> = {};
+  const result: Record<string, SearchContent> = {};
 
-  getJSON({
-    path: "guide/search",
-    url: "resource/guide/search",
-    success: (data) => {
-      const searchMap = data as SearchInfo;
+  // eslint-disable-next-line max-lines-per-function
+  requestJSON(`resource/${name}-search`, (data) => {
+    const searchMap = data as SearchInfo;
 
-      Object.keys(searchMap).forEach((pageID) => {
-        // 搜索页面标题，权重为 6
-        wordsInfo.forEach((word) => {
-          const { title } = searchMap[pageID];
+    // eslint-disable-next-line
+    Object.keys(searchMap).forEach((pageID) => {
+      let weight = 0;
+      const matchList: SearchContentDetail[] = [];
+      const {
+        name = "",
+        desc = "",
+        title,
+        heading,
+        card,
+        doc,
+        text,
+      } = searchMap[pageID];
 
-          if (title && title.indexOf(word.text) !== -1)
-            weight[pageID] = (weight[pageID] || 0) + 6 * word.weight;
+      for (let i = 0; i < wordsInfo.length; i++) {
+        const word = wordsInfo[i];
+
+        // 搜索页面标题，权重为 8
+        if (name.indexOf(word.text) !== -1) weight += 8 * word.weight;
+
+        // 搜索页面描述，权重为 4
+        if (desc.indexOf(word.text) !== -1) {
+          weight += 4 * word.weight;
+          matchList.push({
+            type: "text",
+            text: desc,
+          });
+        }
+
+        // 搜索大标题，权重为 4
+        title.forEach((text) => {
+          if (text.indexOf(word.text) !== -1) {
+            weight += 4 * word.weight;
+            matchList.push({ type: "title", text });
+          }
         });
 
-        if (searchMap[pageID].keywords)
-          // 搜索关键词，权重为 4
-          searchMap[pageID].keywords.forEach((keyword) => {
-            wordsInfo.forEach((word) => {
-              if (keyword.indexOf(word.text) !== -1)
-                weight[pageID] = (weight[pageID] || 0) + 4 * word.weight;
+        // 搜索段落标题，权重为 2
+        heading.forEach((text) => {
+          if (text.indexOf(word.text) !== -1) {
+            weight += 2 * word.weight;
+            matchList.push({ type: "heading", text });
+          }
+        });
+
+        // 搜索文档，权重为 2
+        doc.forEach((config) => {
+          const { name, icon } = config;
+
+          if (name.indexOf(word.text) !== -1) {
+            weight += 2 * word.weight;
+            matchList.push({ type: "doc", name, icon });
+          }
+        });
+
+        if (matchList.length >= 3) {
+          result[pageID] = { weight, content: matchList };
+          break;
+        }
+
+        // 搜索卡片，权重为 2
+        card.forEach((config) => {
+          const { title, desc = "" } = config;
+          if (title.indexOf(word.text) !== -1) {
+            weight += 4 * word.weight;
+            matchList.push({ type: "card", title, desc });
+          } else if (desc.indexOf(word.text) !== -1) {
+            weight += 2 * word.weight;
+            matchList.push({ type: "card", title, desc });
+          }
+        });
+
+        // 搜索文字，权重为 1
+        text.forEach((text: string) => {
+          const index = text.indexOf(word.text);
+
+          if (index !== -1) {
+            weight += 1 * word.weight;
+
+            const startIndex = Math.max(0, index - 8);
+            const endIndex = Math.min(
+              index + 8 + word.text.length,
+              text.length
+            );
+            matchList.push({
+              type: "text",
+              text: `${startIndex === 0 ? "" : "..."}${text.substring(
+                startIndex,
+                endIndex
+              )}${endIndex === text.length ? "" : "..."}`,
             });
-          });
+          }
+        });
 
-        const descConfig: SearchResultWeight = {};
+        if (weight > 0) {
+          result[pageID] = { weight, content: matchList };
+          break;
+        }
+      }
+    });
 
-        if (searchMap[pageID].desc)
-          // 搜索段落标题，权重为 2
-          searchMap[pageID].desc.forEach((descText) => {
-            wordsInfo.forEach((word) => {
-              if (descText.indexOf(word.text) !== -1) {
-                weight[pageID] = (weight[pageID] || 0) + 2 * word.weight;
-                descConfig[descText] = Math.max(
-                  descConfig[descText],
-                  word.weight
-                );
-              }
-            });
-          });
+    const searchResult = Object.keys(result)
+      // 按权重排序
+      .sort((x, y) => result[y].weight - result[x].weight)
+      .map((id) => ({
+        title: searchMap[id].name,
+        content: result[id].content,
+        id,
+      }));
 
-        desc[pageID] = Object.keys(descConfig)
-          .sort((x, y) => (descConfig[y] = descConfig[x]))
-          .shift();
-
-        if (searchMap[pageID].text)
-          // 搜索文字，权重为 1
-          searchMap[pageID].text.forEach((text: string) => {
-            wordsInfo.forEach((word) => {
-              if (text.indexOf(word.text) !== -1)
-                weight[pageID] = (weight[pageID] || 0) + 1 * word.weight;
-            });
-          });
-      });
-
-      const result = Object.keys(weight)
-        // 按权重排序
-        .sort((x, y) => weight[y] - weight[x])
-        .map((key) => ({
-          url: `page?id=${key}&from=搜索`,
-          text: searchMap[key].title,
-          desc: desc[key],
-        }));
-
-      callback(result);
-    },
+    callback(searchResult);
   });
 };

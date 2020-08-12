@@ -11,7 +11,7 @@ wx33acb831ee1831a5
 
   "plugins": {
     "tencentvideo": {
-      "version": "1.3.15",
+      "version": "1.3.16",
       "provider": "wxa75efa648b60994b"
     }
   },

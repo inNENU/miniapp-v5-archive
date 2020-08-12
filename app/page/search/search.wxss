@@ -3,3 +3,76 @@
   font-weight: 600;
   line-height: 1.5;
 }
+
+.search-item {
+  max-width: 517px;
+  margin: 8px 15px;
+  padding: 4px 8px;
+  background-color: var(--block-bgcolor);
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px 3px var(--card-shadow);
+
+  text-align: left;
+  overflow: hidden;
+}
+
+.search-item > .title {
+  margin: 4px 8px;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.search-item .list > .title {
+  margin: 4px 8px;
+  color: var(--grey-three);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.search-item .list .heading {
+  margin: 4px 8px;
+  color: var(--dark-grey);
+  font-size: 16px;
+}
+
+.search-item .list .text {
+  margin: 4px 8px;
+
+  color: var(--grey);
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.search-item .list .doc {
+  display: flex;
+  margin: 4px 8px;
+  font-size: 14px;
+  align-items: center;
+}
+
+.search-item .list .doc .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.search-item .list .card {
+  margin: 6px 8px;
+  padding: 6px 8px;
+  background-color: var(--bgcolor-grey);
+  border-radius: 8px;
+}
+
+.search-item .list .card .title {
+  color: var(--dark-grey);
+  font-size: 15px;
+}
+
+.search-item .list .card .desc {
+  margin-top: 4px;
+  color: var(--grey);
+  font-size: 13px;
+}

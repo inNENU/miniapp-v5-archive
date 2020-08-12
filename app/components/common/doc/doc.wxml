@@ -5,7 +5,7 @@
   catch:tap="view"
 >
   <!-- 文档图标 -->
-  <image class="doc-icon" mode="widthFix" src="./icon/{{config.icon}}.svg" />
+  <image class="doc-icon" src="./icon/{{config.icon}}.svg" />
   <!-- 文档名称 -->
   <view class="name">{{config.name}}</view>
   <!-- 下载按钮 -->
@@ -16,7 +16,7 @@
     hover-stay-time="100"
     catch:tap="download"
   >
-    <image class="icon" mode="widthFix" src="./icon/download.svg" />
+    <image class="icon" src="./icon/download.svg" />
   </view>
   <!-- 查看按钮 -->
   <view
@@ -25,6 +25,6 @@
     hover-stay-time="100"
     catch:tap="view"
   >
-    <image class="icon" mode="widthFix" src="./icon/view.svg" />
+    <image class="icon" src="./icon/view.svg" />
   </view>
 </view>

@@ -73,7 +73,7 @@ $register("main", {
     if (wx.getStorageSync("app-inited")) checkResUpdate("guide", "580K");
 
     // 执行 tab 页预加载
-    ["guide", "function"].forEach((x) => {
+    ["function", "guide", "intro"].forEach((x) => {
       requestJSON(
         `resource/config/${globalData.appID}/${globalData.version}/${x}`,
         (data: PageConfig) => {
@@ -120,7 +120,7 @@ $register("main", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WXEvent.Input) {
-    searching(value, (words) => this.setData({ words }));
+    searching(value, "all", (words) => this.setData({ words }));
   },
 
   /**
@@ -129,6 +129,6 @@ $register("main", {
    * @param value 输入的搜索词
    */
   search({ detail }: WXEvent.Input) {
-    this.$route(`search?words=${detail.value}`);
+    this.$route(`search?name=all&word=${detail.value}`);
   },
 });

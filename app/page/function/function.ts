@@ -3,6 +3,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { checkResUpdate, refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
+import page from "./pageData";
 const { globalData } = getApp<AppOption>();
 
 $register("function", {
@@ -15,53 +16,9 @@ $register("function", {
       action: false,
       statusBarHeight: globalData.info.statusBarHeight,
     },
-    page: {
-      title: "功能大厅",
-      grey: true,
-      hidden: true,
-      content: [
-        {
-          tag: "card",
-          type: "page",
-          src: "http://mp.innenu.com/img/tab/map.jpg",
-          title: "校园地图",
-          logo: "/icon/function/map.svg",
-          url: "map",
-        },
-        {
-          tag: "card",
-          type: "page",
-          src: "http://mp.innenu.com/img/tab/headphone.jpg",
-          title: "音律东师",
-          logo: "/icon/function/music.svg",
-          url: "player",
-        },
-        {
-          tag: "card",
-          type: "page",
-          src: "http://mp.innenu.com/img/tab/calendar.jpg",
-          title: "校历",
-          logo: "/icon/function/calendar.svg",
-          url: "calendar",
-        },
-        {
-          tag: "card",
-          type: "page",
-          src: "http://mp.innenu.com/img/tab/sport-field.jpg",
-          title: "体测计算器",
-          logo: "/icon/function/calculate.svg",
-          url: "PEcal",
-        },
-        {
-          tag: "card",
-          type: "page",
-          src: "http://mp.innenu.com/img/tab/wechat.jpg",
-          title: "校园公众号",
-          logo: "/icon/function/wechat.svg",
-          url: "wechat",
-        },
-      ],
-    },
+
+    /** 页面数据 */
+    page,
   },
 
   onPreload(res) {

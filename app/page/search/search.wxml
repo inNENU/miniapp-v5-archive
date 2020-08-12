@@ -23,7 +23,47 @@
     >Oops... 没有找到任何结果</view
   >
 
-  <list wx:else config="{{result}}" />
+  <block wx:else>
+    <view
+      class="search-item"
+      hover-class="button-hover"
+      wx:for="{{result}}"
+      wx:key="title"
+      data-id="{{item.id}}"
+      catch:tap="navigate"
+    >
+      <view class="title">{{item.title}}</view>
+      <view class="list">
+        <block
+          class="item"
+          wx:for="{{item.content}}"
+          wx:for-item="config"
+          wx:key="title"
+        >
+          <view class="title" wx:if="{{config.type === 'title'}}"
+            >{{config.text}}</view
+          >
+          <view class="heading" wx:elif="{{config.type === 'title'}}"
+            >{{config.text}}</view
+          >
+          <view class="text" wx:elif="{{config.type === 'text'}}"
+            >{{config.text}}</view
+          >
+          <view class="doc" wx:elif="{{config.type === 'doc'}}">
+            <image
+              class="icon"
+              src="/components/common/doc/icon/{{config.icon}}.svg"
+            />
+            <view class="text">{{config.name}}</view>
+          </view>
+          <view class="card" wx:elif="{{config.type === 'card'}}">
+            <view class="title">{{config.title}}</view>
+            <view class="desc">{{config.desc}}</view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </block>
 
   <foot />
 </view>

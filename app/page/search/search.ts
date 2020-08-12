@@ -2,7 +2,7 @@
 
 import $register = require("wxpage");
 import { changeNav, popNotice, getColor } from "../../utils/page";
-import { search, searching } from "../../utils/search";
+import { SearchResult, search, searching } from "../../utils/search";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
 const { globalData } = getApp<AppOption>();
@@ -18,10 +18,7 @@ $register("search", {
     words: [] as string[],
 
     /** 搜索结果 */
-    result: {
-      header: false,
-      content: [] as any[],
-    },
+    result: [] as SearchResult[],
 
     /** 搜索词 */
     searchword: "",
@@ -29,22 +26,26 @@ $register("search", {
     /** 自定义导航栏配置 */
     nav: {
       title: "搜索",
+      action: "redirect",
       statusBarHeight: globalData.info.statusBarHeight,
       from: "返回",
     },
   },
 
   state: {
+    name: "all",
     /** 搜索框中的内容 */
     value: "",
   },
 
   onLoad(options) {
-    if (options.words) this.search({ detail: { value: options.words } });
+    if (options.word) this.search({ detail: { value: options.word } });
+    if (options.name) this.state.name = options.name;
 
     this.setData({
+      "nav.from": getCurrentPages().length === 1 ? "主页" : "返回",
       color: getColor(true),
-      searchword: options.words || "",
+      searchword: options.word || "",
       theme: globalData.theme,
     });
 
@@ -80,7 +81,7 @@ $register("search", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: any) {
-    searching(value, (words) => this.setData({ words }));
+    searching(value, this.state.name, (words) => this.setData({ words }));
   },
 
   /**
@@ -91,12 +92,22 @@ $register("search", {
   search({ detail: { value } }: any) {
     wx.showLoading({ title: "搜索中..." });
 
-    search(value, (result) => {
-      this.setData({ "result.content": result });
+    search(value, this.state.name, (result) => {
+      console.warn(result);
+      this.setData({ result });
 
       this.state.value = value;
 
       wx.hideLoading();
     });
+  },
+
+  navigate({ currentTarget }: WXEvent.Touch) {
+    this.$route(`page?id=${currentTarget.dataset.id}&from=搜索`);
+  },
+
+  redirect() {
+    if (getCurrentPages().length === 1) this.$switch("main");
+    else this.$back();
   },
 });
