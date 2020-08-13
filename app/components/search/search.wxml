@@ -7,8 +7,9 @@
         type="text"
         placeholder="搜索"
         value="{{value}}"
-        focus="{{showInput}}"
+        focus="{{showInput && focus}}"
         confirm-type="search"
+        catch:tap="focus"
         catch:input="inputTyping"
         catch:confirm="confirm"
       />

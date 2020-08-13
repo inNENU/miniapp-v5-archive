@@ -16,7 +16,12 @@
     <view class="name">{{currentSong.title}}</view>
     <view class="author">—— {{currentSong.singer}} ——</view>
   </view>
-  <swiper class="display-wrapper">
+  <swiper
+    class="display-wrapper"
+    indicator-dots="{{lyrics.length > 0}}"
+    indicator-color="{{indicatorColor}}"
+    indicator-active-color="{{indicatorActiveColor}}"
+  >
     <swiper-item class="cover-view">
       <view class="cover-wrapper">
         <image
@@ -33,8 +38,9 @@
       <view class="lyric-text"
         ><text wx:if="{{currentLyric}}">{{currentLyric}}</text></view
       >
+      <view class="indicator-placeholder" />
     </swiper-item>
-    <swiper-item wx:if="{{lyrics.length > 0}}">
+    <swiper-item wx:if="{{lyrics.length > 0}}" class="lyric">
       <scroll-view
         class="lyric-wrapper"
         scroll-y
@@ -49,6 +55,7 @@
           ><text>{{item.text}}</text></view
         >
       </scroll-view>
+      <view class="indicator-placeholder" />
     </swiper-item>
   </swiper>
 

@@ -21,7 +21,16 @@ $register.C({
           // 下载成功，隐藏下载提示并打开文档
           success: (data) => {
             wx.hideLoading();
-            wx.openDocument({ filePath: data.tempFilePath, showMenu: true });
+            wx.openDocument({
+              filePath: data.tempFilePath,
+              showMenu: true,
+              success: () => {
+                console.log("成功打开文档");
+              },
+              fail: ({ errMsg }) => {
+                console.log(`打开文档失败: ${errMsg}`);
+              },
+            });
           },
 
           // 下载失败，隐藏下载提示告知用户下载失败并上报

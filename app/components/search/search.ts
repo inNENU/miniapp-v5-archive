@@ -6,19 +6,31 @@ $register.C({
     searchword: String,
   },
   data: {
+    /** 是否展示输入框 */
     showInput: false,
+    /** 输入框是否获得焦点 */
+    focus: false,
+    /** 输入框中的值 */
     value: "",
   },
 
   methods: {
+    /** 展示输入框 */
     showInput(): void {
-      this.setData({ showInput: true });
+      this.setData({ showInput: true, focus: true });
     },
 
+    /** 激活输入框 */
+    focus(): void {
+      this.setData({ focus: true });
+    },
+
+    /** 隐藏输入框 */
     hideInput(): void {
       this.setData({ value: "", showInput: false });
     },
 
+    /** 清除输入框内容 */
     clearInput(): void {
       this.setData({ value: "" });
     },
@@ -31,13 +43,12 @@ $register.C({
     select(event: WXEvent.Touch): void {
       const value = this.data.words[event.currentTarget.dataset.index];
 
-      this.setData({ value });
-      this.setData({ words: [] });
+      this.setData({ value, words: [], focus: false });
       this.triggerEvent("search", { value });
     },
 
     confirm(event: WXEvent.Input): void {
-      this.setData({ words: [] });
+      this.setData({ words: [], focus: false });
       this.triggerEvent("search", { value: event.detail.value });
     },
   },

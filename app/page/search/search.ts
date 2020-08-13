@@ -33,7 +33,10 @@ $register("search", {
   },
 
   state: {
+    /** 分类 */
     name: "all",
+    /** 是否正在输入 */
+    typing: false,
     /** 搜索框中的内容 */
     value: "",
   },
@@ -81,7 +84,10 @@ $register("search", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: any) {
-    searching(value, this.state.name, (words) => this.setData({ words }));
+    this.state.typing = true;
+    searching(value, this.state.name, (words) => {
+      if (this.state.typing) this.setData({ words });
+    });
   },
 
   /**
@@ -90,6 +96,8 @@ $register("search", {
    * @param value 搜索词
    */
   search({ detail: { value } }: any) {
+    this.state.typing = false;
+    this.setData({ words: [] });
     wx.showLoading({ title: "搜索中..." });
 
     search(value, this.state.name, (result) => {

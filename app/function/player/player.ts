@@ -78,6 +78,8 @@ $register("music", {
 
       info: globalData.info,
       darkmode: globalData.darkmode,
+      indicatorColor: globalData.darkmode ? "#fff2" : "#0002",
+      indicatorActiveColor: globalData.darkmode ? "#fff6" : "#0006",
       firstPage: getCurrentPages().length === 1,
     });
 
@@ -154,7 +156,11 @@ $register("music", {
   },
 
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
+    this.setData({
+      darkmode: theme === "dark",
+      indicatorColor: theme === "dark" ? "#fff2" : "#0002",
+      indicatorActiveColor: theme === "dark" ? "#fff6" : "#0006",
+    });
   },
 
   /** 注册音乐播放器 */

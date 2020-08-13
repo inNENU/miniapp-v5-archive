@@ -1,4 +1,3 @@
-<wxs src="./grid.wxs" module="grid" />
 <!-- 网格头部文字 -->
 <view wx:if="{{config.header !== false}}" class="grid-head"
   >{{config.header}}</view
@@ -14,7 +13,7 @@
     hover-class="button-hover"
     hover-stay-time="100"
     data-url="{{gridItem.url}}"
-    catch:tap="{{grid.navigate}}"
+    catch:tap="navigate"
   >
     <!-- 网格图标 -->
     <image class="icon" src="{{gridItem.icon}}" />

@@ -69,8 +69,12 @@
 }
 
 .display-wrapper {
-  margin: 25px 0;
+  margin-top: 25px;
   flex: 1;
+}
+
+.indicator-placeholder {
+  height: 25px;
 }
 
 .cover-view {
@@ -98,6 +102,10 @@
   height: 0;
 }
 
+.lyric {
+  padding-bottom: 25px;
+}
+
 .lyric-text {
   min-height: 30px;
   color: var(--dark-grey);
@@ -106,7 +114,7 @@
 }
 
 .lyric-wrapper {
-  height: 100%;
+  height: calc(100% - 25px);
   text-align: center;
 }
 

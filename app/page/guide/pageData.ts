@@ -21,6 +21,20 @@ export default {
           icon: "/icon/guide/faq.svg",
           path: "FAQ/index",
         },
+        {
+          text: "学校概况",
+          color: "red",
+          name: "Description",
+          icon: "/icon/about.svg",
+          path: "about/index",
+        },
+        {
+          text: "资助",
+          color: "purple",
+          name: "Subsidize",
+          icon: "/icon/guide/subsidize.svg",
+          path: "subsidize/index",
+        },
       ],
     },
     {
@@ -60,7 +74,7 @@ export default {
           color: "cyan",
           name: "Library",
           icon: "/icon/guide/library.svg",
-          path: "library/index",
+          path: "/intro/apartment/library/index",
         },
         {
           text: "考试",
@@ -125,13 +139,6 @@ export default {
           icon: "/icon/guide/sim.svg",
           path: "sim/index",
         },
-        {
-          text: "资助",
-          color: "orange",
-          name: "Subsidize",
-          icon: "/icon/guide/subsidize.svg",
-          path: "subsidize/index",
-        },
       ],
     },
     {
@@ -165,33 +172,6 @@ export default {
           name: "Nearby",
           icon: "/icon/guide/nearby.svg",
           path: "life/nearby/index",
-        },
-      ],
-    },
-    {
-      tag: "grid",
-      header: "关于东师",
-      content: [
-        {
-          text: "学校概况",
-          color: "red",
-          name: "Description",
-          icon: "/icon/about.svg",
-          path: "about/index",
-        },
-        {
-          text: "学院介绍",
-          color: "orange",
-          name: "School",
-          icon: "/icon/guide/school.svg",
-          path: "school/index",
-        },
-        {
-          text: "学校机构",
-          color: "blue",
-          name: "Apartment",
-          icon: "/icon/guide/apartment.svg",
-          path: "apartment/index",
         },
       ],
       footer: " ",
