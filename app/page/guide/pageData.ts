@@ -22,15 +22,8 @@ export default {
           path: "FAQ/index",
         },
         {
-          text: "学校概况",
-          color: "red",
-          name: "Description",
-          icon: "/icon/about.svg",
-          path: "about/index",
-        },
-        {
           text: "资助",
-          color: "purple",
+          color: "red",
           name: "Subsidize",
           icon: "/icon/guide/subsidize.svg",
           path: "subsidize/index",

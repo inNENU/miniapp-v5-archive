@@ -14,6 +14,13 @@ export default {
           icon: "/icon/about.svg",
           path: "about/index",
         },
+        {
+          text: "招生概况",
+          color: "orange",
+          name: "Enroll",
+          icon: "/icon/about.svg",
+          path: "enroll/index",
+        },
       ],
     },
     {

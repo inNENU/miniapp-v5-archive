@@ -74,16 +74,6 @@
   align-items: center;
 }
 
-@media (prefers-color-scheme: light) {
-  .list-wrapper .list {
-    background-color: var(--bgcolor-grey);
-  }
-
-  .grey .list-wrapper .list {
-    background-color: var(--block-bgcolor);
-  }
-}
-
 .list-wrapper .list:empty {
   padding: 0;
 }

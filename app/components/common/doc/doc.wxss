@@ -14,16 +14,6 @@
   overflow: hidden;
 }
 
-@media (prefers-color-scheme: light) {
-  .doc-wrapper {
-    background-color: var(--bgcolor-grey);
-  }
-
-  .grey .doc-wrapper {
-    background-color: var(--block-bgcolor);
-  }
-}
-
 @media (min-width: 547px) {
   .doc-wrapper {
     margin: 0 auto;

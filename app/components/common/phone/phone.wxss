@@ -19,16 +19,6 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  .phone-wrapper {
-    background-color: var(--bgcolor-grey);
-  }
-
-  .grey .phone-wrapper {
-    background-color: var(--block-bgcolor);
-  }
-}
-
 .phone-wrapper .phone-icon {
   width: 24px;
   height: 24px;
