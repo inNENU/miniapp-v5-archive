@@ -57,6 +57,7 @@ $register("music", {
     });
   },
 
+  // eslint-disable-next-line max-lines-per-function
   onLoad(option) {
     // 加载字体
     wx.loadFontFace({
@@ -78,8 +79,12 @@ $register("music", {
 
       info: globalData.info,
       darkmode: globalData.darkmode,
-      indicatorColor: globalData.darkmode ? "#fff2" : "#0002",
-      indicatorActiveColor: globalData.darkmode ? "#fff6" : "#0006",
+      indicatorColor: globalData.darkmode
+        ? "rgba(255, 255, 255, 0.15)"
+        : "rgba(0, 0, 0, 0.15)",
+      indicatorActiveColor: globalData.darkmode
+        ? "rgba(255, 255, 255, 0.45)"
+        : "rgba(0, 0, 0, 0.45)",
       firstPage: getCurrentPages().length === 1,
     });
 
@@ -158,8 +163,10 @@ $register("music", {
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({
       darkmode: theme === "dark",
-      indicatorColor: theme === "dark" ? "#fff2" : "#0002",
-      indicatorActiveColor: theme === "dark" ? "#fff6" : "#0006",
+      indicatorColor:
+        theme === "dark" ? "rgba(255, 255, 255, 0.15)" : "rgba(0, 0, 0, 0.15)",
+      indicatorActiveColor:
+        theme === "dark" ? "rgba(255, 255, 255, 0.45)" : "rgba(0, 0, 0, 0.45)",
     });
   },
 
