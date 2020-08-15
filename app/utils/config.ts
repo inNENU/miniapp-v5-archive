@@ -15,10 +15,12 @@ export const appOption: AppOption = {
   themeNum: 0,
   /** 是否开启夜间模式 */
   darkmode: false,
-  /** 功能更新提示 */
+  /** 功能大厅更新提示 */
   functionResNotify: true,
-  /** 指南更新提示 */
+  /** 东师指南更新提示 */
   guideResNotify: true,
+  /** 东师介绍更新提示 */
+  introResNotify: true,
   /** 开发者模式开启状态 */
   developMode: false,
 };

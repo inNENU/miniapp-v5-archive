@@ -34,8 +34,9 @@ $register("setting", {
           tag: "List",
           header: "资源更新",
           content: [
-            { text: "功能资源更新提示", swiKey: "functionResNotify" },
-            { text: "指南资源更新提示", swiKey: "guideResNotify" },
+            { text: "功能大厅资源更新提示", swiKey: "functionResNotify" },
+            { text: "东师指南资源更新提示", swiKey: "guideResNotify" },
+            { text: "东师介绍资源更新提示", swiKey: "introResNotify" },
           ],
         },
       ],

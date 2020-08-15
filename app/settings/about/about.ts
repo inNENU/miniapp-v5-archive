@@ -37,17 +37,20 @@ $register("about", {
           header: "工作室与开发者介绍",
           content: [
             { text: "   小程序全部内容均由Hope Studio独立开发。" },
-            { text: "Hope Studio介绍", aim: "MrHope0" },
-            { text: "Mr.Hope个人介绍", aim: "MrHope1" },
-            { text: "致谢名单", aim: "MrHope4" },
+            {
+              text: "Hope Studio 介绍",
+              url: "page?path=other/MrHope/hope-studio",
+            },
+            { text: "Mr.Hope 个人介绍", url: "page?path=other/MrHope/mrhope" },
+            { text: "致谢名单", url: "page?path=other/MrHope/thanks" },
           ],
         },
         {
           tag: "list",
           header: "小程序介绍",
           content: [
-            { text: "开发者访谈", aim: "MrHope3" },
-            { text: "小程序功能太少?", aim: "MrHope2" },
+            { text: "开发者访谈", url: "page?path=other/MrHope/interview" },
+            { text: "常见问题", url: "page?path=other/MrHope/function" },
           ],
         },
       ],
