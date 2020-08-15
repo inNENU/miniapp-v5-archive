@@ -4,5 +4,6 @@
   background-color="{{color.bgColor}}"
   background-color-top="{{color.bgColorTop}}"
   background-color-bottom="{{color.bgColorBottom}}"
+  root-background-color="{{color.bgColor}}"
 />
 <template is="page" data="{{page, theme, darkmode}}" />

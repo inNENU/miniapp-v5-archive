@@ -4,7 +4,6 @@
   background-color="{{color.bgColor}}"
   background-color-top="{{color.bgColorTop}}"
   background-color-bottom="{{color.bgColorBottom}}"
->
-  <navigation-bar title="更新日志" />
-</page-meta>
+  root-background-color="{{color.bgColor}}"
+/>
 <template is="page" data="{{page, theme, darkmode}}" />
