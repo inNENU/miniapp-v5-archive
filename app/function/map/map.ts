@@ -106,14 +106,6 @@ $register("map", {
   },
 
   onReady() {
-    // 读取 tabbar 高度
-    wx.createSelectorQuery()
-      .select("#mapTab")
-      .boundingClientRect((rect) => {
-        this.setData({ tabHeight: rect.height });
-      })
-      .exec();
-
     // 创建地图对象
     const mapCtx = wx.createMapContext("map");
 
@@ -271,7 +263,8 @@ $register("map", {
 
     if (event.type === "markertap") this.$preload(`situs?id=${area}/${path}`);
     else if (event.type === "callouttap")
-      this.$route(`situs?id=${area}/${path}`);
+      if (path) this.$route(`situs?id=${area}/${path}`);
+      else tip("该地点暂无详情");
   },
 
   showList() {

@@ -18,7 +18,8 @@
     <image
       class="{{config.imgClass || 'image'}}"
       mode="{{config.imgmode || 'aspectFill'}}"
-      src="{{item}}"
+      src="{{item}} "
+      lazy-load
     />
   </swiper-item>
 </swiper>

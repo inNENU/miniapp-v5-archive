@@ -99,7 +99,9 @@
 
 .popup-body {
   max-height: 50vh;
+
   hyphens: auto;
+  -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
   word-wrap: break-word;
 }

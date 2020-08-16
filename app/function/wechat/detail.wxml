@@ -47,7 +47,7 @@
       hover-stay-time="100"
       data-title="{{item.title}}"
       data-url="{{item.url}}"
-      catch:tap="cardTap"
+      catch:tap="navigate"
     >
       <image class="img" src="{{item.cover}}" mode="aspectFill" />
       <view class="detail">

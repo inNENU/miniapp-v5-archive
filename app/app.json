@@ -18,7 +18,6 @@
         "player/player",
         "video/video",
         "PEcal/PEcal",
-        "scenery/scenery",
         "weather/weather",
         "wechat/wechat",
         "wechat/detail"

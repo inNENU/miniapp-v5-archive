@@ -1,9 +1,9 @@
 <view class="intro-wrapper">
   <!-- 高斯模糊背景 -->
-  <image class="background" src="{{config.logo}}" mode="aspectFill" />
+  <image class="background" src="{{config.logo}}" mode="aspectFill" lazy-load />
   <view class="intro">
     <!-- 图标 -->
-    <image class="icon" src="{{config.logo}}" />
+    <image class="icon" src="{{config.logo}}" lazy-load />
     <!-- 名称 -->
     <view class="name">{{config.name}}</view>
     <!-- 详情介绍 -->

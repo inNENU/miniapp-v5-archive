@@ -1,7 +1,7 @@
 /* 关于 */
 import $register = require("wxpage");
 import { remove, listFile } from "../../utils/file";
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { changeNav, popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { resDownload } from "../../utils/tab";
@@ -10,7 +10,6 @@ const { globalData } = getApp<AppOption>();
 
 /** 列表动作 */
 type ListAction =
-  | "getStorage"
   | "refreshGuide"
   | "refreshFunc"
   | "refreshIntro"
@@ -31,12 +30,12 @@ $register("storage", {
         {
           tag: "List",
           header: "数据缓存",
-          content: [{ text: "空间占用情况", desc: "0K/10240K" }],
+          content: [{ text: "空间占用情况", desc: "获取中..." }],
         },
         {
           tag: "List",
           header: "文件系统",
-          content: [{ text: "空间占用情况", desc: "0K/10240K" }],
+          content: [{ text: "空间占用情况", desc: "获取中..." }],
         },
         {
           tag: "List",
@@ -67,17 +66,11 @@ $register("storage", {
     },
   },
 
-  onNavigate(res) {
-    resolvePage(res, this.getStorage());
-  },
-
-  onLoad(option: any) {
-    if (globalData.page.id === "存储设置") setPage({ option, ctx: this });
-    else
-      setPage(
-        { option: { id: "storage" }, ctx: this },
-        this.data.page as PageConfig
-      );
+  onLoad() {
+    setPage(
+      { option: { id: "storage" }, ctx: this },
+      this.data.page as PageConfig
+    );
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
@@ -85,8 +78,7 @@ $register("storage", {
   },
 
   onShow() {
-    if (globalData.page.id !== "存储设置")
-      setPage({ option: { id: "storage" }, ctx: this }, this.getStorage());
+    this.setStorage();
   },
 
   onPageScroll(event) {
@@ -106,24 +98,33 @@ $register("storage", {
     if (detail.event) this[detail.event as ListAction]();
   },
 
-  /** 获得存储信息 */
-  getStorage() {
-    const page = this.data.page as any;
-    const { currentSize } = wx.getStorageInfoSync();
+  /** 设置存储信息 */
+  setStorage() {
+    wx.getStorageInfo({
+      success: ({ currentSize }) => {
+        this.setData({
+          "page.content[0].content[0].desc": `${currentSize}K/10240K`, // 写入存储大小
+        });
+      },
+    });
+
     let fileSize = 0;
 
-    ((wx
-      .getFileSystemManager()
-      .statSync(wx.env.USER_DATA_PATH, true) as unknown) as any[]).forEach(
-      (element) => {
-        fileSize += element.stats.size;
-      }
-    );
+    wx.getFileSystemManager().stat({
+      path: wx.env.USER_DATA_PATH,
+      recursive: true,
+      success: (res) => {
+        ((res.stats as unknown) as any[]).forEach((element) => {
+          fileSize += element.stats.size;
+        });
 
-    page.content[0].content[0].desc = `${currentSize}K/10240K`; // 写入存储大小
-    page.content[1].content[0].desc = `${Math.floor(fileSize / 1024)}K/10240K`; // 写入文件大小
-
-    return page;
+        this.setData({
+          "page.content[1].content[0].desc": `${Math.ceil(
+            fileSize / 1024
+          )}K/10240K`, // 写入文件大小
+        });
+      },
+    });
   },
 
   /** 刷新指南资源 */

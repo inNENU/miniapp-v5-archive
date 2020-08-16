@@ -54,5 +54,6 @@
 }
 
 .page-wrapper .tab-page {
+  -webkit-overflow-scrolling: touch;
   overflow-y: scroll;
 }

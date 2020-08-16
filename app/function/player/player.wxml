@@ -150,7 +150,7 @@
       data-index="{{index}}"
       catch:tap="change"
     >
-      <image class="icon" src="{{item.cover}}" />
+      <image class="icon" src="{{item.cover}}" lazy-load />
       <view class="info">
         <view class="name">{{item.title}}</view>
         <view class="singer">{{item.singer}}</view>
