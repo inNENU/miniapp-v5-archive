@@ -57,7 +57,7 @@ const resolvePath = (name: string): string =>
         "storage",
       ].includes(name)
     ? `/settings/${name}/${name}`
-    : ["function", "page", "donate", "web"].includes(name)
+    : ["function", "page", "situs", "web"].includes(name)
     ? `/module/${name}`
     : `/function/${name}/${name}`;
 

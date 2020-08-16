@@ -1,8 +1,8 @@
 import $register = require("wxpage");
-import { changeNav, resolvePage, setPage } from "../../utils/page";
-import { getJSON, readJSON } from "../../utils/file";
-import { AppOption } from "../../app";
-import { PageConfig } from "../../../typings";
+import { changeNav, resolvePage, setPage } from "../utils/page";
+import { getJSON, readJSON } from "../utils/file";
+import { AppOption } from "../app";
+import { PageConfig } from "../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("situs", {

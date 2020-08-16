@@ -15,7 +15,6 @@
         "cal/cal",
         "calendar/calendar",
         "map/map",
-        "situs/situs",
         "player/player",
         "video/video",
         "PEcal/PEcal",
@@ -26,7 +25,7 @@
     },
     {
       "root": "module",
-      "pages": ["page", "web", "function"]
+      "pages": ["page", "web", "function", "situs"]
     },
     {
       "root": "settings",

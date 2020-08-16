@@ -4,7 +4,9 @@ import { AppOption } from "../../app";
 import { server } from "../../utils/config";
 import weatherHandler from "../../components/weather/handler";
 
-const { globalData } = getApp<AppOption>();
+const {
+  globalData: { darkmode, info },
+} = getApp<AppOption>();
 
 $register("weather", {
   data: {
@@ -31,8 +33,8 @@ $register("weather", {
         night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
         firstPage: getCurrentPages().length === 1,
-        info: globalData.info,
-        darkmode: globalData.darkmode,
+        info: info,
+        darkmode: darkmode,
       });
     } // 否则需要重新获取并处理
     else
@@ -50,17 +52,17 @@ $register("weather", {
             night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
             firstPage: getCurrentPages().length === 1,
-            info: globalData.info,
-            darkmode: globalData.darkmode,
+            info: info,
+            darkmode: darkmode,
           });
         },
       });
 
     // 设置页面背景色
     wx.setBackgroundColor({
-      backgroundColorTop: globalData.darkmode ? "#000000" : "#efeef4",
-      backgroundColor: globalData.darkmode ? "#000000" : "#efeef4",
-      backgroundColorBottom: globalData.darkmode ? "#000000" : "#efeef4",
+      backgroundColorTop: darkmode ? "#000000" : "#efeef4",
+      backgroundColor: darkmode ? "#000000" : "#efeef4",
+      backgroundColorBottom: darkmode ? "#000000" : "#efeef4",
     });
 
     wx.onWindowResize(this.redrawCanvas);
@@ -106,7 +108,7 @@ $register("weather", {
         .exec((res) => {
           const canvas = res[0].node;
           const context = canvas.getContext("2d");
-          const dpr = globalData.info.pixelRatio;
+          const dpr = info.pixelRatio;
 
           canvas.width = res[0].width * dpr;
           canvas.height = res[0].height * dpr;
@@ -119,7 +121,7 @@ $register("weather", {
   // eslint-disable-next-line
   draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherDetail) {
     // 为了防止 iPad 等设备可以转屏，必须即时获取
-    const width = globalData.info.windowWidth;
+    const width = info.windowWidth;
     const highTemperature: number[] = [];
     const lowTemperature: number[] = [];
     const { dayForecast } = weather;
@@ -204,8 +206,8 @@ $register("weather", {
    */
   // eslint-disable-next-line
   canvasOldDraw(weather: WeatherDetail) {
-    // 为了防止iPad等设备可以转屏，必须即时获取
-    const width = getApp().globalData.info.windowWidth;
+    // 为了防止 iPad 等设备可以转屏，必须即时获取
+    const width = wx.getSystemInfoSync().windowWidth;
     /** 天气画布组件 */
     const canvasContent = wx.createCanvasContext("weather");
     const highTemperature: number[] = [];
@@ -296,10 +298,7 @@ $register("weather", {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
         .select(".canvas")
-        .fields({
-          node: true,
-          size: true,
-        })
+        .fields({ node: true, size: true })
         .exec((res) => {
           this.draw(res[0].node.getContext("2d"), this.data.weather);
         });
