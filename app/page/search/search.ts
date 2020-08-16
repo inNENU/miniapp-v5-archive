@@ -42,8 +42,8 @@ $register("search", {
   },
 
   onLoad(options) {
-    if (options.word) this.search({ detail: { value: options.word } });
     if (options.name) this.state.name = options.name;
+    if (options.word) this.search({ detail: { value: options.word } });
 
     this.setData({
       "nav.from": getCurrentPages().length === 1 ? "主页" : "返回",
