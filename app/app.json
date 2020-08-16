@@ -36,6 +36,7 @@
         "auth/auth",
         "about/about",
         "donate/donate",
+        "donate/list",
         "resource/resource",
         "log/log"
       ]

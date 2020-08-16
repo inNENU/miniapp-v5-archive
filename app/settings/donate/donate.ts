@@ -1,19 +1,10 @@
 /* 赞赏支持 */
 import $register = require("wxpage");
 import { changeNav, popNotice, getColor } from "../../utils/page";
-import { requestJSON, savePhoto } from "../../utils/wx";
+import { savePhoto } from "../../utils/wx";
 import { server } from "../../utils/config";
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
-
-interface DonateDetail {
-  /** 赞赏支持者姓名 */
-  0: string;
-  /** 赞赏支持金额 */
-  1: number;
-}
-
-type DonateList = DonateDetail[];
 
 $register("donate", {
   data: {
@@ -35,13 +26,26 @@ $register("donate", {
           tag: "text",
           style: "text-indent: 1.5em;",
           text: [
-            "如果您愿意对我进行赞赏支持，可以点击下方二维码。这样会将对应的二维码保存至您的手机相册。您可以稍后使用相应 APP 扫码来进行打赏。因为您也是学生，Mr.Hope 不建议您赞赏支持数目较大的金额，几分钱也是同学一份心意。为了方便统计，请您在打赏时备注“小程序打赏+ 昵称/姓名”，这样能够方便 Mr.Hope 统计。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在下方的列表中。再次感谢您的支持！",
+            "如果您愿意对我进行赞赏支持，可以点击下方二维码。这样会将对应的二维码保存至您的手机相册。您可以稍后使用相应 APP 扫码来进行打赏。因为您也是学生，Mr.Hope 不建议您赞赏支持数目较大的金额，1元钱就是一份心意。",
+          ],
+        },
+        { tag: "title", text: "备注" },
+        {
+          tag: "text",
+          style: "text-indent: 1.5em;",
+          text: [
+            "为了方便统计，请您在打赏时备注“小程序打赏+ 昵称/姓名”。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在赞赏列表中。再次感谢您的支持！",
+            "如果您没有备注姓名，Mr.Hope 无法在转账页面获取到您的昵称或者姓名，所以只能使用佚名来进行统计。另外，不排除您没有备注“小程序打赏”时，Mr.Hope 将其遗漏掉的情况，如果您打赏但是没有看到您的姓名，请您联系我。",
           ],
         },
         { tag: "title", text: "二维码" },
       ],
       shareable: true,
       from: "返回",
+    },
+
+    list: {
+      content: [{ text: "捐赠列表", url: "/settings/donate/list" }],
     },
   },
 
@@ -52,38 +56,7 @@ $register("donate", {
     });
 
     if (getCurrentPages().length === 1)
-      this.setData({
-        "page.from": "主页",
-        "page.action": "redirect",
-      });
-
-    // 获取赞赏支持列表数据
-    requestJSON("resource/config/donate/2019", (donateList) => {
-      let sum2019 = 0;
-
-      ((donateList as unknown) as DonateList).forEach((element) => {
-        sum2019 += element[1];
-      });
-
-      this.setData({
-        donate2019: donateList,
-        sum2019: Math.floor(100 * sum2019) / 100,
-      });
-    });
-
-    // 获取赞赏支持列表数据
-    requestJSON("resource/config/donate/2020", (donateList) => {
-      let sum2020 = 0;
-
-      ((donateList as unknown) as DonateList).forEach((element) => {
-        sum2020 += element[1];
-      });
-
-      this.setData({
-        donate2020: donateList,
-        sum2020: Math.floor(100 * sum2020) / 100,
-      });
-    });
+      this.setData({ "page.from": "主页", "page.action": "redirect" });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
@@ -112,14 +85,15 @@ $register("donate", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /** 重定向到主页 */
-  redirect() {
-    this.$launch("main");
-  },
-
   /** 保存二维码 */
   save(res: WXEvent.Touch) {
     console.info("Start QRCode download."); // 调试
     savePhoto(`img/donate/${res.currentTarget.dataset.name}.png`);
+  },
+
+  /** 重定向到主页 */
+  redirect() {
+    if (getCurrentPages().length === 1) this.$switch("main");
+    else this.$back();
   },
 });

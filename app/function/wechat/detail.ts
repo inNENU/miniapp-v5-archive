@@ -61,7 +61,7 @@ $register("wechat-detail", {
           config: wechat as WechatDetail,
           follow:
             (wechat as WechatDetail).authorized !== false &&
-            (wechat as WechatDetail).follow &&
+            "follow" in (wechat as WechatDetail) &&
             globalData.env === "wechat",
         });
       },

@@ -1,41 +1,9 @@
-.QRCodeCtn {
+.qrcode-wrapper {
   display: flex;
   width: 100%;
   justify-content: space-around;
 }
 
-.QRCode1 {
+.qrcode {
   width: 45%;
-}
-
-.QRCode2 {
-  width: 45%;
-}
-
-.donate-list-wrapper {
-  padding: 0 15px;
-  text-align: left;
-}
-
-.donate-list-wrapper .title {
-  padding-bottom: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 2;
-}
-
-.donate-list-wrapper .year {
-  padding: 4px 0;
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 2;
-}
-
-.donate-list-wrapper .item {
-  font-size: 15px;
-  line-height: 1.5;
-}
-
-.donate-list-wrapper .result {
-  font-size: 16px;
 }
