@@ -1,5 +1,4 @@
 <import src="/components/template" />
-<import src="./template" />
 
 <page-meta
   background-text-style="{{darkmode? 'dark': 'light'}}"
@@ -11,22 +10,22 @@
 
 <view class="{{theme}} {{grey? 'grey': ''}}">
   <template is="nav" data="{{...nav, theme}}" />
-  <view wx:if="{{homePage}}" class="wechat-logo-wrapper">
-    <template
+  <view class="wechat-logo-wrapper">
+    <view
       wx:for="{{wechat}}"
       wx:key="name"
       wx:for-item="config"
-      is="wechat-logo"
-      data="{{config}}"
-    />
+      class="wechat-logo"
+      hover-class="button-hover"
+      hover-stay-time="100"
+      data-path="{{config.path}}"
+      catch:tap="navigate"
+    >
+      <image class="logo" src="{{config.logo}}" />
+      <view class="name">{{config.name}}</view>
+      <view class="desc">{{config.desc}}</view>
+    </view>
   </view>
-  <view wx:else class="wechat-wrapper">
-    <template
-      is="wechat-card"
-      wx:for="{{config.content}}"
-      wx:key="title"
-      data="{{item}}"
-    />
-  </view>
+
   <footer config="{{footer}}" />
 </view>

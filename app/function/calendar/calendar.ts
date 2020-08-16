@@ -105,7 +105,7 @@ $register("calendar", {
   },
 
   back() {
-    if (getCurrentPages().length === 1) this.$back();
-    else this.$switch("main");
+    if (getCurrentPages().length === 1) this.$switch("main");
+    else this.$back();
   },
 });

@@ -2,21 +2,14 @@ import * as $register from "wxpage";
 import { changeNav, popNotice, getColor } from "../../utils/page";
 import { AppOption } from "../../app";
 import { ensureJSON, getJSON } from "../../utils/file";
-import { modal } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 
-interface WechatConfig {
+export interface WechatConfig {
   name: string;
   desc: string;
   logo: string;
   path: string;
-}
-
-interface WechatDetail {
-  name: string;
-  authorized?: boolean;
-  content: WechatConfig[];
 }
 
 $register("wechat", {
@@ -32,8 +25,6 @@ $register("wechat", {
 
     wechat: [] as WechatConfig[],
 
-    config: {} as WechatDetail,
-
     footer: {
       desc: "公众号入驻，请联系 QQ 1178522294",
     },
@@ -41,35 +32,23 @@ $register("wechat", {
 
   state: {} as Record<string, any>,
 
-  onNavigate(options) {
-    ensureJSON({ path: `function/wechat/${options.query.path || "index"}` });
+  onNavigate() {
+    ensureJSON({ path: "function/wechat/index" });
   },
 
-  onLoad({ path = "index", from = "功能大厅" }) {
+  onLoad({ from = "功能大厅" }) {
     getJSON({
-      path: `function/wechat/${path}`,
-      url: `resource/function/wechat/${path}`,
+      path: "function/wechat/index",
+      url: "resource/function/wechat/index",
       success: (wechat) => {
         this.setData({
-          homePage: path === "index",
-          color: getColor(path !== "index"),
+          color: getColor(),
           theme: globalData.theme,
-          [path === "index" ? "wechat" : "config"]: wechat,
-          grey: path !== "index",
-          "nav.title":
-            path === "index"
-              ? "校园公众号"
-              : (wechat as Record<string, any>).name,
+          wechat: wechat as WechatConfig[],
           "nav.from": from,
-          "footer.desc":
-            path === "index"
-              ? "公众号入驻，请联系 QQ 1178522294"
-              : "更新文章，请联系 QQ 1178522294",
         });
       },
     });
-
-    this.state.path = path;
 
     if (getCurrentPages().length === 1)
       this.setData({ "nav.action": "redirect", "nav.from": "主页" });
@@ -84,10 +63,7 @@ $register("wechat", {
   },
 
   onShareAppMessage() {
-    return {
-      title: "校园公众号",
-      path: `/function/wechat/wechat?path=${this.state.path}&from=${this.data.nav.title}`,
-    };
+    return { title: "校园公众号", path: `/function/wechat/wechat` };
   },
 
   onShareTimeline: () => ({ title: "校园公众号" }),
@@ -102,38 +78,12 @@ $register("wechat", {
 
   navigate({ currentTarget }: WXEvent.Touch) {
     this.$route(
-      `wechat?path=${currentTarget.dataset.path}&from=${this.data.nav.title}`
+      `/function/wechat/detail?path=${currentTarget.dataset.path}&from=校园公众号`
     );
   },
 
-  cardTap({ currentTarget }: WXEvent.Touch) {
-    const { title, url } = currentTarget.dataset;
-
-    // 无法跳转，复制链接到剪切板
-    if (this.data.config.authorized === false)
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "尚未授权",
-            "目前暂不支持跳转到该微信公众号图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
-    else if (globalData.env === "qq")
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "无法跳转",
-            "QQ小程序并不支持跳转微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
-    else this.$route(`/module/web?url=${url}&title=${title}`);
-  },
-
   redirect() {
-    this.$switch("main");
+    if (getCurrentPages().length === 1) this.$switch("main");
+    else this.$back();
   },
 });

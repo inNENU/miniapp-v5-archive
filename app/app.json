@@ -20,7 +20,8 @@
         "PEcal/PEcal",
         "scenery/scenery",
         "weather/weather",
-        "wechat/wechat"
+        "wechat/wechat",
+        "wechat/detail"
       ]
     },
     {

@@ -1,0 +1,36 @@
+<import src="/components/template" />
+
+<page-meta
+  background-text-style="{{darkmode? 'dark': 'light'}}"
+  background-color="{{color.bgColor}}"
+  background-color-top="{{color.bgColorTop}}"
+  background-color-bottom="{{color.bgColorBottom}}"
+  root-background-color="{{color.bgColor}}"
+/>
+
+<view class="{{theme}} {{grey? 'grey': ''}}">
+  <template is="nav" data="{{...nav, theme}}" />
+  <view class="wechat-wrapper">
+    <view
+      class="card"
+      wx:for="{{config.content}}"
+      wx:key="title"
+      hover-class="button-hover"
+      hover-stay-time="100"
+      data-title="{{item.title}}"
+      data-url="{{item.url}}"
+      catch:tap="cardTap"
+    >
+      <image class="img" src="{{item.cover}}" mode="aspectFill" />
+      <view class="detail">
+        <view wx:if="{{item.logo}}" class="icon">
+          <image class="logo" src="{{item.logo}}" />
+          <view class="name">{{item.name}}</view>
+        </view>
+        <view class="title">{{item.title}}</view>
+        <view class="desc">{{item.desc}}</view>
+      </view>
+    </view>
+  </view>
+  <footer config="{{footer}}" />
+</view>
