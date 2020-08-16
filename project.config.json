@@ -195,9 +195,9 @@
           "scene": null
         },
         {
-          "id": -1,
+          "id": 16,
           "name": "特定公众号",
-          "pathName": "function/wechat/wechat",
+          "pathName": "function/wechat/detail",
           "query": "path=nenuyouth",
           "scene": null
         },

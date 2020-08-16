@@ -45,6 +45,6 @@
 
 .intro-wrapper .desc {
   max-width: 80%;
-  color: var(--grey-four);
+  color: var(--grey-three);
   font-size: 28rpx;
 }

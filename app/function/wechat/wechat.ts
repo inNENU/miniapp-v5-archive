@@ -5,7 +5,7 @@ import { ensureJSON, getJSON } from "../../utils/file";
 
 const { globalData } = getApp<AppOption>();
 
-export interface WechatConfig {
+interface WechatConfig {
   name: string;
   desc: string;
   logo: string;

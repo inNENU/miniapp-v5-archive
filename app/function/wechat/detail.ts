@@ -1,32 +1,43 @@
 import * as $register from "wxpage";
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { AppOption } from "../../app";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { modal } from "../../utils/wx";
-import { WechatConfig } from "./wechat";
 
 const { globalData } = getApp<AppOption>();
 
 interface WechatDetail {
+  /** 公众号名称 */
   name: string;
+  /** 公众号描述 */
+  desc: string;
+  /** 公众号 Logo */
+  logo: string;
+  /** 是否关联 */
   authorized?: boolean;
-  content: WechatConfig[];
+  /** 关注链接 */
+  follow?: string;
+  /** 图文列表 */
+  content: {
+    /** 标题 */
+    title: string;
+    /** 图文摘要 */
+    desc?: string;
+    /** 图文封面 */
+    cover: string;
+    /** 图文地址 */
+    url: string;
+  }[];
 }
 
 $register("wechat-detail", {
   data: {
-    theme: globalData.theme,
-
-    /** 头部配置 */
-    nav: {
-      title: "公众号",
-      statusBarHeight: globalData.info.statusBarHeight,
-      from: "校园公众号",
-      grey: true,
-    },
-
     config: {} as WechatDetail,
 
+    /** 是否显示关注按钮 */
+    follow: false,
+
+    statusBarHeight: globalData.info.statusBarHeight,
     footer: {
       desc: "更新文章，请联系 QQ 1178522294",
     },
@@ -38,17 +49,20 @@ $register("wechat-detail", {
     ensureJSON({ path: `function/wechat/${options.query.path || "index"}` });
   },
 
-  onLoad({ from, path }) {
+  onLoad({ path }) {
     getJSON({
       path: `function/wechat/${path}`,
       url: `resource/function/wechat/${path}`,
       success: (wechat) => {
         this.setData({
+          darkmode: globalData.darkmode,
+          firstPage: getCurrentPages().length === 1,
           color: getColor(true),
-          theme: globalData.theme,
           config: wechat as WechatDetail,
-          "nav.title": (wechat as WechatDetail).name,
-          "nav.from": getCurrentPages().length === 1 ? "主页" : from || "返回",
+          follow:
+            (wechat as WechatDetail).authorized !== false &&
+            (wechat as WechatDetail).follow &&
+            globalData.env === "wechat",
         });
       },
     });
@@ -60,22 +74,18 @@ $register("wechat-detail", {
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
-    popNotice(`wechat/${this.data.nav.title}`);
-  },
-
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
+    popNotice(`wechat/${this.data.config.name}`);
   },
 
   onShareAppMessage() {
     return {
-      title: this.data.nav.title,
+      title: this.data.config.name,
       path: `/function/wechat/detail?path=${this.state.path}`,
     };
   },
 
   onShareTimeline() {
-    return { title: this.data.nav.title };
+    return { title: this.data.config.name };
   },
 
   onUnload() {
@@ -86,7 +96,7 @@ $register("wechat-detail", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  cardTap({ currentTarget }: WXEvent.Touch) {
+  navigate({ currentTarget }: WXEvent.Touch) {
     const { title, url } = currentTarget.dataset;
 
     // 无法跳转，复制链接到剪切板
@@ -113,7 +123,11 @@ $register("wechat-detail", {
     else this.$route(`web?url=${url}&title=${title}`);
   },
 
-  redirect() {
+  follow() {
+    this.$route(`web?url=${this.data.config.follow}&title=欢迎关注`);
+  },
+
+  back() {
     if (getCurrentPages().length === 1) this.$switch("main");
     else this.$back();
   },
