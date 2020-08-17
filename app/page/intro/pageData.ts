@@ -245,7 +245,7 @@ export default {
         },
         {
           text: "教务处",
-          color: "bule",
+          color: "blue",
           name: "Course",
           icon: "/icon/intro/jwc.svg",
           path: "apartment/course/index",

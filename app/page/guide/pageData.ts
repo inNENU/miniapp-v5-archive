@@ -23,7 +23,7 @@ export default {
         },
         {
           text: "资助",
-          color: "red",
+          color: "purple",
           name: "Subsidize",
           icon: "/icon/guide/subsidize.svg",
           path: "subsidize/index",

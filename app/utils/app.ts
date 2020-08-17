@@ -294,6 +294,7 @@ export const login = (appID: string): void => {
  *
  * @param globalData 小程序的全局数据
  */
+// eslint-disable-next-line max-lines-per-function
 export const startup = (globalData: GlobalData): void => {
   // 获取设备与运行环境信息
   globalData.info = wx.getSystemInfoSync();
@@ -361,9 +362,26 @@ export const startup = (globalData: GlobalData): void => {
   });
 
   // 监听用户截屏
-  wx.onUserCaptureScreen(() => {
-    tip("您可以点击右上角——转发或点击页面右下角——保存二维码分享小程序");
-  });
+  if (wx.getStorageSync("capture-screen") !== "never")
+    wx.onUserCaptureScreen(() => {
+      const status = wx.getStorageSync("capture-screen");
+      wx.showModal({
+        title: "善用小程序分享",
+        content:
+          "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
+        showCancel: status === "noticed",
+        cancelText: "不再提示",
+        success: (res) => {
+          if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
+          else if (res.cancel) {
+            wx.setStorageSync("capture-screen", "never");
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            wx.offUserCaptureScreen();
+          }
+        },
+      });
+    });
 
   // 登录
   // login(globalData.appID);

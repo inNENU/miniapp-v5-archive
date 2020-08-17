@@ -3,7 +3,6 @@
   display: none;
 }
 
-
 /* Android grid */
 .Android .grid-head {
   min-height: 37px;
@@ -66,6 +65,7 @@
 }
 
 .Android .grid-wrapper .text {
+  margin-right: 25px;
   font-size: 16px;
   font-weight: 300;
 }
