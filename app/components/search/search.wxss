@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
 
-  padding: 8px;
+  padding: 8px 15px;
   background-color: #f3f3f8;
 
   color: var(--text-color);
@@ -15,96 +15,69 @@
   }
 }
 
-.search-wrapper {
+.search-wrapper-input,
+.search-wrapper-placeholder {
+  display: flex;
+
   width: 100%;
-  background-color: #fff;
-  border-radius: 4px;
+  background-color: #e3e4e8;
+  border-radius: 8px;
+
+  color: var(--grey);
+  align-items: center;
   flex-shrink: 1;
 }
 
 @media (prefers-color-scheme: dark) {
-  .search-wrapper {
-    background-color: #121212;
+  .search-wrapper-input,
+  .search-wrapper-placeholder {
+    background-color: #1c1c1e;
   }
 }
 
-.input-wrapper {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  padding: 0 32px;
-}
-
-.search-bar .input-wrapper .search-icon {
-  left: 12px;
-  margin-left: 0;
-}
-
 .search-bar .search-icon {
-  position: absolute;
-  top: 50%;
-  margin-top: -8px;
-  margin-left: -20px;
+  margin: 0 6px;
 }
 
 .search-bar .input {
   height: 32px;
-  margin-left: 4px;
+  margin-right: 24px;
 
+  color: var(--text-color);
   text-align: left;
   font-size: 14px;
   line-height: 32px;
-}
-
-.search-bar .placeholder-wrapper {
-  display: flex;
-
-  color: var(--grey);
-  line-height: 32px;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-bar .placeholder {
-  position: relative;
-  padding-left: 24px;
-  font-size: 14px;
+  flex-grow: 1;
 }
 
 .search-bar .clear-wrapper {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-
-  padding: 0 12px;
-}
-
-.search-bar .clear {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  margin-top: -8px;
+  padding: 0 6px;
 }
 
 .search-bar .cancel {
   margin-left: 8px;
-  color: #576b95;
+
+  color: #3478f7;
+  font-size: 14px;
   line-height: 32px;
   white-space: nowrap;
+}
+
+.search-wrapper-placeholder .text {
+  line-height: 32px;
 }
 
 .search-bar .word-wrapper {
   position: absolute;
   z-index: 2;
-  top: 42px;
-  left: 8px;
-  right: 46px;
+  top: 44px;
+  left: 15px;
+  right: 50px;
 
   max-height: 60vh;
 
   background-color: var(--block-bgcolor);
-  border-radius: 6px;
+  border-radius: 8px;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.15);
 
   overflow-y: scroll;
@@ -113,12 +86,12 @@
 .search-bar .word {
   position: relative;
 
-  padding: 4px 32px;
+  padding: 4px 15px;
 
   color: var(--grey-four);
   text-align: left;
   font-size: 15px;
-  line-height: 1.5;
+  line-height: 1.8;
 }
 
 .search-bar .word::after {

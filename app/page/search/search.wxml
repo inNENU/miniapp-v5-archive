@@ -7,7 +7,24 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}} grey">
-  <template is="nav" data="{{...nav, theme}}" />
+  <view
+    class="back-button"
+    style="top:{{statusBarHeight + 5}}px;"
+    hover-class="button-hover"
+    catch:tap="back"
+  >
+    <image
+      class="back-icon"
+      src="/icon/{{firstPage? 'home': 'back'}}{{darkmode? 'White': ''}}.svg"
+    />
+  </view>
+  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
+    <view class="iOS-titletext">搜索</view>
+  </view>
+  <view class="iOS-nav-border" style="top:{{statusBarHeight + 44}}px;" />
+  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
+    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
+  </view>
 
   <search
     words="{{words}}"

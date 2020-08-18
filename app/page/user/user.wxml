@@ -48,7 +48,7 @@
       plain
     >
       <image class="icon" src="/icon/user/bug.svg" />
-      <view class="text">bug反馈</view>
+      <view class="text">bug 反馈</view>
     </button>
     <block wx:if="{{env === 'wx'}}">
       <view class="icon divline" />

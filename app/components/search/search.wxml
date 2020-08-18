@@ -1,7 +1,12 @@
 <view class="search-bar">
-  <view class="search-wrapper">
-    <view class="input-wrapper" wx:if="{{showInput}}">
-      <icon class="search-icon" type="search" size="16" />
+  <view
+    class="search-wrapper-{{showInput? 'input': 'placeholder'}}"
+    catch:tap="showInput"
+  >
+    <icon class="search-icon" type="search" size="22" />
+
+    <block wx:if="{{showInput}}">
+      <!-- <icon class="search-icon" type="search" size="22" /> -->
       <input
         class="input"
         type="text"
@@ -18,15 +23,10 @@
         class="clear-wrapper"
         catch:tap="clearInput"
       >
-        <icon class="clear" type="clear" size="16" />
+        <icon class="clear" type="clear" size="18" />
       </view>
-    </view>
-    <view class="placeholder-wrapper" wx:else catch:tap="showInput">
-      <view class="placeholder">
-        <icon class="search-icon" type="search" size="16" />
-        搜索
-      </view>
-    </view>
+    </block>
+    <text wx:else class="text">搜索</text>
   </view>
   <view hidden="{{!showInput}}" class="cancel" catch:tap="hideInput">取消</view>
   <view class="word-wrapper" wx:if="{{words.length > 0 && showInput}}">

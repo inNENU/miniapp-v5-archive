@@ -12,7 +12,7 @@ $register("search", {
     theme: globalData.theme,
 
     /** 状态栏高度 */
-    statusBarHeight: getApp().globalData.info.statusBarHeight,
+    statusBarHeight: globalData.info.statusBarHeight,
 
     /** 候选词 */
     words: [] as string[],
@@ -22,14 +22,6 @@ $register("search", {
 
     /** 搜索词 */
     searchword: "",
-
-    /** 自定义导航栏配置 */
-    nav: {
-      title: "搜索",
-      action: "redirect",
-      statusBarHeight: globalData.info.statusBarHeight,
-      from: "返回",
-    },
   },
 
   state: {
@@ -60,13 +52,15 @@ $register("search", {
     changeNav(event, this, "nav");
   },
 
-  onShareAppMessage: () => ({
-    title: "搜索",
-    path: "/page/search/search",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }Share.jpg`,
-  }),
+  onShareAppMessage() {
+    return {
+      title: "搜索",
+      path: `/page/search/search?name=${this.state.name}&word=${this.state.value}`,
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }Share.jpg`,
+    };
+  },
 
   onShareTimeline: () => ({ title: "搜索" }),
 
@@ -111,7 +105,7 @@ $register("search", {
     this.$route(`page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 
-  redirect() {
+  back() {
     if (getCurrentPages().length === 1) this.$switch("main");
     else this.$back();
   },

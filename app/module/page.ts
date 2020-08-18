@@ -38,7 +38,9 @@ $register("page", {
   onShareAppMessage() {
     return {
       title: this.data.page.title,
-      path: `/module/page?${this.path ? `path=${this.path}` : `scene=${id}`}`,
+      path: `/module/page?${
+        this.path ? `path=${this.path}` : `scene=${this.data.page.id}`
+      }`,
     };
   },
 
