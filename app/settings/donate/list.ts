@@ -49,7 +49,7 @@ $register("donate-list", {
           this.setData({
             donate2019: donateList,
             sum2019: sum2019.toFixed(2),
-            result2019: (600 - sum2019).toFixed(2),
+            result2019: (sum2019 - 600).toFixed(2),
           });
         }
       },
@@ -70,7 +70,7 @@ $register("donate-list", {
           this.setData({
             donate2020: donateList,
             sum2020: sum2020.toFixed(2),
-            result2020: (600 - sum2020).toFixed(2),
+            result2020: (sum2020 - 600).toFixed(2),
           });
         }
       },

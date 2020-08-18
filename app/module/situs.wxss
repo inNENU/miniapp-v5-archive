@@ -1,4 +1,6 @@
-.situsSwiper {
-  width: 100%;
-  height: 400rpx;
+.title {
+  padding: 8px 15px;
+  text-align: left;
+  font-size: 28px;
+  font-weight: 500;
 }

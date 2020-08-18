@@ -402,9 +402,7 @@ $register("PEcal", {
   },
 
   navigate() {
-    this.$route(
-      "/module/page?from=体测计算器&id=guide/exam/physical-examination/index"
-    );
+    this.$route("/module/page?from=体测计算器&id=guide/exam/pe-test/index");
   },
 
   close() {

@@ -63,7 +63,7 @@
         />
       </view>
       <view class="loading-logo">
-        <image class="logo" src="https://mp.innenu.com/img/logo.png" />
+        <image class="logo" src="https://mp.innenu.com/img/inNENU.png" />
         <view class="shadow" />
         <view class="text">加载中...</view>
       </view>

@@ -1,5 +1,5 @@
 <wxs src="./weather.wxs" module="tool" />
-<view class="wrapper">
+<view class="wrapper grey">
   <view
     class="weather-wrapper {{night? 'night': 'day'}}"
     style="padding-top: {{info.statusBarHeight}}px;"

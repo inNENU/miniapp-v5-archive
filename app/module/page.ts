@@ -18,7 +18,10 @@ $register("page", {
 
     if (getCurrentPages().length === 1) option.action = "redirect";
 
-    if (option.scene) option.id = decodeURIComponent(option.scene);
+    if (option.scene)
+      option.id = decodeURIComponent(option.scene)
+        .replace("#", "guide/")
+        .replace("@", "intro/");
 
     if ("path" in option) {
       loadOnlinePage(option, this);
@@ -35,9 +38,7 @@ $register("page", {
   onShareAppMessage() {
     return {
       title: this.data.page.title,
-      path: `/module/page?${
-        this.path ? `path=${this.path}` : `scene=${this.data.page.id}`
-      }`,
+      path: `/module/page?${this.path ? `path=${this.path}` : `scene=${id}`}`,
     };
   },
 
@@ -58,7 +59,7 @@ $register("page", {
 
   /** 重定向到主页 */
   redirect() {
-    console.log("redirect");
-    this.$launch("main");
+    if (getCurrentPages().length === 1) this.$switch("main");
+    else this.$back();
   },
 });

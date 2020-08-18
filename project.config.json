@@ -15,7 +15,7 @@
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
   "libVersion": "2.12.1",
-  "appid": "wx9ce37d9662499df3",
+  "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.18.0",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
@@ -111,10 +111,10 @@
           "scene": null
         },
         {
-          "id": 13,
-          "name": "地点介绍",
-          "pathName": "function/situs/situs",
-          "query": "xiaoqu=benbu&id=benbu46",
+          "id": 4,
+          "name": "地图地点",
+          "pathName": "module/situs",
+          "query": "id=benbu/facility/cainiao",
           "scene": null
         },
         {

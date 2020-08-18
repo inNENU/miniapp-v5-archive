@@ -39,7 +39,7 @@
 }
 
 .paragraph .text {
-  display: block;
+  word-wrap: break-word;
 }
 
 .paragraph .list {

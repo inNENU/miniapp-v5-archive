@@ -36,6 +36,9 @@
       </button>
       <view class="NENU-navText">{{page.title}}</view>
     </view>
+    <my-swiper wx:if="{{page.photo}}" config="{{ { url: page.photo } }}" />
+    <view class="title">{{page.title}}</view>
     <template is="body" data="{{page, theme}}" />
+    <footer config="{{page}}" />
   </block>
 </view>
