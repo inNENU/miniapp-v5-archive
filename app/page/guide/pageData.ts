@@ -22,6 +22,13 @@ export default {
           path: "FAQ/index",
         },
         {
+          text: "需带物品",
+          color: "blue",
+          name: "Necessity",
+          icon: "/icon/guide/shop.svg",
+          path: "necessity/index",
+        },
+        {
           text: "资助",
           color: "purple",
           name: "Subsidize",

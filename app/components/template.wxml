@@ -105,7 +105,7 @@
 <!-- 标题 -->
 <template name="title">
   <view class="{{theme}}-title" style="{{style || ''}}"
-    ><text selectable>{{text}}</text></view
+    ><text user-select>{{text}}</text></view
   >
 </template>
 <!-- ******************************************

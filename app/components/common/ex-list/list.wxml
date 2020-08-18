@@ -85,7 +85,7 @@
       <!-- 普通文字段落与开关 -->
       <view wx:else id="{{index}}" class="list">
         <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
-        <text class="text" decode selectable space="nbsp"
+        <text class="text" decode user-select space="nbsp"
           >{{listItem.text}}</text
         >
         <view class="desc">
