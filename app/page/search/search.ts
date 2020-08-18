@@ -1,7 +1,7 @@
 /* 搜索页 */
 
 import $register = require("wxpage");
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { SearchResult, search, searching } from "../../utils/search";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
@@ -38,7 +38,7 @@ $register("search", {
     if (options.word) this.search({ detail: { value: options.word } });
 
     this.setData({
-      "nav.from": getCurrentPages().length === 1 ? "主页" : "返回",
+      firstPage: getCurrentPages().length === 1,
       color: getColor(true),
       searchword: options.word || "",
       theme: globalData.theme,
@@ -46,10 +46,6 @@ $register("search", {
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
     popNotice("search");
-  },
-
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
   },
 
   onShareAppMessage() {
