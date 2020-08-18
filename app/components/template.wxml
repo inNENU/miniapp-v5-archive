@@ -298,7 +298,7 @@ Author: Mr.Hope
       class="NENUnav {{titleDisplay? 'fadeOut': 'fadeIn'}}"
       style="background-color: {{color}}; padding-top: {{statusBarHeight}}px;"
     >
-      <button
+      <view
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
         style="position: absolute; left: 0;"
@@ -311,7 +311,7 @@ Author: Mr.Hope
           style="border-color: #fff;"
         />
         <text class="iOS-nav-text" style="color: #fff;">{{from}}</text>
-      </button>
+      </view>
       <view class="NENU-navText">{{title}}</view>
     </view>
   </block>
@@ -320,7 +320,7 @@ Author: Mr.Hope
       class="NENUnav"
       style="background-color: {{color}}; padding-top: {{statusBarHeight}}px;"
     >
-      <button
+      <view
         wx:if="{{action !== false}}"
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
@@ -334,7 +334,7 @@ Author: Mr.Hope
           style="border-color: #fff;"
         ></view>
         <text class="iOS-nav-text" style="color: #fff;">{{from}}</text>
-      </button>
+      </view>
       <view class="NENU-navText">{{title}}</view>
     </view>
   </block>
@@ -379,24 +379,6 @@ Author: Mr.Hope
     <navigator class="donate-button" url="/settings/donate/donate"
       >支持开发者</navigator
     >
-  </view>
-</template>
-<template name="NENUinfo">
-  <view class="NENUInfoCtn">
-    <view class="NENUInfoHead" style="backgroundcolor:{{page[0].color}};">
-      <button
-        wx:if="{{!login}}"
-        class="NENULoginBtn"
-        style="backgroundcolor:{{page[0].color}};"
-        open-type="getUserInfo"
-      >
-        立即登录
-      </button>
-      <view wx:if="{{login}}" class="nickCtn">
-        <image class="NENUnickHead" />
-        <view class="NENUnickname" />
-      </view>
-    </view>
   </view>
 </template>
 <!-- ******************************************

@@ -22,9 +22,9 @@
     </view>
     <view
       class="NENUnav {{page.borderDisplay? 'fadeIn': 'fadeOut'}}"
-      style="background-color:{{page.color}}; padding-top:{{page.statusBarHeight}}px;"
+      style="background-color: {{page.color}}; padding-top: {{page.statusBarHeight}}px;"
     >
-      <button
+      <view
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
         style="position: absolute; left: 0;"
@@ -33,10 +33,11 @@
       >
         <view class="iOS-back-arrow" style="border-color: #fff;" />
         <text class="iOS-nav-text" style="color: #fff;">返回</text>
-      </button>
+      </view>
       <view class="NENU-navText">{{page.title}}</view>
     </view>
     <my-swiper wx:if="{{page.photo}}" config="{{ { url: page.photo } }}" />
+    <view wx:else style="height: {{page.statusBarHeight + 44}}px;" />
     <view class="title">{{page.title}}</view>
     <template is="body" data="{{page, theme}}" />
     <footer config="{{page}}" />
