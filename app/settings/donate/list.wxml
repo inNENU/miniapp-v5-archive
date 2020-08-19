@@ -8,6 +8,7 @@
 />
 <view class="{{theme}}">
   <template is="nav" data="{{...page, theme}}" />
+  <my-text config="{{text}}" />
   <view class="donate-list-wrapper">
     <view class="title">赞赏支持列表:</view>
     <view class="year">2020:</view>
@@ -17,8 +18,10 @@
         <text style="font-weight: 500;">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
       </view>
-      <view class="result">共计: {{sum2020 || 0}} 元</view>
-      <view class="result">结余: {{result2020}} 元</view>
+      <view class="sum">共计: {{sum2020 || 0}} 元</view>
+      <view class="result {{result2020 < 0? 'negative': ''}}"
+        >结余: {{result2020}} 元</view
+      >
     </block>
     <view wx:else>暂无赞赏支持</view>
     <view class="year">2019:</view>
@@ -28,8 +31,10 @@
         <text style="font-weight: 500;">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
       </view>
-      <view class="result">共计: {{sum2019}} 元</view>
-      <view class="result">结余: {{result2019}} 元</view>
+      <view class="sum">共计: {{sum2019}} 元</view>
+      <view class="result {{result2019 < 0? 'negative': ''}}"
+        >结余: {{result2019}} 元</view
+      >
     </block>
     <view wx:else>暂无赞赏支持</view>
   </view>

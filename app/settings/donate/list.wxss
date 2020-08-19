@@ -4,8 +4,8 @@
 }
 
 .donate-list-wrapper .title {
-  padding-bottom: 8px;
-  font-size: 18px;
+  padding-top: 8px;
+  font-size: 19px;
   font-weight: bold;
   line-height: 2;
 }
@@ -13,7 +13,7 @@
 .donate-list-wrapper .year {
   padding: 4px 0;
   font-size: 17px;
-  font-weight: 500;
+  font-weight: bold;
   line-height: 2;
 }
 
@@ -22,6 +22,16 @@
   line-height: 1.5;
 }
 
+.donate-list-wrapper .sum,
 .donate-list-wrapper .result {
   font-size: 16px;
+  line-height: 1.5;
+}
+
+.donate-list-wrapper .result {
+  color: #09bb07;
+}
+
+.donate-list-wrapper .result.negative {
+  color: #e64340;
 }

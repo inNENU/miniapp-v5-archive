@@ -22,6 +22,14 @@ $register("donate-list", {
       shareable: true,
       from: "返回",
     },
+    text: {
+      style: "text-indent: 1.5rem",
+      heading: "统计情况",
+      text: [
+        "该列表将由 Mr.Hope 每天手动统计更新，可能需要至多 40 小时来显示您的打赏信息。",
+        "再次感谢大家对 Mr.Hope 的支持与厚爱!",
+      ],
+    },
   },
 
   onLoad() {

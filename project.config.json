@@ -86,14 +86,14 @@
           "id": 0,
           "name": "分享",
           "pathName": "module/page",
-          "query": "id=school/education/enroll",
+          "query": "id=intro/school/education/enroll",
           "scene": null
         },
         {
-          "id": 3,
+          "id": 1,
           "name": "二维码分享",
           "pathName": "module/page",
-          "query": "scene=life/express/index",
+          "query": "scene=guide/life/express/index",
           "scene": null
         },
         {
@@ -163,6 +163,13 @@
           "id": -1,
           "name": "赞赏",
           "pathName": "settings/donate/donate",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": -1,
+          "name": "赞赏列表",
+          "pathName": "settings/donate/list",
           "query": "",
           "scene": null
         },

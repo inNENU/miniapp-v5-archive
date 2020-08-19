@@ -5,14 +5,16 @@ import { GlobalData } from "../app";
 import { server } from "./config";
 import { setPage } from "./page";
 import { PageConfig } from "../../typings";
+
 /**
- * 资源下载 from fuction.js & guide.js 被checkResUpdate调用
+ * 资源下载 from fuction.js & guide.js 被 checkResUpdate 调用
  *
  * @param name 下载资源名称
  */
 export const resDownload = (name: string): void => {
   wx.showLoading({ title: "更新中...", mask: true });
   wx.setStorageSync(`${name}Download`, false);
+  remove(name, "dir");
   const downLoadTask = wx.downloadFile({
     url: `${server}resource/${name}.zip`,
     success: (res) => {
@@ -105,7 +107,7 @@ export const checkResUpdate = (
                         if (choice2.cancel)
                           modal(
                             "更新提示已关闭",
-                            "您可以在设置中重新打开提示。请注意:为保障正常运行，小程序会每周对资源进行强制更新。",
+                            "您可以在设置中重新打开提示。请注意: 为保障正常运行，小程序会每周对资源进行强制更新。",
                             // 关闭更新提示
                             () => {
                               wx.setStorageSync(`${path}ResNotify`, false);
@@ -125,7 +127,7 @@ export const checkResUpdate = (
 };
 
 /**
- * 动态根据夜间模式改变导航栏 from main.js & me.js
+ * 刷新 tab 页
  *
  * @param name 页面名称
  * @param ctx 页面指针
