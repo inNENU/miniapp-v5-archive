@@ -220,7 +220,7 @@ export default {
           color: "cyan",
           name: "Logistics",
           icon: "/icon/intro/wrench.svg",
-          path: "apartment/logistics",
+          path: "apartment/logistics/index",
         },
         {
           text: "校医院",

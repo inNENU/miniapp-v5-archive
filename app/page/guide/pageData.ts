@@ -25,7 +25,7 @@ export default {
           text: "需带物品",
           color: "blue",
           name: "Necessity",
-          icon: "/icon/guide/shop.svg",
+          icon: "/icon/guide/necessity.svg",
           path: "necessity/index",
         },
         {

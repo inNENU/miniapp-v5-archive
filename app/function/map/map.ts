@@ -39,11 +39,24 @@ $register("map", {
       scale: 17,
     },
 
+    /** 显示弹窗 */
+    showPopup: false,
+
+    popup: {
+      title: "全部",
+      subtitle: "地点列表",
+      cancel: false,
+      confirm: false,
+    },
+
     /** 点分类显示状态 */
     pointDisplay: false,
 
     /** 当前分类 */
     currentCategory: "all",
+
+    /** 当前分类名称 */
+    currentCategoryName: "全部",
 
     /** 校区 */
     area: "benbu" as Area,
@@ -238,19 +251,23 @@ $register("map", {
 
   /** 移动到当前坐标 */
   moveToLocation() {
-    this.mapCtx.moveToLocation({});
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.mapCtx.moveToLocation();
   },
 
+  /** 展示分类选择 */
   point() {
     this.setData({ pointDisplay: !this.data.pointDisplay });
   },
 
+  /** 选择分类 */
   select({ currentTarget }: WXEvent.Touch) {
     const { index } = currentTarget.dataset;
-    const { path } = this.data.category[index];
+    const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 
-    this.setData({ currentCategory: path, markers });
+    this.setData({ currentCategory: path, markers, currentCategoryName: name });
     this.mapCtx.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
@@ -261,14 +278,32 @@ $register("map", {
       (item) => item.id === event.markerId
     ) as MarkerData;
 
-    if (event.type === "markertap") this.$preload(`situs?id=${area}/${path}`);
-    else if (event.type === "callouttap")
-      if (path) this.$route(`situs?id=${area}/${path}`);
-      else tip("该地点暂无详情");
+    if (event.type === "markertap") {
+      if (path) this.$preload(`situs?id=${area}/${path}`);
+    } else if (event.type === "callouttap")
+      if (path) {
+        this.$route(`situs?id=${area}/${path}`);
+        console.log(typeof path, path);
+      } else tip("该地点暂无详情");
   },
 
-  showList() {
-    tip("开发中...");
+  showPopup() {
+    this.setData({ showPopup: true });
+  },
+
+  navigate({ currentTarget }: WXEvent.Touch) {
+    const { area } = this.data;
+
+    const { path } = this.data.markers.find(
+      (item) => item.id === currentTarget.dataset.id
+    ) as MarkerData;
+
+    if (path) this.$route(`situs?id=${area}/${path}`);
+    else tip("该地点暂无详情");
+  },
+
+  closePopup() {
+    this.setData({ showPopup: false });
   },
 
   regionChange(event: any) {

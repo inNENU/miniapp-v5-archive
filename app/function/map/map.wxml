@@ -77,7 +77,20 @@
     <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
     <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
   </view>
-  <view class="list-button" catch:tap="showList">
+  <view class="list-button" catch:tap="showPopup">
     <image class="icon" src="./icon/list.png" />
   </view>
 </view>
+<popup config="{{popup}}" show="{{showPopup}}" catch:close="closePopup">
+  <view
+    wx:for="{{markers}}"
+    wx:key="id"
+    class="point"
+    data-id="{{item.id}}"
+    hover-class="button-hover"
+    catch:tap="navigate"
+  >
+    <view class="name">{{item.name}}</view>
+    <view class="desc">{{item.detail}}</view>
+  </view>
+</popup>

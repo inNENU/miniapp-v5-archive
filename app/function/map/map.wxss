@@ -162,3 +162,39 @@
   width: 28px;
   height: 28px;
 }
+
+@import "/components/popup/popup.wxss";
+
+.point {
+  position: relative;
+  padding: 6px 0;
+  text-align: left;
+  line-height: 1.4;
+}
+
+.point::after {
+  content: " ";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 1px;
+  border-bottom: 1px solid var(--border-color);
+  transform: scaleY(0.4);
+  transform-origin: 0 100%;
+}
+
+.point:last-child::after {
+  display: none;
+}
+
+.point .name {
+  color: var(--grey-three);
+  font-size: 16px;
+}
+
+.point .desc {
+  color: var(--dark-grey);
+  font-size: 14px;
+}

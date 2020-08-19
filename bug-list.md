@@ -12,7 +12,6 @@
 - scroll-view 支持传递 selector 作为 scrollIntoView 的目标节点
 - 天气的更多信息
 - 天气可以随定位选点
-- loading 不再使用图片
 
 ## Content
 
