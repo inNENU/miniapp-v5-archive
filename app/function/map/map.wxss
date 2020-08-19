@@ -163,8 +163,6 @@
   height: 28px;
 }
 
-@import "/components/popup/popup.wxss";
-
 .point {
   position: relative;
   padding: 6px 0;
