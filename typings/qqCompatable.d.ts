@@ -4,4 +4,8 @@ declare namespace WechatMiniprogram {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     AppPlatform: "qq" | undefined;
   }
+
+  interface AuthSetting {
+    "setting.addFriend"?: boolean;
+  }
 }

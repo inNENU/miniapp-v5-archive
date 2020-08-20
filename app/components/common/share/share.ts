@@ -33,19 +33,6 @@ $register.C({
     env,
   },
   methods: {
-    /** QQ暂不支持联系客服的兼容 */
-    contact(): void {
-      if (env === "qq")
-        wx.setClipboardData({
-          data: "1178522294",
-          success: () =>
-            modal(
-              "暂不支持",
-              "QQ小程序暂不支持联系客服，请添加QQ1178522294。QQ号已经添加至您的剪切板。"
-            ),
-        });
-    },
-
     /** 二维码下载 */
     download(): void {
       downLoad(

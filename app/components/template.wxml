@@ -16,27 +16,27 @@
 
       <block wx:if="{{page.content}}">
         <block wx:for="{{page.content}}" wx:key="id">
-          <my-text config="{{item}}" wx:if="{{item.tag === 'text'}}" />
+          <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
           <img
             wx:elif="{{item.tag === 'img'}}"
             config="{{item}}"
             images="{{page.images}}"
           />
-          <list config="{{item}}" wx:elif="{{item.tag === 'list'}}" />
-          <footer config="{{item}}" wx:elif="{{item.tag === 'footer'}}" />
-          <grid config="{{item}}" wx:elif="{{item.tag === 'grid'}}" />
-          <doc config="{{item}}" wx:elif="{{item.tag === 'doc'}}" />
-          <phone config="{{item}}" wx:elif="{{item.tag === 'phone'}}" />
-          <my-swiper config="{{item}}" wx:elif="{{item.tag === 'swiper'}}" />
-          <intro config="{{item}}" wx:elif="{{item.tag === 'intro'}}" />
-          <card config="{{item}}" wx:elif="{{item.tag === 'card'}}" />
+          <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
+          <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
+          <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
+          <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
+          <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
+          <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
+          <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+          <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
           <ex-list
             wx:elif="{{item.tag === 'List'}}"
             config="{{item}}"
             change="{{event? event[index]: ''}}"
             catch:change="list"
           />
-          <media config="{{item}}" wx:elif="{{item.tag === 'media'}}" />
+          <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
           <template
             wx:else
             is="{{item.tag}}"
@@ -78,27 +78,27 @@
 <!-- page without navigation bar -->
 <template name="body">
   <block wx:if="{{theme}}" wx:for="{{page.content}}" wx:key="id">
-    <my-text config="{{item}}" wx:if="{{item.tag === 'text'}}" />
+    <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
     <img
       wx:elif="{{item.tag === 'img'}}"
       config="{{item}}"
       images="{{page? page.images: []}}"
     />
-    <list config="{{item}}" wx:elif="{{item.tag === 'list'}}" />
-    <footer config="{{item}}" wx:elif="{{item.tag === 'footer'}}" />
-    <grid config="{{item}}" wx:elif="{{item.tag === 'grid'}}" />
-    <doc config="{{item}}" wx:elif="{{item.tag === 'doc'}}" />
-    <phone config="{{item}}" wx:elif="{{item.tag === 'phone'}}" />
-    <my-swiper config="{{item}}" wx:elif="{{item.tag === 'swiper'}}" />
-    <intro config="{{item}}" wx:elif="{{item.tag === 'intro'}}" />
+    <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
+    <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
+    <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
+    <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
+    <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
+    <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
+    <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+    <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
     <ex-list
       wx:elif="{{item.tag === 'List'}}"
       config="{{item}}"
       change="{{event? event[index]: ''}}"
       catch:change="list"
     />
-    <card config="{{item}}" wx:elif="{{item.tag === 'card'}}" />
-    <media config="{{item}}" wx:elif="{{item.tag === 'media'}}" />
+    <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
     <template wx:else is="{{item.tag}}" data="{{...item, theme, darkmode}}" />
   </block>
   <share config="{{page}}" />
@@ -108,9 +108,9 @@
 ********************************************* -->
 <!-- 标题 -->
 <template name="title">
-  <view class="{{theme}}-title" style="{{style || ''}}"
-    ><text user-select>{{text}}</text></view
-  >
+  <view class="{{theme}}-title" style="{{style || ''}}">
+    <text user-select>{{text}}</text>
+  </view>
 </template>
 <!-- ******************************************
   Here are  different template used by diferent theme
@@ -336,7 +336,7 @@ Author: Mr.Hope
           wx:if="{{action === 'redirect'}}"
           class="iOS-back-arrow"
           style="border-color: #fff;"
-        ></view>
+        />
         <text class="iOS-nav-text" style="color: #fff;">{{from}}</text>
       </view>
       <view class="NENU-navText">{{title}}</view>

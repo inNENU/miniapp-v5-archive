@@ -89,11 +89,11 @@ export interface WeatherDetail {
     };
   };
   /** 1小时天气预报 */
-  forecast_1h: {
+  forecast_1h?: {
     [props: number]: WeatherForcast1H;
   };
   /** 24小时天气预报 */
-  forecast_24h: {
+  forecast_24h?: {
     [props: number]: WeatherForcast24H;
   };
   /** 实时数据 */
