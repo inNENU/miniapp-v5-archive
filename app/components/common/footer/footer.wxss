@@ -1,5 +1,5 @@
 .footer-wrapper {
-  max-width: 517px;
+  max-width: var(--max-width);
   margin: auto auto 0 auto;
   padding: 10px 15px 8px;
   padding-bottom: env(safe-area-inset-bottom);

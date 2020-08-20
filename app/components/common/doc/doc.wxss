@@ -2,8 +2,8 @@
   display: flex;
   position: relative;
 
-  max-width: 517px;
-  margin: 2px 15px;
+  max-width: var(--max-width);
+  margin: 2px var(--horizontal-margin);
   padding: 8px 10px 8px 15px;
   background-color: var(--block-bgcolor);
   border-radius: 8px;
@@ -12,12 +12,6 @@
   line-height: 1.2;
   align-items: center;
   overflow: hidden;
-}
-
-@media (min-width: 547px) {
-  .doc-wrapper {
-    margin: 0 auto;
-  }
 }
 
 /* 文档图标 */

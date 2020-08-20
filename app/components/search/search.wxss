@@ -24,6 +24,7 @@
   border-radius: 8px;
 
   color: var(--grey);
+  font-size: 14px;
   align-items: center;
   flex-shrink: 1;
 }

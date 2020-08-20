@@ -1,8 +1,8 @@
 .phone-wrapper {
   display: flex;
 
-  max-width: 517px;
-  margin: 2px 15px;
+  max-width: var(--max-width);
+  margin: 2px var(--horizontal-margin);
   padding: 0 15px;
   background-color: var(--block-bgcolor);
   border-radius: 8px;
@@ -11,12 +11,6 @@
   line-height: 2.5;
   align-items: center;
   overflow: hidden;
-}
-
-@media (min-width: 547px) {
-  .phone-wrapper {
-    margin: 2px auto;
-  }
 }
 
 .phone-wrapper .phone-icon {
