@@ -1,4 +1,6 @@
 .donate-list-wrapper {
+  max-width: 517px;
+  margin: 0 auto;
   padding: 0 15px;
   text-align: left;
 }

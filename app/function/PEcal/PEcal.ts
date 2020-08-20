@@ -396,7 +396,7 @@ $register("PEcal", {
         title: "请选择性别年级",
         icon: "none",
         duration: 2500,
-        image: "/icon/close.png",
+        image: "./close.png",
       });
     }
   },

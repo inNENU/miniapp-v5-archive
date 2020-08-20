@@ -33,18 +33,20 @@
 }
 
 .intro-wrapper .icon {
-  width: 200rpx !important;
-  height: 200rpx !important;
+  width: 200rpx;
+  max-width: 150px;
+  height: 200rpx;
+  max-height: 150px;
 }
 
 .intro-wrapper .name {
-  margin: 8rpx 0;
-  font-size: 36rpx;
+  margin: 4px 0;
+  font-size: 18px;
   text-shadow: 0 0 1px var(--grey);
 }
 
 .intro-wrapper .desc {
   max-width: 80%;
   color: var(--grey-three);
-  font-size: 28rpx;
+  font-size: 14px;
 }
