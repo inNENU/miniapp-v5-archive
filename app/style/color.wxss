@@ -5,8 +5,8 @@ page {
   --block-bgcolor: #f3f3f8;
   --border-color: #cccccf;
   --grey: #888;
-  --grey-three: #333;
-  --grey-four: #444;
+  --grey3: #333;
+  --grey4: #444;
   --dark-grey: #666;
   --light-grey: #999;
   --border-color-light: #d9d9d9;
@@ -37,8 +37,8 @@ page .grey {
     --block-bgcolor: #f3f3f8;
     --border-color: #cccccf;
     --grey: #888;
-    --grey-three: #333;
-    --grey-four: #444;
+    --grey3: #333;
+    --grey4: #444;
     --dark-grey: #666;
     --light-grey: #999;
     --border-color-light: #d9d9d9;
@@ -60,8 +60,8 @@ page .grey {
     --block-bgcolor: #1c1c1e;
     --border-color: #3a3a3d;
     --grey: #777;
-    --grey-three: #ccc;
-    --grey-four: #bbb;
+    --grey3: #ccc;
+    --grey4: #bbb;
     --dark-grey: #999;
     --light-grey: #666;
     --arrow-color: #5a5a5f;

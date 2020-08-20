@@ -90,7 +90,7 @@
 
   padding: 4px 15px;
 
-  color: var(--grey-four);
+  color: var(--grey4);
   text-align: left;
   font-size: 15px;
   line-height: 1.8;

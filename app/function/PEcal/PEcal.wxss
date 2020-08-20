@@ -130,7 +130,7 @@
 
 .list-item .unit {
   padding-left: 15px;
-  color: var(--grey-four);
+  color: var(--grey4);
   flex: none;
 }
 

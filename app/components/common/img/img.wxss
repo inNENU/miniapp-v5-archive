@@ -31,7 +31,7 @@
   margin: -2px auto 4px;
   padding: 0 20px;
 
-  color: var(--grey-three);
+  color: var(--grey3);
   text-align: center;
   font-size: 12px;
   font-weight: 300;

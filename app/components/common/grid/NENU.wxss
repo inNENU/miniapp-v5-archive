@@ -65,7 +65,7 @@
 
 .NENU .grid-wrapper .text {
   margin-bottom: 6px;
-  color: var(--grey-four);
+  color: var(--grey4);
   font-size: 15px;
 }
 

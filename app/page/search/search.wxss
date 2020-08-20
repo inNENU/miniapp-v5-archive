@@ -24,7 +24,7 @@
 
 .search-item .list > .title {
   margin: 4px 8px;
-  color: var(--grey-three);
+  color: var(--grey3);
   font-size: 16px;
   font-weight: 500;
 }

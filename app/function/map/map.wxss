@@ -188,7 +188,7 @@
 }
 
 .point .name {
-  color: var(--grey-three);
+  color: var(--grey3);
   font-size: 16px;
 }
 
