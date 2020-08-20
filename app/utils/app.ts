@@ -262,7 +262,7 @@ export const appUpdate = (globalData: GlobalData): void => {
  *
  * @param appID 小程序的appID
  */
-export const login = (appID: string): void => {
+export const login = ({ appID, env }: GlobalData): void => {
   const openid = wx.getStorageSync("openid");
 
   if (openid) console.info(`openid为: ${openid}`);
@@ -273,11 +273,11 @@ export const login = (appID: string): void => {
           wx.request({
             url: `${server}service/login.php`,
             method: "POST",
-            data: { appID, code: res.code },
+            data: { appID, code: res.code, env },
             enableHttp2: true,
             success: (res2) => {
               wx.setStorageSync("openid", (res2.data as any).openid);
-              console.info(`openid为:${(res2.data as any).openid}`);
+              console.info(`openid 为: ${(res2.data as any).openid}`);
             },
           });
       },
@@ -384,5 +384,5 @@ export const startup = (globalData: GlobalData): void => {
     });
 
   // 登录
-  // login(globalData.appID);
+  login(globalData);
 };
