@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { WeatherData, WeatherDetail } from "../../components/weather/typings";
+import { WeatherConfig, WeatherData } from "../../components/weather/typings";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
 import weatherHandler from "../../components/weather/handler";
@@ -11,7 +11,7 @@ const {
 $register("weather", {
   data: {
     /** 天气数据 */
-    weather: {} as WeatherDetail,
+    weather: {} as WeatherConfig,
     /** 当前tips的索引值 */
     tipIndex: 0,
     /** 动画对象 */
@@ -23,7 +23,7 @@ $register("weather", {
 
     // 如果天气数据获取时间小于5分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
-      const weather = weatherData.data as WeatherDetail;
+      const weather = weatherData.data as WeatherConfig;
 
       this.initcanvas(weather);
 
@@ -97,7 +97,7 @@ $register("weather", {
    * @param weather 天气详情
    */
   // eslint-disable-next-line
-  initcanvas(weather: WeatherDetail) {
+  initcanvas(weather: WeatherConfig) {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
         .select(".canvas")
@@ -116,7 +116,7 @@ $register("weather", {
   },
 
   // eslint-disable-next-line
-  draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherDetail) {
+  draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherConfig) {
     // 为了防止 iPad 等设备可以转屏，必须即时获取
     const width = info.windowWidth;
     const highTemperature: number[] = [];
@@ -202,7 +202,7 @@ $register("weather", {
    * @param weather 天气详情
    */
   // eslint-disable-next-line
-  canvasOldDraw(weather: WeatherDetail) {
+  canvasOldDraw(weather: WeatherConfig) {
     // 为了防止 iPad 等设备可以转屏，必须即时获取
     const width = wx.getSystemInfoSync().windowWidth;
     /** 天气画布组件 */

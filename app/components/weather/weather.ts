@@ -1,6 +1,6 @@
 import $register = require("wxpage");
 import weatherHandler from "./handler";
-import { WeatherData, WeatherDetail } from "./typings";
+import { WeatherConfig, WeatherData } from "./typings";
 import { server } from "../../utils/config";
 
 $register.C({
@@ -8,7 +8,7 @@ $register.C({
     /** 提示的索引值 */
     tipIndex: 0,
     /** 天气信息 */
-    weather: {} as WeatherDetail,
+    weather: {} as WeatherConfig,
   },
   lifetimes: {
     attached(): void {

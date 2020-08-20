@@ -89,11 +89,11 @@ export interface WeatherDetail {
     };
   };
   /** 1小时天气预报 */
-  forecast_1h?: {
+  forecast_1h: {
     [props: number]: WeatherForcast1H;
   };
   /** 24小时天气预报 */
-  forecast_24h?: {
+  forecast_24h: {
     [props: number]: WeatherForcast24H;
   };
   /** 实时数据 */
@@ -135,8 +135,11 @@ export interface WeatherDetail {
       [props: number]: string;
     };
   };
+}
+
+export interface Forcast {
   /** 小时预报 */
-  hourForecast?: WeatherForcast1H[];
+  hourForecast: WeatherForcast1H[];
   /** 天预报 */
   dayForecast: WeatherForcast24H[];
 }
@@ -147,3 +150,9 @@ export interface WeatherData {
   message: string;
   status: number;
 }
+
+export type WeatherConfig = Omit<
+  WeatherDetail,
+  "forecast_1h" | "forecast_24h"
+> &
+  Forcast;
