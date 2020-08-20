@@ -27,7 +27,8 @@
       catch:tap="save"
     />
   </view>
-
   <list config="{{list}}" />
+  <template is="title" data="{{ text: '备注', theme, darkmode}}" />
+  <my-text config="{{text}}" />
   <footer />
 </view>
