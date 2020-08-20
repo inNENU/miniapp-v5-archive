@@ -305,99 +305,95 @@ $register("music", {
 
   end() {
     // 结束动作
-    let index = this.data.index as number | string;
+    const { index } = this.data;
     const total = this.data.songList.length;
-    let temp;
+    let result: number | "stop";
 
     switch (this.data.mode) {
       case "随机播放":
-        do temp = Math.round(Math.random() * total - 0.5);
-        while (index === temp);
-        index = temp;
+        do result = Math.round(Math.random() * total - 0.5);
+        while (index === result);
         break;
       case "顺序播放":
-        index =
-          (index as number) + 1 === total ? "stop" : (index as number) + 1;
+        result = index + 1 === total ? "stop" : index + 1;
         tip("播放完毕");
         break;
       case "单曲循环":
+        result = index;
         break;
       case "列表循环":
       default:
-        index = (index as number) + 1 === total ? 0 : (index as number) + 1;
+        result = index + 1 === total ? 0 : index + 1;
     }
-    this.switchSong(index);
+
+    this.switchSong(result);
   },
 
   /** 下一曲动作 */
   next() {
-    let index = this.data.index as number | string;
+    const { index } = this.data;
     const total = this.data.songList.length;
-    let temp;
+    let result: number | "nothing";
 
     switch (this.data.mode) {
       case "随机播放":
-        do temp = Math.round(Math.random() * total - 0.5);
-        while (index === temp);
-        index = temp;
+        do result = Math.round(Math.random() * total - 0.5);
+        while (index === result);
         break;
       case "顺序播放":
-        if ((index as number) + 1 === total) {
-          index = "nothing";
+        if (index + 1 === total) {
+          result = "nothing";
           tip("已是最后一曲");
-        } else index = (index as number) + 1;
+        } else result = index + 1;
         break;
       case "单曲循环":
       case "列表循环":
       default:
-        index = (index as number) + 1 === total ? 0 : (index as number) + 1;
+        result = index + 1 === total ? 0 : index + 1;
     }
-    this.switchSong(index);
+
+    this.switchSong(result);
   },
 
   /** 上一曲动作 */
   previous() {
-    let index = this.data.index as number | string;
+    const { index } = this.data;
     const { length: total } = this.data.songList;
-    let temp;
+    let result: number | string;
 
     switch (this.data.mode) {
       case "随机播放":
-        do temp = Math.round(Math.random() * total - 0.5);
-        while (index === temp);
-        index = temp;
+        do result = Math.round(Math.random() * total - 0.5);
+        while (index === result);
         break;
       case "顺序播放":
         if (index === 0) {
-          index = "nothing";
+          result = "nothing";
           tip("已是第一曲");
-        } else index = (index as number) - 1;
+        } else result = index - 1;
         break;
       case "单曲循环":
       case "列表循环":
       default:
-        index = index === 0 ? total - 1 : (index as number) - 1;
+        result = index === 0 ? total - 1 : index - 1;
     }
-    this.switchSong(index);
+    this.switchSong(result);
   },
 
   /** 切换歌曲 */
-  switchSong(index: string | number) {
+  switchSong(index: "stop" | "nothing" | number) {
     if (index === "stop") {
-      this.setData({
-        playing: false,
-        canPlay: false,
-      });
+      this.setData({ playing: false, canPlay: false });
 
       manager.stop();
       // 正常赋值
     } else if (index !== "nothing") {
-      const currentSong = this.data.songList[index as number];
+      const currentSong = this.data.songList[index];
 
       this.setData({
         currentLyricId: -1,
-        index: index as number,
         currentSong,
+        index,
         playing: false,
         canPlay: false,
       });

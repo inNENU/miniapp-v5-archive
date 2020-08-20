@@ -60,8 +60,8 @@ $register.C({
               else
                 wx.authorize({
                   scope: "scope.writePhotosAlbum",
+                  // 获得授权，写入图片
                   success: () => {
-                    // 获得授权，写入图片
                     savePhoto(path);
                   },
 

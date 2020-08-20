@@ -4,24 +4,19 @@ import $register = require("wxpage");
 import { remove, listFile } from "../utils/file";
 import { AppOption } from "../app";
 import { modal } from "../utils/wx";
-const { globalData } = getApp<AppOption>();
+const {
+  globalData: { appID, theme },
+} = getApp<AppOption>();
 
 $register("function", {
-  data: { appID: globalData.appID },
+  data: { appID },
 
   onLoad(options) {
     if (options.scene) {
       const arg = decodeURIComponent(options.scene);
 
-      this.setData({
-        [arg]: true,
-        theme: globalData.theme,
-      });
-    } else if (options.action)
-      this.setData({
-        [options.action]: true,
-        theme: globalData.theme,
-      });
+      this.setData({ [arg]: true, theme });
+    } else if (options.action) this.setData({ [options.action]: true, theme });
   },
 
   onShareAppMessage: () => ({

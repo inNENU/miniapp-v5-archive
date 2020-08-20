@@ -1,7 +1,7 @@
 .status-wrapper {
   display: flex;
 
-  width: 90%;
+  width: calc(100% - 40px);
   max-width: 517px;
   height: 400rpx;
   margin: 4px auto;

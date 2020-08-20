@@ -4,19 +4,10 @@ let currentSwipe: number;
 
 Component({
   properties: {
-    navList: {
-      type: Array,
-      value: [],
-    },
+    navList: { type: Array, value: [] },
     /** 是否立即更改还是等动画完成之后再进行更改 */
-    immediate: {
-      type: Boolean,
-      value: true,
-    },
-    height: {
-      type: Number,
-      default: 200,
-    },
+    immediate: { type: Boolean, value: true },
+    height: { type: Number, default: 200 },
   },
 
   data: {
@@ -29,8 +20,8 @@ Component({
     changeTab({ currentTarget }: WXEvent.Touch): void {
       this.setData({ current: Number(currentTarget.dataset.index) });
     },
-    change({ detail: { current } }: any): void {
-      if (this.properties.immediate) this.setData({ current });
+    change({ detail }: any): void {
+      if (this.properties.immediate) this.setData({ current: detail.current });
     },
 
     // 设置指示条动画

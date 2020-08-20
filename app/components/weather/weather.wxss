@@ -69,25 +69,37 @@
   height: 140px;
   margin-top: -12px;
   margin-left: -8px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+  background:
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
   animation: sunny 15s linear infinite;
 }
 
 .sunny::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   bottom: 0;
 
   width: 20px;
   height: 140px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.8) 50%, rgba(255, 255, 255, 0) 100%);
+  background:
+    linear-gradient(
+      to top,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.8) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
   opacity: 1;
   transform: rotate(90deg);
 }
 
 .sunny::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 30px;
   left: -30px;
@@ -130,7 +142,7 @@
 }
 
 .cloudy::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 5px;
   bottom: -60px;
@@ -179,7 +191,7 @@
 }
 
 .rainy::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 5px;
   bottom: -60px;
@@ -194,7 +206,7 @@
 }
 
 .rainy::before {
-  content: '';
+  content: "";
   display: block;
 
   width: 3px;
@@ -340,7 +352,7 @@
 }
 
 .rainbow::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 17px;
   bottom: -23px;
@@ -399,7 +411,7 @@
 }
 
 .starry::after {
-  content: '';
+  content: "";
   position: absolute;
   top: 20 rpx;
 
@@ -459,7 +471,7 @@
 }
 
 .stormy::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 5px;
   bottom: -60px;
@@ -474,7 +486,7 @@
 }
 
 .stormy::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   top: 70px;
@@ -548,7 +560,7 @@
 }
 
 .snowy::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 8px;
   bottom: -60px;
@@ -563,7 +575,7 @@
 }
 
 .snowy::before {
-  content: '';
+  content: "";
   display: block;
 
   width: 7px;

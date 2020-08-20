@@ -203,7 +203,7 @@ $register("map", {
 
     Promise.all(promises).then(() => {
       const markerConfig = this.state[this.data.area];
-      console.log(markerConfig);
+
       this.setData({
         category: markerConfig.category,
         markers: markerConfig.marker.all,
@@ -281,10 +281,8 @@ $register("map", {
     if (event.type === "markertap") {
       if (path) this.$preload(`situs?id=${area}/${path}`);
     } else if (event.type === "callouttap")
-      if (path) {
-        this.$route(`situs?id=${area}/${path}`);
-        console.log(typeof path, path);
-      } else tip("该地点暂无详情");
+      if (path) this.$route(`situs?id=${area}/${path}`);
+      else tip("该地点暂无详情");
   },
 
   showPopup() {
@@ -307,8 +305,6 @@ $register("map", {
   },
 
   regionChange(event: any) {
-    console.log("regionChange", event);
-
     if (event.causedBy === "gesture" && event.type === "start")
       this.state.gestureHold = true;
 

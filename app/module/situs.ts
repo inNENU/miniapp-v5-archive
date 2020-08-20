@@ -7,7 +7,7 @@ const { globalData } = getApp<AppOption>();
 
 $register("situs", {
   data: {
-    page: {} as any,
+    page: {} as PageConfig,
   },
 
   state: {},

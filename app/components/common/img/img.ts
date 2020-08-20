@@ -28,12 +28,11 @@ $register.C({
 
     /** 进行图片预览 */
     view(): void {
+      const current = this.data.config.res || this.data.config.src;
+
       wx.previewImage({
-        current: this.data.config.res || this.data.config.src,
-        urls:
-          this.data.images.length === 0
-            ? [this.data.config.res || this.data.config.src]
-            : this.data.images,
+        current,
+        urls: this.data.images.length === 0 ? [current] : this.data.images,
       });
     },
   },

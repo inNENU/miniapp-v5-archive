@@ -13,14 +13,16 @@ $register.C({
   methods: {
     /** 拨打电话 */
     call(): void {
-      wx.makePhoneCall({ phoneNumber: this.data.config.num.toString() });
+      wx.makePhoneCall({ phoneNumber: this.data.config.num });
     },
 
     /** 添加联系人 */
     addContact(): void {
+      const { config } = this.data;
+
       if (env === "qq")
         wx.setClipboardData({
-          data: this.data.config.num,
+          data: config.num,
           success: () => {
             modal(
               "号码已复制到剪切板",
@@ -31,24 +33,24 @@ $register.C({
       else
         wx.addPhoneContact({
           // 添加联系人
-          firstName: this.data.config.fName,
-          lastName: this.data.config.lName,
-          mobilePhoneNumber: this.data.config.num,
-          organization: this.data.config.org,
-          workPhoneNumber: this.data.config.workNum,
-          remark: this.data.config.remark,
-          photoFilePath: this.data.config.head,
-          nickName: this.data.config.nickName,
-          weChatNumber: this.data.config.wechat,
-          addressState: this.data.config.province,
-          addressCity: this.data.config.city,
-          addressStreet: this.data.config.street,
-          addressPostalCode: this.data.config.postCode,
-          title: this.data.config.title,
-          hostNumber: this.data.config.hostNum,
-          email: this.data.config.email,
-          url: this.data.config.website,
-          homePhoneNumber: this.data.config.homeNum,
+          firstName: config.fName,
+          lastName: config.lName,
+          mobilePhoneNumber: config.num,
+          organization: config.org,
+          workPhoneNumber: config.workNum,
+          remark: config.remark,
+          photoFilePath: config.head,
+          nickName: config.nickName,
+          weChatNumber: config.wechat,
+          addressState: config.province,
+          addressCity: config.city,
+          addressStreet: config.street,
+          addressPostalCode: config.postCode,
+          title: config.title,
+          hostNumber: config.hostNum,
+          email: config.email,
+          url: config.website,
+          homePhoneNumber: config.homeNum,
         });
     },
   },

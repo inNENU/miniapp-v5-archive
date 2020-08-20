@@ -51,9 +51,9 @@ $register("weather", {
             // 18点至次日5点为夜间
             night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
+            darkmode,
             firstPage: getCurrentPages().length === 1,
-            info: info,
-            darkmode: darkmode,
+            info,
           });
         },
       });
@@ -101,10 +101,7 @@ $register("weather", {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
         .select(".canvas")
-        .fields({
-          node: true,
-          size: true,
-        })
+        .fields({ node: true, size: true })
         .exec((res) => {
           const canvas = res[0].node;
           const context = canvas.getContext("2d");

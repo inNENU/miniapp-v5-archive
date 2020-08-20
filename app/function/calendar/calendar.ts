@@ -6,6 +6,11 @@ import { TimeLineItem } from "../../components/timeline/timeline";
 import { modal } from "../../utils/wx";
 const { globalData } = getApp<AppOption>();
 
+interface CalendarDetail {
+  title: string;
+  content: TimeLineItem[];
+}
+
 $register("calendar", {
   data: {
     theme: globalData.theme,
@@ -75,11 +80,6 @@ $register("calendar", {
 
   /** 显示校历详情 */
   display(event: WXEvent.Touch) {
-    interface CalendarDetail {
-      title: string;
-      content: TimeLineItem[];
-    }
-
     getJSON({
       path: `function/calendar/${event.detail.path}`,
       url: `resource/function/calendar/${event.detail.path}`,

@@ -98,8 +98,8 @@ $register.C({
     },
 
     /** 获得选择器位置与内容 */
-    getDetail(res: WXEvent.Base): { id: string; content: any } {
-      const id = res.currentTarget.id || res.currentTarget.dataset.id;
+    getDetail({ currentTarget }: WXEvent.Base): { id: string; content: any } {
+      const id = currentTarget.id || currentTarget.dataset.id;
 
       return { id, content: this.data.config.content[id] };
     },
