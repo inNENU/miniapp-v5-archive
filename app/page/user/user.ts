@@ -127,4 +127,12 @@ $register("me", {
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
+
+  addToDesktop() {
+    wx.saveAppToDesktop({
+      success: () => {
+        console.log("添加成功");
+      },
+    });
+  },
 });

@@ -89,6 +89,19 @@
       <image class="icon" src="/icon/user/contact.svg" />
       <view class="text">联系 Mr.Hope</view>
     </button>
+    <block wx:if="{{env === 'qq'}}">
+      <view class="icon divline" />
+      <button
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        plain
+        catch:tap="addToDesktop"
+      >
+        <image class="icon" src="/icon/user/send.svg" />
+        <view class="text">添加到桌面</view>
+      </button>
+    </block>
   </view>
   <footer config="{{footer}}" />
 </view>

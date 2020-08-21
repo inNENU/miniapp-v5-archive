@@ -59,7 +59,7 @@
       </button>
     </block>
     <button
-      wx:if="{{config.shareable && env === 'wx'}}"
+      wx:if="{{config.shareable}}"
       class="button"
       hover-class="button-hover"
       hover-start-time="0"
