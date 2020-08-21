@@ -29,6 +29,8 @@ $register("page", {
     } else setOnlinePage(option, this);
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+
+    wx.reportAnalytics("id_count", { id: option.id });
   },
 
   onPageScroll(event) {

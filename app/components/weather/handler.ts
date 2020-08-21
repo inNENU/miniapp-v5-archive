@@ -8,12 +8,7 @@ import { WeatherConfig, WeatherDetail } from "./typings";
  * @returns 处理后的可读天气数据
  */
 const weatherHandler = (weather: WeatherDetail): WeatherConfig => {
-  const weatherData: Partial<WeatherDetail> = weather;
-
-  delete weatherData.forecast_24h;
-  delete weatherData.forecast_1h;
-
-  return {
+  const weatherData: Partial<WeatherDetail> & WeatherConfig = {
     // 暂时只显示24小时天气预报 TODO: 增加日落日出时间
     hourForecast: Object.keys(weather.forecast_1h)
       .map((key) => {
@@ -54,8 +49,13 @@ const weatherHandler = (weather: WeatherDetail): WeatherConfig => {
 
       return weather.forecast_24h[index];
     }),
-    ...weatherData,
-  } as WeatherConfig;
+    ...weather,
+  };
+
+  delete weatherData.forecast_24h;
+  delete weatherData.forecast_1h;
+
+  return weatherData as WeatherConfig;
 };
 
 export default weatherHandler;

@@ -55,9 +55,6 @@ $register("map", {
     /** 当前分类 */
     currentCategory: "all",
 
-    /** 当前分类名称 */
-    currentCategoryName: "全部",
-
     /** 校区 */
     area: "benbu" as Area,
 
@@ -267,7 +264,7 @@ $register("map", {
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 
-    this.setData({ currentCategory: path, markers, currentCategoryName: name });
+    this.setData({ currentCategory: path, markers, "popup.title": name });
     this.mapCtx.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
