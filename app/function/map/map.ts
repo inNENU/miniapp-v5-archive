@@ -248,8 +248,6 @@ $register("map", {
 
   /** 移动到当前坐标 */
   moveToLocation() {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     this.mapCtx.moveToLocation();
   },
 

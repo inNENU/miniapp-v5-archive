@@ -375,9 +375,7 @@ export const startup = (globalData: GlobalData): void => {
           if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
           else if (res.cancel) {
             wx.setStorageSync("capture-screen", "never");
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            wx.offUserCaptureScreen();
+            if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
           }
         },
       });
