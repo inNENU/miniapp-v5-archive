@@ -1,8 +1,7 @@
 import $register = require("wxpage");
-import { WeatherConfig, WeatherData } from "../../components/weather/typings";
+import { WeatherData } from "../../components/weather/typings";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
-import weatherHandler from "../../components/weather/handler";
 
 const {
   globalData: { darkmode, info },
@@ -11,7 +10,7 @@ const {
 $register("weather", {
   data: {
     /** 天气数据 */
-    weather: {} as WeatherConfig,
+    weather: {} as WeatherData,
     /** 当前tips的索引值 */
     tipIndex: 0,
     /** 动画对象 */
@@ -23,7 +22,7 @@ $register("weather", {
 
     // 如果天气数据获取时间小于5分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
-      const weather = weatherData.data as WeatherConfig;
+      const weather = weatherData.data as WeatherData;
 
       this.initcanvas(weather);
 
@@ -42,12 +41,10 @@ $register("weather", {
         url: `${server}service/weather.php`,
         enableHttp2: true,
         success: (res) => {
-          const weather = weatherHandler((res.data as WeatherData).data);
-
-          this.initcanvas(weather);
+          this.initcanvas(res.data as WeatherData);
 
           this.setData({
-            weather,
+            weather: res.data as WeatherData,
             // 18点至次日5点为夜间
             night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
@@ -97,7 +94,7 @@ $register("weather", {
    * @param weather 天气详情
    */
   // eslint-disable-next-line
-  initcanvas(weather: WeatherConfig) {
+  initcanvas(weather: WeatherData) {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
         .select(".canvas")
@@ -116,7 +113,7 @@ $register("weather", {
   },
 
   // eslint-disable-next-line
-  draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherConfig) {
+  draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherData) {
     // 为了防止 iPad 等设备可以转屏，必须即时获取
     const width = info.windowWidth;
     const highTemperature: number[] = [];
@@ -127,8 +124,8 @@ $register("weather", {
 
     // 生成最高 / 最低温
     dayForecast.forEach((element) => {
-      const maxDegreee = Number(element.max_degree);
-      const minDegree = Number(element.min_degree);
+      const maxDegreee = Number(element.maxDegree);
+      const minDegree = Number(element.minDegree);
 
       highTemperature.push(maxDegreee);
       lowTemperature.push(minDegree);
@@ -165,7 +162,7 @@ $register("weather", {
       canvasContent.arc(x, y + 32, 3, 0, Math.PI * 2);
       canvasContent.fill();
 
-      canvasContent.fillText(`${dayForecast[i].max_degree}°`, x - 10, y + 20);
+      canvasContent.fillText(`${dayForecast[i].maxDegree}°`, x - 10, y + 20);
     }
 
     canvasContent.beginPath();
@@ -192,7 +189,7 @@ $register("weather", {
       canvasContent.arc(x, y + 20, 3, 0, Math.PI * 2);
       canvasContent.fill();
 
-      canvasContent.fillText(`${dayForecast[i].min_degree}°`, x - 10, y + 44);
+      canvasContent.fillText(`${dayForecast[i].minDegree}°`, x - 10, y + 44);
     }
   },
 
@@ -202,7 +199,7 @@ $register("weather", {
    * @param weather 天气详情
    */
   // eslint-disable-next-line
-  canvasOldDraw(weather: WeatherConfig) {
+  canvasOldDraw(weather: WeatherData) {
     // 为了防止 iPad 等设备可以转屏，必须即时获取
     const width = wx.getSystemInfoSync().windowWidth;
     /** 天气画布组件 */
@@ -215,8 +212,8 @@ $register("weather", {
 
     // 生成最高 / 最低温
     dayForecast.forEach((element) => {
-      const maxDegreee = Number(element.max_degree);
-      const minDegree = Number(element.min_degree);
+      const maxDegreee = Number(element.maxDegree);
+      const minDegree = Number(element.minDegree);
 
       highTemperature.push(maxDegreee);
       lowTemperature.push(minDegree);
@@ -255,7 +252,7 @@ $register("weather", {
       canvasContent.fill();
       canvasContent.draw(true);
 
-      canvasContent.fillText(`${dayForecast[i].max_degree}°`, x - 10, y + 20);
+      canvasContent.fillText(`${dayForecast[i].maxDegree}°`, x - 10, y + 20);
       canvasContent.draw(true);
     }
 
@@ -285,7 +282,7 @@ $register("weather", {
       canvasContent.fill();
       canvasContent.draw(true);
 
-      canvasContent.fillText(`${dayForecast[i].min_degree}°`, x - 10, y + 44);
+      canvasContent.fillText(`${dayForecast[i].minDegree}°`, x - 10, y + 44);
       canvasContent.draw(true);
     }
   },

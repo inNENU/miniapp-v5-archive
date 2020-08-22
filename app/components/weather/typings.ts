@@ -6,61 +6,39 @@ export interface WeatherForcast1H {
   /** 摄氏度 */
   degree: string;
   /** 更新时间 */
-  update_time: string;
-  /** 天气 */
-  weather: string;
+  time: string;
   /** 天气代码 */
-  weather_code: string;
-  /** 天气缩写 */
-  weather_short: string;
-  /** 风向 */
-  wind_direction: string;
-  /** 风力 */
-  wind_power: string;
+  weatherCode: string;
 }
 
 /** 24小时天气预报详情 */
 export interface WeatherForcast24H {
   /** 日间天气 */
-  day_weather: string;
+  dayWeather: string;
   /** 日间天气代码 */
-  day_weather_code: string;
+  dayWeatherCode: string;
   /** 日间天气缩写 */
-  day_weather_short: string;
-  /** 日间风向 */
-  day_wind_direction: string;
-  /** 日间风向代码 */
-  day_wind_direction_code: string;
-  /** 日间风力 */
-  day_wind_power: string;
-  /** 日间风力代码 */
-  day_wind_power_code: string;
+  dayWeatherShort: string;
   /** 最高温 */
-  max_degree: string;
+  maxDegree: string;
   /** 最低温 */
-  min_degree: string;
+  minDegree: string;
   /** 夜间温度 */
-  night_weather: string;
+  nightWeather: string;
   /** 夜间温度代码 */
-  night_weather_code: string;
+  nightWeatherCode: string;
   /** 夜间温度缩写 */
-  night_weather_short: string;
+  nightWeatherShort: string;
   /** 夜间风向 */
-  night_wind_direction: string;
-  /** 夜间风向代码 */
-  night_wind_direction_code: string;
+  nightWindDirection: string;
   /** 夜间风力 */
-  night_wind_power: string;
-  /** 夜间风力代码 */
-  night_wind_power_code: string;
-  /** 时间 */
-  time: string;
+  nightWindPower: string;
   /** 星期 */
-  weekday?: string;
+  weekday: string;
 }
 
 /** 天气详情 */
-export interface WeatherDetail {
+export interface WeatherData {
   /** 天气预警 */
   alarm: {
     [props: number]: {
@@ -88,14 +66,10 @@ export interface WeatherDetail {
       url: string;
     };
   };
-  /** 1小时天气预报 */
-  forecast_1h: {
-    [props: number]: WeatherForcast1H;
-  };
-  /** 24小时天气预报 */
-  forecast_24h: {
-    [props: number]: WeatherForcast24H;
-  };
+  /** 小时预报 */
+  hourForecast: WeatherForcast1H[];
+  /** 天预报 */
+  dayForecast: WeatherForcast24H[];
   /** 实时数据 */
   observe: {
     /** 温度 */
@@ -111,13 +85,13 @@ export interface WeatherDetail {
     /** 天气 */
     weather: string;
     /** 天气代码 */
-    weather_code: string;
+    weatherCode: string;
     /** 天气缩写 */
     weather_short: string;
     /** 风向 */
-    wind_direction: string;
+    windDirection: string;
     /** 风力 */
-    wind_power: string;
+    windPower: string;
   };
   /** 日出日落时间 */
   rise: {
@@ -136,23 +110,3 @@ export interface WeatherDetail {
     };
   };
 }
-
-export interface Forcast {
-  /** 小时预报 */
-  hourForecast: WeatherForcast1H[];
-  /** 天预报 */
-  dayForecast: WeatherForcast24H[];
-}
-
-export interface WeatherData {
-  /** 天气数据 */
-  data: WeatherDetail;
-  message: string;
-  status: number;
-}
-
-export type WeatherConfig = Omit<
-  WeatherDetail,
-  "forecast_1h" | "forecast_24h"
-> &
-  Forcast;

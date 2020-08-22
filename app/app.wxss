@@ -8,7 +8,6 @@
 @import 'style/NENU.wxss';
 @import 'style/iOS.wxss';
 @import 'style/weui.wxss';
-@import 'style/QQ.wxss';
 @import 'style/animation.wxss';
 @import 'style/color.wxss';
 

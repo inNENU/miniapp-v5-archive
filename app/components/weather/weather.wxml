@@ -13,8 +13,8 @@
       <text style="font-size: 36px;">{{weather.observe.degree}}</text>
       <text style="font-size: 28px;">°C\n</text>
       <view style="font-size: 18px;">
-        {{weather.dayForecast[1].max_degree}}°C -
-        {{weather.dayForecast[1].min_degree}}°C
+        {{weather.dayForecast[1].maxDegree}}°C -
+        {{weather.dayForecast[1].minDegree}}°C
       </view>
     </view>
     <view class="text icon-refresh" catch:tap="refresh">

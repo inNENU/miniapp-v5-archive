@@ -365,20 +365,22 @@ export const startup = (globalData: GlobalData): void => {
   if (wx.getStorageSync("capture-screen") !== "never")
     wx.onUserCaptureScreen(() => {
       const status = wx.getStorageSync("capture-screen");
-      wx.showModal({
-        title: "善用小程序分享",
-        content:
-          "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
-        showCancel: status === "noticed",
-        cancelText: "不再提示",
-        success: (res) => {
-          if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
-          else if (res.cancel) {
-            wx.setStorageSync("capture-screen", "never");
-            if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
-          }
-        },
-      });
+
+      if (status !== "never")
+        wx.showModal({
+          title: "善用小程序分享",
+          content:
+            "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
+          showCancel: status === "noticed",
+          cancelText: "不再提示",
+          success: (res) => {
+            if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
+            else if (res.cancel) {
+              wx.setStorageSync("capture-screen", "never");
+              if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
+            }
+          },
+        });
     });
 
   // 登录

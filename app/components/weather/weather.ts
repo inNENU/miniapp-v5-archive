@@ -1,6 +1,5 @@
 import $register = require("wxpage");
-import weatherHandler from "./handler";
-import { WeatherConfig, WeatherData } from "./typings";
+import { WeatherData } from "./typings";
 import { server } from "../../utils/config";
 
 $register.C({
@@ -8,7 +7,7 @@ $register.C({
     /** 提示的索引值 */
     tipIndex: 0,
     /** 天气信息 */
-    weather: {} as WeatherConfig,
+    weather: {} as WeatherData,
   },
   lifetimes: {
     attached(): void {
@@ -26,16 +25,17 @@ $register.C({
     /* 获取天气信息 */
     getWeather(): void {
       wx.request({
-        url: `${server}service/weather.php`,
+        url: `${server}service/weatherData.php`,
+        method: "POST",
         enableHttp2: true,
         success: (res) => {
-          const weather = weatherHandler((res.data as WeatherData).data);
+          // const weather = weatherHandler((res.data as WeatherData).data);
 
-          this.setData({ weather });
+          this.setData({ weather: res.data as WeatherData });
 
           // 将天气详情和获取时间写入存储，避免重复获取
           wx.setStorageSync("weather", {
-            data: weather,
+            data: res.data as WeatherData,
             date: new Date().getTime(),
           });
         },

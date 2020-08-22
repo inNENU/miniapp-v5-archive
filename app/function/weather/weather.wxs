@@ -4,41 +4,13 @@ module.exports = {
     return "https://mp.innenu.com/img/weather/icon/" + (icon || "00") + ".svg";
   },
 
-  /** 获得风向 */
-  getDirection: function (weather) {
-    if (weather.observe) {
-      /** 当前风向代码 */
-      var windDirection = weather.observe.wind_direction;
-
-      return windDirection === "8"
-        ? "北"
-        : windDirection === "1"
-        ? "东北"
-        : windDirection === "2"
-        ? "东"
-        : windDirection === "3"
-        ? "东南"
-        : windDirection === "4"
-        ? "南"
-        : windDirection === "5"
-        ? "西南"
-        : windDirection === "6"
-        ? "西"
-        : windDirection === "7"
-        ? "西北"
-        : "未知";
-    }
-
-    return "";
-  },
-
   /** 获得天气 */
   getWeather: function (forecast) {
     if (forecast) {
-      if (forecast.day_weather === forecast.night_weather)
-        return forecast.day_weather;
+      if (forecast.dayWeather === forecast.nightWeather)
+        return forecast.dayWeather;
 
-      return forecast.day_weather + "转" + forecast.night_weather;
+      return forecast.dayWeather + "转" + forecast.nightWeather;
     }
 
     return "";
@@ -46,22 +18,8 @@ module.exports = {
 
   /** 获得温度 */
   getTemperature: function (forecast) {
-    if (forecast) return forecast.max_degree + "/" + forecast.min_degree + "°";
+    if (forecast) return forecast.maxDegree + "/" + forecast.minDegree + "°";
 
     return "";
-  },
-
-  /** 获得日期 */
-  getDate: function (forecast) {
-    return forecast.time.slice(5, 7) + "/" + forecast.time.slice(8, 10);
-  },
-
-  /** 获得时间 */
-  getTime: function (forecast) {
-    return (
-      forecast.update_time.slice(8, 10) +
-      ":" +
-      forecast.update_time.slice(10, 12)
-    );
   },
 };
