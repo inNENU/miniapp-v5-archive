@@ -37,6 +37,13 @@ export interface WeatherForcast24H {
   weekday: string;
 }
 
+export interface WeatherHint {
+  id: string;
+  name: string;
+  info: string;
+  detail: string;
+}
+
 /** 天气详情 */
 export interface WeatherData {
   /** 天气预警 */
@@ -104,9 +111,6 @@ export interface WeatherData {
       time: string;
     };
   };
-  tips: {
-    observe: {
-      [props: number]: string;
-    };
-  };
+  tips: string[];
+  hints: WeatherHint[];
 }

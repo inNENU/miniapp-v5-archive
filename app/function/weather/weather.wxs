@@ -1,9 +1,4 @@
 module.exports = {
-  /** 获得图标 */
-  getIcon: function (icon) {
-    return "https://mp.innenu.com/img/weather/icon/" + (icon || "00") + ".svg";
-  },
-
   /** 获得天气 */
   getWeather: function (forecast) {
     if (forecast) {

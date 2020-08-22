@@ -2,6 +2,7 @@ import $register = require("wxpage");
 import { WeatherData } from "../../components/weather/typings";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
+import { modal } from "../../utils/wx";
 
 const {
   globalData: { darkmode, info },
@@ -333,10 +334,16 @@ $register("weather", {
 
   /** 更新提示 */
   refresh() {
-    const { length } = Object.keys(this.data.weather.tips.observe);
+    const { length } = this.data.weather.tips;
     const numbers = this.data.tipIndex;
 
     this.setData({ tipIndex: numbers === 0 ? length - 1 : numbers - 1 });
+  },
+
+  /** 贴士详情 */
+  hint({ currentTarget }: WXEvent.Touch) {
+    const hint = this.data.weather.hints[currentTarget.dataset.id];
+    modal(hint.name, hint.detail);
   },
 
   /** 返回按钮功能 */

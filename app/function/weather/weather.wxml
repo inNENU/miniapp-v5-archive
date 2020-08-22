@@ -42,9 +42,7 @@
     <view class="detail"
       >{{weather.observe.windDirection}}风 {{weather.observe.windPower}}级</view
     >
-    <view class="tip" catch:tap="refresh"
-      >{{weather.tips.observe[tipIndex]}}</view
-    >
+    <view class="tip" catch:tap="refresh">{{weather.tips[tipIndex]}}</view>
   </view>
   <view class="forecast borderB">
     <view class="item">
@@ -58,7 +56,7 @@
         <text class="weather">{{tool.getWeather(weather.dayForecast[1])}}</text>
         <image
           class="icon"
-          src="{{tool.getIcon(weather.dayForecast[1].dayWeatherCode)}}"
+          src="./icon/{{weather.dayForecast[1].dayWeatherCode || '00'}}.svg"
         />
       </view>
     </view>
@@ -73,7 +71,7 @@
         <text class="weather">{{tool.getWeather(weather.dayForecast[2])}}</text>
         <image
           class="icon"
-          src="{{tool.getIcon(weather.dayForecast[2].dayWeatherCode)}}"
+          src="./icon/{{weather.dayForecast[2].dayWeatherCode || '00'}}.svg"
         />
       </view>
     </view>
@@ -82,7 +80,7 @@
   <scroll-view class="hours borderTB" enable-flex scroll-x>
     <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
       <text class="time">{{item.time}}</text>
-      <image class="icon" src="{{tool.getIcon(item.weatherCode)}}" />
+      <image class="icon" src="./icon/{{item.weatherCode || '00'}}.svg" />
       <text class="degree">{{item.degree}}°</text>
     </view>
   </scroll-view>
@@ -92,9 +90,9 @@
       <view class="day">{{item.weekday}}</view>
       <view class="date">{{item.date}}</view>
       <view class="weather">{{item.dayWeatherShort}}</view>
-      <image class="icon" src="{{tool.getIcon(item.dayWeatherCode)}}" />
+      <image class="icon" src="./icon/{{item.dayWeatherCode || '00'}}.svg" />
       <view class="placeholder" />
-      <image class="icon" src="{{tool.getIcon(item.nightWeatherCode)}}" />
+      <image class="icon" src="./icon/{{item.nightWeatherCode || '00'}}.svg" />
       <view class="weather">{{item.nightWeatherShort}}</view>
       <view class="wind">{{item.nightWindDirection}}</view>
       <view class="wind">{{item.nightWindPower}}级</view>
@@ -104,85 +102,16 @@
   </scroll-view>
   <!-- 其他信息 -->
   <view class="info">
-    <view class="item borderR">
-      <text class="icon icon_xianhao" />
-      <view class="content">{{weather.limit.tail_number }}</view>
-      <view class="title">尾号限行</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_chuanyi_hot" />
-      <view class="content">{{weather.index.clothes.info}}</view>
-      <view class="title">{{weather.index.clothes.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_yusan" />
-      <view class="content">{{weather.index.umbrella.info}}</view>
-      <view class="title">{{weather.index.umbrella.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_ganmao" />
-      <view class="content">{{weather.index.cold.info}}</view>
-      <view class="title">{{weather.index.cold.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_xiche" />
-      <view class="content">{{weather.index.carwash.info}}</view>
-      <view class="title">{{weather.index.carwash.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_yundong" />
-      <view class="content">{{weather.index.sports.info}}</view>
-      <view class="title">{{weather.index.sports.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_fangsai" />
-      <view class="content">{{weather.index.sunscreen.info}}</view>
-      <view class="title">{{weather.index.sunscreen.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_diaoyu" />
-      <view class="content">{{weather.index.fish.info}}</view>
-      <view class="title">{{weather.index.fish.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_lvyou" />
-      <view class="content">{{weather.index.tourism.info}}</view>
-      <view class="title">{{weather.index.tourism.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_jiaotong" />
-      <view class="content">{{weather.index.traffic.info}}</view>
-      <view class="title">{{weather.index.traffic.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_wurankuosan" />
-      <view class="content">{{weather.index.diffusion.info}}</view>
-      <view class="title air">{{weather.index.diffusion.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_shushidu" />
-      <view class="content">{{weather.index.comfort.info}}</view>
-      <view class="title">{{weather.index.comfort.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_liangshai" />
-      <view class="content">{{weather.index.drying.info}}</view>
-      <view class="title">{{weather.index.drying.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_huazhuang" />
-      <view class="content">{{weather.index.makeup.info}}</view>
-      <view class="title">{{weather.index.makeup.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_chenlian" />
-      <view class="content">{{weather.index.morning.info}}</view>
-      <view class="title">{{weather.index.morning.name}}</view>
-    </view>
-    <view class="item">
-      <text class="icon icon_guomin" />
-      <view class="content">{{weather.index.allergy.info}}</view>
-      <view class="title">{{weather.index.allergy.name}}</view>
+    <view
+      wx:for="{{weather.hints}}"
+      wx:key="id"
+      class="item"
+      data-id="{{index}}"
+      catch:tap="hint"
+    >
+      <image class="icon" src="./icon/{{item.id}}.svg" />
+      <view class="content">{{item.info}}</view>
+      <view class="title">{{item.name}}</view>
     </view>
   </view>
 

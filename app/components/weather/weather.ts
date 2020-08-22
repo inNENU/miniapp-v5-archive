@@ -17,7 +17,7 @@ $register.C({
   methods: {
     /** 变更提示信息 */
     refresh(): void {
-      const { length } = Object.keys(this.data.weather.tips.observe);
+      const { length } = this.data.weather.tips;
       const { tipIndex } = this.data;
 
       this.setData({ tipIndex: tipIndex === 0 ? length - 1 : tipIndex - 1 });
