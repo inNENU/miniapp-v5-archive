@@ -297,7 +297,7 @@
 /* 其他信息 */
 .info {
   display: flex;
-  margin-top: 20px;
+  margin: 20px 0;
   background-color: var(--block-bgcolor);
   flex-wrap: wrap;
 }
@@ -370,6 +370,12 @@
 
 .info .title.air {
   font-size: 10px;
+}
+
+.footer {
+  color: var(--grey);
+  text-align: center;
+  font-size: 12px;
 }
 
 /* 背景相关 */

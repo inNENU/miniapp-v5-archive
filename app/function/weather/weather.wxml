@@ -185,4 +185,6 @@
       <view class="title">{{weather.index.allergy.name}}</view>
     </view>
   </view>
+
+  <view class="footer">数据来源: 中国天气网</view>
 </view>
