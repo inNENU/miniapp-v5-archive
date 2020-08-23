@@ -296,7 +296,7 @@ declare namespace MPPage {
      * @param key
      * @param value 缓存数据，可以为对象
      * @param expire 缓存过期时间，单位为毫秒。如果为 true ，那么保持已存在的缓存时间，如果没有缓存，那么认为过期，不保存
-     * @param callback 可选，异步写的时候回调，接收参数：cb(err), err不为空代表失败。
+     * @param callback 可选，异步写的时候回调，接收参数: cb(err), err不为空代表失败。
      */
     set(
       key: string,
@@ -309,7 +309,7 @@ declare namespace MPPage {
      * 如果传 `callback` 参数，会使用异步模式并回调
      *
      * @param key 存储的键值
-     * @param callback 可选，异步读的时候回调，接收参数：`calbck(err, data)`, `err`不为空代表失败
+     * @param callback 可选，异步读的时候回调，接收参数: `calbck(err, data)`, `err`不为空代表失败
      */
     get(key: string, callback?: (err: any, data: any) => void): void;
 
@@ -317,7 +317,7 @@ declare namespace MPPage {
      * 如果传 `callback` 参数，会使用异步模式并回调
      *
      * @param key 需要删除的键值
-     * @param callback 可选，异步删除的时候回调，接收参数：`callback(err, data)`, `err`不为空代表失败
+     * @param callback 可选，异步删除的时候回调，接收参数: `callback(err, data)`, `err`不为空代表失败
      */
     remove(key: string, callback?: () => void): void;
   }
