@@ -12,7 +12,7 @@ $register("weather", {
   data: {
     /** 天气数据 */
     weather: {} as WeatherData,
-    /** 当前tips的索引值 */
+    /** 当前 tips 的索引值 */
     tipIndex: 0,
     /** 动画对象 */
     animation: {},
@@ -21,7 +21,7 @@ $register("weather", {
   onLoad() {
     const weatherData = wx.getStorageSync("weather");
 
-    // 如果天气数据获取时间小于5分钟，则可以使用
+    // 如果天气数据获取时间小于 5 分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
       const weather = weatherData.data as WeatherData;
 
@@ -39,7 +39,7 @@ $register("weather", {
     } // 否则需要重新获取并处理
     else
       wx.request({
-        url: `${server}service/weather.php`,
+        url: `${server}service/weatherData.php`,
         enableHttp2: true,
         success: (res) => {
           this.initcanvas(res.data as WeatherData);
@@ -94,7 +94,6 @@ $register("weather", {
    *
    * @param weather 天气详情
    */
-  // eslint-disable-next-line
   initcanvas(weather: WeatherData) {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
