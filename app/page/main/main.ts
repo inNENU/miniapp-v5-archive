@@ -71,9 +71,9 @@ $register("main", {
 
     // 小程序已经初始化完成，检查页面资源
     if (wx.getStorageSync("app-inited")) {
-      checkResUpdate("function", "功能大厅", "130K");
-      checkResUpdate("guide", "东师指南", "280K");
-      checkResUpdate("intro", "东师介绍", "180K");
+      checkResUpdate("function", "功能大厅", "105K");
+      checkResUpdate("guide", "东师指南", "285K");
+      checkResUpdate("intro", "东师介绍", "290K");
     }
 
     // 执行 tab 页预加载

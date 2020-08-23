@@ -41,7 +41,7 @@ $register("guide", {
       this.$take("guide") || this.data.page
     );
     popNotice("guide");
-    checkResUpdate("guide", "东师指南", "270K");
+    checkResUpdate("guide", "东师指南", "285K");
   },
 
   onShow() {
@@ -60,7 +60,7 @@ $register("guide", {
 
   onPullDownRefresh() {
     refreshPage("guide", this, globalData);
-    checkResUpdate("guide", "东师指南", "270K");
+    checkResUpdate("guide", "东师指南", "285K");
     wx.stopPullDownRefresh();
   },
 
