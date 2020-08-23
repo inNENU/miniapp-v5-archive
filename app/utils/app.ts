@@ -168,12 +168,8 @@ export const noticeCheck = (globalData: GlobalData): void => {
  * @returns 夜间模式状态
  */
 export const getDarkmode = (
-  sysInfo?: WechatMiniprogram.GetSystemInfoSyncResult
-): boolean => {
-  if (sysInfo) return sysInfo.theme === "dark";
-
-  return wx.getSystemInfoSync().theme === "dark";
-};
+  sysInfo: WechatMiniprogram.GetSystemInfoSyncResult = wx.getSystemInfoSync()
+): boolean => (sysInfo.AppPlatform ? false : sysInfo.theme === "dark");
 
 interface UpdateInfo {
   /** 是否进行强制更新 */
