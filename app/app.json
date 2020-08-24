@@ -122,6 +122,7 @@
   "requiredBackgroundModes": ["audio"],
   "usingComponents": {
     "card": "/components/common/card/card",
+    "copy": "/components/common/copy/copy",
     "doc": "/components/common/doc/doc",
     "ex-list": "/components/common/ex-list/list",
     "footer": "/components/common/footer/footer",

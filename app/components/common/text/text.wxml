@@ -27,15 +27,15 @@
     </view>
   </block>
   <block wx:else>
-    <text
-      wx:for="{{config.text}}"
-      wx:key="*this"
-      class="text"
-      style="{{config.style || ''}}"
-      decode
-      user-select
-      space="nbsp"
-      >{{item}}</text
-    >
+    <view wx:for="{{config.text}}" wx:key="*this">
+      <text
+        class="text"
+        style="{{config.style || ''}}"
+        decode
+        user-select
+        space="nbsp"
+        >{{item}}</text
+      >
+    </view>
   </block>
 </view>

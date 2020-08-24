@@ -93,7 +93,7 @@
           <switch
             wx:if="{{listItem.swiKey}}"
             checked="{{listItem.status}}"
-            color="{{color || '#07c160'}}"
+            color="{{color}}"
             data-id="{{index}}"
             catch:change="switch"
           />

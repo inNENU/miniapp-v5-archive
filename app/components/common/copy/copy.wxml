@@ -1,0 +1,13 @@
+<view class="copy-wrapper">
+  <!-- 复制按钮 -->
+  <view
+    class="copy"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    catch:tap="copy"
+  >
+    <image class="icon" src="./icon/copy.svg" />
+  </view>
+  <!-- 待复制文字 -->
+  <view class="text">{{config.text}}</view>
+</view>

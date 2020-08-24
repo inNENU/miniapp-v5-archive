@@ -30,6 +30,7 @@
           <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
           <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
           <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
+          <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
           <ex-list
             wx:elif="{{item.tag === 'List'}}"
             config="{{item}}"
@@ -92,6 +93,7 @@
     <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
     <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
     <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
+    <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
     <ex-list
       wx:elif="{{item.tag === 'List'}}"
       config="{{item}}"
