@@ -12,4 +12,5 @@ export {
   MarkerConfig,
   MarkerData,
   SearchInfo,
+  WechatDetail,
 } from "../server/typings";

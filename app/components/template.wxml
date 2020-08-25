@@ -184,17 +184,13 @@
     <icon type="warn" size="80" />
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
-      <view class="errorDesc">
-        <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-        <text>错误原因有以下几种可能:\n\n </text>
-        <text> 1. 服务器负载过重；\n</text>
-        <text> 2. 设备可能无法访问互联网;\n</text>
-        <text> 3. 导航页面路径错误；\n\n</text>
-        <text>请同学添加 QQ 1178522294 进行反馈，并稍后重试~\n</text>
-        <text
-          >由于服务器一天不足￥2，配置不是很好，您可以点击界面底部的支持开发者按钮支持Mr.Hope，帮助Mr.Hope升级服务器配置。或者您也可以打赏Mr.Hope，感谢同学对Mr.Hope的支持~。</text
-        >
-      </view>
+      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
+      <text>错误原因有以下几种可能:\n\n</text>
+      <text> 1. 服务器负载过重；\n</text>
+      <text> 2. 设备可能无法访问互联网;\n</text>
+      <text> 3. 导航页面路径错误；\n\n</text>
+      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
+      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
     </view>
   </view>
   <view class="donate-wrapper">
@@ -267,15 +263,13 @@
     <icon type="warn" size="80" />
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
-      <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能:\n\n </text>
+      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
+      <text>错误原因有以下几种可能:\n\n</text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>
-      <text>请同学添加 QQ 1178522294 进行反馈，并稍后重试~\n</text>
-      <text
-        >由于服务器一天不足￥2，配置不是很好，您可以点击界面底部的支持开发者按钮支持Mr.Hope，帮助Mr.Hope升级服务器配置。或者您也可以打赏Mr.Hope，感谢同学对Mr.Hope的支持~。</text
-      >
+      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
+      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
     </view>
   </view>
   <view class="donate-wrapper">
@@ -370,15 +364,13 @@ Author: Mr.Hope
     <icon type="warn" size="80" />
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
-      <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能:\n\n </text>
+      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
+      <text>错误原因有以下几种可能:\n\n</text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>
-      <text>请同学添加 QQ 1178522294 进行反馈，并稍后重试~\n</text>
-      <text
-        >由于服务器一天不足￥2，配置不是很好，您可以点击界面底部的支持开发者按钮支持Mr.Hope，帮助Mr.Hope升级服务器配置。或者您也可以打赏Mr.Hope，感谢同学对Mr.Hope的支持~。</text
-      >
+      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
+      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
     </view>
   </view>
   <view class="donate-wrapper">
@@ -454,15 +446,13 @@ Author: Mr.Hope
     <icon type="warn" size="80" />
     <view class="errorText">很抱歉，界面遇到了问题!</view>
     <view class="errorDesc">
-      <text> 这位同学你好，我是 Mr.Hope，很抱歉让你看到如下错误信息。</text>
-      <text>错误原因有以下几种可能:\n\n </text>
+      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
+      <text>错误原因有以下几种可能:\n\n</text>
       <text> 1. 服务器负载过重；\n</text>
       <text> 2. 设备可能无法访问互联网;\n</text>
       <text> 3. 导航页面路径错误；\n\n</text>
-      <text>请同学添加 QQ 1178522294 进行反馈，并稍后重试~\n</text>
-      <text
-        >由于服务器一天不足￥2，配置不是很好，您可以点击界面底部的支持开发者按钮支持Mr.Hope，帮助Mr.Hope升级服务器配置。或者您也可以打赏Mr.Hope，感谢同学对Mr.Hope的支持~。</text
-      >
+      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
+      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
     </view>
   </view>
   <view class="donate-wrapper">

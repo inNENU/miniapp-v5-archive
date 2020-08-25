@@ -37,6 +37,9 @@
       >
     </block>
     <view wx:else>暂无赞赏支持</view>
+    <view class="year">2018: 未开通赞赏支持</view>
+    <view class="sum">共计: 350 元</view>
+    <view class="result negative">结余: -350 元</view>
   </view>
   <footer />
 </view>

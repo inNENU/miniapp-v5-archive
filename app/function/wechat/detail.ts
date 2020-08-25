@@ -3,32 +3,9 @@ import { popNotice, getColor } from "../../utils/page";
 import { AppOption } from "../../app";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { modal } from "../../utils/wx";
+import { WechatDetail } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-
-interface WechatDetail {
-  /** 公众号名称 */
-  name: string;
-  /** 公众号描述 */
-  desc: string;
-  /** 公众号 Logo */
-  logo: string;
-  /** 是否关联 */
-  authorized?: boolean;
-  /** 关注链接 */
-  follow?: string;
-  /** 图文列表 */
-  content: {
-    /** 标题 */
-    title: string;
-    /** 图文摘要 */
-    desc?: string;
-    /** 图文封面 */
-    cover: string;
-    /** 图文地址 */
-    url: string;
-  }[];
-}
 
 $register("wechat-detail", {
   data: {
