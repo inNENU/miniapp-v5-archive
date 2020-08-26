@@ -2,6 +2,7 @@ import $register = require("wxpage");
 import {
   appInit,
   appUpdate,
+  checkResUpdate,
   getDarkmode,
   noticeCheck,
   startup,
@@ -93,6 +94,15 @@ $register.A<AppOption>({
     startup(this.globalData);
 
     console.info("全局数据为", this.globalData);
+  },
+
+  onShow() {
+    // 小程序已经初始化完成，检查页面资源
+    if (wx.getStorageSync("app-inited")) {
+      checkResUpdate("function", "功能大厅", "105K");
+      checkResUpdate("guide", "东师指南", "285K");
+      checkResUpdate("intro", "东师介绍", "290K");
+    }
   },
 
   onAwake(time: number) {

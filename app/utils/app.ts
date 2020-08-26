@@ -1,62 +1,153 @@
 /* eslint-disable max-lines */
 
 /** 文件管理器与API封装 */
-import { remove, listFile, saveFile, unzip } from "./file";
-import { compareVersion, modal, netReport, requestJSON, tip } from "./wx";
-import { error, info, warn } from "./log";
+import { remove, listFile, readJSON, saveFile, unzip } from "./file";
+import { compareVersion, modal, requestJSON, tip } from "./wx";
+import { debug, error, info, warn } from "./log";
 import { GlobalData } from "../app";
 import { appOption, server } from "./config";
 
 /**
- * 下载对应资源并将其解压
+ * 资源下载 from fuction.js & guide.js 被 checkResUpdate 调用
+ *
+ * @param name 下载资源名称
+ * @param tip 是否开启进度提示
+ */
+export const resDownload = (name: string, tip = true): Promise<void> =>
+  new Promise((resolve, reject) => {
+    if (tip) wx.showLoading({ title: "下载中...", mask: true });
+    wx.setStorageSync(`${name}Download`, false);
+    remove(name, "dir");
+    const downLoadTask = wx.downloadFile({
+      url: `${server}resource/${name}.zip`,
+      success: (res) => {
+        if (res.statusCode === 200) {
+          if (tip) wx.showLoading({ title: "保存中...", mask: true });
+
+          // 保存压缩文件到压缩目录
+          saveFile(res.tempFilePath, `${name}Zip`);
+
+          if (tip) wx.showLoading({ title: "解压中...", mask: true });
+
+          // 解压文件到根目录
+          unzip(`${name}Zip`, "", () => {
+            // 删除压缩目录，并将下载成功信息写入存储、判断取消提示
+            remove(`${name}Zip`, "file");
+            wx.setStorageSync(`${name}Download`, true);
+
+            if (tip) wx.hideLoading();
+            resolve();
+          });
+        } else reject(res.statusCode);
+      },
+
+      // 下载失败
+      fail: ({ errMsg }) => {
+        error(`download ${name} fail: ${errMsg}`);
+        reject(errMsg);
+      },
+    });
+
+    downLoadTask.onProgressUpdate((res) => {
+      if (tip)
+        wx.showLoading({ title: `下载中...${res.progress}%`, mask: true });
+    });
+  });
+
+/**
+ * 检查资源更新
+ *
+ * @param path 检查资源的路径
+ * @param name 检查资源的名称
+ * @param dataUsage 消耗的数据流量
+ */
+// eslint-disable-next-line max-lines-per-function
+export const checkResUpdate = (
+  path: string,
+  name: string,
+  dataUsage: string
+): void => {
+  const notify = wx.getStorageSync(`${path}ResNotify`); // 资源提醒
+  const localVersion = readJSON(`${path}Version`); // 读取本地Version文件
+  const localTime = wx.getStorageSync(`${path}UpdateTime`);
+  const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
+
+  // 调试
+  debug(`${name}通知状态为${notify}`, `本地版本文件为: ${localVersion}`);
+  debug(`${name}更新于${localTime}, 现在时间是${currentTime}`);
+
+  if (notify || currentTime > Number(localTime) + 604800)
+    // 如果需要更新
+    wx.request({
+      url: `${server}service/resVersion.php?res=${path}`,
+      enableHttp2: true,
+      success: (res) => {
+        // 资源为最新
+        if (res.statusCode === 200)
+          if (Number(localVersion) === Number(res.data))
+            // 调试
+            debug(`${name}资源已是最新版`);
+          // 需要更新
+          else {
+            info(`${name}资源有更新`); // 调试
+
+            // 如果需要提醒，则弹窗
+            if (notify)
+              wx.showModal({
+                title: `${name}有更新`,
+                content: `请更新资源以获得最新功能与内容。(会消耗${dataUsage}流量)`,
+                cancelText: "取消",
+                cancelColor: "#ff0000",
+                confirmText: "更新",
+                success: (choice) => {
+                  // 用户确认，下载更新
+                  if (choice.confirm) resDownload(path);
+                  // 用户取消，询问是否关闭更新提示
+                  else if (choice.cancel)
+                    wx.showModal({
+                      title: "开启资源更新提示？",
+                      content: "开启后在资源有更新时会提示您更新资源文件。",
+                      cancelText: "关闭",
+                      cancelColor: "#ff0000",
+                      confirmText: "保持开启",
+                      success: (choice2) => {
+                        // 用户选择关闭
+                        if (choice2.cancel)
+                          modal(
+                            "更新提示已关闭",
+                            "您可以在设置中重新打开提示。请注意: 为保障正常运行，小程序会每周对资源进行强制更新。",
+                            // 关闭更新提示
+                            () => {
+                              wx.setStorageSync(`${path}ResNotify`, false);
+                            }
+                          );
+                      },
+                    });
+                },
+              });
+            // 距上次更新已经半个月了，强制更新
+            else resDownload(path);
+          }
+        else tip("服务器出现问题");
+      },
+      fail: () => tip("服务器出现问题"),
+    });
+};
+
+/**
+ * 初始化文件资源
  *
  * @param list 需要下载的资源列表
  * @param callBack 下载完成的回调函数
  */
-const resDownload = (list: string[], callBack: () => void): void => {
-  const promise = list.map(
-    (name) =>
-      new Promise((resolve) => {
-        // 下载zip包
-        wx.downloadFile({
-          url: `${server}resource/${name}.zip`,
-          success: (res) => {
-            console.info(`${name} statusCode is ${res.statusCode}`); // 调试
-            if (res.statusCode === 200) {
-              // 保存压缩文件到压缩目录
-              saveFile(res.tempFilePath, `${name}Zip`);
-              console.info(`save ${name} success`); // 调试
+const initFile = (list: string[], callBack: () => void): void => {
+  const promise = list.map((name) =>
+    resDownload(name, false).then(() => {
+      // 下载资源文件并写入更新时间
+      const timeStamp = new Date().getTime();
 
-              // 解压文件到根目录
-              unzip(`${name}Zip`, "", () => {
-                console.info(`unzip ${name} sucess`); // 调试
-
-                // 删除压缩目录，并将下载成功信息写入存储、判断取消提示
-                remove(`${name}Zip`, "file");
-                wx.setStorageSync(`${name}Download`, true);
-
-                console.info(`delete ${name} sucess`); // 调试
-
-                // 下载资源文件并写入更新时间
-                const timeStamp = new Date().getTime();
-
-                wx.setStorageSync(
-                  `${name}UpdateTime`,
-                  Math.round(timeStamp / 1000)
-                );
-
-                resolve();
-              });
-            }
-          },
-
-          // 下载失败
-          fail: (failMsg) => {
-            netReport();
-            error(`初始化小程序时下载 ${name} 失败:`, failMsg);
-          },
-        });
-      })
+      wx.setStorageSync(`${name}UpdateTime`, Math.round(timeStamp / 1000));
+    })
   );
 
   Promise.all(promise).then(() => callBack());
@@ -103,7 +194,7 @@ export const appInit = (): void => {
     wx.setStorageSync(data, appOption[data]);
   });
 
-  resDownload(["function", "guide", "intro"], () => {
+  initFile(["function", "guide", "intro"], () => {
     // 成功初始化
     wx.setStorageSync("app-inited", true);
     wx.hideLoading();

@@ -1,7 +1,8 @@
 /* 功能大厅 */
 import $register = require("wxpage");
+import { checkResUpdate } from "../../utils/app";
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
-import { checkResUpdate, refreshPage } from "../../utils/tab";
+import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
 import page from "./pageData";
 const { globalData } = getApp<AppOption>();
@@ -36,7 +37,6 @@ $register("function", {
       { option: { id: "function" }, ctx: this },
       this.$take("function") || this.data.page
     );
-    checkResUpdate("function", "功能大厅", "105K");
   },
 
   onShow() {

@@ -16,12 +16,13 @@ $register("page", {
   onLoad(option: any) {
     console.info("进入参数为", option);
 
-    if (getCurrentPages().length === 1) option.action = "redirect";
-
+    // 生成页面 ID
     if (option.scene)
       option.id = decodeURIComponent(option.scene)
         .replace("#", "guide/")
         .replace("@", "intro/");
+
+    option.action = "redirect";
 
     if ("path" in option) {
       loadOnlinePage(option, this);

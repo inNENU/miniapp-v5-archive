@@ -7,8 +7,8 @@ import {
   setPage,
   resolvePage,
 } from "../../utils/page";
-import { checkResUpdate, refreshPage } from "../../utils/tab";
 import { searching } from "../../utils/search";
+import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
 import { server } from "../../utils/config";
@@ -68,13 +68,6 @@ $register("main", {
     });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
-
-    // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("app-inited")) {
-      checkResUpdate("function", "功能大厅", "105K");
-      checkResUpdate("guide", "东师指南", "285K");
-      checkResUpdate("intro", "东师介绍", "290K");
-    }
 
     // 执行 tab 页预加载
     ["function", "guide", "intro"].forEach((x) => {

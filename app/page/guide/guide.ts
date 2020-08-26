@@ -1,7 +1,8 @@
 /* 东师指南 */
 import $register = require("wxpage");
+import { checkResUpdate } from "../../utils/app";
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
-import { checkResUpdate, refreshPage } from "../../utils/tab";
+import { refreshPage } from "../../utils/tab";
 import { searching } from "../../utils/search";
 import { AppOption } from "../../app";
 import page from "./pageData";
@@ -41,7 +42,6 @@ $register("guide", {
       this.$take("guide") || this.data.page
     );
     popNotice("guide");
-    checkResUpdate("guide", "东师指南", "285K");
   },
 
   onShow() {

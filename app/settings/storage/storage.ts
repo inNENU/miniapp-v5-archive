@@ -1,10 +1,10 @@
 /* 关于 */
 import $register = require("wxpage");
+import { resDownload } from "../../utils/app";
 import { remove, listFile } from "../../utils/file";
 import { changeNav, popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
-import { resDownload } from "../../utils/tab";
 import { PageConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
