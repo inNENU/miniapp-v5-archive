@@ -83,13 +83,6 @@ export default {
           icon: "/icon/guide/test.svg",
           path: "exam/index",
         },
-        {
-          text: "资助",
-          color: "mauve",
-          name: "Subsidize",
-          icon: "/icon/guide/subsidize.svg",
-          path: "subsidize/index",
-        },
       ],
     },
     {
@@ -145,6 +138,13 @@ export default {
           name: "SIM",
           icon: "/icon/guide/sim.svg",
           path: "sim/index",
+        },
+        {
+          text: "资助",
+          color: "orange",
+          name: "Subsidize",
+          icon: "/icon/guide/subsidize.svg",
+          path: "subsidize/index",
         },
       ],
     },
