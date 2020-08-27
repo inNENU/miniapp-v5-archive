@@ -86,7 +86,7 @@
           "id": 0,
           "name": "分享",
           "pathName": "module/page",
-          "query": "id=intro/school/education/enroll",
+          "query": "id=guide/account/authorize",
           "scene": null
         },
         {

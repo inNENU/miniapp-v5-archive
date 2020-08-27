@@ -7,14 +7,19 @@
 
   color: var(--text-color);
   line-height: 1.2;
-  align-items: center;
   overflow: hidden;
 }
 
 .copy-wrapper .text {
   text-align: justify;
   font-size: 17px;
-  flex: 1 1 auto;
+}
+
+.copy-wrapper .text::before {
+  content: " ";
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 36px;
 }
 
 .copy-wrapper .copy {
