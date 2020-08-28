@@ -1,4 +1,3 @@
-/* eslint-disable max-params */
 import { debug, error, info, warn } from "./log";
 import { server } from "./config";
 

@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 /* eslint-disable @typescript-eslint/naming-convention */
 
 /** 一小时天气预报详情 */

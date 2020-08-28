@@ -59,6 +59,10 @@ $register("music", {
 
   // eslint-disable-next-line max-lines-per-function
   onLoad(option) {
+    const mode = wx.getStorageSync("play-mode") as PlayMode;
+
+    if (!mode) wx.setStorageSync("play-mode", "列表循环");
+
     // 加载字体
     wx.loadFontFace({
       family: "FZSSJW",
@@ -67,10 +71,6 @@ $register("music", {
         console.info("宋体字体", res); // 调试
       },
     });
-
-    const mode = wx.getStorageSync("play-mode") as PlayMode;
-
-    if (!mode) wx.setStorageSync("play-mode", "列表循环");
 
     // 写入基本信息
     this.setData({
@@ -109,7 +109,6 @@ $register("music", {
         }
 
         const { index } = globalData.music;
-
         const currentSong = (songList as SongDetail[])[index];
 
         // 写入歌曲列表与当前歌曲信息

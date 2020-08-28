@@ -1,5 +1,3 @@
-/* eslint-disable max-params */
-/** 交互模块 */
 import { debug, warn } from "./log";
 import { server } from "./config";
 

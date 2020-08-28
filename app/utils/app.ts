@@ -1,11 +1,8 @@
-/* eslint-disable max-lines */
-
-/** 文件管理器与API封装 */
-import { remove, listFile, readJSON, saveFile, unzip } from "./file";
-import { compareVersion, modal, requestJSON, tip } from "./wx";
-import { debug, error, info, warn } from "./log";
-import { GlobalData } from "../app";
 import { appOption, server } from "./config";
+import { remove, listFile, readJSON, saveFile, unzip } from "./file";
+import { debug, error, info, warn } from "./log";
+import { compareVersion, modal, requestJSON, tip } from "./wx";
+import { GlobalData } from "../app";
 
 /**
  * 资源下载 from fuction.js & guide.js 被 checkResUpdate 调用
@@ -374,6 +371,53 @@ export const login = ({ appID, env }: GlobalData): void => {
     });
 };
 
+/** 注册全局监听 */
+export const registAction = (): void => {
+  // 设置内存不足警告
+  wx.onMemoryWarning((res) => {
+    tip("内存不足");
+    console.warn("onMemoryWarningReceive");
+    wx.reportAnalytics("memory_warning", {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      memory_warning: res && res.level ? res.level : 0,
+    });
+  });
+
+  // 监听网络状态
+  wx.onNetworkStatusChange((res) => {
+    // 显示提示
+    if (!res.isConnected) {
+      tip("网络连接中断,部分小程序功能暂不可用");
+      wx.setStorageSync("networkError", true);
+    } else if (wx.getStorageSync("network")) {
+      wx.setStorageSync("networkError", false);
+      tip("网络链接恢复");
+    }
+  });
+
+  // 监听用户截屏
+  if (wx.getStorageSync("capture-screen") !== "never")
+    wx.onUserCaptureScreen(() => {
+      const status = wx.getStorageSync("capture-screen");
+
+      if (status !== "never")
+        wx.showModal({
+          title: "善用小程序分享",
+          content:
+            "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
+          showCancel: status === "noticed",
+          cancelText: "不再提示",
+          success: (res) => {
+            if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
+            else if (res.cancel) {
+              wx.setStorageSync("capture-screen", "never");
+              if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
+            }
+          },
+        });
+    });
+};
+
 /**
  * 小程序启动时的运行函数
  *
@@ -412,20 +456,6 @@ export const startup = (globalData: GlobalData): void => {
       }
     );
 
-  // 检查通知更新与小程序更新
-  noticeCheck(globalData);
-  appUpdate(globalData);
-
-  // 设置内存不足警告
-  wx.onMemoryWarning((res) => {
-    tip("内存不足");
-    console.warn("onMemoryWarningReceive");
-    wx.reportAnalytics("memory_warning", {
-      // eslint-disable-next-line
-      memory_warning: res && res.level ? res.level : 0,
-    });
-  });
-
   // 获取网络信息
   wx.getNetworkType({
     success: (res) => {
@@ -436,40 +466,8 @@ export const startup = (globalData: GlobalData): void => {
     },
   });
 
-  // 监听网络状态
-  wx.onNetworkStatusChange((res) => {
-    // 显示提示
-    if (!res.isConnected) {
-      tip("网络连接中断,部分小程序功能暂不可用");
-      wx.setStorageSync("networkError", true);
-    } else if (wx.getStorageSync("network")) {
-      wx.setStorageSync("networkError", false);
-      tip("网络链接恢复");
-    }
-  });
-
-  // 监听用户截屏
-  if (wx.getStorageSync("capture-screen") !== "never")
-    wx.onUserCaptureScreen(() => {
-      const status = wx.getStorageSync("capture-screen");
-
-      if (status !== "never")
-        wx.showModal({
-          title: "善用小程序分享",
-          content:
-            "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
-          showCancel: status === "noticed",
-          cancelText: "不再提示",
-          success: (res) => {
-            if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
-            else if (res.cancel) {
-              wx.setStorageSync("capture-screen", "never");
-              if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
-            }
-          },
-        });
-    });
-
-  // 登录
+  noticeCheck(globalData);
+  appUpdate(globalData);
+  registAction();
   login(globalData);
 };
