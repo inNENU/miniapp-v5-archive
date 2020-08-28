@@ -46,6 +46,14 @@
       "network": "all",
       "packages": ["module"]
     },
+    "page/guide/guide": {
+      "network": "all",
+      "packages": ["module"]
+    },
+    "page/intro/intro": {
+      "network": "all",
+      "packages": ["module"]
+    },
     "page/function/function": {
       "network": "all",
       "packages": ["function"]
