@@ -51,12 +51,6 @@ $register("me", {
               desc: globalData.version,
             },
             {
-              text: "小程序内容",
-              desc: "帮助更新?",
-              icon: "/icon/about.svg",
-              url: "resource",
-            },
-            {
               text: "关于",
               icon: "/icon/about.svg",
               url: "about",

@@ -34,7 +34,7 @@ $register("about", {
         },
         {
           tag: "list",
-          header: "工作室与开发者介绍",
+          header: "小程序介绍",
           content: [
             { text: "   小程序全部内容均由Hope Studio独立开发。" },
             {
@@ -42,16 +42,37 @@ $register("about", {
               url: "page?path=other/MrHope/hope-studio",
             },
             { text: "Mr.Hope 个人介绍", url: "page?path=other/MrHope/mrhope" },
+            { text: "开发者访谈", url: "page?path=other/MrHope/interview" },
+            { text: "常见问题", url: "page?path=other/MrHope/function" },
             { text: "致谢名单", url: "page?path=other/MrHope/thanks" },
           ],
         },
         {
-          tag: "list",
-          header: "小程序介绍",
-          content: [
-            { text: "开发者访谈", url: "page?path=other/MrHope/interview" },
-            { text: "常见问题", url: "page?path=other/MrHope/function" },
+          tag: "text",
+          heading: "小程序内容",
+          style: "text-indent: 1.5em;",
+          text: [
+            "小程序页面内容仓库在 Github 上开源。如果您愿意对小程序提供帮助，欢迎您点击下方链接为该仓库做贡献。您可以帮助扩充或编辑小程序的页面文字、图片以及相关文件。",
           ],
+        },
+        {
+          tag: "copy",
+          text: "https://github.com/Hope-Studio/innenu-res",
+        },
+        {
+          tag: "text",
+          heading: "内容版权及使用",
+          style: "text-indent: 1.5em;",
+          text: [
+            "请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免遭到 Mr.Hope 的起诉。",
+            "您可以自由地\n· 共享 — 在任何媒介以任何形式复制、发行本作品",
+            "惟须遵守下列条件:\n1. 署名: 您必须给出适当的署名，提供指向下方许可协议的链接，同时标明是否（对原始作品）作了修改。您可以用任何合理的方式来署名，但是不得以任何方式暗示许可人为您或您的使用背书。\n2. 非商业性使用: 您不得将本作品用于商业目的\n3. 禁止演绎: 如果您 再混合、转换、或者基于该作品创作，您不可以分发修改作品。\n4. 没有附加限制: 您不得适用法律术语或者 技术措施 从而限制其他人做许可协议允许的事情。",
+            "下方是协议详情",
+          ],
+        },
+        {
+          tag: "copy",
+          text: "https://creativecommons.org/licenses/by-nc-nd/4.0/",
         },
       ],
     },

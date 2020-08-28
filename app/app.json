@@ -30,14 +30,13 @@
     {
       "root": "settings",
       "pages": [
-        "outlook/outlook",
-        "storage/storage",
-        "auth/auth",
         "about/about",
+        "auth/auth",
         "donate/donate",
         "donate/list",
-        "resource/resource",
-        "log/log"
+        "log/log",
+        "outlook/outlook",
+        "storage/storage"
       ]
     }
   ],
