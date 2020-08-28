@@ -1,7 +1,7 @@
 <import src="/components/template" />
 <view
   class="iOS grey"
-  style="{{input.status? 'padding-bottom:' + input.height + 'px;': ''}}"
+  style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
 >
   <template is="nav" data="{{...page, theme}}" />
   <view class="desc-wrapper">
@@ -26,10 +26,10 @@
       <picker
         class="picker"
         mode="selector"
-        range="{{gender.picker}}"
+        range="{{gender.keys}}"
         catch:change="genderChange"
       >
-        {{gender.index === undefined? '请选择': gender.picker[gender.index]}}
+        {{gender.key || '请选择'}}
       </picker>
     </view>
     <view class="list-item">
@@ -37,10 +37,10 @@
       <picker
         class="picker"
         mode="selector"
-        range="{{grade.picker}}"
+        range="{{grade.keys}}"
         catch:change="gradeChange"
       >
-        {{grade.index === undefined? '请选择': grade.picker[grade.index]}}
+        {{grade.key || '请选择'}}
       </picker>
     </view>
     <block wx:for="{{list}}" wx:key="id">
@@ -105,13 +105,11 @@
       <view class="score">{{peScore[item.id]}}分</view>
     </view>
     <view class="item">
-      <view class="text">{{result.gender === 'male'? 1000: 800}}米跑</view>
+      <view class="text">{{gender.key === '男'? "1000": "800"}}米跑</view>
       <view class="score">{{peScore.longRun}}分</view>
     </view>
     <view class="item">
-      <view class="text"
-        >{{result.gender === 'male'? '引体向上': '仰卧起坐'}}</view
-      >
+      <view class="text">{{gender.key === '男'? '引体向上': '仰卧起坐'}}</view>
       <view class="score">{{peScore.special}}分</view>
     </view>
     <view class="item">

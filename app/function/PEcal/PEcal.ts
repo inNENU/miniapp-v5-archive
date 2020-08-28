@@ -62,18 +62,20 @@ interface PEScore {
 $register("PEcal", {
   data: {
     theme: globalData.theme,
-    page: { title: "体测计算器", grey: true, from: "功能大厅" },
+    page: { title: "体测计算器", id: "PECal", grey: true, from: "功能大厅" },
 
     /** 性别选择器 */
     gender: {
-      picker: ["男", "女"],
-      value: ["male", "female"],
+      keys: ["男", "女"],
+      key: "",
+      values: ["male", "female"],
     },
 
     /** 年级选择器 */
     grade: {
-      picker: ["大一", "大二", "大三", "大四"],
-      value: ["low", "low", "high", "high"],
+      keys: ["大一", "大二", "大三", "大四"],
+      key: "",
+      values: ["low", "low", "high", "high"],
     },
 
     /** 输入列表 */
@@ -95,9 +97,6 @@ $register("PEcal", {
     /** 体育成绩 */
     peScore: {},
 
-    /** 最终成绩 */
-    result: {} as Record<string, any>,
-
     /** 弹窗配置 */
     popupConfig: { title: "体测成绩", cancel: false },
 
@@ -109,36 +108,50 @@ $register("PEcal", {
       { text: "立定跳远", id: "standingLongJump" },
       { text: "50米跑", id: "shortRun" },
     ],
+
+    /** 是否正在输入 */
+    isTyping: false,
+    /** 键盘高度 */
+    keyboardHeight: 0,
+  },
+
+  state: {
+    /** 测试成绩 */
+    result: {} as Record<string, any>,
+    /** 性别 */
+    gender: "",
+    /** 年级 */
+    grade: "",
   },
 
   onLoad(option: any) {
     setPage({ option, ctx: this }, this.data.page);
+
     const genderIndex = wx.getStorageSync("gender");
     const gradeIndex = wx.getStorageSync("grade");
+    const genderKeys = this.data.gender.keys;
+    const gradeKeys = this.data.grade.keys;
 
     this.setData({
-      // 将用户上次选择的性别和年级载入
-      ...(typeof genderIndex === "number"
-        ? // 改变特别项目和长跑的名称
-          {
-            "gender.index": genderIndex,
-            "longRun.text": genderIndex === 0 ? longRunText[0] : longRunText[1],
-            special: genderIndex === 0 ? special[0] : special[1],
-            "result.gender": this.data.gender.value[genderIndex],
-          }
-        : {}),
+      // 写入性别
+      "gender.key":
+        typeof genderIndex === "number" ? genderKeys[genderIndex] : "",
 
-      ...(typeof gradeIndex === "number"
-        ? // 写入年级
-          {
-            "grade.index": gradeIndex,
-            "result.grade": this.data.grade.value[gradeIndex],
-          }
-        : {}),
+      // 写入年级
+      "grade.key": typeof gradeIndex === "number" ? gradeKeys[gradeIndex] : "",
 
+      // 改变特别项目和长跑的名称
+      "longRun.text": longRunText[genderIndex || 0],
+      special: special[genderIndex || 0],
       // 设置长跑选择器数据
       "longRun.picker": longRunPicker,
     });
+
+    if (typeof genderIndex === "number")
+      this.state.gender = this.data.gender.values[genderIndex];
+
+    if (typeof gradeIndex === "number")
+      this.state.grade = this.data.grade.values[gradeIndex];
 
     if (getCurrentPages().length === 1)
       this.setData({ "nav.action": "redirect", "nav.from": "主页" });
@@ -171,17 +184,15 @@ $register("PEcal", {
   /** 性别切换 */
   genderChange({ detail }: WXEvent.PickerChange) {
     const index = Number(detail.value);
-    const gender = this.data.gender.value[index];
-
-    wx.setStorageSync("gender", index);
 
     // 改变特别项目和长跑的名称
     this.setData({
-      "result.gender": gender,
-      "gender.index": index,
-      special: gender === "male" ? special[0] : special[1],
-      "longRun.text": gender === "male" ? longRunText[0] : longRunText[1],
+      "gender.key": this.data.gender.keys[index],
+      special: special[index],
+      "longRun.text": longRunText[index],
     });
+    this.state.gender = this.data.gender.values[index];
+    wx.setStorageSync("gender", index);
   },
 
   /** 年级切换 */
@@ -189,10 +200,8 @@ $register("PEcal", {
     const index = Number(detail.value);
 
     // 设置年级
-    this.setData({
-      "grade.index": index,
-      "result.grade": this.data.grade.value[index],
-    });
+    this.setData({ "grade.key": this.data.grade.keys[index] });
+    this.state.grade = this.data.grade.values[index];
     wx.setStorageSync("grade", index);
   },
 
@@ -201,7 +210,7 @@ $register("PEcal", {
     const { id } = event.currentTarget;
     const query = wx.createSelectorQuery();
 
-    this.setData({ input: { status: true, height: event.detail.height } });
+    this.setData({ isTyping: true, keyboardHeight: event.detail.height });
 
     query.select(`#${id}`).boundingClientRect();
     query.selectViewport().fields({ size: true, scrollOffset: true });
@@ -221,27 +230,30 @@ $register("PEcal", {
     });
   },
 
+  /** 输入成绩 */
   input({ currentTarget, detail }: WXEvent.Input) {
     const project = currentTarget.id;
 
-    this.setData({ [`result.${project}`]: detail.value });
+    console.log(project);
+
+    this.state.result[project] = detail.value;
   },
 
   blur() {
-    this.setData({ "input.status": false });
+    this.setData({ isTyping: false });
   },
 
   /** 长跑选择器设置 */
   longRunHandler({ detail }: WXEvent.PickerChange) {
-    const { value } = detail;
+    const value = detail.value as number[];
 
     // 设置显示数据
     this.setData({
-      "longRun.value": `${longRunPicker[0][value[0] as number]} ${
-        longRunPicker[1][value[1] as number]
+      "longRun.value": `${longRunPicker[0][value[0]]} ${
+        longRunPicker[1][value[1]]
       }`,
-      "result.longRun": ((value[0] as number) + 2) * 60 + (value[1] as number),
     });
+    this.state.result.longRun = (value[0] + 2) * 60 + value[1];
   },
 
   /** 计算 BMI */
@@ -251,7 +263,7 @@ $register("PEcal", {
 
     // 计算 BMI 状态与分值
     const [state, bmi] =
-      result.gender === "male"
+      this.state.gender === "male"
         ? bmiResult <= 17.8
           ? ["低体重", 80]
           : bmiResult >= 28
@@ -269,7 +281,7 @@ $register("PEcal", {
 
     // 计算及格分数
     const passScore =
-      result.grade === "Low"
+      this.state.grade === "Low"
         ? bmiResult <= 28
           ? 60
           : 60 - Math.ceil(bmiResult - 28) * 2
@@ -283,6 +295,7 @@ $register("PEcal", {
   /** 获得最终成绩 */
   getResult(result: Record<string, any>, callback: (peScore: PEScore) => void) {
     const { length } = gradeLevels;
+    const { gender, grade } = this.state;
     const peScore: PEScore = {
       bmi: 0,
       vitalCapacity: 0,
@@ -300,8 +313,8 @@ $register("PEcal", {
 
     // 读取相应配置文件
     getJSON({
-      path: `function/PEcal/${result.gender}-${result.grade}`,
-      url: `resource/function/PEcal/${result.gender}-${result.grade}`,
+      path: `function/PEcal/${gender}-${grade}`,
+      url: `resource/function/PEcal/${gender}-${grade}`,
       success: (config: any) => {
         // 以下三项越高越好，进行计算
         (["vitalCapacity", "sitAndReach", "standingLongJump"] as (
@@ -330,7 +343,7 @@ $register("PEcal", {
         });
 
         // 计算特别类项目分数
-        const specialScore = result.gender === "male" ? "chinning" : "situp";
+        const specialScore = gender === "male" ? "chinning" : "situp";
 
         if (result[specialScore] && Number(result[specialScore])) {
           for (let i = 0; i < length; i += 1)
@@ -354,13 +367,14 @@ $register("PEcal", {
 
   /** 计算最终结果 */
   calculate() {
-    const { result } = this.data;
+    const { result } = this.state;
+    const { gender, grade } = this.state;
 
     wx.showLoading({ title: "计算中...", mask: true });
     console.info("输入结果为: ", result);
 
     // 可以计算
-    if (result.gender && result.grade) {
+    if (gender && grade) {
       this.getResult(result, (peScore) => {
         // 计算最终成绩
         const finalScore =
