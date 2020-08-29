@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 /**
  * 事件对象类型

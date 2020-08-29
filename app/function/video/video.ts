@@ -24,6 +24,8 @@ interface VideoGroup {
 }
 
 $register("video", {
+  data: { videoName: "", videoList: [] as VideoGroup[] },
+
   onNavigate() {
     ensureJSON({
       path: "function/video/index",
@@ -68,7 +70,7 @@ $register("video", {
             titles: (videoList as VideoGroup[]).map(
               (videoListItem) => videoListItem.title
             ),
-            videoList,
+            videoList: videoList as VideoGroup[],
 
             videoName: item.name,
             videoAuthor: item.author,
@@ -135,7 +137,10 @@ $register("video", {
   /** 切换播放视频 */
   change(event: WXEvent.Touch) {
     console.log(event);
-    const { groupID, listID } = event.currentTarget.dataset;
+    const { groupID, listID } = event.currentTarget.dataset as Record<
+      string,
+      number
+    >;
     const item = this.data.videoList[groupID].content[listID];
 
     this.setData({

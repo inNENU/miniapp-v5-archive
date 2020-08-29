@@ -8,7 +8,7 @@ const {
 $register.C({
   properties: {
     /** 电话组件配置 */
-    config: Object as any,
+    config: Object,
   },
   methods: {
     /** 拨打电话 */

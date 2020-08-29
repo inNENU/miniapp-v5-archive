@@ -1,6 +1,7 @@
 /* 展示页面 */
 
 import $register = require("wxpage");
+import { PageConfig } from "../../typings";
 import {
   changeNav,
   resolvePage,
@@ -9,11 +10,15 @@ import {
 } from "../utils/page";
 
 $register("page", {
+  data: {
+    page: {} as PageConfig,
+  },
+
   onNavigate(option) {
     resolvePage(option);
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     console.info("进入参数为", option);
 
     // 生成页面 ID
@@ -25,7 +30,7 @@ $register("page", {
     option.action = "redirect";
 
     if ("path" in option) {
-      loadOnlinePage(option, this);
+      loadOnlinePage(option as Record<string, never> & { path: string }, this);
       this.path = option.path;
     } else setOnlinePage(option, this);
 

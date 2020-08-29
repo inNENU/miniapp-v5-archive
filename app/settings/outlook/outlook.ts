@@ -47,7 +47,7 @@ $register("setting", {
     resolvePage(res, this.data.page as PageConfig);
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     if (globalData.page.id === "外观设置") setPage({ option, ctx: this });
     else setPage({ option, ctx: this }, this.data.page as PageConfig);
 
@@ -69,7 +69,7 @@ $register("setting", {
   },
 
   /** 列表控制函数 */
-  list({ detail }: any) {
+  list({ detail }: WXEvent.Touch) {
     if (detail.event) this[detail.event as ListAction](detail.value);
   },
 

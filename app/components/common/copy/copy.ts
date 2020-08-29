@@ -1,7 +1,9 @@
-Component({
+import { CopyComponentConfig } from "../../../../typings";
+
+Component<{ config: CopyComponentConfig }>({
   properties: {
     /** 配置 */
-    config: { type: Object as any },
+    config: { type: Object },
   },
 
   methods: {

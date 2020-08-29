@@ -219,7 +219,7 @@ export const noticeCheck = (globalData: GlobalData): void => {
     (noticeList: Record<string, Notice>) => {
       for (const pageName in noticeList) {
         const notice = noticeList[pageName];
-        const oldNotice = wx.getStorageSync(`${pageName}-notice`);
+        const oldNotice = wx.getStorageSync(`${pageName}-notice`) as Notice;
 
         // 如果通知内容不同或为强制通知，写入通知信息，并重置通知状态
         if (
@@ -341,6 +341,10 @@ export const appUpdate = (globalData: GlobalData): void => {
   });
 };
 
+interface LoginCallback {
+  openid: string;
+}
+
 /**
  * 登录
  *
@@ -360,8 +364,8 @@ export const login = ({ appID, env }: GlobalData): void => {
             data: { appID, code: res.code, env },
             enableHttp2: true,
             success: (res2) => {
-              wx.setStorageSync("openid", (res2.data as any).openid);
-              console.info(`openid 为: ${(res2.data as any).openid}`);
+              wx.setStorageSync("openid", (res2.data as LoginCallback).openid);
+              console.info(`openid 为: ${(res2.data as LoginCallback).openid}`);
             },
           });
       },

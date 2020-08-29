@@ -219,13 +219,11 @@ overrides:
             - PascalCase
 
       "@typescript-eslint/no-explicit-any":
-        - off
-        # - warn
-        # - ignoreRestArgs: true
+        - warn
+        - ignoreRestArgs: true
 
       "@typescript-eslint/no-unsafe-member-access":
-        - off
-        # - warn
+        - warn
 
   - files:
       - "**/test/**/*.spec.js"

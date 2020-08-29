@@ -33,4 +33,16 @@ declare namespace WechatMiniprogram {
     /** 是否开启实时路况，默认为 false */
     enableTraffic?: boolean;
   }
+  namespace Component {
+    interface Constructor {
+      <
+        TData extends DataOption = DataOption,
+        TProperty extends PropertyOption = PropertyOption,
+        TMethod extends MethodOption = MethodOption,
+        TCustomInstanceProperty extends IAnyObject = IAnyObject
+      >(
+        options: Options<TData, TProperty, TMethod, TCustomInstanceProperty>
+      ): string;
+    }
+  }
 }

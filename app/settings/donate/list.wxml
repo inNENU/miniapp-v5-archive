@@ -15,7 +15,7 @@
     <block wx:if="{{donate2020}}">
       <view wx:for="{{donate2020}}" wx:key="*this" class="item">
         {{index + 1}}.
-        <text style="font-weight: 500;">{{item[0]}}</text>
+        <text style="font-weight: 500">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
       </view>
       <view class="sum">共计: {{sum2020 || 0}} 元</view>
@@ -29,7 +29,7 @@
     <block wx:if="{{donate2019}}">
       <view wx:for="{{donate2019}}" wx:key="*this" class="item">
         {{index + 1}}.
-        <text style="font-weight: 500;">{{item[0]}}</text>
+        <text style="font-weight: 500">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
       </view>
       <view class="sum">共计: {{sum2019}} 元</view>

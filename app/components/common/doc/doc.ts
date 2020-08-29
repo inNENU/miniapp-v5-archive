@@ -1,10 +1,11 @@
 import $register = require("wxpage");
+import { DocComponentConfig } from "../../../../typings";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
-$register.C({
+$register.C<{ config: DocComponentConfig }>({
   properties: {
     /** 配置 */
-    config: { type: Object as any },
+    config: { type: Object },
   },
 
   methods: {

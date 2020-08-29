@@ -41,7 +41,9 @@ $register.C({
     },
 
     select(event: WXEvent.Touch): void {
-      const value = this.data.words[event.currentTarget.dataset.index];
+      const value = this.data.words[
+        event.currentTarget.dataset.index as number
+      ];
 
       this.setData({ value, words: [], focus: false });
       this.triggerEvent("search", { value });

@@ -53,7 +53,7 @@
     <view class="{{theme}} {{darkmode? 'dark': 'light'}} loading-logo-wrapper">
       <view
         class="back-button"
-        style="top: 27.5px;"
+        style="top: 27.5px"
         hover-class="button-hover"
         hover-stay-time="100"
         catch:tap="$back"
@@ -301,16 +301,16 @@ Author: Mr.Hope
       <view
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
-        style="position: absolute; left: 0;"
+        style="position: absolute; left: 0"
         plain
         catch:tap="$back"
       >
         <view
           wx:if="{{action === undefined || action === 'redirect'}}"
           class="iOS-back-arrow"
-          style="border-color: #fff;"
+          style="border-color: #fff"
         />
-        <text class="iOS-nav-text" style="color: #fff;">{{from}}</text>
+        <text class="iOS-nav-text" style="color: #fff">{{from}}</text>
       </view>
       <view class="NENU-navText">{{title}}</view>
     </view>
@@ -324,16 +324,16 @@ Author: Mr.Hope
         wx:if="{{action !== false}}"
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
-        style="position: absolute; left: 0;"
+        style="position: absolute; left: 0"
         plain
         catch:tap="{{action}}"
       >
         <view
           wx:if="{{action === 'redirect'}}"
           class="iOS-back-arrow"
-          style="border-color: #fff;"
+          style="border-color: #fff"
         />
-        <text class="iOS-nav-text" style="color: #fff;">{{from}}</text>
+        <text class="iOS-nav-text" style="color: #fff">{{from}}</text>
       </view>
       <view class="NENU-navText">{{title}}</view>
     </view>

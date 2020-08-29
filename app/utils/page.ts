@@ -4,7 +4,13 @@ import { ensureJSON, readJSON, writeJSON } from "./file";
 import { modal, requestJSON } from "./wx";
 import { AppOption } from "../app";
 import { Notice } from "./app";
-import { PageOption, PageConfig } from "../../typings/pageData";
+import {
+  AdvancedListComponentItemConfig,
+  GridComponentItemComfig,
+  ListComponentItemConfig,
+  PageOption,
+  PageConfig,
+} from "../../typings/pageData";
 import { server } from "./config";
 
 /** 全局数据 */
@@ -16,7 +22,13 @@ const { globalData } = getApp<AppOption>();
  * @param element 列表的内容
  * @param page 页面内容
  */
-const resolveList = (listElement: any, page: PageConfig): void => {
+const resolveList = (
+  listElement:
+    | AdvancedListComponentItemConfig
+    | GridComponentItemComfig
+    | ListComponentItemConfig,
+  page: PageConfig
+): void => {
   // 设置列表导航
   if ("url" in listElement) listElement.url += `?from=${page.title}`;
   if ("path" in listElement)
@@ -32,22 +44,22 @@ const resolveList = (listElement: any, page: PageConfig): void => {
   if ("pickerValue" in listElement)
     if (listElement.single) {
       // 单列选择器
-      const pickerValue: string | number = wx.getStorageSync(listElement.key);
+      const pickerValue: number = wx.getStorageSync(listElement.key);
 
       listElement.value = listElement.pickerValue[pickerValue];
       listElement.currentValue = [pickerValue];
     } else {
       // 多列选择器
-      const pickerValues: string[] = wx
-        .getStorageSync(listElement.key)
-        .split("-");
+      const pickerValues: string[] = (wx.getStorageSync(
+        listElement.key
+      ) as string).split("-");
 
       listElement.currentValue = [];
       listElement.value = [];
       pickerValues.forEach((pickerElement, index) => {
         listElement.value[index] =
           listElement.pickerValue[index][Number(pickerElement)];
-        listElement.currentValue[index] = Number(pickerElement);
+        (listElement.currentValue as any[])[index] = Number(pickerElement);
       });
     }
 };
@@ -82,10 +94,15 @@ const disposePage = (
 
     if (page.content)
       page.content.forEach((element) => {
-        // 设置list组件
+        // 设置 list 组件
         if ("content" in element)
-          element.content.forEach((listElement: any) =>
-            resolveList(listElement, page)
+          element.content.forEach(
+            (
+              listElement:
+                | AdvancedListComponentItemConfig
+                | GridComponentItemComfig
+                | ListComponentItemConfig
+            ) => resolveList(listElement, page)
           );
       });
 
@@ -107,14 +124,21 @@ const preGetPage = (page: PageConfig): void => {
   if (page && page.content)
     page.content.forEach((component) => {
       if ("content" in component)
-        // 该组件是列表，需要预加载界面，提前获取界面到存储
-        component.content.forEach((element: any) => {
-          if ("path" in element)
-            ensureJSON({
-              path: `${element.path}`,
-              url: `resource/${element.path}`,
-            });
-        });
+        // 该组件是列表或九宫格，需要预加载界面，提前获取界面到存储
+        component.content.forEach(
+          (
+            element:
+              | AdvancedListComponentItemConfig
+              | GridComponentItemComfig
+              | ListComponentItemConfig
+          ) => {
+            if ("path" in element)
+              ensureJSON({
+                path: `${element.path}`,
+                url: `resource/${element.path}`,
+              });
+          }
+        );
     });
   else warn("不存在页面内容");
 
@@ -248,7 +272,9 @@ export const getColor = (grey = false): ColorConfig => {
 interface SetPageOption {
   option: PageOption;
   ctx: WechatMiniprogram.Page.MPInstance<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Record<string, any>
   >;
   handle?: boolean;
@@ -292,7 +318,8 @@ export const setPage = (
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
   else if (
     (option.id && globalData.page.id === option.id) ||
-    (ctx.data.page && globalData.page.id === ctx.data.page.title)
+    (ctx.data.page &&
+      globalData.page.id === (ctx.data.page as PageConfig).title)
   ) {
     debug(`${globalData.page.id} 已处理`);
     ctx.setData(
@@ -312,7 +339,7 @@ export const setPage = (
     );
   } else {
     debug(`${option.id || "未知页面"} 未处理`);
-    const pageData = handle
+    const pageData: PageConfig = handle
       ? ctx.data.page
       : disposePage(ctx.data.page, option, ctx.$state.firstOpen);
 
@@ -368,8 +395,12 @@ export const popNotice = (id: string): void => {
 // eslint-disable-next-line max-lines-per-function
 export const setOnlinePage = (
   option: PageOption,
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: any,
+  ctx: WechatMiniprogram.Page.MPInstance<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>
+  >,
   preload = true
 ): void => {
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
@@ -394,7 +425,7 @@ export const setOnlinePage = (
   } else if (option.id) {
     // 需要重新载入界面
     info(`${option.id} onLoad开始，参数为: `, option);
-    const page = readJSON(`${option.id}`);
+    const page = readJSON<PageConfig>(`${option.id}`);
 
     // 如果本地存储中含有 page 直接处理
     if (page) {
@@ -476,11 +507,14 @@ export const setOnlinePage = (
  * @param ctx 页面指针
  * @param preload 是否需要预加载(默认需要)
  */
-// eslint-disable-next-line max-lines-per-function
 export const loadOnlinePage = (
   option: PageOption & { path: string },
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: any
+  ctx: WechatMiniprogram.Page.MPInstance<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>
+  >
 ): void => {
   if (option.path) {
     // 需要重新载入界面
@@ -562,10 +596,15 @@ export const loadFont = (theme: string): void => {
 export const changeNav = (
   option: WechatMiniprogram.Page.IPageScrollOption,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: any,
+  ctx: WechatMiniprogram.Page.MPInstance<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>
+  >,
   headName?: string
 ): void => {
-  const pageHead = headName ? ctx.data[headName] : ctx.data.page;
+  const pageHead: PageConfig = headName ? ctx.data[headName] : ctx.data.page;
 
   // 判断情况并赋值
   const nav = {

@@ -117,18 +117,18 @@ $register("PEcal", {
 
   state: {
     /** 测试成绩 */
-    result: {} as Record<string, any>,
+    result: {} as Record<string, number>,
     /** 性别 */
     gender: "",
     /** 年级 */
     grade: "",
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     setPage({ option, ctx: this }, this.data.page);
 
-    const genderIndex = wx.getStorageSync("gender");
-    const gradeIndex = wx.getStorageSync("grade");
+    const genderIndex = wx.getStorageSync("gender") as number | "";
+    const gradeIndex = wx.getStorageSync("grade") as number | "";
     const genderKeys = this.data.gender.keys;
     const gradeKeys = this.data.grade.keys;
 
@@ -236,7 +236,7 @@ $register("PEcal", {
 
     console.log(project);
 
-    this.state.result[project] = detail.value;
+    this.state.result[project] = Number(detail.value);
   },
 
   blur() {
@@ -257,7 +257,7 @@ $register("PEcal", {
   },
 
   /** 计算 BMI */
-  getBMI(result: Record<string, any>): [number, number] {
+  getBMI(result: Record<string, number>): [number, number] {
     const bmiResult =
       Math.round((result.weight * 100000) / result.height / result.height) / 10;
 

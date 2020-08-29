@@ -258,7 +258,7 @@ $register("map", {
 
   /** 选择分类 */
   select({ currentTarget }: WXEvent.Touch) {
-    const { index } = currentTarget.dataset;
+    const index = currentTarget.dataset.index as number;
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 

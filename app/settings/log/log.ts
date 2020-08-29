@@ -4,7 +4,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
-import { PageConfig } from "../../../typings";
+import { ComponentConfig, PageConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("log", {
@@ -45,7 +45,7 @@ $register("log", {
     resolvePage(res, this.data.page as PageConfig);
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     if (globalData.page.id === "更新日志") setPage({ option, ctx: this });
     else setPage({ option: { id: "log" }, ctx: this });
 
@@ -58,7 +58,7 @@ $register("log", {
     // 在线获取日志页面文件
     requestJSON(
       `resource/config/${globalData.appID}/${globalData.version}/log`,
-      (data: any) => {
+      (data: ComponentConfig[]) => {
         setPage(
           { option: { id: "更新日志" }, ctx: this },
           {

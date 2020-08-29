@@ -19,11 +19,14 @@ $register("weather", {
   },
 
   onLoad() {
-    const weatherData = wx.getStorageSync("weather");
+    const weatherData = wx.getStorageSync("weather") as {
+      date: number;
+      data: WeatherData;
+    };
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
-      const weather = weatherData.data as WeatherData;
+      const weather = weatherData.data;
 
       this.initcanvas(weather);
 
@@ -341,7 +344,7 @@ $register("weather", {
 
   /** 贴士详情 */
   hint({ currentTarget }: WXEvent.Touch) {
-    const hint = this.data.weather.hints[currentTarget.dataset.id];
+    const hint = this.data.weather.hints[currentTarget.dataset.id as number];
     modal(hint.name, hint.detail);
   },
 

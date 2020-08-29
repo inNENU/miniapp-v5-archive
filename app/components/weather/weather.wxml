@@ -10,9 +10,9 @@
       >长春市 | {{weather.observe.weather}}</view
     >
     <view class="temperature">
-      <text style="font-size: 36px;">{{weather.observe.degree}}</text>
-      <text style="font-size: 28px;">°C\n</text>
-      <view style="font-size: 18px;">
+      <text style="font-size: 36px">{{weather.observe.degree}}</text>
+      <text style="font-size: 28px">°C\n</text>
+      <view style="font-size: 18px">
         {{weather.dayForecast[1].maxDegree}}°C -
         {{weather.dayForecast[1].minDegree}}°C
       </view>

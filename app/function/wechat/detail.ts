@@ -20,7 +20,9 @@ $register("wechat-detail", {
     },
   },
 
-  state: {} as Record<string, any>,
+  state: {
+    path: "",
+  },
 
   onNavigate(options) {
     ensureJSON({ path: `function/wechat/${options.query.path || "index"}` });

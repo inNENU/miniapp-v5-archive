@@ -1,6 +1,6 @@
 <!-- 加载错误显示 -->
 <view wx:if="{{error}}" class="status-wrapper">
-  <icon type="warn" size="32" style="margin-bottom: 5px;" />
+  <icon type="warn" size="32" style="margin-bottom: 5px" />
   <text>图片加载失败</text>
 </view>
 <!-- 加载中显示 -->

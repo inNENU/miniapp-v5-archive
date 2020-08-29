@@ -30,8 +30,6 @@ $register("wechat", {
     },
   },
 
-  state: {} as Record<string, any>,
-
   onNavigate() {
     ensureJSON({ path: "function/wechat/index" });
   },

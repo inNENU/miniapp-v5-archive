@@ -1,19 +1,6 @@
 import { PageConfig as PageDataConfig } from "../server/typings";
 
-export {
-  AdvancedListComponentConfig,
-  CardComponentConfig,
-  DocComponentConfig,
-  FooterComponentConfig,
-  GridComponentConfig,
-  ListComponentConfig,
-  ImageComponentConfig,
-  MediaComponentConfig,
-  PhoneComponentConfig,
-  SwiperComponentConfig,
-  TitleComponentConfig,
-  TextComponentConfig,
-} from "../server/typings";
+export * from "../server/typings";
 
 declare namespace PageData {
   enum PageDataOption {

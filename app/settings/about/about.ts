@@ -5,7 +5,12 @@ import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { requestJSON, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
-import { PageConfig, AdvancedListComponentConfig } from "../../../typings";
+import {
+  AdvancedListComponentConfig,
+  AdvancedListComponentItemConfig,
+  ComponentConfig,
+  PageConfig,
+} from "../../../typings";
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
 let developMode = false;
@@ -91,7 +96,7 @@ $register("about", {
     resolvePage(res, page as PageConfig);
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     if (globalData.page.id === "关于") setPage({ option, ctx: this });
     else {
       const { page } = this.data;
@@ -99,9 +104,11 @@ $register("about", {
       // 读取开发者模式并对页面显示做相应改变
       developMode = wx.getStorageSync("developMode");
       if (!developMode)
-        (page.content[0].content as any[]).forEach((x, y) => {
-          x.hidden = y !== 0;
-        });
+        (page.content[0].content as AdvancedListComponentItemConfig[]).forEach(
+          (x, y) => {
+            x.hidden = y !== 0;
+          }
+        );
 
       setPage({ option: { id: "about" }, ctx: this }, page as PageConfig);
     }
@@ -115,14 +122,14 @@ $register("about", {
     // 读取在线文件更新页面显示
     requestJSON(
       `resource/config/${globalData.appID}/${globalData.version}/about`,
-      (data: any) => {
+      (data: ComponentConfig[]) => {
         setPage(
           { option: { id: "关于" }, ctx: this },
           {
             ...this.data.page,
-            content: this.data.page.content
+            content: (this.data.page.content as ComponentConfig[])
               .slice(0, 1)
-              .concat(data) as PageConfig["content"],
+              .concat(data),
           }
         );
       }
@@ -152,7 +159,7 @@ $register("about", {
   },
 
   /** 列表控制函数 */
-  list({ detail }: any) {
+  list({ detail }: WXEvent.Touch) {
     if (detail.event)
       this[detail.event as "debugSwitch" | "testSwitch"](detail.value);
   },
@@ -162,7 +169,8 @@ $register("about", {
     // 关闭开发者模式
     if (developMode) {
       wx.setStorageSync("developMode", false);
-      (this.data.page.content[0].content as any[]).forEach((x, y) => {
+      (this.data.page.content[0]
+        .content as AdvancedListComponentItemConfig[]).forEach((x, y) => {
         x.hidden = y !== 0;
       });
       this.setData({ page: this.data.page });
@@ -196,7 +204,8 @@ $register("about", {
       // 密码正确
       if (event.detail.value === "5201314") {
         tip("已启用开发者模式");
-        (this.data.page.content[0].content as any[]).forEach((x) => {
+        (this.data.page.content[0]
+          .content as AdvancedListComponentItemConfig[]).forEach((x) => {
           x.hidden = false;
         });
         this.setData({ page: this.data.page, debug: false });

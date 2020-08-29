@@ -141,10 +141,10 @@ export const readFile = (
  * @param encoding 文件的编码格式
  * @returns JSON 文件内容
  */
-export const readJSON = (
+export const readJSON = <T>(
   path: string,
   encoding: FileEncoding = "utf-8"
-): any => {
+): T => {
   let data;
 
   try {
@@ -255,13 +255,11 @@ export const saveOnlineFile = ({
  */
 export const writeFile = (
   path: string,
-  data: Record<string, any> | ArrayBuffer | string,
+  data: ArrayBuffer | string,
   encoding: FileEncoding = "utf-8"
 ): void => {
-  const jsonString = JSON.stringify(data);
-
   makeDir(dirname(path));
-  fileManager.writeFileSync(`${userPath}/${path}`, jsonString, encoding);
+  fileManager.writeFileSync(`${userPath}/${path}`, data, encoding);
 };
 
 /**
@@ -273,7 +271,8 @@ export const writeFile = (
  */
 export const writeJSON = (
   path: string,
-  data: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any> | any[],
   encoding: FileEncoding = "utf-8"
 ): void => {
   const jsonString = JSON.stringify(data);
@@ -359,10 +358,10 @@ export const ensureJSON = ({
   } else if (success) success();
 };
 
-export interface GetJSONOption {
+export interface GetJSONOption<T> {
   path: string;
   url?: string;
-  success?: (data: Record<string, any> | any[] | string) => void;
+  success?: (data: T) => void;
   fail?: (errMsg: string | number) => void;
   error?: (statusCode: number) => void;
 }
@@ -374,18 +373,18 @@ export interface GetJSONOption {
  * @param successFunc JSON 获取成功后的回调
  * @param failFunc JSON 获取失败后的回调
  */
-export const getJSON = ({
+export const getJSON = <T>({
   path,
   url = path,
   success,
   fail,
   error: errorFunc = fail,
-}: GetJSONOption): void => {
+}: GetJSONOption<T>): void => {
   ensureJSON({
     url,
     path,
     success: () => {
-      const data = readJSON(path);
+      const data = readJSON<T>(path);
       if (success) success(data);
     },
     fail,

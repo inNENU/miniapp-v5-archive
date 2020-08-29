@@ -9,6 +9,5 @@
 <view class="{{theme}} grey">
   <template is="nav" data="{{...nav, theme}}" />
   <search words="{{words}}" catch:searching="searching" catch:search="search" />
-  <copy config="{{ { text:'aaa', header:'aaa' } }}" />
   <template is="body" data="{{page, theme}}" />
 </view>

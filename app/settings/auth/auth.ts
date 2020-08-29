@@ -4,6 +4,7 @@ import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { PageConfig, ListComponentConfig } from "../../../typings";
+import { ButtonListComponnetItemConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 type AuthorizeList =
@@ -87,7 +88,7 @@ $register("authorize", {
     resolvePage(res, this.data.page as PageConfig);
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     if (globalData.page.id === "授权设置") setPage({ option, ctx: this });
     else setPage({ option: { id: "authorize" }, ctx: this });
 
@@ -124,7 +125,7 @@ $register("authorize", {
   },
 
   /** 列表处理函数 */
-  list({ detail }: any) {
+  list({ detail }: WXEvent.Touch) {
     if (detail.event) this[detail.event as ListAction]();
   },
 
@@ -193,7 +194,8 @@ $register("authorize", {
                   const list = this.data.page.content[0].content;
 
                   authorizeList.forEach((type2, index) => {
-                    (list as any)[index].desc = res2.authSetting[type2]
+                    (list as ButtonListComponnetItemConfig[])[index].desc = res2
+                      .authSetting[type2]
                       ? "已授权✓"
                       : "未授权×";
                   });

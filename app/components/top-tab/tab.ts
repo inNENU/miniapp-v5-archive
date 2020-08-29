@@ -20,12 +20,13 @@ Component({
     changeTab({ currentTarget }: WXEvent.Touch): void {
       this.setData({ current: Number(currentTarget.dataset.index) });
     },
-    change({ detail }: any): void {
+
+    change({ detail }: WXEvent.SwiperChange): void {
       if (this.properties.immediate) this.setData({ current: detail.current });
     },
 
     // 设置指示条动画
-    transition({ detail }): void {
+    transition({ detail }: WXEvent.SwiperTransition): void {
       this.setData({
         barleft:
           (detail.dx + globalData.info.screenWidth * currentSwipe) /

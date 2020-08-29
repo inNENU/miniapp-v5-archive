@@ -3,12 +3,12 @@ import $register = require("wxpage");
 $register.C({
   properties: {
     /** 普通列表配置 */
-    config: Object as any,
+    config: Object,
   },
 
   methods: {
-    navigate(event): void {
-      this.$route(event.currentTarget.dataset.url);
+    navigate({ currentTarget }: WXEvent.Touch): void {
+      this.$route(currentTarget.dataset.url);
     },
   },
 });

@@ -23,7 +23,7 @@ $register("music", {
     /** 歌曲总长度 */
     totalTime: 1,
     /** 当前歌曲信息 */
-    currentSong: {} as any,
+    currentSong: {} as SongDetail,
     /** 是否展示歌曲列表 */
     showSongList: false,
     /** 歌曲列表 */

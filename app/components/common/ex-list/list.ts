@@ -1,9 +1,22 @@
 import $register = require("wxpage");
+import {
+  AdvancedListComponentConfig,
+  AdvancedListComponentItemConfig,
+  ButtonListComponnetItemConfig,
+  PickerListComponentItemConfig,
+  SliderListComponentItemConfig,
+  SwitchListComponentItemConfig,
+} from "../../../../typings";
+
+interface ListDetail<T = AdvancedListComponentItemConfig> {
+  id: string;
+  content: T;
+}
 
 $register.C({
   properties: {
     /** 配置 */
-    config: { type: Object as any },
+    config: { type: Object },
 
     /** 改变触发 */
     change: { type: Object },
@@ -14,14 +27,16 @@ $register.C({
       const {
         id,
         content: { visible: value },
-      } = this.getDetail(res);
+      } = this.getDetail(res) as ListDetail<PickerListComponentItemConfig>;
 
       this.setData({ [`config.content[${id}].visible`]: !value });
     },
 
     /** 控制选择器改变 */
     pickerChange(res: WXEvent.PickerChange): void {
-      const { id, content } = this.getDetail(res);
+      const { id, content } = this.getDetail(res) as ListDetail<
+        PickerListComponentItemConfig
+      >;
 
       if (res.type === "change") {
         const { value } = res.detail;
@@ -29,8 +44,12 @@ $register.C({
         // 判断为多列选择器，遍历每一列更新页面数据、并存储选择器值
         if (Array.isArray(value)) {
           value.forEach((x: string | number, y: number) => {
-            content.value[y] = content.pickerValue[y][Number(x)];
-            content.currentValue[y] = x;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (content.value as any[])[y] = (content.pickerValue as any[][])[y][
+              Number(x)
+            ];
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (content.currentValue as number[])![y] = Number(x);
           });
           wx.setStorageSync(content.key, value.join("-"));
 
@@ -50,7 +69,9 @@ $register.C({
 
     /** 开关改变 */
     switch(res: WXEvent.SwitchChange): void {
-      const { id, content } = this.getDetail(res);
+      const { id, content } = this.getDetail(res) as ListDetail<
+        SwitchListComponentItemConfig
+      >;
 
       // 更新页面数据
       this.setData(
@@ -68,14 +89,18 @@ $register.C({
 
     /** 触发按钮事件 */
     button(res: WXEvent.Touch): void {
-      const { content } = this.getDetail(res);
+      const { content } = this.getDetail(res) as ListDetail<
+        ButtonListComponnetItemConfig
+      >;
 
       this.triggerEvent("change", { event: content.button });
     },
 
     /** 控制滑块显隐 */
     sliderTap(res: WXEvent.Touch): void {
-      const { id, content } = this.getDetail(res);
+      const { id, content } = this.getDetail(res) as ListDetail<
+        SliderListComponentItemConfig
+      >;
 
       // 更新页面数据
       this.setData({ [`config.content[${id}].visible`]: !content.visible });
@@ -83,7 +108,9 @@ $register.C({
 
     /** 滑块改变 */
     sliderChange(res: WXEvent.SliderChange): void {
-      const { id, content } = this.getDetail(res);
+      const { id, content } = this.getDetail(res) as ListDetail<
+        SliderListComponentItemConfig
+      >;
       const { value } = res.detail;
 
       // 更新页面数据，并写入值到存储
@@ -98,10 +125,15 @@ $register.C({
     },
 
     /** 获得选择器位置与内容 */
-    getDetail({ currentTarget }: WXEvent.Base): { id: string; content: any } {
+    getDetail({ currentTarget }: WXEvent.Base): ListDetail {
       const id = currentTarget.id || currentTarget.dataset.id;
 
-      return { id, content: this.data.config.content[id] };
+      return {
+        id,
+        content: (this.data.config as AdvancedListComponentConfig).content[
+          Number(id)
+        ],
+      };
     },
   },
   observers: {
@@ -110,8 +142,10 @@ $register.C({
      *
      * @param detail 需要改变的键及其对应值
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     change(detail: Record<string, any>): void {
       if (detail) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const detail2: Record<string, any> = {};
 
         Object.keys(detail).forEach((element) => {

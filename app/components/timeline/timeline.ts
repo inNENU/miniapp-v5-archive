@@ -39,8 +39,9 @@ $register.C({
 
   methods: {
     active({ currentTarget }: WXEvent.Touch): void {
-      const path = this.data.config[currentTarget.dataset.index]
-        .path as TimeLineItem["path"];
+      const { path } = (this.data.config as TimeLineItem[])[
+        currentTarget.dataset.index as number
+      ];
 
       if (path) this.triggerEvent("active", { path });
     },

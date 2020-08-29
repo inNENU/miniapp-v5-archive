@@ -1,4 +1,6 @@
 /* eslint-disable max-lines */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 declare namespace MPPage {
   /** 页面跳转参数 */
   interface PageLifeTimeOptions {
@@ -298,11 +300,11 @@ declare namespace MPPage {
      * @param expire 缓存过期时间，单位为毫秒。如果为 true ，那么保持已存在的缓存时间，如果没有缓存，那么认为过期，不保存
      * @param callback 可选，异步写的时候回调，接收参数: cb(err), err不为空代表失败。
      */
-    set(
+    set<T = any>(
       key: string,
-      value: any,
+      value: T,
       expire?: number | true,
-      callback?: (errMsg: any) => void
+      callback?: (errMsg: string) => void
     ): void;
 
     /**
@@ -311,7 +313,7 @@ declare namespace MPPage {
      * @param key 存储的键值
      * @param callback 可选，异步读的时候回调，接收参数: `calbck(err, data)`, `err`不为空代表失败
      */
-    get(key: string, callback?: (err: any, data: any) => void): void;
+    get<T = any>(key: string, callback?: (err: string, data: T) => void): void;
 
     /**
      * 如果传 `callback` 参数，会使用异步模式并回调
@@ -581,7 +583,11 @@ declare namespace WechatMiniprogram {
     > = ThisType<MPInstance<D, P, M>> & Options<D, P, M>;
 
     interface MPConstructor {
-      <D extends DataOption, P extends PropertyOption, M extends MethodOption>(
+      <
+        D extends DataOption = DataOption,
+        P extends PropertyOption = PropertyOption,
+        M extends MethodOption = MethodOption
+      >(
         options: MPOption<D, P, M>
       ): string;
     }

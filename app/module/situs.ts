@@ -10,33 +10,37 @@ $register("situs", {
     page: {} as PageConfig,
   },
 
-  state: {},
+  state: {
+    id: "",
+  },
 
   onPreload(res) {
     resolvePage(res, readJSON(`function/map/${res.query.id}`));
   },
 
   onLoad(option) {
-    if (globalData.page.id === option.id) setPage({ option, ctx: this });
-    else
-      getJSON({
-        path: `function/map/${option.id}`,
-        url: `resource/function/${option.id}`,
-        success: (data) => {
-          setPage({ option, ctx: this }, data as PageConfig);
-        },
-        fail: () => {
-          setPage(
-            { option, ctx: this },
-            {
-              error: true,
-              statusBarHeight: globalData.info.statusBarHeight,
-            }
-          );
-        },
-      });
+    if (option.id) {
+      if (globalData.page.id === option.id) setPage({ option, ctx: this });
+      else
+        getJSON({
+          path: `function/map/${option.id}`,
+          url: `resource/function/${option.id}`,
+          success: (data) => {
+            setPage({ option, ctx: this }, data as PageConfig);
+          },
+          fail: () => {
+            setPage(
+              { option, ctx: this },
+              {
+                error: true,
+                statusBarHeight: globalData.info.statusBarHeight,
+              }
+            );
+          },
+        });
 
-    this.state = option;
+      this.state.id = option.id;
+    }
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
   },

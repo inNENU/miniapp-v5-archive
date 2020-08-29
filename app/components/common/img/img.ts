@@ -3,7 +3,7 @@ import $register = require("wxpage");
 $register.C({
   properties: {
     /** 图片组件配置 */
-    config: { type: Object as any },
+    config: { type: Object },
 
     /** 展示图片列表 */
     images: {

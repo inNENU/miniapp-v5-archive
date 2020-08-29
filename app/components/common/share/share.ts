@@ -6,7 +6,7 @@ const {
 } = getApp<AppOption>(); // 获得日志管理器，全局数据
 
 $register.C({
-  properties: { config: { type: Object, value: { id: "" } } as any },
+  properties: { config: { type: Object, value: { id: "" } } },
   data: {
     // 小程序运行环境
     env,
