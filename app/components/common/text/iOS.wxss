@@ -1,37 +1,3 @@
-/* iOS */
-.iOS .paragraph-title {
-  max-width: 517px;
-  min-height: 36px;
-  margin: 0 auto;
-  padding: 12px 15px 4px 15px;
-
-  text-align: left;
-  font-size: 19px;
-  font-weight: 500;
-}
-
-.iOS-title + .paragraph-title {
+.iOS-title + .paragraph-header {
   padding-top: 2px;
-}
-
-.grey.iOS .paragraph-title {
-  min-height: 37px;
-  margin: 0 10px;
-  padding: 23px 15px 5px 15px;
-
-  color: var(--dark-grey);
-  font-size: 13px;
-  font-weight: 400;
-}
-
-@media (min-width: 768px) {
-  .iOShead {
-    min-height: 38px;
-    font-size: 21px;
-  }
-
-  .grey .iOShead {
-    min-height: 38px;
-    font-size: 14px;
-  }
 }

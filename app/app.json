@@ -6,7 +6,14 @@
     "page/guide/guide",
     "page/intro/intro",
     "page/user/user",
-    "page/search/search"
+    "page/search/search",
+    "settings/about/about",
+    "settings/auth/auth",
+    "settings/donate/donate",
+    "settings/donate/list",
+    "settings/log/log",
+    "settings/outlook/outlook",
+    "settings/storage/storage"
   ],
   "subPackages": [
     {
@@ -26,18 +33,6 @@
     {
       "root": "module",
       "pages": ["page", "web", "function", "situs"]
-    },
-    {
-      "root": "settings",
-      "pages": [
-        "about/about",
-        "auth/auth",
-        "donate/donate",
-        "donate/list",
-        "log/log",
-        "outlook/outlook",
-        "storage/storage"
-      ]
     }
   ],
   "preloadRule": {
@@ -56,10 +51,6 @@
     "page/function/function": {
       "network": "all",
       "packages": ["function"]
-    },
-    "page/user/user": {
-      "network": "all",
-      "packages": ["settings"]
     }
   },
   "window": {

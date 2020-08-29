@@ -1,3 +1,5 @@
+<!-- 标题 -->
+<view wx:if="{{config.header}}" class="copy-header">{{config.header}}</view>
 <view class="copy-wrapper">
   <!-- 复制按钮 -->
   <view

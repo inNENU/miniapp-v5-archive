@@ -1,5 +1,5 @@
 <!-- 段落标题 -->
-<view wx:if="{{config.heading}}" class="paragraph-title"
+<view wx:if="{{config.heading}}" class="paragraph-header"
   >{{config.heading}}</view
 >
 <!-- 段落主体 -->

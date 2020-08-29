@@ -1,10 +1,29 @@
 /******************
       通用样式
  *****************/
-.paragraph {
-  max-width: 517px;
+.paragraph-header {
+  max-width: var(--max-width);
+  min-height: 36px;
+  margin: 0 var(--paragraph-horizontal-margin);
+  padding: 12px 15px 4px 15px;
 
-  margin: 0 auto;
+  color: var(--text-color);
+  text-align: left;
+  font-size: 19px;
+  font-weight: 500;
+}
+
+.grey .paragraph-header {
+  padding: 21px 15px 5px 15px;
+  color: var(--dark-grey);
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.paragraph {
+  max-width: var(--max-width);
+
+  margin: 0 var(--paragraph-horizontal-margin);
   padding: 0 15px;
 
   text-align: justify;
@@ -24,9 +43,6 @@
 .grey .paragraph {
   position: relative;
 
-  max-width: unset;
-
-  margin: 0 15px;
   padding: 10px 15px;
   background-color: var(--block-bgcolor);
   border-radius: 8px;
@@ -57,5 +73,4 @@
 
 @import "iOS.wxss";
 @import "Android.wxss";
-@import "NENU.wxss";
 @import "weui.wxss";

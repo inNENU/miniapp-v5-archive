@@ -39,12 +39,12 @@ $register("about", {
             { text: "   小程序全部内容均由Hope Studio独立开发。" },
             {
               text: "Hope Studio 介绍",
-              url: "page?path=other/MrHope/hope-studio",
+              url: "page?path=other/about/hope-studio",
             },
-            { text: "Mr.Hope 个人介绍", url: "page?path=other/MrHope/mrhope" },
-            { text: "开发者访谈", url: "page?path=other/MrHope/interview" },
-            { text: "常见问题", url: "page?path=other/MrHope/function" },
-            { text: "致谢名单", url: "page?path=other/MrHope/thanks" },
+            { text: "Mr.Hope 个人介绍", url: "page?path=other/about/mrhope" },
+            { text: "开发者访谈", url: "page?path=other/about/interview" },
+            { text: "常见问题", url: "page?path=other/about/function" },
+            { text: "致谢名单", url: "page?path=other/about/thanks" },
           ],
         },
         {
@@ -67,8 +67,9 @@ $register("about", {
         },
         {
           tag: "list",
+          header: false,
           content: [
-            { text: "协议详情", url: "page?path=other/MrHope/copyright" },
+            { text: "协议详情", url: "page?path=other/about/copyright" },
           ],
         },
       ],

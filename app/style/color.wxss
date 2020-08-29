@@ -15,6 +15,7 @@ page {
   --card-shadow: rgba(191, 192, 195, 0.15);
   --max-width: 517px;
   --horizontal-margin: 15px;
+  --paragraph-horizontal-margin: auto;
 }
 
 @media (min-width: 547px) {
@@ -27,6 +28,7 @@ page .grey {
   --block-bgcolor: #fff;
   --max-width: none;
   --horizontal-margin: 15px;
+  --paragraph-horizontal-margin: 15px;
 }
 
 @media (prefers-color-scheme: light) {

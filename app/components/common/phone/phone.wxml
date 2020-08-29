@@ -1,3 +1,5 @@
+<!-- 标题 -->
+<view wx:if="{{config.header}}" class="phone-header">{{config.header}}</view>
 <view class="phone-wrapper">
   <!-- 电话图标 -->
   <image class="phone-icon" mode="widthFix" src="./phone.svg" />

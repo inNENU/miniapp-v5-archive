@@ -1,23 +1,7 @@
-.weui .paragraph-title {
-  margin-bottom: 0.34em;
-  padding: 0 16px;
-  padding: 0 calc(16px + constant(safe-area-inset-right)) 0 calc(16px + constant(safe-area-inset-left));
-  padding: 0 calc(16px + env(safe-area-inset-right)) 0 calc(16px + env(safe-area-inset-left));
-
-  text-align: left;
+.weui .paragraph-header {
   font-size: 17px;
   font-weight: 700;
   line-height: 1.4;
-}
-
-.grey.weui .paragraph-title {
-  min-height: 10px;
-  margin: 0.77em 0 0.3em 0;
-  padding: 0 15px;
-
-  color: var(--light-grey);
-  font-size: 14px;
-  font-weight: 400;
 }
 
 .weui .paragraph {
