@@ -2,10 +2,10 @@ Component({
   properties: { config: Object },
 
   methods: {
-    change(event: WXEvent.SwiperChange): void {
+    change(event: WechatMiniprogram.SwiperChange): void {
       this.triggerEvent("change", event);
     },
-    animation(event: WXEvent.SwiperAnimationFinish): void {
+    animation(event: WechatMiniprogram.SwiperAnimationFinish): void {
       this.triggerEvent("animation", event);
     },
   },

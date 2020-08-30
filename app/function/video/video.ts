@@ -135,7 +135,7 @@ $register("video", {
   },
 
   /** 切换播放视频 */
-  change(event: WXEvent.Touch) {
+  change(event: WechatMiniprogram.TouchEvent) {
     console.log(event);
     const { groupID, listID } = event.currentTarget.dataset as Record<
       string,

@@ -7,7 +7,7 @@ $register.C({
   },
 
   methods: {
-    navigate({ currentTarget }: WXEvent.Touch): void {
+    navigate({ currentTarget }: WechatMiniprogram.TouchEvent): void {
       this.$route(currentTarget.dataset.url);
     },
   },

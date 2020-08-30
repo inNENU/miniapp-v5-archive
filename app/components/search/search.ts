@@ -35,12 +35,12 @@ $register.C({
       this.setData({ value: "" });
     },
 
-    inputTyping(event: WXEvent.Input): void {
+    inputTyping(event: WechatMiniprogram.Input): void {
       this.setData({ value: event.detail.value });
       this.triggerEvent("searching", { value: event.detail.value });
     },
 
-    select(event: WXEvent.Touch): void {
+    select(event: WechatMiniprogram.TouchEvent): void {
       const value = this.data.words[
         event.currentTarget.dataset.index as number
       ];
@@ -49,7 +49,7 @@ $register.C({
       this.triggerEvent("search", { value });
     },
 
-    confirm(event: WXEvent.Input): void {
+    confirm(event: WechatMiniprogram.Input): void {
       this.setData({ words: [], focus: false });
       this.triggerEvent("search", { value: event.detail.value });
     },

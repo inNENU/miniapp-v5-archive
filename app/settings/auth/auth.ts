@@ -125,7 +125,7 @@ $register("authorize", {
   },
 
   /** 列表处理函数 */
-  list({ detail }: WXEvent.Touch) {
+  list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction]();
   },
 

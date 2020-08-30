@@ -73,7 +73,7 @@ $register("setting", {
   },
 
   /** 列表控制函数 */
-  list({ detail }: WXEvent.Touch) {
+  list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction](detail.value);
   },
 

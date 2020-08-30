@@ -23,23 +23,23 @@ $register.C({
   },
   methods: {
     /** 控制选择器显隐 */
-    pickerTap(res: WXEvent.Touch): void {
+    pickerTap(event: WechatMiniprogram.TouchEvent): void {
       const {
         id,
         content: { visible: value },
-      } = this.getDetail(res) as ListDetail<PickerListComponentItemConfig>;
+      } = this.getDetail(event) as ListDetail<PickerListComponentItemConfig>;
 
       this.setData({ [`config.content[${id}].visible`]: !value });
     },
 
     /** 控制选择器改变 */
-    pickerChange(res: WXEvent.PickerChange): void {
-      const { id, content } = this.getDetail(res) as ListDetail<
+    pickerChange(event: WechatMiniprogram.PickerChange): void {
+      const { id, content } = this.getDetail(event) as ListDetail<
         PickerListComponentItemConfig
       >;
 
-      if (res.type === "change") {
-        const { value } = res.detail;
+      if (event.type === "change") {
+        const { value } = event.detail;
 
         // 判断为多列选择器，遍历每一列更新页面数据、并存储选择器值
         if (Array.isArray(value)) {
@@ -68,28 +68,28 @@ $register.C({
     },
 
     /** 开关改变 */
-    switch(res: WXEvent.SwitchChange): void {
-      const { id, content } = this.getDetail(res) as ListDetail<
+    switch(event: WechatMiniprogram.SwitchChange): void {
+      const { id, content } = this.getDetail(event) as ListDetail<
         SwitchListComponentItemConfig
       >;
 
       // 更新页面数据
       this.setData(
-        { [`config.content[${id}].status`]: res.detail.value },
+        { [`config.content[${id}].status`]: event.detail.value },
         () => {
           this.triggerEvent("change", {
             event: content.Switch,
-            value: res.detail.value,
+            value: event.detail.value,
           });
         }
       );
 
-      wx.setStorageSync(content.swiKey, res.detail.value); // 将开关值写入存储的swiKey变量中
+      wx.setStorageSync(content.swiKey, event.detail.value); // 将开关值写入存储的swiKey变量中
     },
 
     /** 触发按钮事件 */
-    button(res: WXEvent.Touch): void {
-      const { content } = this.getDetail(res) as ListDetail<
+    button(event: WechatMiniprogram.TouchEvent): void {
+      const { content } = this.getDetail(event) as ListDetail<
         ButtonListComponnetItemConfig
       >;
 
@@ -97,8 +97,8 @@ $register.C({
     },
 
     /** 控制滑块显隐 */
-    sliderTap(res: WXEvent.Touch): void {
-      const { id, content } = this.getDetail(res) as ListDetail<
+    sliderTap(event: WechatMiniprogram.TouchEvent): void {
+      const { id, content } = this.getDetail(event) as ListDetail<
         SliderListComponentItemConfig
       >;
 
@@ -107,11 +107,11 @@ $register.C({
     },
 
     /** 滑块改变 */
-    sliderChange(res: WXEvent.SliderChange): void {
-      const { id, content } = this.getDetail(res) as ListDetail<
+    sliderChange(event: WechatMiniprogram.SliderChange): void {
+      const { id, content } = this.getDetail(event) as ListDetail<
         SliderListComponentItemConfig
       >;
-      const { value } = res.detail;
+      const { value } = event.detail;
 
       // 更新页面数据，并写入值到存储
       content.value = value;
@@ -121,11 +121,11 @@ $register.C({
         this.triggerEvent("change", { value, event: content.slider });
       });
 
-      if (res.type === "change") wx.setStorageSync(content.sliKey, value);
+      if (event.type === "change") wx.setStorageSync(content.sliKey, value);
     },
 
     /** 获得选择器位置与内容 */
-    getDetail({ currentTarget }: WXEvent.Base): ListDetail {
+    getDetail({ currentTarget }: WechatMiniprogram.BaseEvent): ListDetail {
       const id = currentTarget.id || currentTarget.dataset.id;
 
       return {

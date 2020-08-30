@@ -1,349 +1,515 @@
 /* eslint-disable max-lines */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 
-/**
- * 事件对象类型
- */
-declare namespace WXEvent {
-  interface Target {
-    /** 事件组件的id */
+/** 事件对象类型 */
+declare namespace WechatMiniprogram {
+  interface Target<DataSet extends IAnyObject = IAnyObject> {
+    /** 事件组件的 id */
     id: string;
     /** 当前组件的类型 */
     tagName?: string;
-    /** 事件组件上由data-开头的自定义属性组成的集合 */
-    dataset: Record<string, any>;
+    /** 事件组件上由 `data-` 开头的自定义属性组成的集合 */
+    dataset: DataSet;
     /** 距离页面顶部的偏移量 */
     offsetTop: number;
     /** 距离页面左边的偏移量 */
     offsetLeft: number;
   }
 
-  /**
-   * base事件参数
-   */
-  interface Base {
-    /**
-     * 事件类型
-     */
+  /** 基础事件参数 */
+  interface BaseEvent<
+    Mark extends IAnyObject = IAnyObject,
+    CurrentTargetDataset extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = CurrentTargetDataset
+  > {
+    /** 事件类型 */
     type: string;
-    /**
-     * 页面打开到触发事件所经过的毫秒数
-     */
+    /** 页面打开到触发事件所经过的毫秒数 */
     timeStamp: number;
-    /**
-     * 触发事件的源组件
-     */
-    target: Target;
-    /**
-     * 事件绑定的当前组件
-     */
-    currentTarget: Target;
+    /** 事件冒泡路径上所有由 `mark:` 开头的自定义属性组成的集合 */
+    mark?: Mark;
+    /** 触发事件的源组件 */
+    target: Target<TargetDataset>;
+    /** 事件绑定的当前组件 */
+    currentTarget: Target<CurrentTargetDataset>;
   }
 
-  /**
-   * 自定义事件
-   */
-  interface Custom<P extends Record<string, any> = Record<string, any>>
-    extends Base {
-    /**
-     * 额外的信息
-     */
-    detail: P;
+  /** 自定义事件 */
+  interface CustomEvent<
+    Detail extends IAnyObject = IAnyObject,
+    Mark extends IAnyObject = IAnyObject,
+    CurrentTargetDataset extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = CurrentTargetDataset
+  > extends BaseEvent<Mark, CurrentTargetDataset, TargetDataset> {
+    /** 额外的信息 */
+    detail: Detail;
   }
 
-  /**
-   * Touch 对象
-   */
+  /** Touch 对象 */
   interface TouchDetail {
-    /**
-     * 距离页面可显示区域 (屏幕除去导航条) 左上角距离，横向为X轴
-     */
+    /** 距离页面可显示区域 (屏幕除去导航条) 左上角距离，横向为 X 轴 */
     clientX: number;
-    /**
-     * 距离页面可显示区域 (屏幕除去导航条) 左上角距离，纵向为Y轴
-     */
+    /** 距离页面可显示区域 (屏幕除去导航条) 左上角距离，纵向为 Y 轴 */
     clientY: number;
-    /**
-     * 触摸点的标识符
-     */
+    /** 触摸点的标识符 */
     identifier: number;
-    /**
-     * 距离文档左上角的距离，文档的左上角为原点，横向为X轴
-     */
+    /** 距离文档左上角的距离，文档的左上角为原点，横向为 X 轴 */
     pageX: number;
-    /**
-     * 距离文档左上角的距离，文档的左上角为原点，纵向为Y轴
-     */
+    /** 距离文档左上角的距离，文档的左上角为原点，纵向为 Y 轴 */
     pageY: number;
   }
 
-  /**
-   * 触摸事件响应
-   */
+  /** canvas Touch 对象 */
+  interface TouchCanvasDetail {
+    /** 触摸点的标识符 */
+    identifier: number;
+    /** 距离 Canvas 左上角的距离，Canvas 的左上角为原点 ，横向为X轴 */
+    x: number;
+    /** 距离 Canvas 左上角的距离，Canvas 的左上角为原点 纵向为Y轴 */
+    y: number;
+  }
+
+  /** 触摸事件 */
   interface Touch<
-    P extends Record<string, any> = Record<string, any>,
-    T extends TouchDetail | TouchCanvasDetail = TouchDetail
-  > extends Custom<P> {
-    /**
-     * 触摸事件，当前停留在屏幕中的触摸点信息的数组
-     */
+    Detail extends IAnyObject = IAnyObject,
+    T extends TouchDetail | TouchCanvasDetail = TouchDetail,
+    Mark extends IAnyObject = IAnyObject,
+    CurrentTargetDataset extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = CurrentTargetDataset
+  > extends CustomEvent<Detail, Mark, CurrentTargetDataset, TargetDataset> {
+    /** 触摸事件，当前停留在屏幕中的触摸点信息的数组 */
     touches: T[];
-    /**
-     * 触摸事件，当前变化的触摸点信息的数组
-     */
+    /** 触摸事件，当前变化的触摸点信息的数组 */
     changedTouches: T[];
   }
 
-  /**
-   * canvas Touch 对象
-   */
-  interface TouchCanvasDetail {
-    /**
-     * 触摸点的标识符
-     */
-    identifier: number;
-    /**
-     * 距离 Canvas 左上角的距离，Canvas 的左上角为原点 ，横向为X轴
-     */
-    x: number;
-    /**
-     * 距离 Canvas 左上角的距离，Canvas 的左上角为原点 纵向为Y轴
-     */
-    y: number;
-  }
+  /** 触摸事件响应 */
+  type TouchEvent<
+    Detail extends IAnyObject = IAnyObject,
+    Mark extends IAnyObject = IAnyObject,
+    CurrentTargetDataset extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = CurrentTargetDataset
+  > = Touch<Detail, TouchDetail, Mark, CurrentTargetDataset, TargetDataset>;
 
-  /**
-   * canvas触摸事件响应
-   */
-  interface TouchCanvas extends Touch<never, TouchCanvasDetail> {
-    /**
-     * <canvas> 中的触摸事件不可冒泡，所以没有 currentTarget。
-     */
+  /** canvas 触摸事件响应 */
+  interface TouchCanvas<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > extends Touch<never, TouchCanvasDetail, Mark, never, TargetDataset> {
+    // canvas 中的触摸事件不可冒泡，所以没有 currentTarget。
     currentTarget: never;
   }
-
-  /**
-   * 拖动过程中触发的事件，event.detail = {x, y, source}
-   *
-   * 最低基础库: 1.9.90
-   */
-  type MovableViewChange = Custom<{
-    x: number;
-    y: number;
-    /**
-     * 产生移动的原因
-     *
-     * - `touch` 拖动
-     * - `touch-out-of-bounds` 超出移动范围
-     * - `out-of-bounds` 超出移动范围后的回弹
-     * - `friction` 惯性
-     * - `空字符串` setData
-     */
-    source: "touch" | "touch-out-of-bounds" | "out-of-bounds" | "friction" | "";
-  }>;
-
-  /**
-   * 缩放过程中触发的事件，event.detail = {x, y, scale}，x 和 y 字段在2.1.0之后支持
-   *
-   * 最低基础库: 1.9.90
-   */
-  type MovableViewScale = Custom<{
-    /** 最低基础库: 2.1.0 */
-    x: number;
-    /** 最低基础库: 2.1.0 */
-    y: number;
-    scale: number;
-  }>;
 
   /**
    * 图片加载成功时触发
    *
    * 最低基础库: 2.1.0
    */
-  type CoverImageLoad = Custom<{
-    /** 图片宽度 */
-    width: number;
-    /** 图片高度 */
-    height: number;
-  }>;
+  type CoverImageLoad<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 图片宽度 */
+      width: number;
+      /** 图片高度 */
+      height: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
    * 图片加载失败时触发
    *
    * 最低基础库: 2.1.0
    */
-  type CoverImageError = Custom<WechatMiniprogram.GeneralCallbackResult>;
+  type CoverImageError = CustomEvent<WechatMiniprogram.GeneralCallbackResult>;
 
   /**
-   * 滚动到顶部/左边时触发
-   */
-  type ScrollToUpper = Custom<{
-    direction: "top" | "left";
-  }>;
-
-  /**
-   * 滚动到底部/右边时触发
-   */
-  type ScrollToLower = Custom<{
-    direction: "bottom" | "right";
-  }>;
-
-  /**
-   * 滚动时触发，event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}
-   */
-  type ScrollView = Custom<{
-    scrollLeft: number;
-    scrollTop: number;
-    scrollHeight: number;
-    scrollWidth: number;
-    deltaX: number;
-    deltaY: number;
-  }>;
-
-  /**
-   * current 改变时会触发 change 事件，event.detail = {current, source}
+   * 拖动过程中触发的事件，event.detail = {x, y, source}
    *
-   * `tip`: 如果在 bindchange 的事件回调函数中使用 setData 改变 current 值，则有可能导致 setData 被不停地调用，因而通常情况下请在改变 current 值前检测 source 字段来判断是否是由于用户触摸引起。
+   * 最低基础库: 1.9.90
    */
-  type SwiperChange = Custom<{
-    current: number;
-    /**
-     * 表示导致变更的原因
-     *
-     * - `autoplay` 自动播放导致swiper变化；
-     * - `touch` 用户划动引起swiper变化；
-     * - 其它原因将用空字符串表示。
-     *
-     * 最低基础库: 1.4.0
-     */
-    source: "" | "autoplay" | "touch";
-    /** 该 swiper-item 的标识符 */
-    currentItemId: string;
-  }>;
+  type MovableViewChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      x: number;
+      y: number;
+      /**
+       * 产生移动的原因
+       *
+       * - `touch` 拖动
+       * - `touch-out-of-bounds` 超出移动范围
+       * - `out-of-bounds` 超出移动范围后的回弹
+       * - `friction` 惯性
+       * - `空字符串` setData
+       */
+      source:
+        | "touch"
+        | "touch-out-of-bounds"
+        | "out-of-bounds"
+        | "friction"
+        | "";
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * swiper-item 的位置发生改变时会触发 transition 事件，event.detail = {dx: dx, dy: dy}
+   * 缩放过程中触发的事件
+   *
+   * event.detail = {x, y, scale}
+   *
+   * x 和 y 字段在 2.1.0 之后支持
+   *
+   * 最低基础库: 1.9.90
+   */
+  type MovableViewScale<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 最低基础库: 2.1.0 */
+      x: number;
+      /** 最低基础库: 2.1.0 */
+      y: number;
+      scale: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 滑动开始事件 (同时开启 enhanced 属性后生效)
+   *
+   * detail { scrollTop, scrollLeft }
+   *
+   * 最低基础库: 2.12.0
+   */
+  type ScrollViewDragStart<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      scrollTop: number;
+      scrollLeft: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 滑动事件 (同时开启 enhanced 属性后生效)
+   *
+   * detail { scrollTop, scrollLeft }
+   *
+   * 最低基础库: 2.12.0
+   */
+  type ScrollViewDragging<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      scrollTop: number;
+      scrollLeft: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 滑动结束事件 (同时开启 enhanced 属性后生效)
+   *
+   * detail { scrollTop, scrollLeft }
+   *
+   * 最低基础库: 2.12.0
+   */
+  type ScrollViewDragEnd<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      scrollTop: number;
+      scrollLeft: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /** 滚动到顶部/左边时触发 */
+  type ScrollViewScrollToUpper<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      direction: "top" | "left";
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /** 滚动到底部/右边时触发 */
+  type ScrollViewScrollToLower<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      direction: "bottom" | "right";
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 滚动时触发
+   *
+   * event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}
+   */
+  type ScrollViewScroll<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      scrollLeft: number;
+      scrollTop: number;
+      scrollHeight: number;
+      scrollWidth: number;
+      deltaX: number;
+      deltaY: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  type ScrollViewRefresherPulling<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
+
+  type ScrollViewRefresherRefresh<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
+
+  type ScrollViewRefresherRestore<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
+
+  type ScrollViewRefresherAbort<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
+
+  /**
+   * current 改变时会触发 change 事件
+   *
+   * event.detail = {current, source}
+   *
+   * **Tip**: 如果在 bindchange 的事件回调函数中使用 setData 改变 current 值，则有可能导致 setData 被不停地调用，因而通常情况下请在改变 current 值前检测 source 字段来判断是否是由于用户触摸引起。
+   */
+  type SwiperChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      current: number;
+      /**
+       * 表示导致变更的原因
+       *
+       * - `autoplay` 自动播放导致 swiper 变化；
+       * - `touch` 用户划动引起 swiper 变化；
+       * - 其它原因将用空字符串表示。
+       *
+       * 最低基础库: 1.4.0
+       */
+      source: "" | "autoplay" | "touch";
+      /** 该 swiper-item 的标识符 */
+      currentItemId: string;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * swiper-item 的位置发生改变时会触发 transition 事件
+   *
+   * event.detail = {dx: dx, dy: dy}
    *
    * 最低基础库: 2.4.3
    */
-  type SwiperTransition = Custom<{
-    dx: number;
-    dy: number;
-  }>;
+  type SwiperTransition<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      dx: number;
+      dy: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
    * 动画结束时会触发 animationfinish 事件
    *
    * 最低基础库: 1.9.0
    */
-  type SwiperAnimationFinish = SwiperChange;
+  type SwiperAnimationFinish<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = SwiperChange<Mark, TargetDataset>;
 
   /**
-   * 动画完成事件
+   * progress 动画完成事件
    *
    * 最低基础库 2.4.1
    */
-  type ProgressActiveEnd = Custom<{
-    curPercent: number;
-  }>;
+  type ProgressActiveEnd<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      curPercent: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * 用户点击该按钮时，会返回获取到的用户信息，回调的detail数据与wx.getUserInfo返回的一致，open-type="getUserInfo"时有效
+   * 用户点击该按钮时，会返回获取到的用户信息，回调的 detail 数据与 `wx. getUserInfo` 返回的一致，`open-type="getUserInfo"` 时有效
    *
    * 最低基础库: 1.3.0
    */
-  type ButtonGetUserInfo = Custom<
+  type ButtonGetUserInfo = CustomEvent<
     WechatMiniprogram.GeneralCallbackResult &
       WechatMiniprogram.GetUserInfoSuccessCallbackResult
   >;
 
   /**
-   * 客服消息回调，open-type="contact"时有效
+   * 客服消息回调，`open-type="contact"` 时有效
    *
    * 最低基础库: 1.5.0
    */
-  type ButtonContact = Custom<WechatMiniprogram.GeneralCallbackResult>;
+  type ButtonContact = CustomEvent<WechatMiniprogram.GeneralCallbackResult>;
 
   /**
-   * 获取用户手机号回调，open-type=getPhoneNumber时有效
+   * 获取用户手机号回调，`open-type=getPhoneNumber` 时有效
    *
    * 最低基础库: 1.2.0
    */
-  type ButtonGetPhoneNumber = Custom<
+  type ButtonGetPhoneNumber = CustomEvent<
     WechatMiniprogram.GeneralCallbackResult &
       Partial<WechatMiniprogram.GetWeRunDataSuccessCallbackResult>
   >;
 
   /**
-   * 当使用开放能力时，发生错误的回调，open-type=launchApp时有效
+   * 当使用开放能力时，发生错误的回调，`open-type=launchApp` 时有效
    *
    * 最低基础库: 1.9.5
    */
-  type ButtonError = Custom<WechatMiniprogram.GeneralCallbackResult>;
+  type ButtonError = CustomEvent<WechatMiniprogram.GeneralCallbackResult>;
 
   /**
-   * 在打开授权设置页后回调，open-type=openSetting时有效
+   * 在打开授权设置页后回调，`open-type=openSetting` 时有效
    *
    * 最低基础库: 2.0.7
    */
-  type ButtonOpenSetting = Custom<
+  type ButtonOpenSetting = CustomEvent<
     WechatMiniprogram.GeneralCallbackResult &
       WechatMiniprogram.OpenSettingSuccessCallbackResult
   >;
 
   /**
-   * 打开 APP 成功的回调，open-type=launchApp时有效
+   * 打开 APP 成功的回调，`open-type=launchApp` 时有效
    *
    * 最低基础库: 2.4.4
    */
-  type ButtonLaunchApp = Custom<WechatMiniprogram.GeneralCallbackResult>;
+  type ButtonLaunchApp = CustomEvent<WechatMiniprogram.GeneralCallbackResult>;
 
   /**
-   * checkbox-group 中选中项发生改变时触发 change 事件，detail = {value:['选中的checkbox的value的数组']}
+   * checkbox-group 中选中项发生改变时触发 change 事件
+   *
+   * detail = { value: ['选中的checkbox 的 value 的数组'] }
    */
-  type CheckboxGroupChange = Custom<{
-    /** 选中的checkbox的value的数组 */
-    value: string[];
-  }>;
+  type CheckboxGroupChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 选中的 checkbox 的 value 的数组 */
+      value: string[];
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
    * 编辑器初始化完成时触发
    *
    * 最低基础库: 2.7.0
    */
-  type EditorReady = Custom;
+  type EditorReady<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
 
   /**
-   * 编辑器聚焦时触发，event.detail = {html, text, delta}
+   * 编辑器聚焦时触发
+   *
+   * event.detail = {html, text, delta}
    *
    * 最低基础库: 2.7.0
    */
-  type EditorFocus = Custom<{
-    html: string;
-    text: string;
-    delta: any[];
-  }>;
+  type EditorFocus<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      html: string;
+      text: string;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      delta: any[];
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * 编辑器失去焦点时触发，detail = {html, text, delta}
+   * 编辑器失去焦点时触发
+   *
+   * detail = {html, text, delta}
    *
    * 最低基础库: 2.7.0
    */
-  type EditorBlur = EditorFocus;
+  type EditorBlur<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = EditorFocus<Mark, TargetDataset>;
 
   /**
-   * 编辑器内容改变时触发，detail = {html, text, delta}
+   * 编辑器内容改变时触发
+   *
+   * detail = {html, text, delta}
    *
    * 最低基础库: 2.7.0
    */
-  type EditorInput = EditorFocus;
+  type EditorInput<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = EditorFocus<Mark, TargetDataset>;
 
   /**
    * 通过 Context 方法改变编辑器内样式时触发，返回选区已设置的样式
    *
    * 最低基础库: 2.7.0
    */
-  type EditorStatusChange = Custom<
+  type EditorStatusChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
     Partial<{
       align: "left" | "center" | "right" | "justify";
       bold: "strong";
@@ -363,254 +529,421 @@ declare namespace WXEvent {
       header: number;
       script: "sub" | "super";
       direction: "rtl";
-    }>
+    }>,
+    Mark,
+    TargetDataset
   >;
 
   /**
-   * 携带 form 中的数据触发 submit 事件，event.detail = {value : {'name': 'value'} , formId: ''}
-   */
-  type FormSubmit = Custom<{
-    formId?: unknown;
-    target: Target;
-    /** 表单中的数据，需要在表单组件中加上 name 来作为 key。 */
-    value: Record<string, any>;
-  }>;
-
-  /**
-   * 表单重置时会触发 reset 事件
-   */
-  type FormReset = Custom<{
-    target: Target;
-  }>;
-
-  /**
-   * 键盘输入时触发，event.detail = {value, cursor, keyCode}，处理函数可以直接 return 一个字符串，将替换输入框的内容。
-   */
-  type Input = Custom<{
-    /** 输入框内容 */
-    value: string;
-    /** 光标位置 */
-    cursor: number;
-    /** keyCode 为键值 (目前工具还不支持返回keyCode参数) `2.1.0` 起支持 */
-    keyCode?: number;
-  }>;
-
-  /**
-   * 输入框聚焦时触发，event.detail = { value, height }
-   */
-  type InputFocus = Custom<{
-    /** 输入框内容 */
-    value: string;
-    /** 键盘高度, 在基础库 `1.9.90` 起支持 */
-    height?: number;
-  }>;
-
-  /**
-   * 输入框失去焦点时触发，event.detail = {value: value}
-   */
-  type InputBlur = Custom<{
-    /** 输入框内容 */
-    value: string;
-  }>;
-
-  /**
-   * 点击完成按钮时触发，event.detail = {value: value}
-   */
-  type InputConfirm = Custom<{
-    /** 输入框内容 */
-    value: string;
-  }>;
-
-  /**
-   * 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
+   * 携带 form 中的数据触发 submit 事件
    *
-   * __tip__: 键盘高度发生变化，keyboardheightchange事件可能会多次触发，开发者对于相同的height值应该忽略掉
+   * event.detail = {value : {'name': 'value'} , formId: ''}
+   */
+  type FormSubmit<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      formId?: unknown;
+      target: Target;
+      /** 表单中的数据，需要在表单组件中加上 name 来作为 key。 */
+      value: IAnyObject;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /** 表单重置时会触发 reset 事件 */
+  type FormReset<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      target: Target;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /** 键盘输入时触发
+   *
+   * event.detail = {value, cursor, keyCode}
+   *
+   * 处理函数可以直接 return 一个字符串，将替换输入框的内容。
+   */
+  type Input<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 输入框内容 */
+      value: string;
+      /** 光标位置 */
+      cursor: number;
+      /** keyCode 为键值 (目前工具还不支持返回keyCode参数) `2.1.0` 起支持 */
+      keyCode?: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 输入框聚焦时触发
+   *
+   * event.detail = { value, height }
+   */
+  type InputFocus<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 输入框内容 */
+      value: string;
+      /** 键盘高度, 在基础库 `1.9.90` 起支持 */
+      height?: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 输入框失去焦点时触发
+   *
+   * event.detail = {value: value}
+   */
+  type InputBlur<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 输入框内容 */
+      value: string;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 点击完成按钮时触发
+   *
+   * event.detail = {value: value}
+   */
+  type InputConfirm<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 输入框内容 */
+      value: string;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 键盘高度发生变化的时候触发此事件
+   *
+   * event.detail = {height: height, duration: duration}
+   *
+   * **tip**: 键盘高度发生变化，keyboardheightchange 事件可能会多次触发，开发者对于相同的 height 值应该忽略掉
    *
    * 最低基础库: `2.7.0`
    */
-  type InputKeyboardHeightChange = Custom<{
-    /** 键盘高度 */
-    height: number;
-    duration: number;
-  }>;
+  type InputKeyboardHeightChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 键盘高度 */
+      height: number;
+      duration: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
    * 取消选择时触发
    *
    * 最低基础库: 1.9.90
    */
-  type PickerCancel = Custom;
+  type PickerCancel<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
 
   /**
-   * value 改变时触发 change 事件，event.detail = {value}
+   * value 改变时触发 change 事件
+   *
+   * event.detail = {value}
    *
    * 当 mode = region 时 (最低基础库: 1.4.0)
    *
    * value 改变时触发 change 事件，event.detail = {value, code, postcode}，其中字段 code 是统计用区划代码，postcode 是邮政编码
    */
-  type PickerChange = Custom<{
-    /**
-     * 当 mode = selector 时, 返回当前选择的 value
-     *
-     * 当 mode = multiSelector 时, 返回一个索引数组
-     *
-     * 当 mode = time | date 时, 返回 `"12:01"` | `"2016-09-01"`
-     *
-     * 当 mode = region 时, 返回 `["广东省", "广州市", "海珠区"]`
-     */
-    value: string | number[] | [string, string, string];
-    /** 统计用区划代码 当 mode = region 时有效 (最低基础库: 1.4.0) */
-    code: [string, string, string];
-    /** 邮政编码 当 mode = region 时有效 (最低基础库: 1.4.0) */
-    postcode: string;
-  }>;
+  type PickerChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /**
+       * 当 mode = selector 时, 返回当前选择的 value
+       *
+       * 当 mode = multiSelector 时, 返回一个索引数组
+       *
+       * 当 mode = time | date 时, 返回 `"12:01"` | `"2016-09-01"`
+       *
+       * 当 mode = region 时, 返回 `["广东省", "广州市", "海珠区"]`
+       */
+      value: string | number[] | [string, string, string];
+      /** 统计用区划代码 当 mode = region 时有效 (最低基础库: 1.4.0) */
+      code: [string, string, string];
+      /** 邮政编码 当 mode = region 时有效 (最低基础库: 1.4.0) */
+      postcode: string;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /** 列改变时触发 当 `mode = multiSelector` 时有效 */
+  type PickerColumnChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 修改的列 */
+      column: number;
+      value: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * 列改变时触发 当 mode = multiSelector 时有效
+   * 滚动选择时触发 change 事件
+   *
+   * event.detail = {value}
    */
-  type PickerColumnChange = Custom<{
-    /** 修改的列 */
-    column: number;
-    value: number;
-  }>;
-
-  /**
-   * 滚动选择时触发change事件，event.detail = {value}
-   */
-  type PickerViewChange = Custom<{
-    /** value为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项 (下标从 0 开始)  */
-    value: number[];
-  }>;
+  type PickerViewChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** value 为数组，表示 picker-view 内的 picker-view-column 当前选择的是第几项 (下标从 0 开始)  */
+      value: number[];
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
    * 当滚动选择开始时候触发事件
    *
    * 最低基础库: 2.3.1
    */
-  type PickerViewPickStart = Custom;
+  type PickerViewPickStart<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
 
   /**
    * 当滚动选择结束时候触发事件
    *
    * 最低基础库: 2.3.1
    */
-  type PickerViewPickEnd = Custom;
+  type PickerViewPickEnd<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<never, Mark, TargetDataset>;
+
+  /** radio-group 切换事件 */
+  type RadioGroupChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    /** radio-group 中选中项的 value */
+    {
+      value: string;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * radio-group 中选中项的 value
+   * 完成一次拖动后触发的事件
+   *
+   * event.detail = {value}
    */
-  type RadioGroupChange = Custom<{
-    value: string;
-  }>;
+  type SliderChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** slider 的数值 0 - 100 */
+      value: number;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * 完成一次拖动后触发的事件，event.detail = {value}
-   */
-  type SliderChange = Custom<{
-    /** slider 的数值 0-100 */
-    value: number;
-  }>;
-
-  /**
-   * 拖动过程中触发的事件，event.detail = {value}
+   * 拖动过程中触发的事件
+   *
+   * event.detail = {value}
    *
    * 最低基础库: 1.7.0
    */
-  type SliderChanging = SliderChange;
+  type SliderChanging<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = SliderChange<Mark, TargetDataset>;
 
   /**
-   * checked 改变时触发 change 事件，event.detail={ value}
-   */
-  type SwitchChange = Custom<{
-    value: boolean;
-  }>;
-
-  /**
-   * 输入框聚焦时触发，event.detail = { value, height }，height 为键盘高度，在基础库 1.9.90 起支持
-   */
-  type TextareaFocus = InputFocus;
-
-  /**
-   * 输入框失去焦点时触发，event.detail = {value, cursor}
+   * checked 改变时触发 change 事件
    *
-   * `tip`: textarea 的 blur 事件会晚于页面上的 tap 事件，如果需要在 button 的点击事件获取 textarea，可以使用 form 的 bindsubmit。
+   * event.detail={ value}
    */
-  type TextareaBlur = InputBlur;
+  type SwitchChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      value: boolean;
+    },
+    Mark,
+    TargetDataset
+  >;
 
   /**
-   * 输入框行数变化时调用，event.detail = {height: 0, heightRpx: 0, lineCount: 0}
-   */
-  type TextareaLineChange = Custom<{
-    /** 输入框高度(px) */
-    height: number;
-    /** 输入框高度(rpx) */
-    heightRpx: number;
-    /** 行数 */
-    lineCount: number;
-    /** 行高 */
-    lineHeight: number;
-  }>;
-
-  /**
-   * 当键盘输入时，触发 input 事件，event.detail = {value, cursor, keyCode}，keyCode 为键值，目前工具还不支持返回keyCode参数。
+   * 输入框聚焦时触发
    *
-   * `tip`: 不建议在多行文本上对用户的输入进行修改，所以 **bindinput 处理函数的返回值并不会反映到 textarea 上**
-   */
-  type TextareaInput = Input;
-
-  /**
-   * 点击完成时， 触发 confirm 事件，event.detail = {value: value}
-   */
-  type TextareaConfirm = InputConfirm;
-
-  /**
-   * 键盘高度发生变化的时候触发此事件，event.detail = {height: height, duration: duration}
+   * event.detail = { value, height }，height 为键盘高度
    *
-   * `tip`: 键盘高度发生变化，keyboardheightchange事件可能会多次触发，开发者对于相同的height值应该忽略掉
+   * 在基础库 1.9.90 起支持
+   */
+  type TextareaFocus<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = InputFocus<Mark, TargetDataset>;
+
+  /**
+   * 输入框失去焦点时触发
+   *
+   * event.detail = {value, cursor}
+   *
+   * **tip**: textarea 的 blur 事件会晚于页面上的 tap 事件，如果需要在 button 的点击事件获取 textarea，可以使用 form 的 bindsubmit。
+   */
+  type TextareaBlur<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = InputBlur<Mark, TargetDataset>;
+
+  /**
+   * 输入框行数变化时调用
+   *
+   * event.detail = {height: 0, heightRpx: 0, lineCount: 0}
+   */
+  type TextareaLineChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = CustomEvent<
+    {
+      /** 输入框高度(px) */
+      height: number;
+      /** 输入框高度(rpx) */
+      heightRpx: number;
+      /** 行数 */
+      lineCount: number;
+      /** 行高 */
+      lineHeight: number;
+    },
+    Mark,
+    TargetDataset
+  >;
+
+  /**
+   * 当键盘输入时，触发 input 事件
+   *
+   * event.detail = {value, cursor, keyCode}
+   *
+   * keyCode 为键值，目前工具还不支持返回 keyCode 参数。
+   *
+   * **tip**: 不建议在多行文本上对用户的输入进行修改，所以 **bindinput 处理函数的返回值并不会反映到 textarea 上**
+   */
+  type TextareaInput<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = Input<Mark, TargetDataset>;
+
+  /**
+   * 点击完成时， 触发 confirm 事件
+   *
+   * event.detail = {value: value}
+   */
+  type TextareaConfirm<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = InputConfirm<Mark, TargetDataset>;
+
+  /**
+   * 键盘高度发生变化的时候触发此事件
+   *
+   * event.detail = {height: height, duration: duration}
+   *
+   * **tip**: 键盘高度发生变化，keyboardheightchange事件可能会多次触发，开发者对于相同的height值应该忽略掉
    *
    * 最低基础库: 2.7.0
    */
-  type TextareaKeyboardHeightChange = InputKeyboardHeightChange;
+  type TextareaKeyboardHeightChange<
+    Mark extends IAnyObject = IAnyObject,
+    TargetDataset extends IAnyObject = IAnyObject
+  > = InputKeyboardHeightChange<Mark, TargetDataset>;
 
   /**
    * 功能页返回，且操作成功时触发， detail 格式与具体功能页相关
    *
    * 最低基础库: 2.1.0
    */
-  type FunctionalNavigatorSuccess = Custom;
+  type FunctionalNavigatorSuccess<
+    Detail extends IAnyObject = IAnyObject
+  > = CustomEvent<Detail, never, never>;
 
   /**
    * 功能页返回，且操作失败时触发， detail 格式与具体功能页相关
    *
    * 最低基础库: 2.1.0
    */
-  type FunctionalNavigatorFail = Custom;
+  type FunctionalNavigatorFail<
+    Detail extends IAnyObject = IAnyObject
+  > = CustomEvent<Detail, never, never>;
 
   /**
-   * 当target="miniProgram"时有效，跳转小程序成功
+   * 当 `target="miniProgram"` 时有效，跳转小程序成功
    *
    * 最低基础库: 2.0.7
    */
-  type NavigatorSuccess = Custom;
+  type NavigatorSuccess = CustomEvent;
   /**
-   * 当target="miniProgram"时有效，跳转小程序失败
+   * 当 `target="miniProgram"` 时有效，跳转小程序失败
    *
    * `tips`: 需要用户确认跳转 从 2.3.0 版本开始，在跳转至其他小程序前，将统一增加弹窗，询问是否跳转，用户确认后才可以跳转其他小程序。如果用户点击取消，则回调 fail cancel。
    *
    * 最低基础库: 2.0.7
    */
-  type NavigatorFail = Custom;
+  type NavigatorFail = CustomEvent;
   /**
-   * 当target="miniProgram"时有效，跳转小程序完成
+   * 当 `target="miniProgram"` 时有效，跳转小程序完成
    *
    * 最低基础库: 2.0.7
    */
-  type NavigatorComplete = Custom;
+  type NavigatorComplete = CustomEvent;
 
   /**
-   * 当发生错误时触发 error 事件，detail = {errMsg:MediaError.code}
+   * 当发生错误时触发 error 事件
+   *
+   * detail = {errMsg:MediaError.code}
    */
-  type AudioError = Custom<{
+  type AudioError = CustomEvent<{
     /**
      * MediaError.code
      *
@@ -622,60 +955,48 @@ declare namespace WXEvent {
     errMsg: 1 | 2 | 3 | 4;
   }>;
 
-  /**
-   * 当开始/继续播放时触发play事件
-   */
-  type AudioPlay = Custom;
+  /** 当开始/继续播放时触发play事件 */
+  type AudioPlay = CustomEvent;
+
+  /** 当暂停播放时触发 pause 事件 */
+  type AudioPause = CustomEvent;
 
   /**
-   * 当暂停播放时触发 pause 事件
+   * 当播放进度改变时触发 timeupdate 事件
+   *
+   * detail = {currentTime, duration}
    */
-  type AudioPause = Custom;
-
-  /**
-   * 当播放进度改变时触发 timeupdate 事件，detail = {currentTime, duration}
-   */
-  type AudioTimeUpdate = Custom<{
+  type AudioTimeUpdate = CustomEvent<{
     currentTime: number;
     duration: number;
   }>;
 
-  /**
-   * 当播放到末尾时触发 ended 事件
-   */
-  type AudioEnded = Custom;
+  /** 当播放到末尾时触发 ended 事件 */
+  type AudioEnded = CustomEvent;
 
-  /**
-   * 摄像头在非正常终止时触发，如退出后台等情况
-   */
-  type CameraStop = Custom;
+  /** 摄像头在非正常终止时触发，如退出后台等情况 */
+  type CameraStop = CustomEvent;
 
-  /**
-   * 用户不允许使用摄像头时触发
-   */
-  type CameraError = Custom;
+  /** 用户不允许使用摄像头时触发 */
+  type CameraError = CustomEvent;
 
   /**
    * 相机初始化完成时触发
    *
    * 最低基础库: 2.7.0
    */
-  type CameraInitDone = Custom;
+  type CameraInitDone = CustomEvent;
 
   /**
    * 在扫码识别成功时触发，仅在 mode="scanCode" 时生效
    *
    * 最低基础库: 2.1.0
    */
-  type CameraScanCode = Custom;
+  type CameraScanCode = CustomEvent;
 
-  /**
-   * 当错误发生时触发，event.detail = {errMsg}
-   */
+  /** 当错误发生时触发，event.detail = {errMsg} */
   type ImageError = CoverImageError;
-  /**
-   * 当图片载入完毕时触发，event.detail = {height, width}
-   */
+  /** 当图片载入完毕时触发，event.detail = {height, width} */
   type ImageLoad = CoverImageLoad;
 
   /**
@@ -683,7 +1004,7 @@ declare namespace WXEvent {
    *
    * 最低基础库 1.7.0
    */
-  type LivePlayerStateChange = Custom<{
+  type LivePlayerStateChange = CustomEvent<{
     /**
      * 状态码
      *
@@ -719,7 +1040,7 @@ declare namespace WXEvent {
    *
    * 最低基础库 1.7.0
    */
-  type LivePlayerFullScreenChange = Custom<{
+  type LivePlayerFullScreenChange = CustomEvent<{
     direction: "vertical" | "horizontal";
     fullScreen: boolean;
   }>;
@@ -729,7 +1050,7 @@ declare namespace WXEvent {
    *
    * 最低基础库 1.9.0
    */
-  type LivePlayerNetStatus = Custom<{
+  type LivePlayerNetStatus = CustomEvent<{
     /**
      * 网络状态数据
      *
@@ -759,7 +1080,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.7.0
    */
-  type LivePusherStateChange = Custom<{
+  type LivePusherStateChange = CustomEvent<{
     /**
      * 状态码
      *
@@ -803,7 +1124,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.9.0
    */
-  type LivePusherNetStatus = Custom<{
+  type LivePusherNetStatus = CustomEvent<{
     /**
      * 网络状态数据
      *
@@ -834,7 +1155,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.7.4
    */
-  type LivePusherError = Custom<{
+  type LivePusherError = CustomEvent<{
     errMsg: string;
     /**
      * 错误码
@@ -852,14 +1173,14 @@ declare namespace WXEvent {
    *
    * 最低基础库: 2.4.0
    */
-  type LivePusherBgmStart = Custom;
+  type LivePusherBgmStart = CustomEvent;
 
   /**
    * 背景音进度变化时触发，detail = {progress, duration}
    *
    * 最低基础库: 2.4.0
    */
-  type LivePusherBgmProgress = Custom<{
+  type LivePusherBgmProgress = CustomEvent<{
     progress: number;
     duration: number;
   }>;
@@ -869,27 +1190,19 @@ declare namespace WXEvent {
    *
    * 最低基础库: 2.4.0
    */
-  type LivePusherBgmComplete = Custom;
+  type LivePusherBgmComplete = CustomEvent;
 
-  /**
-   * 当开始/继续播放时触发play事件
-   */
-  type VideoPlay = Custom;
+  /** 当开始/继续播放时触发play事件 */
+  type VideoPlay = CustomEvent;
 
-  /**
-   * 当暂停播放时触发 pause 事件
-   */
-  type VideoPause = Custom;
+  /** 当暂停播放时触发 pause 事件 */
+  type VideoPause = CustomEvent;
 
-  /**
-   * 当播放到末尾时触发 ended 事件
-   */
-  type VideoEnded = Custom;
+  /** 当播放到末尾时触发 ended 事件 */
+  type VideoEnded = CustomEvent;
 
-  /**
-   * 播放进度变化时触发，event.detail = {currentTime, duration} 。触发频率 250ms 一次
-   */
-  type VideoTimeUpdate = Custom<{
+  /** 播放进度变化时触发，event.detail = {currentTime, duration} 。触发频率 250ms 一次 */
+  type VideoTimeUpdate = CustomEvent<{
     currentTime: number;
     duration: number;
   }>;
@@ -899,7 +1212,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.4.0
    */
-  type VideoFullScreenChange = Custom<{
+  type VideoFullScreenChange = CustomEvent<{
     fullScreen: boolean;
     direction: "vertical" | "horizontal";
   }>;
@@ -909,31 +1222,122 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.7.0
    */
-  type VideoWaiting = Custom;
+  type VideoWaiting = CustomEvent;
 
   /**
    * 视频播放出错时触发
    *
    * 最低基础库: 1.7.0
    */
-  type VideoError = Custom;
+  type VideoError = CustomEvent;
 
   /**
    * 加载进度变化时触发，只支持一段加载。
    *
    * 最低基础库: 2.4.0
    */
-  type VideoPregress = Custom<{
+  type VideoPregress = CustomEvent<{
     /** 百分比 */
     buffered: number;
   }>;
+
+  /**
+   * 加载进度变化时触发，只支持一段加载。
+   *
+   * 最低基础库: 2.4.0
+   */
+  type VoipRoomError = CustomEvent;
+
+  /**
+   * 点击地图时触发
+   *
+   * 2.9.0 起返回经纬度信息
+   */
+  type MapTap = CustomEvent<{
+    /** 经度，最低基础库 2.9.0 */
+    longitude: number;
+    /** 纬度，最低基础库 2.9.0 */
+    latitude: number;
+  }>;
+
+  /**
+   * 点击标记点时触发
+   *
+   * e.detail = {markerId}
+   */
+  type MarkerTap = CustomEvent<{
+    /** 标记点 ID */
+    markerId: number;
+  }>;
+
+  /**
+   * 点击 label 时触发
+   *
+   * e.detail = {markerId}
+   *
+   * 最低基础库: 2.9.0
+   */
+  type LabelTap = MarkerTap;
+
+  /**
+   * 点击控件时触发
+   *
+   * e.detail = {controlId}
+   */
+  type ControlTap = CustomEvent<{
+    /** 控件 ID */
+    controlId: number;
+  }>;
+
+  /**
+   * 点击 label 时触发
+   *
+   * e.detail = {markerId}
+   *
+   * 最低基础库: 1.2.0
+   */
+  type CalloutTap = MarkerTap;
+
+  /**
+   * 在地图渲染更新完成时触发
+   *
+   * 最低基础库: 1.6.0
+   */
+  type MapUpdated = CustomEvent;
+
+  /**
+   * 在地图渲染更新完成时触发
+   *
+   * 最低基础库: 1.6.0
+   */
+  type RegionChange = CustomEvent<{
+    /** 旋转程度，最低基础库 2.3.0 */
+    rotate: number;
+    /** 缩放程度，最低基础库 2.3.0 */
+    skew: number;
+  }> & {
+    /**
+     * 视野变化开始、结束时触发
+     *
+     * 视野变化开始为 `begin`，结束为 `end`
+     */
+    type: "begin" | "end";
+    /**
+     * 导致视野变化的原因
+     *
+     * - drag: 拖动地图导致
+     * - scale: 缩放导致
+     * - update: 调用接口导致
+     */
+    causedBy: "drag" | "scale" | "update";
+  };
 
   /**
    * 广告加载成功的回调
    *
    * 最低基础库: 2.2.1
    */
-  type AdLoad = Custom;
+  type AdLoad = CustomEvent;
 
   /**
    * 广告加载失败的回调，event.detail = {errCode: 1002}
@@ -942,7 +1346,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 2.2.1
    */
-  type AdError = Custom<{
+  type AdError = CustomEvent<{
     /**
      * 错误码
      *
@@ -964,15 +1368,16 @@ declare namespace WXEvent {
    *
    * 最低基础库: 2.6.5
    */
-  type AdClose = Custom;
+  type AdClose = CustomEvent;
 
   /**
    * 网页向小程序 postMessage 时，会在特定时机 (小程序后退、组件销毁、分享) 触发并收到消息。e.detail = { data }
    *
    * 最低基础库: 1.6.4
    */
-  type WebviewMessage = Custom<{
+  type WebviewMessage = CustomEvent<{
     /** 多次 postMessage 的参数组成的数组 */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any[];
   }>;
 
@@ -981,7 +1386,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.6.4
    */
-  type WebviewLoad = Custom<{
+  type WebviewLoad = CustomEvent<{
     src: string;
   }>;
 
@@ -990,7 +1395,7 @@ declare namespace WXEvent {
    *
    * 最低基础库: 1.6.4
    */
-  type WebviewError = Custom<{
+  type WebviewError = CustomEvent<{
     src: string;
   }>;
 }

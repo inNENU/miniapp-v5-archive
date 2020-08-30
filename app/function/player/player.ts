@@ -274,7 +274,7 @@ $register("music", {
       });
   },
 
-  loadCover(event: WXEvent.ImageLoad) {
+  loadCover(event: WechatMiniprogram.ImageLoad) {
     // 加载封面
     if (event.type === "load") this.setData({ coverLoad: true });
   },
@@ -289,7 +289,7 @@ $register("music", {
   },
 
   /** 拖拽进度 */
-  drag(event: WXEvent.SliderChange) {
+  drag(event: WechatMiniprogram.SliderChange) {
     if (this.state.interupt) {
       manager.src = this.data.currentSong.src;
       this.state.interupt = false;
@@ -426,7 +426,7 @@ $register("music", {
   },
 
   // 点击列表具体歌曲项时触发
-  change(res: WXEvent.Touch) {
+  change(res: WechatMiniprogram.TouchEvent) {
     this.list();
     this.switchSong(res.currentTarget.dataset.index);
   },

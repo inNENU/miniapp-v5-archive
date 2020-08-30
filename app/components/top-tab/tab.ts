@@ -17,16 +17,16 @@ Component({
   },
 
   methods: {
-    changeTab({ currentTarget }: WXEvent.Touch): void {
+    changeTab({ currentTarget }: WechatMiniprogram.TouchEvent): void {
       this.setData({ current: Number(currentTarget.dataset.index) });
     },
 
-    change({ detail }: WXEvent.SwiperChange): void {
+    change({ detail }: WechatMiniprogram.SwiperChange): void {
       if (this.properties.immediate) this.setData({ current: detail.current });
     },
 
     // 设置指示条动画
-    transition({ detail }: WXEvent.SwiperTransition): void {
+    transition({ detail }: WechatMiniprogram.SwiperTransition): void {
       this.setData({
         barleft:
           (detail.dx + globalData.info.screenWidth * currentSwipe) /
@@ -36,7 +36,7 @@ Component({
 
     aminationFinish({
       detail: { current },
-    }: WXEvent.SwiperAnimationFinish): void {
+    }: WechatMiniprogram.SwiperAnimationFinish): void {
       currentSwipe = current;
       if (!this.data.immediate) this.setData({ current });
     },

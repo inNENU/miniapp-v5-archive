@@ -91,7 +91,7 @@ $register("storage", {
   },
 
   /** 列表动作 */
-  list({ detail }: WXEvent.Touch) {
+  list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction]();
   },
 

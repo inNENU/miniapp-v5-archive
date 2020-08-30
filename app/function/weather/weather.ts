@@ -343,7 +343,7 @@ $register("weather", {
   },
 
   /** 贴士详情 */
-  hint({ currentTarget }: WXEvent.Touch) {
+  hint({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const hint = this.data.weather.hints[currentTarget.dataset.id as number];
     modal(hint.name, hint.detail);
   },

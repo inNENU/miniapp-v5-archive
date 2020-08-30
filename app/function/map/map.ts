@@ -230,7 +230,7 @@ $register("map", {
    *
    * @param event 触摸事件
    */
-  scale(event: WXEvent.Touch) {
+  scale(event: WechatMiniprogram.TouchEvent) {
     this.mapCtx.getCenterLocation({
       success: (res) => {
         this.setData({
@@ -257,7 +257,7 @@ $register("map", {
   },
 
   /** 选择分类 */
-  select({ currentTarget }: WXEvent.Touch) {
+  select({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const index = currentTarget.dataset.index as number;
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
@@ -266,7 +266,7 @@ $register("map", {
     this.mapCtx.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
-  markers(event: WXEvent.MarkerTap) {
+  markers(event: WechatMiniprogram.MarkerTap) {
     const { area } = this.data;
 
     const { path } = this.data.markers.find(
@@ -284,7 +284,7 @@ $register("map", {
     this.setData({ showPopup: true });
   },
 
-  navigate({ currentTarget }: WXEvent.Touch) {
+  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { area } = this.data;
 
     const { path } = this.data.markers.find(

@@ -182,7 +182,7 @@ $register("PEcal", {
   },
 
   /** 性别切换 */
-  genderChange({ detail }: WXEvent.PickerChange) {
+  genderChange({ detail }: WechatMiniprogram.PickerChange) {
     const index = Number(detail.value);
 
     // 改变特别项目和长跑的名称
@@ -196,7 +196,7 @@ $register("PEcal", {
   },
 
   /** 年级切换 */
-  gradeChange({ detail }: WXEvent.PickerChange) {
+  gradeChange({ detail }: WechatMiniprogram.PickerChange) {
     const index = Number(detail.value);
 
     // 设置年级
@@ -206,7 +206,7 @@ $register("PEcal", {
   },
 
   /** 输入框聚焦 */
-  focus(event: WXEvent.InputFocus) {
+  focus(event: WechatMiniprogram.InputFocus) {
     const { id } = event.currentTarget;
     const query = wx.createSelectorQuery();
 
@@ -231,7 +231,7 @@ $register("PEcal", {
   },
 
   /** 输入成绩 */
-  input({ currentTarget, detail }: WXEvent.Input) {
+  input({ currentTarget, detail }: WechatMiniprogram.Input) {
     const project = currentTarget.id;
 
     console.log(project);
@@ -244,7 +244,7 @@ $register("PEcal", {
   },
 
   /** 长跑选择器设置 */
-  longRunHandler({ detail }: WXEvent.PickerChange) {
+  longRunHandler({ detail }: WechatMiniprogram.PickerChange) {
     const value = detail.value as number[];
 
     // 设置显示数据

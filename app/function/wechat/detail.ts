@@ -75,7 +75,7 @@ $register("wechat-detail", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  navigate({ currentTarget }: WXEvent.Touch) {
+  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { title, url } = currentTarget.dataset;
 
     // 无法跳转，复制链接到剪切板

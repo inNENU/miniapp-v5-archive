@@ -79,7 +79,7 @@ $register("calendar", {
   },
 
   /** 显示校历详情 */
-  display(event: WXEvent.Touch) {
+  display(event: WechatMiniprogram.TouchEvent) {
     getJSON({
       path: `function/calendar/${event.detail.path}`,
       url: `resource/function/calendar/${event.detail.path}`,

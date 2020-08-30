@@ -43,7 +43,7 @@ $register("cal", {
     // 对data赋值
   },
 
-  input(event: WXEvent.Input) {
+  input(event: WechatMiniprogram.Input) {
     console.log(event);
     const { grade } = this.data;
 
@@ -75,7 +75,7 @@ $register("cal", {
     // 将新值写回data中
   },
 
-  next(event: WXEvent.Touch) {
+  next(event: WechatMiniprogram.TouchEvent) {
     const { grade } = this.data;
     const { id } = event.currentTarget.dataset;
 
@@ -92,7 +92,7 @@ $register("cal", {
     });
   },
 
-  sort(event: WXEvent.Touch) {
+  sort(event: WechatMiniprogram.TouchEvent) {
     console.log(event);
   },
 

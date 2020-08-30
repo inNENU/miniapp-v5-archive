@@ -96,7 +96,7 @@ $register("donate", {
   },
 
   /** 保存二维码 */
-  save(res: WXEvent.Touch) {
+  save(res: WechatMiniprogram.TouchEvent) {
     console.info("Start QRCode download."); // 调试
     savePhoto(`img/donate/${res.currentTarget.dataset.name}.png`);
   },

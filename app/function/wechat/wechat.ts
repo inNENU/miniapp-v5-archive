@@ -74,7 +74,7 @@ $register("wechat", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  navigate({ currentTarget }: WXEvent.Touch) {
+  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
     this.$route(
       `/function/wechat/detail?path=${currentTarget.dataset.path}&from=校园公众号`
     );

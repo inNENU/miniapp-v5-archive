@@ -85,7 +85,7 @@ $register("guide", {
    *
    * @param value 输入的搜索词
    */
-  searching({ detail: { value } }: WXEvent.Input) {
+  searching({ detail: { value } }: WechatMiniprogram.Input) {
     searching(value, "intro", (words) => this.setData({ words }));
   },
 
@@ -94,7 +94,7 @@ $register("guide", {
    *
    * @param value 输入的搜索词
    */
-  search({ detail }: WXEvent.Input) {
+  search({ detail }: WechatMiniprogram.Input) {
     this.$route(`/page/search/search?name=intro&word=${detail.value}`);
   },
 });

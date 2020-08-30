@@ -38,7 +38,7 @@ $register.C({
   },
 
   methods: {
-    active({ currentTarget }: WXEvent.Touch): void {
+    active({ currentTarget }: WechatMiniprogram.TouchEvent): void {
       const { path } = (this.data.config as TimeLineItem[])[
         currentTarget.dataset.index as number
       ];

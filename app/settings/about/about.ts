@@ -159,7 +159,7 @@ $register("about", {
   },
 
   /** 列表控制函数 */
-  list({ detail }: WXEvent.Touch) {
+  list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event)
       this[detail.event as "debugSwitch" | "testSwitch"](detail.value);
   },
@@ -199,7 +199,7 @@ $register("about", {
    *
    * @param event 输入事件
    */
-  password(event: WXEvent.Input) {
+  password(event: WechatMiniprogram.Input) {
     if (event.detail.value.length === 7) {
       // 密码正确
       if (event.detail.value === "5201314") {
