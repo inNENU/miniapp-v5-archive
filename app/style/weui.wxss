@@ -23,10 +23,10 @@ icon {
 
   text-align: center;
   font-family:
-    'Helvetica Neue',
+    "Helvetica Neue",
     FZKTJW,
     -apple-system-font,
-    'PingFang SC',
+    "PingFang SC",
     Helvetica,
     STHeiti,
     Tahoma,
@@ -65,7 +65,7 @@ icon {
 
 .weui-cells::after,
 .weui-cells::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   left: 0;
   right: 0;
@@ -117,7 +117,7 @@ icon {
 }
 
 .weui-cell::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 16px;
@@ -177,7 +177,7 @@ icon {
 }
 
 .weui-cell__ft_in-access::after {
-  content: ' ';
+  content: " ";
   display: inline-block;
   position: absolute;
   top: 50%;
@@ -271,7 +271,7 @@ icon {
 
 .weui-form-preview::after,
 .weui-form-preview::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   left: 0;
   right: 0;
@@ -308,7 +308,7 @@ icon {
 }
 
 .weui-form-preview__hd::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   left: 16px;
   right: 0;
@@ -339,7 +339,7 @@ icon {
 }
 
 .weui-form-preview__ft::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -382,7 +382,7 @@ icon {
 }
 
 .weui-form-preview__btn::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -427,7 +427,7 @@ icon {
 }
 
 .weui-select::before {
-  content: ' ';
+  content: " ";
   display: inline-block;
   position: absolute;
   top: 50%;
@@ -539,7 +539,7 @@ icon {
 }
 
 .weui-uploader__file_status::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -573,7 +573,7 @@ icon {
 
 .weui-uploader__input-box::after,
 .weui-uploader__input-box::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -895,7 +895,7 @@ icon {
 }
 
 .weui-footer__link::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0.36em;
   left: -8px;
@@ -1024,7 +1024,7 @@ icon {
 }
 
 .wx_dot_loading::before {
-  content: '';
+  content: "";
   position: absolute;
   left: -12px;
 
@@ -1034,7 +1034,7 @@ icon {
 }
 
 .wx_dot_loading::after {
-  content: '';
+  content: "";
   position: absolute;
   right: -12px;
 
@@ -1278,7 +1278,7 @@ icon {
 }
 
 .weui-loadmore__tips_in-dot::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -1329,7 +1329,7 @@ icon {
 
 .weui-panel::after,
 .weui-panel::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   left: 0;
   right: 0;
@@ -1355,7 +1355,7 @@ icon {
 }
 
 .weui-panel__hd::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   left: 16px;
   right: 0;
@@ -1373,7 +1373,7 @@ icon {
 }
 
 .weui-media-box::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 16px;
@@ -1548,7 +1548,7 @@ icon {
 }
 
 .weui-navbar__item::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   right: 0;
@@ -1579,7 +1579,7 @@ icon {
 }
 
 .weui-navbar__slider {
-  content: ' ';
+  content: " ";
   display: none;
   position: absolute;
   left: 0;
@@ -1614,7 +1614,7 @@ icon {
 }
 
 .weui-tabbar::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -1752,7 +1752,7 @@ i.weui-tabbar__icon {
 }
 
 .weui-slideview__btn-group_default ~ .weui-slideview__btn-group_default::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -1773,7 +1773,7 @@ i.weui-tabbar__icon {
 }
 
 .weui-slideview__btn-group_warn ~ .weui-slideview__btn-group_warn::before {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -1981,7 +1981,7 @@ i.weui-tabbar__icon {
 }
 
 .weui-icon-clear::after {
-  content: '';
+  content: "";
   display: inline-block;
   vertical-align: middle;
 
@@ -2013,8 +2013,8 @@ i.weui-tabbar__icon {
   white-space: nowrap;
 }
 
-icon[type='success']::after,
-icon[type='success']::before {
+icon[type="success"]::after,
+icon[type="success"]::before {
   color: #07c160 !important;
 }
 
@@ -2121,7 +2121,7 @@ icon[type='success']::before {
 }
 
 .weui-dialog__ft::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -2152,7 +2152,7 @@ icon[type='success']::before {
 }
 
 .weui-dialog__btn::after {
-  content: ' ';
+  content: " ";
   position: absolute;
   top: 0;
   left: 0;
@@ -2266,7 +2266,7 @@ icon[type='success']::before {
   width: 100%;
   height: 44px;
   background-color: #fff;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 }
 

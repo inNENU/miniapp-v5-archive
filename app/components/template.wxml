@@ -32,7 +32,7 @@
           <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
           <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
           <ex-list
-            wx:elif="{{item.tag === 'advanced-list'}}"
+            wx:elif="{{item.tag === 'List'}}"
             config="{{item}}"
             change="{{event? event[index]: ''}}"
             catch:change="list"
@@ -95,7 +95,7 @@
     <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
     <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
     <ex-list
-      wx:elif="{{item.tag === 'advanced-list'}}"
+      wx:elif="{{item.tag === 'List'}}"
       config="{{item}}"
       change="{{event? event[index]: ''}}"
       catch:change="list"
@@ -392,12 +392,11 @@ Author: Mr.Hope
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">{{title}}</view>
-    <button
+    <view
       wx:if="{{action !== false}}"
       class="button Android-nav-back-button"
       hover-class="back-button-hover"
       hover-stay-time="100"
-      plain
       catch:tap="{{action === undefined? '$back': action}}"
     >
       <view
@@ -405,7 +404,7 @@ Author: Mr.Hope
         class="weui-navigation-bar-backbutton"
       />
       <view class="Android-back-text">{{from}}</view>
-    </button>
+    </view>
   </view>
   <view
     class="Android-nav-placeholder"
@@ -425,16 +424,15 @@ Author: Mr.Hope
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">页面出错</view>
-    <button
+    <view
       class="button Android-nav-back-button"
       hover-class="back-button-hover"
       hover-stay-time="100"
-      plain
       catch:tap="$back"
     >
       <view class="weui-navigation-bar-backbutton" />
       <view class="Android-back-text">返回</view>
-    </button>
+    </view>
   </view>
   <view
     class="Android-nav-placeholder"

@@ -3,16 +3,9 @@
   position: relative;
 
   padding: 8px 15px;
-  background-color: #f3f3f8;
 
   color: var(--text-color);
   align-items: center;
-}
-
-@media (prefers-color-scheme: dark) {
-  .search-bar {
-    background-color: #000;
-  }
 }
 
 .search-wrapper-input,

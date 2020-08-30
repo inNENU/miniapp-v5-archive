@@ -45,7 +45,7 @@
 
 .NENUnav {
   box-sizing: content-box;
-  height: 40px;
+  height: 44px;
   padding: 2px 0;
   border-bottom: 1rpx solid var(--bgcolor-grey);
   justify-content: flex-start;
