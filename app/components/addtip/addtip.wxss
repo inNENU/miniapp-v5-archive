@@ -7,7 +7,6 @@
   top: 0;
   right: 0;
 
-  width: 300px;
   flex-direction: column;
   justify-content: flex-end;
   align-items: flex-end;
@@ -27,7 +26,7 @@
 
   height: 42px;
   margin-right: 20px;
-  padding: 0 10px;
+  padding: 0 12px;
   background-color: var(--bgcolor);
   border-radius: 6px;
   box-shadow: 0 4px 8px -2px rgba(95, 95, 95, 0.5);
@@ -38,7 +37,11 @@
   align-items: center;
 }
 
-.icon-button {
-  width: 16px;
-  height: 16px;
+.addtip-wrapper .close-wrapper {
+  padding: 2px;
+}
+
+.addtip-wrapper .icon-button {
+  width: 20px;
+  height: 20px;
 }

@@ -4,8 +4,10 @@
   style="top:{{36 + statusBarHeight}}px;"
 >
   <view class="arrow" />
-  <view class="body"
-    >{{text}}
-    <text class="icon-button close" catch:tap="close" />
+  <view class="body">
+    {{text}}
+    <view class="close-wrapper" catch:tap="close">
+      <view class="icon-button close" />
+    </view>
   </view>
 </view>
