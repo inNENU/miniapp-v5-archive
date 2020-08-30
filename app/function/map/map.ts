@@ -274,9 +274,9 @@ $register("map", {
     ) as MarkerData;
 
     if (event.type === "markertap") {
-      if (path) this.$preload(`situs?id=${area}/${path}`);
+      if (path) this.$preload(`/module/situs?id=${area}/${path}`);
     } else if (event.type === "callouttap")
-      if (path) this.$route(`situs?id=${area}/${path}`);
+      if (path) this.$route(`/module/situs?id=${area}/${path}`);
       else tip("该地点暂无详情");
   },
 
@@ -291,7 +291,7 @@ $register("map", {
       (item) => item.id === currentTarget.dataset.id
     ) as MarkerData;
 
-    if (path) this.$route(`situs?id=${area}/${path}`);
+    if (path) this.$route(`/module/situs?id=${area}/${path}`);
     else tip("该地点暂无详情");
   },
 

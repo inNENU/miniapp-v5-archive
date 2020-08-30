@@ -34,7 +34,9 @@ Component({
       });
     },
 
-    aminationFinish({ detail: { current } }: any): void {
+    aminationFinish({
+      detail: { current },
+    }: WXEvent.SwiperAnimationFinish): void {
       currentSwipe = current;
       if (!this.data.immediate) this.setData({ current });
     },

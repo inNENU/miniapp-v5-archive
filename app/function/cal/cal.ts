@@ -1,4 +1,5 @@
 import $register = require("wxpage");
+import { PageConfigWithContent } from "../../../typings";
 import { changeNav, setPage } from "../../utils/page";
 
 $register("cal", {
@@ -7,7 +8,7 @@ $register("cal", {
       title: "绩点计算(beta)",
       from: "功能大厅",
       content: [{ tag: "title", text: "绩点计算器" }],
-    },
+    } as PageConfigWithContent,
     grade: [] as any[],
     // 在这里必须定义一个grade的空数组
     totalCredit: 0,
@@ -16,7 +17,7 @@ $register("cal", {
     display: false,
   },
 
-  onLoad(option: any) {
+  onLoad(option) {
     setPage({ option, ctx: this });
   },
 

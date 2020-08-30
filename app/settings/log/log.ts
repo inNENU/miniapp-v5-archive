@@ -4,7 +4,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
-import { ComponentConfig, PageConfig } from "../../../typings";
+import { ComponentConfig, PageConfigWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("log", {
@@ -38,11 +38,11 @@ $register("log", {
           ],
         },
       ],
-    },
+    } as PageConfigWithContent,
   },
 
   onNavigate(res) {
-    resolvePage(res, this.data.page as PageConfig);
+    resolvePage(res, this.data.page);
   },
 
   onLoad(option) {

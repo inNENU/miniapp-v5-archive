@@ -1,3 +1,5 @@
+import { PageConfigWithContent } from "../../../typings";
+
 export default {
   title: "功能大厅",
   grey: true,
@@ -15,7 +17,7 @@ export default {
       tag: "card",
       type: "page",
       src: "http://mp.innenu.com/img/tab/headphone.jpg",
-      title: "音律东师",
+      title: "音悦东师",
       logo: "/icon/function/music.svg",
       url: "player",
     },
@@ -44,4 +46,4 @@ export default {
       url: "wechat",
     },
   ],
-};
+} as PageConfigWithContent;

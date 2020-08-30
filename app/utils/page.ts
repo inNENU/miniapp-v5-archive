@@ -13,16 +13,23 @@ import {
 } from "../../typings/pageData";
 import { server } from "./config";
 
+type PageInstanceWithPage = WechatMiniprogram.Page.MPInstance<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any> & { page?: PageConfig },
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  Record<string, any>
+>;
+
 /** 全局数据 */
 const { globalData } = getApp<AppOption>();
 
 /**
- * 处理列表
+ * 处理详情内容
  *
  * @param element 列表的内容
  * @param page 页面内容
  */
-const resolveList = (
+const resolveContent = (
   listElement:
     | AdvancedListComponentItemConfig
     | GridComponentItemComfig
@@ -59,6 +66,7 @@ const resolveList = (
       pickerValues.forEach((pickerElement, index) => {
         listElement.value[index] =
           listElement.pickerValue[index][Number(pickerElement)];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (listElement.currentValue as any[])[index] = Number(pickerElement);
       });
     }
@@ -78,39 +86,35 @@ const disposePage = (
   option: PageOption,
   firstOpen = false
 ): PageConfig => {
-  if (page) {
-    page.statusBarHeight = globalData.info.statusBarHeight;
+  page.statusBarHeight = globalData.info.statusBarHeight;
 
-    // 判断是否是首页或来自分享
-    if (firstOpen || option.scene || option.action == "redirect") {
-      // 左上角动作默认为重定向
-      page.from = "主页";
-      if (typeof page.action === "undefined") page.action = "redirect";
-      info(`${page.id} 页面由分享载入`);
-    } else {
-      page.id = option.id ? option.id : page.title; // 设置界面名称
-      page.from = option.from || "返回"; // 设置页面来源
-    }
-
-    if (page.content)
-      page.content.forEach((element) => {
-        // 设置 list 组件
-        if ("content" in element)
-          element.content.forEach(
-            (
-              listElement:
-                | AdvancedListComponentItemConfig
-                | GridComponentItemComfig
-                | ListComponentItemConfig
-            ) => resolveList(listElement, page)
-          );
-      });
-
-    // 调试
-    info(`${page.id} 处理完毕`);
+  // 判断是否是首页或来自分享
+  if (firstOpen || option.scene || option.action == "redirect") {
+    // 左上角动作默认为重定向
+    page.from = "主页";
+    if (typeof page.action === "undefined") page.action = "redirect";
+    info(`${page.id} 页面由分享载入`);
+  } else {
+    page.id = option.id ? option.id : page.title; // 设置界面名称
+    page.from = option.from || "返回"; // 设置页面来源
   }
-  // 调试: 未传入 page
-  else error("页面数据不存在");
+
+  if (page.content)
+    page.content.forEach((element) => {
+      // 设置 list 组件
+      if ("content" in element)
+        element.content.forEach(
+          (
+            listElement:
+              | AdvancedListComponentItemConfig
+              | GridComponentItemComfig
+              | ListComponentItemConfig
+          ) => resolveContent(listElement, page)
+        );
+    });
+
+  // 调试
+  info(`${page.id} 处理完毕`);
 
   return page; // 返回处理后的 page
 };
@@ -120,7 +124,7 @@ const disposePage = (
  *
  * @param page 页面数据
  */
-const preGetPage = (page: PageConfig): void => {
+const preloadPage = (page: PageConfig): void => {
   if (page && page.content)
     page.content.forEach((component) => {
       if ("content" in component)
@@ -271,12 +275,7 @@ export const getColor = (grey = false): ColorConfig => {
 
 interface SetPageOption {
   option: PageOption;
-  ctx: WechatMiniprogram.Page.MPInstance<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>
-  >;
+  ctx: PageInstanceWithPage;
   handle?: boolean;
 }
 
@@ -332,12 +331,12 @@ export const setPage = (
       () => {
         debug(`${globalData.page.id} 已写入`);
         if (preload) {
-          preGetPage(ctx.data.page);
+          preloadPage(ctx.data.page as PageConfig);
           debug(`${globalData.page.id} 预加载子页面完成`);
         }
       }
     );
-  } else {
+  } else if (ctx.data.page) {
     debug(`${option.id || "未知页面"} 未处理`);
     const pageData: PageConfig = handle
       ? ctx.data.page
@@ -395,12 +394,7 @@ export const popNotice = (id: string): void => {
 // eslint-disable-next-line max-lines-per-function
 export const setOnlinePage = (
   option: PageOption,
-  ctx: WechatMiniprogram.Page.MPInstance<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>
-  >,
+  ctx: PageInstanceWithPage,
   preload = true
 ): void => {
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
@@ -417,7 +411,7 @@ export const setOnlinePage = (
       () => {
         debug(`${option.id} 已写入`);
         if (preload) {
-          preGetPage(ctx.data.page);
+          preloadPage(ctx.data.page as PageConfig);
           debug(`${option.id} 预加载子页面完成`);
         }
       }
@@ -436,7 +430,7 @@ export const setOnlinePage = (
 
       // 如果需要执行预加载，则执行
       if (preload) {
-        preGetPage(ctx.data.page);
+        preloadPage(ctx.data.page as PageConfig);
         debug(`${option.id} 界面预加载完成`);
       }
     }
@@ -453,7 +447,7 @@ export const setOnlinePage = (
 
           // 如果需要执行预加载，则执行
           if (preload) {
-            preGetPage(ctx.data.page);
+            preloadPage(ctx.data.page as PageConfig);
             debug(`${option.id} 界面预加载完成`);
           }
 
@@ -509,12 +503,7 @@ export const setOnlinePage = (
  */
 export const loadOnlinePage = (
   option: PageOption & { path: string },
-  ctx: WechatMiniprogram.Page.MPInstance<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>
-  >
+  ctx: PageInstanceWithPage
 ): void => {
   if (option.path) {
     // 需要重新载入界面
@@ -596,12 +585,7 @@ export const loadFont = (theme: string): void => {
 export const changeNav = (
   option: WechatMiniprogram.Page.IPageScrollOption,
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: WechatMiniprogram.Page.MPInstance<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>
-  >,
+  ctx: PageInstanceWithPage,
   headName?: string
 ): void => {
   const pageHead: PageConfig = headName ? ctx.data[headName] : ctx.data.page;

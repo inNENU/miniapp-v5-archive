@@ -56,7 +56,7 @@
   "window": {
     "navigationBarBackgroundColor": "@navBgColor",
     "navigationBarTextStyle": "@navTextStyle",
-    "navigationBarTitleText": "in东师",
+    "navigationBarTitleText": "in 东师",
     "navigationStyle": "custom",
     "backgroundColor": "@bgColor",
     "backgroundTextStyle": "@bgTxtStyle",

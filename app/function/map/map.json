@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "东师校园地图",
   "usingComponents": {
     "popup": "/components/popup/popup"
   }

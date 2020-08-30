@@ -99,11 +99,11 @@ $register("wechat-detail", {
           );
         },
       });
-    else this.$route(`web?url=${url}&title=${title}`);
+    else this.$route(`/module/web?url=${url}&title=${title}`);
   },
 
   follow() {
-    this.$route(`web?url=${this.data.config.follow}&title=欢迎关注`);
+    this.$route(`/module/web?url=${this.data.config.follow}&title=欢迎关注`);
   },
 
   back() {

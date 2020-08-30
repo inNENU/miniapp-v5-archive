@@ -3,7 +3,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
-import { PageConfig, ListComponentConfig } from "../../../typings";
+import { ListComponentConfig, PageConfigWithContent } from "../../../typings";
 import { ButtonListComponnetItemConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
@@ -64,7 +64,7 @@ $register("authorize", {
           ],
         },
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "进行授权",
           content: [
             { text: "地理位置", button: "location" },
@@ -79,13 +79,13 @@ $register("authorize", {
           foot: " ",
         },
       ],
-    },
+    } as PageConfigWithContent,
 
     authorize: {},
   },
 
   onNavigate(res) {
-    resolvePage(res, this.data.page as PageConfig);
+    resolvePage(res, this.data.page);
   },
 
   onLoad(option) {
@@ -191,7 +191,8 @@ $register("authorize", {
 
               wx.getSetting({
                 success: (res2) => {
-                  const list = this.data.page.content[0].content;
+                  const list = (this.data.page
+                    .content[0] as ListComponentConfig).content;
 
                   authorizeList.forEach((type2, index) => {
                     (list as ButtonListComponnetItemConfig[])[index].desc = res2

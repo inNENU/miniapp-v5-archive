@@ -98,7 +98,7 @@ $register("search", {
   },
 
   navigate({ currentTarget }: WXEvent.Touch) {
-    this.$route(`page?id=${currentTarget.dataset.id}&from=搜索`);
+    this.$route(`/module/page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 
   back() {

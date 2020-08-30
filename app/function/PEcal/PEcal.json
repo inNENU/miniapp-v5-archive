@@ -1,4 +1,5 @@
 {
+  "navigationBarTitleText": "体测计算器",
   "usingComponents": {
     "popup": "/components/popup/popup"
   }

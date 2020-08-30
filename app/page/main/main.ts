@@ -12,7 +12,7 @@ import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
 import { server } from "../../utils/config";
-import { PageConfig } from "../../../typings";
+import { PageConfigWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("main", {
@@ -43,7 +43,7 @@ $register("main", {
         },
       ],
       hidden: true,
-    },
+    } as PageConfigWithContent,
   },
 
   onPageLaunch() {
@@ -73,7 +73,7 @@ $register("main", {
     ["function", "guide", "intro"].forEach((x) => {
       requestJSON(
         `resource/config/${globalData.appID}/${globalData.version}/${x}`,
-        (data: PageConfig) => {
+        (data: PageConfigWithContent) => {
           wx.setStorageSync(x, data);
           this.$preload(`${x}?id=${x}`);
         }
@@ -126,6 +126,6 @@ $register("main", {
    * @param value 输入的搜索词
    */
   search({ detail }: WXEvent.Input) {
-    this.$route(`search?name=all&word=${detail.value}`);
+    this.$route(`/page/search/search?name=all&word=${detail.value}`);
   },
 });

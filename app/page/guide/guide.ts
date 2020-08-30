@@ -95,6 +95,6 @@ $register("guide", {
    * @param value 输入的搜索词
    */
   search({ detail }: WXEvent.Input) {
-    this.$route(`search?name=guide&word=${detail.value}`);
+    this.$route(`/page/search/search?name=guide&word=${detail.value}`);
   },
 });

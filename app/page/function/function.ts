@@ -79,6 +79,6 @@ $register("function", {
   },
 
   navigate() {
-    this.$route("weather");
+    this.$route("/function/weather");
   },
 });

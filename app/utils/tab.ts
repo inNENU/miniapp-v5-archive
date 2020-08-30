@@ -12,8 +12,12 @@ import { PageConfig } from "../../typings";
  */
 export const refreshPage = (
   name: string,
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: any,
+  ctx: WechatMiniprogram.Page.MPInstance<
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Record<string, any>
+  >,
   globalData: GlobalData
 ): void => {
   const test = wx.getStorageSync("test");

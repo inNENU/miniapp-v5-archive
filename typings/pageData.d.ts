@@ -1,23 +1,9 @@
-import { PageConfig as PageDataConfig } from "../server/typings";
+import {
+  ComponentConfig,
+  PageConfig as PageDataConfig,
+} from "../server/typings";
 
 export * from "../server/typings";
-
-declare namespace PageData {
-  enum PageDataOption {
-    "tag",
-    "head",
-    "foot",
-    "content",
-  }
-
-  interface List {
-    tag: "list";
-    head: string | boolean;
-    content: any[];
-    foot?: string;
-  }
-  type Test = List[];
-}
 
 /** 页面数据 */
 export interface PageConfig extends Partial<PageDataConfig> {
@@ -31,6 +17,17 @@ export interface PageConfig extends Partial<PageDataConfig> {
   error?: true;
   /** 左上角操作 */
   action?: string | boolean;
+
+  /** 是否显示标题(仅 iOS 主题) */
+  titleDisplay?: boolean;
+  /** 是否显示分割线(仅 iOS 主题) */
+  borderDisplay?: boolean;
+  /** 是否显示阴影(仅 Android 主题) */
+  shadow?: boolean;
+}
+
+export interface PageConfigWithContent extends PageConfig {
+  content: ComponentConfig[];
 }
 
 export interface PageOption {

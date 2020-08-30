@@ -7,9 +7,9 @@ import { AppOption } from "../../app";
 import { server } from "../../utils/config";
 import {
   AdvancedListComponentConfig,
-  AdvancedListComponentItemConfig,
   ComponentConfig,
-  PageConfig,
+  PageConfigWithContent,
+  SwitchListComponentItemConfig,
 } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
@@ -26,7 +26,7 @@ $register("about", {
       feedback: true,
       content: [
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "版本号",
           content: [
             { text: globalData.version, button: "debugMode" },
@@ -78,7 +78,7 @@ $register("about", {
           ],
         },
       ],
-    },
+    } as PageConfigWithContent,
   },
 
   onNavigate(res) {
@@ -93,7 +93,7 @@ $register("about", {
         }
       );
 
-    resolvePage(res, page as PageConfig);
+    resolvePage(res, page);
   },
 
   onLoad(option) {
@@ -104,13 +104,13 @@ $register("about", {
       // 读取开发者模式并对页面显示做相应改变
       developMode = wx.getStorageSync("developMode");
       if (!developMode)
-        (page.content[0].content as AdvancedListComponentItemConfig[]).forEach(
+        (page.content[0] as AdvancedListComponentConfig).content.forEach(
           (x, y) => {
             x.hidden = y !== 0;
           }
         );
 
-      setPage({ option: { id: "about" }, ctx: this }, page as PageConfig);
+      setPage({ option: { id: "about" }, ctx: this }, page);
     }
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
@@ -169,8 +169,8 @@ $register("about", {
     // 关闭开发者模式
     if (developMode) {
       wx.setStorageSync("developMode", false);
-      (this.data.page.content[0]
-        .content as AdvancedListComponentItemConfig[]).forEach((x, y) => {
+      (this.data.page
+        .content[0] as AdvancedListComponentConfig).content.forEach((x, y) => {
         x.hidden = y !== 0;
       });
       this.setData({ page: this.data.page });
@@ -204,8 +204,8 @@ $register("about", {
       // 密码正确
       if (event.detail.value === "5201314") {
         tip("已启用开发者模式");
-        (this.data.page.content[0]
-          .content as AdvancedListComponentItemConfig[]).forEach((x) => {
+        (this.data.page
+          .content[0] as AdvancedListComponentConfig).content.forEach((x) => {
           x.hidden = false;
         });
         this.setData({ page: this.data.page, debug: false });
@@ -240,7 +240,8 @@ $register("about", {
    * @param value 开关状态
    */
   debugSwitch(value: boolean) {
-    (this.data.page.content[0].content as any[])[2].status = value;
+    ((this.data.page.content[0] as AdvancedListComponentConfig)
+      .content[2] as SwitchListComponentItemConfig).status = value;
     this.setData({ page: this.data.page });
     wx.setStorageSync("debugMode", value);
 

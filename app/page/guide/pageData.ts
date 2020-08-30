@@ -1,3 +1,5 @@
+import { PageConfigWithContent } from "../../../typings";
+
 export default {
   title: "东师指南",
   grey: true,
@@ -184,4 +186,4 @@ export default {
       footer: " ",
     },
   ],
-};
+} as PageConfigWithContent;

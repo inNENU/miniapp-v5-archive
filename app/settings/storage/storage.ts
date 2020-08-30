@@ -5,7 +5,7 @@ import { remove, listFile } from "../../utils/file";
 import { changeNav, popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
-import { PageConfig } from "../../../typings";
+import { PageConfigWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 /** 列表动作 */
@@ -28,17 +28,17 @@ $register("storage", {
       feedback: true,
       content: [
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "数据缓存",
           content: [{ text: "空间占用情况", desc: "获取中..." }],
         },
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "文件系统",
           content: [{ text: "空间占用情况", desc: "获取中..." }],
         },
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "资源刷新",
           foot: "如果页面显示出现问题请刷新资源",
           content: [
@@ -48,7 +48,7 @@ $register("storage", {
           ],
         },
         {
-          tag: "List",
+          tag: "advanced-list",
           header: "重置",
           content: [
             { text: "清除小程序数据", button: "deleteData" },
@@ -63,14 +63,11 @@ $register("storage", {
           ],
         },
       ],
-    },
+    } as PageConfigWithContent,
   },
 
   onLoad() {
-    setPage(
-      { option: { id: "storage" }, ctx: this },
-      this.data.page as PageConfig
-    );
+    setPage({ option: { id: "storage" }, ctx: this }, this.data.page);
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
@@ -94,7 +91,7 @@ $register("storage", {
   },
 
   /** 列表动作 */
-  list({ detail }: any) {
+  list({ detail }: WXEvent.Touch) {
     if (detail.event) this[detail.event as ListAction]();
   },
 
@@ -114,7 +111,10 @@ $register("storage", {
       path: wx.env.USER_DATA_PATH,
       recursive: true,
       success: (res) => {
+        // TODO: update
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ((res.stats as unknown) as any[]).forEach((element) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           fileSize += element.stats.size;
         });
 

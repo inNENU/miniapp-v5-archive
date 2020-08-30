@@ -1,5 +1,3 @@
-/* 展示页面 */
-
 import $register = require("wxpage");
 import { PageConfig } from "../../typings";
 import {
@@ -19,7 +17,7 @@ $register("page", {
   },
 
   onLoad(option) {
-    console.info("进入参数为", option);
+    console.info("进入参数为: ", option);
 
     // 生成页面 ID
     if (option.scene)
