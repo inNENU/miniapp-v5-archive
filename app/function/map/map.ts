@@ -270,7 +270,7 @@ $register("map", {
     const { area } = this.data;
 
     const { path } = this.data.markers.find(
-      (item) => item.id === event.markerId
+      (item) => item.id === event.detail.markerId
     ) as MarkerData;
 
     if (event.type === "markertap") {
@@ -299,8 +299,9 @@ $register("map", {
     this.setData({ showPopup: false });
   },
 
-  regionChange(event: any) {
-    if (event.causedBy === "gesture" && event.type === "start")
+  regionChange(event: WechatMiniprogram.RegionChange) {
+    console.log(event);
+    if (event.causedBy === "gesture" && event.type === "begin")
       this.state.gestureHold = true;
 
     // 用户对地图进行了缩放或移动
@@ -329,7 +330,7 @@ $register("map", {
     }
   },
 
-  update(event: any) {
+  update(event: WechatMiniprogram.MapUpdated) {
     console.log("update", event);
   },
 

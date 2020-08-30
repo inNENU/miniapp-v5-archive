@@ -221,6 +221,13 @@
           "pathName": "page/search/search",
           "query": "word=浴池",
           "scene": null
+        },
+        {
+          "id": -1,
+          "name": "绩点计算",
+          "pathName": "function/cal/cal",
+          "query": "",
+          "scene": null
         }
       ]
     }

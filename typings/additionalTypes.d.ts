@@ -1,6 +1,5 @@
-declare namespace WX {
-  interface RequestResult<T>
-    extends WechatMiniprogram.RequestSuccessCallbackResult {
+declare namespace WechatMiniprogram {
+  interface RequestResult<T> extends RequestSuccessCallbackResult {
     data: T;
   }
 }

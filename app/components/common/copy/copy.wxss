@@ -32,6 +32,7 @@
 .copy-wrapper .text {
   text-align: justify;
   font-size: 17px;
+  word-break: break-all;
 }
 
 .copy-wrapper .text::before {

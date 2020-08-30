@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}}">
-  <template is="body" data="{{page, theme}}" />
+  <template is="nav" data="{{...nav, theme}}" />
   <view class="gradeHeader">
     <scroll-view scroll-x class="picker">
       新计算
@@ -16,15 +16,10 @@
     <view class="edit" catch:tap="edit">{{editText}}</view>
   </view>
   <view class="gradeinputerF">
-    <view
-      wx:for="{{grade}}"
-      wx:for-item="Grade"
-      class="courseContainer"
-      id="{{Grade.id}}"
-    >
+    <view wx:for="{{grade}}" class="courseContainer" id="{{item.id}}">
       <button
         class="sort {{display? '': 'hide'}}"
-        id="sort{{Grade.id}}"
+        id="sort{{item.id}}"
         catch:touchmove="sort"
       >
         <text class="sortText">↕</text>
@@ -33,12 +28,12 @@
         class="course"
         type="text"
         confirm-type="next"
-        value="{{Grade.course}}"
-        placeholder="  课程{{Grade.id+1}}"
+        value="{{item.course}}"
+        placeholder="课程{{item.id+1}}"
         maxlength="8"
-        focus="{{Grade.courseFocus}}"
+        focus="{{item.courseFocus}}"
         data-class="course"
-        data-id="{{Grade.id}}"
+        data-id="{{item.id}}"
         data-maxlength="8"
         catch:input="input"
         catch:confirm="next"
@@ -46,38 +41,38 @@
       <input
         class="grade"
         type="number"
-        value="{{Grade.grade}}"
-        placeholder="  成绩"
+        value="{{item.grade}}"
+        placeholder="成绩"
         maxlength="4"
-        catch:input="input"
-        focus="{{Grade.gradeFocus}}"
-        data-class="grade"
-        data-id="{{Grade.id}}"
         data-maxlength="4"
+        focus="{{item.gradeFocus}}"
+        data-class="grade"
+        data-index="{{index}}"
+        catch:input="input"
       />
       <input
         class="credit"
         type="digit"
-        value="{{Grade.credit}}"
-        placeholder="  学分"
+        value="{{item.credit}}"
+        placeholder="学分"
         maxlength="3"
-        focus="{{Grade.courseFocus}}"
-        data-class="credit"
-        data-id="{{Grade.id}}"
+        focus="{{item.courseFocus}}"
         data-maxlength="3"
+        data-class="credit"
+        data-index="{{index}}"
         catch:input="input"
       />
       <button
-        class="remove {{display?'':'hide'}}"
+        class="remove {{display? '': 'hide'}}"
         data-action="remove"
-        data-id="{{Grade.id}}"
+        data-index="{{index}}"
         catch:tap="remove"
       >
         <text class="removeText">-</text>
       </button>
     </view>
     <view class="btnCtn">
-      <button catch:tap="addNew">新增</button>
+      <button catch:tap="add">新增</button>
       <button catch:tap="calculate">计算</button>
     </view>
   </view>

@@ -1315,22 +1315,40 @@ declare namespace WechatMiniprogram {
     rotate: number;
     /** 缩放程度，最低基础库 2.3.0 */
     skew: number;
-  }> & {
-    /**
-     * 视野变化开始、结束时触发
-     *
-     * 视野变化开始为 `begin`，结束为 `end`
-     */
-    type: "begin" | "end";
-    /**
-     * 导致视野变化的原因
-     *
-     * - drag: 拖动地图导致
-     * - scale: 缩放导致
-     * - update: 调用接口导致
-     */
-    causedBy: "drag" | "scale" | "update";
-  };
+  }> &
+    (
+      | {
+          /**
+           * 视野变化开始、结束时触发
+           *
+           * 视野变化开始为 `begin`
+           */
+          type: "begin";
+          /**
+           * 导致视野变化的原因
+           *
+           * - gesture: 用户手势
+           * - update: 调用接口导致
+           */
+          causedBy: "gesture" | "update";
+        }
+      | {
+          /**
+           * 视野变化结束时触发
+           *
+           * 视野变化结束为 `end`
+           */
+          type: "end";
+          /**
+           * 导致视野变化的原因
+           *
+           * - drag: 拖动地图导致
+           * - scale: 缩放导致
+           * - update: 调用接口导致
+           */
+          causedBy: "drag" | "scale" | "update";
+        }
+    );
 
   /**
    * 广告加载成功的回调

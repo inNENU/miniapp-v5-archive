@@ -10,10 +10,10 @@ $register.C<{ config: DocComponentConfig }>({
 
   methods: {
     view(): void {
+      // 检测到文档
       if (["doc", "ppt", "xls", "pdf"].includes(this.data.config.icon)) {
-        // 检测到文档
-
-        wx.showLoading({ title: "下载中...0%", mask: true }); // 显示下载提示
+        // 显示下载提示
+        wx.showLoading({ title: "下载中...0%", mask: true });
 
         // 开始下载文件
         const docTask = wx.downloadFile({
