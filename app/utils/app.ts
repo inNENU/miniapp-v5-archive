@@ -277,9 +277,9 @@ export const appUpdate = (globalData: GlobalData): void => {
   const updateManager = wx.getUpdateManager();
 
   // 检查更新
-  updateManager.onCheckForUpdate((status) => {
+  updateManager.onCheckForUpdate(({ hasUpdate }) => {
     // 找到更新，提示用户获取到更新
-    if (status.hasUpdate) tip("发现小程序更新，下载中...");
+    if (hasUpdate) tip("发现小程序更新，下载中...");
   });
 
   updateManager.onUpdateReady(() => {

@@ -102,7 +102,7 @@ $register("weather", {
       wx.createSelectorQuery()
         .select(".canvas")
         .fields({ node: true, size: true })
-        .exec((res) => {
+        .exec((res: Required<WechatMiniprogram.NodeInfo>[]) => {
           const canvas = res[0].node;
           const context = canvas.getContext("2d");
           const dpr = info.pixelRatio;

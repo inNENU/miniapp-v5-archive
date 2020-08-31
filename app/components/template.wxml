@@ -232,7 +232,9 @@
   </view>
   <view wx:if="{{desc}}" class="Android-head">
     <view class="Android-nav-title">{{title}}</view>
-    <view wx:if="{{desc}}" class="Android-desc">{{desc}}</view>
+    <view wx:if="{{desc}}" class="Android-desc">
+      <text decode>{{desc}}</text>
+    </view>
   </view>
 </template>
 <!-- Android错误页面 -->
@@ -414,7 +416,9 @@ Author: Mr.Hope
   </view>
   <view wx:if="{{desc}}" class="Android-head">
     <view class="Android-nav-title">{{title}}</view>
-    <view wx:if="{{desc}}" class="Android-desc">{{desc}}</view>
+    <view wx:if="{{desc}}" class="Android-desc">
+      <text decode>{{desc}}</text>
+    </view>
   </view>
 </template>
 <!-- Weui错误页面 -->

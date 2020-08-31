@@ -600,7 +600,7 @@ declare namespace WechatMiniprogram {
       /** 输入框内容 */
       value: string;
       /** 键盘高度, 在基础库 `1.9.90` 起支持 */
-      height?: number;
+      height: number;
     },
     Mark,
     TargetDataset

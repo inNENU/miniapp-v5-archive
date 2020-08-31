@@ -33,6 +33,44 @@ declare namespace WechatMiniprogram {
     /** 是否开启实时路况，默认为 false */
     enableTraffic?: boolean;
   }
+
+  interface RequestResult<T> extends RequestSuccessCallbackResult {
+    data: T;
+  }
+
+  interface NodeRectInfo {
+    top: number;
+    right: number;
+    bottom: number;
+    left: number;
+  }
+
+  interface NodeSizeInfo {
+    width: number;
+    height: number;
+  }
+
+  interface NodeScrollOffsetInfo {
+    scrollLeft?: number;
+    scrollTop?: number;
+  }
+
+  type NodeInfo = Partial<
+    NodeRectInfo &
+      NodeSizeInfo &
+      NodeScrollOffsetInfo & {
+        id: string;
+        mark: IAnyObject;
+        dataset: IAnyObject;
+        properties: string[];
+        computedStyle: string[];
+        node: {
+          getContext: (type: string) => CanvasContext;
+        } & NodeRectInfo &
+          NodeSizeInfo;
+      }
+  >;
+
   namespace Component {
     interface Constructor {
       <

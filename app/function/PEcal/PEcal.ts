@@ -40,6 +40,23 @@ const longRunPicker = [["2分", "3分", "4分", "5分", "6分", "7分"], []];
 // 生成长跑选择器
 for (let i = 0; i < 60; i += 1) longRunPicker[1].push(`${i}秒`);
 
+interface GradeConfig {
+  /** 肺活量 */
+  vitalCapacity: number[];
+  /** 短跑 */
+  shortRun: number[];
+  /** 坐位体前屈 */
+  sitAndReach: number[];
+  /** 立定跳远 */
+  standingLongJump: number[];
+  /** 长跑 */
+  longRun: number[];
+  /** 仰卧起坐 */
+  situp?: number[];
+  /** 立定跳远 */
+  chinning?: (number | string)[];
+}
+
 interface PEScore {
   /** BMI 分值 */
   bmi: number;
@@ -214,17 +231,14 @@ $register("PEcal", {
 
     query.select(`#${id}`).boundingClientRect();
     query.selectViewport().fields({ size: true, scrollOffset: true });
-    query.exec((res: any[]) => {
-      if (
-        (res[0].bottom as number) + (event.detail.height as number) >
-        (res[1].height as number)
-      )
+    query.exec((res: Required<WechatMiniprogram.NodeInfo>[]) => {
+      if (res[0].bottom + event.detail.height > res[1].height)
         wx.pageScrollTo({
           scrollTop:
-            (res[1].scrollTop as number) +
-            (res[0].bottom as number) +
-            (event.detail.height as number) -
-            (res[1].height as number) +
+            res[1].scrollTop +
+            res[0].bottom +
+            event.detail.height -
+            res[1].height +
             10,
         });
     });
@@ -293,6 +307,7 @@ $register("PEcal", {
   },
 
   /** 获得最终成绩 */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getResult(result: Record<string, any>, callback: (peScore: PEScore) => void) {
     const { length } = gradeLevels;
     const { gender, grade } = this.state;
@@ -315,7 +330,8 @@ $register("PEcal", {
     getJSON({
       path: `function/PEcal/${gender}-${grade}`,
       url: `resource/function/PEcal/${gender}-${grade}`,
-      success: (config: any) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      success: (config: GradeConfig) => {
         // 以下三项越高越好，进行计算
         (["vitalCapacity", "sitAndReach", "standingLongJump"] as (
           | "vitalCapacity"
@@ -348,15 +364,17 @@ $register("PEcal", {
         if (result[specialScore] && Number(result[specialScore])) {
           for (let i = 0; i < length; i += 1)
             if (
-              config[specialScore][i] !== "" &&
-              result[specialScore] <= config[specialScore][i]
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              config[specialScore]![i] !== "" &&
+              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+              result[specialScore] <= config[specialScore]![i]
             ) {
               peScore.special = gradeLevels[i];
               break;
             } else if (i === length - 1) peScore.special = gradeLevels[i];
         } else peScore.special = 0;
 
-        // TODO:计算加分
+        // TODO: 计算加分
 
         console.info("成绩为", peScore);
 
