@@ -2,5 +2,4 @@ app/**/*.js
 app/**/*.d.ts
 app/function/player/player.wxs
 
-server/resource/**/*.json
-server/script/**/*.js
+server/

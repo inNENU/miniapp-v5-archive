@@ -183,6 +183,19 @@ export default {
           path: "life/nearby/index",
         },
       ],
+    },
+    {
+      tag: "grid",
+      header: "乐在东师",
+      content: [
+        {
+          text: "个人建议",
+          color: "blue",
+          name: "Advice",
+          icon: "/icon/guide/advice.svg",
+          path: "advice/index",
+        },
+      ],
       footer: " ",
     },
   ],

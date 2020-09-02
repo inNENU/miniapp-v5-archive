@@ -64,16 +64,13 @@ $register("about", {
           text: "https://github.com/Hope-Studio/innenu-res",
         },
         {
-          tag: "text",
-          heading: "内容版权及使用",
-          text: [
-            "   请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免引起纠纷。",
-          ],
-        },
-        {
           tag: "list",
-          header: false,
+          header: "内容版权及使用",
           content: [
+            {
+              text:
+                "   请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免引起纠纷。",
+            },
             { text: "协议详情", url: "page?path=other/about/copyright" },
           ],
         },
