@@ -1,11 +1,11 @@
-import $register = require("wxpage");
 import { AppOption } from "../../../app";
 import { modal } from "../../../utils/wx";
+import { PhoneComponentConfig } from "../../../../typings";
 const {
   globalData: { env },
 } = getApp<AppOption>(); // 获得当前小程序环境
 
-$register.C({
+Component<{ config: PhoneComponentConfig }>({
   properties: {
     /** 电话组件配置 */
     config: Object,

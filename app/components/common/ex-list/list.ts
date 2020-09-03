@@ -13,7 +13,11 @@ interface ListDetail<T = AdvancedListComponentItemConfig> {
   content: T;
 }
 
-$register.C({
+$register.C<{
+  config: AdvancedListComponentConfig;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  change: Record<string, any>;
+}>({
   properties: {
     /** 配置 */
     config: { type: Object },

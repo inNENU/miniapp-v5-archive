@@ -114,7 +114,7 @@
           "id": 4,
           "name": "地图地点",
           "pathName": "module/situs",
-          "query": "id=benbu/facility/cainiao",
+          "query": "id=benbu/school/foreign",
           "scene": null
         },
         {

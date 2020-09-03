@@ -1,6 +1,6 @@
-import $register = require("wxpage");
+import { ImageComponentConfig } from "../../../../typings";
 
-$register.C({
+Component<{ config: ImageComponentConfig; images: string[] }>({
   properties: {
     /** 图片组件配置 */
     config: { type: Object },

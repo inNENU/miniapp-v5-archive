@@ -1,6 +1,7 @@
 import $register = require("wxpage");
+import { ListComponentConfig } from "../../../../typings";
 
-$register.C({
+$register.C<{ config: ListComponentConfig }>({
   properties: {
     /** 普通列表配置 */
     config: Object,

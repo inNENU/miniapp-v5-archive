@@ -1,7 +1,7 @@
-import $register = require("wxpage");
 import { tip } from "../../../utils/wx";
+import { MediaComponentConfig } from "../../../../typings";
 
-$register.C({
+Component<{ config: MediaComponentConfig }>({
   properties: {
     /** 媒体组件配置 */
     config: { type: Object },

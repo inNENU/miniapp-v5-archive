@@ -1,11 +1,10 @@
-import $register = require("wxpage");
 import { savePhoto } from "../../../utils/wx";
 import { AppOption } from "../../../app";
 const {
   globalData: { env, appID },
 } = getApp<AppOption>(); // 获得日志管理器，全局数据
 
-$register.C({
+Component({
   properties: { config: { type: Object, value: { id: "" } } },
   data: {
     // 小程序运行环境
