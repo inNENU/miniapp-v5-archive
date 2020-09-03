@@ -8,7 +8,7 @@
 />
 <view class="{{theme}}">
   <template is="nav" data="{{...page, theme}}" />
-  <template is="body" data="{{page, theme}}" />
+  <template is="components" data="{{content: page.content, theme}}" />
   <view class="qrcode-wrapper">
     <image
       class="qrcode"
@@ -27,8 +27,6 @@
       catch:tap="save"
     />
   </view>
-  <list config="{{list}}" />
-  <template is="title" data="{{ text: '备注', theme, darkmode}}" />
-  <my-text config="{{text}}" />
+  <template is="components" data="{{content:content2, theme}}" />
   <footer />
 </view>

@@ -1,7 +1,7 @@
 import { appOption, server } from "./config";
 import { remove, listFile, readJSON, saveFile, unzip } from "./file";
 import { debug, error, info, warn } from "./log";
-import { compareVersion, modal, requestJSON, tip } from "./wx";
+import { modal, requestJSON, tip } from "./wx";
 import { GlobalData } from "../app";
 
 /**
@@ -429,7 +429,6 @@ export const registAction = (): void => {
  *
  * @param globalData 小程序的全局数据
  */
-// eslint-disable-next-line max-lines-per-function
 export const startup = (globalData: GlobalData): void => {
   // 获取设备与运行环境信息
   globalData.info = wx.getSystemInfoSync();
@@ -441,24 +440,24 @@ export const startup = (globalData: GlobalData): void => {
   globalData.appID = wx.getAccountInfoSync().miniProgram.appId;
 
   // 检测基础库版本
-  if (
-    ((globalData.env === "qq" &&
-      compareVersion(globalData.info.SDKVersion, "1.9.0") < 0) ||
-      (globalData.env === "wx" &&
-        compareVersion(globalData.info.SDKVersion, "2.8.0") < 0)) &&
-    wx.getStorageSync("SDKVersion") !== globalData.info.SDKVersion
-  )
-    modal(
-      "基础库版本偏低",
-      `您的${
-        globalData.env === "qq" ? "QQ" : "微信"
-      }版本偏低，虽然不会影响小程序的功能，但会导致部分内容显示异常。为获得最佳体验，建议您更新至最新版本。`,
-      () => {
-        // 避免重复提示
-        wx.setStorageSync("SDKVersion", globalData.info.SDKVersion);
-        if (wx.canIUse("updateWeChatApp")) wx.updateWeChatApp();
-      }
-    );
+  // if (
+  //   ((globalData.env === "qq" &&
+  //     compareVersion(globalData.info.SDKVersion, "1.9.0") < 0) ||
+  //     (globalData.env === "wx" &&
+  //       compareVersion(globalData.info.SDKVersion, "2.8.0") < 0)) &&
+  //   wx.getStorageSync("SDKVersion") !== globalData.info.SDKVersion
+  // )
+  //   modal(
+  //     "基础库版本偏低",
+  //     `您的${
+  //       globalData.env === "qq" ? "QQ" : "微信"
+  //     }版本偏低，虽然不会影响小程序的功能，但会导致部分内容显示异常。为获得最佳体验，建议您更新至最新版本。`,
+  //     () => {
+  //       // 避免重复提示
+  //       wx.setStorageSync("SDKVersion", globalData.info.SDKVersion);
+  //       if (wx.canIUse("updateWeChatApp")) wx.updateWeChatApp();
+  //     }
+  //   );
 
   // 获取网络信息
   wx.getNetworkType({

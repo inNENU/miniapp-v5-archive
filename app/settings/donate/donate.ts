@@ -40,17 +40,21 @@ $register("donate", {
       from: "返回",
     } as PageConfigWithContent,
 
-    text: {
-      style: "text-indent: 1.5em;",
-      text: [
-        "由于 Mr.Hope 无法在转账页面获取到您的昵称或者姓名，请您在打赏时备注“小程序打赏 + 昵称/姓名”。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在赞赏列表中(未备注的捐赠将显示为佚名)。再次感谢您的支持！",
-        "Mr.Hope 也许会产生统计遗漏，如果您捐赠但未看到您的姓名，请您务必联系我。",
-      ],
-    },
-
-    list: {
-      content: [{ text: "捐赠列表", url: "/settings/donate/list" }],
-    },
+    content2: [
+      {
+        tag: "list",
+        content: [{ text: "捐赠列表", url: "/settings/donate/list" }],
+      },
+      { tag: "title", text: "备注" },
+      {
+        tag: "text",
+        style: "text-indent: 1.5em;",
+        text: [
+          "由于 Mr.Hope 无法在转账页面获取到您的昵称或者姓名，请您在打赏时备注“小程序打赏 + 昵称/姓名”。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在赞赏列表中(未备注的捐赠将显示为佚名)。再次感谢您的支持！",
+          "Mr.Hope 也许会产生统计遗漏，如果您捐赠但未看到您的姓名，请您务必联系我。",
+        ],
+      },
+    ],
   },
 
   onLoad() {

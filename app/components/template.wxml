@@ -1,56 +1,21 @@
 <!-- page with navigation bar -->
 <template name="page">
-  <block wx:if="{{page}}">
-    <view
-      wx:scope-data="{{...page.scopeData}}"
-      class="{{theme}} {{page.grey? 'grey': ''}}"
-    >
-      <block wx:if="{{!page.hidden}}">
-        <template
-          is="{{theme}}error"
-          wx:if="{{page.error}}"
-          data="{{...page, darkmode}}"
-        />
-        <template is="{{theme}}Nav" wx:else data="{{...page, darkmode}}" />
-      </block>
+  <view
+    wx:if="{{page}}"
+    wx:scope-data="{{...page.scopeData}}"
+    class="{{theme}} {{page.grey? 'grey': ''}}"
+  >
+    <!-- 错误显示 -->
+    <block wx:if="{{page.error}}">
+      <template
+        is="{{theme}}Nav"
+        data="{{ title: '页面出错', from: '返回', ...page, darkmode }}"
+      />
+      <template is="error" />
+    </block>
 
-      <block wx:if="{{page.content}}">
-        <block wx:for="{{page.content}}" wx:key="id">
-          <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
-          <img
-            wx:elif="{{item.tag === 'img'}}"
-            config="{{item}}"
-            images="{{page.images}}"
-          />
-          <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
-          <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
-          <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
-          <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
-          <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-          <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
-          <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
-          <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
-          <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
-          <ex-list
-            wx:elif="{{item.tag === 'advanced-list'}}"
-            config="{{item}}"
-            change="{{event? event[index]: ''}}"
-            catch:change="list"
-          />
-          <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
-          <template
-            wx:else
-            is="{{item.tag}}"
-            data="{{...item, theme, darkmode}}"
-          />
-        </block>
-      </block>
-      <share config="{{page}}" />
-      <footer config="{{page}}" wx:if="{{page.footer !== false}}" />
-    </view>
-  </block>
-  <block wx:else>
-    <view class="{{theme}} {{darkmode? 'dark': 'light'}} loading-logo-wrapper">
+    <!-- 加载页面 -->
+    <view wx:elif="{{!page.content}}" class="loading-logo-wrapper">
       <view
         class="back-button"
         style="top: 27.5px"
@@ -73,37 +38,76 @@
         <view class="text">加载中...</view>
       </view>
     </view>
-  </block>
+
+    <block wx:else>
+      <!-- 导航栏 -->
+      <template
+        wx:if="{{!page.hidden}}"
+        is="{{theme}}Nav"
+        data="{{...page, darkmode}}"
+      />
+
+      <!-- 页面内容 -->
+      <block wx:for="{{page.content}}" wx:key="id">
+        <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
+        <img
+          wx:elif="{{item.tag === 'img'}}"
+          config="{{item}}"
+          images="{{page.images}}"
+        />
+        <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
+        <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
+        <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
+        <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
+        <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
+        <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
+        <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+        <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
+        <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
+        <ex-list
+          wx:elif="{{item.tag === 'advanced-list'}}"
+          config="{{item}}"
+          change="{{event? event[index]: ''}}"
+          catch:change="list"
+        />
+        <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+        <template
+          wx:else
+          is="{{item.tag}}"
+          data="{{...item, theme, darkmode}}"
+        />
+      </block>
+      <share config="{{page}}" />
+      <footer config="{{page}}" wx:if="{{page.footer !== false}}" />
+    </block>
+  </view>
 </template>
 
-<!-- page without navigation bar -->
-<template name="body">
-  <block wx:if="{{theme}}" wx:for="{{page.content}}" wx:key="id">
-    <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
-    <img
-      wx:elif="{{item.tag === 'img'}}"
-      config="{{item}}"
-      images="{{page? page.images: []}}"
-    />
-    <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
-    <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
-    <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
-    <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
-    <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-    <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
-    <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
-    <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
-    <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
-    <ex-list
-      wx:elif="{{item.tag === 'advanced-list'}}"
-      config="{{item}}"
-      change="{{event? event[index]: ''}}"
-      catch:change="list"
-    />
-    <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
-    <template wx:else is="{{item.tag}}" data="{{...item, theme, darkmode}}" />
+<!-- components -->
+<template name="components">
+  <block wx:if="{{theme && content.length}}">
+    <block wx:for="{{content}}" wx:key="id">
+      <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
+      <img wx:elif="{{item.tag === 'img'}}" config="{{item}}" />
+      <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
+      <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
+      <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
+      <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
+      <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
+      <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
+      <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+      <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
+      <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
+      <ex-list
+        wx:elif="{{item.tag === 'advanced-list'}}"
+        config="{{item}}"
+        change="{{event? event[index]: ''}}"
+        catch:change="list"
+      />
+      <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+      <template wx:else is="{{item.tag}}" data="{{...item, theme, darkmode}}" />
+    </block>
   </block>
-  <share config="{{page}}" />
 </template>
 <!-- ******************************************
   Here are common template used by all theme
@@ -114,72 +118,8 @@
     <text user-select>{{text}}</text>
   </view>
 </template>
-<!-- ******************************************
-  Here are  different template used by diferent theme
-********************************************* -->
-<!-- 导航栏 -->
-<template name="nav">
-  <block wx:if="{{!hidden}}">
-    <template
-      is="{{theme}}Nav"
-      data="{{title, from, titleDisplay, borderDisplay, shadow, action, statusBarHeight, darkmode}}"
-    />
-  </block>
-</template>
-<!-- ******************************************
-    Below are  different themes template.
-
-    iOS theme
-********************************************* -->
-<!-- iOS导航栏 -->
-<template name="iOSNav">
-  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
-    <view wx:if="{{titleDisplay}}" class="iOS-titletext">{{title}}</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="iOS-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      plain
-      catch:tap="{{action === undefined? '$back': action}}"
-    >
-      <view
-        wx:if="{{action === undefined || action === 'redirect'}}"
-        class="iOS-back-arrow"
-      />
-      <text class="iOS-nav-text">{{from}}</text>
-    </view>
-  </view>
-  <view
-    wx:if="{{borderDisplay}}"
-    class="iOS-nav-border"
-    style="top:{{statusBarHeight + 44}}px;"
-  />
-  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
-  <view class="iOS-head">{{title}}</view>
-</template>
-<!-- iOS错误 -->
-<template name="iOSerror">
-  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
-    <view class="iOS-titletext">页面出错</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="iOS-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      plain
-      catch:tap="{{action || '$back'}}"
-    >
-      <view class="iOS-back-arrow" />
-      <text class="iOS-nav-text">返回</text>
-    </view>
-  </view>
-  <view class="iOS-nav-border" style="top:{{statusBarHeight + 44}}px;" />
-  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
+<!-- 错误文字 -->
+<template name="error">
   <view class="errorCtn">
     <icon type="warn" size="80" />
     <view class="errorText">很抱歉，界面遇到了问题!</view>
@@ -199,6 +139,48 @@
     >
   </view>
 </template>
+
+<!-- 导航栏 -->
+<template name="nav">
+  <block wx:if="{{!hidden}}">
+    <template
+      is="{{theme}}Nav"
+      data="{{title, from, titleDisplay, borderDisplay, shadow, action, statusBarHeight, darkmode}}"
+    />
+  </block>
+</template>
+<!-- ***************************
+        iOS theme
+**************************** -->
+<!-- iOS导航栏 -->
+<template name="iOSNav">
+  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
+    <view wx:if="{{titleDisplay}}" class="iOS-titletext">{{title}}</view>
+    <view
+      wx:if="{{action !== false}}"
+      class="iOS-nav-back-button"
+      hover-class="back-button-hover"
+      hover-stay-time="100"
+      plain
+      catch:tap="{{action || '$back'}}"
+    >
+      <view
+        wx:if="{{action === undefined || action === 'redirect'}}"
+        class="iOS-back-arrow"
+      />
+      <text class="iOS-nav-text">{{from}}</text>
+    </view>
+  </view>
+  <view
+    wx:if="{{borderDisplay}}"
+    class="iOS-nav-border"
+    style="top:{{statusBarHeight + 44}}px;"
+  />
+  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
+    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
+  </view>
+  <view class="iOS-head">{{title}}</view>
+</template>
 <!-- ******************************************
         Android theme
 ********************************************* -->
@@ -215,7 +197,7 @@
       hover-class="back-button-hover"
       hover-stay-time="100"
       plain
-      catch:tap="{{action === undefined? '$back': action}}"
+      catch:tap="{{action || '$back'}}"
     >
       <view
         wx:if="{{action === undefined || action === 'redirect'}}"
@@ -235,49 +217,6 @@
     <view wx:if="{{desc}}" class="Android-desc">
       <text decode>{{desc}}</text>
     </view>
-  </view>
-</template>
-<!-- Android错误页面 -->
-<template name="Androiderror">
-  <view
-    class="Android-navigation-bar"
-    style="padding-top: {{statusBarHeight}}px;"
-  >
-    <view class="Android-titletext">页面出错</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="Android-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      plain
-      catch:tap="{{ action || '$back'}}"
-    >
-      <view class="Android-back-arrow" />
-    </view>
-  </view>
-  <view
-    class="Android-nav-placeholder"
-    style="height:{{statusBarHeight + 44}}px;"
-  >
-    <text>到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮</text>
-  </view>
-  <view class="errorCtn">
-    <icon type="warn" size="80" />
-    <view class="errorText">很抱歉，界面遇到了问题!</view>
-    <view class="errorDesc">
-      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
-      <text>错误原因有以下几种可能:\n\n</text>
-      <text> 1. 服务器负载过重；\n</text>
-      <text> 2. 设备可能无法访问互联网;\n</text>
-      <text> 3. 导航页面路径错误；\n\n</text>
-      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
-      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
-    </view>
-  </view>
-  <view class="donate-wrapper">
-    <navigator class="donate-button" url="/settings/donate/donate"
-      >支持开发者</navigator
-    >
   </view>
 </template>
 <!-- ******************************************
@@ -327,7 +266,6 @@ Author: Mr.Hope
         class="iOS-nav-back-button"
         hover-class="back-button-hover"
         style="position: absolute; left: 0"
-        plain
         catch:tap="{{action}}"
       >
         <view
@@ -342,45 +280,6 @@ Author: Mr.Hope
   </block>
   <view style="width:100%;height:{{statusBarHeight + 40}}px;" />
 </template>
-<!-- NENU错误页面 -->
-<template name="NENUerror">
-  <view
-    class="NENUnav"
-    style="background-color:{{color}};padding-top:{{statusBarHeight}}px;"
-  >
-    <view class="NENU-navText">页面出错</view>
-  </view>
-  <view
-    style="width:100%; background-color:{{color}}; height:{{statusBarHeight + 40}}px;"
-  />
-  <view
-    class="back-button"
-    style="top: {{statusBarHeight + 5.5}}px;"
-    hover-class="button-hover"
-    hover-stay-time="100"
-    catch:tap="$back"
-  >
-    <image class="back-icon" src="/icon/back{{darkmode? 'White': ''}}.svg" />
-  </view>
-  <view class="errorCtn">
-    <icon type="warn" size="80" />
-    <view class="errorText">很抱歉，界面遇到了问题!</view>
-    <view class="errorDesc">
-      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
-      <text>错误原因有以下几种可能:\n\n</text>
-      <text> 1. 服务器负载过重；\n</text>
-      <text> 2. 设备可能无法访问互联网;\n</text>
-      <text> 3. 导航页面路径错误；\n\n</text>
-      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
-      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
-    </view>
-  </view>
-  <view class="donate-wrapper">
-    <navigator class="donate-button" url="/settings/donate/donate"
-      >支持开发者</navigator
-    >
-  </view>
-</template>
 <!-- ******************************************
 WEUI theme
 
@@ -390,7 +289,7 @@ Author: Mr.Hope
 <!-- weui导航栏 -->
 <template name="weuiNav">
   <view
-    class="weui-navigation-bar {{shadow?'AndroidNavShadow':''}}"
+    class="weui-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="Android-titletext">{{title}}</view>
@@ -419,47 +318,5 @@ Author: Mr.Hope
     <view wx:if="{{desc}}" class="Android-desc">
       <text decode>{{desc}}</text>
     </view>
-  </view>
-</template>
-<!-- Weui错误页面 -->
-<template name="weuierror">
-  <view
-    class="weui-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
-    style="padding-top: {{statusBarHeight}}px;"
-  >
-    <view class="Android-titletext">页面出错</view>
-    <view
-      class="button Android-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      catch:tap="$back"
-    >
-      <view class="weui-navigation-bar-backbutton" />
-      <view class="Android-back-text">返回</view>
-    </view>
-  </view>
-  <view
-    class="Android-nav-placeholder"
-    style="height:{{statusBarHeight + 44}}px;"
-  >
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
-  <view class="errorCtn">
-    <icon type="warn" size="80" />
-    <view class="errorText">很抱歉，界面遇到了问题!</view>
-    <view class="errorDesc">
-      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
-      <text>错误原因有以下几种可能:\n\n</text>
-      <text> 1. 服务器负载过重；\n</text>
-      <text> 2. 设备可能无法访问互联网;\n</text>
-      <text> 3. 导航页面路径错误；\n\n</text>
-      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
-      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
-    </view>
-  </view>
-  <view class="donate-wrapper">
-    <navigator class="donate-button" url="/settings/donate/donate"
-      >支持开发者</navigator
-    >
   </view>
 </template>

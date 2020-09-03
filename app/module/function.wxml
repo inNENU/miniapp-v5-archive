@@ -9,7 +9,7 @@
       联系校会君
     </button>
     <button wx:else type="primary" class="action" open-type="contact">
-      联系Mr.Hope
+      联系 Mr.Hope
     </button>
   </block>
   <button

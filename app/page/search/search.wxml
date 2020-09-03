@@ -33,8 +33,6 @@
     catch:search="search"
   />
 
-  <template is="body" data="{{page, theme}}" />
-
   <title config="{{ { text: '搜索结果' } }}" />
 
   <view wx:if="{{result.content.length === 0 }}" class="info"

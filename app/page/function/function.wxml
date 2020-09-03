@@ -9,5 +9,5 @@
 <view class="{{theme}} grey">
   <template is="nav" data="{{...nav, theme}}" />
   <weather catch:navigate="navigate" />
-  <template is="body" data="{{page, theme}}" />
+  <template is="components" data="{{content: page.content, theme}}" />
 </view>

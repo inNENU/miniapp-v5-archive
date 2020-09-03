@@ -8,7 +8,7 @@ Component<{ config: ImageComponentConfig; images: string[] }>({
     /** 展示图片列表 */
     images: {
       type: Array,
-      value: [],
+      value: [] as string[],
     },
   },
 
