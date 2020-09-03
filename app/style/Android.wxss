@@ -12,16 +12,6 @@
 
   color: var(--text-color);
   text-align: center;
-  font-family:
-    "Helvetica Neue",
-    FZKTJW,
-    -apple-system-font,
-    "PingFang SC",
-    Helvetica,
-    STHeiti,
-    Tahoma,
-    Simsun,
-    sans-serif !important;
 }
 
 @media (prefers-color-scheme: dark) {

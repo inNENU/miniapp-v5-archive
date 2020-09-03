@@ -66,7 +66,7 @@ $register("wechat-detail", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.config.name,
-      query: { path: this.state.path },
+      query: `path=${this.state.path}`,
     };
   },
 

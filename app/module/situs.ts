@@ -75,7 +75,14 @@ $register("situs", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
-      query: { from: "主页", id: this.state.id },
+      query: `from=主页&id${this.state.id}`,
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: this.data.page.title,
+      query: `from=主页&id${this.state.id}`,
     };
   },
 

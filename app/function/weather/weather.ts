@@ -296,7 +296,7 @@ $register("weather", {
       wx.createSelectorQuery()
         .select(".canvas")
         .fields({ node: true, size: true })
-        .exec((res) => {
+        .exec((res: Required<WechatMiniprogram.NodeInfo>[]) => {
           this.draw(res[0].node.getContext("2d"), this.data.weather);
         });
     else this.canvasOldDraw(this.data.weather);

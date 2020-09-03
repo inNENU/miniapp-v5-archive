@@ -66,7 +66,7 @@ $register("music", {
     // 加载字体
     wx.loadFontFace({
       family: "FZSSJW",
-      source: `url("${server}fonts/FZSSJW.ttf")`,
+      source: `url("${server}assets/fonts/FZSSJW.ttf")`,
       complete: (res) => {
         console.info("宋体字体", res); // 调试
       },
@@ -151,7 +151,7 @@ $register("music", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.currentSong.title,
-      query: { name: this.data.currentSong.title },
+      query: `name=${this.data.currentSong.title}`,
     };
   },
 

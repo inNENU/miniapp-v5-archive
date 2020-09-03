@@ -11,7 +11,6 @@ import {
   PageOption,
   PageConfig,
 } from "../../typings/pageData";
-import { server } from "./config";
 
 type PageInstanceWithPage = WechatMiniprogram.Page.MPInstance<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -64,8 +63,11 @@ const resolveContent = (
       listElement.currentValue = [];
       listElement.value = [];
       pickerValues.forEach((pickerElement, index) => {
-        listElement.value[index] =
-          listElement.pickerValue[index][Number(pickerElement)];
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (listElement.value as any[])[index] = (listElement.pickerValue[
+          index
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ] as any[])[Number(pickerElement)];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (listElement.currentValue as any[])[index] = Number(pickerElement);
       });
@@ -534,31 +536,6 @@ export const loadOnlinePage = (
       }
     );
   } else error("no path");
-};
-
-/**
- * 加载字体
- *
- * @param theme 主题
- */
-export const loadFont = (theme: string): void => {
-  if (theme === "Android")
-    wx.loadFontFace({
-      family: "FZKTJW",
-      source: `url("${server}fonts/FZKTJW.ttf")`,
-      complete: (res) => {
-        info("楷体字体", res); // 调试
-      },
-    });
-  else if (theme === "NENU")
-    wx.loadFontFace({
-      family: "FZSSJW",
-      source: `url("${server}fonts/FZSSJW.ttf")`,
-      complete: (res) => {
-        info("宋体字体", res); // 调试
-      },
-    });
-  else warn(`无法处理主题 ${theme}`);
 };
 
 /**

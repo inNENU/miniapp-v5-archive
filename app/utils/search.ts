@@ -4,6 +4,7 @@ import { requestJSON } from "./wx";
 /** 搜索匹配详情 */
 interface SearchContentDetail {
   type: "title" | "heading" | "text" | "card" | "doc";
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [props: string]: any;
 }
 
