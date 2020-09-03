@@ -1,8 +1,7 @@
-import $register = require("wxpage");
 import { WeatherData } from "./typings";
 import { server } from "../../utils/config";
 
-$register.C({
+Component({
   data: {
     /** 提示的索引值 */
     tipIndex: 0,

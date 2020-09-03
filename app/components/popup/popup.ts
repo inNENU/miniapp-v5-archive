@@ -1,5 +1,3 @@
-import $register = require("wxpage");
-
 export interface PopupConfig {
   /** 主标题 */
   title: string;
@@ -17,7 +15,7 @@ export interface PopupConfig {
   confirm?: string;
 }
 
-$register.C({
+Component({
   properties: {
     config: Object,
     // 是否展示对话框

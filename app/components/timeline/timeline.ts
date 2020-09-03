@@ -1,5 +1,3 @@
-import $register = require("wxpage");
-
 export interface TimeLineItem {
   /** 时间线项目标题 */
   title: string;
@@ -15,7 +13,7 @@ export interface TimeLineItem {
   class?: string;
 }
 
-$register.C({
+Component({
   properties: {
     /** 时间线配置 */
     config: Array,

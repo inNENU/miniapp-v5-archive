@@ -1,6 +1,4 @@
-import $register = require("wxpage");
-
-$register.C({
+Component({
   properties: {
     words: Array,
     searchword: String,

@@ -1,10 +1,7 @@
-/** 添加到我的小程序 */
-
-import $register = require("wxpage");
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
 
-$register.C({
+Component({
   properties: {
     /** 提示文字 */
     text: { type: String, value: "点击「添加小程序」，下次访问更便捷" },
