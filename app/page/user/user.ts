@@ -69,11 +69,11 @@ $register("me", {
 
     footer: {
       author: "",
-      desc: `当前版本: ${globalData.version}\n小程序由${
+      desc: `当前版本: ${globalData.version}\n${
         globalData.appID === "wx9ce37d9662499df3"
-          ? "校学生会委托 Mr.Hope "
-          : " Mr.Hope 个人"
-      }制作，如有错误还请见谅`,
+          ? "Mr.Hope 已授权东北师范大学校学生会使用小程序代码。\n"
+          : ""
+      }小程序由 Mr.Hope 个人制作，如有错误还请见谅`,
     },
   },
 
