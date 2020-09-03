@@ -421,11 +421,6 @@ declare namespace MPPage {
     $refs: any;
   }
 
-  /** 页面构造器 */
-  interface PageConstructor {
-    (name: string, options: PageOption): void;
-  }
-
   /** 组件实例 */
   interface ComponentInstance<D extends WechatMiniprogram.Component.DataOption>
     extends Message,
@@ -551,44 +546,56 @@ declare namespace MPPage {
 declare namespace WechatMiniprogram {
   namespace Page {
     type MPInstance<
-      D extends DataOption,
-      C extends CustomOption
-    > = MPPage.PageInstance & Instance<D, C>;
+      TData extends DataOption,
+      TCustom extends CustomOption
+    > = MPPage.PageInstance & Instance<TData, TCustom>;
 
-    type MPOption<D extends DataOption, C extends CustomOption> = Partial<
-      MPPage.PageOption
-    > &
-      ThisType<MPInstance<D, C>> &
-      Options<D, C>;
+    type MPOptions<
+      TData extends DataOption,
+      TCustom extends CustomOption
+    > = (TCustom &
+      Partial<Data<TData>> &
+      Partial<ILifetime> &
+      Partial<MPPage.PageOption>) &
+      ThisType<MPInstance<TData, TCustom>>;
 
     interface MPConstructor {
-      <D extends DataOption, C extends CustomOption>(
+      <TData extends DataOption, TCustom extends CustomOption>(
         name: string,
-        options: MPOption<D, C>
+        options: MPOptions<TData, TCustom>
       ): void;
     }
   }
 
   namespace Component {
     type MPInstance<
-      D extends DataOption,
-      P extends PropertyOption,
-      M extends MethodOption
-    > = MPPage.ComponentInstance<D> & Instance<D, P, M>;
+      TData extends DataOption,
+      TProperty extends PropertyOption,
+      TMethod extends Partial<MethodOption>,
+      TCustomInstanceProperty extends IAnyObject = IAnyObject
+    > = MPPage.ComponentInstance<TData> &
+      Instance<TData, TProperty, TMethod, TCustomInstanceProperty>;
 
-    type MPOption<
-      D extends DataOption,
-      P extends PropertyOption,
-      M extends MethodOption
-    > = ThisType<MPInstance<D, P, M>> & Options<D, P, M>;
+    type MPOptions<
+      TData extends DataOption,
+      TProperty extends PropertyOption,
+      TMethod extends MethodOption,
+      TCustomInstanceProperty extends IAnyObject = IAnyObject
+    > = Partial<Data<TData>> &
+      Partial<Property<TProperty>> &
+      Partial<Method<TMethod>> &
+      Partial<OtherOption> &
+      Partial<Lifetimes> &
+      ThisType<MPInstance<TData, TProperty, TMethod, TCustomInstanceProperty>>;
 
     interface MPConstructor {
       <
-        D extends DataOption = DataOption,
-        P extends PropertyOption = PropertyOption,
-        M extends MethodOption = MethodOption
+        TData extends DataOption = DataOption,
+        TProperty extends PropertyOption = PropertyOption,
+        TMethod extends MethodOption = MethodOption,
+        TCustomInstanceProperty extends IAnyObject = IAnyObject
       >(
-        options: MPOption<D, P, M>
+        options: Options<TData, TProperty, TMethod, TCustomInstanceProperty>
       ): string;
     }
   }
@@ -596,13 +603,13 @@ declare namespace WechatMiniprogram {
   namespace App {
     type MPInstance<T extends IAnyObject> = Option & T;
 
-    type MPOption<T extends IAnyObject> = Partial<MPPage.AppOption> &
+    type MPOptions<T extends IAnyObject> = Partial<MPPage.AppOption> &
       Partial<Option> &
       T &
       ThisType<MPInstance<T>>;
 
     interface MPConstructor {
-      <T extends IAnyObject>(options: MPOption<T>): void;
+      <T extends IAnyObject>(options: MPOptions<T>): void;
     }
   }
 }

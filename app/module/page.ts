@@ -8,8 +8,11 @@ import {
 } from "../utils/page";
 
 $register("page", {
-  data: {
-    page: {} as PageConfig,
+  data: { page: {} as PageConfig },
+
+  state: {
+    /** 在线文件路径 */
+    path: "",
   },
 
   onNavigate(option) {
@@ -17,6 +20,7 @@ $register("page", {
   },
 
   onLoad(option) {
+    console.log(this.data.page);
     console.info("进入参数为: ", option);
 
     // 生成页面 ID
@@ -29,9 +33,10 @@ $register("page", {
 
     if ("path" in option) {
       loadOnlinePage(option as Record<string, never> & { path: string }, this);
-      this.path = option.path;
+      this.state.path = option.path as string;
     } else setOnlinePage(option, this);
 
+    console.log(this.data.page);
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     wx.reportAnalytics("id_count", { id: option.id });
@@ -41,19 +46,21 @@ $register("page", {
     changeNav(event, this);
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
       path: `/module/page?${
-        this.path ? `path=${this.path}` : `scene=${this.data.page.id}`
+        this.state.path
+          ? `path=${this.state.path}`
+          : `scene=${this.data.page.id}`
       }`,
     };
   },
 
-  onShareTimeline() {
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
-      query: { id: this.data.page.id },
+      query: { id: this.data.page.id as string },
     };
   },
 
@@ -61,6 +68,7 @@ $register("page", {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
   },
 
+  /** 设置主题 */
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },

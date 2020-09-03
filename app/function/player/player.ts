@@ -141,14 +141,14 @@ $register("music", {
     popNotice("music");
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.currentSong.title,
       path: `/function/player/player?name=${this.data.currentSong.title}`,
     };
   },
 
-  onShareTimeline() {
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.currentSong.title,
       query: { name: this.data.currentSong.title },
@@ -358,7 +358,7 @@ $register("music", {
   previous() {
     const { index } = this.data;
     const { length: total } = this.data.songList;
-    let result: number | string;
+    let result: number | "nothing";
 
     switch (this.data.mode) {
       case "随机播放":

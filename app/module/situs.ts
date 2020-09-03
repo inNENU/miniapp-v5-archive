@@ -65,14 +65,14 @@ $register("situs", {
     changeNav(event, this);
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
       path: `/function/situs/situs?from=主页&id=${this.state.id}`,
     };
   },
 
-  onShareTimeline() {
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
       query: { from: "主页", id: this.state.id },

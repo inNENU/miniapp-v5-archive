@@ -28,7 +28,7 @@ $register("wechat-detail", {
     ensureJSON({ path: `function/wechat/${options.query.path || "index"}` });
   },
 
-  onLoad({ path }) {
+  onLoad({ path = "" }) {
     getJSON({
       path: `function/wechat/${path}`,
       url: `resource/function/wechat/${path}`,
@@ -56,15 +56,18 @@ $register("wechat-detail", {
     popNotice(`wechat/${this.data.config.name}`);
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.config.name,
       path: `/function/wechat/detail?path=${this.state.path}`,
     };
   },
 
-  onShareTimeline() {
-    return { title: this.data.config.name };
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
+    return {
+      title: this.data.config.name,
+      query: { path: this.state.path },
+    };
   },
 
   onUnload() {

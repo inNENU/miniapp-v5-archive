@@ -48,7 +48,7 @@ $register("search", {
     popNotice("search");
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: "搜索",
       path: `/page/search/search?name=${this.state.name}&word=${this.state.value}`,
@@ -58,7 +58,15 @@ $register("search", {
     };
   },
 
-  onShareTimeline: () => ({ title: "搜索" }),
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
+    return {
+      title: "搜索",
+      query: {
+        name: this.state.name,
+        word: this.state.value,
+      },
+    };
+  },
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
@@ -73,7 +81,7 @@ $register("search", {
    *
    * @param value 输入的搜索词
    */
-  searching({ detail: { value } }: any) {
+  searching({ detail: { value } }: WechatMiniprogram.Input) {
     this.state.typing = true;
     searching(value, this.state.name, (words) => {
       if (this.state.typing) this.setData({ words });
@@ -85,7 +93,7 @@ $register("search", {
    *
    * @param value 搜索词
    */
-  search({ detail: { value } }: any) {
+  search({ detail: { value } }: { detail: { value: string } }) {
     this.state.typing = false;
     this.setData({ words: [] });
     wx.showLoading({ title: "搜索中..." });
