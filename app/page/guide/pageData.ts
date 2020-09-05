@@ -11,14 +11,14 @@ export default {
       content: [
         {
           text: "入学准备",
-          color: "orange",
+          color: "red",
           name: "Prepare",
           icon: "/icon/guide/prepare.svg",
           path: "prepare/index",
         },
         {
           text: "新生报到",
-          color: "red",
+          color: "orange",
           name: "Check",
           icon: "/icon/guide/check.svg",
           path: "check/index",
@@ -29,6 +29,13 @@ export default {
           name: "Necessity",
           icon: "/icon/guide/necessity.svg",
           path: "necessity/index",
+        },
+        {
+          text: "入学活动",
+          color: "purple",
+          name: "Activity",
+          icon: "/icon/guide/activity.svg",
+          path: "activity/index",
         },
         {
           text: "常见问题",
@@ -85,6 +92,13 @@ export default {
           icon: "/icon/guide/test.svg",
           path: "exam/index",
         },
+        {
+          text: "教务系统",
+          color: "blue",
+          name: "System",
+          icon: "/icon/guide/system.svg",
+          path: "system/index",
+        },
       ],
     },
     {
@@ -120,6 +134,35 @@ export default {
           icon: "/icon/guide/network.svg",
           path: "network/index",
         },
+
+        {
+          text: "快递",
+          color: "mauve",
+          name: "Express",
+          icon: "/icon/guide/express.svg",
+          path: "express/index",
+        },
+        {
+          text: "超市",
+          color: "olive",
+          name: "Shop",
+          icon: "/icon/guide/shop.svg",
+          path: "shop/index",
+        },
+        {
+          text: "洗浴",
+          color: "red",
+          name: "Bath",
+          icon: "/icon/guide/bath.svg",
+          path: "bath/index",
+        },
+        {
+          text: "生活",
+          color: "orange",
+          name: "Life",
+          icon: "/icon/guide/life.svg",
+          path: "life/index",
+        },
         {
           text: "账户",
           color: "olive",
@@ -128,25 +171,11 @@ export default {
           path: "account/index",
         },
         {
-          text: "生活",
-          color: "mauve",
-          name: "Life",
-          icon: "/icon/guide/life.svg",
-          path: "life/index",
-        },
-        {
           text: "SIM 卡",
-          color: "blue",
+          color: "purple",
           name: "SIM",
           icon: "/icon/guide/sim.svg",
           path: "sim/index",
-        },
-        {
-          text: "资助",
-          color: "orange",
-          name: "Subsidize",
-          icon: "/icon/guide/subsidize.svg",
-          path: "subsidize/index",
         },
       ],
     },

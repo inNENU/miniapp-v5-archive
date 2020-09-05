@@ -21,6 +21,8 @@ export const appOption: AppOption = {
   guideResNotify: true,
   /** 东师介绍更新提示 */
   introResNotify: true,
+  /** 图标更新提示 */
+  iconResNotify: true,
   /** 开发者模式开启状态 */
   developMode: false,
 };

@@ -7,6 +7,7 @@ import {
   SliderListComponentItemConfig,
   SwitchListComponentItemConfig,
 } from "../../../../typings";
+import { readFile } from "../../../utils/file";
 
 interface ListDetail<T = AdvancedListComponentItemConfig> {
   id: string;
@@ -25,6 +26,7 @@ $register.C<{
     /** 改变触发 */
     change: { type: Object },
   },
+
   methods: {
     /** 控制选择器显隐 */
     pickerTap(event: WechatMiniprogram.TouchEvent): void {
@@ -140,6 +142,7 @@ $register.C<{
       };
     },
   },
+
   observers: {
     /**
      * 改变触发
@@ -158,6 +161,17 @@ $register.C<{
 
         this.setData(detail2);
       }
+    },
+  },
+
+  lifetimes: {
+    attached(): void {
+      // 设置图标
+      this.setData({
+        icons: this.data.config.content.map((item) =>
+          "base64Icon" in item ? readFile(`icon/${item.base64Icon}`) : ""
+        ),
+      });
     },
   },
 });

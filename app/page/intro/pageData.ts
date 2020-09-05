@@ -23,6 +23,13 @@ export default {
           icon: "/icon/about.svg",
           path: "intro/enroll/index",
         },
+        {
+          text: "资助",
+          color: "purple",
+          name: "Subsidize",
+          icon: "/icon/intro/subsidize.svg",
+          path: "intro/subsidize/index",
+        },
       ],
     },
     {

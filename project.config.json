@@ -86,7 +86,7 @@
           "id": 0,
           "name": "分享",
           "pathName": "module/page",
-          "query": "id=guide/account/authorize",
+          "query": "id=guide/card/index",
           "scene": null
         },
         {

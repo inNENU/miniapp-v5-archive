@@ -1,5 +1,12 @@
 import { appOption, server } from "./config";
-import { remove, listFile, readJSON, saveFile, unzip } from "./file";
+import {
+  remove,
+  listFile,
+  readJSON,
+  saveFile,
+  unzip,
+  isFileExist,
+} from "./file";
 import { debug, error, info, warn } from "./log";
 import { modal, requestJSON, tip } from "./wx";
 import { GlobalData } from "../app";
@@ -14,7 +21,7 @@ export const resDownload = (name: string, tip = true): Promise<void> =>
   new Promise((resolve, reject) => {
     if (tip) wx.showLoading({ title: "下载中...", mask: true });
     wx.setStorageSync(`${name}Download`, false);
-    remove(name, "dir");
+    if (isFileExist(name)) remove(name, "dir");
     const downLoadTask = wx.downloadFile({
       url: `${server}resource/${name}.zip`,
       success: (res) => {
@@ -191,7 +198,7 @@ export const appInit = (): void => {
     wx.setStorageSync(data, appOption[data]);
   });
 
-  initFile(["function", "guide", "intro"], () => {
+  initFile(["function", "guide", "icon", "intro"], () => {
     // 成功初始化
     wx.setStorageSync("app-inited", true);
     wx.hideLoading();

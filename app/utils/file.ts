@@ -30,36 +30,24 @@ export const dirname = (path: string): string =>
  * @param isDir 要删除的是否是文件夹
  */
 export const remove = (path: string, type?: "dir" | "file"): void => {
-  if (!type)
-    try {
-      // 判断路径是否是文件，并执行对应删除操作
+  try {
+    if (!type)
       if (
         (fileManager.statSync(
           `${userPath}/${path}`
         ) as WechatMiniprogram.Stats).isFile()
       )
+        // 判断路径是否是文件，并执行对应删除操作
         fileManager.unlinkSync(`${userPath}/${path}`);
       else fileManager.rmdirSync(`${userPath}/${path}`, true);
-    } catch (err) {
-      // 调试
-      error(`删除 ${path} 出错,错误为:`, err);
-    }
-  // 是目录
-  else if (type === "dir")
-    try {
-      fileManager.rmdirSync(`${userPath}/${path}`, true);
-    } catch (err) {
-      // 调试
-      error(`删除 ${path} 出错,错误为:`, err);
-    }
-  // 是文件
-  else
-    try {
-      fileManager.unlinkSync(`${userPath}/${path}`);
-    } catch (err) {
-      // 调试
-      error(`删除 ${path} 出错,错误为:`, err);
-    }
+    // 是目录
+    else if (type === "dir") fileManager.rmdirSync(`${userPath}/${path}`, true);
+    // 是文件
+    else fileManager.unlinkSync(`${userPath}/${path}`);
+  } catch ({ message }) {
+    // 调试
+    error(`删除 ${path} 出错,错误为:`, message);
+  }
 };
 
 /**
@@ -73,9 +61,9 @@ export const isFileExist = (path: string): boolean => {
     fileManager.statSync(`${userPath}/${path}`, false);
 
     return true;
-  } catch (err) {
+  } catch ({ message }) {
     // 调试
-    warn(`${path} 不存在`, err);
+    warn(`${path} 不存在`, message);
 
     return false;
   }

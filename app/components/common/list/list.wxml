@@ -17,14 +17,24 @@
         data-url="{{listItem.url}}"
         catch:tap="navigate"
       >
-        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
+        <image
+          wx:elif="{{listItem.icon}}"
+          class="icon"
+          src="{{listItem.icon}}"
+        />
         <view class="text">{{listItem.text}}</view>
         <view class="desc">{{listItem.desc}}</view>
         <view class="access" />
       </view>
       <!-- 普通文字段落 -->
       <view wx:else class="list">
-        <image wx:if="{{listItem.icon}}" class="icon" src="{{listItem.icon}}" />
+        <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
+        <image
+          wx:elif="{{listItem.icon}}"
+          class="icon"
+          src="{{listItem.icon}}"
+        />
         <text class="text" decode user-select space="nbsp"
           >{{listItem.text}}</text
         >

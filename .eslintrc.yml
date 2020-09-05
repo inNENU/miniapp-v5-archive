@@ -6,6 +6,7 @@ env:
 globals:
   wx: readonly
   getApp: readonly
+  getCurrentPages: readonly
   App: readonly
   Page: readonly
   Component: readonly

@@ -102,6 +102,7 @@ $register.A<AppOption>({
       checkResUpdate("function", "功能大厅", "105K");
       checkResUpdate("guide", "东师指南", "285K");
       checkResUpdate("intro", "东师介绍", "290K");
+      checkResUpdate("icon", "图标资源", "170K");
     }
   },
 
