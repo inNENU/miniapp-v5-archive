@@ -144,6 +144,15 @@ $register.C<{
   },
 
   observers: {
+    "config.content"(value: AdvancedListComponentItemConfig[]): void {
+      // 设置图标
+      this.setData({
+        icons: value.map((item) =>
+          "base64Icon" in item ? readFile(`icon/${item.base64Icon}`) || "" : ""
+        ),
+      });
+    },
+
     /**
      * 改变触发
      *
@@ -161,17 +170,6 @@ $register.C<{
 
         this.setData(detail2);
       }
-    },
-  },
-
-  lifetimes: {
-    attached(): void {
-      // 设置图标
-      this.setData({
-        icons: this.data.config.content.map((item) =>
-          "base64Icon" in item ? readFile(`icon/${item.base64Icon}`) : ""
-        ),
-      });
     },
   },
 });

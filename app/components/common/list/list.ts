@@ -1,5 +1,8 @@
 import $register = require("wxpage");
-import { ListComponentConfig } from "../../../../typings";
+import {
+  ListComponentConfig,
+  ListComponentItemConfig,
+} from "../../../../typings";
 import { readFile } from "../../../utils/file";
 
 $register.C<{ config: ListComponentConfig }>({
@@ -14,14 +17,12 @@ $register.C<{ config: ListComponentConfig }>({
     },
   },
 
-  lifetimes: {
-    attached(): void {
+  observers: {
+    "config.content"(value: ListComponentItemConfig[]): void {
       // 设置图标
       this.setData({
-        icons: this.data.config.content.map((item) =>
-          "base64Icon" in item
-            ? (readFile(`icon/${item.base64Icon}`) as string | undefined) || ""
-            : ""
+        icons: value.map((item) =>
+          "base64Icon" in item ? readFile(`icon/${item.base64Icon}`) || "" : ""
         ),
       });
     },
