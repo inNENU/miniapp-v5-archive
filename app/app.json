@@ -13,7 +13,11 @@
     "settings/donate/list",
     "settings/log/log",
     "settings/outlook/outlook",
-    "settings/storage/storage"
+    "settings/storage/storage",
+    "module/function",
+    "module/page",
+    "module/web",
+    "module/situs"
   ],
   "subPackages": [
     {
@@ -29,25 +33,9 @@
         "wechat/wechat",
         "wechat/detail"
       ]
-    },
-    {
-      "root": "module",
-      "pages": ["page", "web", "function", "situs"]
     }
   ],
   "preloadRule": {
-    "page/main/main": {
-      "network": "all",
-      "packages": ["module"]
-    },
-    "page/guide/guide": {
-      "network": "all",
-      "packages": ["module"]
-    },
-    "page/intro/intro": {
-      "network": "all",
-      "packages": ["module"]
-    },
     "page/function/function": {
       "network": "all",
       "packages": ["function"]
