@@ -28,14 +28,13 @@ $register("storage", {
       feedback: true,
       content: [
         {
-          tag: "advanced-list",
-          header: "数据缓存",
-          content: [{ text: "空间占用情况", desc: "获取中..." }],
-        },
-        {
-          tag: "advanced-list",
-          header: "文件系统",
-          content: [{ text: "空间占用情况", desc: "获取中..." }],
+          tag: "list",
+          header: "空间占用",
+          content: [
+            { text: "小程序体积", desc: "450K" },
+            { text: "数据缓存空间占用", desc: "获取中..." },
+            { text: "文件系统空间占用", desc: "获取中..." },
+          ],
         },
         {
           tag: "advanced-list",
@@ -45,6 +44,7 @@ $register("storage", {
             { text: "刷新介绍资源", button: "refreshIntro" },
             { text: "刷新功能资源", button: "refreshFunc" },
             { text: "刷新指南资源", button: "refreshGuide" },
+            { text: "刷新图片资源", button: "refreshIcon" },
           ],
         },
         {
@@ -100,7 +100,7 @@ $register("storage", {
     wx.getStorageInfo({
       success: ({ currentSize }) => {
         this.setData({
-          "page.content[0].content[0].desc": `${currentSize}K/10240K`, // 写入存储大小
+          "page.content[0].content[1].desc": `${currentSize}K/10240K`, // 写入存储大小
         });
       },
     });
@@ -119,7 +119,7 @@ $register("storage", {
         });
 
         this.setData({
-          "page.content[1].content[0].desc": `${Math.ceil(
+          "page.content[0].content[2].desc": `${Math.ceil(
             fileSize / 1024
           )}K/10240K`, // 写入文件大小
         });
@@ -145,6 +145,13 @@ $register("storage", {
   refreshIntro() {
     confirm("刷新介绍资源", () => {
       resDownload("intro");
+    });
+  },
+
+  /** 刷新图标资源 */
+  refreshIcon() {
+    confirm("刷新图标资源", () => {
+      resDownload("icon");
     });
   },
 

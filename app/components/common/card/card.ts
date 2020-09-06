@@ -44,11 +44,12 @@ $register.C<{ config: CardComponentConfig }>({
   },
 
   observers: {
-    "config.base64Logo"(value: string): void {
+    "config.logo"(value: string): void {
       // 设置图标
-      this.setData({
-        base64Logo: readFile(`icon/${value}`) || "",
-      });
+      if (!value.includes("/"))
+        this.setData({
+          base64Logo: readFile(`icon/${value}`) || "",
+        });
     },
   },
 });

@@ -10,7 +10,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/map.jpg",
       title: "校园地图",
-      base64Logo: "map",
+      logo: "map",
       url: "map",
     },
     {
@@ -18,7 +18,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/headphone.jpg",
       title: "音悦东师",
-      base64Logo: "music",
+      logo: "music",
       url: "music",
     },
     {
@@ -26,7 +26,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/calendar.jpg",
       title: "校历",
-      base64Logo: "calendar",
+      logo: "calendar",
       url: "calendar",
     },
     {
@@ -34,7 +34,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/sport-field.jpg",
       title: "体测计算器",
-      base64Logo: "calculate",
+      logo: "calculate",
       url: "PEcal",
     },
     {
@@ -42,7 +42,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/wechat.jpg",
       title: "校园公众号",
-      base64Logo: "wechat",
+      logo: "wechat",
       url: "wechat",
     },
   ],
