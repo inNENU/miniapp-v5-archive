@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-.player-wrapper {
+.music-wrapper {
   display: flex;
 
   height: 100vh;
@@ -23,7 +23,7 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .player-wrapper {
+  .music-wrapper {
     background-color: rgba(0, 0, 0, 0.8);
   }
 }
@@ -180,7 +180,7 @@
   margin: 0 10rpx;
 }
 
-.player-wrapper .button {
+.music-wrapper .button {
   width: 70rpx;
   max-width: 40px;
   height: 70rpx;

@@ -144,7 +144,7 @@ $register("music", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.currentSong.title,
-      path: `/function/player/player?name=${this.data.currentSong.title}`,
+      path: `/function/music/music?name=${this.data.currentSong.title}`,
     };
   },
 

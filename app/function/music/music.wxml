@@ -1,6 +1,6 @@
-<wxs src="./player.wxs" module="player" />
+<wxs src="./music.wxs" module="music" />
 <image class="backgroud-image" mode="aspectFill" src="{{currentSong.cover}}" />
-<view class="player-wrapper">
+<view class="music-wrapper">
   <view
     class="back-button"
     style="top:{{info.statusBarHeight + 5}}px;"
@@ -78,8 +78,8 @@
     <!-- activeColor 为 QQ 适配 -->
     <!-- 播放时间 -->
     <view class="time-wrapper">
-      <view class="time">{{player.getTime(currentTime)}}</view>
-      <view class="time">{{player.getTime(totalTime)}}</view>
+      <view class="time">{{music.getTime(currentTime)}}</view>
+      <view class="time">{{music.getTime(totalTime)}}</view>
     </view>
 
     <view class="button-wrapper">
@@ -90,7 +90,7 @@
         hover-stay-time="100"
         catch:tap="modeSwitch"
       >
-        <image class="icon" src="{{player.getMode(mode)}}" />
+        <image class="icon" src="{{music.getMode(mode)}}" />
       </view>
       <view
         class="button"

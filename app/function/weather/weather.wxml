@@ -56,7 +56,7 @@
         <text class="weather">{{tool.getWeather(weather.dayForecast[1])}}</text>
         <image
           class="icon"
-          src="./icon/{{weather.dayForecast[1].dayWeatherCode || 'day/00'}}.svg"
+          src="{{weatherIcon[weather.dayForecast[1].dayWeatherCode]}}"
         />
       </view>
     </view>
@@ -71,7 +71,7 @@
         <text class="weather">{{tool.getWeather(weather.dayForecast[2])}}</text>
         <image
           class="icon"
-          src="./icon/{{weather.dayForecast[2].dayWeatherCode || 'day/00'}}.svg"
+          src="{{weatherIcon[weather.dayForecast[2].dayWeatherCode]}}"
         />
       </view>
     </view>
@@ -80,7 +80,8 @@
   <scroll-view class="hours borderTB" enable-flex scroll-x>
     <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
       <text class="time">{{item.time}}</text>
-      <image class="icon" src="./icon/{{item.weatherCode || 'day/00'}}.svg" />
+
+      <image class="icon" src="{{weatherIcon[item.weatherCode]}}" />
       <text class="degree">{{item.degree}}</text>
     </view>
   </scroll-view>
@@ -90,15 +91,9 @@
       <view class="day">{{item.weekday}}</view>
       <view class="date">{{item.date}}</view>
       <view class="weather">{{item.dayWeatherShort}}</view>
-      <image
-        class="icon"
-        src="./icon/{{item.dayWeatherCode || 'day/00'}}.svg"
-      />
+      <image class="icon" src="{{weatherIcon[item.dayWeatherCode]}}" />
       <view class="placeholder" />
-      <image
-        class="icon"
-        src="./icon/{{item.nightWeatherCode || 'night/00'}}.svg"
-      />
+      <image class="icon" src="{{weatherIcon[item.nightWeatherCode]}}" />
       <view class="weather">{{item.nightWeatherShort}}</view>
       <view class="wind">{{item.nightWindDirection}}</view>
       <view class="wind">{{item.nightWindPower}}级</view>
@@ -115,7 +110,7 @@
       data-id="{{index}}"
       catch:tap="hint"
     >
-      <image class="icon" src="./icon/{{item.id}}.svg" />
+      <image class="icon" src="{{hintIcon[item.id]}}" />
       <view class="content">{{item.info}}</view>
       <view class="title">{{item.name}}</view>
     </view>

@@ -1,5 +1,5 @@
 app/**/*.js
 app/**/*.d.ts
-app/function/player/player.wxs
+app/function/music/music.wxs
 
 server/

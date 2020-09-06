@@ -3,6 +3,7 @@ import { WeatherData } from "../../components/weather/typings";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
 import { modal } from "../../utils/wx";
+import { readFile } from "../../utils/file";
 
 const {
   globalData: { darkmode, info },
@@ -18,11 +19,18 @@ $register("weather", {
     animation: {},
   },
 
+  state: {
+    weatherIcon: {} as Record<string, string>,
+  },
+
   onLoad() {
     const weatherData = wx.getStorageSync("weather") as {
       date: number;
       data: WeatherData;
     };
+
+    const weatherIcon = JSON.parse(readFile("./icon/weather/icon") as string);
+    const hintIcon = JSON.parse(readFile("./icon/weather/hint") as string);
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
@@ -34,6 +42,9 @@ $register("weather", {
         weather,
         // 18点至次日5点为夜间
         night: new Date().getHours() > 18 || new Date().getHours() < 5,
+
+        weatherIcon,
+        hintIcon,
 
         firstPage: getCurrentPages().length === 1,
         info: info,
@@ -51,6 +62,9 @@ $register("weather", {
             weather: res.data as WeatherData,
             // 18点至次日5点为夜间
             night: new Date().getHours() > 18 || new Date().getHours() < 5,
+
+            weatherIcon,
+            hintIcon,
 
             darkmode,
             firstPage: getCurrentPages().length === 1,

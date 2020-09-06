@@ -5,6 +5,7 @@ import { modal } from "../../../utils/wx";
 const {
   globalData: { appID },
 } = getApp<AppOption>();
+import { readFile } from "../../../utils/file";
 
 $register.C<{ config: CardComponentConfig }>({
   properties: {
@@ -39,6 +40,15 @@ $register.C<{ config: CardComponentConfig }>({
             },
           });
       else if (config.type === "page") this.$route(config.url);
+    },
+  },
+
+  observers: {
+    "config.base64Logo"(value: string): void {
+      // 设置图标
+      this.setData({
+        base64Logo: readFile(`icon/${value}`) || "",
+      });
     },
   },
 });

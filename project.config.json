@@ -134,14 +134,14 @@
         {
           "id": 7,
           "name": "播放器",
-          "pathName": "function/player/player",
+          "pathName": "function/music/music",
           "query": "",
           "scene": null
         },
         {
           "id": 8,
           "name": "特定歌曲",
-          "pathName": "function/player/player",
+          "pathName": "function/music/music",
           "query": "index=17",
           "scene": null
         },
