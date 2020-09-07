@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { PageConfig } from "../../typings";
+import { PageData } from "../../typings";
 import {
   changeNav,
   resolvePage,
@@ -8,7 +8,7 @@ import {
 } from "../utils/page";
 
 $register("page", {
-  data: { page: {} as PageConfig },
+  data: { page: {} as PageData },
 
   state: {
     /** 在线文件路径 */

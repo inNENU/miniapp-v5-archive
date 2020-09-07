@@ -3,7 +3,7 @@
 import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
-import { PageConfig } from "../../../typings";
+import { PageData } from "../../../typings";
 import { server } from "../../utils/config";
 const { globalData } = getApp<AppOption>();
 
@@ -71,7 +71,7 @@ $register("me", {
           ],
         },
       ],
-    } as PageConfig,
+    } as PageData,
 
     footer: {
       author: "",

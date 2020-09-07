@@ -8,7 +8,7 @@ import {
   startup,
 } from "./utils/app";
 import { version } from "./utils/config";
-import { PageConfig } from "../typings";
+import { PageData } from "../typings";
 
 export interface GlobalData {
   /** 小程序运行环境 */
@@ -25,7 +25,7 @@ export interface GlobalData {
   /** 页面信息 */
   page: {
     /** 页面数据 */
-    data?: PageConfig;
+    data?: PageData;
     /** 页面标识符 */
     id?: string;
   };
@@ -89,7 +89,7 @@ $register.A<AppOption>({
     console.info("小程序启动，参数为", opts); // 调试
 
     // 如果初次启动执行初始化
-    if (!wx.getStorageSync("app-inited")) appInit();
+    if (!wx.getStorageSync("inited")) appInit();
 
     startup(this.globalData);
 
@@ -98,12 +98,7 @@ $register.A<AppOption>({
 
   onShow() {
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("app-inited")) {
-      checkResUpdate("function", "功能大厅", "105K");
-      checkResUpdate("guide", "东师指南", "285K");
-      checkResUpdate("intro", "东师介绍", "290K");
-      checkResUpdate("icon", "图标资源", "170K");
-    }
+    if (wx.getStorageSync("inited")) checkResUpdate();
   },
 
   onAwake(time: number) {

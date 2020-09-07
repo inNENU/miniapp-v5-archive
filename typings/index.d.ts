@@ -4,11 +4,4 @@ import "./wx/lib.wx.event.d.ts";
 
 export * from "./pageData";
 
-export {
-  Category,
-  Marker,
-  MarkerConfig,
-  MarkerData,
-  SearchInfo,
-  WechatDetail,
-} from "../server/typings";
+export * from "../server/typings";

@@ -8,7 +8,7 @@ import { server } from "../../utils/config";
 import {
   AdvancedListComponentConfig,
   ComponentConfig,
-  PageConfigWithContent,
+  PageDataWithContent,
   SwitchListComponentItemConfig,
 } from "../../../typings";
 const { globalData } = getApp<AppOption>();
@@ -75,7 +75,7 @@ $register("about", {
           ],
         },
       ],
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
   },
 
   onNavigate(res) {

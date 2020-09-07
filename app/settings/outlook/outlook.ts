@@ -4,7 +4,7 @@ import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import {
   AdvancedListComponentConfig,
-  PageConfigWithContent,
+  PageDataWithContent,
   PickerListComponentItemConfig,
 } from "../../../typings";
 const { globalData } = getApp<AppOption>();
@@ -45,7 +45,7 @@ $register("setting", {
           ],
         },
       ],
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
   },
 
   onNavigate(res) {

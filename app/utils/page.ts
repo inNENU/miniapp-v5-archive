@@ -9,12 +9,12 @@ import {
   GridComponentItemComfig,
   ListComponentItemConfig,
   PageOption,
-  PageConfig,
-} from "../../typings/pageData";
+  PageData,
+} from "../../typings";
 
 type PageInstanceWithPage = WechatMiniprogram.Page.MPInstance<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  Record<string, any> & { page?: PageConfig },
+  Record<string, any> & { page?: PageData },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Record<string, any>
 >;
@@ -33,7 +33,7 @@ const resolveContent = (
     | AdvancedListComponentItemConfig
     | GridComponentItemComfig
     | ListComponentItemConfig,
-  page: PageConfig
+  page: PageData
 ): void => {
   // 设置列表导航
   if ("url" in listElement) listElement.url += `?from=${page.title}`;
@@ -84,10 +84,10 @@ const resolveContent = (
  * @returns 处理之后的page
  */
 const disposePage = (
-  page: PageConfig,
+  page: PageData,
   option: PageOption,
   firstOpen = false
-): PageConfig => {
+): PageData => {
   page.statusBarHeight = globalData.info.statusBarHeight;
 
   // 判断是否是首页或来自分享
@@ -126,7 +126,7 @@ const disposePage = (
  *
  * @param page 页面数据
  */
-const preloadPage = (page: PageConfig): void => {
+const preloadPage = (page: PageData): void => {
   if (page && page.content)
     page.content.forEach((component) => {
       if ("content" in component)
@@ -176,15 +176,15 @@ const preloadPage = (page: PageConfig): void => {
  */
 export const resolvePage = (
   option: MPPage.PageLifeTimeOptions,
-  page?: PageConfig,
+  page?: PageData,
   setGlobal = true
-): PageConfig | null => {
+): PageData | null => {
   info("将要跳转: ", option); // 控制台输出参数
   let pageData = null;
 
   if (page) pageData = disposePage(page, option.query);
   else if (option.query.id) {
-    const jsonContent: PageConfig = readJSON(`${option.query.id}`);
+    const jsonContent: PageData = readJSON(`${option.query.id}`);
 
     if (jsonContent) pageData = disposePage(jsonContent, option.query);
     else warn(`${option.query.id} 文件不存在，处理失败`);
@@ -300,7 +300,7 @@ interface SetPageOption {
  */
 export const setPage = (
   { option, ctx, handle = false }: SetPageOption,
-  page?: PageConfig,
+  page?: PageData,
   preload = true
 ): void => {
   // 设置页面数据
@@ -319,8 +319,7 @@ export const setPage = (
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
   else if (
     (option.id && globalData.page.id === option.id) ||
-    (ctx.data.page &&
-      globalData.page.id === (ctx.data.page as PageConfig).title)
+    (ctx.data.page && globalData.page.id === (ctx.data.page as PageData).title)
   ) {
     debug(`${globalData.page.id} 已处理`);
     ctx.setData(
@@ -333,14 +332,14 @@ export const setPage = (
       () => {
         debug(`${globalData.page.id} 已写入`);
         if (preload) {
-          preloadPage(ctx.data.page as PageConfig);
+          preloadPage(ctx.data.page as PageData);
           debug(`${globalData.page.id} 预加载子页面完成`);
         }
       }
     );
   } else if (ctx.data.page) {
     debug(`${option.id || "未知页面"} 未处理`);
-    const pageData: PageConfig = handle
+    const pageData: PageData = handle
       ? ctx.data.page
       : disposePage(ctx.data.page, option, ctx.$state.firstOpen);
 
@@ -413,7 +412,7 @@ export const setOnlinePage = (
       () => {
         debug(`${option.id} 已写入`);
         if (preload) {
-          preloadPage(ctx.data.page as PageConfig);
+          preloadPage(ctx.data.page as PageData);
           debug(`${option.id} 预加载子页面完成`);
         }
       }
@@ -421,7 +420,7 @@ export const setOnlinePage = (
   } else if (option.id) {
     // 需要重新载入界面
     info(`${option.id} onLoad开始，参数为: `, option);
-    const page = readJSON<PageConfig>(`${option.id}`);
+    const page = readJSON<PageData>(`${option.id}`);
 
     // 如果本地存储中含有 page 直接处理
     if (page) {
@@ -432,7 +431,7 @@ export const setOnlinePage = (
 
       // 如果需要执行预加载，则执行
       if (preload) {
-        preloadPage(ctx.data.page as PageConfig);
+        preloadPage(ctx.data.page as PageData);
         debug(`${option.id} 界面预加载完成`);
       }
     }
@@ -445,11 +444,11 @@ export const setOnlinePage = (
           if (option.from !== "share") writeJSON(`${option.id}`, data);
 
           // 设置界面
-          setPage({ option, ctx }, data as PageConfig);
+          setPage({ option, ctx }, data as PageData);
 
           // 如果需要执行预加载，则执行
           if (preload) {
-            preloadPage(ctx.data.page as PageConfig);
+            preloadPage(ctx.data.page as PageData);
             debug(`${option.id} 界面预加载完成`);
           }
 
@@ -514,7 +513,7 @@ export const loadOnlinePage = (
       `resource/${option.path}`,
       (page) => {
         if (page) {
-          setPage({ option, ctx }, page as PageConfig);
+          setPage({ option, ctx }, page as PageData);
           popNotice(option.path);
           info(`${option.path} onLoad 成功:`, ctx.data);
           wx.reportMonitor("0", 1);
@@ -565,7 +564,7 @@ export const changeNav = (
   ctx: PageInstanceWithPage,
   headName?: string
 ): void => {
-  const pageHead: PageConfig = headName ? ctx.data[headName] : ctx.data.page;
+  const pageHead: PageData = headName ? ctx.data[headName] : ctx.data.page;
 
   // 判断情况并赋值
   const nav = {

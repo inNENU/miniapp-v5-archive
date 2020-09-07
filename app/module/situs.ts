@@ -2,12 +2,12 @@ import $register = require("wxpage");
 import { changeNav, resolvePage, setPage } from "../utils/page";
 import { getJSON, readJSON } from "../utils/file";
 import { AppOption } from "../app";
-import { PageConfig } from "../../typings";
+import { PageData } from "../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("situs", {
   data: {
-    page: {} as PageConfig,
+    page: {} as PageData,
   },
 
   state: {
@@ -26,7 +26,7 @@ $register("situs", {
           path: `function/map/${option.id}`,
           url: `resource/function/${option.id}`,
           success: (data) => {
-            setPage({ option, ctx: this }, data as PageConfig);
+            setPage({ option, ctx: this }, data as PageData);
           },
           fail: () => {
             setPage(

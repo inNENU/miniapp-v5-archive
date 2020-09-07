@@ -1,5 +1,6 @@
 /* 主页 */
 import $register = require("wxpage");
+import { checkResUpdate } from "../../utils/app";
 import {
   changeNav,
   popNotice,
@@ -12,7 +13,7 @@ import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
 import { server } from "../../utils/config";
-import { PageConfigWithContent } from "../../../typings";
+import { PageDataWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("main", {
@@ -43,7 +44,7 @@ $register("main", {
         },
       ],
       hidden: true,
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
   },
 
   onPageLaunch() {
@@ -73,7 +74,7 @@ $register("main", {
     ["function", "guide", "intro"].forEach((x) => {
       requestJSON(
         `resource/config/${globalData.appID}/${globalData.version}/${x}`,
-        (data: PageConfigWithContent) => {
+        (data: PageDataWithContent) => {
           wx.setStorageSync(x, data);
           this.$preload(`${x}?id=${x}`);
         }
@@ -84,6 +85,7 @@ $register("main", {
 
   onPullDownRefresh() {
     refreshPage("main", this, globalData);
+    checkResUpdate();
     wx.stopPullDownRefresh();
   },
 

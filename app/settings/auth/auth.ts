@@ -3,7 +3,7 @@ import $register = require("wxpage");
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
-import { ListComponentConfig, PageConfigWithContent } from "../../../typings";
+import { ListComponentConfig, PageDataWithContent } from "../../../typings";
 import { ButtonListComponnetItemConfig } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
@@ -79,7 +79,7 @@ $register("authorize", {
           foot: " ",
         },
       ],
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
 
     authorize: {},
   },

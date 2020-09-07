@@ -1,12 +1,7 @@
-import {
-  ComponentConfig,
-  PageConfig as PageDataConfig,
-} from "../server/typings";
-
-export * from "../server/typings";
+import { ComponentConfig, PageConfig } from "../server/typings";
 
 /** 页面数据 */
-export interface PageConfig extends Partial<PageDataConfig> {
+export interface PageData extends Partial<PageConfig> {
   /** 状态栏高度 */
   statusBarHeight?: number;
   /** 页面深度 */
@@ -26,7 +21,7 @@ export interface PageConfig extends Partial<PageDataConfig> {
   shadow?: boolean;
 }
 
-export interface PageConfigWithContent extends PageConfig {
+export interface PageDataWithContent extends PageData {
   content: ComponentConfig[];
 }
 

@@ -1,4 +1,4 @@
-import { PageConfigWithContent } from "../../../typings";
+import { PageDataWithContent } from "../../../typings";
 
 export default {
   title: "功能大厅",
@@ -46,4 +46,4 @@ export default {
       url: "wechat",
     },
   ],
-} as PageConfigWithContent;
+} as PageDataWithContent;

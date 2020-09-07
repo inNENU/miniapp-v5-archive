@@ -2,4 +2,5 @@ app/**/*.js
 app/**/*.d.ts
 app/function/music/music.wxs
 
-server/
+server/resource/**/*.json
+server/script/**/*.js

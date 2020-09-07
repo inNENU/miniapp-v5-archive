@@ -55,7 +55,7 @@ $register("function", {
 
   onPullDownRefresh() {
     refreshPage("function", this, globalData);
-    checkResUpdate("function", "功能大厅", "105K");
+    checkResUpdate();
     wx.stopPullDownRefresh();
   },
 

@@ -1,7 +1,7 @@
 import { requestJSON } from "./wx";
 import { GlobalData } from "../app";
 import { setPage } from "./page";
-import { PageConfig } from "../../typings";
+import { PageData } from "../../typings";
 
 /**
  * 刷新 tab 页
@@ -25,7 +25,7 @@ export const refreshPage = (
   // 开启测试后展示测试界面
   if (test)
     requestJSON(`resource/config/${globalData.appID}/test/${name}`, (data) => {
-      setPage({ ctx, option: { id: name } }, data as PageConfig);
+      setPage({ ctx, option: { id: name } }, data as PageData);
     });
   // 普通界面加载
   else
@@ -33,7 +33,7 @@ export const refreshPage = (
       `resource/config/${globalData.appID}/${globalData.version}/${name}`,
       (data) => {
         wx.setStorageSync(name, data);
-        setPage({ ctx, option: { id: name } }, data as PageConfig);
+        setPage({ ctx, option: { id: name } }, data as PageData);
       }
     );
 };

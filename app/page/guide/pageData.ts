@@ -1,4 +1,4 @@
-import { PageConfigWithContent } from "../../../typings";
+import { PageDataWithContent } from "../../../typings";
 
 export default {
   title: "东师指南",
@@ -227,4 +227,4 @@ export default {
       footer: " ",
     },
   ],
-} as PageConfigWithContent;
+} as PageDataWithContent;

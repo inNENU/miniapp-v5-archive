@@ -5,7 +5,7 @@ import { remove, listFile } from "../../utils/file";
 import { changeNav, popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
-import { PageConfigWithContent } from "../../../typings";
+import { PageDataWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 /** 列表动作 */
@@ -63,7 +63,7 @@ $register("storage", {
           ],
         },
       ],
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
   },
 
   onLoad() {

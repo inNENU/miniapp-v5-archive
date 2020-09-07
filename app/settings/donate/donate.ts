@@ -4,7 +4,7 @@ import { changeNav, popNotice, getColor } from "../../utils/page";
 import { requestJSON, savePhoto } from "../../utils/wx";
 import { server } from "../../utils/config";
 import { AppOption } from "../../app";
-import { PageConfigWithContent } from "../../../typings";
+import { PageDataWithContent } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
 $register("donate", {
@@ -38,7 +38,7 @@ $register("donate", {
       ],
       shareable: true,
       from: "返回",
-    } as PageConfigWithContent,
+    } as PageDataWithContent,
 
     content2: [
       {

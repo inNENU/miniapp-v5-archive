@@ -60,7 +60,7 @@ $register("guide", {
 
   onPullDownRefresh() {
     refreshPage("guide", this, globalData);
-    checkResUpdate("guide", "东师指南", "285K");
+    checkResUpdate();
     wx.stopPullDownRefresh();
   },
 
