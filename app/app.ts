@@ -47,7 +47,7 @@ export interface AppOption {
 
 const resolvePath = (name: string): string =>
   ["main", "function", "guide", "me", "search"].includes(name)
-    ? `/page/${name}/${name}`
+    ? `/pages/${name}/${name}`
     : [
         "about",
         "auth",
@@ -117,7 +117,7 @@ $register.A<AppOption>({
 
   onPageNotFound(msg) {
     // 重定向到主界面
-    wx.switchTab({ url: "page/main/main" });
+    wx.switchTab({ url: "pages/main/main" });
 
     console.warn("未找到界面:", msg);
   },

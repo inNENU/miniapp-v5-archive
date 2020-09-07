@@ -95,7 +95,7 @@ $register("main", {
 
   onShareAppMessage: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
-    path: "/page/main/main",
+    path: "/pages/main/main",
     imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,
@@ -128,6 +128,6 @@ $register("main", {
    * @param value 输入的搜索词
    */
   search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`/page/search/search?name=all&word=${detail.value}`);
+    this.$route(`/pages/search/search?name=all&word=${detail.value}`);
   },
 });

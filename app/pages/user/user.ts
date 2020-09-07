@@ -104,7 +104,7 @@ $register("me", {
 
   onShareAppMessage: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
-    path: "/page/main/main",
+    path: "/pages/main/main",
     imageUrl: `${server}img/${
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }Share.jpg`,

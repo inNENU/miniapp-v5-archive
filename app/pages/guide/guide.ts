@@ -1,4 +1,4 @@
-/* 东师介绍 */
+/* 东师指南 */
 import $register = require("wxpage");
 import { checkResUpdate } from "../../utils/app";
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
@@ -17,7 +17,7 @@ $register("guide", {
 
     /** 自定义导航栏配置 */
     nav: {
-      title: "东师介绍",
+      title: "东师指南",
       action: false,
       statusBarHeight: globalData.info.statusBarHeight,
     },
@@ -28,25 +28,25 @@ $register("guide", {
 
   onPreload(res) {
     this.$put(
-      "intro",
-      resolvePage(res, wx.getStorageSync("intro") || this.data.page)
+      "guide",
+      resolvePage(res, wx.getStorageSync("guide") || this.data.page)
     );
     console.info(
-      `东师介绍预加载用时${new Date().getTime() - globalData.date}ms`
+      `东师指南预加载用时${new Date().getTime() - globalData.date}ms`
     );
   },
 
   onLoad() {
     setPage(
-      { option: { id: "intro" }, ctx: this },
-      this.$take("intro") || this.data.page
+      { option: { id: "guide" }, ctx: this },
+      this.$take("guide") || this.data.page
     );
-    popNotice("intro");
+    popNotice("guide");
   },
 
   onShow() {
-    refreshPage("intro", this, globalData);
-    popNotice("intro");
+    refreshPage("guide", this, globalData);
+    popNotice("guide");
   },
 
   onReady() {
@@ -59,7 +59,7 @@ $register("guide", {
   },
 
   onPullDownRefresh() {
-    refreshPage("intro", this, globalData);
+    refreshPage("guide", this, globalData);
     checkResUpdate();
     wx.stopPullDownRefresh();
   },
@@ -68,9 +68,9 @@ $register("guide", {
     changeNav(event, this, "nav");
   },
 
-  onShareAppMessage: () => ({ title: "东师介绍", path: "/page/intro/intro" }),
+  onShareAppMessage: () => ({ title: "东师指南", path: "/pages/guide/guide" }),
 
-  onShareTimeline: () => ({ title: "东师介绍" }),
+  onShareTimeline: () => ({ title: "东师指南" }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
@@ -86,7 +86,7 @@ $register("guide", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "intro", (words) => this.setData({ words }));
+    searching(value, "guide", (words) => this.setData({ words }));
   },
 
   /**
@@ -95,6 +95,6 @@ $register("guide", {
    * @param value 输入的搜索词
    */
   search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`/page/search/search?name=intro&word=${detail.value}`);
+    this.$route(`/pages/search/search?name=guide&word=${detail.value}`);
   },
 });

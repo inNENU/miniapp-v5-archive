@@ -1,12 +1,12 @@
 {
-  "entryPagePath": "page/main/main",
+  "entryPagePath": "pages/main/main",
   "pages": [
-    "page/main/main",
-    "page/function/function",
-    "page/guide/guide",
-    "page/intro/intro",
-    "page/user/user",
-    "page/search/search",
+    "pages/main/main",
+    "pages/function/function",
+    "pages/guide/guide",
+    "pages/intro/intro",
+    "pages/user/user",
+    "pages/search/search",
     "settings/about/about",
     "settings/auth/auth",
     "settings/donate/donate",
@@ -36,7 +36,7 @@
     }
   ],
   "preloadRule": {
-    "page/function/function": {
+    "pages/function/function": {
       "network": "all",
       "packages": ["function"]
     }
@@ -61,31 +61,31 @@
     "position": "bottom",
     "list": [
       {
-        "pagePath": "page/main/main",
+        "pagePath": "pages/main/main",
         "text": "首页",
         "iconPath": "@homeIcon",
         "selectedIconPath": "icon/tab/home-active.png"
       },
       {
-        "pagePath": "page/intro/intro",
+        "pagePath": "pages/intro/intro",
         "text": "东师介绍",
         "iconPath": "@introIcon",
         "selectedIconPath": "icon/tab/intro-active.png"
       },
       {
-        "pagePath": "page/guide/guide",
+        "pagePath": "pages/guide/guide",
         "text": "东师指南",
         "iconPath": "@guideIcon",
         "selectedIconPath": "icon/tab/guide-active.png"
       },
       {
-        "pagePath": "page/function/function",
+        "pagePath": "pages/function/function",
         "text": "功能大厅",
         "iconPath": "@functionIcon",
         "selectedIconPath": "icon/tab/function-active.png"
       },
       {
-        "pagePath": "page/user/user",
+        "pagePath": "pages/user/user",
         "text": "我的东师",
         "iconPath": "@userIcon",
         "selectedIconPath": "icon/tab/user-active.png"

@@ -211,14 +211,14 @@
         {
           "id": 18,
           "name": "搜索",
-          "pathName": "page/search/search",
+          "pathName": "pages/search/search",
           "query": "",
           "scene": null
         },
         {
           "id": 19,
           "name": "指定文字搜索",
-          "pathName": "page/search/search",
+          "pathName": "pages/search/search",
           "query": "word=浴池",
           "scene": null
         },

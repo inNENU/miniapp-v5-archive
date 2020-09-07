@@ -1,23 +1,19 @@
-/* 东师指南 */
+/* 功能大厅 */
 import $register = require("wxpage");
 import { checkResUpdate } from "../../utils/app";
 import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
-import { searching } from "../../utils/search";
 import { AppOption } from "../../app";
 import page from "./pageData";
 const { globalData } = getApp<AppOption>();
 
-$register("guide", {
+$register("function", {
   data: {
     theme: globalData.theme,
 
-    /** 候选词 */
-    words: [] as string[],
-
     /** 自定义导航栏配置 */
     nav: {
-      title: "东师指南",
+      title: "功能大厅",
       action: false,
       statusBarHeight: globalData.info.statusBarHeight,
     },
@@ -28,25 +24,24 @@ $register("guide", {
 
   onPreload(res) {
     this.$put(
-      "guide",
-      resolvePage(res, wx.getStorageSync("guide") || this.data.page)
+      "function",
+      resolvePage(res, wx.getStorageSync("function") || this.data.page)
     );
     console.info(
-      `东师指南预加载用时${new Date().getTime() - globalData.date}ms`
+      `功能大厅预加载用时${new Date().getTime() - globalData.date}ms`
     );
   },
 
   onLoad() {
     setPage(
-      { option: { id: "guide" }, ctx: this },
-      this.$take("guide") || this.data.page
+      { option: { id: "function" }, ctx: this },
+      this.$take("function") || this.data.page
     );
-    popNotice("guide");
   },
 
   onShow() {
-    refreshPage("guide", this, globalData);
-    popNotice("guide");
+    refreshPage("function", this, globalData);
+    popNotice("function");
   },
 
   onReady() {
@@ -59,7 +54,7 @@ $register("guide", {
   },
 
   onPullDownRefresh() {
-    refreshPage("guide", this, globalData);
+    refreshPage("function", this, globalData);
     checkResUpdate();
     wx.stopPullDownRefresh();
   },
@@ -68,9 +63,12 @@ $register("guide", {
     changeNav(event, this, "nav");
   },
 
-  onShareAppMessage: () => ({ title: "东师指南", path: "/page/guide/guide" }),
+  onShareAppMessage: () => ({
+    title: "功能大厅",
+    path: "/pages/function/function",
+  }),
 
-  onShareTimeline: () => ({ title: "东师指南" }),
+  onShareTimeline: () => ({ title: "功能大厅" }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
@@ -80,21 +78,7 @@ $register("guide", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /**
-   * 在搜索框中输入时触发的函数
-   *
-   * @param value 输入的搜索词
-   */
-  searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "guide", (words) => this.setData({ words }));
-  },
-
-  /**
-   * 跳转到搜索页面
-   *
-   * @param value 输入的搜索词
-   */
-  search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`/page/search/search?name=guide&word=${detail.value}`);
+  navigate() {
+    this.$route("/function/weather");
   },
 });

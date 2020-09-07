@@ -51,7 +51,7 @@ $register("search", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: "搜索",
-      path: `/page/search/search?name=${this.state.name}&word=${this.state.value}`,
+      path: `/pages/search/search?name=${this.state.name}&word=${this.state.value}`,
       imageUrl: `${server}img/${
         globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
       }Share.jpg`,
