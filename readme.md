@@ -21,3 +21,5 @@ wx33acb831ee1831a5
 
 - QQ 不支持在 json 中配置组件样式隔离选项
 - QQ 不支持 text 的 user-select
+- QQ 的 app.json 声明了 groupIdList
+- QQ 不兼容 darkmode, app.json 写法有差异
