@@ -1,7 +1,7 @@
 <view class="card" hover-class="button-hover" catch:tap="tap">
   <image class="img" src="{{config.src}}" mode="aspectFill" lazy-load />
   <view class="detail">
-    <view wx:if="{{base64Logo || config.logo}}" class="icon">
+    <view wx:if="{{base64Logo || config.logo}}" class="icon-wrapper">
       <image class="logo" src="{{base64Logo || config.logo}}" lazy-load />
       <view class="name">{{config.name}}</view>
     </view>

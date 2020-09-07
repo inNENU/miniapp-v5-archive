@@ -31,38 +31,32 @@ $register("me", {
           content: [
             {
               text: "外观设置",
-              icon: "/icon/user/setting.svg",
               base64Icon: "setting",
               url: "outlook",
             },
             {
               text: "权限设置",
-              icon: "/icon/user/setting.svg",
               base64Icon: "setting",
               url: "auth",
             },
             {
               text: "存储设置",
-              icon: "/icon/user/setting.svg",
               base64Icon: "setting",
               url: "storage",
             },
             {
               text: "更新日志",
-              icon: "/icon/about.svg",
               base64Icon: "about",
               url: "log",
               desc: globalData.version,
             },
             {
               text: "关于",
-              icon: "/icon/about.svg",
               base64Icon: "about",
               url: "about",
             },
             {
               text: "赞赏支持 Mr.Hope",
-              icon: "/icon/user/donate.svg",
               base64Icon: "donate",
               desc: "了解详情",
               url: "donate",

@@ -1,3 +1,251 @@
+/*
+ * @Description: 全局通用样式
+ * @Version: 2.0
+ */
+
+/*****************
+    常规背景
+*****************/
+
+.page {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bgcolor);
+}
+
+/*****************
+    背景蒙层
+*****************/
+
+.mask {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.mask,
+.mask_transparent {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+/*****************
+    加载中图标
+*****************/
+
+.loading-logo-wrapper {
+  display: flex;
+
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.loading-logo {
+  width: 100px;
+  height: 125px;
+  filter: drop-shadow(-1px 1px 2px rgba(191, 190, 195, 0.15));
+}
+
+@keyframes jump {
+  0% {
+    top: 0;
+    transform: rotate(0deg);
+  }
+
+  10% {
+    top: -18rpx;
+    transform: rotate(-7.2deg);
+  }
+
+  20% {
+    top: -32rpx;
+    transform: rotate(-28.8deg);
+  }
+
+  30% {
+    top: -42rpx;
+    transform: rotate(-64.8deg);
+  }
+
+  40% {
+    top: -48rpx;
+    transform: rotate(-115.2deg);
+  }
+
+  50% {
+    top: -50rpx;
+    transform: rotate(-180deg);
+  }
+
+  60% {
+    top: -48rpx;
+    transform: rotate(-244.8deg);
+  }
+
+  70% {
+    top: -42rpx;
+    transform: rotate(-295.2deg);
+  }
+
+  80% {
+    top: -32rpx;
+    transform: rotate(-331.2deg);
+  }
+
+  90% {
+    top: -18rpx;
+    transform: rotate(-352.8deg);
+  }
+
+  100% {
+    top: 0;
+    transform: rotate(-360deg);
+  }
+}
+
+.loading-logo .logo {
+  position: relative;
+
+  width: 100px;
+  height: 100px;
+
+  background-color: #2ecc71;
+  border-radius: 50%;
+  animation: jump 2s linear 0s none infinite alternate-reverse;
+}
+
+.loading-logo .logo .in {
+  position: absolute;
+  left: 40px;
+  color: #fff;
+  font-size: 32px;
+}
+
+.loading-logo .logo .dong {
+  position: absolute;
+  top: 36px;
+  left: 15px;
+
+  color: #fff;
+  font-size: 32px;
+}
+
+.loading-logo .logo .shi {
+  position: absolute;
+  top: 44px;
+  right: 15px;
+
+  color: #fff;
+  font-size: 32px;
+}
+
+.loading-logo-wrapper .text {
+  margin: 8px auto;
+  color: var(--grey);
+  font-size: 18px;
+}
+
+@media (min-width: 480px) {
+  .loading-logo-wrapper .text {
+    margin: 12px auto;
+    font-size: 24px;
+  }
+}
+
+@keyframes shadow {
+  0%,
+  100% {
+    transform: scaleX(1.4);
+  }
+
+  50% {
+    transform: scaleX(1);
+  }
+}
+
+.loading-logo-wrapper .shadow {
+  width: 60px;
+  height: 10px;
+  margin: -10px 20px 0 20px;
+  background: rgba(191, 190, 195, 0.15);
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(191, 190, 195, 0.15);
+  animation: shadow 2s ease 0s none infinite alternate-reverse;
+}
+
+/*****************
+    返回按钮
+*****************/
+
+.back-button {
+  position: fixed;
+  z-index: 1100;
+  top: 26px;
+  left: 9px;
+
+  width: 46px;
+  height: 31px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 18px;
+}
+
+.back-button::before {
+  content: " ";
+  position: absolute;
+  z-index: 98;
+  top: 0;
+  left: 0;
+
+  width: 200%;
+  height: 200%;
+  border: 1px solid rgba(127, 127, 127, 0.2);
+  border-radius: 36px;
+  transform: scale(0.5);
+  transform-origin: 0 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .back-button {
+    background-color: rgba(0, 0, 0, 0.15);
+  }
+
+  .back-button::before {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+}
+
+.back-button-hover {
+  opacity: 0.2;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  margin: 4px auto;
+}
+
+/* error */
+
+.errorCtn {
+  padding: 20% 10%;
+}
+
+.errorText {
+  margin: 10px 0;
+  color: red;
+  font-size: 18px;
+}
+
+.errorDesc {
+  color: #888;
+  text-align: justify !important;
+  font-size: 16px;
+}
+
 .button-hover {
   background-color: var(--hover) !important;
   color: inherit;
@@ -22,36 +270,4 @@
   color: #fff;
   text-align: center;
   line-height: 1.6;
-}
-
-.icon-button {
-  width: 24px;
-  height: 24px;
-  background-color: transparent;
-  background-position: 50% 50%;
-  border: 0;
-
-  font-size: 0;
-
-  background-repeat: no-repeat;
-  background-size: 100%;
-  outline: 0;
-}
-
-.icon-button.close {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'%3E%3Cdefs%3E%3Cpath id='a' d='M8 6.943L1.807.75.75 1.807 6.943 8 .75 14.193l1.057 1.057L8 9.057l6.193 6.193 1.057-1.057L9.057 8l6.193-6.193L14.193.75z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd' transform='translate(-16 -20)'%3E%3Cpath fill='none' d='M0 12C0 5.373 5.367 0 12 0h390c6.628 0 12 5.374 12 12v52H0V12z'/%3E%3Cuse fill='%23000' fill-opacity='.9' transform='translate(20 24)' xlink:href='%23a'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.icon-button.more {
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='none' d='M-374-8c0-6.627 5.367-12 12-12H28c6.628 0 12 5.374 12 12v52h-414V-8z'/%3E%3Cpath fill='%23000' fill-opacity='.9' d='M6.75 12a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0zM12 10.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zm7 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-@media (prefers-color-scheme: dark) {
-  .icon-button.close {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='24' height='24' viewBox='0 0 24 24'%3E%3Cdefs%3E%3Cpath id='a' d='M8 6.943L1.807.75.75 1.807 6.943 8 .75 14.193l1.057 1.057L8 9.057l6.193 6.193 1.057-1.057L9.057 8l6.193-6.193L14.193.75z'/%3E%3C/defs%3E%3Cg fill='none' fill-rule='evenodd' transform='translate(-16 -20)'%3E%3Cpath fill='none' d='M0 12C0 5.373 5.367 0 12 0h390c6.628 0 12 5.374 12 12v52H0V12z'/%3E%3Cuse fill='%23FFF' fill-opacity='.9' transform='translate(20 24)' xlink:href='%23a'/%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .icon-button.more {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath fill='none' d='M-374-8c0-6.627 5.367-12 12-12H28c6.628 0 12 5.374 12 12v52h-414V-8z'/%3E%3Cpath fill='%23FFF' fill-opacity='.9' d='M6.75 12a1.75 1.75 0 1 1-3.5 0 1.75 1.75 0 0 1 3.5 0zM12 10.25a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5zm7 0a1.75 1.75 0 1 1 0 3.5 1.75 1.75 0 0 1 0-3.5z'/%3E%3C/g%3E%3C/svg%3E");
-  }
 }

@@ -38,7 +38,7 @@
   line-height: 1.4;
 }
 
-.card .icon {
+.card .icon-wrapper {
   display: flex;
   float: right;
   flex-direction: column;
