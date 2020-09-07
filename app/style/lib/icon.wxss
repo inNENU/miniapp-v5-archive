@@ -1,4 +1,5 @@
-.icon,
+.base-icon,
+.icon-font,
 .icon-button {
   background-color: transparent;
   background-position: 50% 50%;
@@ -11,7 +12,7 @@
   outline: 0;
 }
 
-.icon {
+.icon-font {
   display: inline-block;
   width: 1rem;
   height: 1rem;
