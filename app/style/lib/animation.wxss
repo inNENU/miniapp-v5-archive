@@ -1,5 +1,14 @@
 /* Animation css */
-[class*="animation-"] {
+
+.animation-fade,
+.animation-scale-up,
+.animation-scale-down,
+.animation-slide-top,
+.animation-slide-bottom,
+.animation-slide-left,
+.animation-slide-right,
+.animation-shake,
+.animation-reverse {
   animation-duration: 0.5s;
   animation-fill-mode: both;
   animation-timing-function: ease-out;

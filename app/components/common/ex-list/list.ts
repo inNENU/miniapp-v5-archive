@@ -148,7 +148,9 @@ $register.C<{
       // 设置图标
       this.setData({
         icons: value.map((item) =>
-          "base64Icon" in item ? readFile(`icon/${item.base64Icon}`) || "" : ""
+          item.icon && !item.icon.includes("/")
+            ? readFile(`icon/${item.icon}`) || ""
+            : ""
         ),
       });
     },

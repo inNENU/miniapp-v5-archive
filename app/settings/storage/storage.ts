@@ -31,7 +31,7 @@ $register("storage", {
           tag: "list",
           header: "空间占用",
           content: [
-            { text: "小程序体积", desc: "424K" },
+            { text: "小程序体积", desc: "414K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],
@@ -41,6 +41,7 @@ $register("storage", {
           header: "资源刷新",
           foot: "如果页面显示出现问题请刷新资源",
           content: [
+            { text: "刷新全部资源", button: "refreshAll" },
             { text: "刷新介绍资源", button: "refreshIntro" },
             { text: "刷新功能资源", button: "refreshFunc" },
             { text: "刷新指南资源", button: "refreshGuide" },
@@ -152,6 +153,13 @@ $register("storage", {
   refreshIcon() {
     confirm("刷新图标资源", () => {
       resDownload("icon");
+    });
+  },
+
+  /** 刷新所有资源 */
+  refreshAll() {
+    confirm("刷新图标资源", () => {
+      resDownload("function-guide-icon-intro");
     });
   },
 

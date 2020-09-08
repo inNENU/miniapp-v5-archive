@@ -85,7 +85,6 @@ $register("setting", {
     globalData.theme = theme;
     wx.setStorageSync("theme", theme);
     this.setData({ theme });
-    // Set({ option: { aim: 'settings' }, ctx: this }, this.data.page);
     this.$emit("theme", theme);
     console.info(`theme 切换为 ${theme}`); // 调试
   },

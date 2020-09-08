@@ -1,4 +1,4 @@
-@import "../../style/common.wxss";
+@import "../../style/lib/icon.wxss";
 
 .addtip-wrapper {
   display: flex;

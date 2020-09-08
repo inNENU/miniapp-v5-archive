@@ -16,7 +16,7 @@
       />
     </view>
     <button
-      class="button share"
+      class="share-button"
       hover-class="button-hover"
       hover-start-time="0"
       open-type="share"
@@ -35,7 +35,9 @@
       <view class="number">{{weather.air.aqi}}</view>
       <view class="level">{{weather.air.aqiName}}</view>
     </view>
-    <view class="location"><text class="-font location" /> 长春市 南关区</view>
+    <view class="location-wrapper"
+      ><text class="icon-font location" /> 长春市 南关区</view
+    >
     <view class="temperature">{{weather.observe.degree}}°</view>
     <view class="type">{{weather.observe.weather}}</view>
     <view class="detail">湿度 {{weather.observe.humidity}}%</view>

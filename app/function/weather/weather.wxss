@@ -22,7 +22,7 @@
   overflow: hidden;
 }
 
-.share {
+.share-button {
   position: absolute;
   z-index: 10;
   top: 120px;
@@ -96,7 +96,7 @@
   line-height: 14px;
 }
 
-.location {
+.location-wrapper {
   width: 76%;
   height: 16px;
   margin: 18px 12%;

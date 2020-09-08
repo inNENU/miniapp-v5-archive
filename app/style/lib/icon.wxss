@@ -32,7 +32,7 @@
 }
 
 .icon-font.share {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='81' height='81'%3E%3Cpath d='M618.86 92L992 484.88 618.86 875.9V651.38S247.64 608.78 32 932c0 0 67.5-615.48 586.86-615.48'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1024 1024' xmlns='http://www.w3.org/2000/svg' width='81' height='81'%3E%3Cpath d='M618.86 92L992 484.88 618.86 875.9V651.38S247.64 608.78 32 932c0 0 67.5-615.48 586.86-615.48' fill='%23fff'/%3E%3C/svg%3E");
 }
 
 .icon-button.close {

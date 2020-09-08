@@ -31,33 +31,33 @@ $register("me", {
           content: [
             {
               text: "外观设置",
-              base64Icon: "setting",
+              icon: "setting",
               url: "outlook",
             },
             {
               text: "权限设置",
-              base64Icon: "setting",
+              icon: "setting",
               url: "auth",
             },
             {
               text: "存储设置",
-              base64Icon: "setting",
+              icon: "setting",
               url: "storage",
             },
             {
               text: "更新日志",
-              base64Icon: "about",
+              icon: "about",
               url: "log",
               desc: globalData.version,
             },
             {
               text: "关于",
-              base64Icon: "about",
+              icon: "about",
               url: "about",
             },
             {
               text: "赞赏支持 Mr.Hope",
-              base64Icon: "donate",
+              icon: "donate",
               desc: "了解详情",
               url: "donate",
               hidden: globalData.appID === "wx9ce37d9662499df3",
