@@ -29,8 +29,24 @@ $register("weather", {
       data: WeatherData;
     };
 
-    const weatherIcon = JSON.parse(readFile("./icon/weather/icon") as string);
-    const hintIcon = JSON.parse(readFile("./icon/weather/hint") as string);
+    const weatherIcon = JSON.parse(
+      (readFile("./icon/weather/icon") as string) || "{}"
+    );
+    const hintIcon = JSON.parse(
+      (readFile("./icon/weather/hint") as string) || "{}"
+    );
+
+    if (!wx.getStorageSync("inited")) {
+      const handler = setInterval(() => {
+        if (wx.getStorageSync("inited")) {
+          this.setData({
+            weatherIcon: JSON.parse(readFile("./icon/weather/icon") as string),
+            hintIcon: JSON.parse(readFile("./icon/weather/hint") as string),
+          });
+          clearInterval(handler);
+        }
+      }, 500);
+    }
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
     if (weatherData.date > new Date().getTime() - 300000) {
@@ -40,7 +56,7 @@ $register("weather", {
 
       this.setData({
         weather,
-        // 18点至次日5点为夜间
+        // 18 点至次日 5 点为夜间
         night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
         weatherIcon,
@@ -60,7 +76,7 @@ $register("weather", {
 
           this.setData({
             weather: res.data as WeatherData,
-            // 18点至次日5点为夜间
+            // 18 点至次日 5 点为夜间
             night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
             weatherIcon,

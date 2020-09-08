@@ -24,7 +24,7 @@ $register("location", {
       else
         getJSON({
           path: `function/map/${option.id}`,
-          url: `resource/function/${option.id}`,
+          url: `resource/function/map/${option.id}`,
           success: (data) => {
             setPage({ option, ctx: this }, data as PageData);
           },
