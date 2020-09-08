@@ -58,7 +58,17 @@ $register("main", {
     setPage({ option: { id: "main" }, ctx: this });
     // 设置胶囊和背景颜色
     this.setData({ color: getColor(this.data.page.grey) });
-    refreshPage("main", this, globalData);
+
+    if (wx.getStorageSync("inited")) refreshPage("main", this, globalData);
+    else {
+      const handler = setInterval(() => {
+        if (wx.getStorageSync("inited")) {
+          refreshPage("main", this, globalData);
+          clearInterval(handler);
+        }
+      }, 500);
+    }
+
     popNotice("main");
   },
 
