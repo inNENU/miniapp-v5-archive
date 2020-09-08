@@ -2,7 +2,6 @@ import { appOption, server } from "./config";
 import {
   remove,
   listFile,
-  writeFile,
   readJSON,
   writeJSON,
   saveFile,
@@ -83,7 +82,7 @@ export const resDownload = (fileName: string, tip = true): Promise<void> =>
 // eslint-disable-next-line max-lines-per-function
 export const checkResUpdate = (): void => {
   const notify = wx.getStorageSync("resourceNotify"); // 资源提醒
-  const localVersion: VersionInfo = readJSON("version"); // 读取本地 Version 文件
+  const localVersion: Record<string, number> = readJSON("version") || {}; // 读取本地 Version 文件
   const localTime = wx.getStorageSync(`resourceUpdateTime`);
   const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
 
@@ -102,7 +101,7 @@ export const checkResUpdate = (): void => {
           const updateList: string[] = [];
 
           for (const key in versionInfo.version)
-            if (versionInfo.version[key] !== localVersion.version[key])
+            if (versionInfo.version[key] !== localVersion[key])
               updateList.push(key);
 
           // 需要更新
@@ -112,8 +111,8 @@ export const checkResUpdate = (): void => {
             const fileName = updateList.join("-");
             const size = versionInfo.size[fileName];
 
-            // 如果需要提醒，则弹窗
             if (notify)
+              // 需要提醒
               wx.showModal({
                 title: "内容更新",
                 content: `请更新资源以获得最新功能与内容。(会消耗${size}K流量)`,
@@ -124,7 +123,7 @@ export const checkResUpdate = (): void => {
                   // 用户确认，下载更新
                   if (choice.confirm)
                     resDownload(fileName).then(() => {
-                      writeJSON("version", versionInfo);
+                      writeJSON("version", versionInfo.version);
                     });
                   // 用户取消，询问是否关闭更新提示
                   else if (choice.cancel)
@@ -152,7 +151,7 @@ export const checkResUpdate = (): void => {
             // 距上次更新已经半个月了，强制更新
             else
               resDownload(fileName).then(() => {
-                writeJSON("version", versionInfo);
+                writeJSON("version", versionInfo.version);
               });
           } // 调试
           else debug("资源已是最新版");
@@ -170,7 +169,7 @@ export const appInit = (): void => {
 
   // 设置主题
   if (appOption.theme === "auto") {
-    // 主题为auto
+    // 主题为 auto
     let num;
     let theme;
     const { platform } = wx.getSystemInfoSync();
@@ -215,8 +214,7 @@ export const appInit = (): void => {
       success: (res) => {
         console.log("版本信息为", res.data);
         if (res.statusCode === 200) {
-          writeFile("version.json", JSON.stringify(res.data));
-
+          writeJSON("version", (res.data as VersionInfo).version);
           // 成功初始化
           wx.setStorageSync("inited", true);
           wx.hideLoading();
