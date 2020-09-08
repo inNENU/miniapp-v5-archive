@@ -1,11 +1,11 @@
 import $register = require("wxpage");
-import { changeNav, resolvePage, setPage } from "../utils/page";
-import { getJSON, readJSON } from "../utils/file";
-import { AppOption } from "../app";
-import { PageData } from "../../typings";
+import { changeNav, resolvePage, setPage } from "../../utils/page";
+import { getJSON, readJSON } from "../../utils/file";
+import { AppOption } from "../../app";
+import { PageData } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 
-$register("situs", {
+$register("location", {
   data: {
     page: {} as PageData,
   },
@@ -42,6 +42,8 @@ $register("situs", {
       this.state.id = option.id;
     }
 
+    this.setData({ firstPage: getCurrentPages().length === 1 });
+
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
   },
 
@@ -68,7 +70,7 @@ $register("situs", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
-      path: `/function/situs/situs?from=主页&id=${this.state.id}`,
+      path: `/function/map/location?from=主页&id=${this.state.id}`,
     };
   },
 

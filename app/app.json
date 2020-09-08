@@ -16,8 +16,7 @@
     "settings/storage/storage",
     "module/function",
     "module/page",
-    "module/web",
-    "module/situs"
+    "module/web"
   ],
   "subPackages": [
     {
@@ -26,6 +25,7 @@
         "cal/cal",
         "calendar/calendar",
         "map/map",
+        "map/location",
         "music/music",
         "video/video",
         "PEcal/PEcal",

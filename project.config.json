@@ -113,7 +113,7 @@
         {
           "id": 4,
           "name": "地图地点",
-          "pathName": "module/situs",
+          "pathName": "function/map/location",
           "query": "id=benbu/school/foreign",
           "scene": null
         },
