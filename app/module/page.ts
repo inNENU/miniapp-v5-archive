@@ -1,11 +1,6 @@
 import $register = require("wxpage");
 import { PageData } from "../../typings";
-import {
-  changeNav,
-  resolvePage,
-  loadOnlinePage,
-  setOnlinePage,
-} from "../utils/page";
+import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
 $register("page", {
   data: { page: {} as PageData },
@@ -20,7 +15,6 @@ $register("page", {
   },
 
   onLoad(option) {
-    console.log(this.data.page);
     console.info("进入参数为: ", option);
 
     // 生成页面 ID
@@ -28,8 +22,6 @@ $register("page", {
       option.id = decodeURIComponent(option.scene)
         .replace("#", "guide/")
         .replace("@", "intro/");
-
-    option.action = "redirect";
 
     if ("path" in option) {
       loadOnlinePage(option as Record<string, never> & { path: string }, this);
@@ -42,9 +34,8 @@ $register("page", {
     wx.reportAnalytics("id_count", { id: option.id });
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
@@ -71,11 +62,5 @@ $register("page", {
   /** 设置主题 */
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
-  },
-
-  /** 重定向到主页 */
-  redirect() {
-    if (getCurrentPages().length === 1) this.$switch("main");
-    else this.$back();
   },
 });

@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { changeNav, resolvePage, setPage } from "../../utils/page";
+import { resolvePage, setPage } from "../../utils/page";
 import { getJSON, readJSON } from "../../utils/file";
 import { AppOption } from "../../app";
 import { PageData } from "../../../typings";
@@ -63,9 +63,9 @@ $register("location", {
    *   });
    * },
    */
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {

@@ -48,9 +48,6 @@ $register("wechat-detail", {
 
     this.state.path = path;
 
-    if (getCurrentPages().length === 1)
-      this.setData({ "nav.action": "redirect", "nav.from": "主页" });
-
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     popNotice(`wechat/${this.data.config.name}`);

@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}}">
-  <template is="nav" data="{{...nav, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
   <view class="desc">点击对应学期可查看详情</view>
   <view class="calendar-wrapper">
     <time-line config="{{calendar}}" catch:active="display" />

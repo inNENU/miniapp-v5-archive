@@ -1,7 +1,7 @@
 /* 东师介绍 */
 import $register = require("wxpage");
 import { checkResUpdate } from "../../utils/app";
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
 import { searching } from "../../utils/search";
 import { AppOption } from "../../app";
@@ -64,9 +64,8 @@ $register("guide", {
     wx.stopPullDownRefresh();
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({ title: "东师介绍", path: "/pages/intro/intro" }),
 

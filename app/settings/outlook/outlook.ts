@@ -1,6 +1,6 @@
 /* 设置页面 */
 import $register = require("wxpage");
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import {
   AdvancedListComponentConfig,
@@ -56,9 +56,8 @@ $register("setting", {
     popNotice("theme");
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

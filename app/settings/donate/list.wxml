@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}}">
-  <template is="nav" data="{{...page, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
   <my-text config="{{text}}" />
   <view class="donate-list-wrapper">
     <view class="title">赞赏支持列表:</view>

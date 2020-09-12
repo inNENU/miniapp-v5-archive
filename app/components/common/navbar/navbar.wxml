@@ -1,0 +1,11 @@
+<import src="./iOS.wxml" />
+<import src="./Android.wxml" />
+<import src="./NENU.wxml" />
+<import src="./weui.wxml" />
+<wxs src="./navbar.wxs" module="navbar" />
+
+<template
+  wx:if="{{!nav.hidden && theme}}"
+  is="{{theme}}Nav"
+  data="{{nav, firstPage, darkmode, statusBarHeight, titleDisplay, borderDisplay, shadow}}"
+/>

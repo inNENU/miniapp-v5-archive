@@ -1,7 +1,7 @@
 /* 功能大厅 */
 import $register = require("wxpage");
 import { checkResUpdate } from "../../utils/app";
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
 import page from "./pageData";
@@ -59,9 +59,8 @@ $register("function", {
     wx.stopPullDownRefresh();
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "功能大厅",

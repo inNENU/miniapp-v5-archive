@@ -1,6 +1,6 @@
 /* 赞赏支持 */
 import $register = require("wxpage");
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { server } from "../../utils/config";
 import { AppOption } from "../../app";
 const { globalData } = getApp<AppOption>();
@@ -38,9 +38,6 @@ $register("donate-list", {
       color: getColor(),
       "page.statusBarHeight": globalData.info.statusBarHeight,
     });
-
-    if (getCurrentPages().length === 1)
-      this.setData({ "page.from": "主页", "page.action": "redirect" });
 
     wx.request({
       url: `${server}service/donateList.php?year=2019`,
@@ -90,9 +87,8 @@ $register("donate-list", {
     popNotice("donate-list");
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "赞赏列表",
@@ -110,11 +106,5 @@ $register("donate-list", {
 
   themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
-  },
-
-  /** 重定向到主页 */
-  redirect() {
-    if (getCurrentPages().length === 1) this.$switch("main");
-    else this.$back();
   },
 });

@@ -1,7 +1,7 @@
 /* 我的东师 */
 
 import $register = require("wxpage");
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import { PageData } from "../../../typings";
 import { server } from "../../utils/config";
@@ -98,9 +98,8 @@ $register("me", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",

@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}} grey">
-  <template is="nav" data="{{...nav, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
   <search words="{{words}}" catch:searching="searching" catch:search="search" />
   <template is="components" data="{{content: page.content, theme}}" />
 </view>

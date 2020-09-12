@@ -3,7 +3,7 @@
   class="iOS grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
 >
-  <template is="nav" data="{{...page, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
   <view class="desc-wrapper">
     <view class="desc-button" hover-class="button-hover" catch:tap="navigate">
       <view class="text">体测说明</view>

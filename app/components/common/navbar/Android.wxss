@@ -1,0 +1,126 @@
+
+.Android-navigation-bar,
+.Android-nav-placeholder {
+  width: 100%;
+  background-color: #f8f8f8;
+}
+
+.Android-navigation-bar {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+
+  box-sizing: content-box;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+}
+
+.AndroidNavShadow {
+  box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
+}
+
+@media (prefers-color-scheme: dark) {
+  .AndroidNavShadow {
+    box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+  }
+}
+
+.Android-nav-placeholder {
+  position: relative;
+  height: 69px;
+  color: #d9d9d9;
+  font-size: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-navigation-bar,
+  .Android-nav-placeholder {
+    background-color: #000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .grey .Android-navigation-bar,
+  .grey .Android-nav-placeholder {
+    background-color: #10110b;
+  }
+}
+
+.Android-titletext {
+  position: absolute;
+  z-index: 100;
+
+  max-width: 50%;
+
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.Android-nav-back-button {
+  display: flex;
+  position: absolute;
+  z-index: 101;
+  left: 0;
+
+  min-width: 10px;
+  max-width: 30%;
+  min-height: 0;
+  margin: 0 3%;
+  padding: 8px 5px;
+
+  line-height: 2.4;
+  align-items: center;
+}
+
+.Android-back-arrow {
+  width: 11px;
+  height: 11px;
+  border-width: 0 0 3px 3px;
+  border-style: solid;
+  border-color: black;
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-back-arrow {
+    border-color: white;
+  }
+}
+
+.Android-back-text {
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-back-text {
+    color: #cacaca;
+  }
+}
+
+.Android-head {
+  padding: 25px 40px;
+}
+
+.Android-nav-title {
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.Android-desc {
+  margin-top: 5px;
+  color: #888;
+  text-align: left;
+  font-size: 14px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-desc {
+    color: #777;
+  }
+}

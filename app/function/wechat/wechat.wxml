@@ -9,7 +9,7 @@
 />
 
 <view class="{{theme}} {{grey? 'grey': ''}}">
-  <template is="nav" data="{{...nav, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
   <view class="wechat-logo-wrapper">
     <view
       wx:for="{{wechat}}"

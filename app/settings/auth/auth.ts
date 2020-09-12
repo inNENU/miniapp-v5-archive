@@ -1,6 +1,6 @@
 /* 授权 */
 import $register = require("wxpage");
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { ListComponentConfig, PageDataWithContent } from "../../../typings";
@@ -112,9 +112,8 @@ $register("authorize", {
     });
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

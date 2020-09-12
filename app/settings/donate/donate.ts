@@ -1,6 +1,6 @@
 /* 赞赏支持 */
 import $register = require("wxpage");
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { requestJSON, savePhoto } from "../../utils/wx";
 import { server } from "../../utils/config";
 import { AppOption } from "../../app";
@@ -63,9 +63,6 @@ $register("donate", {
       "page.statusBarHeight": globalData.info.statusBarHeight,
     });
 
-    if (getCurrentPages().length === 1)
-      this.setData({ "page.from": "主页", "page.action": "redirect" });
-
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     popNotice("donate");
@@ -77,9 +74,8 @@ $register("donate", {
     });
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "支持 Mr.Hope",
@@ -103,11 +99,5 @@ $register("donate", {
   save(res: WechatMiniprogram.TouchEvent) {
     console.info("Start QRCode download."); // 调试
     savePhoto(`img/donate/${res.currentTarget.dataset.name}.png`);
-  },
-
-  /** 重定向到主页 */
-  redirect() {
-    if (getCurrentPages().length === 1) this.$switch("main");
-    else this.$back();
   },
 });

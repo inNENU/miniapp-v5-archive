@@ -7,9 +7,10 @@
   >
     <!-- 错误显示 -->
     <block wx:if="{{page.error}}">
-      <template
-        is="{{theme}}Nav"
-        data="{{ title: '页面出错', from: '返回', ...page, darkmode }}"
+      <navbar
+        theme="{{theme}}"
+        darkmode="{{darkmode}}"
+        nav="{{ { title: '页面出错', from: '返回', ...page } }}"
       />
       <template is="error" />
     </block>
@@ -41,11 +42,7 @@
 
     <block wx:else>
       <!-- 导航栏 -->
-      <template
-        wx:if="{{!page.hidden}}"
-        is="{{theme}}Nav"
-        data="{{...page, darkmode}}"
-      />
+      <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
 
       <!-- 页面内容 -->
       <block wx:for="{{page.content}}" wx:key="id">
@@ -137,186 +134,5 @@
     <navigator class="donate-button" url="/settings/donate/donate"
       >支持开发者</navigator
     >
-  </view>
-</template>
-
-<!-- 导航栏 -->
-<template name="nav">
-  <block wx:if="{{!hidden}}">
-    <template
-      is="{{theme}}Nav"
-      data="{{title, from, titleDisplay, borderDisplay, shadow, action, statusBarHeight, darkmode}}"
-    />
-  </block>
-</template>
-<!-- ***************************
-        iOS theme
-**************************** -->
-<!-- iOS导航栏 -->
-<template name="iOSNav">
-  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
-    <view wx:if="{{titleDisplay}}" class="iOS-titletext">{{title}}</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="iOS-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      plain
-      catch:tap="{{action || '$back'}}"
-    >
-      <view
-        wx:if="{{action === undefined || action === 'redirect'}}"
-        class="iOS-back-arrow"
-      />
-      <text class="iOS-nav-text">{{from}}</text>
-    </view>
-  </view>
-  <view
-    wx:if="{{borderDisplay}}"
-    class="iOS-nav-border"
-    style="top:{{statusBarHeight + 44}}px;"
-  />
-  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
-  <view class="iOS-head">{{title}}</view>
-</template>
-<!-- ******************************************
-        Android theme
-********************************************* -->
-<!-- Android导航栏 -->
-<template name="AndroidNav">
-  <view
-    class="Android-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
-    style="padding-top: {{statusBarHeight}}px;"
-  >
-    <view class="Android-titletext">{{title}}</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="Android-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      plain
-      catch:tap="{{action || '$back'}}"
-    >
-      <view
-        wx:if="{{action === undefined || action === 'redirect'}}"
-        class="Android-back-arrow"
-      />
-      <view class="Android-back-text">{{from}}</view>
-    </view>
-  </view>
-  <view
-    class="Android-nav-placeholder"
-    style="height:{{statusBarHeight + 44}}px;"
-  >
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
-  <view wx:if="{{desc}}" class="Android-head">
-    <view class="Android-nav-title">{{title}}</view>
-    <view wx:if="{{desc}}" class="Android-desc">
-      <text decode>{{desc}}</text>
-    </view>
-  </view>
-</template>
-<!-- ******************************************
-NENU theme
-
-Version: V1.0
-Author: Mr.Hope
-********************************************* -->
-<template name="NENUNav">
-  <block wx:if="{{action === undefined}}">
-    <view
-      class="back-button {{borderDisplay? 'fadeIn': 'fadeOut'}}"
-      style="top:{{statusBarHeight + 5}}px;"
-      hover-class="button-hover"
-      catch:tap="$back"
-    >
-      <image class="back-icon" src="/icon/back{{darkmode? 'White': ''}}.svg" />
-    </view>
-    <view
-      class="NENUnav {{titleDisplay? 'fadeOut': 'fadeIn'}}"
-      style="background-color: {{color}}; padding-top: {{statusBarHeight}}px;"
-    >
-      <view
-        class="iOS-nav-back-button"
-        hover-class="back-button-hover"
-        style="position: absolute; left: 0"
-        plain
-        catch:tap="$back"
-      >
-        <view
-          wx:if="{{action === undefined || action === 'redirect'}}"
-          class="iOS-back-arrow"
-          style="border-color: #fff"
-        />
-        <text class="iOS-nav-text" style="color: #fff">{{from}}</text>
-      </view>
-      <view class="NENU-navText">{{title}}</view>
-    </view>
-  </block>
-  <block wx:else>
-    <view
-      class="NENUnav"
-      style="background-color: {{color}}; padding-top: {{statusBarHeight}}px;"
-    >
-      <view
-        wx:if="{{action !== false}}"
-        class="iOS-nav-back-button"
-        hover-class="back-button-hover"
-        style="position: absolute; left: 0"
-        catch:tap="{{action}}"
-      >
-        <view
-          wx:if="{{action === 'redirect'}}"
-          class="iOS-back-arrow"
-          style="border-color: #fff"
-        />
-        <text class="iOS-nav-text" style="color: #fff">{{from}}</text>
-      </view>
-      <view class="NENU-navText">{{title}}</view>
-    </view>
-  </block>
-  <view style="width:100%;height:{{statusBarHeight + 40}}px;" />
-</template>
-<!-- ******************************************
-WEUI theme
-
-Version: V1.0
-Author: Mr.Hope
-********************************************* -->
-<!-- weui导航栏 -->
-<template name="weuiNav">
-  <view
-    class="weui-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
-    style="padding-top: {{statusBarHeight}}px;"
-  >
-    <view class="Android-titletext">{{title}}</view>
-    <view
-      wx:if="{{action !== false}}"
-      class="button Android-nav-back-button"
-      hover-class="back-button-hover"
-      hover-stay-time="100"
-      catch:tap="{{action === undefined? '$back': action}}"
-    >
-      <view
-        wx:if="{{action === undefined || action === 'redirect'}}"
-        class="weui-navigation-bar-backbutton"
-      />
-      <view class="Android-back-text">{{from}}</view>
-    </view>
-  </view>
-  <view
-    class="Android-nav-placeholder"
-    style="height:{{statusBarHeight + 44}}px;"
-  >
-    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
-  </view>
-  <view wx:if="{{desc}}" class="Android-head">
-    <view class="Android-nav-title">{{title}}</view>
-    <view wx:if="{{desc}}" class="Android-desc">
-      <text decode>{{desc}}</text>
-    </view>
   </view>
 </template>

@@ -1,0 +1,25 @@
+<template name="iOSNav">
+  <view class="iOS-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
+    <view wx:if="{{titleDisplay}}" class="iOS-titletext">{{nav.title}}</view>
+    <view
+      wx:if="{{nav.action !== false}}"
+      class="iOS-nav-back-button"
+      hover-class="back-button-hover"
+      hover-stay-time="100"
+      data-action="{{nav.action}}"
+      catch:tap="{{nav.action? navbar.action: 'back'}}"
+    >
+      <view wx:if="{{!nav.action}}" class="iOS-back-arrow" />
+      <text class="iOS-nav-text">{{firstPage? '主页': nav.from}}</text>
+    </view>
+  </view>
+  <view
+    wx:if="{{borderDisplay}}"
+    class="iOS-nav-border"
+    style="top:{{statusBarHeight + 44}}px;"
+  />
+  <view class="iOS-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
+    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
+  </view>
+  <view class="iOS-head">{{nav.title}}</view>
+</template>

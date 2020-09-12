@@ -1,7 +1,7 @@
 /* 更新日志 */
 
 import $register = require("wxpage");
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
 import { ComponentConfig, PageDataWithContent } from "../../../typings";
@@ -76,9 +76,8 @@ $register("log", {
     );
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({ title: "更新日志", path: "/settings/log/log" }),
 

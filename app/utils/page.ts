@@ -79,27 +79,12 @@ const resolveContent = (
  *
  * @param page 页面数据
  * @param option 页面传参
- * @param firstPage 是否是第一个页面
  *
  * @returns 处理之后的page
  */
-const disposePage = (
-  page: PageData,
-  option: PageOption,
-  firstOpen = false
-): PageData => {
-  page.statusBarHeight = globalData.info.statusBarHeight;
-
-  // 判断是否是首页或来自分享
-  if (firstOpen || option.scene || option.action == "redirect") {
-    // 左上角动作默认为重定向
-    page.from = "主页";
-    if (typeof page.action === "undefined") page.action = "redirect";
-    info(`${page.id} 页面由分享载入`);
-  } else {
-    page.id = option.id ? option.id : page.title; // 设置界面名称
-    page.from = option.from || "返回"; // 设置页面来源
-  }
+const disposePage = (page: PageData, option: PageOption): PageData => {
+  page.id = option.id ? option.id : page.title; // 设置界面名称
+  page.from = option.from || "返回"; // 设置页面来源
 
   if (page.content)
     page.content.forEach((element) => {
@@ -305,9 +290,7 @@ export const setPage = (
 ): void => {
   // 设置页面数据
   if (page) {
-    const pageData = handle
-      ? page
-      : disposePage(page, option, ctx.$state.firstOpen);
+    const pageData = handle ? page : disposePage(page, option);
 
     ctx.setData({
       color: getColor(pageData.grey),
@@ -341,7 +324,7 @@ export const setPage = (
     debug(`${option.id || "未知页面"} 未处理`);
     const pageData: PageData = handle
       ? ctx.data.page
-      : disposePage(ctx.data.page, option, ctx.$state.firstOpen);
+      : disposePage(ctx.data.page, option);
 
     // 设置页面数据
     ctx.setData({
@@ -535,53 +518,4 @@ export const loadOnlinePage = (
       }
     );
   } else error("no path");
-};
-
-/**
- * **简介:**
- *
- * - 描述: 导航栏动态改变
- *
- * - 用法: 在页面 `onPageScroll` 时调用
- *
- * - 性质: 同步函数
- *
- * @param option 组件参数
- * @param ctx 页面指针
- * @param headName 导航栏配置对象在 `data` 中的名称
- *
- * **案例:**
- *
- * ```ts
- *   onPageScroll(event) {
- *     changeNav(event, this);
- *   },
- * ```
- */
-export const changeNav = (
-  option: WechatMiniprogram.Page.IPageScrollOption,
-  // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-  ctx: PageInstanceWithPage,
-  headName?: string
-): void => {
-  const pageHead: PageData = headName ? ctx.data[headName] : ctx.data.page;
-
-  // 判断情况并赋值
-  const nav = {
-    borderDisplay: option.scrollTop >= 53,
-    titleDisplay: option.scrollTop > 42,
-    shadow: option.scrollTop > 1,
-  };
-
-  // 判断结果并更新界面数据
-  if (pageHead.titleDisplay !== nav.titleDisplay)
-    ctx.setData({
-      [`${headName || "page"}.titleDisplay`]: nav.titleDisplay,
-    });
-  else if (pageHead.borderDisplay !== nav.borderDisplay)
-    ctx.setData({
-      [`${headName || "page"}.borderDisplay`]: nav.borderDisplay,
-    });
-  else if (pageHead.shadow !== nav.shadow)
-    ctx.setData({ [`${headName || "page"}.shadow`]: nav.shadow });
 };

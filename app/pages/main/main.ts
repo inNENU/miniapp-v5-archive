@@ -1,13 +1,7 @@
 /* 主页 */
 import $register = require("wxpage");
 import { checkResUpdate } from "../../utils/app";
-import {
-  changeNav,
-  popNotice,
-  getColor,
-  setPage,
-  resolvePage,
-} from "../../utils/page";
+import { popNotice, getColor, setPage, resolvePage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 import { AppOption } from "../../app";
@@ -99,9 +93,8 @@ $register("main", {
     wx.stopPullDownRefresh();
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",

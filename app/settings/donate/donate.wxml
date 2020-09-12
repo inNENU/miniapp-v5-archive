@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}}">
-  <template is="nav" data="{{...page, theme}}" />
+  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
   <template is="components" data="{{content: page.content, theme}}" />
   <view class="qrcode-wrapper">
     <image

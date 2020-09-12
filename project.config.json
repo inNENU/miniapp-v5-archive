@@ -14,7 +14,7 @@
   },
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
-  "libVersion": "2.13.0",
+  "libVersion": "2.12.2",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.18.0",
   "qqappid": "1109559721",
@@ -226,6 +226,13 @@
           "id": 20,
           "name": "绩点计算",
           "pathName": "function/cal/cal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 21,
+          "name": "关于",
+          "pathName": "settings/about/about",
           "query": "",
           "scene": null
         }

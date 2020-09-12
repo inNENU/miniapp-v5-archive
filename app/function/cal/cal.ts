@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { changeNav, setPage } from "../../utils/page";
+import { setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
@@ -40,9 +40,8 @@ $register("cal", {
     setPage({ option, ctx: this });
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   /** 添加新的课程 */
   add() {

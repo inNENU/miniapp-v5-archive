@@ -2,7 +2,7 @@
 import $register = require("wxpage");
 import { resDownload } from "../../utils/app";
 import { remove, listFile } from "../../utils/file";
-import { changeNav, popNotice, setPage } from "../../utils/page";
+import { popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { PageDataWithContent } from "../../../typings";
@@ -79,9 +79,8 @@ $register("storage", {
     this.setStorage();
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

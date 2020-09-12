@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { AppOption } from "../../app";
 import { TimeLineItem } from "../../components/timeline/timeline";
@@ -59,9 +59,8 @@ $register("calendar", {
     popNotice("calendar");
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "东师校历",

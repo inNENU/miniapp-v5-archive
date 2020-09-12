@@ -1,5 +1,5 @@
 import * as $register from "wxpage";
-import { changeNav, popNotice, getColor } from "../../utils/page";
+import { popNotice, getColor } from "../../utils/page";
 import { AppOption } from "../../app";
 import { ensureJSON, getJSON } from "../../utils/file";
 
@@ -48,17 +48,13 @@ $register("wechat", {
       },
     });
 
-    if (getCurrentPages().length === 1)
-      this.setData({ "nav.action": "redirect", "nav.from": "主页" });
-
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     popNotice("wechat");
   },
 
-  onPageScroll(event) {
-    changeNav(event, this, "nav");
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage() {
     return { title: "校园公众号", path: `/function/wechat/wechat` };
@@ -78,10 +74,5 @@ $register("wechat", {
     this.$route(
       `/function/wechat/detail?path=${currentTarget.dataset.path}&from=校园公众号`
     );
-  },
-
-  redirect() {
-    if (getCurrentPages().length === 1) this.$switch("main");
-    else this.$back();
   },
 });

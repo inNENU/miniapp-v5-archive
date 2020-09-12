@@ -1,7 +1,7 @@
 /* 关于 */
 
 import $register = require("wxpage");
-import { changeNav, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { requestJSON, tip } from "../../utils/wx";
 import { AppOption } from "../../app";
 import { server } from "../../utils/config";
@@ -133,9 +133,8 @@ $register("about", {
     );
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "关于",
@@ -253,10 +252,5 @@ $register("about", {
    */
   testSwitch(value: boolean) {
     tip(`已${value ? "启用" : "关闭"}测试功能`);
-  },
-
-  /** 重定向到主页 */
-  redirect() {
-    this.$launch("main");
   },
 });

@@ -1,5 +1,5 @@
 import $register = require("wxpage");
-import { changeNav, popNotice, setPage } from "../../utils/page";
+import { popNotice, setPage } from "../../utils/page";
 import { AppOption } from "../../app";
 import { getJSON } from "../../utils/file";
 const { globalData } = getApp<AppOption>();
@@ -170,18 +170,14 @@ $register("PEcal", {
     if (typeof gradeIndex === "number")
       this.state.grade = this.data.grade.values[gradeIndex];
 
-    if (getCurrentPages().length === 1)
-      this.setData({ "nav.action": "redirect", "nav.from": "主页" });
-
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     // 设置通知
     popNotice("PEcal");
   },
 
-  onPageScroll(event) {
-    changeNav(event, this);
-  },
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  onPageScroll() {},
 
   onShareAppMessage: () => ({
     title: "体测计算器",
@@ -433,9 +429,5 @@ $register("PEcal", {
 
   close() {
     this.setData({ showScore: false });
-  },
-
-  redirect() {
-    this.$launch("main");
   },
 });

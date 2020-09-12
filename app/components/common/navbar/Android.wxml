@@ -1,0 +1,32 @@
+w<!-- Android导航栏 -->
+<template name="AndroidNav">
+  <view
+    class="Android-navigation-bar {{shadow? 'AndroidNavShadow': ''}}"
+    style="padding-top: {{statusBarHeight}}px;"
+  >
+    <view class="Android-titletext">{{nav.title}}</view>
+    <view
+      wx:if="{{nav.action !== false}}"
+      class="Android-nav-back-button"
+      hover-class="back-button-hover"
+      hover-stay-time="100"
+      data-action="{{nav.action}}"
+      catch:tap="{{nav.action? navbar.action: 'back'}}"
+    >
+      <view wx:if="{{!nav.action}}" class="Android-back-arrow" />
+      <view class="Android-back-text">{{firstPage? '主页': nav.from}}</view>
+    </view>
+  </view>
+  <view
+    class="Android-nav-placeholder"
+    style="height:{{statusBarHeight + 44}}px;"
+  >
+    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
+  </view>
+  <view wx:if="{{nav.desc}}" class="Android-head">
+    <view class="Android-nav-title">{{nav.title}}</view>
+    <view wx:if="{{nav.desc}}" class="Android-desc">
+      <text decode>{{nav.desc}}</text>
+    </view>
+  </view>
+</template>
