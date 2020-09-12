@@ -30,7 +30,7 @@
       <view class="desc">{{config.desc}}</view>
       <!-- 关注 -->
       <view
-        wx:if="{{follow}}"
+        wx:if="{{config.follow}}"
         class="follow"
         hover-class="hover"
         catch:tap="follow"

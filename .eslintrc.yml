@@ -10,6 +10,7 @@ globals:
   App: readonly
   Page: readonly
   Component: readonly
+  getRegExp: readonly
 
 extends:
   - eslint:recommended

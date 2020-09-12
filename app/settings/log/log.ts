@@ -21,6 +21,7 @@ $register("log", {
           tag: "list",
           header: "近期更新",
           content: [
+            { text: "V 3.7.0:\n · 重构资源更新逻辑" },
             { text: "V 3.6.0:\n · 图标支持热更新" },
             {
               text:

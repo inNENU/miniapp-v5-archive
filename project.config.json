@@ -14,15 +14,15 @@
   },
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
-  "libVersion": "2.12.2",
+  "libVersion": "2.13.0",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.18.0",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
     "urlCheck": true,
-    "es6": true,
-    "enhance": true,
+    "es6": false,
+    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -60,14 +60,6 @@
     "beforeUpload": ""
   },
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
     "plugin": {
       "current": -1,
       "list": []
@@ -79,6 +71,14 @@
       "current": -1,
       "list": []
     },
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    },
     "miniprogram": {
       "current": -1,
       "list": [
@@ -86,7 +86,7 @@
           "id": 0,
           "name": "分享",
           "pathName": "module/page",
-          "query": "id=guide/card/index",
+          "query": "id=guide/dorm/index",
           "scene": null
         },
         {
