@@ -60,7 +60,7 @@ $register("me", {
               icon: "donate",
               desc: "了解详情",
               url: "donate",
-              hidden: globalData.appID === "wx9ce37d9662499df3",
+              hidden: globalData.appID !== "wx33acb831ee1831a5",
             },
           ],
         },
