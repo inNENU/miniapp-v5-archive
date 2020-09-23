@@ -117,10 +117,10 @@
 </template>
 <!-- 错误文字 -->
 <template name="error">
-  <view class="errorCtn">
+  <view class="error-wrapper">
     <icon type="warn" size="80" />
-    <view class="errorText">很抱歉，界面遇到了问题!</view>
-    <view class="errorDesc">
+    <view class="text">很抱歉，界面遇到了问题!</view>
+    <view class="desc">
       <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
       <text>错误原因有以下几种可能:\n\n</text>
       <text> 1. 服务器负载过重；\n</text>
@@ -131,7 +131,7 @@
     </view>
   </view>
   <view class="donate-wrapper">
-    <navigator class="donate-button" url="/settings/donate/donate"
+    <navigator class="button" url="/settings/donate/donate"
       >支持开发者</navigator
     >
   </view>

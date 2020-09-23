@@ -31,6 +31,12 @@
   bottom: 0;
 }
 
+.button-hover {
+  background-color: var(--hover) !important;
+  color: inherit;
+  opacity: 0.7 !important;
+}
+
 /*****************
     加载中图标
 *****************/
@@ -230,26 +236,20 @@
 
 /* error */
 
-.errorCtn {
+.error-wrapper {
   padding: 20% 10%;
 }
 
-.errorText {
+.error-wrapper .text {
   margin: 10px 0;
   color: red;
   font-size: 18px;
 }
 
-.errorDesc {
+.error-wrapper .desc {
   color: #888;
   text-align: justify !important;
   font-size: 16px;
-}
-
-.button-hover {
-  background-color: var(--hover) !important;
-  color: inherit;
-  opacity: 0.7 !important;
 }
 
 /* donate */
@@ -259,7 +259,7 @@
   width: 100%;
 }
 
-.donate-button {
+.donate-wrapper .button {
   width: 60%;
   margin: 0 auto;
   padding: 10px;

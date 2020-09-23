@@ -45,7 +45,7 @@ $register("storage", {
             { text: "刷新介绍资源", button: "refreshIntro" },
             { text: "刷新功能资源", button: "refreshFunc" },
             { text: "刷新指南资源", button: "refreshGuide" },
-            { text: "刷新图片资源", button: "refreshIcon" },
+            { text: "刷新图标资源", button: "refreshIcon" },
           ],
         },
         {

@@ -18,36 +18,15 @@
 }
 
 /* paragraph */
-
-.NENU-title,
-.NENUhead {
-  text-align: left;
-}
-
 .NENU-title {
   min-height: 24px;
   padding: 9px 15px 3px 15px;
+
+  text-align: left;
   font-size: 18px;
   font-weight: 500;
 }
 
 .NENU-title + .NENU-title {
   padding-top: 2px;
-}
-
-.NENUhead {
-  padding: 9px 15px 3px 15px;
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.NENU-title + .NENUhead {
-  padding-top: 5px;
-}
-
-.grey .NENUhead {
-  min-height: 37px;
-  padding: 23px 15px 5px 15px;
-  color: var(--dark-grey);
-  font-size: 13px;
 }
