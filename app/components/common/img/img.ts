@@ -15,7 +15,7 @@ Component<{ config: ImageComponentConfig; images: string[] }>({
   methods: {
     /** 图片加载完成 */
     load(): void {
-      this.setData({ load: true });
+      this.setData({ loaded: true });
     },
 
     /** 图片加载出错 */

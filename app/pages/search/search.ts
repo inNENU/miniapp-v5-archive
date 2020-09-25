@@ -61,7 +61,7 @@ $register("search", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: "搜索",
-      query: `name=${this.state.name}&word=${this.state.value}`,
+      query: { name: this.state.name, word: this.state.value },
     };
   },
 

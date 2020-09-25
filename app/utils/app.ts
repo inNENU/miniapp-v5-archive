@@ -300,71 +300,73 @@ interface UpdateInfo {
  * @param globalData 小程序的全局数据
  */
 export const appUpdate = (globalData: GlobalData): void => {
-  const updateManager = wx.getUpdateManager();
+  if (wx.canIUse("getUpdateManager")) {
+    const updateManager = wx.getUpdateManager();
 
-  // 检查更新
-  updateManager.onCheckForUpdate(({ hasUpdate }) => {
-    // 找到更新，提示用户获取到更新
-    if (hasUpdate) tip("发现小程序更新，下载中...");
-  });
+    // 检查更新
+    updateManager.onCheckForUpdate(({ hasUpdate }) => {
+      // 找到更新，提示用户获取到更新
+      if (hasUpdate) tip("发现小程序更新，下载中...");
+    });
 
-  updateManager.onUpdateReady(() => {
-    // 请求配置文件
-    requestJSON<string>(
-      `resource/config/${globalData.appID}/version`,
-      (version) => {
-        // 请求配置文件
-        requestJSON(
-          `resource/config/${globalData.appID}/${version}/config`,
-          (data) => {
-            const { forceUpdate, reset } = data as UpdateInfo;
+    updateManager.onUpdateReady(() => {
+      // 请求配置文件
+      requestJSON<string>(
+        `resource/config/${globalData.appID}/version`,
+        (version) => {
+          // 请求配置文件
+          requestJSON(
+            `resource/config/${globalData.appID}/${version}/config`,
+            (data) => {
+              const { forceUpdate, reset } = data as UpdateInfo;
 
-            // 更新下载就绪，提示用户重新启动
-            wx.showModal({
-              title: "已找到新版本",
-              content: `新版本${version}已下载，请重启应用更新。${
-                reset ? "该版本会初始化小程序。" : ""
-              }`,
-              showCancel: !reset && !forceUpdate,
-              confirmText: "应用",
-              cancelText: "取消",
-              success: (res) => {
-                // 用户确认，应用更新
-                if (res.confirm) {
-                  // 需要初始化
-                  if (reset) {
-                    // 显示提示
-                    wx.showLoading({ title: "初始化中", mask: true });
+              // 更新下载就绪，提示用户重新启动
+              wx.showModal({
+                title: "已找到新版本",
+                content: `新版本${version}已下载，请重启应用更新。${
+                  reset ? "该版本会初始化小程序。" : ""
+                }`,
+                showCancel: !reset && !forceUpdate,
+                confirmText: "应用",
+                cancelText: "取消",
+                success: (res) => {
+                  // 用户确认，应用更新
+                  if (res.confirm) {
+                    // 需要初始化
+                    if (reset) {
+                      // 显示提示
+                      wx.showLoading({ title: "初始化中", mask: true });
 
-                    // 清除文件系统文件与数据存储
-                    listFile("").forEach((filePath) => {
-                      remove(filePath);
-                    });
-                    wx.clearStorageSync();
+                      // 清除文件系统文件与数据存储
+                      listFile("").forEach((filePath) => {
+                        remove(filePath);
+                      });
+                      wx.clearStorageSync();
 
-                    // 隐藏提示
-                    wx.hideLoading();
+                      // 隐藏提示
+                      wx.hideLoading();
+                    }
+
+                    // 应用更新
+                    updateManager.applyUpdate();
                   }
+                },
+              });
+            }
+          );
+        }
+      );
+    });
 
-                  // 应用更新
-                  updateManager.applyUpdate();
-                }
-              },
-            });
-          }
-        );
-      }
-    );
-  });
+    // 更新下载失败
+    updateManager.onUpdateFailed(() => {
+      // 提示用户网络出现问题
+      tip("小程序更新下载失败，请检查您的网络！");
 
-  // 更新下载失败
-  updateManager.onUpdateFailed(() => {
-    // 提示用户网络出现问题
-    tip("小程序更新下载失败，请检查您的网络！");
-
-    // 调试
-    warn("Upate App error because of Net Error");
-  });
+      // 调试
+      warn("Upate App error because of Net Error");
+    });
+  }
 };
 
 interface LoginCallback {

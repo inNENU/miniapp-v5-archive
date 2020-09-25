@@ -51,7 +51,7 @@ $register("page", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
-      query: `id=${this.data.page.id as string}`,
+      query: { id: this.data.page.id as string },
     };
   },
 

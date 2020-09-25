@@ -4,14 +4,14 @@
   <text>图片加载失败</text>
 </view>
 <!-- 加载中显示 -->
-<view wx:elif="{{!load}}" class="status-wrapper">
+<view wx:elif="{{!loaded}}" class="status-wrapper">
   <image class="loading" src="/icon/loading.svg" lazy-load />
   <text>加载中...</text>
 </view>
 <!-- 图片 -->
 <image
   class="img"
-  style="{{load? '':'height: 0px;'}}"
+  style="{{loaded? '':'height: 0px;'}}"
   lazy-load="{{config.lazy !== false}}"
   mode="{{config.imgMode || 'widthFix'}}"
   src="{{config.src}}"

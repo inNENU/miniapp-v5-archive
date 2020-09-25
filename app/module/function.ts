@@ -24,7 +24,7 @@ $register("function", {
     path: "/module/function/function?action=all",
   }),
 
-  onShareTimeline: () => ({ title: "功能页", query: "action=all" }),
+  onShareTimeline: () => ({ title: "功能页", query: { action: "all" } }),
 
   /** 初始化小程序 */
   resetApp() {

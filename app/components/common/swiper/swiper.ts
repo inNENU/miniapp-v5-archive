@@ -9,10 +9,11 @@ Component({
   methods: {
     change(event: WechatMiniprogram.SwiperChange): void {
       this.setData({ current: event.detail.current });
-      this.triggerEvent("change", event);
+
+      this.triggerEvent("change", event as any);
     },
     animation(event: WechatMiniprogram.SwiperAnimationFinish): void {
-      this.triggerEvent("animation", event);
+      this.triggerEvent("animation", event as any);
     },
   },
 });
