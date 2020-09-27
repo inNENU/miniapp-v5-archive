@@ -8,6 +8,14 @@
       },
       {
         "type": "suffix",
+        "value": "scss"
+      },
+      {
+        "type": "suffix",
+        "value": "ts"
+      },
+      {
+        "type": "suffix",
         "value": "bak"
       }
     ]
