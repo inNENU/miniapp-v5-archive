@@ -7,6 +7,8 @@
     "server/"
   ],
   "scripts": {
+    "watch": "gulp watch && tsc --watch",
+    "build": "gulp build && tsc",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
     "commit": "git cz",
     "doc": "typedoc --options ./typedoc.json",
@@ -14,8 +16,6 @@
     "lint:check": "prettier --check . && prettier --check --parser babel-flow **/*.wxs && prettier --check --parser html **/*.wxml && eslint --ext .ts,.wxs . && stylelint **/*.wxss",
     "ts:watch": "tsc --watch",
     "ts:compile": "tsc",
-    "watch": "gulp watch && tsc --watch",
-    "build": "gulp build && tsc",
     "upgrade": "ncu -u && yarn install && yarn upgrade"
   },
   "repository": {

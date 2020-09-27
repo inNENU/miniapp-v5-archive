@@ -6,7 +6,7 @@
   root-background-color="{{color.bgColor}}"
 />
 
-<view class="iOS grey">
+<view class="ios grey">
   <view
     class="back-button"
     style="top: {{statusBarHeight + 5}}px;"

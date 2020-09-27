@@ -29,7 +29,7 @@ $register("setting", {
               text: "主题设置",
               key: "themeNum",
               single: true,
-              pickerValue: ["iOS", "Android", "NENU", "weui"],
+              pickerValue: ["ios", "android", "nenu", "weui"],
               picker: "setTheme",
             },
           ],

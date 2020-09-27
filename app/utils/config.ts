@@ -11,7 +11,7 @@ export interface AppOption {
 
 /** 小程序配置 */
 export const appOption: AppOption = {
-  theme: "iOS",
+  theme: "ios",
   themeNum: 0,
   /** 是否开启夜间模式 */
   darkmode: false,

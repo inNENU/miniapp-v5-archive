@@ -1,4 +1,4 @@
-.Android-navigation-bar {
+.android-navigation-bar {
   position: fixed;
   z-index: 1000;
 
@@ -22,17 +22,17 @@
       background-color: #10110b;
     }
   }
-}
 
-.AndroidNavShadow {
-  box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
+  &.shadow {
+    box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
 
-  @media (prefers-color-scheme: dark) {
-    box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+    @media (prefers-color-scheme: dark) {
+      box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+    }
   }
 }
 
-.Android-nav-placeholder {
+.android-nav-placeholder {
   position: relative;
 
   width: 100%;
@@ -53,7 +53,7 @@
   }
 }
 
-.Android-titletext {
+.android-titletext {
   position: absolute;
   z-index: 100;
 
@@ -64,7 +64,7 @@
   line-height: 1;
 }
 
-.Android-nav-back-button {
+.android-nav-back-button {
   position: absolute;
   left: 0;
   z-index: 101;
@@ -81,7 +81,7 @@
   line-height: 2.4;
 }
 
-.Android-back-arrow {
+.android-back-arrow {
   width: 11px;
   height: 11px;
   border-width: 0 0 3px 3px;
@@ -95,7 +95,7 @@
   }
 }
 
-.Android-back-text {
+.android-back-text {
   overflow: hidden;
   font-size: 14px;
   text-overflow: ellipsis;
@@ -106,17 +106,17 @@
   }
 }
 
-.Android-head {
+.android-head {
   padding: 25px 40px;
 }
 
-.Android-nav-title {
+.android-nav-title {
   font-weight: 400;
   font-size: 20px;
   text-align: left;
 }
 
-.Android-desc {
+.android-desc {
   margin-top: 5px;
   color: #888;
   font-size: 14px;

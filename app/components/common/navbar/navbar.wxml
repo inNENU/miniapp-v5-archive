@@ -1,6 +1,6 @@
-<import src="./iOS.wxml" />
-<import src="./Android.wxml" />
-<import src="./NENU.wxml" />
+<import src="./ios.wxml" />
+<import src="./android.wxml" />
+<import src="./nenu.wxml" />
 <import src="./weui.wxml" />
 <wxs src="./navbar.wxs" module="navbar" />
 

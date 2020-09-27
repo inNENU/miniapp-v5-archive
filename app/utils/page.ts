@@ -211,20 +211,20 @@ export const getColor = (grey = false): ColorConfig => {
       case "Andriod":
         temp = ["#10110b", "#10110b", "#10110b"];
         break;
-      case "iOS":
+      case "ios":
         temp = ["#000000", "#000000", "#000000"];
         break;
-      case "NENU":
+      case "nenu":
       default:
         temp = ["#070707", "#070707", "#070707"];
     }
   else if (globalData.darkmode && !grey)
     switch (globalData.theme) {
-      case "iOS":
+      case "ios":
         temp = ["#000000", "#000000", "#000000"];
         break;
       case "Andriod":
-      case "NENU":
+      case "nenu":
       default:
         temp = ["#000000", "#000000", "#000000"];
     }
@@ -233,10 +233,10 @@ export const getColor = (grey = false): ColorConfig => {
       case "Andriod":
         temp = ["#f8f8f8", "#f8f8f8", "#f8f8f8"];
         break;
-      case "NENU":
+      case "nenu":
         temp = ["#f0f0f0", "#f0f0f0", "#f0f0f0"];
         break;
-      case "iOS":
+      case "ios":
       default:
         temp = ["#f4f4f4", "#efeef4", "#efeef4"];
     }
@@ -245,10 +245,10 @@ export const getColor = (grey = false): ColorConfig => {
       case "Andriod":
         temp = ["#f8f8f8", "#f8f8f8", "#f8f8f8"];
         break;
-      case "NENU":
+      case "nenu":
         temp = ["#ffffff", "#ffffff", "#ffffff"];
         break;
-      case "iOS":
+      case "ios":
       default:
         temp = ["#f4f4f4", "#ffffff", "#ffffff"];
     }

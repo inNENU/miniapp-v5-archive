@@ -1,10 +1,10 @@
 /*
 
- * @Description: iOS主题
+ * @Description: ios主题
  * @Version: 2.0
  */
 
-.iOS {
+.ios {
   width: 100%;
   min-height: 100%;
 
@@ -14,11 +14,11 @@
   text-align: center;
 }
 
-.iOS.grey {
+.ios.grey {
   background-color: var(--bgcolor-grey);
 }
 
-.iOS-title {
+.ios-title {
   max-width: 517px;
   min-height: 24px;
   margin: 0 auto;
@@ -30,17 +30,17 @@
 }
 
 @media (min-width: 768px) {
-  .iOS-title {
+  .ios-title {
     min-height: 26px;
     font-size: 24px;
   }
 }
 
-.grey .iOS-title {
+.grey .ios-title {
   max-width: unset;
   padding-left: 30px;
 }
 
-.iOS-title + .iOS-title {
+.ios-title + .ios-title {
   padding-top: 2px;
 }

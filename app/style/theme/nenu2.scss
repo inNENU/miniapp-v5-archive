@@ -1,24 +1,24 @@
-/* ---NENU theme made by MrHope--- */
+/* ---nenu theme made by MrHope--- */
 
-.NENU {
+.nenu {
   width: 100%;
   min-height: 100%;
   background-color: var(--bgcolor);
   color: var(--text-color);
 }
 
-.NENU.grey {
+.nenu.grey {
   background-color: #f0f0f0;
 }
 
 @media (prefers-color-scheme: dark) {
-  .NENU.grey {
+  .nenu.grey {
     background-color: #0f0f0f;
   }
 }
 
 /* paragraph */
-.NENU-title {
+.nenu-title {
   min-height: 24px;
   padding: 9px 15px 3px;
 
@@ -27,6 +27,6 @@
   text-align: left;
 }
 
-.NENU-title + .NENU-title {
+.nenu-title + .nenu-title {
   padding-top: 2px;
 }

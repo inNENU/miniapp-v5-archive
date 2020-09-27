@@ -1,6 +1,6 @@
-/* NENU nav */
-.NENUnav,
-.NENUnav2 {
+/* nenu nav */
+.nenunav,
+.nenunav2 {
   position: fixed;
   z-index: 99;
 
@@ -14,7 +14,7 @@
   color: #fff;
 }
 
-.NENUnav {
+.nenunav {
   justify-content: flex-start;
 
   box-sizing: content-box;
@@ -24,7 +24,7 @@
   border-bottom: 1rpx solid var(--bgcolor-grey);
 }
 
-.NENU-navText {
+.nenu-nav-title {
   position: absolute;
 
   width: 100%;
@@ -32,23 +32,4 @@
   font-weight: 500;
   font-size: 18px;
   text-align: center;
-}
-
-.NENUNavTitle {
-  position: absolute;
-
-  max-width: 517px;
-  padding: 6.5px 9px;
-  border: 1rpx solid rgba(255, 255, 255, 0.15);
-  border-radius: 17px;
-
-  background-color: rgba(0, 0, 0, 0.15);
-  color: #fff;
-
-  font-size: 18px;
-  line-height: 1;
-}
-
-.NENUHead .back-icon {
-  color: var(--text-color);
 }

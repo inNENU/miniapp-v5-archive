@@ -1,19 +1,19 @@
-<!-- weui导航栏 -->
-<template name="weuiNav">
+<!-- android导航栏 -->
+<template name="androidNav">
   <view
-    class="weui-navigation-bar {{shadow? 'androidNavShadow': ''}}"
+    class="android-navigation-bar {{shadow? 'shadow': ''}}"
     style="padding-top: {{statusBarHeight}}px;"
   >
     <view class="android-titletext">{{nav.title}}</view>
     <view
       wx:if="{{nav.action !== false}}"
-      class="button android-nav-back-button"
+      class="android-nav-back-button"
       hover-class="back-button-hover"
       hover-stay-time="100"
       data-action="{{nav.action}}"
       catch:tap="{{nav.action? navbar.action: 'back'}}"
     >
-      <view wx:if="{{!nav.action}}" class="weui-navigation-bar-backbutton" />
+      <view wx:if="{{!nav.action}}" class="android-back-arrow" />
       <view class="android-back-text">{{firstPage? '主页': nav.from}}</view>
     </view>
   </view>

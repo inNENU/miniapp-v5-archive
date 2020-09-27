@@ -178,15 +178,15 @@ export const appInit = (): void => {
     switch (platform) {
       case "ios":
       case "windows":
-        theme = "iOS";
+        theme = "ios";
         num = 0;
         break;
       case "android":
-        theme = "Android";
+        theme = "android";
         num = 1;
         break;
       default:
-        theme = "iOS";
+        theme = "ios";
         num = 0;
     }
 

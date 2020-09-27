@@ -8,7 +8,7 @@
 />
 <template is="page" data="{{page, theme, darkmode}}" />
 <view
-  class="password-mask {{debug? 'fadeIn': 'fadeOut'}}"
+  class="password-mask {{debug? 'fade-in': 'fade-out'}}"
   style="top: {{debug? 0: '100%'}};"
   catch:tap="cancelInput"
 />

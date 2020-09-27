@@ -1,6 +1,6 @@
 <import src="/components/template" />
 <view
-  class="iOS grey"
+  class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
 >
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />

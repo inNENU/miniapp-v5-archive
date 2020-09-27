@@ -1,11 +1,11 @@
-/* ---Android theme made by Mr.Hope--- */
+/* ---android theme made by Mr.Hope--- */
 
 /* V 1.0.0 */
 
 /* 安卓容器 */
 
-.Android,
-.Androidgrey {
+.android,
+.androidgrey {
   width: 100%;
   min-height: 100%;
 
@@ -16,18 +16,18 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  .Android {
+  .android {
     background-color: #000;
   }
 }
 
 @media (prefers-color-scheme: dark) {
-  .Android.grey {
+  .android.grey {
     background-color: #10110b;
   }
 }
 
-.Android-title {
+.android-title {
   margin: 0.66em 15px 0.34em;
   font-weight: 500;
   font-size: 18px;

@@ -179,16 +179,16 @@
 
 /* animation */
 
-.fadeIn,
-.fadeOut {
+.fade-in,
+.fade-out {
   transition: opacity 0.8s !important;
 }
 
-.fadeIn {
+.fade-in {
   opacity: 1 !important;
 }
 
-.fadeOut {
+.fade-out {
   opacity: 0 !important;
 }
 
