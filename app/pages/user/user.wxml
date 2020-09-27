@@ -8,12 +8,12 @@
 />
 <view class="{{theme}} grey">
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
-  <view class="infoCtn">
+  <view class="info-wrapper">
     <view class="avator">
       <open-data type="userAvatarUrl" />
     </view>
     <view>
-      <view class="nickName">
+      <view class="nickname">
         <open-data type="userNickName" />
       </view>
       <view class="detail">

@@ -47,15 +47,7 @@ rules:
 
   declaration-empty-line-before: null
 
-  declaration-property-value-disallowed-list:
-    border: ["none"]
-    border-top: ["none"]
-    border-right: ["none"]
-    border-bottom: ["none"]
-    border-left: ["none"]
   function-comma-space-after: always-single-line
-
-  function-parentheses-space-inside: never
 
   function-url-quotes: always
 
@@ -101,7 +93,7 @@ rules:
 
   selector-max-compound-selectors: 3
 
-  selector-max-id: 0
+  selector-max-id: 1
 
   selector-no-qualifying-type: true
 

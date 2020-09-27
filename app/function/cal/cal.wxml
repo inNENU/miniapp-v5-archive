@@ -9,7 +9,7 @@
 <view class="{{theme}}">
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
   <template is="nav" data="{{...nav, theme}}" />
-  <view class="gradeHeader">
+  <view class="grade-header">
     <scroll-view scroll-x class="picker">
       新计算
       <button />
@@ -17,13 +17,13 @@
     <view class="edit" catch:tap="edit">{{editText}}</view>
   </view>
   <view class="gradeinputerF">
-    <view wx:for="{{grade}}" class="courseContainer" id="{{item.id}}">
+    <view wx:for="{{grade}}" class="course-wrapper" id="{{item.id}}">
       <button
         class="sort {{display? '': 'hide'}}"
         id="sort{{item.id}}"
         catch:touchmove="sort"
       >
-        <text class="sortText">↕</text>
+        <text class="sort-text">↕</text>
       </button>
       <input
         class="course"
@@ -69,15 +69,15 @@
         data-index="{{index}}"
         catch:tap="remove"
       >
-        <text class="removeText">-</text>
+        <text class="remove-text">-</text>
       </button>
     </view>
-    <view class="btnCtn">
+    <view class="btn-wrapper">
       <button catch:tap="add">新增</button>
       <button catch:tap="calculate">计算</button>
     </view>
   </view>
-  <view wx:if="{{gradePointAverage}}" class="gradeDisplay">
+  <view wx:if="{{gradePointAverage}}" class="grade-display">
     总学分:{{totalCredit}}\n 平均绩点: {{gradePointAverage}}
   </view>
 </view>

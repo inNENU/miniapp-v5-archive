@@ -3,37 +3,37 @@
   margin: 0 auto;
   padding: 0 15px;
   text-align: left;
-}
 
-.donate-list-wrapper .title {
-  padding-top: 8px;
-  font-weight: bold;
-  font-size: 19px;
-  line-height: 2;
-}
+  .title {
+    padding-top: 8px;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 2;
+  }
 
-.donate-list-wrapper .year {
-  padding: 4px 0;
-  font-weight: bold;
-  font-size: 17px;
-  line-height: 2;
-}
+  .year {
+    padding: 4px 0;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 2;
+  }
 
-.donate-list-wrapper .item {
-  font-size: 15px;
-  line-height: 1.5;
-}
+  .item {
+    font-size: 15px;
+    line-height: 1.5;
+  }
 
-.donate-list-wrapper .sum,
-.donate-list-wrapper .result {
-  font-size: 16px;
-  line-height: 1.5;
-}
+  .sum,
+  .result {
+    font-size: 16px;
+    line-height: 1.5;
+  }
 
-.donate-list-wrapper .result {
-  color: #09bb07;
-}
+  .result {
+    color: #09bb07;
 
-.donate-list-wrapper .result.negative {
-  color: #e64340;
+    &.negative {
+      color: #e64340;
+    }
+  }
 }

@@ -46,7 +46,7 @@
     >
     <view class="tip" catch:tap="refresh">{{weather.tips[tipIndex]}}</view>
   </view>
-  <view class="forecast borderB">
+  <view class="forecast bb">
     <view class="item">
       <view class="top">
         <text class="date">今天</text>

@@ -9,23 +9,19 @@
 
 .video-info {
   padding: 15px;
-}
-
-.video-info .name,
-.video-info .author {
   color: var(--dark-grey);
   font-family: FZSSJW, -apple-system-font, "PingFang SC", "Helvetica Neue",
     Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
-}
 
-.video-info .name {
-  margin-bottom: 10px;
-  font-weight: 500;
-  font-size: 28px;
-}
+  .name {
+    margin-bottom: 10px;
+    font-weight: 500;
+    font-size: 28px;
+  }
 
-.video-info .author {
-  font-size: 16px;
+  .author {
+    font-size: 16px;
+  }
 }
 
 .player {
@@ -44,48 +40,45 @@
   border-top-right-radius: 12px;
 
   box-shadow: 0 -2px 5px rgba(219, 218, 223, 0.95);
-}
 
-@media (prefers-color-scheme: dark) {
-  .video-list {
+  @media (prefers-color-scheme: dark) {
     box-shadow: 0 -2px 5px rgba(36, 37, 32, 0.95);
   }
-}
 
-.video-list .title {
-  margin: 0 auto;
-  padding: 8px 15px 4px;
+  .title {
+    margin: 0 auto;
+    padding: 8px 15px 4px;
 
-  font-weight: 500;
-  font-size: 20px;
-  text-align: left;
-}
-
-.video-list .item {
-  width: 100%;
-  padding: 8px 15px;
-  text-align: left;
-}
-
-.video-list .name {
-  color: #333;
-  font-size: 16px;
-  font-family: FZSSJW, -apple-system-font, "PingFang SC", "Helvetica Neue",
-    Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
-}
-
-@media (prefers-color-scheme: dark) {
-  .video-list .name {
-    color: #ccc;
+    font-weight: 500;
+    font-size: 20px;
+    text-align: left;
   }
-}
 
-.video-list .author {
-  color: #888;
-  font-size: 26rpx;
-}
+  .item {
+    width: 100%;
+    padding: 8px 15px;
+    text-align: left;
+  }
 
-.video-list .active .name,
-.video-list .active .author {
-  color: #3478f7;
+  .name {
+    color: #333;
+    font-size: 16px;
+    font-family: FZSSJW, -apple-system-font, "PingFang SC", "Helvetica Neue",
+      Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
+    @media (prefers-color-scheme: dark) {
+      color: #ccc;
+    }
+  }
+
+  .author {
+    color: #888;
+    font-size: 26rpx;
+  }
+
+  .active {
+    .name,
+    .author {
+      color: #3478f7;
+    }
+  }
 }

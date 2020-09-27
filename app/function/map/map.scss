@@ -22,20 +22,18 @@
   box-shadow: -1px 3px 5px #dbdadfd3;
 
   font-size: 28px;
-}
 
-@media (prefers-color-scheme: dark) {
-  .scale-button {
+  @media (prefers-color-scheme: dark) {
     box-shadow: -1px 3px 5px #4b4d47d3;
   }
-}
 
-.scale-button.zoomin {
-  bottom: 140px;
-}
+  &.zoomin {
+    bottom: 140px;
+  }
 
-.scale-button.zoomout {
-  bottom: 90px;
+  &.zoomout {
+    bottom: 90px;
+  }
 }
 
 /* 分类按钮 */
@@ -51,17 +49,15 @@
 
   background-color: var(--bgcolor);
   box-shadow: -1px 3px 5px #dbdadfd3;
-}
 
-@media (prefers-color-scheme: dark) {
-  .point-button {
+  @media (prefers-color-scheme: dark) {
     box-shadow: -1px 3px 5px #4b4d47d3;
   }
-}
 
-.point-button .icon {
-  width: 100%;
-  height: 100%;
+  .icon {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* 选择按钮 */
@@ -76,19 +72,19 @@
   border-radius: 4px;
 
   background-color: var(--bgcolor);
-}
 
-.select-wrapper .button {
-  padding: 5px 15px;
-  line-height: 1.3rem;
-}
+  .button {
+    padding: 5px 15px;
+    line-height: 1.3rem;
 
-.select-wrapper .button.borderB:last-child::after {
-  display: none;
-}
+    &.bb:last-child::after {
+      display: none;
+    }
 
-.select-wrapper .button.active {
-  color: #3478f7;
+    &.active {
+      color: #3478f7;
+    }
+  }
 }
 
 /*****************
@@ -113,10 +109,8 @@
 
   background-color: var(--bgcolor);
   box-shadow: 0 -2px 5px rgba(219, 218, 223, 0.95);
-}
 
-@media (prefers-color-scheme: dark) {
-  .tab {
+  @media (prefers-color-scheme: dark) {
     box-shadow: 0 -2px 5px rgba(45, 44, 49, 0.95);
   }
 }
@@ -125,11 +119,11 @@
 .locate-button {
   padding: 1px;
   border-radius: 3px;
-}
 
-.locate-button .icon {
-  width: 28px;
-  height: 28px;
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 /* switch组件 */
@@ -140,22 +134,22 @@
   border-radius: 5px;
 
   background-color: var(--bgcolor);
-}
 
-.switch .item {
-  display: inline-block;
+  .item {
+    display: inline-block;
 
-  width: 50%;
-  height: 100%;
+    width: 50%;
+    height: 100%;
 
-  color: #3478f7;
+    color: #3478f7;
 
-  line-height: 35px;
-}
+    line-height: 35px;
 
-.switch .item.active {
-  background-color: #3478f7;
-  color: var(--bgcolor);
+    &.active {
+      background-color: #3478f7;
+      color: var(--bgcolor);
+    }
+  }
 }
 
 /* list 按钮 */
@@ -163,11 +157,11 @@
   padding: 2px 4px;
   border-radius: 4px;
   background-color: transparent;
-}
 
-.list-button .icon {
-  width: 28px;
-  height: 28px;
+  .icon {
+    width: 28px;
+    height: 28px;
+  }
 }
 
 .point {
@@ -175,33 +169,33 @@
   padding: 6px 0;
   line-height: 1.4;
   text-align: left;
-}
 
-.point::after {
-  content: " ";
+  &::after {
+    content: " ";
 
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
 
-  height: 1px;
-  border-bottom: 1px solid var(--border-color);
+    height: 1px;
+    border-bottom: 1px solid var(--border-color);
 
-  transform: scaleY(0.4);
-  transform-origin: 0 100%;
-}
+    transform: scaleY(0.4);
+    transform-origin: 0 100%;
+  }
 
-.point:last-child::after {
-  display: none;
-}
+  &:last-child::after {
+    display: none;
+  }
 
-.point .name {
-  color: var(--grey3);
-  font-size: 16px;
-}
+  .name {
+    color: var(--grey3);
+    font-size: 16px;
+  }
 
-.point .desc {
-  color: var(--dark-grey);
-  font-size: 14px;
+  .desc {
+    color: var(--dark-grey);
+    font-size: 14px;
+  }
 }

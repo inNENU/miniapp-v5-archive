@@ -4,18 +4,12 @@ const sass = require("gulp-sass");
 const PluginError = require("plugin-error");
 const through = require("through2");
 
-// `clean` 函数并未被导出（export），因此被认为是私有任务（private task）。
-// 它仍然可以被用在 `series()` 组合中。
-const clean = (cb) => {
-  // body omitted
-  cb();
-};
-
 const buildWXSS = () =>
   src("app/**/*.scss")
     .pipe(
       sass({
         outputStyle: "expanded",
+        // hack for remaining '@import'
         importer: (url, _prev, done) => {
           if (url.includes(".css")) return null;
           done({ contents: `@import "${url}.css"` });
@@ -38,9 +32,10 @@ const buildWXSS = () =>
           return cb();
         }
 
-        var content = file.contents
+        const content = file.contents
           .toString()
           .replace(/@import url\((.*?)\.css\)/gu, '@import "$1.wxss"');
+
         file.contents = Buffer.from(content);
 
         this.push(file);
@@ -53,8 +48,9 @@ const buildWXSS = () =>
 const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
 
+const watchCommand = parallel(watchWXSS);
 const build = parallel(buildWXSS);
 
-exports.watch = watchWXSS;
+exports.watch = watchCommand;
 exports.build = build;
-exports.default = series(clean, build);
+exports.default = build;

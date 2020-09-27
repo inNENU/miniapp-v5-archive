@@ -10,7 +10,7 @@
     </view>
   </view>
   <view class="score-wrapper">
-    <view class="BMI">
+    <view class="bmi">
       <view class="title">BMI:</view>
       <view class="result">{{bmi.score}} {{bmi.state}}</view>
     </view>

@@ -5,55 +5,55 @@
 
 .tab-bar-wrapper {
   position: absolute;
-  z-index: 1000;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
+  z-index: 1000;
 
   width: 100%;
 }
 
 .tab-bar {
   display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
 
   min-width: 100%;
   padding: 0 4px;
+
   background: var(--bgcolor);
 
   white-space: nowrap;
 
-  flex-wrap: nowrap;
-  align-items: center;
-
   transition: all 0.3s;
-}
 
-.tab-bar .item {
-  padding: 0 10px;
-  color: var(--grey3);
-  flex: 1 0;
-}
+  .item {
+    flex: 1 0;
+    padding: 0 10px;
+    color: var(--grey3);
 
-.tab-bar .item .text {
-  padding: 2px 0;
-  border-bottom: 2px solid var(--bgcolor);
-}
+    .text {
+      padding: 2px 0;
+      border-bottom: 2px solid var(--bgcolor);
+    }
 
-.tab-bar .item.active {
-  color: var(--text-color);
-  font-size: 20px;
-  font-weight: bold;
-}
+    &.active {
+      color: var(--text-color);
+      font-weight: bold;
+      font-size: 20px;
 
-.tab-bar .item.active .text {
-  border-color: #07c160;
+      .text {
+        border-color: #07c160;
+      }
+    }
+  }
 }
 
 .page-wrapper {
   height: 200px;
-}
 
-.page-wrapper .tab-page {
-  -webkit-overflow-scrolling: touch;
-  overflow-y: scroll;
+  .tab-page {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
 }

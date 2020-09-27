@@ -15,66 +15,66 @@
   box-shadow: 1px 1px 2px 3px var(--card-shadow);
 
   text-align: left;
-}
 
-.search-item > .title {
-  margin: 4px 8px;
-  font-weight: 500;
-  font-size: 18px;
-  text-align: left;
-}
+  > .title {
+    margin: 4px 8px;
+    font-weight: 500;
+    font-size: 18px;
+    text-align: left;
+  }
 
-.search-item .list > .title {
-  margin: 4px 8px;
-  color: var(--grey3);
-  font-weight: 500;
-  font-size: 16px;
-}
+  .list > .title {
+    margin: 4px 8px;
+    color: var(--grey3);
+    font-weight: 500;
+    font-size: 16px;
+  }
 
-.search-item .list .heading {
-  margin: 4px 8px;
-  color: var(--dark-grey);
-  font-size: 16px;
-}
+  .heading {
+    margin: 4px 8px;
+    color: var(--dark-grey);
+    font-size: 16px;
+  }
 
-.search-item .list .text {
-  overflow: hidden;
+  .text {
+    overflow: hidden;
 
-  margin: 4px 8px;
+    margin: 4px 8px;
 
-  color: var(--grey);
+    color: var(--grey);
 
-  font-size: 14px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
+    font-size: 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-.search-item .list .doc {
-  display: flex;
-  align-items: center;
-  margin: 4px 8px;
-  font-size: 14px;
-}
+  .doc {
+    display: flex;
+    align-items: center;
+    margin: 4px 8px;
+    font-size: 14px;
 
-.search-item .list .doc .icon {
-  width: 16px;
-  height: 16px;
-}
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
 
-.search-item .list .card {
-  margin: 6px 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  background-color: var(--bgcolor-grey);
-}
+  .card {
+    margin: 6px 8px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background-color: var(--bgcolor-grey);
 
-.search-item .list .card .title {
-  color: var(--dark-grey);
-  font-size: 15px;
-}
+    .title {
+      color: var(--dark-grey);
+      font-size: 15px;
+    }
 
-.search-item .list .card .desc {
-  margin-top: 4px;
-  color: var(--grey);
-  font-size: 13px;
+    .desc {
+      margin-top: 4px;
+      color: var(--grey);
+      font-size: 13px;
+    }
+  }
 }

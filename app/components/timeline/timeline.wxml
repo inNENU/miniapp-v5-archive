@@ -1,4 +1,4 @@
-<view class="timelineCtn">
+<view class="timeline-wrapper">
   <!-- 时间线容器 -->
   <view class="timeline timeline-{{alternate? 'alternate': 'left'}}">
     <!-- 每一个时间线项目 -->

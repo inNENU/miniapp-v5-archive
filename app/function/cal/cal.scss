@@ -8,7 +8,7 @@ input {
   font-size: 32rpx;
 }
 
-.gradeHeader {
+.grade-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -24,7 +24,7 @@ input {
 
 .edit {
   width: 15%;
-  color: blue;
+  color: #00f;
   text-align: center;
 }
 
@@ -35,7 +35,7 @@ input {
   width: 100%;
 }
 
-.courseContainer {
+.course-wrapper {
   display: flex;
   justify-content: space-between;
   width: 90%;
@@ -54,13 +54,13 @@ input {
   max-width: 15%;
 }
 
-.btnCtn {
+.btn-wrapper {
   display: flex;
   justify-content: space-between;
   width: 90%;
 }
 
-.gradeDisplay {
+.grade-display {
   width: 100%;
   text-align: center;
 }
@@ -78,7 +78,7 @@ input {
   border: 0;
   border-radius: 50%;
 
-  background-color: red;
+  background-color: #f00;
 }
 
 .sort {
@@ -97,16 +97,16 @@ input {
   background-color: #3f3;
 }
 
-.removeText {
+.remove-text {
   margin-top: -10rpx;
-  color: white;
+  color: #fff;
   font-weight: 500;
   font-size: 60rpx;
 }
 
-.sortText {
+.sort-text {
   margin-top: 0rpx;
-  color: white;
+  color: #fff;
   font-weight: 500;
   font-size: 32rpx;
 }

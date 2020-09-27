@@ -56,7 +56,7 @@
   <view
     wx:for="{{category}}"
     wx:key="path"
-    class="button{{selectItem === item.path? ' active': ''}} borderB"
+    class="button{{selectItem === item.path? ' active': ''}} bb"
     hover-class="button-hover"
     data-index="{{index}}"
     catch:tap="select"

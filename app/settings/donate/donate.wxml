@@ -9,9 +9,9 @@
 <view class="{{theme}}">
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
   <template is="components" data="{{content: page.content, theme}}" />
-  <view class="qrcode-wrapper">
+  <view class="qrcode">
     <image
-      class="qrcode"
+      class="item"
       lazy-load
       mode="widthFix"
       src="https://mp.innenu.com/img/donate/Wechat.jpg"
@@ -19,7 +19,7 @@
       catch:tap="save"
     />
     <image
-      class="qrcode"
+      class="item"
       lazy-load
       mode="widthFix"
       src="https://mp.innenu.com/img/donate/Alipay.jpg"

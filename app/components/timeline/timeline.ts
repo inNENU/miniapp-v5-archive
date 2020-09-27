@@ -28,6 +28,7 @@ Component({
   lifetimes: {
     attached(): void {
       wx.onWindowResize(this.updateTimeline);
+      this.updateTimeline();
     },
 
     detached(): void {
