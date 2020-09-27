@@ -1,0 +1,44 @@
+.footer-wrapper {
+  max-width: var(--max-width);
+  margin: auto auto 0;
+  padding: 10px 15px 8px;
+  padding-bottom: env(safe-area-inset-bottom);
+
+  color: #86868b;
+
+  font-size: 12px;
+  line-height: 1.33337;
+  letter-spacing: -0.01em;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    font-size: 13px;
+  }
+
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 10px;
+
+    font-weight: 300;
+    font-size: 10px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+
+    @media (min-width: 768px) {
+      font-size: 12px;
+    }
+  }
+
+  .copyright {
+    text-align: center;
+  }
+}

@@ -1,0 +1,54 @@
+.list-wrapper .picker {
+  display: block;
+
+  .desc {
+    position: absolute;
+    top: 0;
+    right: 15px;
+    padding: 10px 0;
+  }
+}
+
+.picker-view {
+  height: 160px;
+
+  .column {
+    flex: none;
+    min-width: 50px;
+    background-color: var(--bgcolor-dark);
+    color: var(--text-color);
+
+    &:first-child,
+    &:last-child {
+      flex: 1;
+    }
+
+    .item {
+      display: flex;
+      flex: none;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 0 8px;
+
+      font-size: 18px;
+      text-align: center;
+    }
+
+    &:first-child .item {
+      text-align: right;
+    }
+
+    &:last-child .item {
+      text-align: left;
+    }
+
+    &:only-child .item {
+      text-align: center;
+    }
+  }
+}
+
+.slider {
+  padding: 5px 15px;
+}

@@ -1,0 +1,121 @@
+.Android-navigation-bar,
+.Android-nav-placeholder {
+  width: 100%;
+  background-color: #f8f8f8;
+}
+
+.Android-navigation-bar {
+  position: fixed;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: content-box;
+
+  height: 44px;
+}
+
+.AndroidNavShadow {
+  box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+  }
+}
+
+.Android-nav-placeholder {
+  position: relative;
+  height: 69px;
+  color: #d9d9d9;
+  font-size: 8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .Android-navigation-bar,
+  .Android-nav-placeholder {
+    background-color: #000;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .grey .Android-navigation-bar,
+  .grey .Android-nav-placeholder {
+    background-color: #10110b;
+  }
+}
+
+.Android-titletext {
+  position: absolute;
+  z-index: 100;
+
+  max-width: 50%;
+
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 1;
+}
+
+.Android-nav-back-button {
+  position: absolute;
+  left: 0;
+  z-index: 101;
+
+  display: flex;
+  align-items: center;
+
+  min-width: 10px;
+  max-width: 30%;
+  min-height: 0;
+  margin: 0 3%;
+  padding: 8px 5px;
+
+  line-height: 2.4;
+}
+
+.Android-back-arrow {
+  width: 11px;
+  height: 11px;
+  border-width: 0 0 3px 3px;
+  border-style: solid;
+  border-color: black;
+
+  transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+
+  @media (prefers-color-scheme: dark) {
+    border-color: white;
+  }
+}
+
+.Android-back-text {
+  overflow: hidden;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (prefers-color-scheme: dark) {
+    color: #cacaca;
+  }
+}
+
+.Android-head {
+  padding: 25px 40px;
+}
+
+.Android-nav-title {
+  font-weight: 400;
+  font-size: 20px;
+  text-align: left;
+}
+
+.Android-desc {
+  margin-top: 5px;
+  color: #888;
+  font-size: 14px;
+  text-align: left;
+
+  @media (prefers-color-scheme: dark) {
+    color: #777;
+  }
+}

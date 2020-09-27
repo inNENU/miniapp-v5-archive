@@ -1,0 +1,54 @@
+.weui {
+  .grid-wrapper {
+    overflow: hidden;
+    border-top: 1rpx solid rgba(0, 0, 0, 0.1);
+    border-left: 1rpx solid rgba(0, 0, 0, 0.1);
+
+    .grid {
+      position: relative;
+
+      float: left;
+
+      box-sizing: border-box;
+
+      width: 25%;
+      padding: 20px 10px;
+      border-right: 1rpx solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+
+      background-color: #fff;
+
+      @media (prefers-color-scheme: dark) {
+        border-right: 1rpx solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+        background-color: #000;
+      }
+    }
+
+    .icon {
+      display: block;
+      width: 28px;
+      height: 28px;
+      margin: 0 auto;
+    }
+
+    .text {
+      display: block;
+
+      overflow: hidden;
+
+      margin-top: 5px;
+
+      color: rgba(0, 0, 0, 0.9);
+
+      font-size: 14px;
+      text-align: center;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      @media (prefers-color-scheme: dark) {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+}

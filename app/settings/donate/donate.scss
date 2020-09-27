@@ -1,0 +1,12 @@
+.qrcode-wrapper {
+  display: flex;
+  justify-content: space-around;
+
+  width: 100%;
+  max-width: 517px;
+  margin: 0 auto;
+}
+
+.qrcode {
+  width: 45%;
+}

@@ -239,3 +239,9 @@ overrides:
     rules:
       id-length: "off"
       max-lines-per-function: "off"
+
+  - files:
+      - "gulpfile.js"
+
+    env:
+      node: true

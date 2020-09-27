@@ -1,0 +1,85 @@
+/* NENU grid */
+
+.NENU {
+  .grid-wrapper {
+    position: relative;
+    background-color: var(--block-bgcolor);
+
+    &::before {
+      content: " ";
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+
+      height: 1px;
+      border-top: 1px solid var(--border-color);
+
+      transform: scaleY(0.4);
+      transform-origin: 0 0;
+    }
+
+    .grid {
+      position: relative;
+
+      width: 25%;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 0 !important;
+
+      background-color: var(--bgcolor);
+
+      line-height: 1.6 !important;
+
+      @media (min-width: 480px) {
+        width: 16.666%;
+      }
+
+      @media (min-width: 1024px) {
+        width: 12.5%;
+      }
+
+      &::before,
+      &::after {
+        content: " ";
+        position: absolute;
+        right: 0;
+        bottom: 0;
+      }
+
+      &::before {
+        top: 0;
+
+        width: 1px;
+        border-right: 1px solid var(--border-color) !important;
+
+        transform: scaleX(0.4);
+        transform-origin: 100% 0;
+      }
+
+      &::after {
+        left: 0;
+
+        height: 1px;
+        border-bottom: 1px solid var(--border-color) !important;
+
+        transform: scaleY(0.4);
+        transform-origin: 0 100%;
+      }
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      margin-top: 16px;
+    }
+
+    .text {
+      margin-bottom: 6px;
+      color: var(--grey4);
+      font-size: 15px;
+    }
+  }
+}

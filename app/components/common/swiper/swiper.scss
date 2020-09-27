@@ -1,0 +1,50 @@
+/* swiper */
+.swiper-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.swiper {
+  width: 100%;
+  height: 400rpx;
+
+  .image {
+    width: 100%;
+    height: 100%;
+  }
+
+  &.card .image {
+    overflow: hidden;
+
+    width: calc(100% - 30px);
+    height: 360rpx;
+    margin: 20px 15px;
+    border-radius: 16rpx;
+  }
+}
+
+.swiper-dots {
+  position: absolute;
+  right: 0;
+  bottom: 20rpx;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+
+  .dot {
+    width: 14rpx;
+    height: 14rpx;
+    margin: 0 8rpx;
+    border-radius: 8rpx;
+
+    background: #fff;
+
+    transition: all 0.6s;
+
+    &.active {
+      width: 24rpx;
+      background: #fff;
+    }
+  }
+}

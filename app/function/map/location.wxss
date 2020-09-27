@@ -1,9 +1,0 @@
-.title {
-  max-width: 517px;
-  margin: 0 auto;
-  padding: 8px 15px;
-
-  text-align: left;
-  font-size: 28px;
-  font-weight: 500;
-}

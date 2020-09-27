@@ -1,0 +1,91 @@
+.page.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100vh;
+  padding-top: 10vh;
+}
+
+.video-info {
+  padding: 15px;
+}
+
+.video-info .name,
+.video-info .author {
+  color: var(--dark-grey);
+  font-family: FZSSJW, -apple-system-font, "PingFang SC", "Helvetica Neue",
+    Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
+}
+
+.video-info .name {
+  margin-bottom: 10px;
+  font-weight: 500;
+  font-size: 28px;
+}
+
+.video-info .author {
+  font-size: 16px;
+}
+
+.player {
+  width: 700rpx;
+  max-height: 400rpx;
+  margin: 20px auto;
+}
+
+.video-list {
+  flex: 1;
+
+  overflow-y: scroll;
+
+  padding: 10px 0;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+
+  box-shadow: 0 -2px 5px rgba(219, 218, 223, 0.95);
+}
+
+@media (prefers-color-scheme: dark) {
+  .video-list {
+    box-shadow: 0 -2px 5px rgba(36, 37, 32, 0.95);
+  }
+}
+
+.video-list .title {
+  margin: 0 auto;
+  padding: 8px 15px 4px;
+
+  font-weight: 500;
+  font-size: 20px;
+  text-align: left;
+}
+
+.video-list .item {
+  width: 100%;
+  padding: 8px 15px;
+  text-align: left;
+}
+
+.video-list .name {
+  color: #333;
+  font-size: 16px;
+  font-family: FZSSJW, -apple-system-font, "PingFang SC", "Helvetica Neue",
+    Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .video-list .name {
+    color: #ccc;
+  }
+}
+
+.video-list .author {
+  color: #888;
+  font-size: 26rpx;
+}
+
+.video-list .active .name,
+.video-list .active .author {
+  color: #3478f7;
+}

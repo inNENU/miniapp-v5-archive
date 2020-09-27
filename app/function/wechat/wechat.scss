@@ -1,0 +1,45 @@
+.wechat-logo-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.wechat-logo {
+  width: 50%;
+  padding: 8px 12px;
+}
+
+.wechat-logo .logo {
+  overflow: hidden;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 50%;
+}
+
+@media (min-width: 517px) {
+  .wechat-logo {
+    width: 33.33%;
+    padding: 8px 12px;
+  }
+
+  .wechat-logo .logo {
+    overflow: hidden;
+
+    width: 150rpx;
+    max-width: 150px;
+    height: 150rpx;
+    max-height: 150px;
+    border-radius: 50%;
+  }
+}
+
+.wechat-logo .name {
+  margin: 4px auto;
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.wechat-logo .desc {
+  margin: 4px auto;
+  color: var(--dark-grey);
+  font-size: 14px;
+}

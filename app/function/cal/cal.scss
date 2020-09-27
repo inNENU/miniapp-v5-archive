@@ -1,0 +1,112 @@
+input {
+  width: auto;
+  margin: 12rpx 0;
+  padding: 0 12rpx;
+  border: solid 1px #888;
+  border-radius: 10rpx;
+
+  font-size: 32rpx;
+}
+
+.gradeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 70rpx;
+}
+
+.picker {
+  width: 80%;
+  margin: 4rpx 12rpx;
+}
+
+.edit {
+  width: 15%;
+  color: blue;
+  text-align: center;
+}
+
+.gradeinputer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.courseContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  height: 78rpx;
+}
+
+.course {
+  width: 30%;
+}
+
+.grade {
+  max-width: 15%;
+}
+
+.credit {
+  max-width: 15%;
+}
+
+.btnCtn {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+}
+
+.gradeDisplay {
+  width: 100%;
+  text-align: center;
+}
+
+.remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40rpx;
+  min-width: 0%;
+  height: 40rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background-color: red;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40rpx;
+  min-width: 0%;
+  height: 40rpx;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+
+  background-color: #3f3;
+}
+
+.removeText {
+  margin-top: -10rpx;
+  color: white;
+  font-weight: 500;
+  font-size: 60rpx;
+}
+
+.sortText {
+  margin-top: 0rpx;
+  color: white;
+  font-weight: 500;
+  font-size: 32rpx;
+}

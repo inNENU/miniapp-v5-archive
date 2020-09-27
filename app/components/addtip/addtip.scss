@@ -1,0 +1,48 @@
+@import "../../style/lib/icon";
+
+.addtip-wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1100;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-end;
+
+  .arrow {
+    width: 0;
+    height: 0;
+    margin-right: 60px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent transparent var(--bgcolor) transparent;
+  }
+
+  .body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 42px;
+    margin-right: 20px;
+    padding: 0 12px;
+    border-radius: 6px;
+
+    background-color: var(--bgcolor);
+    color: var(--text-color);
+    box-shadow: 0 4px 8px -2px rgba(95, 95, 95, 0.5);
+
+    font-size: 14px;
+  }
+
+  .close-wrapper {
+    padding: 2px;
+  }
+
+  .icon-button {
+    width: 20px;
+    height: 20px;
+  }
+}

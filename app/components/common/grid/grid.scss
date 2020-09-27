@@ -1,0 +1,49 @@
+.grid-head {
+  min-height: 36px;
+  padding: 12px 15px 4px;
+
+  color: var(--text-color);
+
+  font-weight: 500;
+  font-size: 19px;
+  text-align: left;
+
+  @media (min-width: 768px) {
+    min-height: 38px;
+    font-size: 21px;
+  }
+
+  .grey & {
+    min-height: 37px;
+    margin: 0 10px;
+    padding: 23px 15px 5px;
+
+    color: var(--dark-grey);
+
+    font-size: 13px;
+
+    @media (min-width: 768px) {
+      margin: 0 15px;
+    }
+  }
+}
+
+.grid-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-foot {
+  min-height: 14px;
+  padding: 3px 15px;
+
+  color: #999;
+
+  font-size: 14px;
+  text-align: left;
+}
+
+@import "Android";
+@import "NENU";
+@import "iOS";
+@import "weui";

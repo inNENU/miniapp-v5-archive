@@ -1,6 +1,7 @@
 app/miniprogram_npm/
 app/**/*.js
 app/**/*.js.map
+app/**/*.wxss
 doc/**
 node_modules/**
 

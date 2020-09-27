@@ -1,0 +1,161 @@
+/* list */
+
+.list-header {
+  max-width: var(--max-width);
+  min-height: 36px;
+  margin: 0 var(--horizontal-margin);
+  padding: 12px 15px 4px;
+
+  color: var(--text-color);
+
+  font-weight: 500;
+  font-size: 19px;
+  text-align: left;
+
+  .grey & {
+    padding: 21px 15px 5px;
+    color: var(--dark-grey);
+    font-weight: 400;
+    font-size: 13px;
+  }
+}
+
+.list-footer {
+  max-width: var(--max-width);
+  min-height: 16px;
+  margin: 0 15px;
+  padding: 5px 15px 0;
+
+  color: var(--dark-grey);
+
+  font-size: 13px;
+  text-align: left;
+}
+
+.list-wrapper {
+  position: relative;
+
+  overflow: hidden;
+
+  max-width: var(--max-width);
+  margin: 0 var(--horizontal-margin);
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+
+  .list {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    padding: 0 15px;
+    border: none !important;
+    border-radius: 0;
+
+    background-color: var(--block-bgcolor);
+    color: var(--text-color) !important;
+
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 1.45;
+
+    &:empty {
+      padding: 0;
+    }
+  }
+
+  .text {
+    flex-grow: 1;
+
+    padding: 10px 0;
+
+    color: var(--text-color);
+
+    line-height: 1.5;
+    text-align: left;
+    word-break: break-word;
+  }
+
+  .icon {
+    width: 30px;
+    height: 30px;
+    margin: 10px 10px 10px 0;
+  }
+
+  .desc {
+    flex-shrink: 1;
+
+    overflow: hidden;
+
+    max-width: 40%;
+
+    color: #8a8a8e;
+
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @media (prefers-color-scheme: dark) {
+      color: #98989f;
+    }
+  }
+
+  .access {
+    position: relative;
+    padding-right: 15px;
+
+    &::after {
+      content: " ";
+
+      position: absolute;
+      top: 50%;
+      right: 2px;
+
+      display: inline-block;
+
+      width: 7px;
+      height: 7px;
+      margin-top: -4px;
+      border-width: 2px 2px 0 0;
+      border-style: solid;
+      border-color: var(--arrow-color);
+
+      transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    }
+  }
+
+  .divline {
+    position: relative;
+
+    &::after {
+      content: " ";
+
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 15px;
+
+      height: 1px;
+      border-bottom: 1px solid var(--border-color);
+
+      transform: scaleY(0.4);
+      transform-origin: 0 100%;
+    }
+
+    &.icon {
+      width: 100%;
+      height: 0;
+      margin: 0;
+    }
+
+    &.icon::after {
+      left: 55px;
+    }
+
+    &:last-child::after {
+      display: none;
+    }
+  }
+}

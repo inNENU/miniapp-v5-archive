@@ -79,7 +79,7 @@
     </view>
   </view>
   <!-- 小时预报 -->
-  <scroll-view class="hours borderTB" enable-flex scroll-x>
+  <scroll-view class="hours btb" enable-flex scroll-x>
     <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
       <text class="time">{{item.time}}</text>
 
@@ -88,7 +88,7 @@
     </view>
   </scroll-view>
   <!-- 日预报 -->
-  <scroll-view class="days borderTB" enable-flex scroll-x>
+  <scroll-view class="days btb" enable-flex scroll-x>
     <view wx:for="{{weather.dayForecast}}" class="item" wx:key="weekday">
       <view class="day">{{item.weekday}}</view>
       <view class="date">{{item.date}}</view>
