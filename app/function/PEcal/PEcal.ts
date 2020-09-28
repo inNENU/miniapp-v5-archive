@@ -302,11 +302,9 @@ $register("PEcal", {
 
     // 计算及格分数
     const passScore =
-      this.state.grade === "Low"
-        ? bmiResult <= 28
-          ? 60
-          : 60 - Math.ceil(bmiResult - 28) * 2
-        : 50;
+      this.state.grade === "low"
+        ? 60 - Math.ceil(Math.max(bmiResult - 28, 0)) * 2
+        : 50 - Math.ceil(Math.max(bmiResult - 28, 0)) * 2;
 
     this.setData({ bmi: { score: bmiResult, state } });
 
