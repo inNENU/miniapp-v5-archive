@@ -29,4 +29,8 @@ $register.C<{ config: GridComponentConfig }>({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

@@ -29,4 +29,8 @@ $register.C<{ config: ListComponentConfig }>({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

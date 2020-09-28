@@ -105,7 +105,7 @@
           class="icon"
           src="{{listItem.icon}}"
         />
-        <text class="text" decode user-select space="nbsp"
+        <text class="text" decode selectable space="nbsp"
           >{{listItem.text}}</text
         >
         <view class="desc">
@@ -113,7 +113,7 @@
           <switch
             wx:if="{{listItem.swiKey}}"
             checked="{{listItem.status}}"
-            color="{{color}}"
+            color="{{color || '#07c160'}}"
             data-id="{{index}}"
             catch:change="switch"
           />

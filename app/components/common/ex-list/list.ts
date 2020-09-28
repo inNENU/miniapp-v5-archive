@@ -174,4 +174,8 @@ $register.C<{
       }
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

@@ -42,52 +42,52 @@
     }
   },
   "window": {
-    "navigationBarBackgroundColor": "@navBgColor",
-    "navigationBarTextStyle": "@navTextStyle",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "in 东师",
     "navigationStyle": "custom",
-    "backgroundColor": "@bgColor",
-    "backgroundTextStyle": "@bgTxtStyle",
-    "backgroundColorTop": "@bgColorTop",
-    "backgroundColorBottom": "@bgColorBottom",
+    "backgroundColor": "#efeef4",
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#f5f5f7",
+    "backgroundColorBottom": "#efeef4",
     "pageOrientation": "portrait"
   },
   "tabBar": {
     "custom": false,
-    "color": "@tabColor",
+    "color": "#bbbbbb",
     "selectedColor": "#2ecc71",
-    "borderStyle": "@tabBorderStyle",
-    "backgroundColor": "@tabBgColor",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
     "position": "bottom",
     "list": [
       {
         "pagePath": "pages/main/main",
         "text": "首页",
-        "iconPath": "@homeIcon",
+        "iconPath": "icon/tab/home.png",
         "selectedIconPath": "icon/tab/home-active.png"
       },
       {
         "pagePath": "pages/intro/intro",
         "text": "东师介绍",
-        "iconPath": "@introIcon",
+        "iconPath": "icon/tab/intro.png",
         "selectedIconPath": "icon/tab/intro-active.png"
       },
       {
         "pagePath": "pages/guide/guide",
         "text": "东师指南",
-        "iconPath": "@guideIcon",
+        "iconPath": "icon/tab/guide.png",
         "selectedIconPath": "icon/tab/guide-active.png"
       },
       {
         "pagePath": "pages/function/function",
         "text": "功能大厅",
-        "iconPath": "@functionIcon",
+        "iconPath": "icon/tab/function.png",
         "selectedIconPath": "icon/tab/function-active.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的东师",
-        "iconPath": "@userIcon",
+        "iconPath": "icon/tab/user.png",
         "selectedIconPath": "icon/tab/user-active.png"
       }
     ]
@@ -128,5 +128,6 @@
   "themeLocation": "style/theme.json",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
+  "groupIdList": ["1139044856"],
   "singlePage": { "navigationBarFit": "float" }
 }

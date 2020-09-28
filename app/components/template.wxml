@@ -112,7 +112,7 @@
 <!-- 标题 -->
 <template name="title">
   <view class="{{theme}}-title" style="{{style || ''}}">
-    <text user-select>{{text}}</text>
+    <text selectable>{{text}}</text>
   </view>
 </template>
 <!-- 错误文字 -->

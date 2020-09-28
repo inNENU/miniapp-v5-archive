@@ -15,7 +15,7 @@
         focus="{{showInput && focus}}"
         confirm-type="search"
         catch:tap="focus"
-        catch:input="inputTyping"
+        bindinput="inputTyping"
         catch:confirm="confirm"
       />
       <view

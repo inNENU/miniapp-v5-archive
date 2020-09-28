@@ -36,7 +36,7 @@
         data-class="course"
         data-id="{{item.id}}"
         data-maxlength="8"
-        catch:input="input"
+        bindinput="input"
         catch:confirm="next"
       />
       <input
@@ -49,7 +49,7 @@
         focus="{{item.gradeFocus}}"
         data-class="grade"
         data-index="{{index}}"
-        catch:input="input"
+        bindinput="input"
       />
       <input
         class="credit"
@@ -61,7 +61,7 @@
         data-maxlength="3"
         data-class="credit"
         data-index="{{index}}"
-        catch:input="input"
+        bindinput="input"
       />
       <button
         class="remove {{display? '': 'hide'}}"
