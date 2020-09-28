@@ -1,10 +1,13 @@
 import $register = require("wxpage");
+
+import { AppOption } from "../../app";
 import { Lyric, PlayMode, SongDetail } from "./typings";
+
+import { server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
-import { server } from "../../utils/config";
 import { tip } from "../../utils/wx";
-import { AppOption } from "../../app";
+
 const { globalData } = getApp<AppOption>();
 
 /** 音频管理器 */
@@ -152,6 +155,16 @@ $register("music", {
     return {
       title: this.data.currentSong.title,
       query: { name: this.data.currentSong.title },
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: this.data.currentSong.title,
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `name=${this.data.currentSong.title}`,
     };
   },
 

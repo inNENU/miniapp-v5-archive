@@ -1,8 +1,10 @@
-/* 赞赏支持 */
 import $register = require("wxpage");
-import { popNotice, getColor } from "../../utils/page";
-import { server } from "../../utils/config";
+
 import { AppOption } from "../../app";
+
+import { server } from "../../utils/config";
+import { popNotice, getColor } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 interface DonateDetail {
@@ -99,6 +101,13 @@ $register("donate-list", {
   }),
 
   onShareTimeline: () => ({ title: "赞赏列表" }),
+
+  onAddToFavorites: () => ({
+    title: "赞赏列表",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

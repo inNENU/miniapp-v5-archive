@@ -1,12 +1,14 @@
-/* 设置页面 */
 import $register = require("wxpage");
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+
 import { AppOption } from "../../app";
 import {
   AdvancedListComponentConfig,
   PageDataWithContent,
   PickerListComponentItemConfig,
 } from "../../../typings";
+
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 /** 列表动作列表 */

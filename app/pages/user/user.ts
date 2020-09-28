@@ -1,10 +1,11 @@
-/* 我的东师 */
-
 import $register = require("wxpage");
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+
 import { AppOption } from "../../app";
 import { PageData } from "../../../typings";
+
 import { server } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 $register("me", {
@@ -111,6 +112,13 @@ $register("me", {
 
   onShareTimeline: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+  }),
+
+  onAddToFavorites: () => ({
+    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
   }),
 
   onUnload() {

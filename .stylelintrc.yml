@@ -95,7 +95,10 @@ rules:
 
   selector-max-id: 1
 
-  selector-no-qualifying-type: true
+  selector-no-qualifying-type:
+    - true
+    - ignore:
+        - attribute
 
   selector-no-vendor-prefix: true
 

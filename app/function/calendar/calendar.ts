@@ -1,9 +1,13 @@
 import $register = require("wxpage");
-import { popNotice, getColor } from "../../utils/page";
-import { ensureJSON, getJSON } from "../../utils/file";
+
 import { AppOption } from "../../app";
 import { TimeLineItem } from "../../components/timeline/timeline";
+
+import { popNotice, getColor } from "../../utils/page";
+import { ensureJSON, getJSON } from "../../utils/file";
 import { modal } from "../../utils/wx";
+import { server } from "../../utils/config";
+
 const { globalData } = getApp<AppOption>();
 
 interface CalendarDetail {
@@ -68,6 +72,13 @@ $register("calendar", {
   }),
 
   onShareTimeline: () => ({ title: "东师校历" }),
+
+  onAddToFavorites: () => ({
+    title: "东师校历",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

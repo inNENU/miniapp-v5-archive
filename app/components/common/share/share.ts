@@ -1,5 +1,5 @@
-import { savePhoto } from "../../../utils/wx";
 import { AppOption } from "../../../app";
+import { savePhoto } from "../../../utils/wx";
 const {
   globalData: { env, appID },
 } = getApp<AppOption>(); // 获得日志管理器，全局数据

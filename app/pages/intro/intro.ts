@@ -1,11 +1,14 @@
-/* 东师介绍 */
 import $register = require("wxpage");
-import { checkResUpdate } from "../../utils/app";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { refreshPage } from "../../utils/tab";
-import { searching } from "../../utils/search";
-import { AppOption } from "../../app";
 import page from "./pageData";
+
+import { AppOption } from "../../app";
+
+import { checkResUpdate } from "../../utils/app";
+import { server } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { searching } from "../../utils/search";
+import { refreshPage } from "../../utils/tab";
+
 const { globalData } = getApp<AppOption>();
 
 $register("guide", {
@@ -70,6 +73,13 @@ $register("guide", {
   onShareAppMessage: () => ({ title: "东师介绍", path: "/pages/intro/intro" }),
 
   onShareTimeline: () => ({ title: "东师介绍" }),
+
+  onAddToFavorites: () => ({
+    title: "东师介绍",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

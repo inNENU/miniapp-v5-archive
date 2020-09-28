@@ -1,12 +1,14 @@
 import $register = require("wxpage");
-import { WeatherData } from "../../components/weather/typings";
+
 import { AppOption } from "../../app";
+import { WeatherData } from "../../components/weather/typings";
+
 import { server } from "../../utils/config";
-import { modal } from "../../utils/wx";
 import { readFile } from "../../utils/file";
+import { modal } from "../../utils/wx";
 
 const {
-  globalData: { darkmode, info },
+  globalData: { appID, darkmode, info },
 } = getApp<AppOption>();
 
 $register("weather", {
@@ -108,6 +110,13 @@ $register("weather", {
   }),
 
   onShareTimeline: () => ({ title: "东师天气" }),
+
+  onAddToFavorites: () => ({
+    title: "体测计算器",
+    imageUrl: `${server}img/${
+      appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     /** 移除旋转屏幕与加速度计监听 */

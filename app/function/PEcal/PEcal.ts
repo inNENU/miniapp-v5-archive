@@ -1,7 +1,11 @@
 import $register = require("wxpage");
-import { popNotice, setPage } from "../../utils/page";
+
 import { AppOption } from "../../app";
+
+import { server } from "../../utils/config";
 import { getJSON } from "../../utils/file";
+import { popNotice, setPage } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 /** 分数段设置 */
@@ -185,6 +189,13 @@ $register("PEcal", {
   }),
 
   onShareTimeline: () => ({ title: "体测计算器" }),
+
+  onAddToFavorites: () => ({
+    title: "体测计算器",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

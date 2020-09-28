@@ -1,5 +1,5 @@
-import { tip } from "../../../utils/wx";
 import { MediaComponentConfig } from "../../../../typings";
+import { tip } from "../../../utils/wx";
 
 Component<{ config: MediaComponentConfig }>({
   properties: {

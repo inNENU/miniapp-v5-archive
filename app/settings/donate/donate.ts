@@ -1,10 +1,12 @@
-/* 赞赏支持 */
 import $register = require("wxpage");
-import { popNotice, getColor } from "../../utils/page";
-import { requestJSON, savePhoto } from "../../utils/wx";
-import { server } from "../../utils/config";
+
 import { AppOption } from "../../app";
 import { PageDataWithContent } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { popNotice, getColor } from "../../utils/page";
+import { requestJSON, savePhoto } from "../../utils/wx";
+
 const { globalData } = getApp<AppOption>();
 
 $register("donate", {
@@ -86,6 +88,13 @@ $register("donate", {
   }),
 
   onShareTimeline: () => ({ title: "支持 Mr.Hope" }),
+
+  onAddToFavorites: () => ({
+    title: "支持 Mr.Hope",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

@@ -1,16 +1,17 @@
-/* 关于 */
-
 import $register = require("wxpage");
-import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { requestJSON, tip } from "../../utils/wx";
+
 import { AppOption } from "../../app";
-import { server } from "../../utils/config";
 import {
   AdvancedListComponentConfig,
   ComponentConfig,
   PageDataWithContent,
   SwitchListComponentItemConfig,
 } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { requestJSON, tip } from "../../utils/wx";
+
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
 let developMode = false;
@@ -145,6 +146,13 @@ $register("about", {
   }),
 
   onShareTimeline: () => ({ title: "关于" }),
+
+  onAddToFavorites: () => ({
+    title: "关于",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

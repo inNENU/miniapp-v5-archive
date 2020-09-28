@@ -1,10 +1,13 @@
-/* 功能大厅 */
 import $register = require("wxpage");
+import page from "./pageData";
+
+import { AppOption } from "../../app";
+
 import { checkResUpdate } from "../../utils/app";
+import { server } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
-import { AppOption } from "../../app";
-import page from "./pageData";
+
 const { globalData } = getApp<AppOption>();
 
 $register("function", {
@@ -68,6 +71,13 @@ $register("function", {
   }),
 
   onShareTimeline: () => ({ title: "功能大厅" }),
+
+  onAddToFavorites: () => ({
+    title: "功能大厅",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

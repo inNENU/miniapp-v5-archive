@@ -1,10 +1,12 @@
-/* 授权 */
 import $register = require("wxpage");
+
+import { AppOption } from "../../app";
+import { ButtonListComponnetItemConfig } from "../../../typings";
+import { ListComponentConfig, PageDataWithContent } from "../../../typings";
+
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
-import { AppOption } from "../../app";
-import { ListComponentConfig, PageDataWithContent } from "../../../typings";
-import { ButtonListComponnetItemConfig } from "../../../typings";
+
 const { globalData } = getApp<AppOption>();
 
 type AuthorizeList =
