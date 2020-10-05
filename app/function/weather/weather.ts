@@ -38,9 +38,9 @@ $register("weather", {
       (readFile("./icon/weather/hint") as string) || "{}"
     );
 
-    if (!wx.getStorageSync("inited")) {
+    if (!wx.getStorageSync("innenu-inited")) {
       const handler = setInterval(() => {
-        if (wx.getStorageSync("inited")) {
+        if (wx.getStorageSync("innenu-inited")) {
           this.setData({
             weatherIcon: JSON.parse(readFile("./icon/weather/icon") as string),
             hintIcon: JSON.parse(readFile("./icon/weather/hint") as string),

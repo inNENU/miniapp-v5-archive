@@ -21,6 +21,7 @@ plugins:
 
 ignorePatterns:
   - app/**/*.js
+  - server/**
 
 rules:
   comma-dangle:

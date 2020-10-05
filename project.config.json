@@ -22,7 +22,7 @@
   },
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
-  "libVersion": "2.13.0",
+  "libVersion": "2.13.1",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.19.0",
   "qqappid": "1109559721",
@@ -69,26 +69,21 @@
   },
   "condition": {
     "plugin": {
-      "current": -1,
       "list": []
     },
     "game": {
       "list": []
     },
     "gamePlugin": {
-      "current": -1,
       "list": []
     },
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "miniprogram": {
-      "current": -1,
       "list": [
         {
           "id": 0,
