@@ -20,25 +20,26 @@
     <scroll-view scroll-x>
       <view class="action-list">
         <block wx:for="{{actions}}" wx:key="text">
-          <button
-            wx:if="{{!item.hidden}}"
-            class="action"
-            hover-class="button-hover"
-            hover-start-time="0"
-            plain
-            open-type="{{item.openType}}"
-            open-id="{{item.openId}}"
-            group-id="{{item.groupId}}"
-            share-type="{{item.shareType}}"
-            bind:tap="{{item.action || ''}}"
-          >
-            <image
-              wx:if="{{iconData[item.icon]}}"
-              class="icon"
-              src="{{iconData[item.icon]}}"
-            />
+          <view wx:if="{{!item.hidden}}" class="action">
+            <button
+              class="icon-wrapper"
+              hover-class="button-hover"
+              hover-start-time="0"
+              plain
+              open-type="{{item.openType}}"
+              open-id="{{item.openId}}"
+              group-id="{{item.groupId}}"
+              share-type="{{item.shareType}}"
+              bind:tap="{{item.action || ''}}"
+            >
+              <image
+                wx:if="{{iconData[item.icon]}}"
+                class="icon"
+                src="{{iconData[item.icon]}}"
+              />
+            </button>
             <view class="text">{{item.text}}</view>
-          </button>
+          </view>
         </block>
       </view>
     </scroll-view>

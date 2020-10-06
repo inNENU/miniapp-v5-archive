@@ -48,12 +48,16 @@
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
 
-    background-color: var(--bgcolor);
+    background-color: #dedede;
 
     line-height: 1.4;
 
     transition: all 0.3s;
     transform: translateY(100%);
+
+    @media (prefers-color-scheme: dark) {
+      background-color: #0d0d0d;
+    }
   }
 
   &.show .share-menu {
@@ -64,28 +68,36 @@
     display: flex;
     align-items: center;
     justify-content: start;
-    padding: 5px 10px;
+
+    height: 104px;
+    margin-top: 15px;
+    padding: 0 10px;
   }
 
   .action {
     flex-shrink: 0;
+    margin: 0 10px;
 
-    width: auto;
-    margin: 0 4px;
-    padding: 8px;
-    border: none;
+    .icon-wrapper {
+      width: 56px;
+      height: 56px;
+      margin-bottom: 6px;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+
+      background-color: var(--block-bgcolor);
+    }
 
     .icon {
       width: 36px;
       height: 36px;
-      border-radius: 50%;
-      background-color: var(--block-bgcolor);
     }
 
     .text {
       color: var(--dark-grey);
       font-weight: 400;
-      font-size: 13px;
+      font-size: 10px;
     }
   }
 
@@ -93,7 +105,7 @@
     width: 100%;
     height: 60px;
     padding: 8px 24px;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom));
+    padding-bottom: calc(24px + env(safe-area-inset-bottom) / 2);
     border: none;
     border-top: 8px var(--border-color-light) solid !important;
     border-radius: 0;
