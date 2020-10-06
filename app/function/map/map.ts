@@ -1,9 +1,12 @@
 import $register = require("wxpage");
+
 import { AppOption } from "../../app";
-import { ensureJSON, getJSON } from "../../utils/file";
-import { modal, tip } from "../../utils/wx";
-import { popNotice } from "../../utils/page";
 import { Category, MarkerConfig, MarkerData } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { ensureJSON, getJSON } from "../../utils/file";
+import { popNotice } from "../../utils/page";
+import { modal, tip } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 
@@ -135,6 +138,13 @@ $register("map", {
   onShareAppMessage: () => ({ title: "东师地图", path: "/function/map/map" }),
 
   onShareTimeline: () => ({ title: "东师地图" }),
+
+  onAddToFavorites: () => ({
+    title: "东师地图",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
 
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);

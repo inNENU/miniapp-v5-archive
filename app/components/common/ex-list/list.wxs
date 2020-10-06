@@ -5,7 +5,9 @@ module.exports = {
   },
   /** 需要渲染为按钮 */
   isButton: function (listItem) {
-    return listItem.inlay || listItem.button || listItem.slider;
+    return (
+      listItem.inlay || listItem.button || listItem.slider || listItem.openType
+    );
   },
   /** 按钮操作 */
   button: function (event) {

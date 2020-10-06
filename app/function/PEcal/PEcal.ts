@@ -1,7 +1,11 @@
 import $register = require("wxpage");
-import { popNotice, setPage } from "../../utils/page";
+
 import { AppOption } from "../../app";
+
+import { server } from "../../utils/config";
 import { getJSON } from "../../utils/file";
+import { popNotice, setPage } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 /** 分数段设置 */
@@ -186,6 +190,13 @@ $register("PEcal", {
 
   onShareTimeline: () => ({ title: "体测计算器" }),
 
+  onAddToFavorites: () => ({
+    title: "体测计算器",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
+
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
   },
@@ -291,11 +302,9 @@ $register("PEcal", {
 
     // 计算及格分数
     const passScore =
-      this.state.grade === "Low"
-        ? bmiResult <= 28
-          ? 60
-          : 60 - Math.ceil(bmiResult - 28) * 2
-        : 50;
+      this.state.grade === "low"
+        ? 60 - Math.ceil(Math.max(bmiResult - 28, 0)) * 2
+        : 50 - Math.ceil(Math.max(bmiResult - 28, 0)) * 2;
 
     this.setData({ bmi: { score: bmiResult, state } });
 

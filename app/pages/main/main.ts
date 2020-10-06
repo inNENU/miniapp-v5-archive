@@ -1,13 +1,15 @@
-/* 主页 */
 import $register = require("wxpage");
+
+import { AppOption } from "../../app";
+import { PageDataWithContent } from "../../../typings";
+
 import { checkResUpdate } from "../../utils/app";
-import { popNotice, getColor, setPage, resolvePage } from "../../utils/page";
+import { server } from "../../utils/config";
+import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
-import { AppOption } from "../../app";
 import { requestJSON } from "../../utils/wx";
-import { server } from "../../utils/config";
-import { PageDataWithContent } from "../../../typings";
+
 const { globalData } = getApp<AppOption>();
 
 $register("main", {
@@ -53,10 +55,11 @@ $register("main", {
     // 设置胶囊和背景颜色
     this.setData({ color: getColor(this.data.page.grey) });
 
-    if (wx.getStorageSync("inited")) refreshPage("main", this, globalData);
+    if (wx.getStorageSync("innenu-inited"))
+      refreshPage("main", this, globalData);
     else {
       const handler = setInterval(() => {
-        if (wx.getStorageSync("inited")) {
+        if (wx.getStorageSync("innenu-inited")) {
           refreshPage("main", this, globalData);
           clearInterval(handler);
         }
@@ -106,6 +109,13 @@ $register("main", {
 
   onShareTimeline: () => ({
     title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+  }),
+
+  onAddToFavorites: () => ({
+    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
   }),
 
   onUnload() {

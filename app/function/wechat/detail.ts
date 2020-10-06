@@ -1,9 +1,12 @@
-import * as $register from "wxpage";
-import { popNotice, getColor } from "../../utils/page";
+import $register = require("wxpage");
+
 import { AppOption } from "../../app";
-import { ensureJSON, getJSON } from "../../utils/file";
-import { modal } from "../../utils/wx";
 import { WechatDetail } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { ensureJSON, getJSON } from "../../utils/file";
+import { getColor, popNotice } from "../../utils/page";
+import { modal } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 
@@ -64,6 +67,16 @@ $register("wechat-detail", {
     return {
       title: this.data.config.name,
       query: { path: this.state.path },
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: this.data.config.name,
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `path=${this.state.path}`,
     };
   },
 

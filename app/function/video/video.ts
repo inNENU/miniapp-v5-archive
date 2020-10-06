@@ -1,8 +1,12 @@
 import $register = require("wxpage");
-import { ensureJSON, getJSON } from "../../utils/file";
-import { modal, tip } from "../../utils/wx";
-import { popNotice } from "../../utils/page";
+
 import { AppOption } from "../../app";
+
+import { server } from "../../utils/config";
+import { ensureJSON, getJSON } from "../../utils/file";
+import { popNotice } from "../../utils/page";
+import { modal, tip } from "../../utils/wx";
+
 const { globalData } = getApp<AppOption>();
 
 interface VideoConfig {
@@ -123,6 +127,16 @@ $register("video", {
     return {
       title: this.data.videoName,
       query: { name: this.data.videoName },
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: this.data.videoName,
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `name=${this.data.videoName}`,
     };
   },
 

@@ -1,11 +1,13 @@
-/* 关于 */
 import $register = require("wxpage");
+
+import { AppOption } from "../../app";
+import { PageDataWithContent } from "../../../typings";
+
 import { resDownload } from "../../utils/app";
 import { remove, listFile } from "../../utils/file";
 import { popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
-import { AppOption } from "../../app";
-import { PageDataWithContent } from "../../../typings";
+
 const { globalData } = getApp<AppOption>();
 
 /** 列表动作 */
@@ -31,7 +33,7 @@ $register("storage", {
           tag: "list",
           header: "空间占用",
           content: [
-            { text: "小程序体积", desc: "397K" },
+            { text: "小程序体积", desc: "389K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],

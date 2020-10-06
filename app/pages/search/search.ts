@@ -1,10 +1,11 @@
-/* 搜索页 */
-
 import $register = require("wxpage");
+
+import { AppOption } from "../../app";
+
+import { server } from "../../utils/config";
 import { popNotice, getColor } from "../../utils/page";
 import { SearchResult, search, searching } from "../../utils/search";
-import { AppOption } from "../../app";
-import { server } from "../../utils/config";
+
 const { globalData } = getApp<AppOption>();
 
 $register("search", {
@@ -62,6 +63,16 @@ $register("search", {
     return {
       title: "搜索",
       query: { name: this.state.name, word: this.state.value },
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: "搜索",
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `name=${this.state.name}&word=${this.state.value}`,
     };
   },
 

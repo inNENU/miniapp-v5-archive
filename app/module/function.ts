@@ -1,9 +1,11 @@
-/* 功能页面 */
-
 import $register = require("wxpage");
-import { remove, listFile } from "../utils/file";
+
 import { AppOption } from "../app";
+
+import { server } from "../utils/config";
+import { listFile, remove } from "../utils/file";
 import { modal } from "../utils/wx";
+
 const {
   globalData: { appID, theme },
 } = getApp<AppOption>();
@@ -25,6 +27,16 @@ $register("function", {
   }),
 
   onShareTimeline: () => ({ title: "功能页", query: { action: "all" } }),
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: "功能页",
+      imageUrl: `${server}img/${
+        appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: "action=all",
+    };
+  },
 
   /** 初始化小程序 */
   resetApp() {

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { appOption, server } from "./config";
 import {
   remove,
@@ -212,11 +213,12 @@ export const appInit = (): void => {
       url: `${server}service/version.php`,
       enableHttp2: true,
       success: (res) => {
+        console.log(res);
         console.log("版本信息为", res.data);
         if (res.statusCode === 200) {
           writeJSON("version", (res.data as VersionInfo).version);
           // 成功初始化
-          wx.setStorageSync("inited", true);
+          wx.setStorageSync("innenu-inited", true);
           wx.hideLoading();
         }
       },

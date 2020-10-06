@@ -7,7 +7,11 @@ Page({
     this.setData({ url: res.url, title });
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return { title: this.data.title, path: `/module/web?url=${this.data.url}` };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return { title: this.data.title };
   },
 });

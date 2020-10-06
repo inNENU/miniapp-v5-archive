@@ -1,10 +1,12 @@
-/* 更新日志 */
-
 import $register = require("wxpage");
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+
 import { AppOption } from "../../app";
-import { requestJSON } from "../../utils/wx";
 import { ComponentConfig, PageDataWithContent } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { requestJSON } from "../../utils/wx";
+
 const { globalData } = getApp<AppOption>();
 
 $register("log", {
@@ -83,6 +85,12 @@ $register("log", {
 
   onShareTimeline: () => ({ title: "更新日志" }),
 
+  onAddToFavorites: () => ({
+    title: "更新日志",
+    imageUrl: `${server}img/${
+      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+    }.jpg`,
+  }),
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
   },

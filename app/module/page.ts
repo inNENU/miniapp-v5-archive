@@ -1,6 +1,14 @@
 import $register = require("wxpage");
+
+import { AppOption } from "../app";
 import { PageData } from "../../typings";
+
+import { server } from "../utils/config";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
+
+const {
+  globalData: { appID },
+} = getApp<AppOption>();
 
 $register("page", {
   data: { page: {} as PageData },
@@ -52,6 +60,16 @@ $register("page", {
     return {
       title: this.data.page.title,
       query: { id: this.data.page.id as string },
+    };
+  },
+
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: this.data.page.title,
+      imageUrl: `${server}img/${
+        appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `from=主页&id=${this.data.page.id}`,
     };
   },
 

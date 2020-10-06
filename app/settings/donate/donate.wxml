@@ -6,27 +6,4 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}}">
-  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
-  <template is="components" data="{{content: page.content, theme}}" />
-  <view class="qrcode">
-    <image
-      class="item"
-      lazy-load
-      mode="widthFix"
-      src="https://mp.innenu.com/img/donate/Wechat.jpg"
-      data-name="Wechat"
-      catch:tap="save"
-    />
-    <image
-      class="item"
-      lazy-load
-      mode="widthFix"
-      src="https://mp.innenu.com/img/donate/Alipay.jpg"
-      data-name="Alipay"
-      catch:tap="save"
-    />
-  </view>
-  <template is="components" data="{{content:content2, theme}}" />
-  <footer />
-</view>
+<template is="page" data="{{page, theme, darkmode}}" />

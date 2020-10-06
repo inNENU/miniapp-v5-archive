@@ -1,11 +1,14 @@
 import $register = require("wxpage");
-import { CardComponentConfig } from "../../../../typings";
+
 import { AppOption } from "../../../app";
+import { CardComponentConfig } from "../../../../typings";
+
+import { readFile } from "../../../utils/file";
 import { modal } from "../../../utils/wx";
+
 const {
   globalData: { appID },
 } = getApp<AppOption>();
-import { readFile } from "../../../utils/file";
 
 $register.C<{ config: CardComponentConfig }>({
   properties: {

@@ -1,8 +1,12 @@
 import $register = require("wxpage");
-import { resolvePage, setPage } from "../../utils/page";
-import { getJSON, readJSON } from "../../utils/file";
+
 import { AppOption } from "../../app";
 import { PageData } from "../../../typings";
+
+import { server } from "../../utils/config";
+import { getJSON, readJSON } from "../../utils/file";
+import { resolvePage, setPage } from "../../utils/page";
+
 const { globalData } = getApp<AppOption>();
 
 $register("location", {
@@ -84,7 +88,10 @@ $register("location", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.page.title,
-      query: `from=主页&id${this.state.id}`,
+      imageUrl: `${server}img/${
+        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
+      }.jpg`,
+      query: `from=主页&id=${this.state.id}`,
     };
   },
 

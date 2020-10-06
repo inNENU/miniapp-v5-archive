@@ -1,6 +1,6 @@
 import { AppOption } from "../../../app";
-import { modal } from "../../../utils/wx";
 import { PhoneComponentConfig } from "../../../../typings";
+import { modal } from "../../../utils/wx";
 const {
   globalData: { env },
 } = getApp<AppOption>(); // 获得当前小程序环境

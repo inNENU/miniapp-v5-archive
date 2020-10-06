@@ -1,4 +1,7 @@
 import $register = require("wxpage");
+
+import { PageData } from "../typings";
+
 import {
   appInit,
   appUpdate,
@@ -8,7 +11,6 @@ import {
   startup,
 } from "./utils/app";
 import { version } from "./utils/config";
-import { PageData } from "../typings";
 
 export interface GlobalData {
   /** 小程序运行环境 */
@@ -77,7 +79,7 @@ $register.A<AppOption>({
 
   config: {
     route: [
-      "/page/$page/$page",
+      "/pages/$page/$page",
       "/module/$page",
       "/function/$page/$page",
       "/settings/$page/$page",
@@ -89,7 +91,7 @@ $register.A<AppOption>({
     console.info("小程序启动，参数为", opts); // 调试
 
     // 如果初次启动执行初始化
-    if (!wx.getStorageSync("inited")) appInit();
+    if (!wx.getStorageSync("innenu-inited")) appInit();
 
     startup(this.globalData);
 
@@ -98,11 +100,11 @@ $register.A<AppOption>({
 
   onShow() {
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("inited")) checkResUpdate();
+    if (wx.getStorageSync("innenu-inited")) checkResUpdate();
   },
 
   onAwake(time: number) {
-    console.info("小程序在", time, "ms之后被唤醒");
+    console.info(`小程序在 ${time}ms 之后被唤醒`);
 
     // 重新应用夜间模式、
     this.globalData.darkmode = getDarkmode();
