@@ -58,7 +58,8 @@
     "userConfirmedUseCompilerModuleSwitch": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "remoteDebugLogEnable": false
+    "remoteDebugLogEnable": false,
+    "prefetch": false
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},

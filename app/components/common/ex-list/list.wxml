@@ -14,6 +14,7 @@
         class="list"
         hover-class="button-hover"
         hover-stay-time="100"
+        data-url="{{listItem.url}}"
         catch:tap="{{list.navigate}}"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
@@ -23,7 +24,8 @@
           src="{{listItem.icon}}"
         />
         <view class="text">{{listItem.text}}</view>
-        <view class="desc access">{{listItem.desc}}</view>
+        <view class="desc">{{listItem.desc}}</view>
+        <view class="access" />
       </view>
       <!-- 按钮、嵌入选择器与滑块 -->
       <button
@@ -34,6 +36,9 @@
         hover-stay-time="100"
         disabled="{{listItem.disabled}}"
         plain
+        open-type="{{listItem.openType}}"
+        open-id="{{listItem.openId}}"
+        group-id="{{listItem.groupId}}"
         data-item="{{listItem}}"
         catch:tap="{{list.button}}"
         capture-bind:tap="{{listItem.pickerValue ? 'pickerTap' : listItem.slider ? 'sliderTap' : ''}}"

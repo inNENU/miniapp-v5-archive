@@ -5,7 +5,7 @@ import { PageDataWithContent } from "../../../typings";
 
 import { server } from "../../utils/config";
 import { popNotice, getColor } from "../../utils/page";
-import { requestJSON, savePhoto } from "../../utils/wx";
+import { savePhoto } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 
@@ -32,31 +32,33 @@ $register("donate", {
           style: "text-indent: 1.5em;",
           text: [
             "如果您愿意对我的工作以及我的开销进行赞赏支持，可以点击下方二维码。这样会将对应的二维码保存至您的手机相册。您可以稍后使用相应 APP 扫码来进行打赏。如果您是学生，Mr.Hope 不建议您赞赏支持数目较大的金额，1 至 2 元钱就是一份心意。如果您是家长，Mr.Hope 欢迎您进行一定程度的赞赏。",
-            "您也可以通过参加“支付宝 - 赚钱红包”来支持 Mr.Hope。您只需每日将下方数字粘贴至支付宝搜索框中进行搜索，即可领取到一个红包。如果您成功在付款时时使用了它，Mr.Hope 也会得到 ￥0.05 左右的赏金。如果您平日多加支持，Mr.Hope 也会得到一笔一定数额的赏金。",
           ],
         },
-        { tag: "copy", text: "526454931" },
-        { tag: "title", text: "二维码" },
+        { tag: "title", text: "赞赏方式" },
+        {
+          tag: "advanced-list",
+          header: false,
+          content: [{ text: "保存二维码", button: "save" }],
+        },
+        { tag: "title", text: "捐赠列表" },
+        {
+          tag: "advanced-list",
+          header: false,
+          content: [{ text: "查看详情", url: "/settings/donate/list" }],
+        },
+        { tag: "title", text: "备注" },
+        {
+          tag: "text",
+          style: "text-indent: 1.5em;",
+          text: [
+            "由于 Mr.Hope 无法在转账页面获取到您的昵称或者姓名，请您在打赏时备注“小程序打赏 + 昵称/姓名”。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在赞赏列表中(未备注的捐赠将显示为佚名)。再次感谢您的支持！",
+            "Mr.Hope 也许会产生统计遗漏，如果您捐赠但未看到您的姓名，请您务必联系我。",
+          ],
+        },
       ],
+      action: false,
       shareable: true,
-      from: "返回",
     } as PageDataWithContent,
-
-    content2: [
-      {
-        tag: "list",
-        content: [{ text: "捐赠列表", url: "/settings/donate/list" }],
-      },
-      { tag: "title", text: "备注" },
-      {
-        tag: "text",
-        style: "text-indent: 1.5em;",
-        text: [
-          "由于 Mr.Hope 无法在转账页面获取到您的昵称或者姓名，请您在打赏时备注“小程序打赏 + 昵称/姓名”。Mr.Hope 会将每一笔赞赏支持的姓名和打赏金额显示在赞赏列表中(未备注的捐赠将显示为佚名)。再次感谢您的支持！",
-          "Mr.Hope 也许会产生统计遗漏，如果您捐赠但未看到您的姓名，请您务必联系我。",
-        ],
-      },
-    ],
   },
 
   onLoad() {
@@ -68,12 +70,6 @@ $register("donate", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
     popNotice("donate");
-  },
-
-  onShow() {
-    requestJSON("resource/config/donate/alipay", (code: number) => {
-      this.setData({ "page.content[4].text": code.toString() });
-    });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -105,8 +101,9 @@ $register("donate", {
   },
 
   /** 保存二维码 */
-  save(res: WechatMiniprogram.TouchEvent) {
+  save() {
     console.info("Start QRCode download."); // 调试
-    savePhoto(`img/donate/${res.currentTarget.dataset.name}.png`);
+    savePhoto("img/donate/Alipay.jpg");
+    savePhoto("img/donate/Wechat.jpg");
   },
 });

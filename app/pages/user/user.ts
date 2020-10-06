@@ -7,12 +7,11 @@ import { server } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 
 const { globalData } = getApp<AppOption>();
+const { appID, env, version } = globalData;
 
 $register("me", {
   data: {
     theme: globalData.theme,
-    env: globalData.env,
-    appID: globalData.appID,
 
     /** 自定义导航栏配置 */
     nav: {
@@ -49,19 +48,57 @@ $register("me", {
               text: "更新日志",
               icon: "about",
               url: "log",
-              desc: globalData.version,
+              desc: version,
             },
             {
               text: "关于",
               icon: "about",
               url: "about",
             },
+          ],
+        },
+        {
+          tag: "advanced-list",
+          content: [
             {
-              text: "赞赏支持 Mr.Hope",
-              icon: "donate",
-              desc: "了解详情",
-              url: "donate",
-              hidden: globalData.appID !== "wx33acb831ee1831a5",
+              text: "分享小程序",
+              icon: "share",
+              openType: "share",
+            },
+            {
+              text: "Bug 反馈",
+              icon: "bug",
+              openType: "feedback",
+              hidden: env === "qq",
+            },
+            {
+              text: "加入 in 东师咨询群",
+              icon: "qq-group",
+              openType: "openGroupProfile",
+              groupId: "1139044856",
+              hidden: env === "wx",
+            },
+            {
+              text: "添加 Mr.Hope 好友",
+              icon: "contact",
+              openType: "addFriend",
+              openId: "868D7B2F0C609B4285698EAB77A47BA1",
+              hidden: env === "wx",
+            },
+            {
+              text:
+                appID === "wx9ce37d9662499df3"
+                  ? "联系校会君"
+                  : "联系或支持 Mr.Hope",
+              icon: "contact",
+              openType: "contact",
+              hidden: env === "qq",
+            },
+            {
+              text: "添加到桌面",
+              icon: "send",
+              button: "addToDesktop",
+              hidden: env == "wx",
             },
           ],
         },
@@ -70,8 +107,8 @@ $register("me", {
 
     footer: {
       author: "",
-      desc: `当前版本: ${globalData.version}\n${
-        globalData.appID === "wx9ce37d9662499df3"
+      desc: `当前版本: ${version}\n${
+        appID === "wx9ce37d9662499df3"
           ? "Mr.Hope 已授权东北师范大学校学生会使用小程序代码。\n"
           : ""
       }小程序由 Mr.Hope 个人制作，如有错误还请见谅`,
