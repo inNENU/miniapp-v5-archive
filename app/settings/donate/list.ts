@@ -22,6 +22,7 @@ $register("donate-list", {
     page: {
       title: "赞赏列表",
       shareable: true,
+      qrcode: false,
       from: "返回",
     },
     text: {

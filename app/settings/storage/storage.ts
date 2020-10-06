@@ -33,7 +33,7 @@ $register("storage", {
           tag: "list",
           header: "空间占用",
           content: [
-            { text: "小程序体积", desc: "400K" },
+            { text: "小程序体积", desc: "389K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],

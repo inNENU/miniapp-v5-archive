@@ -60,27 +60,49 @@
     transform: translateY(0);
   }
 
-  .button,
+  .action-list {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    height: 120px;
+    padding: 5px 10px;
+  }
+
+  .action {
+    flex-shrink: 0;
+
+    width: auto;
+    margin: 0 4px;
+    padding: 8px;
+    border: none;
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background-color: var(--block-bgcolor);
+    }
+
+    .text {
+      color: var(--dark-grey);
+      font-weight: 400;
+      font-size: 13px;
+    }
+  }
+
   .cancel-button {
     width: 100%;
+    height: 60px;
     padding: 8px 24px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom));
     border: none;
+    border-top: 8px var(--border-color-light) solid !important;
     border-radius: 0;
 
     background-color: var(--block-bgcolor);
     color: var(--text-color);
 
     font-weight: 400;
-  }
-
-  .button {
-    border-top: 1rpx var(--border-color) solid;
-    line-height: 2.4;
-  }
-
-  .cancel-button {
-    height: 60px;
-    padding-bottom: calc(24px + env(safe-area-inset-bottom));
-    border-top: 8px var(--border-color-light) solid !important;
   }
 }

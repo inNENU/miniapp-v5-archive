@@ -58,6 +58,7 @@ $register("donate", {
       ],
       action: false,
       shareable: true,
+      qrcode: false,
     } as PageDataWithContent,
   },
 
