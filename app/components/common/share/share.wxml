@@ -17,28 +17,30 @@
   <view class="mask" />
   <!-- 分享按钮列表 -->
   <view class="share-menu">
-    <scroll-view scroll-x enable-flex class="action-list">
-      <block wx:for="{{actions}}" wx:key="text">
-        <button
-          wx:if="{{!item.hidden}}"
-          class="action"
-          hover-class="button-hover"
-          hover-start-time="0"
-          plain
-          open-type="{{item.openType}}"
-          open-id="{{item.openId}}"
-          group-id="{{item.groupId}}"
-          share-type="{{item.shareType}}"
-          bind:tap="{{item.action || ''}}"
-        >
-          <image
-            wx:if="{{iconData[item.icon]}}"
-            class="icon"
-            src="{{iconData[item.icon]}}"
-          />
-          <view class="text">{{item.text}}</view>
-        </button>
-      </block>
+    <scroll-view scroll-x>
+      <view class="action-list">
+        <block wx:for="{{actions}}" wx:key="text">
+          <button
+            wx:if="{{!item.hidden}}"
+            class="action"
+            hover-class="button-hover"
+            hover-start-time="0"
+            plain
+            open-type="{{item.openType}}"
+            open-id="{{item.openId}}"
+            group-id="{{item.groupId}}"
+            share-type="{{item.shareType}}"
+            bind:tap="{{item.action || ''}}"
+          >
+            <image
+              wx:if="{{iconData[item.icon]}}"
+              class="icon"
+              src="{{iconData[item.icon]}}"
+            />
+            <view class="text">{{item.text}}</view>
+          </button>
+        </block>
+      </view>
     </scroll-view>
     <button class="cancel-button" hover-class="button-hover">取消</button>
   </view>
