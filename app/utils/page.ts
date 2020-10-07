@@ -354,7 +354,7 @@ export const popNotice = (id: string): void => {
 
     if (notice) {
       modal(notice.title, notice.content, () => {
-        wx.setStorageSync(`${id}notifyed`, true); // 防止二次弹窗
+        wx.setStorageSync(`${id}-notifyed`, true); // 防止二次弹窗
       });
       info(`${id} 页面弹出通知`); // 调试
     }

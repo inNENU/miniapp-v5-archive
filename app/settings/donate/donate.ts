@@ -31,14 +31,16 @@ $register("donate", {
           tag: "text",
           style: "text-indent: 1.5em;",
           text: [
-            "如果您愿意对我的工作以及我的开销进行赞赏支持，可以点击下方二维码。这样会将对应的二维码保存至您的手机相册。您可以稍后使用相应 APP 扫码来进行打赏。如果您是学生，Mr.Hope 不建议您赞赏支持数目较大的金额，1 至 2 元钱就是一份心意。如果您是家长，Mr.Hope 欢迎您进行一定程度的赞赏。",
+            "如果您愿意对我的工作以及我的开销进行赞赏支持，可以点击下方按钮将对应的二维码保存至您的手机相册。您可以稍后使用相应 APP 扫码来进行打赏。",
           ],
         },
-        { tag: "title", text: "赞赏方式" },
         {
           tag: "advanced-list",
           header: false,
-          content: [{ text: "保存二维码", button: "save" }],
+          content: [
+            { text: "保存微信二维码", button: "saveWechat" },
+            { text: "保存支付宝二维码", button: "saveAlipay" },
+          ],
         },
         { tag: "title", text: "捐赠列表" },
         {
@@ -102,9 +104,11 @@ $register("donate", {
   },
 
   /** 保存二维码 */
-  save() {
-    console.info("Start QRCode download."); // 调试
-    savePhoto("img/donate/Alipay.jpg");
+  saveWechat() {
     savePhoto("img/donate/Wechat.jpg");
+  },
+
+  saveAlipay() {
+    savePhoto("img/donate/Alipay.jpg");
   },
 });

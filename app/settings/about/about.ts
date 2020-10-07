@@ -54,6 +54,21 @@ $register("about", {
           ],
         },
         {
+          tag: "advanced-list",
+          header: "支持小程序",
+          content: [
+            {
+              text:
+                "小程序每年会产生开销，如果你希望帮助 Mr.Hope，欢迎联系 Mr.Hope 施以援手。",
+            },
+            {
+              text: "联系并支持 Mr.Hope",
+              icon: "contact",
+              openType: "contact",
+            },
+          ],
+        },
+        {
           tag: "text",
           heading: "小程序内容",
           text: [
