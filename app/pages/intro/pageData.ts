@@ -20,7 +20,7 @@ export default {
           text: "招生概况",
           color: "orange",
           name: "Enroll",
-          icon: "about",
+          icon: "enroll",
           path: "intro/enroll/index",
         },
         {
@@ -159,7 +159,7 @@ export default {
           text: "体育学院",
           color: "purple",
           name: "Pe",
-          icon: "pe",
+          icon: "basketball",
           path: "intro/school/pe/index",
         },
         {
@@ -242,7 +242,7 @@ export default {
           text: "保卫科",
           color: "mauve",
           name: "Defend",
-          icon: "shield",
+          icon: "safe",
           path: "apartment/defend",
         },
         {

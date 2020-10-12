@@ -18,7 +18,7 @@ export default {
       type: "page",
       src: "http://mp.innenu.com/img/tab/headphone.jpg",
       title: "音悦东师",
-      logo: "music",
+      logo: "cd",
       url: "music",
     },
     {
