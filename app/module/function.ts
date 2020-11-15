@@ -26,7 +26,7 @@ $register("function", {
     path: "/module/function/function?action=all",
   }),
 
-  onShareTimeline: () => ({ title: "功能页", query: { action: "all" } }),
+  onShareTimeline: () => ({ title: "功能页", query: "action=all" }),
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {

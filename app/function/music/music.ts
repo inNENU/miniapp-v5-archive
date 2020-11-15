@@ -154,7 +154,7 @@ $register("music", {
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.currentSong.title,
-      query: { name: this.data.currentSong.title },
+      query: `name=${this.data.currentSong.title}`,
     };
   },
 

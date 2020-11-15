@@ -46,7 +46,7 @@ $register("me", {
             },
             {
               text: "更新日志",
-              icon: "about",
+              icon: "log",
               url: "log",
               desc: version,
             },

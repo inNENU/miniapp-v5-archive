@@ -126,7 +126,7 @@ $register("video", {
   onShareTimeline() {
     return {
       title: this.data.videoName,
-      query: { name: this.data.videoName },
+      query: `name=${this.data.videoName}`,
     };
   },
 

@@ -6,5 +6,5 @@
   </view>
 
   <view class="footer">{{text}}</view>
-  <view class="copyright">Copyright © 2017-2020 HopeStudio</view>
+  <view class="copyright">Copyright © 2017-2020 Mr.Hope</view>
 </view>
