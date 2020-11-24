@@ -40,9 +40,9 @@ $register.C<{
 
     /** 控制选择器改变 */
     pickerChange(event: WechatMiniprogram.PickerChange): void {
-      const { id, content } = this.getDetail(event) as ListDetail<
-        PickerListComponentItemConfig
-      >;
+      const { id, content } = this.getDetail(
+        event
+      ) as ListDetail<PickerListComponentItemConfig>;
 
       if (event.type === "change") {
         const { value } = event.detail;
@@ -75,9 +75,9 @@ $register.C<{
 
     /** 开关改变 */
     switch(event: WechatMiniprogram.SwitchChange): void {
-      const { id, content } = this.getDetail(event) as ListDetail<
-        SwitchListComponentItemConfig
-      >;
+      const { id, content } = this.getDetail(
+        event
+      ) as ListDetail<SwitchListComponentItemConfig>;
 
       // 更新页面数据
       this.setData(
@@ -95,18 +95,18 @@ $register.C<{
 
     /** 触发按钮事件 */
     button(event: WechatMiniprogram.TouchEvent): void {
-      const { content } = this.getDetail(event) as ListDetail<
-        ButtonListComponnetItemConfig
-      >;
+      const { content } = this.getDetail(
+        event
+      ) as ListDetail<ButtonListComponnetItemConfig>;
 
       this.triggerEvent("change", { event: content.button });
     },
 
     /** 控制滑块显隐 */
     sliderTap(event: WechatMiniprogram.TouchEvent): void {
-      const { id, content } = this.getDetail(event) as ListDetail<
-        SliderListComponentItemConfig
-      >;
+      const { id, content } = this.getDetail(
+        event
+      ) as ListDetail<SliderListComponentItemConfig>;
 
       // 更新页面数据
       this.setData({ [`config.content[${id}].visible`]: !content.visible });
@@ -114,9 +114,9 @@ $register.C<{
 
     /** 滑块改变 */
     sliderChange(event: WechatMiniprogram.SliderChange): void {
-      const { id, content } = this.getDetail(event) as ListDetail<
-        SliderListComponentItemConfig
-      >;
+      const { id, content } = this.getDetail(
+        event
+      ) as ListDetail<SliderListComponentItemConfig>;
       const { value } = event.detail;
 
       // 更新页面数据，并写入值到存储
