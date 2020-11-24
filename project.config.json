@@ -22,9 +22,9 @@
   },
   "miniprogramRoot": "app/",
   "compileType": "miniprogram",
-  "libVersion": "2.13.1",
+  "libVersion": "2.14.0",
   "appid": "wx33acb831ee1831a5",
-  "qqLibVersion": "1.19.0",
+  "qqLibVersion": "1.20.0",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {

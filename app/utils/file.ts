@@ -26,6 +26,7 @@ export const dirname = (path: string): string =>
 
 /**
  * 删除文件或文件夹
+ *
  * @param path 要删除的文件或文件夹路径
  * @param isDir 要删除的是否是文件夹
  */
@@ -54,7 +55,6 @@ export const remove = (path: string, type?: "dir" | "file"): void => {
  * 判断文件或文件夹是否存在
  *
  * @param path 要查看的文件/文件夹路径
- * @returns true
  */
 export const isFileExist = (path: string): boolean => {
   try {
