@@ -188,7 +188,7 @@ $register("map", {
   setMarker() {
     const promises = ["benbu", "jingyue"].map(
       (path) =>
-        new Promise((resolve) => {
+        new Promise<void>((resolve) => {
           getJSON({
             path: `function/map/marker/${path}`,
             url: `resource/function/map/marker/${path}`,
