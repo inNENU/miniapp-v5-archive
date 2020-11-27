@@ -43,6 +43,7 @@ $register("search", {
       color: getColor(true),
       searchword: options.word || "",
       theme: globalData.theme,
+      darkmode: globalData.darkmode,
     });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);

@@ -14,8 +14,8 @@
     "doc": "typedoc --options ./typedoc.json",
     "lint": "prettier --check --write . && prettier --check --write --parser babel-flow **/*.wxs && prettier --check --write --parser html **/*.wxml && eslint --fix --ext .ts,.wxs . && stylelint --fix **/*.scss",
     "lint:check": "prettier --check . && prettier --check --parser babel-flow **/*.wxs && prettier --check --parser html **/*.wxml && eslint --ext .ts,.wxs . && stylelint **/*.scss",
-    "ts:watch": "tsc --watch",
-    "ts:compile": "tsc",
+    "ts:watch": "tsc --build --watch",
+    "ts:compile": "tsc --build",
     "upgrade": "ncu -u && yarn install && yarn upgrade"
   },
   "repository": {

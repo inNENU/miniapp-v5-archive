@@ -30,7 +30,7 @@
   "setting": {
     "urlCheck": true,
     "es6": false,
-    "enhance": false,
+    "enhance": true,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -58,7 +58,8 @@
     "userConfirmedUseCompilerModuleSwitch": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "userConfirmedBundleSwitch": true
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
