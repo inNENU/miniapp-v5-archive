@@ -41,7 +41,7 @@
     "gulp-sass": "4.1.0",
     "husky": "4.3.0",
     "lint-staged": "10.5.1",
-    "miniprogram-api-typings": "3.2.0",
+    "miniprogram-api-typings": "3.2.1",
     "prettier": "2.1.2",
     "stylelint": "13.7.2",
     "stylelint-config-prettier": "8.0.2",
