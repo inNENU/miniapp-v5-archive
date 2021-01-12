@@ -11,7 +11,7 @@ const {
 } = getApp<AppOption>();
 
 $register("page", {
-  data: { page: {} as PageData },
+  data: { page: {} as PageData & { id: string } },
 
   state: {
     /** 在线文件路径 */

@@ -2,12 +2,12 @@
 const log = wx.getRealtimeLogManager
   ? wx.getRealtimeLogManager()
   : wx.getLogManager({ level: 1 });
-const realtime = Boolean(wx.getRealtimeLogManager);
+const hasRealtime = "getRealtimeLogManager" in wx;
 
 /** 写入普通日志 */
 export const debug = (...args: any[]): void => {
   console.log(...args);
-  if (realtime) log.info("debug", ...args);
+  if (hasRealtime) log.info("debug", ...args);
   else (log as WechatMiniprogram.LogManager).debug(...args);
 };
 
@@ -26,7 +26,7 @@ export const warn = (...args: any[]): void => {
 /** 写入错误日志 */
 export const error = (...args: any[]): void => {
   console.error(...args);
-  if (realtime) (log as WechatMiniprogram.RealtimeLogManager).error(...args);
+  if (hasRealtime) (log as WechatMiniprogram.RealtimeLogManager).error(...args);
   else log.warn("error", ...args);
 };
 
@@ -36,6 +36,6 @@ export const error = (...args: any[]): void => {
  * @param filterMsg 过滤信息
  */
 export const fliter = (filterMsg: string): void => {
-  if (realtime)
+  if (hasRealtime)
     (log as WechatMiniprogram.RealtimeLogManager).setFilterMsg(filterMsg);
 };

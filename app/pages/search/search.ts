@@ -114,7 +114,9 @@ $register("search", {
     });
   },
 
-  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+  navigate({
+    currentTarget,
+  }: WechatMiniprogram.TouchEvent<never, never, { id: string }>) {
     this.$route(`/module/page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 

@@ -20,126 +20,8 @@ plugins:
   - prettier
 
 ignorePatterns:
-  - app/**/*.js
-  - server/**
-
-rules:
-  comma-dangle:
-    - off
-
-  complexity:
-    - warn
-    - max: 25
-
-  capitalized-comments:
-    - off
-
-  curly:
-    - error
-    - multi
-
-  function-call-argument-newline:
-    - error
-    - consistent
-
-  global-require:
-    - off
-
-  guard-for-in:
-    - off
-
-  id-length:
-    - error
-    - min: 2
-      exceptions:
-        - i
-        - j
-        - x
-        - y
-
-  implicit-arrow-linebreak:
-    - off
-
-  indent:
-    - off
-
-  init-declarations:
-    - off
-
-  line-comment-position:
-    - off
-
-  max-lines:
-    - warn
-    - 500
-
-  max-lines-per-function:
-    - warn
-    - 80
-
-  max-statements:
-    - warn
-    - 25
-
-  new-cap:
-    - off
-
-  nonblock-statement-body-position:
-    - error
-    - any
-
-  no-console:
-    - off
-
-  no-debugger:
-    - off
-
-  no-inline-comments:
-    - off
-
-  no-magic-numbers:
-    - off
-
-  no-multi-assign:
-    - off
-
-  no-nested-ternary:
-    - off
-
-  no-param-reassign:
-    - error
-    - props: false
-
-  no-plusplus:
-    - error
-    - allowForLoopAfterthoughts: true
-
-  no-sync:
-    - off
-
-  no-ternary:
-    - off
-
-  no-underscore-dangle:
-    - error
-    - allowAfterThis: true
-
-  no-undefined:
-    - off
-
-  no-unused-vars:
-    - off
-
-  no-warning-comments:
-    - warn
-
-  object-curly-spacing:
-    - off
-
-  prefer-destructuring:
-    - error
-    - object: true
-      array: false
+  - dist/
+  - server/
 
 overrides:
   - files:
@@ -186,6 +68,7 @@ overrides:
     extends:
       - plugin:@typescript-eslint/eslint-recommended
       - plugin:@typescript-eslint/recommended
+      - "plugin:@typescript-eslint/recommended-requiring-type-checking"
       - prettier/@typescript-eslint
 
     plugins:
@@ -224,22 +107,22 @@ overrides:
         - warn
         - ignoreRestArgs: true
 
+      "@typescript-eslint/no-floating-promises":
+        - off
+
       "@typescript-eslint/no-unsafe-member-access":
         - warn
+
+      "@typescript-eslint/unbound-method":
+        - off
 
   - files:
       - "**/test/**/*.spec.js"
       - "**/test/**/*.spec.ts"
-      - "**/test/**/*.test.js"
-      - "**/test/**/*.test.ts"
 
     env:
-      mocha: true
+      jest: true
       node: true
-
-    rules:
-      id-length: "off"
-      max-lines-per-function: "off"
 
   - files:
       - "gulpfile.js"

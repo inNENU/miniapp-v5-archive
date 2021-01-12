@@ -98,7 +98,8 @@ $register("about", {
     const { page } = this.data;
 
     // 读取开发者模式并对页面显示做相应改变
-    developMode = wx.getStorageSync("developMode");
+    if (wx.getStorageSync("developMode") as boolean | undefined)
+      developMode = true;
     if (!developMode)
       (page.content[0] as AdvancedListComponentConfig).content.forEach(
         (x, y) => {
@@ -115,7 +116,8 @@ $register("about", {
       const { page } = this.data;
 
       // 读取开发者模式并对页面显示做相应改变
-      developMode = wx.getStorageSync("developMode");
+      if (wx.getStorageSync("developMode") as boolean | undefined)
+        developMode = true;
       if (!developMode)
         (page.content[0] as AdvancedListComponentConfig).content.forEach(
           (x, y) => {
@@ -140,9 +142,7 @@ $register("about", {
           { option: { id: "关于" }, ctx: this },
           {
             ...this.data.page,
-            content: (this.data.page.content as ComponentConfig[])
-              .slice(0, 1)
-              .concat(data),
+            content: this.data.page.content.slice(0, 1).concat(data),
           }
         );
       }

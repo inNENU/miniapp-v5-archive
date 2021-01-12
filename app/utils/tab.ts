@@ -20,7 +20,7 @@ export const refreshPage = (
   >,
   globalData: GlobalData
 ): void => {
-  const test = wx.getStorageSync("test");
+  const test = wx.getStorageSync("test") as boolean;
 
   // 开启测试后展示测试界面
   if (test)

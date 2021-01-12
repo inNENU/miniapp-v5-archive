@@ -16,7 +16,10 @@ interface ActionConfig {
   shareType?: number;
   action?: string;
 }
-const store = {
+
+type IconData = Record<string, string>;
+
+const store: { iconData: IconData | null } = {
   iconData: null,
 };
 
@@ -29,7 +32,7 @@ Component({
       const { config } = this.data;
       if (typeof config.qrcode === "string")
         savePhoto(`/img/QRCode/${appID}/${config.qrcode}.png`);
-      else savePhoto(`/img/QRCode/${appID}/${config.id}.png`);
+      else savePhoto(`/img/QRCode/${appID}/${config.id as string}.png`);
     },
   },
 
@@ -38,7 +41,7 @@ Component({
       if (!store.iconData)
         store.iconData = JSON.parse(
           (readFile("icon/shareicons") as string) || "{}"
-        );
+        ) as IconData;
 
       this.setData({ iconData: store.iconData });
     },

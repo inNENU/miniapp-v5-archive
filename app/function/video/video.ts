@@ -91,12 +91,13 @@ $register("video", {
       if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
 
       popNotice("video");
-    } else
+    } else {
       modal(
         "禁止播放",
         "只有企业主体小程序才可以播放视频，请使用微信搜索小程序“东师青年+”。",
         () => this.back()
       );
+    }
   },
 
   onShow() {
@@ -111,19 +112,19 @@ $register("video", {
     this.createSelectorQuery()
       .select(".video-list")
       .fields({ size: true }, ({ height }) => {
-        this.setData({ height });
+        this.setData({ height: height as number });
       })
       .exec();
   },
 
-  onShareAppMessage() {
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.videoName,
       path: `/function/video/video?name=${this.data.videoName}`,
     };
   },
 
-  onShareTimeline() {
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.videoName,
       query: `name=${this.data.videoName}`,

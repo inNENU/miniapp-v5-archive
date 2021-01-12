@@ -33,6 +33,7 @@ $register.C<{
       const {
         id,
         content: { visible: value },
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       } = this.getDetail(event) as ListDetail<PickerListComponentItemConfig>;
 
       this.setData({ [`config.content[${id}].visible`]: !value });
@@ -40,6 +41,7 @@ $register.C<{
 
     /** 控制选择器改变 */
     pickerChange(event: WechatMiniprogram.PickerChange): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<PickerListComponentItemConfig>;
@@ -50,7 +52,7 @@ $register.C<{
         // 判断为多列选择器，遍历每一列更新页面数据、并存储选择器值
         if (Array.isArray(value)) {
           value.forEach((x: string | number, y: number) => {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            // eslint-disable-next-line
             (content.value as any[])[y] = (content.pickerValue as any[][])[y][
               Number(x)
             ];
@@ -61,6 +63,7 @@ $register.C<{
 
           // 判断为单列选择器，更新页面数据并存储选择器值
         } else {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           content.value = content.pickerValue[Number(value)];
           content.currentValue = Number(value);
           wx.setStorageSync(content.key, Number(value));
@@ -75,6 +78,7 @@ $register.C<{
 
     /** 开关改变 */
     switch(event: WechatMiniprogram.SwitchChange): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SwitchListComponentItemConfig>;
@@ -95,6 +99,7 @@ $register.C<{
 
     /** 触发按钮事件 */
     button(event: WechatMiniprogram.TouchEvent): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { content } = this.getDetail(
         event
       ) as ListDetail<ButtonListComponnetItemConfig>;
@@ -104,6 +109,7 @@ $register.C<{
 
     /** 控制滑块显隐 */
     sliderTap(event: WechatMiniprogram.TouchEvent): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;
@@ -114,6 +120,7 @@ $register.C<{
 
     /** 滑块改变 */
     sliderChange(event: WechatMiniprogram.SliderChange): void {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;
@@ -131,14 +138,14 @@ $register.C<{
     },
 
     /** 获得选择器位置与内容 */
-    getDetail({ currentTarget }: WechatMiniprogram.BaseEvent): ListDetail {
+    getDetail({
+      currentTarget,
+    }: WechatMiniprogram.TouchEvent<never, never, { id: string }>): ListDetail {
       const id = currentTarget.id || currentTarget.dataset.id;
 
       return {
         id,
-        content: (this.data.config as AdvancedListComponentConfig).content[
-          Number(id)
-        ],
+        content: this.data.config.content[Number(id)],
       };
     },
   },
@@ -167,6 +174,7 @@ $register.C<{
         const detail2: Record<string, any> = {};
 
         Object.keys(detail).forEach((element) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           detail2[`config.${element}`] = detail[element];
         });
 

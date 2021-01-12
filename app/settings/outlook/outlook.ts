@@ -80,8 +80,10 @@ $register("setting", {
    * @param value 主题名称
    */
   setTheme(value: string) {
-    const theme = ((this.data.page.content[0] as AdvancedListComponentConfig)
-      .content[0] as PickerListComponentItemConfig).pickerValue[Number(value)];
+    const theme = (((this.data.page.content[0] as AdvancedListComponentConfig)
+      .content[0] as PickerListComponentItemConfig).pickerValue as string[])[
+      Number(value)
+    ];
 
     globalData.theme = theme;
     wx.setStorageSync("theme", theme);

@@ -16,7 +16,6 @@ type ListAction =
   | "refreshFunc"
   | "refreshIntro"
   | "deleteData"
-  | "deleteData"
   | "resetApp";
 
 $register("storage", {

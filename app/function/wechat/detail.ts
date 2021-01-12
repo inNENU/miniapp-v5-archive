@@ -88,7 +88,13 @@ $register("wechat-detail", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+  navigate({
+    currentTarget,
+  }: WechatMiniprogram.TouchEvent<
+    never,
+    never,
+    { title: string; url: string }
+  >) {
     const { title, url } = currentTarget.dataset;
 
     // 无法跳转，复制链接到剪切板
@@ -116,7 +122,9 @@ $register("wechat-detail", {
   },
 
   follow() {
-    this.$route(`/module/web?url=${this.data.config.follow}&title=欢迎关注`);
+    this.$route(
+      `/module/web?url=${this.data.config.follow as string}&title=欢迎关注`
+    );
   },
 
   back() {

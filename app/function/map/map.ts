@@ -175,7 +175,7 @@ $register("map", {
 
   /** 获得当前校区 */
   getArea(): Area {
-    const value: Area | undefined = wx.getStorageSync("map-area");
+    const value = wx.getStorageSync("map-area") as Area | undefined;
 
     if (value) return value;
 
@@ -285,9 +285,10 @@ $register("map", {
 
     if (event.type === "markertap") {
       if (path) this.$preload(`/function/map/location?id=${area}/${path}`);
-    } else if (event.type === "callouttap")
+    } else if (event.type === "callouttap") {
       if (path) this.$route(`/function/map/location?id=${area}/${path}`);
       else tip("该地点暂无详情");
+    }
   },
 
   showPopup() {

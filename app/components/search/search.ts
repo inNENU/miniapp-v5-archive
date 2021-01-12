@@ -39,7 +39,7 @@ Component({
     },
 
     select(event: WechatMiniprogram.TouchEvent): void {
-      const value = this.data.words[
+      const value = (this.data.words as string[])[
         event.currentTarget.dataset.index as number
       ];
 

@@ -36,22 +36,26 @@ const resolveContent = (
   page: PageData
 ): void => {
   // 设置列表导航
-  if ("url" in listElement) listElement.url += `?from=${page.title}`;
+  if ("url" in listElement) listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
-    listElement.url = `page?from=${page.title}&id=${listElement.path}`;
+    listElement.url = `page?from=${page.title || "返回"}&id=${
+      listElement.path as string
+    }`;
 
   // 设置列表开关与滑块
   if ("swiKey" in listElement)
-    listElement.status = wx.getStorageSync(listElement.swiKey);
+    listElement.status = wx.getStorageSync(listElement.swiKey) as boolean;
   if ("sliKey" in listElement)
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     listElement.value = wx.getStorageSync(listElement.sliKey);
 
   // 设置列表选择器
   if ("pickerValue" in listElement)
     if (listElement.single) {
       // 单列选择器
-      const pickerValue: number = wx.getStorageSync(listElement.key);
+      const pickerValue = wx.getStorageSync(listElement.key) as number;
 
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       listElement.value = listElement.pickerValue[pickerValue];
       listElement.currentValue = [pickerValue];
     } else {
@@ -63,10 +67,10 @@ const resolveContent = (
       listElement.currentValue = [];
       listElement.value = [];
       pickerValues.forEach((pickerElement, index) => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // eslint-disable-next-line
         (listElement.value as any[])[index] = (listElement.pickerValue[
           index
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line
         ] as any[])[Number(pickerElement)];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (listElement.currentValue as any[])[index] = Number(pickerElement);
@@ -101,7 +105,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
     });
 
   // 调试
-  info(`${page.id} 处理完毕`);
+  info(`${page.id as string} 处理完毕`);
 
   return page; // 返回处理后的 page
 };
@@ -125,8 +129,8 @@ const preloadPage = (page: PageData): void => {
           ) => {
             if ("path" in element)
               ensureJSON({
-                path: `${element.path}`,
-                url: `resource/${element.path}`,
+                path: `${element.path as string}`,
+                url: `resource/${element.path as string}`,
               });
           }
         );
@@ -302,9 +306,13 @@ export const setPage = (
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
   else if (
     (option.id && globalData.page.id === option.id) ||
-    (ctx.data.page && globalData.page.id === (ctx.data.page as PageData).title)
+    (ctx.data.page &&
+      ctx.data.page.title &&
+      globalData.page.id === ctx.data.page.title)
   ) {
-    debug(`${globalData.page.id} 已处理`);
+    const { id } = globalData.page;
+
+    debug(`${id} 已处理`);
     ctx.setData(
       {
         color: getColor(globalData.page.data?.grey),
@@ -313,15 +321,16 @@ export const setPage = (
         page: globalData.page.data,
       },
       () => {
-        debug(`${globalData.page.id} 已写入`);
+        debug(`${id} 已写入`);
         if (preload) {
           preloadPage(ctx.data.page as PageData);
-          debug(`${globalData.page.id} 预加载子页面完成`);
+          debug(`${id} 预加载子页面完成`);
         }
       }
     );
   } else if (ctx.data.page) {
     debug(`${option.id || "未知页面"} 未处理`);
+
     const pageData: PageData = handle
       ? ctx.data.page
       : disposePage(ctx.data.page, option);
@@ -350,7 +359,7 @@ export const setPage = (
 export const popNotice = (id: string): void => {
   if (!wx.getStorageSync(`${id}-notifyed`)) {
     // 没有进行过通知，判断是否需要弹窗，从存储中获取通知内容并展示
-    const notice: Notice = wx.getStorageSync(`${id}-notice`);
+    const notice = wx.getStorageSync(`${id}-notice`) as Notice;
 
     if (notice) {
       modal(notice.title, notice.content, () => {
@@ -381,28 +390,32 @@ export const setOnlinePage = (
   ctx: PageInstanceWithPage,
   preload = true
 ): void => {
-  // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
-  if (globalData.page.id === option.id) {
-    debug(`${option.id} 已处理`);
-    ctx.setData(
-      {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        color: getColor(globalData.page.data!.grey),
-        theme: globalData.theme,
-        darkmode: globalData.darkmode,
-        page: globalData.page.data,
-      },
-      () => {
-        debug(`${option.id} 已写入`);
-        if (preload) {
-          preloadPage(ctx.data.page as PageData);
-          debug(`${option.id} 预加载子页面完成`);
+  if (option.id) {
+    // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
+    if (globalData.page.id === option.id) {
+      debug(`${option.id} 已处理`);
+
+      return ctx.setData(
+        {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          color: getColor(globalData.page.data!.grey),
+          theme: globalData.theme,
+          darkmode: globalData.darkmode,
+          page: globalData.page.data,
+        },
+        () => {
+          debug(`${option.id as string} 已写入`);
+          if (preload) {
+            preloadPage(ctx.data.page as PageData);
+            debug(`${option.id as string} 预加载子页面完成`);
+          }
         }
-      }
-    );
-  } else if (option.id) {
+      );
+    }
+
     // 需要重新载入界面
     info(`${option.id} onLoad开始，参数为: `, option);
+
     const page = readJSON<PageData>(`${option.id}`);
 
     // 如果本地存储中含有 page 直接处理
@@ -424,7 +437,8 @@ export const setOnlinePage = (
         `resource/${option.id}`,
         (data) => {
           // 非分享界面下将页面数据写入存储
-          if (option.from !== "share") writeJSON(`${option.id}`, data);
+          if (option.from !== "share")
+            writeJSON(`${option.id as string}`, data);
 
           // 设置界面
           setPage({ option, ctx }, data as PageData);
@@ -432,14 +446,14 @@ export const setOnlinePage = (
           // 如果需要执行预加载，则执行
           if (preload) {
             preloadPage(ctx.data.page as PageData);
-            debug(`${option.id} 界面预加载完成`);
+            debug(`${option.id as string} 界面预加载完成`);
           }
 
           // 弹出通知
-          popNotice(option.id || "");
+          popNotice(option.id as string);
 
           // 调试
-          info(`${option.id} onLoad 成功`);
+          info(`${option.id as string} onLoad 成功`);
         },
         (res) => {
           // 设置 error 页面并弹出通知
@@ -453,7 +467,7 @@ export const setOnlinePage = (
           popNotice(option.id || "");
 
           // 调试
-          warn(`${option.id} onLoad 失败，错误为`, res);
+          warn(`${option.id as string} onLoad 失败，错误为`, res);
         },
         () => {
           // 设置 error 界面
@@ -466,7 +480,7 @@ export const setOnlinePage = (
           );
 
           // 调试
-          warn(`${option.id} 资源错误`);
+          warn(`${option.id as string} 资源错误`);
         }
       );
   } else error("no id");

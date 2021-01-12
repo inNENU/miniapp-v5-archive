@@ -1,8 +1,11 @@
-const { dest, parallel, series, src, watch } = require("gulp");
+const { dest, parallel, src, watch } = require("gulp");
 const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const PluginError = require("plugin-error");
 const through = require("through2");
+const typescript = require("gulp-typescript");
+
+const tsProject = typescript.createProject("tsconfig.json");
 
 const buildWXSS = () =>
   src("app/**/*.scss")
@@ -43,13 +46,23 @@ const buildWXSS = () =>
         cb();
       })
     )
-    .pipe(dest("app/"));
+    .pipe(dest("dist"));
+
+const moveFiles = () =>
+  src("app/**/*.{wxml,wxs,json,svg,png}").pipe(dest("dist"));
 
 const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
 
-const watchCommand = parallel(watchWXSS);
-const build = parallel(buildWXSS);
+const buildTypesciprt = () =>
+  tsProject.src().pipe(tsProject()).pipe(dest("dist"));
+
+const watchTypescript = () => watch("app/**/*.ts", buildTypesciprt);
+
+const watchFiles = () => watch("app/**/*.{wxml,wxs,json,svg,png}", moveFiles);
+
+const watchCommand = parallel(watchWXSS, watchTypescript, watchFiles);
+const build = parallel(buildWXSS, buildTypesciprt, moveFiles);
 
 exports.watch = watchCommand;
 exports.build = build;

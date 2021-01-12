@@ -1,5 +1,3 @@
-var tipIndex = 0;
-
 /** 获得天气类名 */
 function getClass(weather) {
   if (weather.observe) {

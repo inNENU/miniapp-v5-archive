@@ -30,20 +30,35 @@ $register("weather", {
       date: number;
       data: WeatherData;
     };
+    if (wx.getStorageSync("innenu-inited")) {
+      const weatherIcon = JSON.parse(
+        (readFile("./icon/weather/icon") as string) || "{}"
+      ) as Record<string, string>;
+      const hintIcon = JSON.parse(
+        (readFile("./icon/weather/hint") as string) || "{}"
+      ) as Record<string, string>;
 
-    const weatherIcon = JSON.parse(
-      (readFile("./icon/weather/icon") as string) || "{}"
-    );
-    const hintIcon = JSON.parse(
-      (readFile("./icon/weather/hint") as string) || "{}"
-    );
+      this.setData({
+        // 18 点至次日 5 点为夜间
+        night: new Date().getHours() > 18 || new Date().getHours() < 5,
 
-    if (!wx.getStorageSync("innenu-inited")) {
+        weatherIcon,
+        hintIcon,
+
+        firstPage: getCurrentPages().length === 1,
+        info,
+        darkmode,
+      });
+    } else {
       const handler = setInterval(() => {
         if (wx.getStorageSync("innenu-inited")) {
           this.setData({
-            weatherIcon: JSON.parse(readFile("./icon/weather/icon") as string),
-            hintIcon: JSON.parse(readFile("./icon/weather/hint") as string),
+            weatherIcon: JSON.parse(
+              readFile("./icon/weather/icon") as string
+            ) as Record<string, string>,
+            hintIcon: JSON.parse(
+              readFile("./icon/weather/hint") as string
+            ) as Record<string, string>,
           });
           clearInterval(handler);
         }
@@ -56,19 +71,9 @@ $register("weather", {
 
       this.initcanvas(weather);
 
-      this.setData({
-        weather,
-        // 18 点至次日 5 点为夜间
-        night: new Date().getHours() > 18 || new Date().getHours() < 5,
-
-        weatherIcon,
-        hintIcon,
-
-        firstPage: getCurrentPages().length === 1,
-        info: info,
-        darkmode: darkmode,
-      });
-    } // 否则需要重新获取并处理
+      this.setData({ weather });
+    }
+    // 需要重新获取并处理
     else
       wx.request({
         url: `${server}service/weatherData.php`,
@@ -78,15 +83,6 @@ $register("weather", {
 
           this.setData({
             weather: res.data as WeatherData,
-            // 18 点至次日 5 点为夜间
-            night: new Date().getHours() > 18 || new Date().getHours() < 5,
-
-            weatherIcon,
-            hintIcon,
-
-            darkmode,
-            firstPage: getCurrentPages().length === 1,
-            info,
           });
         },
       });

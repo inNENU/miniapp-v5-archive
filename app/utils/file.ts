@@ -132,7 +132,7 @@ export const readFile = (
 export const readJSON = <T>(
   path: string,
   encoding: FileEncoding = "utf-8"
-): T => {
+): T | undefined => {
   let data;
 
   try {
@@ -141,7 +141,7 @@ export const readJSON = <T>(
       encoding
     );
     try {
-      data = JSON.parse(fileContent as string);
+      data = JSON.parse(fileContent as string) as T;
 
       debug(`读取 ${path}.json 成功`);
     } catch (err) {
@@ -349,7 +349,7 @@ export const ensureJSON = ({
 export interface GetJSONOption<T> {
   path: string;
   url?: string;
-  success?: (data: T) => void;
+  success?: (data: T | undefined) => void;
   fail?: (errMsg: string | number) => void;
   error?: (statusCode: number) => void;
 }

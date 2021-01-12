@@ -18,11 +18,11 @@ import { VersionInfo } from "../../typings";
  * 资源下载
  *
  * @param fileName 下载资源名称
- * @param tip 是否开启进度提示
+ * @param progress 是否开启进度提示
  */
-export const resDownload = (fileName: string, tip = true): Promise<void> =>
+export const resDownload = (fileName: string, progress = true): Promise<void> =>
   new Promise((resolve, reject) => {
-    if (tip) wx.showLoading({ title: "下载中...", mask: true });
+    if (progress) wx.showLoading({ title: "下载中...", mask: true });
 
     // 取消下载成功提示并移除对应资源文件
     fileName.split("-").forEach((res) => {
@@ -36,12 +36,12 @@ export const resDownload = (fileName: string, tip = true): Promise<void> =>
       url: `${server}resource/${fileName}.zip`,
       success: (res) => {
         if (res.statusCode === 200) {
-          if (tip) wx.showLoading({ title: "保存中...", mask: true });
+          if (progress) wx.showLoading({ title: "保存中...", mask: true });
 
           // 保存压缩文件到压缩目录
           saveFile(res.tempFilePath, "zipTemp");
 
-          if (tip) wx.showLoading({ title: "解压中...", mask: true });
+          if (progress) wx.showLoading({ title: "解压中...", mask: true });
 
           // 解压文件到根目录
           unzip("zipTemp", "", () => {
@@ -49,12 +49,12 @@ export const resDownload = (fileName: string, tip = true): Promise<void> =>
             remove("zipTemp", "file");
 
             // 将下载成功信息写入存储
-            fileName.split("-").forEach((res) => {
-              if (res) wx.setStorageSync(`${res}Download`, true);
+            fileName.split("-").forEach((resource) => {
+              if (resource) wx.setStorageSync(`${resource}Download`, true);
             });
 
             // 判断取消提示
-            if (tip) wx.hideLoading();
+            if (progress) wx.hideLoading();
             resolve();
           });
         } else reject(res.statusCode);
@@ -68,7 +68,7 @@ export const resDownload = (fileName: string, tip = true): Promise<void> =>
     });
 
     downLoadTask.onProgressUpdate((res) => {
-      if (tip)
+      if (progress)
         wx.showLoading({ title: `下载中...${res.progress}%`, mask: true });
     });
   });
@@ -82,13 +82,17 @@ export const resDownload = (fileName: string, tip = true): Promise<void> =>
  */
 // eslint-disable-next-line max-lines-per-function
 export const checkResUpdate = (): void => {
-  const notify = wx.getStorageSync("resourceNotify"); // 资源提醒
+  const notify = wx.getStorageSync("resourceNotify") as boolean; // 资源提醒
   const localVersion: Record<string, number> = readJSON("version") || {}; // 读取本地 Version 文件
-  const localTime = wx.getStorageSync(`resourceUpdateTime`);
+  const localTime = wx.getStorageSync(`resourceUpdateTime`) as number;
   const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
 
   // 调试
-  debug(`资源通知状态为 ${notify}`, "本地版本文件为: ", localVersion);
+  debug(
+    `资源通知 ${notify ? "打开" : "关闭"}`,
+    "本地版本文件为: ",
+    localVersion
+  );
 
   if (notify || currentTime > Number(localTime) + 604800)
     // 如果需要更新
@@ -177,15 +181,12 @@ export const appInit = (): void => {
 
     // 根据平台设置主题
     switch (platform) {
-      case "ios":
-      case "windows":
-        theme = "ios";
-        num = 0;
-        break;
       case "android":
         theme = "android";
         num = 1;
         break;
+      case "ios":
+      case "windows":
       default:
         theme = "ios";
         num = 0;
@@ -284,7 +285,7 @@ export const noticeCheck = (globalData: GlobalData): void => {
  * @returns 夜间模式状态
  */
 export const getDarkmode = (
-  sysInfo: WechatMiniprogram.GetSystemInfoSyncResult = wx.getSystemInfoSync()
+  sysInfo: WechatMiniprogram.SystemInfo = wx.getSystemInfoSync()
 ): boolean => (sysInfo.AppPlatform ? false : sysInfo.theme === "dark");
 
 interface UpdateInfo {
@@ -381,7 +382,7 @@ interface LoginCallback {
  * @param appID 小程序的appID
  */
 export const login = ({ appID, env }: GlobalData): void => {
-  const openid = wx.getStorageSync("openid");
+  const openid = wx.getStorageSync("openid") as string;
 
   if (openid) console.info(`openid为: ${openid}`);
   else
@@ -399,7 +400,7 @@ export const login = ({ appID, env }: GlobalData): void => {
             },
           });
       },
-      fail: (errMsg) => {
+      fail: ({ errMsg }) => {
         console.error(`登录失败！${errMsg}`);
       },
     });
@@ -432,7 +433,10 @@ export const registAction = (): void => {
   // 监听用户截屏
   if (wx.getStorageSync("capture-screen") !== "never")
     wx.onUserCaptureScreen(() => {
-      const status = wx.getStorageSync("capture-screen");
+      const status = wx.getStorageSync("capture-screen") as
+        | "never"
+        | "noticed"
+        | undefined;
 
       if (status !== "never")
         wx.showModal({
@@ -465,7 +469,7 @@ export const startup = (globalData: GlobalData): void => {
   if (globalData.info.AppPlatform === "qq") globalData.env = "qq";
 
   // 获取主题、夜间模式、appID
-  globalData.theme = wx.getStorageSync("theme");
+  globalData.theme = wx.getStorageSync("theme") as string;
   globalData.darkmode = getDarkmode(globalData.info);
   globalData.appID = wx.getAccountInfoSync().miniProgram.appId;
 

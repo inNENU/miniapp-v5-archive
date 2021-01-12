@@ -1,9 +1,10 @@
-app/miniprogram_npm/
-app/**/*.js
-app/**/*.js.map
-app/**/*.wxss
-doc/**
+# Node Modules
 node_modules/**
 
-!app/node_modules/**/*.js
-!app/node_modules/**/*.js.map
+# Output Files
+dist/**
+!dist/package.json
+!dist/yarn.lock
+
+# VSCode config
+.vscode/

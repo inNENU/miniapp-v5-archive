@@ -595,7 +595,7 @@ declare namespace WechatMiniprogram {
         TMethod extends MethodOption = MethodOption,
         TCustomInstanceProperty extends IAnyObject = IAnyObject
       >(
-        options: Options<TData, TProperty, TMethod, TCustomInstanceProperty>
+        options: MPOptions<TData, TProperty, TMethod, TCustomInstanceProperty>
       ): string;
     }
   }
@@ -616,6 +616,7 @@ declare namespace WechatMiniprogram {
 
 declare module "wxpage" {
   interface WXPage
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     extends WechatMiniprogram.Page.MPConstructor,
       MPPage.Emitter {
     // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -1,5 +1,4 @@
 {
   "javascript.validate.enable": false,
-  "typescript.tsdk": "node_modules\\typescript\\lib",
-  "liveServer.settings.port": 5591
+  "typescript.tsdk": "node_modules\\typescript\\lib"
 }

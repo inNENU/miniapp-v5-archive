@@ -103,7 +103,7 @@ $register("music", {
             (song) => song.title === name
           );
         } else {
-          const name = wx.getStorageSync("music");
+          const name = wx.getStorageSync("music") as string | undefined;
 
           if (name)
             globalData.music.index = (songList as SongDetail[]).findIndex(

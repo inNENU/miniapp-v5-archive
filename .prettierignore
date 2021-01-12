@@ -1,6 +1,4 @@
-app/**/*.js
-app/**/*.d.ts
-app/**/*.wxss
+dist/
 app/function/music/music.wxs
 
 doc/
