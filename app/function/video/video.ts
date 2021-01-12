@@ -49,8 +49,7 @@ $register("video", {
           if (options.scene) {
             const ids = options.scene.split("-").map((id) => Number(id));
 
-            groupID = ids[0];
-            listID = ids[1];
+            [groupID, listID] = ids;
           } else if (options.name) {
             const name = decodeURI(options.name);
 
@@ -58,6 +57,7 @@ $register("video", {
               const listIndex = videoGroup.content.findIndex(
                 (videoItem) => videoItem.name === name
               );
+
               if (listIndex !== -1) {
                 groupID = groupIndex;
                 listID = listIndex;
@@ -105,7 +105,8 @@ $register("video", {
       family: "FZSSJW",
       source: 'url("https://mrhope.top/ttf/FZSSJW.ttf")',
       complete: (res) => {
-        console.info(`宋体字体${res.status}`); // 调试
+        // 调试
+        console.info(`宋体字体${res.status}`);
       },
     });
 
@@ -181,7 +182,8 @@ $register("video", {
   /** 提示用户视频加载出错 */
   error() {
     tip("视频加载出错");
-    wx.reportMonitor("5", 1); // 调试
+    // 调试
+    wx.reportMonitor("5", 1);
   },
 
   /** 返回按钮功能 */

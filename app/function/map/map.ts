@@ -189,11 +189,11 @@ $register("map", {
     const promises = ["benbu", "jingyue"].map(
       (path) =>
         new Promise<void>((resolve) => {
-          getJSON({
+          getJSON<MarkerConfig>({
             path: `function/map/marker/${path}`,
             url: `resource/function/map/marker/${path}`,
             success: (markerData) => {
-              this.state[path as Area] = markerData as MarkerConfig;
+              this.state[path as Area] = markerData;
 
               resolve();
             },

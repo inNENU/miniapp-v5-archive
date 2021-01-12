@@ -94,7 +94,8 @@ $register.C<{
         }
       );
 
-      wx.setStorageSync(content.swiKey, event.detail.value); // 将开关值写入存储的swiKey变量中
+      // 将开关值写入存储的 swiKey 变量中
+      wx.setStorageSync(content.swiKey, event.detail.value);
     },
 
     /** 触发按钮事件 */

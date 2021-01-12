@@ -28,8 +28,6 @@ Component({
         method: "POST",
         enableHttp2: true,
         success: (res) => {
-          // const weather = weatherHandler((res.data as WeatherData).data);
-
           this.setData({ weather: res.data as WeatherData });
 
           // 将天气详情和获取时间写入存储，避免重复获取

@@ -89,6 +89,8 @@ $register("setting", {
     wx.setStorageSync("theme", theme);
     this.setData({ theme });
     this.$emit("theme", theme);
-    console.info(`theme 切换为 ${theme}`); // 调试
+
+    // 调试
+    console.info(`theme 切换为 ${theme}`);
   },
 });

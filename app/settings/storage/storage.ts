@@ -4,7 +4,7 @@ import { AppOption } from "../../app";
 import { PageDataWithContent } from "../../../typings";
 
 import { resDownload } from "../../utils/app";
-import { remove, listFile } from "../../utils/file";
+import { listFile, remove } from "../../utils/file";
 import { popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 
@@ -100,8 +100,9 @@ $register("storage", {
   setStorage() {
     wx.getStorageInfo({
       success: ({ currentSize }) => {
+        // 写入存储大小
         this.setData({
-          "page.content[0].content[1].desc": `${currentSize}K/10240K`, // 写入存储大小
+          "page.content[0].content[1].desc": `${currentSize}K/10240K`,
         });
       },
     });
@@ -119,10 +120,11 @@ $register("storage", {
           fileSize += element.stats.size;
         });
 
+        // 写入文件大小
         this.setData({
           "page.content[0].content[2].desc": `${Math.ceil(
             fileSize / 1024
-          )}K/10240K`, // 写入文件大小
+          )}K/10240K`,
         });
       },
     });

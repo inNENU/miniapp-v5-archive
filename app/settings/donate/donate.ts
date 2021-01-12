@@ -4,7 +4,7 @@ import { AppOption } from "../../app";
 import { PageDataWithContent } from "../../../typings";
 
 import { server } from "../../utils/config";
-import { popNotice, getColor } from "../../utils/page";
+import { getColor, popNotice } from "../../utils/page";
 import { savePhoto } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();

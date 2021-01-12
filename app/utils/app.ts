@@ -1,15 +1,15 @@
 /* eslint-disable max-lines */
 import { appOption, server } from "./config";
+import { debug, error, info, warn } from "./log";
 import {
-  remove,
+  isFileExist,
   listFile,
   readJSON,
-  writeJSON,
+  remove,
   saveFile,
   unzip,
-  isFileExist,
+  writeJSON,
 } from "./file";
-import { debug, error, info, warn } from "./log";
 import { modal, requestJSON, tip } from "./wx";
 import { GlobalData } from "../app";
 import { VersionInfo } from "../../typings";
@@ -82,10 +82,14 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
  */
 // eslint-disable-next-line max-lines-per-function
 export const checkResUpdate = (): void => {
-  const notify = wx.getStorageSync("resourceNotify") as boolean; // 资源提醒
-  const localVersion: Record<string, number> = readJSON("version") || {}; // 读取本地 Version 文件
+  /** 资源提醒状态 */
+  const notify = wx.getStorageSync("resourceNotify") as boolean;
+  /** 本地资源版本 */
+  const localVersion: Record<string, number> = readJSON("version") || {};
+  /** 上次更新时间 */
   const localTime = wx.getStorageSync(`resourceUpdateTime`) as number;
-  const currentTime = Math.round(new Date().getTime() / 1000); // 读取当前和上次更新时间
+  /** 当前时间 */
+  const currentTime = Math.round(new Date().getTime() / 1000);
 
   // 调试
   debug(
@@ -111,7 +115,8 @@ export const checkResUpdate = (): void => {
 
           // 需要更新
           if (updateList.length > 0) {
-            info("资源有更新"); // 调试
+            // 调试
+            info("资源有更新");
 
             const fileName = updateList.join("-");
             const size = versionInfo.size[fileName];
@@ -158,7 +163,8 @@ export const checkResUpdate = (): void => {
               resDownload(fileName).then(() => {
                 writeJSON("version", versionInfo.version);
               });
-          } // 调试
+          }
+          // 调试
           else debug("资源已是最新版");
         } else tip("服务器出现问题");
       },
@@ -473,25 +479,27 @@ export const startup = (globalData: GlobalData): void => {
   globalData.darkmode = getDarkmode(globalData.info);
   globalData.appID = wx.getAccountInfoSync().miniProgram.appId;
 
-  // 检测基础库版本
-  // if (
-  //   ((globalData.env === "qq" &&
-  //     compareVersion(globalData.info.SDKVersion, "1.9.0") < 0) ||
-  //     (globalData.env === "wx" &&
-  //       compareVersion(globalData.info.SDKVersion, "2.8.0") < 0)) &&
-  //   wx.getStorageSync("SDKVersion") !== globalData.info.SDKVersion
-  // )
-  //   modal(
-  //     "基础库版本偏低",
-  //     `您的${
-  //       globalData.env === "qq" ? "QQ" : "微信"
-  //     }版本偏低，虽然不会影响小程序的功能，但会导致部分内容显示异常。为获得最佳体验，建议您更新至最新版本。`,
-  //     () => {
-  //       // 避免重复提示
-  //       wx.setStorageSync("SDKVersion", globalData.info.SDKVersion);
-  //       if (wx.canIUse("updateWeChatApp")) wx.updateWeChatApp();
-  //     }
-  //   );
+  /*
+   * 检测基础库版本
+   * if (
+   *   ((globalData.env === "qq" &&
+   *     compareVersion(globalData.info.SDKVersion, "1.9.0") < 0) ||
+   *     (globalData.env === "wx" &&
+   *       compareVersion(globalData.info.SDKVersion, "2.8.0") < 0)) &&
+   *   wx.getStorageSync("SDKVersion") !== globalData.info.SDKVersion
+   * )
+   *   modal(
+   *     "基础库版本偏低",
+   *     `您的${
+   *       globalData.env === "qq" ? "QQ" : "微信"
+   *     }版本偏低，虽然不会影响小程序的功能，但会导致部分内容显示异常。为获得最佳体验，建议您更新至最新版本。`,
+   *     () => {
+   *       // 避免重复提示
+   *       wx.setStorageSync("SDKVersion", globalData.info.SDKVersion);
+   *       if (wx.canIUse("updateWeChatApp")) wx.updateWeChatApp();
+   *     }
+   *   );
+   */
 
   // 获取网络信息
   wx.getNetworkType({

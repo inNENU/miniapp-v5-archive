@@ -21,7 +21,8 @@ Component<{ config: MediaComponentConfig }>({
     /** 提示用户加载出错 */
     error(): void {
       tip("视频加载出错");
-      wx.reportMonitor("5", 1); // 调试
+      // 调试
+      wx.reportMonitor("5", 1);
     },
   },
 });

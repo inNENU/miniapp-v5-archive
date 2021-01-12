@@ -34,6 +34,7 @@ module.exports = {
   /** 获得天气背景类名 */
   getBgClass: function (weather) {
     var weatherClass = getClass(weather);
+
     return weatherClass === "starry"
       ? "starry-bg"
       : weatherClass === "stormy"

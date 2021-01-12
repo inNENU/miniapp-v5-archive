@@ -44,6 +44,7 @@ $register.C({
           }>
         ): void;
       };
+
       // 判断结果并更新界面数据
       if (that.data.titleDisplay !== nav.titleDisplay)
         that.setData({

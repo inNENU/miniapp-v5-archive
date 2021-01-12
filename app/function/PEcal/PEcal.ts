@@ -332,11 +332,11 @@ $register("PEcal", {
       [peScore.bmi, peScore.passScore] = this.getBMI(result);
 
     // 读取相应配置文件
-    getJSON({
+    getJSON<GradeConfig>({
       path: `function/PEcal/${gender}-${grade}`,
       url: `resource/function/PEcal/${gender}-${grade}`,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      success: (config: GradeConfig) => {
+      success: (config) => {
         // 以下三项越高越好，进行计算
         (["vitalCapacity", "sitAndReach", "standingLongJump"] as (
           | "vitalCapacity"
@@ -412,7 +412,7 @@ $register("PEcal", {
           ) / 100;
 
         this.setData({
-          peScore: peScore,
+          peScore,
           showScore: true,
           pe: {
             score: finalScore,

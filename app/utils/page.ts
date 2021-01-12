@@ -8,8 +8,8 @@ import {
   AdvancedListComponentItemConfig,
   GridComponentItemComfig,
   ListComponentItemConfig,
-  PageOption,
   PageData,
+  PageOption,
 } from "../../typings";
 
 type PageInstanceWithPage = WechatMiniprogram.Page.MPInstance<
@@ -87,8 +87,10 @@ const resolveContent = (
  * @returns 处理之后的page
  */
 const disposePage = (page: PageData, option: PageOption): PageData => {
-  page.id = option.id ? option.id : page.title; // 设置界面名称
-  page.from = option.from || "返回"; // 设置页面来源
+  // 设置界面名称
+  page.id = option.id || page.title;
+  // 设置页面来源
+  page.from = option.from || "返回";
 
   if (page.content)
     page.content.forEach((element) => {
@@ -107,7 +109,8 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
   // 调试
   info(`${page.id as string} 处理完毕`);
 
-  return page; // 返回处理后的 page
+  // 返回处理后的 page
+  return page;
 };
 
 /**
@@ -137,7 +140,8 @@ const preloadPage = (page: PageData): void => {
     });
   else warn("不存在页面内容");
 
-  wx.reportMonitor("1", 1); // 统计报告
+  // 统计报告
+  wx.reportMonitor("1", 1);
 };
 
 /**
@@ -168,12 +172,14 @@ export const resolvePage = (
   page?: PageData,
   setGlobal = true
 ): PageData | null => {
-  info("将要跳转: ", option); // 控制台输出参数
+  // 控制台输出参数
+  info("将要跳转: ", option);
+
   let pageData = null;
 
   if (page) pageData = disposePage(page, option.query);
   else if (option.query.id) {
-    const jsonContent: PageData = readJSON(`${option.query.id}`);
+    const jsonContent = readJSON<PageData>(`${option.query.id}`);
 
     if (jsonContent) pageData = disposePage(jsonContent, option.query);
     else warn(`${option.query.id} 文件不存在，处理失败`);
@@ -225,8 +231,6 @@ export const getColor = (grey = false): ColorConfig => {
   else if (globalData.darkmode && !grey)
     switch (globalData.theme) {
       case "ios":
-        temp = ["#000000", "#000000", "#000000"];
-        break;
       case "Andriod":
       case "nenu":
       default:
@@ -363,12 +367,16 @@ export const popNotice = (id: string): void => {
 
     if (notice) {
       modal(notice.title, notice.content, () => {
-        wx.setStorageSync(`${id}-notifyed`, true); // 防止二次弹窗
+        // 防止二次弹窗
+        wx.setStorageSync(`${id}-notifyed`, true);
       });
-      info(`${id} 页面弹出通知`); // 调试
+
+      // 调试
+      info(`${id} 页面弹出通知`);
     }
   }
-  wx.reportAnalytics("page_count", { id }); // Aim统计分析
+  // 统计分析
+  wx.reportAnalytics("page_count", { id });
 };
 
 /**
@@ -395,7 +403,7 @@ export const setOnlinePage = (
     if (globalData.page.id === option.id) {
       debug(`${option.id} 已处理`);
 
-      return ctx.setData(
+      ctx.setData(
         {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           color: getColor(globalData.page.data!.grey),
@@ -411,78 +419,78 @@ export const setOnlinePage = (
           }
         }
       );
-    }
+    } else {
+      // 需要重新载入界面
+      info(`${option.id} onLoad开始，参数为: `, option);
 
-    // 需要重新载入界面
-    info(`${option.id} onLoad开始，参数为: `, option);
+      const page = readJSON<PageData>(`${option.id}`);
 
-    const page = readJSON<PageData>(`${option.id}`);
+      // 如果本地存储中含有 page 直接处理
+      if (page) {
+        setPage({ option, ctx }, page);
+        popNotice(option.id);
+        info(`${option.id} onLoad 成功: `, ctx.data);
+        wx.reportMonitor("0", 1);
 
-    // 如果本地存储中含有 page 直接处理
-    if (page) {
-      setPage({ option, ctx }, page);
-      popNotice(option.id);
-      info(`${option.id} onLoad 成功: `, ctx.data);
-      wx.reportMonitor("0", 1);
-
-      // 如果需要执行预加载，则执行
-      if (preload) {
-        preloadPage(ctx.data.page as PageData);
-        debug(`${option.id} 界面预加载完成`);
-      }
-    }
-    // 请求页面Json
-    else
-      requestJSON(
-        `resource/${option.id}`,
-        (data) => {
-          // 非分享界面下将页面数据写入存储
-          if (option.from !== "share")
-            writeJSON(`${option.id as string}`, data);
-
-          // 设置界面
-          setPage({ option, ctx }, data as PageData);
-
-          // 如果需要执行预加载，则执行
-          if (preload) {
-            preloadPage(ctx.data.page as PageData);
-            debug(`${option.id as string} 界面预加载完成`);
-          }
-
-          // 弹出通知
-          popNotice(option.id as string);
-
-          // 调试
-          info(`${option.id as string} onLoad 成功`);
-        },
-        (res) => {
-          // 设置 error 页面并弹出通知
-          setPage(
-            { option, ctx },
-            {
-              error: true,
-              statusBarHeight: globalData.info.statusBarHeight,
-            }
-          );
-          popNotice(option.id || "");
-
-          // 调试
-          warn(`${option.id as string} onLoad 失败，错误为`, res);
-        },
-        () => {
-          // 设置 error 界面
-          setPage(
-            { option, ctx },
-            {
-              error: true,
-              statusBarHeight: globalData.info.statusBarHeight,
-            }
-          );
-
-          // 调试
-          warn(`${option.id as string} 资源错误`);
+        // 如果需要执行预加载，则执行
+        if (preload) {
+          preloadPage(ctx.data.page as PageData);
+          debug(`${option.id} 界面预加载完成`);
         }
-      );
+      }
+      // 请求页面Json
+      else
+        requestJSON(
+          `resource/${option.id}`,
+          (data) => {
+            // 非分享界面下将页面数据写入存储
+            if (option.from !== "share")
+              writeJSON(`${option.id as string}`, data);
+
+            // 设置界面
+            setPage({ option, ctx }, data as PageData);
+
+            // 如果需要执行预加载，则执行
+            if (preload) {
+              preloadPage(ctx.data.page as PageData);
+              debug(`${option.id as string} 界面预加载完成`);
+            }
+
+            // 弹出通知
+            popNotice(option.id as string);
+
+            // 调试
+            info(`${option.id as string} onLoad 成功`);
+          },
+          (res) => {
+            // 设置 error 页面并弹出通知
+            setPage(
+              { option, ctx },
+              {
+                error: true,
+                statusBarHeight: globalData.info.statusBarHeight,
+              }
+            );
+            popNotice(option.id || "");
+
+            // 调试
+            warn(`${option.id as string} onLoad 失败，错误为`, res);
+          },
+          () => {
+            // 设置 error 界面
+            setPage(
+              { option, ctx },
+              {
+                error: true,
+                statusBarHeight: globalData.info.statusBarHeight,
+              }
+            );
+
+            // 调试
+            warn(`${option.id as string} 资源错误`);
+          }
+        );
+    }
   } else error("no id");
 };
 

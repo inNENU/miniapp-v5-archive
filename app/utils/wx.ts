@@ -13,7 +13,7 @@ export const tip = (
   duration = 1500,
   icon: "success" | "loading" | "none" = "none"
 ): void => {
-  wx.showToast({ icon, title: text, duration: duration ? duration : 1500 });
+  wx.showToast({ icon, title: text, duration });
 };
 
 /**
@@ -119,7 +119,9 @@ export const requestJSON = <T = Record<string, any>>(
     url: `${server}${path}.json`,
     enableHttp2: true,
     success: (res) => {
-      debug(`请求 ${path} 成功: `, res); // 调试
+      // 调试
+      debug(`请求 ${path} 成功: `, res);
+
       if (res.statusCode === 200) successFunc(res.data as T);
       else {
         tip("服务器出现问题，请稍后重试");

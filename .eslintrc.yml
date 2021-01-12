@@ -23,6 +23,31 @@ ignorePatterns:
   - dist/
   - server/
 
+rules:
+  eqeqeq: error
+  line-comment-position: error
+  no-duplicate-imports: error
+  object-shorthand: error
+  padding-line-between-statements:
+    - error
+    - blankLine: always
+      prev: "*"
+      next: return
+    - blankLine: always
+      prev:
+        - const
+        - let
+      next: "*"
+    - blankLine: any
+      prev:
+        - const
+        - let
+      next:
+        - const
+        - let
+  prefer-destructuring: error
+  prefer-template: error
+
 overrides:
   - files:
       - ".lintstagedrc.js"

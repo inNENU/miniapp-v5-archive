@@ -91,7 +91,8 @@ export const listFile = (path: string): string[] => {
   try {
     const fileList = fileManager.readdirSync(`${userPath}/${path}`);
 
-    info(`${path} 文件夹下文件为: `, fileList); // 调试
+    // 调试
+    info(`${path} 文件夹下文件为: `, fileList);
 
     return fileList;
   } catch (err) {
@@ -140,6 +141,7 @@ export const readJSON = <T>(
       `${userPath}/${path}.json`,
       encoding
     );
+
     try {
       data = JSON.parse(fileContent as string) as T;
 
@@ -349,8 +351,8 @@ export const ensureJSON = ({
 export interface GetJSONOption<T> {
   path: string;
   url?: string;
-  success?: (data: T | undefined) => void;
-  fail?: (errMsg: string | number) => void;
+  success?: (data: T) => void;
+  fail?: (errMsg?: string | number) => void;
   error?: (statusCode: number) => void;
 }
 
@@ -373,7 +375,9 @@ export const getJSON = <T>({
     path,
     success: () => {
       const data = readJSON<T>(path);
-      if (success) success(data);
+
+      if (success && typeof data !== "undefined") success(data);
+      else if (fail) fail("Data returned with undefined");
     },
     fail,
     error: errorFunc,

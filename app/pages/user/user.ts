@@ -98,7 +98,7 @@ $register("me", {
               text: "添加到桌面",
               icon: "send",
               button: "addToDesktop",
-              hidden: env == "wx",
+              hidden: env === "wx",
             },
           ],
         },

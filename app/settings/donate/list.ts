@@ -3,7 +3,7 @@ import $register = require("wxpage");
 import { AppOption } from "../../app";
 
 import { server } from "../../utils/config";
-import { popNotice, getColor } from "../../utils/page";
+import { getColor, popNotice } from "../../utils/page";
 
 const { globalData } = getApp<AppOption>();
 

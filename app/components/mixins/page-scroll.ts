@@ -6,6 +6,7 @@ type TrivialInstance = WechatMiniprogram.Page.TrivialInstance & {
 
 const getCurrentPage = (): TrivialInstance => {
   const pages = getCurrentPages();
+
   return pages[pages.length - 1] || ({} as TrivialInstance);
 };
 
@@ -37,6 +38,7 @@ export const pageScrollMixin = (scroller: Scroller): string =>
 
     detached() {
       const page = getCurrentPage();
+
       page.scrollHandler = (page.scrollHandler || []).filter(
         (item) => item !== scroller
       );

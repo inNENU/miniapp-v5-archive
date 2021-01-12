@@ -88,7 +88,8 @@ $register.A<AppOption>({
   },
 
   onLaunch(opts) {
-    console.info("小程序启动，参数为", opts); // 调试
+    // 调试
+    console.info("小程序启动，参数为", opts);
 
     // 如果初次启动执行初始化
     if (!wx.getStorageSync("innenu-inited")) appInit();

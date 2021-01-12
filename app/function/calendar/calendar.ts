@@ -3,7 +3,7 @@ import $register = require("wxpage");
 import { AppOption } from "../../app";
 import { TimeLineItem } from "../../components/timeline/timeline";
 
-import { popNotice, getColor } from "../../utils/page";
+import { getColor, popNotice } from "../../utils/page";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { modal } from "../../utils/wx";
 import { server } from "../../utils/config";
@@ -36,14 +36,14 @@ $register("calendar", {
   },
 
   onLoad() {
-    getJSON({
+    getJSON<TimeLineItem[]>({
       path: "function/calendar/index",
       url: "resource/function/calendar/index",
       success: (calendar) => {
         this.setData({
           color: getColor(),
           theme: globalData.theme,
-          calendar: calendar as TimeLineItem[],
+          calendar,
         });
       },
       fail: () => {
@@ -90,13 +90,13 @@ $register("calendar", {
 
   /** 显示校历详情 */
   display(event: WechatMiniprogram.TouchEvent<{ path: string }>) {
-    getJSON({
+    getJSON<CalendarDetail>({
       path: `function/calendar/${event.detail.path}`,
       url: `resource/function/calendar/${event.detail.path}`,
       success: (data) => {
         this.setData({
-          "popupConfig.title": (data as CalendarDetail).title,
-          calendarDetail: (data as CalendarDetail).content,
+          "popupConfig.title": data.title,
+          calendarDetail: data.content,
           display: true,
         });
       },

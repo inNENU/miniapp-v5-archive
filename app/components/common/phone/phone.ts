@@ -1,9 +1,10 @@
 import { AppOption } from "../../../app";
 import { PhoneComponentConfig } from "../../../../typings";
 import { modal } from "../../../utils/wx";
+
 const {
   globalData: { env },
-} = getApp<AppOption>(); // 获得当前小程序环境
+} = getApp<AppOption>();
 
 Component<{ config: PhoneComponentConfig }>({
   properties: {

@@ -71,7 +71,8 @@ $register("music", {
       family: "FZSSJW",
       source: `url("${server}assets/fonts/FZSSJW.ttf")`,
       complete: (res) => {
-        console.info("宋体字体", res); // 调试
+        // 调试
+        console.info("宋体字体", res);
       },
     });
 
@@ -91,7 +92,7 @@ $register("music", {
       firstPage: getCurrentPages().length === 1,
     });
 
-    getJSON({
+    getJSON<SongDetail[]>({
       path: "function/music/index",
       url: "resource/function/music/index",
       success: (songList) => {
@@ -99,25 +100,25 @@ $register("music", {
         else if (option.name) {
           const name = decodeURI(option.name);
 
-          globalData.music.index = (songList as SongDetail[]).findIndex(
+          globalData.music.index = songList.findIndex(
             (song) => song.title === name
           );
         } else {
           const name = wx.getStorageSync("music") as string | undefined;
 
           if (name)
-            globalData.music.index = (songList as SongDetail[]).findIndex(
+            globalData.music.index = songList.findIndex(
               (song) => song.title === name
             );
         }
 
         const { index } = globalData.music;
-        const currentSong = (songList as SongDetail[])[index];
+        const currentSong = songList[index];
 
         // 写入歌曲列表与当前歌曲信息
         this.setData({
           index,
-          songList: songList as SongDetail[],
+          songList,
           currentSong,
         });
 
@@ -186,7 +187,8 @@ $register("music", {
   managerRegister() {
     // 能够播放 100ms 后设置可以播放
     manager.onCanplay(() => {
-      console.info("Canplay"); // 调试
+      // 调试
+      console.info("Canplay");
       this.setData({ canplay: true });
     });
 
@@ -252,14 +254,14 @@ $register("music", {
     const { lyric } = this.data.currentSong;
 
     if (lyric)
-      getJSON({
+      getJSON<Lyric[]>({
         path: `function/music/${lyric}`,
         url: `resource/function/music/${lyric}`,
         success: (lyrics) => {
           this.setData({
             currentLyric: "",
             currentLyricId: -1,
-            lyrics: lyrics as Lyric[],
+            lyrics,
           });
         },
       });

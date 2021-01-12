@@ -1,10 +1,11 @@
 import { AppOption } from "../../../app";
 import { PageData } from "../../../../typings";
-import { savePhoto } from "../../../utils/wx";
 import { readFile } from "../../../utils/file";
+import { savePhoto } from "../../../utils/wx";
+
 const {
   globalData: { env, appID },
-} = getApp<AppOption>(); // 获得日志管理器，全局数据
+} = getApp<AppOption>();
 
 interface ActionConfig {
   icon: string;
@@ -30,6 +31,7 @@ Component({
     /** 二维码下载 */
     download(): void {
       const { config } = this.data;
+
       if (typeof config.qrcode === "string")
         savePhoto(`/img/QRCode/${appID}/${config.qrcode}.png`);
       else savePhoto(`/img/QRCode/${appID}/${config.id as string}.png`);

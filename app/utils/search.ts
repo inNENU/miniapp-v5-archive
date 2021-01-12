@@ -31,11 +31,17 @@ interface WordInfo {
   weight: number;
 }
 
+/**
+ * 生成匹配词
+ *
+ * @param word 搜索词
+ */
 const genWords = (word: string): WordInfo[] => {
   const { length } = word;
 
   if (length === 1) return [{ text: word, weight: 1 }];
   const result: WordInfo[] = [];
+
   for (let wordNumber = length; wordNumber > 1; wordNumber--)
     for (let start = 0; start < length - wordNumber + 1; start++)
       result.push({
@@ -50,17 +56,18 @@ const genWords = (word: string): WordInfo[] => {
  * 搜索词
  *
  * @param searchWord 输入的搜索词
+ * @param category 搜索分类
  *
  * @returns 匹配的候选词列表
  */
 export const searching = (
   searchWord: string,
-  name: string,
+  category: string,
   callback: (words: string[]) => void
 ): void => {
   const words: string[] = [];
 
-  requestJSON(`resource/${name}-search`, (data) => {
+  requestJSON(`resource/${category}-search`, (data) => {
     const keywords = data as SearchInfo;
 
     if (searchWord)
@@ -102,20 +109,21 @@ export const searching = (
  * 搜索
  *
  * @param searchWord 输入的搜索词
+ * @param category 搜索分类
  *
  * @returns 匹配的结果列表
  */
 // eslint-disable-next-line max-lines-per-function
 export const search = (
   searchWord: string,
-  name: string,
+  category: string,
   callback: (result: SearchResult[]) => void
 ): void => {
   const wordsInfo = genWords(searchWord);
   const result: Record<string, SearchContent> = {};
 
   // eslint-disable-next-line max-lines-per-function
-  requestJSON(`resource/${name}-search`, (data) => {
+  requestJSON(`resource/${category}-search`, (data) => {
     const searchMap = data as SearchInfo;
 
     // eslint-disable-next-line
@@ -181,6 +189,7 @@ export const search = (
         // 搜索卡片，权重为 2
         card.forEach((config) => {
           const { title, desc = "" } = config;
+
           if (title.indexOf(word.text) !== -1) {
             weight += 4 * word.weight;
             matchList.push({ type: "card", title, desc });
@@ -191,7 +200,7 @@ export const search = (
         });
 
         // 搜索文字，权重为 1
-        text.forEach((text: string) => {
+        text.forEach((text) => {
           const index = text.indexOf(word.text);
 
           if (index !== -1) {
@@ -202,6 +211,7 @@ export const search = (
               index + 8 + word.text.length,
               text.length
             );
+
             matchList.push({
               type: "text",
               text: `${startIndex === 0 ? "" : "..."}${text.substring(

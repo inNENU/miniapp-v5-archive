@@ -26,11 +26,11 @@ $register("location", {
     if (option.id) {
       if (globalData.page.id === option.id) setPage({ option, ctx: this });
       else
-        getJSON({
+        getJSON<PageData>({
           path: `function/map/${option.id}`,
           url: `resource/function/map/${option.id}`,
           success: (data) => {
-            setPage({ option, ctx: this }, data as PageData);
+            setPage({ option, ctx: this }, data);
           },
           fail: () => {
             setPage(

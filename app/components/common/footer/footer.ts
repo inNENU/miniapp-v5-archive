@@ -1,8 +1,9 @@
 import { AppOption } from "../../../app";
 import { server } from "../../../utils/config";
 const {
+  // 获得当前小程序ID
   globalData: { appID },
-} = getApp<AppOption>(); // 获得当前小程序ID
+} = getApp<AppOption>();
 
 Component({
   properties: {

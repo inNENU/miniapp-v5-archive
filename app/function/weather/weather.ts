@@ -30,6 +30,7 @@ $register("weather", {
       date: number;
       data: WeatherData;
     };
+
     if (wx.getStorageSync("innenu-inited")) {
       const weatherIcon = JSON.parse(
         (readFile("./icon/weather/icon") as string) || "{}"
@@ -380,6 +381,7 @@ $register("weather", {
   /** 贴士详情 */
   hint({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const hint = this.data.weather.hints[currentTarget.dataset.id as number];
+
     modal(hint.name, hint.detail);
   },
 
