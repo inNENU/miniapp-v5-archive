@@ -32,7 +32,7 @@
   },
   "homepage": "https://mrhope.site",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.14.2",
+    "@typescript-eslint/eslint-plugin": "4.15.0",
     "@typescript-eslint/parser": "4.14.2",
     "conventional-changelog-cli": "2.1.1",
     "cz-conventional-changelog": "3.3.0",
