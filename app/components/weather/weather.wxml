@@ -7,7 +7,7 @@
   <view class="weather-pic {{tool.getClass(weather)}}" />
   <block wx:if="{{weather.observe}}">
     <view class="detail"
-      ><text class="icon-font location" /> 长春市 | {{
+      ><text class="icon-font icon-location" /> 长春市 | {{
       weather.observe.weather}}</view
     >
     <view class="temperature">
@@ -19,7 +19,7 @@
       </view>
     </view>
     <view class="text" catch:tap="refresh"
-      ><text class="icon-font refresh" />{{weather.tips[tipIndex]}}</view
+      ><text class="icon-font icon-refresh" />{{weather.tips[tipIndex]}}</view
     >
   </block>
   <image wx:else src="/icon/loading.svg" class="loading" />

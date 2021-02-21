@@ -22,7 +22,7 @@
       open-type="share"
       plain
     >
-      <text class="icon-font share" /> 分享
+      <text class="icon-font icon-share" /> 分享
     </button>
 
     <!-- 背景蒙层 -->
@@ -36,7 +36,7 @@
       <view class="level">{{weather.air.aqiName}}</view>
     </view>
     <view class="location-wrapper"
-      ><text class="icon-font location" /> 长春市 南关区</view
+      ><text class="icon-font icon-location" /> 长春市 南关区</view
     >
     <view class="temperature">{{weather.observe.degree}}°</view>
     <view class="type">{{weather.observe.weather}}</view>

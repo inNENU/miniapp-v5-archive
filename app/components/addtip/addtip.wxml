@@ -7,7 +7,7 @@
   <view class="body">
     {{text}}
     <view class="close-wrapper" catch:tap="close">
-      <view class="icon-button close" />
+      <view class="icon-button icon-close" />
     </view>
   </view>
 </view>

@@ -5,8 +5,8 @@ import { server } from "./config";
  * 显示提示文字
  *
  * @param text 提示文字
- * @param duration 提示持续时间，单位ms，默认为`1500`
- * @param icon 提示图标，默认为`'none'`
+ * @param duration 提示持续时间，单位 ms，默认为 `1500`
+ * @param icon 提示图标，默认为 `'none'`
  */
 export const tip = (
   text: string,

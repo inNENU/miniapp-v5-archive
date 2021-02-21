@@ -1,3 +1,7 @@
+import type { AppOption } from "../../app";
+
+const { globalData } = getApp<AppOption>();
+
 export interface PopupConfig {
   /** 主标题 */
   title: string;
@@ -22,6 +26,12 @@ Component({
     show: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  lifetimes: {
+    attached(): void {
+      this.setData({ info: globalData.info });
     },
   },
 

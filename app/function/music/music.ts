@@ -372,7 +372,7 @@ $register("music", {
   /** 上一曲动作 */
   previous() {
     const { index } = this.data;
-    const { length: total } = this.data.songList;
+    const total = this.data.songList.length;
     let result: number | "nothing";
 
     switch (this.data.mode) {

@@ -24,6 +24,7 @@ const buildWXSS = () =>
       through.obj(function (file, enc, cb) {
         if (file.isNull()) {
           this.push(file);
+
           return cb();
         }
 
@@ -32,6 +33,7 @@ const buildWXSS = () =>
             "error",
             new PluginError("Sass", "Streaming not supported")
           );
+
           return cb();
         }
 
@@ -48,18 +50,24 @@ const buildWXSS = () =>
     )
     .pipe(dest("dist"));
 
+const buildTypesciprt = () =>
+  tsProject.src().pipe(tsProject()).pipe(dest("dist"));
+
 const moveFiles = () =>
   src("app/**/*.{wxml,wxs,json,svg,png}").pipe(dest("dist"));
 
 const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
 
-const buildTypesciprt = () =>
-  tsProject.src().pipe(tsProject()).pipe(dest("dist"));
+const watchTypescript = () =>
+  watch("app/**/*.ts", { ignoreInitial: false }, buildTypesciprt);
 
-const watchTypescript = () => watch("app/**/*.ts", buildTypesciprt);
-
-const watchFiles = () => watch("app/**/*.{wxml,wxs,json,svg,png}", moveFiles);
+const watchFiles = () =>
+  watch(
+    "app/**/*.{wxml,wxs,json,svg,png}",
+    { ignoreInitial: false },
+    moveFiles
+  );
 
 const watchCommand = parallel(watchWXSS, watchTypescript, watchFiles);
 const build = parallel(buildWXSS, buildTypesciprt, moveFiles);

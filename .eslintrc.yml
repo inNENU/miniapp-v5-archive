@@ -45,16 +45,13 @@ rules:
       next:
         - const
         - let
-  prefer-destructuring: error
+  prefer-destructuring:
+    - error
+    - object: true
+
   prefer-template: error
 
 overrides:
-  - files:
-      - ".lintstagedrc.js"
-
-    env:
-      node: true
-
   - files:
       - "*.wxs"
 

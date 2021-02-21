@@ -6,9 +6,6 @@ plugins:
   - stylelint-order
   - stylelint-scss
 
-ignoreFiles:
-  - app/**/*.wxss
-
 rules:
   at-rule-disallowed-list:
     - debug
@@ -50,8 +47,6 @@ rules:
   function-comma-space-after: always-single-line
 
   function-url-quotes: always
-
-  indentation: 2
 
   length-zero-no-unit: true
 
