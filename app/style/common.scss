@@ -41,21 +41,6 @@
     加载中图标
 *****************/
 
-.loading-logo-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 100vw;
-  height: 100vh;
-}
-
-.loading-logo {
-  width: 100px;
-  height: 125px;
-  filter: drop-shadow(-1px 1px 2px rgba(191, 190, 195, 0.15));
-}
-
 @keyframes jump {
   0% {
     top: 0;
@@ -113,58 +98,6 @@
   }
 }
 
-.loading-logo .logo {
-  position: relative;
-
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-
-  background-color: #2ecc71;
-
-  animation: jump 2s linear 0s none infinite alternate-reverse;
-}
-
-.loading-logo .logo .in {
-  position: absolute;
-  left: 40px;
-  color: #fff;
-  font-size: 32px;
-}
-
-.loading-logo .logo .dong {
-  position: absolute;
-  top: 36px;
-  left: 15px;
-
-  color: #fff;
-
-  font-size: 32px;
-}
-
-.loading-logo .logo .shi {
-  position: absolute;
-  top: 44px;
-  right: 15px;
-
-  color: #fff;
-
-  font-size: 32px;
-}
-
-.loading-logo-wrapper .text {
-  margin: 8px auto;
-  color: var(--grey);
-  font-size: 18px;
-}
-
-@media (min-width: 480px) {
-  .loading-logo-wrapper .text {
-    margin: 12px auto;
-    font-size: 24px;
-  }
-}
-
 @keyframes shadow {
   0%,
   100% {
@@ -176,16 +109,81 @@
   }
 }
 
-.loading-logo-wrapper .shadow {
-  width: 60px;
-  height: 10px;
-  margin: -10px 20px 0;
-  border-radius: 50%;
+.loading-logo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  background: rgba(191, 190, 195, 0.15);
-  box-shadow: 0 0 5px rgba(191, 190, 195, 0.15);
+  width: 100vw;
+  height: 100vh;
 
-  animation: shadow 2s ease 0s none infinite alternate-reverse;
+  .text {
+    margin: 8px auto;
+    color: var(--grey);
+    font-size: 18px;
+
+    @media (min-width: 480px) {
+      margin: 12px auto;
+      font-size: 24px;
+    }
+  }
+
+  .shadow {
+    width: 60px;
+    height: 10px;
+    margin: -10px 20px 0;
+    border-radius: 50%;
+
+    background: rgba(191, 190, 195, 0.15);
+    box-shadow: 0 0 5px rgba(191, 190, 195, 0.15);
+
+    animation: shadow 2s ease 0s none infinite alternate-reverse;
+  }
+}
+
+.loading-logo {
+  width: 100px;
+  height: 125px;
+  filter: drop-shadow(-1px 1px 2px rgba(191, 190, 195, 0.15));
+
+  .logo {
+    position: relative;
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+
+    background-color: #2ecc71;
+
+    animation: jump 2s linear 0s none infinite alternate-reverse;
+
+    .in {
+      position: absolute;
+      left: 40px;
+      color: #fff;
+      font-size: 32px;
+    }
+
+    .dong {
+      position: absolute;
+      top: 36px;
+      left: 15px;
+
+      color: #fff;
+
+      font-size: 32px;
+    }
+
+    .shi {
+      position: absolute;
+      top: 44px;
+      right: 15px;
+
+      color: #fff;
+
+      font-size: 32px;
+    }
+  }
 }
 
 /*****************
@@ -203,32 +201,37 @@
   border-radius: 18px;
 
   background-color: rgba(255, 255, 255, 0.5);
-}
 
-.back-button::before {
-  content: " ";
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 98;
-
-  width: 200%;
-  height: 200%;
-  border: 1px solid rgba(127, 127, 127, 0.2);
-  border-radius: 36px;
-
-  transform: scale(0.5);
-  transform-origin: 0 0;
-}
-
-@media (prefers-color-scheme: dark) {
-  .back-button {
+  @media (prefers-color-scheme: dark) {
     background-color: rgba(0, 0, 0, 0.15);
   }
 
-  .back-button::before {
-    border: 1px solid rgba(255, 255, 255, 0.2);
+  &::before {
+    content: " ";
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 98;
+
+    width: 200%;
+    height: 200%;
+    border: 1px solid rgba(127, 127, 127, 0.2);
+    border-radius: 36px;
+
+    transform: scale(0.5);
+    transform-origin: 0 0;
+
+    @media (prefers-color-scheme: dark) {
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  .icon-back,
+  .icon-home {
+    width: 24px;
+    height: 24px;
+    margin: 4px auto;
   }
 }
 
@@ -236,28 +239,22 @@
   opacity: 0.2;
 }
 
-.back-icon {
-  width: 24px;
-  height: 24px;
-  margin: 4px auto;
-}
-
 /* error */
 
 .error-wrapper {
   padding: 20% 10%;
-}
 
-.error-wrapper .text {
-  margin: 10px 0;
-  color: #f00;
-  font-size: 18px;
-}
+  .text {
+    margin: 10px 0;
+    color: #f00;
+    font-size: 18px;
+  }
 
-.error-wrapper .desc {
-  color: #888;
-  font-size: 16px;
-  text-align: justify !important;
+  .desc {
+    color: #888;
+    font-size: 16px;
+    text-align: justify !important;
+  }
 }
 
 /* donate */
@@ -265,18 +262,18 @@
   position: fixed;
   bottom: 20px;
   width: 100%;
-}
 
-.donate-wrapper .button {
-  width: 60%;
-  margin: 0 auto;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  .button {
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
 
-  background-color: #09bb07;
-  color: #fff;
+    background-color: #09bb07;
+    color: #fff;
 
-  line-height: 1.6;
-  text-align: center;
+    line-height: 1.6;
+    text-align: center;
+  }
 }

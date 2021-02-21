@@ -7,10 +7,7 @@
     hover-class="button-hover"
     catch:tap="back"
   >
-    <image
-      class="back-icon"
-      src="/icon/{{firstPage? 'home': 'back'}}{{darkmode? 'White': ''}}.svg"
-    />
+    <view class="icon-{{firstPage? 'home': 'back'}}" />
   </view>
   <view class="song-info">
     <view class="name">{{currentSong.title}}</view>

@@ -4,8 +4,7 @@
 
 /* 安卓容器 */
 
-.android,
-.androidgrey {
+.android {
   width: 100%;
   min-height: 100%;
 
@@ -13,17 +12,13 @@
   color: var(--text-color);
 
   text-align: center;
-}
 
-@media (prefers-color-scheme: dark) {
-  .android {
+  @media (prefers-color-scheme: dark) {
     background-color: #000;
-  }
-}
 
-@media (prefers-color-scheme: dark) {
-  .android.grey {
-    background-color: #10110b;
+    &.grey {
+      background-color: #10110b;
+    }
   }
 }
 

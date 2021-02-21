@@ -1,25 +1,19 @@
-.weui,
-.weuigrey {
+.weui {
   width: 100%;
   min-height: 100%;
 
   background-color: #f8f8f8;
+  color: var(--text-color);
 
   font-family: "Helvetica Neue", FZKTJW, -apple-system-font, "PingFang SC",
     Helvetica, STHeiti, Tahoma, Simsun, sans-serif !important;
   text-align: center;
-}
 
-@media (prefers-color-scheme: dark) {
-  .weui {
+  @media (prefers-color-scheme: dark) {
     background-color: #000;
-    color: #fff;
-  }
-}
 
-@media (prefers-color-scheme: dark) {
-  .weui.grey {
-    background-color: #10110b;
-    color: #fff;
+    &.grey {
+      background-color: #10110b;
+    }
   }
 }

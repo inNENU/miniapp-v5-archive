@@ -27,20 +27,18 @@
   font-weight: 500;
   font-size: 22px;
   text-align: left;
-}
 
-@media (min-width: 768px) {
-  .ios-title {
+  @media (min-width: 768px) {
     min-height: 26px;
     font-size: 24px;
   }
-}
 
-.grey .ios-title {
-  max-width: unset;
-  padding-left: 30px;
-}
+  .grey & {
+    max-width: unset;
+    padding-left: 30px;
+  }
 
-.ios-title + .ios-title {
-  padding-top: 2px;
+  & + & {
+    padding-top: 2px;
+  }
 }

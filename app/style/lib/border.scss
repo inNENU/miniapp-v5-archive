@@ -5,18 +5,22 @@
   position: relative;
 }
 
-.bt::before,
-.btb::before {
-  top: 0;
-  border-top: 1px solid var(--border-color);
-  transform-origin: 0 0;
+.bt,
+.btb {
+  &::before {
+    top: 0;
+    border-top: 1px solid var(--border-color);
+    transform-origin: 0 0;
+  }
 }
 
-.bb::after,
-.btb::after {
-  bottom: 0;
-  border-bottom: 1px solid var(--border-color);
-  transform-origin: 0 100%;
+.bb,
+.btb {
+  &::after {
+    bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+    transform-origin: 0 100%;
+  }
 }
 
 .bt::before,

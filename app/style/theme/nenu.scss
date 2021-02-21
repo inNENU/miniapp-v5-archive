@@ -5,15 +5,13 @@
   min-height: 100%;
   background-color: var(--bgcolor);
   color: var(--text-color);
-}
 
-.nenu.grey {
-  background-color: #f0f0f0;
-}
+  &.grey {
+    background-color: #f0f0f0;
 
-@media (prefers-color-scheme: dark) {
-  .nenu.grey {
-    background-color: #0f0f0f;
+    @media (prefers-color-scheme: dark) {
+      background-color: #0f0f0f;
+    }
   }
 }
 
@@ -25,8 +23,8 @@
   font-weight: 500;
   font-size: 18px;
   text-align: left;
-}
 
-.nenu-title + .nenu-title {
-  padding-top: 2px;
+  & + & {
+    padding-top: 2px;
+  }
 }
