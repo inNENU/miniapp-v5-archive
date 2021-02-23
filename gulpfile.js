@@ -1,70 +1,73 @@
 const { dest, parallel, src, watch } = require("gulp");
 const rename = require("gulp-rename");
-const sass = require("gulp-sass");
+const { sassSync } = require("@mr-hope/gulp-sass");
 const PluginError = require("plugin-error");
-const through = require("through2");
 const typescript = require("gulp-typescript");
+const { Transform } = require("stream");
 
-const tsProject = typescript.createProject("tsconfig.json");
+const tSProject = typescript.createProject("tsconfig.json");
 
 const buildWXSS = () =>
   src("app/**/*.scss")
     .pipe(
-      sass({
-        outputStyle: "expanded",
-        // hack for remaining '@import'
-        importer: (url, _prev, done) => {
+      sassSync({
+        // use `@` as hack for remaining '@import'
+        importer: (url) => {
           if (url.includes(".css")) return null;
-          done({ contents: `@import "${url}.css"` });
+
+          return { contents: `@import "${url}.css"` };
         },
-      }).on("error", sass.logError)
+      }).on("error", sassSync.logError)
     )
     .pipe(rename({ extname: ".wxss" }))
     .pipe(
-      through.obj(function (file, enc, cb) {
-        if (file.isNull()) {
-          this.push(file);
+      new Transform({
+        objectMode: true,
+        transform(chunk, _enc, callback) {
+          if (chunk.isNull()) {
+            this.push(chunk);
 
-          return cb();
-        }
+            return callback();
+          }
 
-        if (file.isStream()) {
-          this.emit(
-            "error",
-            new PluginError("Sass", "Streaming not supported")
-          );
+          if (chunk.isStream()) {
+            this.emit(
+              "error",
+              new PluginError("Sass", "Streaming not supported")
+            );
 
-          return cb();
-        }
+            return callback();
+          }
 
-        const content = file.contents
-          .toString()
-          .replace(/@import url\((.*?)\.css\)/gu, '@import "$1.wxss"');
+          const content = chunk.contents
+            .toString()
+            .replace(/@import "@(.*?)\.css"/gu, '@import "$1.wxss"');
 
-        file.contents = Buffer.from(content);
+          chunk.contents = Buffer.from(content);
 
-        this.push(file);
+          this.push(chunk);
 
-        cb();
+          callback();
+        },
       })
     )
     .pipe(dest("dist"));
 
-const buildTypesciprt = () =>
-  tsProject.src().pipe(tsProject()).pipe(dest("dist"));
-
-const moveFiles = () =>
-  src("app/**/*.{wxml,wxs,json,svg,png}").pipe(dest("dist"));
-
 const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
+
+const buildTypesciprt = () =>
+  tSProject.src().pipe(tSProject()).pipe(dest("dist"));
 
 const watchTypescript = () =>
   watch("app/**/*.ts", { ignoreInitial: false }, buildTypesciprt);
 
+const moveFiles = () =>
+  src("app/**/*.{wxml,wxs,json,svg,png,webp}").pipe(dest("dist"));
+
 const watchFiles = () =>
   watch(
-    "app/**/*.{wxml,wxs,json,svg,png}",
+    "app/**/*.{wxml,wxs,json,svg,png,webp}",
     { ignoreInitial: false },
     moveFiles
   );
@@ -74,4 +77,5 @@ const build = parallel(buildWXSS, buildTypesciprt, moveFiles);
 
 exports.watch = watchCommand;
 exports.build = build;
+
 exports.default = build;
