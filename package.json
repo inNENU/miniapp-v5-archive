@@ -47,7 +47,7 @@
     "husky": "5.1.1",
     "lint-staged": "10.5.4",
     "miniprogram-api-typings": "3.2.3",
-    "npm-check-updates": "11.1.8",
+    "npm-check-updates": "11.2.0",
     "prettier": "2.2.1",
     "stylelint": "13.11.0",
     "stylelint-config-prettier": "8.0.2",
