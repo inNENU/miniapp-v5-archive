@@ -19,7 +19,7 @@ Component({
   lifetimes: {
     ready(): void {
       // 判断是否已经显示过
-      const cache = wx.getStorageSync("add-tip") as number;
+      const cache = wx.getStorageSync<number | undefined>("add-tip");
 
       if (!cache) {
         // 没显示过，则进行展示

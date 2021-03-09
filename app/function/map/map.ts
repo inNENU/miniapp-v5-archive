@@ -175,7 +175,7 @@ $register("map", {
 
   /** 获得当前校区 */
   getArea(): Area {
-    const value = wx.getStorageSync("map-area") as Area | undefined;
+    const value = wx.getStorageSync<Area | undefined>("map-area");
 
     if (value) return value;
 

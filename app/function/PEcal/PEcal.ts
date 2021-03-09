@@ -148,8 +148,8 @@ $register("PEcal", {
   onLoad(option) {
     setPage({ option, ctx: this }, this.data.page);
 
-    const genderIndex = wx.getStorageSync("gender") as number | "";
-    const gradeIndex = wx.getStorageSync("grade") as number | "";
+    const genderIndex = wx.getStorageSync<number | "">("gender");
+    const gradeIndex = wx.getStorageSync<number | "">("grade");
     const genderKeys = this.data.gender.keys;
     const gradeKeys = this.data.grade.keys;
 

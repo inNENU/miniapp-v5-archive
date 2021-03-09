@@ -26,10 +26,13 @@ $register("weather", {
   },
 
   onLoad() {
-    const weatherData = wx.getStorageSync("weather") as {
-      date: number;
-      data: WeatherData;
-    };
+    const weatherData = wx.getStorageSync<
+      | {
+          date: number;
+          data: WeatherData;
+        }
+      | undefined
+    >("weather");
 
     if (wx.getStorageSync("innenu-inited")) {
       const weatherIcon = JSON.parse(
@@ -67,7 +70,7 @@ $register("weather", {
     }
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
-    if (weatherData.date > new Date().getTime() - 300000) {
+    if (weatherData && weatherData.date > new Date().getTime() - 300000) {
       const weather = weatherData.data;
 
       this.initcanvas(weather);

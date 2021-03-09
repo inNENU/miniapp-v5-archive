@@ -83,11 +83,11 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
 // eslint-disable-next-line max-lines-per-function
 export const checkResUpdate = (): void => {
   /** 资源提醒状态 */
-  const notify = wx.getStorageSync("resourceNotify") as boolean;
+  const notify = wx.getStorageSync<boolean | undefined>("resourceNotify");
   /** 本地资源版本 */
   const localVersion: Record<string, number> = readJSON("version") || {};
   /** 上次更新时间 */
-  const localTime = wx.getStorageSync(`resourceUpdateTime`) as number;
+  const localTime = wx.getStorageSync<number | undefined>(`resourceUpdateTime`);
   /** 当前时间 */
   const currentTime = Math.round(new Date().getTime() / 1000);
 
@@ -100,13 +100,13 @@ export const checkResUpdate = (): void => {
 
   if (notify || currentTime > Number(localTime) + 604800)
     // 如果需要更新
-    wx.request({
+    wx.request<VersionInfo>({
       url: `${server}service/version.php`,
       enableHttp2: true,
       success: (res) => {
         // 资源为最新
         if (res.statusCode === 200) {
-          const versionInfo = res.data as VersionInfo;
+          const versionInfo = res.data;
           const updateList: string[] = [];
 
           for (const key in versionInfo.version)
@@ -216,14 +216,14 @@ export const appInit = (): void => {
 
     wx.setStorageSync("resourceUpdateTime", Math.round(timeStamp / 1000));
 
-    wx.request({
+    wx.request<VersionInfo>({
       url: `${server}service/version.php`,
       enableHttp2: true,
       success: (res) => {
         console.log(res);
         console.log("版本信息为", res.data);
         if (res.statusCode === 200) {
-          writeJSON("version", (res.data as VersionInfo).version);
+          writeJSON("version", res.data.version);
           // 成功初始化
           wx.setStorageSync("innenu-inited", true);
           wx.hideLoading();
@@ -249,15 +249,18 @@ export interface Notice {
  * @param globalData 小程序的全局数据
  */
 export const noticeCheck = (globalData: GlobalData): void => {
-  requestJSON(
+  requestJSON<Record<string, Notice>>(
     `resource/config/${globalData.appID}/${globalData.version}/notice`,
-    (noticeList: Record<string, Notice>) => {
+    (noticeList) => {
       for (const pageName in noticeList) {
         const notice = noticeList[pageName];
-        const oldNotice = wx.getStorageSync(`${pageName}-notice`) as Notice;
+        const oldNotice = wx.getStorageSync<Notice | undefined>(
+          `${pageName}-notice`
+        );
 
         // 如果通知内容不同或为强制通知，写入通知信息，并重置通知状态
         if (
+          !oldNotice ||
           oldNotice.title !== notice.title ||
           oldNotice.content !== notice.content ||
           notice.force
@@ -324,11 +327,9 @@ export const appUpdate = (globalData: GlobalData): void => {
         `resource/config/${globalData.appID}/version`,
         (version) => {
           // 请求配置文件
-          requestJSON(
+          requestJSON<UpdateInfo>(
             `resource/config/${globalData.appID}/${version}/config`,
-            (data) => {
-              const { forceUpdate, reset } = data as UpdateInfo;
-
+            ({ forceUpdate, reset }) => {
               // 更新下载就绪，提示用户重新启动
               wx.showModal({
                 title: "已找到新版本",
@@ -388,21 +389,21 @@ interface LoginCallback {
  * @param appID 小程序的appID
  */
 export const login = ({ appID, env }: GlobalData): void => {
-  const openid = wx.getStorageSync("openid") as string;
+  const openid = wx.getStorageSync<string | undefined>("openid");
 
   if (openid) console.info(`openid为: ${openid}`);
   else
     wx.login({
-      success: (res) => {
-        if (res.code)
-          wx.request({
+      success: ({ code }) => {
+        if (code)
+          wx.request<LoginCallback>({
             url: `${server}service/login.php`,
             method: "POST",
-            data: { appID, code: res.code, env },
+            data: { appID, code, env },
             enableHttp2: true,
-            success: (res2) => {
-              wx.setStorageSync("openid", (res2.data as LoginCallback).openid);
-              console.info(`openid 为: ${(res2.data as LoginCallback).openid}`);
+            success: ({ data }) => {
+              wx.setStorageSync("openid", data.openid);
+              console.info(`openid 为: ${data.openid}`);
             },
           });
       },
@@ -439,10 +440,9 @@ export const registAction = (): void => {
   // 监听用户截屏
   if (wx.getStorageSync("capture-screen") !== "never")
     wx.onUserCaptureScreen(() => {
-      const status = wx.getStorageSync("capture-screen") as
-        | "never"
-        | "noticed"
-        | undefined;
+      const status = wx.getStorageSync<"never" | "noticed" | undefined>(
+        "capture-screen"
+      );
 
       if (status !== "never")
         wx.showModal({
@@ -475,7 +475,7 @@ export const startup = (globalData: GlobalData): void => {
   if (globalData.info.AppPlatform === "qq") globalData.env = "qq";
 
   // 获取主题、夜间模式、appID
-  globalData.theme = wx.getStorageSync("theme") as string;
+  globalData.theme = wx.getStorageSync<string>("theme");
   globalData.darkmode = getDarkmode(globalData.info);
   globalData.appID = wx.getAccountInfoSync().miniProgram.appId;
 

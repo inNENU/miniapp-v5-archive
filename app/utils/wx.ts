@@ -115,14 +115,14 @@ export const requestJSON = <T = Record<string, any>>(
   failFunc: (errMsg: string | number) => void = (): void => void 0,
   errorFunc: (statusCode: number) => void = failFunc
 ): void => {
-  wx.request({
+  wx.request<T>({
     url: `${server}${path}.json`,
     enableHttp2: true,
     success: (res) => {
       // 调试
       debug(`请求 ${path} 成功: `, res);
 
-      if (res.statusCode === 200) successFunc(res.data as T);
+      if (res.statusCode === 200) successFunc(res.data);
       else {
         tip("服务器出现问题，请稍后重试");
         // 调试

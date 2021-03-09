@@ -67,9 +67,7 @@ export const searching = (
 ): void => {
   const words: string[] = [];
 
-  requestJSON(`resource/${category}-search`, (data) => {
-    const keywords = data as SearchInfo;
-
+  requestJSON<SearchInfo>(`resource/${category}-search`, (keywords) => {
     if (searchWord)
       Object.keys(keywords).forEach((jsonName) => {
         const { name = "", desc = "", title, heading } = keywords[jsonName];
@@ -123,9 +121,7 @@ export const search = (
   const result: Record<string, SearchContent> = {};
 
   // eslint-disable-next-line max-lines-per-function
-  requestJSON(`resource/${category}-search`, (data) => {
-    const searchMap = data as SearchInfo;
-
+  requestJSON<SearchInfo>(`resource/${category}-search`, (searchMap) => {
     // eslint-disable-next-line
     Object.keys(searchMap).forEach((pageID) => {
       let weight = 0;

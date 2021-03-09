@@ -20,20 +20,23 @@ export const refreshPage = (
   >,
   globalData: GlobalData
 ): void => {
-  const test = wx.getStorageSync("test") as boolean;
+  const test = wx.getStorageSync<boolean | undefined>("test");
 
   // 开启测试后展示测试界面
   if (test)
-    requestJSON(`resource/config/${globalData.appID}/test/${name}`, (data) => {
-      setPage({ ctx, option: { id: name } }, data as PageData);
-    });
+    requestJSON<PageData>(
+      `resource/config/${globalData.appID}/test/${name}`,
+      (data) => {
+        setPage({ ctx, option: { id: name } }, data);
+      }
+    );
   // 普通界面加载
   else
-    requestJSON(
+    requestJSON<PageData>(
       `resource/config/${globalData.appID}/${globalData.version}/${name}`,
       (data) => {
         wx.setStorageSync(name, data);
-        setPage({ ctx, option: { id: name } }, data as PageData);
+        setPage({ ctx, option: { id: name } }, data);
       }
     );
 };

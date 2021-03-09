@@ -98,7 +98,7 @@ $register("about", {
     const { page } = this.data;
 
     // 读取开发者模式并对页面显示做相应改变
-    if (wx.getStorageSync("developMode") as boolean | undefined)
+    if (wx.getStorageSync<boolean | undefined>("developMode"))
       developMode = true;
     if (!developMode)
       (page.content[0] as AdvancedListComponentConfig).content.forEach(
@@ -116,7 +116,7 @@ $register("about", {
       const { page } = this.data;
 
       // 读取开发者模式并对页面显示做相应改变
-      if (wx.getStorageSync("developMode") as boolean | undefined)
+      if (wx.getStorageSync<boolean | undefined>("developMode"))
         developMode = true;
       if (!developMode)
         (page.content[0] as AdvancedListComponentConfig).content.forEach(

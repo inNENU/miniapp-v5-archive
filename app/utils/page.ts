@@ -44,7 +44,8 @@ const resolveContent = (
 
   // 设置列表开关与滑块
   if ("swiKey" in listElement)
-    listElement.status = wx.getStorageSync(listElement.swiKey) as boolean;
+    listElement.status =
+      wx.getStorageSync<boolean | undefined>(listElement.swiKey) || false;
   if ("sliKey" in listElement)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     listElement.value = wx.getStorageSync(listElement.sliKey);
@@ -53,16 +54,16 @@ const resolveContent = (
   if ("pickerValue" in listElement)
     if (listElement.single) {
       // 单列选择器
-      const pickerValue = wx.getStorageSync(listElement.key) as number;
+      const pickerValue = wx.getStorageSync<number>(listElement.key);
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       listElement.value = listElement.pickerValue[pickerValue];
       listElement.currentValue = [pickerValue];
     } else {
       // 多列选择器
-      const pickerValues: string[] = (wx.getStorageSync(
-        listElement.key
-      ) as string).split("-");
+      const pickerValues: string[] = wx
+        .getStorageSync<string>(listElement.key)
+        .split("-");
 
       listElement.currentValue = [];
       listElement.value = [];
@@ -363,7 +364,7 @@ export const setPage = (
 export const popNotice = (id: string): void => {
   if (!wx.getStorageSync(`${id}-notifyed`)) {
     // 没有进行过通知，判断是否需要弹窗，从存储中获取通知内容并展示
-    const notice = wx.getStorageSync(`${id}-notice`) as Notice;
+    const notice = wx.getStorageSync<Notice | undefined>(`${id}-notice`);
 
     if (notice) {
       modal(notice.title, notice.content, () => {
@@ -440,7 +441,7 @@ export const setOnlinePage = (
       }
       // 请求页面Json
       else
-        requestJSON(
+        requestJSON<PageData>(
           `resource/${option.id}`,
           (data) => {
             // 非分享界面下将页面数据写入存储
@@ -448,7 +449,7 @@ export const setOnlinePage = (
               writeJSON(`${option.id as string}`, data);
 
             // 设置界面
-            setPage({ option, ctx }, data as PageData);
+            setPage({ option, ctx }, data);
 
             // 如果需要执行预加载，则执行
             if (preload) {
@@ -514,11 +515,11 @@ export const loadOnlinePage = (
   if (option.path) {
     // 需要重新载入界面
     info(`${option.path} onLoad 开始，参数为:`, option);
-    requestJSON(
+    requestJSON<PageData>(
       `resource/${option.path}`,
       (page) => {
         if (page) {
-          setPage({ option, ctx }, page as PageData);
+          setPage({ option, ctx }, page);
           popNotice(option.path);
           info(`${option.path} onLoad 成功:`, ctx.data);
           wx.reportMonitor("0", 1);

@@ -23,16 +23,16 @@ Component({
     },
     /* 获取天气信息 */
     getWeather(): void {
-      wx.request({
+      wx.request<WeatherData>({
         url: `${server}service/weatherData.php`,
         method: "POST",
         enableHttp2: true,
-        success: (res) => {
-          this.setData({ weather: res.data as WeatherData });
+        success: ({ data }) => {
+          this.setData({ weather: data });
 
           // 将天气详情和获取时间写入存储，避免重复获取
           wx.setStorageSync("weather", {
-            data: res.data as WeatherData,
+            data,
             date: new Date().getTime(),
           });
         },

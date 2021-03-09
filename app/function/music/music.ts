@@ -62,7 +62,7 @@ $register("music", {
 
   // eslint-disable-next-line max-lines-per-function
   onLoad(option) {
-    const mode = wx.getStorageSync("play-mode") as PlayMode;
+    const mode = wx.getStorageSync<PlayMode | undefined>("play-mode");
 
     if (!mode) wx.setStorageSync("play-mode", "列表循环");
 
@@ -104,7 +104,7 @@ $register("music", {
             (song) => song.title === name
           );
         } else {
-          const name = wx.getStorageSync("music") as string | undefined;
+          const name = wx.getStorageSync<string | undefined>("music");
 
           if (name)
             globalData.music.index = songList.findIndex(
@@ -426,8 +426,14 @@ $register("music", {
 
   /** 切换播放模式 */
   modeSwitch() {
-    const modes = ["列表循环", "单曲循环", "顺序播放", "随机播放", "列表循环"];
-    const mode = modes[modes.indexOf(this.data.mode) + 1] as PlayMode;
+    const modes: PlayMode[] = [
+      "列表循环",
+      "单曲循环",
+      "顺序播放",
+      "随机播放",
+      "列表循环",
+    ];
+    const mode = modes[modes.indexOf(this.data.mode) + 1];
 
     this.setData({ mode });
 

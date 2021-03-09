@@ -14,8 +14,6 @@ interface DonateDetail {
   1: number;
 }
 
-type DonateList = DonateDetail[];
-
 $register("donate-list", {
   data: {
     theme: globalData.theme,
@@ -42,16 +40,16 @@ $register("donate-list", {
       "page.statusBarHeight": globalData.info.statusBarHeight,
     });
 
-    wx.request({
+    wx.request<DonateDetail[]>({
       url: `${server}service/donateList.php?year=2019`,
       enableHttp2: true,
       success: (res) => {
         console.log(res);
         if (res.statusCode === 200) {
-          const donateList = res.data as DonateList;
+          const donateList = res.data;
           let sum2019 = 0;
 
-          ((donateList as unknown) as DonateList).forEach((element) => {
+          donateList.forEach((element) => {
             sum2019 += element[1];
           });
 
@@ -64,15 +62,15 @@ $register("donate-list", {
       },
     });
 
-    wx.request({
+    wx.request<DonateDetail[]>({
       url: `${server}service/donateList.php?year=2020`,
       enableHttp2: true,
       success: (res) => {
         if (res.statusCode === 200) {
-          const donateList = res.data as DonateList;
+          const donateList = res.data;
           let sum2020 = 0;
 
-          ((donateList as unknown) as DonateList).forEach((element) => {
+          donateList.forEach((element) => {
             sum2020 += element[1];
           });
 
