@@ -19,7 +19,7 @@
     "lint:wxs": "prettier --check --parser babel-flow **/*.wxs",
     "packages:check-update": "ncu --deep --timeout 600000",
     "packages:update": "ncu -u --deep --timeout 600000 && yarn install && yarn upgrade",
-    "postinstall": "husky install",
+    "prepare": "husky install",
     "watch": "gulp watch"
   },
   "repository": {
@@ -48,9 +48,9 @@
     "husky": "6.0.0",
     "lint-staged": "10.5.4",
     "miniprogram-api-typings": "3.3.2",
-    "npm-check-updates": "11.5.4",
+    "npm-check-updates": "11.5.9",
     "prettier": "2.2.1",
-    "stylelint": "13.13.0",
+    "stylelint": "13.13.1",
     "stylelint-config-prettier": "8.0.2",
     "stylelint-config-standard": "22.0.0",
     "stylelint-order": "4.1.0",

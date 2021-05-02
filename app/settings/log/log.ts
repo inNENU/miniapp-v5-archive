@@ -17,7 +17,6 @@ $register("log", {
       title: "更新日志",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
-      feedback: true,
       content: [
         {
           tag: "list",

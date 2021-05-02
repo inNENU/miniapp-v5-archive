@@ -94,29 +94,29 @@ Component({
             text: "下载二维码",
             action: "download",
           });
-
-        if (config.contact !== false)
-          if (env === "qq")
-            actions.push({
-              icon: "contact",
-              text: "联系 Mr.Hope",
-              openType: "addFriend",
-              openId: "868D7B2F0C609B4285698EAB77A47BA1",
-            });
-          else
-            actions.push({
-              icon: "contact",
-              text: "联系 Mr.Hope",
-              openType: "contact",
-            });
-
-        if (env === "wx" && config.feedback !== false)
-          actions.push({
-            icon: "feedback",
-            text: "意见反馈",
-            openType: "feedback",
-          });
       }
+
+      if (config.contact !== false)
+        if (env === "qq")
+          actions.push({
+            icon: "contact",
+            text: "联系 Mr.Hope",
+            openType: "addFriend",
+            openId: "868D7B2F0C609B4285698EAB77A47BA1",
+          });
+        else
+          actions.push({
+            icon: "contact",
+            text: "联系 Mr.Hope",
+            openType: "contact",
+          });
+
+      if (env === "wx" && config.feedback !== false)
+        actions.push({
+          icon: "feedback",
+          text: "意见反馈",
+          openType: "feedback",
+        });
 
       this.setData({ actions });
     },

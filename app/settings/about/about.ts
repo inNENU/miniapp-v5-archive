@@ -24,7 +24,6 @@ $register("about", {
       title: "关于",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
-      feedback: true,
       content: [
         {
           tag: "advanced-list",

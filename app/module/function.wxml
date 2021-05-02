@@ -21,14 +21,6 @@
     意见反馈
   </button>
   <button
-    wx:if="{{all || login}}"
-    class="action"
-    open-type="getUserInfo"
-    type="primary"
-  >
-    登录
-  </button>
-  <button
     type="primary"
     class="action"
     wx:if="{{all || reset}}"

@@ -26,7 +26,6 @@ $register("storage", {
       title: "存储设置",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
-      feedback: true,
       content: [
         {
           tag: "list",

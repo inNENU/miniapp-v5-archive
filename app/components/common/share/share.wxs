@@ -5,7 +5,12 @@ var top = 0;
 module.exports = {
   /** 是否显示 */
   isShowed: function (config) {
-    return config && (config.shareable || config.contact || config.feedback);
+    return (
+      config &&
+      (config.contact !== false ||
+        config.feedback !== false ||
+        config.shareable)
+    );
   },
 
   /** 移动按钮 */
