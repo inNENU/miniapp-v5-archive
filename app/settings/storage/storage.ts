@@ -114,7 +114,7 @@ $register("storage", {
       success: (res) => {
         // TODO: update
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ((res.stats as unknown) as any[]).forEach((element) => {
+        (res.stats as unknown as any[]).forEach((element) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           fileSize += element.stats.size;
         });

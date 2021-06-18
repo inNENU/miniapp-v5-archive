@@ -34,9 +34,9 @@ export const remove = (path: string, type?: "dir" | "file"): void => {
   try {
     if (!type)
       if (
-        (fileManager.statSync(
-          `${userPath}/${path}`
-        ) as WechatMiniprogram.Stats).isFile()
+        (
+          fileManager.statSync(`${userPath}/${path}`) as WechatMiniprogram.Stats
+        ).isFile()
       )
         // 判断路径是否是文件，并执行对应删除操作
         fileManager.unlinkSync(`${userPath}/${path}`);
@@ -71,15 +71,15 @@ export const isFileExist = (path: string): boolean => {
 
 export const isFile = (path: string): boolean =>
   isFileExist(path) &&
-  (fileManager.statSync(
-    `${userPath}/${path}`
-  ) as WechatMiniprogram.Stats).isFile();
+  (
+    fileManager.statSync(`${userPath}/${path}`) as WechatMiniprogram.Stats
+  ).isFile();
 
 export const isDir = (path: string): boolean =>
   isFileExist(path) &&
-  (fileManager.statSync(
-    `${userPath}/${path}`
-  ) as WechatMiniprogram.Stats).isDirectory();
+  (
+    fileManager.statSync(`${userPath}/${path}`) as WechatMiniprogram.Stats
+  ).isDirectory();
 
 /**
  * 列出目录下文件

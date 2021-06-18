@@ -66,7 +66,7 @@ const resolvePath = (name: string): string =>
 
 $register.A<AppOption>({
   /** 小程序的全局数据 */
-  globalData: ({
+  globalData: {
     version,
     music: { playing: false, index: 0 },
     page: {
@@ -75,7 +75,7 @@ $register.A<AppOption>({
     },
     date: new Date().getTime(),
     env: "wx",
-  } as unknown) as GlobalData,
+  } as unknown as GlobalData,
 
   config: {
     route: [

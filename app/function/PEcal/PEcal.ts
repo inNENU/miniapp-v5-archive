@@ -10,25 +10,7 @@ const { globalData } = getApp<AppOption>();
 
 /** 分数段设置 */
 const gradeLevels = [
-  10,
-  20,
-  30,
-  40,
-  50,
-  60,
-  62,
-  64,
-  66,
-  68,
-  70,
-  72,
-  74,
-  76,
-  78,
-  80,
-  85,
-  90,
-  95,
+  10, 20, 30, 40, 50, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 85, 90, 95,
   100,
 ];
 /** 特殊项目 */
@@ -338,11 +320,13 @@ $register("PEcal", {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       success: (config) => {
         // 以下三项越高越好，进行计算
-        (["vitalCapacity", "sitAndReach", "standingLongJump"] as (
-          | "vitalCapacity"
-          | "sitAndReach"
-          | "standingLongJump"
-        )[]).forEach((x) => {
+        (
+          ["vitalCapacity", "sitAndReach", "standingLongJump"] as (
+            | "vitalCapacity"
+            | "sitAndReach"
+            | "standingLongJump"
+          )[]
+        ).forEach((x) => {
           if (result[x] && Number(result[x])) {
             for (let i = 0; i < length; i++)
               if (result[x] <= config[x][i]) {

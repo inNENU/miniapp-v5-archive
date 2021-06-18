@@ -195,8 +195,9 @@ $register("authorize", {
 
               wx.getSetting({
                 success: (res2) => {
-                  const list = (this.data.page
-                    .content[0] as ListComponentConfig).content;
+                  const list = (
+                    this.data.page.content[0] as ListComponentConfig
+                  ).content;
 
                   authorizeList.forEach((type2, index) => {
                     (list as ButtonListComponnetItemConfig[])[index].desc = res2

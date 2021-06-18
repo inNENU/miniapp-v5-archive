@@ -69,10 +69,12 @@ const resolveContent = (
       listElement.value = [];
       pickerValues.forEach((pickerElement, index) => {
         // eslint-disable-next-line
-        (listElement.value as any[])[index] = (listElement.pickerValue[
-          index
-          // eslint-disable-next-line
-        ] as any[])[Number(pickerElement)];
+        (listElement.value as any[])[index] = (
+          listElement.pickerValue[
+            index
+            // eslint-disable-next-line
+          ] as any[]
+        )[Number(pickerElement)];
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (listElement.currentValue as any[])[index] = Number(pickerElement);
       });

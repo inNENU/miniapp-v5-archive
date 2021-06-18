@@ -74,13 +74,8 @@ $register("cal", {
       | "grade";
 
     if (event.detail.value.length < event.currentTarget.dataset.maxLength)
-      grade[index][
-        `${target}Focus` as "courseFocus" | "creditFocus" | "gradeFocus"
-      ] = true;
-    else
-      grade[index][
-        `${target}Focus` as "courseFocus" | "creditFocus" | "gradeFocus"
-      ] = false;
+      grade[index][`${target}Focus`] = true;
+    else grade[index][`${target}Focus`] = false;
 
     grade[index][target] = event.detail.value;
 

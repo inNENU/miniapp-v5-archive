@@ -57,8 +57,7 @@ $register("about", {
           header: "支持小程序",
           content: [
             {
-              text:
-                "小程序每年会产生开销，如果你希望帮助 Mr.Hope，欢迎联系 Mr.Hope 施以援手。",
+              text: "小程序每年会产生开销，如果你希望帮助 Mr.Hope，欢迎联系 Mr.Hope 施以援手。",
             },
             {
               text: "联系并支持 Mr.Hope",
@@ -83,8 +82,7 @@ $register("about", {
           header: "内容版权及使用",
           content: [
             {
-              text:
-                "   请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免引起纠纷。",
+              text: "   请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免引起纠纷。",
             },
             { text: "协议详情", url: "page?path=other/about/copyright" },
           ],
@@ -187,8 +185,9 @@ $register("about", {
     // 关闭开发者模式
     if (developMode) {
       wx.setStorageSync("developMode", false);
-      (this.data.page
-        .content[0] as AdvancedListComponentConfig).content.forEach((x, y) => {
+      (
+        this.data.page.content[0] as AdvancedListComponentConfig
+      ).content.forEach((x, y) => {
         x.hidden = y !== 0;
       });
       this.setData({ page: this.data.page });
@@ -222,8 +221,9 @@ $register("about", {
       // 密码正确
       if (event.detail.value === "5201314") {
         tip("已启用开发者模式");
-        (this.data.page
-          .content[0] as AdvancedListComponentConfig).content.forEach((x) => {
+        (
+          this.data.page.content[0] as AdvancedListComponentConfig
+        ).content.forEach((x) => {
           x.hidden = false;
         });
         this.setData({ page: this.data.page, debug: false });
@@ -258,8 +258,10 @@ $register("about", {
    * @param value 开关状态
    */
   debugSwitch(value: boolean) {
-    ((this.data.page.content[0] as AdvancedListComponentConfig)
-      .content[2] as SwitchListComponentItemConfig).status = value;
+    (
+      (this.data.page.content[0] as AdvancedListComponentConfig)
+        .content[2] as SwitchListComponentItemConfig
+    ).status = value;
     this.setData({ page: this.data.page });
     wx.setStorageSync("debugMode", value);
 
