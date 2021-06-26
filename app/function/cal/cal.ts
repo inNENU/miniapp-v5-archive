@@ -72,10 +72,15 @@ $register("cal", {
       | "course"
       | "credit"
       | "grade";
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+    const targetFocus = `${target}Focus` as
+      | "courseFocus"
+      | "creditFocus"
+      | "gradeFocus";
 
     if (event.detail.value.length < event.currentTarget.dataset.maxLength)
-      grade[index][`${target}Focus`] = true;
-    else grade[index][`${target}Focus`] = false;
+      grade[index][targetFocus] = true;
+    else grade[index][targetFocus] = false;
 
     grade[index][target] = event.detail.value;
 

@@ -34,12 +34,12 @@ wx33acb831ee1831a5
 
 ### 可以兼容但未兼容的
 
-- QQ 不支持在 json 中配置组件样式隔离选项(兼容方式: 写在 ts 里)
-- QQ 的 input 不支持 `catch:` 写法(兼容方式: 使用 `bind` 写法)
-- QQ 需要补全分包的页面 json(兼容方式: 直接补全)
+- QQ 不支持在 json 中配置组件样式隔离选项 (兼容方式: 写在 ts 里)
+- QQ 的 input 不支持 `catch:` 写法 (兼容方式: 使用 `bind` 写法)
+- QQ 需要补全分包的页面 json (兼容方式: 直接补全)
 
 ### 无法兼容的
 
-- QQ 不兼容 darkmode, app.json 写法有差异(编译失败)
-- QQ 不支持 text 的 user-select(旧写法出现警告)
-- QQ 的 app.json 声明了 groupIdList(旧写法出现警告)
+- QQ 不兼容 darkmode, app.json 写法有差异 (编译失败)
+- QQ 不支持 text 的 user-select (旧写法出现警告)
+- QQ 的 app.json 声明了 groupIdList (旧写法出现警告)

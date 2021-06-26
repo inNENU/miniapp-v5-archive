@@ -33,6 +33,7 @@
     "lib": ["ESNext"],
     "locale": "zh-CN",
     "module": "CommonJS",
+    "outDir": "dist",
     "types": ["miniprogram-api-typings"]
   },
   "include": ["app/**/*.ts", "typings/**/*.ts"]

@@ -5,6 +5,7 @@ const PluginError = require("plugin-error");
 const typescript = require("gulp-typescript");
 const { Transform } = require("stream");
 const fibers = require("fibers");
+const sourcemaps = require("gulp-sourcemaps");
 
 const tSProject = typescript.createProject("tsconfig.json");
 
@@ -59,10 +60,14 @@ const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
 
 const buildTypesciprt = () =>
-  tSProject.src().pipe(tSProject()).pipe(dest("dist"));
+  src(["app/**/*.ts", "typings/**/*.ts"])
+    .pipe(sourcemaps.init())
+    .pipe(tSProject())
+    .pipe(sourcemaps.write(".", { includeContent: false }))
+    .pipe(dest("dist"));
 
 const watchTypescript = () =>
-  watch("app/**/*.ts", { ignoreInitial: false }, buildTypesciprt);
+  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildTypesciprt);
 
 const moveFiles = () =>
   src("app/**/*.{wxml,wxs,json,svg,png,webp}").pipe(dest("dist"));

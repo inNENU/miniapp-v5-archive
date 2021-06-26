@@ -196,8 +196,8 @@ export const search = (
         });
 
         // 搜索文字，权重为 1
-        text.forEach((text) => {
-          const index = text.indexOf(word.text);
+        text.forEach((item) => {
+          const index = item.indexOf(word.text);
 
           if (index !== -1) {
             weight += 1 * word.weight;
@@ -205,15 +205,15 @@ export const search = (
             const startIndex = Math.max(0, index - 8);
             const endIndex = Math.min(
               index + 8 + word.text.length,
-              text.length
+              item.length
             );
 
             matchList.push({
               type: "text",
-              text: `${startIndex === 0 ? "" : "..."}${text.substring(
+              text: `${startIndex === 0 ? "" : "..."}${item.substring(
                 startIndex,
                 endIndex
-              )}${endIndex === text.length ? "" : "..."}`,
+              )}${endIndex === item.length ? "" : "..."}`,
             });
           }
         });
