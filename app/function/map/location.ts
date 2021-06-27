@@ -1,6 +1,6 @@
 import $register = require("wxpage");
 
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { getJSON, readJSON } from "../../utils/file";
 import { resolvePage, setPage } from "../../utils/page";
 
@@ -88,9 +88,7 @@ $register("location", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.page.title,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `from=主页&id=${this.state.id}`,
     };
   },

@@ -44,6 +44,10 @@
   "packOptions": {
     "ignore": [
       {
+        "type": "file",
+        "value": "package.json"
+      },
+      {
         "type": "suffix",
         "value": "md"
       },

@@ -1,6 +1,6 @@
 import $register = require("wxpage");
 
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { requestJSON, tip } from "../../utils/wx";
 
@@ -163,18 +163,14 @@ $register("about", {
   onShareAppMessage: () => ({
     title: "关于",
     path: "/settings/about/about",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.jpg`,
   }),
 
   onShareTimeline: () => ({ title: "关于" }),
 
   onAddToFavorites: () => ({
     title: "关于",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

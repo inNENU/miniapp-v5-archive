@@ -1,6 +1,6 @@
 import $register = require("wxpage");
 
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { requestJSON } from "../../utils/wx";
 
@@ -83,9 +83,7 @@ $register("log", {
 
   onAddToFavorites: () => ({
     title: "更新日志",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {
