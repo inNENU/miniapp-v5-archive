@@ -52,7 +52,7 @@
         <!-- 按钮文字为蓝色 -->
         <view
           class="text"
-          style="{{listItem.type === 'button'? 'color: #3478f7;': ''}}"
+          style="{{listItem.type === 'button' && listItem.handler? 'color: #3478f7;': ''}}"
         >
           {{listItem.text}}
         </view>
