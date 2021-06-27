@@ -8,39 +8,38 @@
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
-    "es6": true,
-    "postcss": true,
-    "minified": true,
     "urlCheck": true,
-    "uglifyFileName": true,
-    "checkSiteMap": false,
-    "coverView": true,
+    "es6": true,
     "enhance": true,
-    "babelSetting": {
-      "ignore": [],
-      "outputPath": ""
-    },
-    "uploadWithSourceMap": true,
+    "postcss": true,
     "preloadBackgroundData": false,
+    "minified": true,
     "newFeature": true,
+    "coverView": true,
     "nodeModules": true,
     "autoAudits": false,
     "showShadowRootInWxmlPanel": true,
     "scopeDataCheck": false,
+    "uglifyFileName": false,
     "checkInvalidKey": true,
+    "checkSiteMap": false,
+    "uploadWithSourceMap": true,
     "compileHotReLoad": true,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
     "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": true,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
-    "showES6CompileOption": false,
-    "remoteDebugLogEnable": false,
-    "prefetch": false
+    "showES6CompileOption": false
   },
   "packOptions": {
     "ignore": [
