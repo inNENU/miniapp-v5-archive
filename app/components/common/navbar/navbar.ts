@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import $register = require("wxpage");
-import { AppOption } from "../../../app";
+
 import { pageScrollMixin } from "../../mixins/page-scroll";
+
+import type { AppOption } from "../../../app";
+
 const { globalData } = getApp<AppOption>();
 
 $register.C({

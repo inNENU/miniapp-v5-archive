@@ -1,6 +1,7 @@
 import $register = require("wxpage");
 import { setPage } from "../../utils/page";
-import { AppOption } from "../../app";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 

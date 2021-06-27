@@ -1,12 +1,12 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { Category, MarkerConfig, MarkerData } from "../../../typings";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type { Category, MarkerConfig, MarkerData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -83,7 +83,7 @@ $register("map", {
   },
 
   onNavigate() {
-    console.info("将要跳转 Map");
+    console.info("Navigating to Map");
     ensureJSON({
       path: "function/map/marker/benbu",
       url: "resource/function/map/marker/benbu",
@@ -141,9 +141,7 @@ $register("map", {
 
   onAddToFavorites: () => ({
     title: "东师地图",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

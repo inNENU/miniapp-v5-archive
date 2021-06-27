@@ -1,6 +1,7 @@
-import { AppOption } from "../../../app";
-import { PhoneComponentConfig } from "../../../../typings";
 import { modal } from "../../../utils/wx";
+
+import type { AppOption } from "../../../app";
+import type { PhoneComponentConfig } from "../../../../typings";
 
 const {
   globalData: { env },

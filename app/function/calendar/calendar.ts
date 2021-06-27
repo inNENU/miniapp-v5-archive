@@ -1,12 +1,12 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { TimeLineItem } from "../../components/timeline/timeline";
-
 import { getColor, popNotice } from "../../utils/page";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { modal } from "../../utils/wx";
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
+
+import type { AppOption } from "../../app";
+import type { TimeLineItem } from "../../components/timeline/timeline";
 
 const { globalData } = getApp<AppOption>();
 
@@ -75,9 +75,7 @@ $register("calendar", {
 
   onAddToFavorites: () => ({
     title: "东师校历",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

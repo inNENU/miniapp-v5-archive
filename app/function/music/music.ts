@@ -1,12 +1,12 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { Lyric, PlayMode, SongDetail } from "./typings";
-
-import { server } from "../../utils/config";
+import { getImagePrefix, getTitle, server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type { Lyric, PlayMode, SongDetail } from "./typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -126,7 +126,7 @@ $register("music", {
         if (globalData.music.playing) this.setData({ canplay: true });
         // 对音频管理器进行设置
         else {
-          manager.epname = "in东师";
+          manager.epname = getTitle();
           manager.src = currentSong.src;
           manager.title = currentSong.title;
           manager.singer = currentSong.singer;
@@ -162,9 +162,7 @@ $register("music", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.currentSong.title,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `name=${this.data.currentSong.title}`,
     };
   },

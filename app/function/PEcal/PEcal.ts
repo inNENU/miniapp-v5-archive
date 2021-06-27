@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/file";
 import { popNotice, setPage } from "../../utils/page";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -174,9 +174,7 @@ $register("PEcal", {
 
   onAddToFavorites: () => ({
     title: "体测计算器",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {
@@ -365,7 +363,7 @@ $register("PEcal", {
 
         // TODO: 计算加分
 
-        console.info("成绩为", peScore);
+        console.info("Score:", peScore);
 
         callback(peScore);
       },
@@ -417,7 +415,7 @@ $register("PEcal", {
   },
 
   navigate() {
-    this.$route("/module/page?from=体测计算器&id=guide/exam/pe-test/index");
+    this.$route("page?from=体测计算器&id=guide/exam/pe-test/index");
   },
 
   close() {

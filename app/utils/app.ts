@@ -11,8 +11,9 @@ import {
   writeJSON,
 } from "./file";
 import { modal, requestJSON, tip } from "./wx";
-import { GlobalData } from "../app";
-import { VersionInfo } from "../../typings";
+
+import type { GlobalData } from "../app";
+import type { VersionInfo } from "../../typings";
 
 /**
  * 资源下载
@@ -165,7 +166,7 @@ export const checkResUpdate = (): void => {
               });
           }
           // 调试
-          else debug("资源已是最新版");
+          else debug("Newest resource already downloaded");
         } else tip("服务器出现问题");
       },
       fail: () => tip("服务器出现问题"),

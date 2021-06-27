@@ -1,5 +1,6 @@
-import { SearchInfo } from "../../typings";
 import { requestJSON } from "./wx";
+
+import type { SearchInfo } from "../../typings";
 
 /** 搜索匹配详情 */
 interface SearchContentDetail {

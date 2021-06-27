@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
 import { server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { getColor, popNotice } from "../../utils/page";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 

@@ -116,7 +116,7 @@ $register("me", {
   onPreload(res) {
     this.$put("me", resolvePage(res, this.data.page));
     console.info(
-      `我的东师预加载用时${new Date().getTime() - globalData.date}ms`
+      `User page load time: ${new Date().getTime() - globalData.date}ms`
     );
   },
 

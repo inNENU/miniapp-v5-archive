@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../../app";
-import { CardComponentConfig } from "../../../../typings";
-
 import { readFile } from "../../../utils/file";
 import { modal } from "../../../utils/wx";
+
+import type { AppOption } from "../../../app";
+import type { CardComponentConfig } from "../../../../typings";
 
 const {
   globalData: { appID },

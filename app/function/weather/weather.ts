@@ -1,14 +1,14 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { WeatherData } from "../../components/weather/typings";
-
-import { server } from "../../utils/config";
+import { getImagePrefix, server } from "../../utils/config";
 import { readFile } from "../../utils/file";
 import { modal } from "../../utils/wx";
 
+import type { AppOption } from "../../app";
+import type { WeatherData } from "../../components/weather/typings";
+
 const {
-  globalData: { appID, darkmode, info },
+  globalData: { darkmode, info },
 } = getApp<AppOption>();
 
 $register("weather", {
@@ -113,9 +113,7 @@ $register("weather", {
 
   onAddToFavorites: () => ({
     title: "体测计算器",
-    imageUrl: `${server}img/${
-      appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

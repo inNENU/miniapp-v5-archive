@@ -1,11 +1,11 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { PageData } from "../../../typings";
-
 import { server } from "../../utils/config";
 import { getJSON, readJSON } from "../../utils/file";
 import { resolvePage, setPage } from "../../utils/page";
+
+import type { AppOption } from "../../app";
+import type { PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 

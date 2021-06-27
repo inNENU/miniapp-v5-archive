@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
 import { getImagePrefix } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
 import { SearchResult, search, searching } from "../../utils/search";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 

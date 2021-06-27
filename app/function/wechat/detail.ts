@@ -1,12 +1,12 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { WechatDetail } from "../../../typings";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { getColor, popNotice } from "../../utils/page";
 import { modal } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type { WechatDetail } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -73,9 +73,7 @@ $register("wechat-detail", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.config.name,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `path=${this.state.path}`,
     };
   },
@@ -118,13 +116,11 @@ $register("wechat-detail", {
           );
         },
       });
-    else this.$route(`/module/web?url=${url}&title=${title}`);
+    else this.$route(`web?url=${url}&title=${title}`);
   },
 
   follow() {
-    this.$route(
-      `/module/web?url=${this.data.config.follow as string}&title=欢迎关注`
-    );
+    this.$route(`web?url=${this.data.config.follow as string}&title=欢迎关注`);
   },
 
   back() {

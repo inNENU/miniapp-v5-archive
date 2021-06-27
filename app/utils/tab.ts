@@ -1,7 +1,8 @@
-import { GlobalData } from "../app";
-import { PageData } from "../../typings";
 import { requestJSON } from "./wx";
 import { setPage } from "./page";
+
+import type { GlobalData } from "../app";
+import type { PageData } from "../../typings";
 
 /**
  * 刷新 tab 页

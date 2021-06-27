@@ -1,7 +1,5 @@
 import $register = require("wxpage");
 
-import { PageData } from "../typings";
-
 import {
   appInit,
   appUpdate,
@@ -11,6 +9,8 @@ import {
   startup,
 } from "./utils/app";
 import { version } from "./utils/config";
+
+import type { PageData } from "../typings";
 
 export interface GlobalData {
   /** 小程序运行环境 */

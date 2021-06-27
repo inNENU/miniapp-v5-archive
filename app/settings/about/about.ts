@@ -1,16 +1,16 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import {
+import { server } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { requestJSON, tip } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type {
   AdvancedListComponentConfig,
   ComponentConfig,
   PageDataWithContent,
   SwitchListComponentItemConfig,
 } from "../../../typings";
-
-import { server } from "../../utils/config";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { requestJSON, tip } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
