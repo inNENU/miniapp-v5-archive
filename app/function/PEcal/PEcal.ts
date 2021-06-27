@@ -156,7 +156,7 @@ $register("PEcal", {
     if (typeof gradeIndex === "number")
       this.state.grade = this.data.grade.values[gradeIndex];
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     // 设置通知
     popNotice("PEcal");
@@ -180,10 +180,10 @@ $register("PEcal", {
   }),
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 

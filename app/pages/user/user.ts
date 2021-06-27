@@ -133,7 +133,7 @@ $register("me", {
       this.setData({ theme });
     });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -159,10 +159,10 @@ $register("me", {
   }),
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 

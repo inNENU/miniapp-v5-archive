@@ -41,7 +41,7 @@
         group-id="{{listItem.groupId}}"
         data-item="{{listItem}}"
         catch:tap="{{list.button}}"
-        capture-bind:tap="{{listItem.pickerValue ? 'pickerTap' : listItem.slider ? 'sliderTap' : ''}}"
+        capture-bind:tap="{{list.tapHandler(listItem)}}"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
         <image
@@ -50,13 +50,18 @@
           src="{{listItem.icon}}"
         />
         <!-- 按钮文字为蓝色 -->
-        <view class="text" style="{{listItem.button? 'color: #3478f7;': ''}}">
+        <view
+          class="text"
+          style="{{listItem.type === 'button'? 'color: #3478f7;': ''}}"
+        >
           {{listItem.text}}
         </view>
         <!-- 显示滑块值 -->
-        <view wx:if="{{listItem.slider}}" class="desc">{{listItem.value}}</view>
+        <view wx:if="{{listItem.type === 'slider'}}" class="desc"
+          >{{listItem.value}}</view
+        >
         <!-- 显示行内选择器值 -->
-        <view wx:elif="{{listItem.pickerValue}}" class="desc">
+        <view wx:elif="{{listItem.type === 'picker'}}" class="desc">
           <block wx:if="{{listItem.single}}">{{listItem.value}}</block>
           <block wx:else>
             <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
@@ -65,29 +70,29 @@
       </button>
       <!-- 非嵌入选择器 -->
       <picker
-        wx:elif="{{listItem.pickerValue}}"
+        wx:elif="{{listItem.type === 'picker'}}"
         id="{{index}}"
         class="list picker"
         hover-class="button-hover"
         hover-stay-time="100"
         value="{{listItem.currentValue}}"
-        range="{{listItem.pickerValue}}"
+        range="{{listItem.select}}"
         header-text="{{listItem.header || listItem.text}}"
         catch:change="pickerChange"
       >
         <view class="text">{{listItem.text}}</view>
-        <view wx:if="{{listItem.pickerValue}}" class="desc">
+        <view wx:if="{{listItem.select}}" class="desc">
           <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
         </view>
       </picker>
       <!-- navigator -->
       <navigator
-        wx:elif="{{listItem.navigate}}"
+        wx:elif="{{listItem.type === 'navigator'}}"
         id="{{index}}"
         class="list"
         hover-class="button-hover"
         hover-stay-time="100"
-        url="{{listItem.navigate}}"
+        url="{{listItem.url}}"
         openType="{{listItem.openType}}"
         target="{{listItem.target}}"
       >
@@ -116,7 +121,7 @@
         <view class="desc">
           {{listItem.desc}}
           <switch
-            wx:if="{{listItem.swiKey}}"
+            wx:if="{{listItem.type === 'switch'}}"
             checked="{{listItem.status}}"
             color="{{color}}"
             data-id="{{index}}"
@@ -142,7 +147,7 @@
         />
         <!-- 嵌入式选择器显示 -->
         <picker-view
-          wx:if="{{listItem.pickerValue}}"
+          wx:if="{{listItem.type === 'picker'}}"
           class="picker-view"
           indicator-class="pickSelected"
           value="{{listItem.currentValue}}"
@@ -151,12 +156,12 @@
           catch:change="pickerChange"
         >
           <picker-view-column wx:if="{{listItem.single}}" class="column">
-            <view wx:for="{{listItem.pickerValue}}" wx:key="*this" class="item"
+            <view wx:for="{{listItem.select}}" wx:key="*this" class="item"
               >{{item}}</view
             >
           </picker-view-column>
           <block wx:else>
-            <block wx:for="{{listItem.pickerValue}}" wx:key>
+            <block wx:for="{{listItem.select}}" wx:key>
               <picker-view-column class="column">
                 <view wx:for="{{item}}" wx:key="*this" class="item"
                   >{{item}}</view

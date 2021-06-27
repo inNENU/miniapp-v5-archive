@@ -113,7 +113,7 @@ $register("map", {
 
     this.setMarker();
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("map");
   },
@@ -147,10 +147,10 @@ $register("map", {
   }),
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 

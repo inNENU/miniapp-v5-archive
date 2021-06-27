@@ -72,16 +72,16 @@ $register("authorize", {
           tag: "advanced-list",
           header: "进行授权",
           content: [
-            { text: "地理位置", button: "location" },
-            { text: "保存到相册", button: "album" },
-            { text: "通讯地址", button: "address" },
-            { text: "发票抬头", button: "invoiceTitle" },
-            { text: "获取发票", button: "invoice" },
-            { text: "微信运动步数", button: "werun" },
-            { text: "录音", button: "record" },
-            { text: "摄像头", button: "camera" },
+            { text: "地理位置", type: "button", handler: "location" },
+            { text: "保存到相册", type: "button", handler: "album" },
+            { text: "通讯地址", type: "button", handler: "address" },
+            { text: "发票抬头", type: "button", handler: "invoiceTitle" },
+            { text: "获取发票", type: "button", handler: "invoice" },
+            { text: "微信运动步数", type: "button", handler: "werun" },
+            { text: "录音", type: "button", handler: "record" },
+            { text: "摄像头", type: "button", handler: "camera" },
           ],
-          foot: " ",
+          footer: " ",
         },
       ],
     } as PageDataWithContent,
@@ -97,7 +97,7 @@ $register("authorize", {
     if (globalData.page.id === "授权设置") setPage({ option, ctx: this });
     else setPage({ option: { id: "authorize" }, ctx: this });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("authorize");
   },
@@ -106,6 +106,8 @@ $register("authorize", {
     const list = (this.data.page.content[0] as ListComponentConfig).content;
 
     popNotice("authorize");
+
+    // update authorize status
     wx.getSetting({
       success: (res) => {
         authorizeList.forEach((type, index) => {
@@ -121,14 +123,14 @@ $register("authorize", {
   onPageScroll() {},
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /** 列表处理函数 */
+  /** List actions handler */
   list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction]();
   },

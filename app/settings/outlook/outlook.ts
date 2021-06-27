@@ -12,7 +12,7 @@ import { popNotice, resolvePage, setPage } from "../../utils/page";
 const { globalData } = getApp<AppOption>();
 
 /** 列表动作列表 */
-type ListAction = "setTheme";
+type ListAction = "updateTheme";
 
 $register("setting", {
   data: {
@@ -28,18 +28,25 @@ $register("setting", {
           header: "主题设置",
           content: [
             {
+              type: "picker",
               text: "主题设置",
+              select: ["ios", "android", "nenu", "weui"],
               key: "themeNum",
+              handler: "updateTheme",
               single: true,
-              pickerValue: ["ios", "android", "nenu", "weui"],
-              picker: "setTheme",
             },
           ],
         },
         {
           tag: "advanced-list",
           header: "资源更新",
-          content: [{ text: "资源更新提示", swiKey: "resourceNotify" }],
+          content: [
+            {
+              text: "资源更新提示",
+              type: "switch",
+              key: "resourceNotify",
+            },
+          ],
         },
       ],
     } as PageDataWithContent,
@@ -53,7 +60,7 @@ $register("setting", {
     if (globalData.page.id === "外观设置") setPage({ option, ctx: this });
     else setPage({ option, ctx: this }, this.data.page);
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("theme");
   },
@@ -62,29 +69,25 @@ $register("setting", {
   onPageScroll() {},
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /** 列表控制函数 */
+  /** List control function */
   list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction](detail.value);
   },
 
-  /**
-   * 设置主题
-   *
-   * @param value 主题名称
-   */
-  setTheme(value: string) {
+  updateTheme(value: string) {
+    // get the updated theme
     const theme = (
       (
         (this.data.page.content[0] as AdvancedListComponentConfig)
           .content[0] as PickerListComponentItemConfig
-      ).pickerValue as string[]
+      ).select as string[]
     )[Number(value)];
 
     globalData.theme = theme;
@@ -92,7 +95,7 @@ $register("setting", {
     this.setData({ theme });
     this.$emit("theme", theme);
 
-    // 调试
-    console.info(`theme 切换为 ${theme}`);
+    // debug
+    console.info(`Switched to ${theme} theme`);
   },
 });

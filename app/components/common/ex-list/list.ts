@@ -53,7 +53,7 @@ $register.C<{
         if (Array.isArray(value)) {
           value.forEach((x: string | number, y: number) => {
             // eslint-disable-next-line
-            (content.value as any[])[y] = (content.pickerValue as any[][])[y][
+            (content.value as any[])[y] = (content.select as any[][])[y][
               Number(x)
             ];
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -63,15 +63,15 @@ $register.C<{
 
           // 判断为单列选择器，更新页面数据并存储选择器值
         } else {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          content.value = content.pickerValue[Number(value)];
+          // eslint-disable-next-line
+          content.value = content.select[Number(value)];
           content.currentValue = Number(value);
           wx.setStorageSync(content.key, Number(value));
         }
 
         // 将选择器的变更响应到页面上
         this.setData({ [`config.content[${id}]`]: content }, () => {
-          this.triggerEvent("change", { value, event: content.picker });
+          this.triggerEvent("change", { value, event: content.handler });
         });
       }
     },
@@ -88,14 +88,14 @@ $register.C<{
         { [`config.content[${id}].status`]: event.detail.value },
         () => {
           this.triggerEvent("change", {
-            event: content.Switch,
+            event: content.handler,
             value: event.detail.value,
           });
         }
       );
 
-      // 将开关值写入存储的 swiKey 变量中
-      wx.setStorageSync(content.swiKey, event.detail.value);
+      // 将开关值写入存储的 key 变量中
+      wx.setStorageSync(content.key, event.detail.value);
     },
 
     /** 触发按钮事件 */
@@ -105,7 +105,7 @@ $register.C<{
         event
       ) as ListDetail<ButtonListComponnetItemConfig>;
 
-      this.triggerEvent("change", { event: content.button });
+      this.triggerEvent("change", { event: content.handler });
     },
 
     /** 控制滑块显隐 */
@@ -132,10 +132,10 @@ $register.C<{
 
       // 写入页面数据
       this.setData({ [`config.content[${id}].value`]: value }, () => {
-        this.triggerEvent("change", { value, event: content.slider });
+        this.triggerEvent("change", { value, event: content.handler });
       });
 
-      if (event.type === "change") wx.setStorageSync(content.sliKey, value);
+      if (event.type === "change") wx.setStorageSync(content.key, value);
     },
 
     /** 获得选择器位置与内容 */

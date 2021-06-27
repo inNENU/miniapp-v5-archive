@@ -53,7 +53,7 @@ $register("log", {
     if (globalData.page.id === "更新日志") setPage({ option, ctx: this });
     else setPage({ option: { id: "log" }, ctx: this });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("log");
   },
@@ -87,11 +87,12 @@ $register("log", {
       globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
     }.jpg`,
   }),
+
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 });

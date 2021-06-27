@@ -42,43 +42,44 @@ const resolveContent = (
       listElement.path as string
     }`;
 
-  // 设置列表开关与滑块
-  if ("swiKey" in listElement)
-    listElement.status =
-      wx.getStorageSync<boolean | undefined>(listElement.swiKey) || false;
-  if ("sliKey" in listElement)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    listElement.value = wx.getStorageSync(listElement.sliKey);
-
-  // 设置列表选择器
-  if ("pickerValue" in listElement)
-    if (listElement.single) {
-      // 单列选择器
-      const pickerValue = wx.getStorageSync<number>(listElement.key);
-
+  if ("type" in listElement) {
+    if (listElement.type === "switch")
+      // 设置列表开关与滑块
+      listElement.status =
+        wx.getStorageSync<boolean | undefined>(listElement.key) || false;
+    else if (listElement.type === "slider")
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      listElement.value = listElement.pickerValue[pickerValue];
-      listElement.currentValue = [pickerValue];
-    } else {
-      // 多列选择器
-      const pickerValues: string[] = wx
-        .getStorageSync<string>(listElement.key)
-        .split("-");
+      listElement.value = wx.getStorageSync(listElement.key);
+    // 设置列表选择器
+    else if (listElement.type === "picker")
+      if (listElement.single) {
+        // 单列选择器
+        const selectIndex = wx.getStorageSync<number>(listElement.key);
 
-      listElement.currentValue = [];
-      listElement.value = [];
-      pickerValues.forEach((pickerElement, index) => {
-        // eslint-disable-next-line
-        (listElement.value as any[])[index] = (
-          listElement.pickerValue[
-            index
-            // eslint-disable-next-line
-          ] as any[]
-        )[Number(pickerElement)];
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (listElement.currentValue as any[])[index] = Number(pickerElement);
-      });
-    }
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        listElement.value = listElement.select[selectIndex];
+        listElement.currentValue = [selectIndex];
+      } else {
+        // 多列选择器
+        const selectIndexs: string[] = wx
+          .getStorageSync<string>(listElement.key)
+          .split("-");
+
+        listElement.currentValue = [];
+        listElement.value = [];
+        selectIndexs.forEach((pickerElement, index) => {
+          // eslint-disable-next-line
+          (listElement.value as any[])[index] = (
+            listElement.select[
+              index
+              // eslint-disable-next-line
+            ] as any[]
+          )[Number(pickerElement)];
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          (listElement.currentValue as any[])[index] = Number(pickerElement);
+        });
+      }
+  }
 };
 
 /**

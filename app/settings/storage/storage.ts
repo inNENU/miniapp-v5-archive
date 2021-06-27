@@ -15,7 +15,7 @@ type ListAction =
   | "refreshGuide"
   | "refreshFunc"
   | "refreshIntro"
-  | "deleteData"
+  | "clearData"
   | "resetApp";
 
 $register("storage", {
@@ -41,23 +41,23 @@ $register("storage", {
           header: "资源刷新",
           foot: "如果页面显示出现问题请刷新资源",
           content: [
-            { text: "刷新全部资源", button: "refreshAll" },
-            { text: "刷新介绍资源", button: "refreshIntro" },
-            { text: "刷新功能资源", button: "refreshFunc" },
-            { text: "刷新指南资源", button: "refreshGuide" },
-            { text: "刷新图标资源", button: "refreshIcon" },
+            { text: "刷新全部资源", type: "button", handler: "refreshAll" },
+            { text: "刷新介绍资源", type: "button", handler: "refreshIntro" },
+            { text: "刷新功能资源", type: "button", handler: "refreshFunc" },
+            { text: "刷新指南资源", type: "button", handler: "refreshGuide" },
+            { text: "刷新图标资源", type: "button", handler: "refreshIcon" },
           ],
         },
         {
           tag: "advanced-list",
           header: "重置",
           content: [
-            { text: "清除小程序数据", button: "deleteData" },
-            { text: "清除小程序文件", button: "deleteFile" },
-            { text: "初始化小程序", button: "resetApp" },
+            { text: "清除小程序数据", type: "button", handler: "clearData" },
+            { text: "清除小程序文件", type: "button", handler: "clearFiles" },
+            { text: "初始化小程序", type: "button", handler: "resetApp" },
             {
               text: "退出小程序",
-              navigate: true,
+              type: "navigator",
               openType: "exit",
               target: "miniProgram",
             },
@@ -70,33 +70,33 @@ $register("storage", {
   onLoad() {
     setPage({ option: { id: "storage" }, ctx: this }, this.data.page);
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("storage");
   },
 
   onShow() {
-    this.setStorage();
+    this.setStorageStat();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /** 列表动作 */
+  /** List Actions Handler */
   list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event) this[detail.event as ListAction]();
   },
 
   /** 设置存储信息 */
-  setStorage() {
+  setStorageStat() {
     wx.getStorageInfo({
       success: ({ currentSize }) => {
         // 写入存储大小
@@ -159,13 +159,13 @@ $register("storage", {
 
   /** 刷新所有资源 */
   refreshAll() {
-    confirm("刷新图标资源", () => {
+    confirm("刷新全部资源", () => {
       resDownload("function-guide-icon-intro");
     });
   },
 
   /** 清除小程序数据 */
-  deleteData() {
+  clearData() {
     confirm("清除小程序数据", () => {
       wx.clearStorageSync();
       tip("数据清除完成");
@@ -173,7 +173,7 @@ $register("storage", {
   },
 
   /** 清除小程序文件 */
-  deleteFile() {
+  clearFiles() {
     confirm("清除小程序文件", () => {
       wx.showLoading({ title: "删除中", mask: true });
 

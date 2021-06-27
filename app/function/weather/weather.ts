@@ -101,7 +101,7 @@ $register("weather", {
     wx.onWindowResize(this.redrawCanvas);
     this.backgroundChange();
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   onShareAppMessage: () => ({
@@ -124,10 +124,10 @@ $register("weather", {
     wx.stopAccelerometer({
       success: () => console.info("stop accelerometer listening success"),
     });
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 

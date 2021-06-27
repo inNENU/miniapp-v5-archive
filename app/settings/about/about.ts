@@ -29,14 +29,24 @@ $register("about", {
           tag: "advanced-list",
           header: "版本号",
           content: [
-            { text: globalData.version, button: "debugMode" },
+            { text: globalData.version, type: "button", handler: "debugMode" },
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            { text: "启用测试功能", swiKey: "test", Switch: "testSwitch" },
+            {
+              text: "启用测试功能",
+              type: "switch",
+              key: "test",
+              handler: "toggleTest",
+            },
             // eslint-disable-next-line @typescript-eslint/naming-convention
-            { text: "调试开关", swiKey: "debugMode", Switch: "debugSwitch" },
-            { text: "退出开发者模式", button: "debugMode" },
+            {
+              text: "调试开关",
+              type: "switch",
+              key: "debugMode",
+              handler: "toggleDebug",
+            },
+            { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
-        },
+        } as AdvancedListComponentConfig,
         {
           tag: "list",
           header: "小程序介绍",
@@ -125,7 +135,7 @@ $register("about", {
       setPage({ option: { id: "about" }, ctx: this }, page);
     }
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("about");
   },
@@ -167,17 +177,17 @@ $register("about", {
   }),
 
   onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.themeChange);
+    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
-  themeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
+  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
 
   /** 列表控制函数 */
   list({ detail }: WechatMiniprogram.TouchEvent) {
     if (detail.event)
-      this[detail.event as "debugSwitch" | "testSwitch"](detail.value);
+      this[detail.event as "toggleDebug" | "toggleTest"](detail.value);
   },
 
   /** 点击版本号时触发的函数 */
@@ -257,7 +267,7 @@ $register("about", {
    *
    * @param value 开关状态
    */
-  debugSwitch(value: boolean) {
+  toggleDebug(value: boolean) {
     (
       (this.data.page.content[0] as AdvancedListComponentConfig)
         .content[2] as SwitchListComponentItemConfig
@@ -274,7 +284,7 @@ $register("about", {
    *
    * @param value 开关状态
    */
-  testSwitch(value: boolean) {
+  toggleTest(value: boolean) {
     tip(`已${value ? "启用" : "关闭"}测试功能`);
   },
 });
