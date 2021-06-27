@@ -72,6 +72,7 @@ $register("about", {
             {
               text: "联系并支持 Mr.Hope",
               icon: "contact",
+              type: "button",
               openType: "contact",
             },
           ],

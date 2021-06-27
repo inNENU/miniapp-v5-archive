@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { appOption, server } from "./config";
+import { appConfig, server } from "./config";
 import { debug, error, info, warn } from "./log";
 import {
   isFileExist,
@@ -179,7 +179,7 @@ export const appInit = (): void => {
   info("初次启动");
 
   // 设置主题
-  if (appOption.theme === "auto") {
+  if (appConfig.theme === "auto") {
     // 主题为 auto
     let num;
     let theme;
@@ -201,13 +201,13 @@ export const appInit = (): void => {
     wx.setStorageSync("theme", theme);
     wx.setStorageSync("themeNum", num);
   } else {
-    wx.setStorageSync("theme", appOption.theme);
-    wx.setStorageSync("themeNum", appOption.themeNum);
+    wx.setStorageSync("theme", appConfig.theme);
+    wx.setStorageSync("themeNum", appConfig.themeNum);
   }
 
   // 写入预设数据
-  Object.keys(appOption).forEach((data) => {
-    wx.setStorageSync(data, appOption[data]);
+  Object.keys(appConfig).forEach((data) => {
+    wx.setStorageSync(data, appConfig[data]);
   });
 
   resDownload("function-guide-icon-intro", false).then(() => {

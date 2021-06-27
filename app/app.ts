@@ -50,18 +50,12 @@ export interface AppOption {
 const resolvePath = (name: string): string =>
   ["main", "function", "guide", "me", "search"].includes(name)
     ? `/pages/${name}/${name}`
-    : [
-        "about",
-        "auth",
-        "donate",
-        "log",
-        "outlook",
-        "resource",
-        "storage",
-      ].includes(name)
-    ? `/settings/${name}/${name}`
     : ["function", "page", "web"].includes(name)
     ? `/module/${name}`
+    : ["about", "auth", "log", "outlook", "resource", "storage"].includes(name)
+    ? `/settings/${name}/${name}`
+    : name === "work"
+    ? "/settings/about/work"
     : `/function/${name}/${name}`;
 
 $register.A<AppOption>({
