@@ -12,7 +12,7 @@
     <view class="title">赞赏支持列表:</view>
     <view class="year">2021:</view>
     <block wx:if="{{donate2021}}">
-      <view wx:for="{{donate2021}}" wx:key="*this" class="item">
+      <view wx:for="{{donate2021}}" class="item">
         {{index + 1}}.
         <text style="font-weight: 500">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
@@ -27,7 +27,7 @@
 
     <view class="year">2020:</view>
     <block wx:if="{{donate2020}}">
-      <view wx:for="{{donate2020}}" wx:key="*this" class="item">
+      <view wx:for="{{donate2020}}" class="item">
         {{index + 1}}.
         <text style="font-weight: 500">{{item[0]}}</text>
         赞赏 {{item[1]}} 元
@@ -41,7 +41,7 @@
     <view wx:else>获取中...</view>
     <view class="year">2019:</view>
     <block wx:if="{{donate2019}}">
-      <view wx:for="{{donate2019}}" wx:key="*this" class="item">
+      <view wx:for="{{donate2019}}" class="item">
         {{index + 1}}.
         <text style="font-weight: 500">{{item[0]}}</text>
         赞赏 {{item[1]}} 元

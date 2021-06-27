@@ -165,16 +165,23 @@
         },
         {
           "id": 11,
-          "name": "赞赏",
-          "pathName": "settings/donate/donate",
+          "name": "关于",
+          "pathName": "settings/about/work",
           "query": "",
+          "scene": null
+        },
+        {
+          "id": 22,
+          "name": "赞赏",
+          "pathName": "settings/about/work",
+          "query": "type=donate",
           "scene": null
         },
         {
           "id": 12,
           "name": "赞赏列表",
-          "pathName": "settings/donate/list",
-          "query": "",
+          "pathName": "settings/about/work",
+          "query": "type=donateList",
           "scene": null
         },
         {
