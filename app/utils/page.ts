@@ -2,9 +2,10 @@
 import { debug, error, info, warn } from "./log";
 import { ensureJSON, readJSON, writeJSON } from "./file";
 import { modal, requestJSON } from "./wx";
-import { AppOption } from "../app";
-import { Notice } from "./app";
-import {
+
+import type { AppOption } from "../app";
+import type { Notice } from "./app";
+import type {
   AdvancedListComponentItemConfig,
   GridComponentItemComfig,
   ListComponentItemConfig,
@@ -111,7 +112,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
     });
 
   // 调试
-  info(`${page.id as string} 处理完毕`);
+  info(`Resolve ${page.id as string} page success`);
 
   // 返回处理后的 page
   return page;
@@ -142,7 +143,7 @@ const preloadPage = (page: PageData): void => {
           }
         );
     });
-  else warn("不存在页面内容");
+  else warn(`Page is empty`);
 
   // 统计报告
   wx.reportMonitor("1", 1);
@@ -177,7 +178,7 @@ export const resolvePage = (
   setGlobal = true
 ): PageData | null => {
   // 控制台输出参数
-  info("将要跳转: ", option);
+  info("Navigating to: ", option);
 
   let pageData = null;
 
@@ -186,7 +187,7 @@ export const resolvePage = (
     const jsonContent = readJSON<PageData>(`${option.query.id}`);
 
     if (jsonContent) pageData = disposePage(jsonContent, option.query);
-    else warn(`${option.query.id} 文件不存在，处理失败`);
+    else warn(`Can't resolve ${option.query.id} because file doesn't exist`);
   }
 
   if (pageData && setGlobal) {
@@ -320,7 +321,7 @@ export const setPage = (
   ) {
     const { id } = globalData.page;
 
-    debug(`${id} 已处理`);
+    debug(`${id} has been resloved`);
     ctx.setData(
       {
         color: getColor(globalData.page.data?.grey),
@@ -329,15 +330,15 @@ export const setPage = (
         page: globalData.page.data,
       },
       () => {
-        debug(`${id} 已写入`);
+        debug(`${id} pageData is set`);
         if (preload) {
           preloadPage(ctx.data.page as PageData);
-          debug(`${id} 预加载子页面完成`);
+          debug(`Preloaded ${id} links`);
         }
       }
     );
   } else if (ctx.data.page) {
-    debug(`${option.id || "未知页面"} 未处理`);
+    debug(`${option.id || "Unknown"} not resolved`);
 
     const pageData: PageData = handle
       ? ctx.data.page
@@ -376,7 +377,7 @@ export const popNotice = (id: string): void => {
       });
 
       // 调试
-      info(`${id} 页面弹出通知`);
+      info(`Pop notice in ${id} page`);
     }
   }
   // 统计分析
@@ -405,7 +406,7 @@ export const setOnlinePage = (
   if (option.id) {
     // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
     if (globalData.page.id === option.id) {
-      debug(`${option.id} 已处理`);
+      debug(`${option.id} has been resolved`);
 
       ctx.setData(
         {
@@ -416,16 +417,16 @@ export const setOnlinePage = (
           page: globalData.page.data,
         },
         () => {
-          debug(`${option.id as string} 已写入`);
+          debug(`${option.id as string} pageData is set`);
           if (preload) {
             preloadPage(ctx.data.page as PageData);
-            debug(`${option.id as string} 预加载子页面完成`);
+            debug(`Preloaded ${option.id as string} links`);
           }
         }
       );
     } else {
       // 需要重新载入界面
-      info(`${option.id} onLoad开始，参数为: `, option);
+      info(`${option.id} onLoad with options: `, option);
 
       const page = readJSON<PageData>(`${option.id}`);
 
@@ -433,13 +434,13 @@ export const setOnlinePage = (
       if (page) {
         setPage({ option, ctx }, page);
         popNotice(option.id);
-        info(`${option.id} onLoad 成功: `, ctx.data);
+        info(`${option.id} onLoad success: `, ctx.data);
         wx.reportMonitor("0", 1);
 
         // 如果需要执行预加载，则执行
         if (preload) {
           preloadPage(ctx.data.page as PageData);
-          debug(`${option.id} 界面预加载完成`);
+          debug(`${option.id} preload complete`);
         }
       }
       // 请求页面Json
@@ -457,14 +458,14 @@ export const setOnlinePage = (
             // 如果需要执行预加载，则执行
             if (preload) {
               preloadPage(ctx.data.page as PageData);
-              debug(`${option.id as string} 界面预加载完成`);
+              debug(`Preload ${option.id as string} complete`);
             }
 
             // 弹出通知
             popNotice(option.id as string);
 
             // 调试
-            info(`${option.id as string} onLoad 成功`);
+            info(`${option.id as string} onLoad Succeed`);
           },
           (res) => {
             // 设置 error 页面并弹出通知
@@ -478,7 +479,7 @@ export const setOnlinePage = (
             popNotice(option.id || "");
 
             // 调试
-            warn(`${option.id as string} onLoad 失败，错误为`, res);
+            warn(`${option.id as string} onLoad failed with error:`, res);
           },
           () => {
             // 设置 error 界面
@@ -491,7 +492,7 @@ export const setOnlinePage = (
             );
 
             // 调试
-            warn(`${option.id as string} 资源错误`);
+            warn(`${option.id as string} resource error`);
           }
         );
     }
@@ -517,14 +518,14 @@ export const loadOnlinePage = (
 ): void => {
   if (option.path) {
     // 需要重新载入界面
-    info(`${option.path} onLoad 开始，参数为:`, option);
+    info(`${option.path} onLoad starts with options:`, option);
     requestJSON<PageData>(
       `resource/${option.path}`,
       (page) => {
         if (page) {
           setPage({ option, ctx }, page);
           popNotice(option.path);
-          info(`${option.path} onLoad 成功:`, ctx.data);
+          info(`${option.path} onLoad succeed:`, ctx.data);
           wx.reportMonitor("0", 1);
         }
       },
@@ -540,7 +541,7 @@ export const loadOnlinePage = (
         popNotice(option.path || "");
 
         // 调试
-        warn(`${option.path} onLoad 失败，错误为 ${errMsg}`);
+        warn(`${option.path} onLoad failed with error: ${errMsg}`);
       }
     );
   } else error("no path");

@@ -9,7 +9,6 @@ export const workPage: PageDataWithContent = {
       text: ["全部 in 东师小程序的文字和代码均由 Mr.Hope 一人编写。"],
     },
   ],
-  action: false,
   shareable: true,
   qrcode: false,
 };
@@ -66,7 +65,6 @@ export const donatePage: PageDataWithContent = {
       ],
     },
   ],
-  action: false,
   shareable: true,
   qrcode: false,
 };

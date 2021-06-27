@@ -1,14 +1,9 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../app";
-import { PageData } from "../../typings";
-
-import { server } from "../utils/config";
+import { getImagePrefix } from "../utils/config";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
-const {
-  globalData: { appID },
-} = getApp<AppOption>();
+import type { PageData } from "../../typings";
 
 $register("page", {
   data: { page: {} as PageData & { id: string } },
@@ -23,7 +18,7 @@ $register("page", {
   },
 
   onLoad(option) {
-    console.info("进入参数为: ", option);
+    console.info("onLoad options: ", option);
 
     // 生成页面 ID
     if (option.scene)
@@ -66,9 +61,7 @@ $register("page", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.page.title,
-      imageUrl: `${server}img/${
-        appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `from=主页&id=${this.data.page.id}`,
     };
   },

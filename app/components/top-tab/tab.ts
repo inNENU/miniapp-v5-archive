@@ -1,4 +1,5 @@
-import { AppOption } from "../../app";
+import type { AppOption } from "../../app";
+
 const { globalData } = getApp<AppOption>();
 let currentSwipe: number;
 

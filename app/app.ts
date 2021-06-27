@@ -1,7 +1,5 @@
 import $register = require("wxpage");
 
-import { PageData } from "../typings";
-
 import {
   appInit,
   appUpdate,
@@ -11,6 +9,8 @@ import {
   startup,
 } from "./utils/app";
 import { version } from "./utils/config";
+
+import type { PageData } from "../typings";
 
 export interface GlobalData {
   /** 小程序运行环境 */
@@ -50,18 +50,12 @@ export interface AppOption {
 const resolvePath = (name: string): string =>
   ["main", "function", "guide", "me", "search"].includes(name)
     ? `/pages/${name}/${name}`
-    : [
-        "about",
-        "auth",
-        "donate",
-        "log",
-        "outlook",
-        "resource",
-        "storage",
-      ].includes(name)
-    ? `/settings/${name}/${name}`
     : ["function", "page", "web"].includes(name)
     ? `/module/${name}`
+    : ["about", "auth", "log", "outlook", "resource", "storage"].includes(name)
+    ? `/settings/${name}/${name}`
+    : name === "work"
+    ? "/settings/about/work"
     : `/function/${name}/${name}`;
 
 $register.A<AppOption>({

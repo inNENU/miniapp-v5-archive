@@ -1,12 +1,12 @@
 import $register = require("wxpage");
+
 import page from "./pageData";
-
-import { AppOption } from "../../app";
-
 import { checkResUpdate } from "../../utils/app";
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -31,7 +31,7 @@ $register("function", {
       resolvePage(res, wx.getStorageSync("function") || this.data.page)
     );
     console.info(
-      `功能大厅预加载用时${new Date().getTime() - globalData.date}ms`
+      `Function page loading time: ${new Date().getTime() - globalData.date}ms`
     );
   },
 
@@ -74,9 +74,7 @@ $register("function", {
 
   onAddToFavorites: () => ({
     title: "功能大厅",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {
@@ -88,6 +86,6 @@ $register("function", {
   },
 
   navigate() {
-    this.$route("/function/weather");
+    this.$route("weather");
   },
 });

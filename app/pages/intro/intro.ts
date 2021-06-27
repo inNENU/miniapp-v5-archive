@@ -1,13 +1,13 @@
 import $register = require("wxpage");
+
 import page from "./pageData";
-
-import { AppOption } from "../../app";
-
 import { checkResUpdate } from "../../utils/app";
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -35,7 +35,7 @@ $register("guide", {
       resolvePage(res, wx.getStorageSync("intro") || this.data.page)
     );
     console.info(
-      `东师介绍预加载用时${new Date().getTime() - globalData.date}ms`
+      `Intro page load time: ${new Date().getTime() - globalData.date}ms`
     );
   },
 
@@ -76,9 +76,7 @@ $register("guide", {
 
   onAddToFavorites: () => ({
     title: "东师介绍",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {
@@ -104,6 +102,6 @@ $register("guide", {
    * @param value 输入的搜索词
    */
   search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`/pages/search/search?name=intro&word=${detail.value}`);
+    this.$route(`search?name=intro&word=${detail.value}`);
   },
 });

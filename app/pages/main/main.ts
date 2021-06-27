@@ -1,14 +1,14 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { PageDataWithContent } from "../../../typings";
-
 import { checkResUpdate } from "../../utils/app";
-import { server } from "../../utils/config";
+import { getImagePrefix, getTitle } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 import { requestJSON } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type { PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -44,7 +44,11 @@ $register("main", {
   },
 
   onPageLaunch() {
-    console.info("主页面启动: ", new Date().getTime() - globalData.date, "ms");
+    console.info(
+      "Main Page Launched: ",
+      new Date().getTime() - globalData.date,
+      "ms"
+    );
     const page = wx.getStorageSync<PageDataWithContent | undefined>("main");
 
     resolvePage({ query: { id: "main" } }, page ? page : this.data.page);
@@ -100,22 +104,18 @@ $register("main", {
   onPageScroll() {},
 
   onShareAppMessage: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+    title: getTitle(),
     path: "/pages/main/main",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.jpg`,
   }),
 
   onShareTimeline: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+    title: getTitle(),
   }),
 
   onAddToFavorites: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    title: getTitle(),
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {
@@ -141,6 +141,6 @@ $register("main", {
    * @param value 输入的搜索词
    */
   search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`/pages/search/search?name=all&word=${detail.value}`);
+    this.$route(`search?name=all&word=${detail.value}`);
   },
 });

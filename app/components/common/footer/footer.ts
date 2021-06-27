@@ -1,5 +1,7 @@
-import { AppOption } from "../../../app";
 import { server } from "../../../utils/config";
+
+import type { AppOption } from "../../../app";
+
 const {
   // 获得当前小程序ID
   globalData: { appID },

@@ -1,11 +1,11 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -135,9 +135,7 @@ $register("video", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.videoName,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `name=${this.data.videoName}`,
     };
   },

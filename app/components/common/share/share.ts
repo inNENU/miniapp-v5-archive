@@ -1,7 +1,8 @@
-import { AppOption } from "../../../app";
-import { PageData } from "../../../../typings";
 import { readFile } from "../../../utils/file";
 import { savePhoto } from "../../../utils/wx";
+
+import type { AppOption } from "../../../app";
+import type { PageData } from "../../../../typings";
 
 const {
   globalData: { env, appID },

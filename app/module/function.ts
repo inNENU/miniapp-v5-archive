@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../app";
-
-import { server } from "../utils/config";
+import { getImagePrefix } from "../utils/config";
 import { listFile, remove } from "../utils/file";
 import { modal } from "../utils/wx";
+
+import type { AppOption } from "../app";
 
 const {
   globalData: { appID, theme },
@@ -31,9 +31,7 @@ $register("function", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: "功能页",
-      imageUrl: `${server}img/${
-        appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: "action=all",
     };
   },

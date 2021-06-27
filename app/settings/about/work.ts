@@ -1,7 +1,7 @@
 import $register = require("wxpage");
 
 import { donateListPage, donatePage, workPage } from "./pageData";
-import { server } from "../../utils/config";
+import { getImagePrefix, server } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
 import { savePhoto } from "../../utils/wx";
 
@@ -86,9 +86,7 @@ $register("donate", {
     return {
       title: this.getTitle(),
       path: `/settings/donate/donate?type=${this.data.type}`,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }Share.jpg`,
+      imageUrl: `${getImagePrefix()}Share.jpg`,
     };
   },
 
@@ -99,9 +97,7 @@ $register("donate", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.getTitle(),
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `type=${this.data.type}`,
     };
   },

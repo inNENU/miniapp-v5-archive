@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { getColor, popNotice } from "../../utils/page";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -67,9 +67,7 @@ $register("wechat", {
 
   onAddToFavorites: () => ({
     title: "校园公众号",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
   onUnload() {
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);

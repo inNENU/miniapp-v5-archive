@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import { PageData } from "../../../typings";
-
-import { server } from "../../utils/config";
+import { getImagePrefix, getTitle } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
+
+import type { AppOption } from "../../app";
+import type { PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 const { appID, env, version } = globalData;
@@ -87,9 +87,7 @@ $register("me", {
             },
             {
               text:
-                appID === "wx9ce37d9662499df3"
-                  ? "联系校会君"
-                  : "联系或支持 Mr.Hope",
+                appID === "wx9ce37d9662499df3" ? "联系校会君" : "联系 Mr.Hope",
               icon: "contact",
               openType: "contact",
               hidden: env === "qq",
@@ -118,7 +116,7 @@ $register("me", {
   onPreload(res) {
     this.$put("me", resolvePage(res, this.data.page));
     console.info(
-      `我的东师预加载用时${new Date().getTime() - globalData.date}ms`
+      `User page load time: ${new Date().getTime() - globalData.date}ms`
     );
   },
 
@@ -140,22 +138,16 @@ $register("me", {
   onPageScroll() {},
 
   onShareAppMessage: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
+    title: getTitle(),
     path: "/pages/main/main",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.jpg`,
   }),
 
-  onShareTimeline: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
-  }),
+  onShareTimeline: () => ({ title: getTitle() }),
 
   onAddToFavorites: () => ({
-    title: globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "in东师",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    title: getTitle(),
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

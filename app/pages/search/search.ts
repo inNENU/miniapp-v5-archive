@@ -1,10 +1,10 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-
-import { server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
 import { SearchResult, search, searching } from "../../utils/search";
+
+import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
@@ -54,9 +54,7 @@ $register("search", {
     return {
       title: "搜索",
       path: `/pages/search/search?name=${this.state.name}&word=${this.state.value}`,
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }Share.jpg`,
+      imageUrl: `${getImagePrefix()}Share.jpg`,
     };
   },
 
@@ -70,9 +68,7 @@ $register("search", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: "搜索",
-      imageUrl: `${server}img/${
-        globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-      }.jpg`,
+      imageUrl: `${getImagePrefix()}.jpg`,
       query: `name=${this.state.name}&word=${this.state.value}`,
     };
   },
@@ -117,7 +113,7 @@ $register("search", {
   navigate({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<never, never, { id: string }>) {
-    this.$route(`/module/page?id=${currentTarget.dataset.id}&from=搜索`);
+    this.$route(`page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 
   back() {

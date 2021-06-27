@@ -47,7 +47,7 @@ export const remove = (path: string, type?: "dir" | "file"): void => {
     else fileManager.unlinkSync(`${userPath}/${path}`);
   } catch ({ message }) {
     // 调试
-    error(`删除 ${path} 出错,错误为:`, message);
+    error(`Delete ${path} failed:`, message);
   }
 };
 
@@ -63,7 +63,7 @@ export const isFileExist = (path: string): boolean => {
     return true;
   } catch ({ message }) {
     // 调试
-    warn(`${path} 不存在`, message);
+    warn(`${path} don't exist`, message);
 
     return false;
   }
@@ -92,12 +92,12 @@ export const listFile = (path: string): string[] => {
     const fileList = fileManager.readdirSync(`${userPath}/${path}`);
 
     // 调试
-    info(`${path} 文件夹下文件为: `, fileList);
+    info(`Files under ${path} folder: `, fileList);
 
     return fileList;
   } catch (err) {
     // 调试
-    error(`列出 ${path} 文件夹下文件错误: `, err);
+    error(`Error listing ${path} folder: `, err);
 
     return [];
   }
@@ -117,7 +117,7 @@ export const readFile = (
   try {
     return fileManager.readFileSync(`${userPath}/${path}`, encoding);
   } catch (err) {
-    warn(`${path} 不存在`);
+    warn(`${path} don't exist`);
 
     return undefined;
   }
@@ -145,18 +145,18 @@ export const readJSON = <T>(
     try {
       data = JSON.parse(fileContent as string) as T;
 
-      debug(`读取 ${path}.json 成功`);
+      debug(`Reading ${path}.json succeed`);
     } catch (err) {
       data = undefined;
 
       // 调试
-      warn(`${path} 解析失败`);
+      warn(`Parsing ${path}.json failed`);
     }
   } catch (err) {
     data = undefined;
 
     // 调试
-    warn(`${path} 不存在`);
+    warn(`File ${path}.json don't exist`);
   }
 
   return data;
@@ -172,7 +172,7 @@ export const makeDir = (path: string, recursive = true): void => {
     fileManager.mkdirSync(`${userPath}/${path}`, recursive);
   } catch (err) {
     // 调试
-    info(`${path} 目录已存在`, err);
+    info(`${path} dir already exists:`, err);
   }
 };
 
@@ -186,7 +186,7 @@ export const saveFile = (tempFilePath: string, path: string): void => {
     fileManager.saveFileSync(tempFilePath, `${userPath}/${path}`);
   } catch (err) {
     // 调试
-    error(`保存文件到 ${path} 失败:`, err);
+    error(`Error saving file to ${path}:`, err);
   }
 };
 
@@ -222,16 +222,16 @@ export const saveOnlineFile = ({
     filePath: `${userPath}/${path}`,
     success: (res) => {
       if (res.statusCode === 200) {
-        info(`保存 ${url} 成功`);
+        info(`Save ${url} success`);
         if (success) success(res.tempFilePath);
       } else {
         if (errorFunc) errorFunc(res.statusCode);
-        warn(`下载 ${url} 失败，状态码为 ${res.statusCode}`);
+        warn(`Download ${url} failed with status code ${res.statusCode}`);
       }
     },
     fail: ({ errMsg }) => {
       if (fail) fail(errMsg);
-      warn(`下载 ${url} 失败，错误为 ${errMsg}`);
+      warn(`Download ${url} failed with error: ${errMsg}`);
     },
   });
 };
@@ -293,15 +293,15 @@ export const saveJSON = ({
     filePath: `${userPath}/${path}.json`,
     success: (res) => {
       if (res.statusCode === 200) {
-        info(`保存 ${url}.json 成功`);
+        info(`Save ${url}.json success`);
         if (success) success();
       } else {
-        error(`获取 ${url}.json 失败，状态码为 ${res.statusCode}`);
+        error(`Get ${url}.json failed with status code ${res.statusCode}`);
         if (errorFunc) errorFunc(res.statusCode);
       }
     },
     fail: ({ errMsg }) => {
-      error(`下载 ${url}.json 失败，错误为 ${errMsg}`);
+      error(`Download ${url}.json failed with error: ${errMsg}`);
       if (fail) fail(errMsg);
     },
   });
@@ -323,7 +323,7 @@ export const ensureJSON = ({
   error: errorFunc = fail,
 }: EnsureJSONOption): void => {
   if (!isFileExist(`${path}.json`)) {
-    info(`开始获取 ${url}.json`);
+    info(`Fetching ${url}.json`);
 
     makeDir(dirname(path));
 
@@ -332,16 +332,16 @@ export const ensureJSON = ({
       filePath: `${userPath}/${path}.json`,
       success: (res) => {
         if (res.statusCode === 200) {
-          info(`获取 ${url}.json 成功`);
+          info(`Fetch ${url}.json success`);
           if (success) success();
         } else {
-          error(`获取 ${url}.json 失败，状态码为 ${res.statusCode}`);
+          error(`Fetch ${url}.json failed with statuscode ${res.statusCode}`);
           if (errorFunc) errorFunc(res.statusCode);
           remove(`${path}.json`);
         }
       },
       fail: ({ errMsg }) => {
-        error(`下载 ${url}.json 失败，错误为 ${errMsg}`);
+        error(`Download ${url}.json failed with error ${errMsg}`);
         if (fail) fail(errMsg);
       },
     });
@@ -403,7 +403,7 @@ export const unzip = (
       if (successFunc) successFunc();
     },
     fail: (failMsg) => {
-      error(`解压 ${path} 失败:`, failMsg);
+      error(`Unzip ${path} failed with error:`, failMsg);
     },
   });
 };

@@ -1,16 +1,16 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import {
+import { getImagePrefix } from "../../utils/config";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { requestJSON, tip } from "../../utils/wx";
+
+import type { AppOption } from "../../app";
+import type {
   AdvancedListComponentConfig,
   ComponentConfig,
   PageDataWithContent,
   SwitchListComponentItemConfig,
 } from "../../../typings";
-
-import { server } from "../../utils/config";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { requestJSON, tip } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
@@ -72,6 +72,7 @@ $register("about", {
             {
               text: "联系并支持 Mr.Hope",
               icon: "contact",
+              type: "button",
               openType: "contact",
             },
           ],
@@ -162,18 +163,14 @@ $register("about", {
   onShareAppMessage: () => ({
     title: "关于",
     path: "/settings/about/about",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.jpg`,
   }),
 
   onShareTimeline: () => ({ title: "关于" }),
 
   onAddToFavorites: () => ({
     title: "关于",
-    imageUrl: `${server}img/${
-      globalData.appID === "wx9ce37d9662499df3" ? "myNENU" : "inNENU"
-    }.jpg`,
+    imageUrl: `${getImagePrefix()}.jpg`,
   }),
 
   onUnload() {

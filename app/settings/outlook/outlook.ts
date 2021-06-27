@@ -1,13 +1,13 @@
 import $register = require("wxpage");
 
-import { AppOption } from "../../app";
-import {
+import { popNotice, resolvePage, setPage } from "../../utils/page";
+
+import type { AppOption } from "../../app";
+import type {
   AdvancedListComponentConfig,
   PageDataWithContent,
   PickerListComponentItemConfig,
 } from "../../../typings";
-
-import { popNotice, resolvePage, setPage } from "../../utils/page";
 
 const { globalData } = getApp<AppOption>();
 
