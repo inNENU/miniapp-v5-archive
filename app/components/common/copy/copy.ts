@@ -14,4 +14,8 @@ Component<{ config: CopyComponentConfig }>({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

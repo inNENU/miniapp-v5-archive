@@ -77,25 +77,28 @@
   </view>
   <!-- 小时预报 -->
   <scroll-view class="hours btb" enable-flex scroll-x>
-    <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
-      <text class="time">{{item.time}}</text>
-
-      <image class="icon" src="{{weatherIcon[item.weatherCode]}}" />
-      <text class="degree">{{item.degree}}</text>
+    <view class="flex">
+      <view wx:for="{{weather.hourForecast}}" wx:key="update_time" class="item">
+        <text class="time">{{item.time}}</text>
+        <image class="icon" src="{{weatherIcon[item.weatherCode]}}" />
+        <text class="degree">{{item.degree}}</text>
+      </view>
     </view>
   </scroll-view>
   <!-- 日预报 -->
   <scroll-view class="days btb" enable-flex scroll-x>
-    <view wx:for="{{weather.dayForecast}}" class="item" wx:key="weekday">
-      <view class="day">{{item.weekday}}</view>
-      <view class="date">{{item.date}}</view>
-      <view class="weather">{{item.dayWeatherShort}}</view>
-      <image class="icon" src="{{weatherIcon[item.dayWeatherCode]}}" />
-      <view class="placeholder" />
-      <image class="icon" src="{{weatherIcon[item.nightWeatherCode]}}" />
-      <view class="weather">{{item.nightWeatherShort}}</view>
-      <view class="wind">{{item.nightWindDirection}}</view>
-      <view class="wind">{{item.nightWindPower}}级</view>
+    <view class="flex">
+      <view wx:for="{{weather.dayForecast}}" class="item" wx:key="weekday">
+        <view class="day">{{item.weekday}}</view>
+        <view class="date">{{item.date}}</view>
+        <view class="weather">{{item.dayWeatherShort}}</view>
+        <image class="icon" src="{{weatherIcon[item.dayWeatherCode]}}" />
+        <view class="placeholder" />
+        <image class="icon" src="{{weatherIcon[item.nightWeatherCode]}}" />
+        <view class="weather">{{item.nightWeatherShort}}</view>
+        <view class="wind">{{item.nightWindDirection}}</view>
+        <view class="wind">{{item.nightWindPower}}级</view>
+      </view>
     </view>
     <!-- 温度曲线 -->
     <canvas type="2d" class="canvas temperature" canvas-id="weather" />

@@ -53,4 +53,8 @@ Component({
       this.triggerEvent("more");
     },
   },
+
+  options: {
+    styleIsolation: "apply-shared",
+  },
 });

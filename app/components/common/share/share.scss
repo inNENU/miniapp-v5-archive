@@ -63,13 +63,17 @@
     transform: translateY(0);
   }
 
+  .action-list-wrapper {
+    height: 104px;
+    margin-top: 15px;
+  }
+
   .action-list {
     display: flex;
     align-items: center;
     justify-content: start;
 
-    height: 104px;
-    margin-top: 15px;
+    height: 100%;
     padding: 0 10px;
   }
 

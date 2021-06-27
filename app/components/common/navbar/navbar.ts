@@ -71,4 +71,8 @@ $register.C({
       if (getCurrentPages().length === 1) this.setData({ firstPage: true });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });
