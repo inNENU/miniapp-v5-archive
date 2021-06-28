@@ -12,7 +12,7 @@
   catch:updated="update"
   catch:regionchange="regionChange"
 />
-<!-- 返回按钮 -->
+
 <view
   class="back-button"
   style="top:{{info.statusBarHeight + 5}}px;"
@@ -21,25 +21,43 @@
 >
   <view class="icon-{{firstPage? 'home': 'back'}}" />
 </view>
-<!-- 放大按钮 -->
+
 <view
-  class="scale-button zoomin"
-  hover-class="button-hover"
-  data-action="enlarge"
-  catch:tap="scale"
+  class="area-switch"
+  style="top:{{info.statusBarHeight + 5}}px;"
+  catch:tap="changeArea"
 >
-  <text>+</text>
+  <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
+  <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
 </view>
-<!-- 缩小按钮 -->
+
+<view class="scale-buttons">
+  <view
+    class="item"
+    hover-class="button-hover"
+    data-action="zoom-out"
+    catch:tap="scale"
+  >
+    <image src="./icon/zoom-out.svg" />
+  </view>
+  <view
+    class="item"
+    hover-class="button-hover"
+    data-action="zoom-in"
+    catch:tap="scale"
+  >
+    <image src="./icon/zoom-in.svg" />
+  </view>
+</view>
+
 <view
-  class="scale-button zoomout"
+  class="locate-button"
   hover-class="button-hover"
-  data-action="narrow"
-  catch:tap="scale"
+  catch:tap="moveToLocation"
 >
-  <text>-</text>
+  <image class="icon" src="./icon/locate.svg" />
 </view>
-<!-- 点位按钮 -->
+
 <view
   class="point-button"
   hover-class="button-hover"
@@ -48,6 +66,7 @@
 >
   <image class="icon" src="./icon/point.svg" />
 </view>
+
 <!-- 分类按钮 -->
 <view class="select-wrapper {{pointDisplay? 'move-left-in': 'move-left-out'}}">
   <view
@@ -61,19 +80,9 @@
     {{item.name}}
   </view>
 </view>
+
 <!-- 自定义tab栏 -->
-<view class="tab" id="mapTab">
-  <view
-    class="locate-button"
-    hover-class="button-hover"
-    catch:tap="moveToLocation"
-  >
-    <image class="icon" src="./icon/locate.png" />
-  </view>
-  <view class="switch" catch:tap="changeArea">
-    <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
-    <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
-  </view>
+<view class="tab">
   <view class="list-button" catch:tap="showPopup">
     <image class="icon" src="./icon/list.png" />
   </view>

@@ -100,11 +100,6 @@ $register("map", {
 
     this.setData({
       area,
-      /** 地图风格 */
-      mapStyle: globalData.darkmode
-        ? "46NBZ-EJ6C4-4REUO-XR7ZR-CWLG5-T3BDA"
-        : "PZGBZ-74N6F-KVYJ5-NRJDH-Y3NUT-IKFLF",
-
       /** 设备信息 */
       info: globalData.info,
       darkmode: globalData.darkmode,
@@ -245,7 +240,7 @@ $register("map", {
           map: {
             scale:
               this.data.map.scale +
-              (event.currentTarget.dataset.action === "enlarge" ? 1 : -1),
+              (event.currentTarget.dataset.action === "zoom-in" ? 1 : -1),
             latitude: res.latitude,
             longitude: res.longitude,
           },

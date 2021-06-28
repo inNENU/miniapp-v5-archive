@@ -3,36 +3,91 @@
   height: 100%;
 }
 
-/* scale 组件 */
-.scale-button {
-  position: fixed;
-  right: 20px;
+/* switch组件 */
+.area-switch {
+  position: absolute;
+  left: calc(50% - 60px);
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  overflow: hidden;
 
-  width: 40px;
-  height: 40px;
-  padding-bottom: 1px;
-  border-radius: 50%;
+  width: 120px;
+  height: 30px;
+  border: 1px solid #3478f7;
+  border-radius: 14px;
 
   background-color: var(--bgcolor);
-  color: var(--grey);
-  box-shadow: -1px 3px 5px #dbdadfd3;
 
-  font-size: 28px;
+  font-size: 14px;
+
+  .item {
+    display: inline-block;
+
+    width: 50%;
+    height: 100%;
+
+    color: #3478f7;
+
+    line-height: 30px;
+
+    &.active {
+      background-color: #3478f7;
+      color: var(--bgcolor);
+    }
+  }
+}
+
+/* scale 组件 */
+.scale-buttons {
+  position: fixed;
+  bottom: 60px;
+  left: 20px;
+
+  overflow: hidden;
+
+  width: 76px;
+  height: 32px;
+  border-radius: 16px;
+
+  background-color: var(--bgcolor);
+  box-shadow: -1px 3px 5px #dbdadfd3;
 
   @media (prefers-color-scheme: dark) {
     box-shadow: -1px 3px 5px #4b4d47d3;
   }
 
-  &.zoomin {
-    bottom: 140px;
+  .item {
+    display: inline-block;
+    height: 100%;
+    padding: 6px 8px;
+
+    image {
+      width: 22px;
+      height: 22px;
+    }
+  }
+}
+
+/* locate组件 */
+.locate-button {
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 6px;
+
+  background-color: var(--bgcolor);
+  box-shadow: -1px 3px 5px #dbdadfd3;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: -1px 3px 5px #4b4d47d3;
   }
 
-  &.zoomout {
-    bottom: 90px;
+  .icon {
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -112,43 +167,6 @@
 
   @media (prefers-color-scheme: dark) {
     box-shadow: 0 -2px 5px rgba(45, 44, 49, 0.95);
-  }
-}
-
-/* locate组件 */
-.locate-button {
-  padding: 1px;
-  border-radius: 3px;
-
-  .icon {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-/* switch组件 */
-.switch {
-  width: 130px;
-  height: 35px;
-  border: 1px solid #3478f7;
-  border-radius: 5px;
-
-  background-color: var(--bgcolor);
-
-  .item {
-    display: inline-block;
-
-    width: 50%;
-    height: 100%;
-
-    color: #3478f7;
-
-    line-height: 35px;
-
-    &.active {
-      background-color: #3478f7;
-      color: var(--bgcolor);
-    }
   }
 }
 
