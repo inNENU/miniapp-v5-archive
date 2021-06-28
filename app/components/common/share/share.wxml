@@ -29,7 +29,7 @@
               open-type="{{item.openType}}"
               open-id="{{item.openId}}"
               group-id="{{item.groupId}}"
-              share-type="{{item.shareType}}"
+              share-mode="{{item.shareMode}}"
               bind:tap="{{item.action || ''}}"
             >
               <image

@@ -8,9 +8,11 @@ Component<{ config: CopyComponentConfig }>({
 
   methods: {
     copy(): void {
+      const { text } = this.data.config;
+
       wx.setClipboardData({
-        data: this.data.config.text,
-        success: () => console.log("复制成功"),
+        data: text,
+        success: () => console.log(`Copied '${text}'`),
       });
     },
   },

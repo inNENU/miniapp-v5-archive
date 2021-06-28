@@ -9,14 +9,16 @@ Component<{ config: DocComponentConfig }>({
 
   methods: {
     view(): void {
+      const { icon, url } = this.data.config;
+
       // 检测到文档
-      if (["doc", "ppt", "xls", "pdf"].includes(this.data.config.icon)) {
+      if (["doc", "ppt", "xls", "pdf"].includes(icon)) {
         // 显示下载提示
         wx.showLoading({ title: "下载中...0%", mask: true });
 
         // 开始下载文件
         const docTask = wx.downloadFile({
-          url: this.data.config.url,
+          url,
 
           // 下载成功，隐藏下载提示并打开文档
           success: (data) => {
@@ -25,10 +27,10 @@ Component<{ config: DocComponentConfig }>({
               filePath: data.tempFilePath,
               showMenu: true,
               success: () => {
-                console.log("成功打开文档");
+                console.log(`Open document ${url} success`);
               },
               fail: ({ errMsg }) => {
-                console.log(`打开文档失败: ${errMsg}`);
+                console.log(`Open document ${url} failed: ${errMsg}`);
               },
             });
           },
@@ -36,7 +38,7 @@ Component<{ config: DocComponentConfig }>({
           // 下载失败，隐藏下载提示告知用户下载失败并上报
           fail: () => {
             wx.hideLoading();
-            tip("文档下载失败");
+            tip(`Download document ${url} failed`);
             wx.reportMonitor("9", 1);
           },
         });
@@ -47,16 +49,18 @@ Component<{ config: DocComponentConfig }>({
         });
 
         // 检测到图片，开始图片浏览
-      } else if (["jpg", "png", "gif"].includes(this.data.config.icon))
-        wx.previewImage({ urls: [this.data.config.url] });
+      } else if (["jpg", "png", "gif"].includes(icon))
+        wx.previewImage({ urls: [url] });
     },
 
     /** 下载文档 */
     download(): void {
-      if (["doc", "ppt", "xls", "pdf"].includes(this.data.config.icon))
+      const { icon, url } = this.data.config;
+
+      if (["doc", "ppt", "xls", "pdf"].includes(icon))
         // 检测到文档
         wx.setClipboardData({
-          data: this.data.config.url,
+          data: url,
           success: () => {
             modal(
               "复制成功",
@@ -64,9 +68,9 @@ Component<{ config: DocComponentConfig }>({
             );
           },
         });
-      else if (["jpg", "png", "gif"].includes(this.data.config.icon))
+      else if (["jpg", "png", "gif"].includes(icon))
         // 检测到图片，开始图片下载
-        savePhoto(this.data.config.url);
+        savePhoto(url);
     },
   },
 });

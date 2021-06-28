@@ -36,7 +36,7 @@ module.exports = {
       case "touchend":
       default:
         if (time > event.timeStamp - 200) {
-          console.log("touch");
+          console.log("Tap in shared menu");
           ownerInstance.selectComponent(".share-wrapper").setStyle({
             visibility: "visible",
             opacity: 1,

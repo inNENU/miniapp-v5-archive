@@ -72,7 +72,7 @@ $register("music", {
       source: `url("${server}assets/fonts/FZSSJW.ttf")`,
       complete: (res) => {
         // 调试
-        console.info("宋体字体", res);
+        console.info(`Font status: ${res.status}`);
       },
     });
 
@@ -228,12 +228,12 @@ $register("music", {
     // 歌曲播放结束
     manager.onEnded(() => {
       this.end();
-      console.log("end");
+      console.log("Music ends");
     });
 
     // 歌曲播放结束
     manager.onStop(() => {
-      console.log("用户通过浮窗中止");
+      console.log("Music Stops by closing popup");
       this.setData({ currentTime: 0, playing: false });
       this.state.interupt = true;
     });

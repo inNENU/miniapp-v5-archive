@@ -49,7 +49,6 @@ $register("donate", {
           url: `${server}service/donateList.php?year=${year}`,
           enableHttp2: true,
           success: (res) => {
-            console.log(res);
             if (res.statusCode === 200) {
               const donateList = res.data;
               let sum = 0;

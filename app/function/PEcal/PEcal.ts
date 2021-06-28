@@ -235,8 +235,6 @@ $register("PEcal", {
   input({ currentTarget, detail }: WechatMiniprogram.Input) {
     const project = currentTarget.id;
 
-    console.log(project);
-
     this.state.result[project] = Number(detail.value);
   },
 
@@ -376,7 +374,7 @@ $register("PEcal", {
     const { gender, grade } = this.state;
 
     wx.showLoading({ title: "计算中...", mask: true });
-    console.info("输入结果为: ", result);
+    console.info("Input data: ", result);
 
     // 可以计算
     if (gender && grade) {

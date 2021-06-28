@@ -15,7 +15,7 @@ interface ActionConfig {
   openType?: string;
   openId?: string;
   groupId?: string;
-  shareType?: number;
+  shareMode?: string[];
   action?: string;
 }
 
@@ -59,27 +59,33 @@ Component({
           actions.push(
             {
               icon: "qq",
+              text: "分享给最近联系人",
+              openType: "share",
+              shareMode: ["recentContacts"],
+            },
+            {
+              icon: "qq",
               text: "分享给好友",
               openType: "share",
-              shareType: 1,
+              shareMode: ["qq"],
             },
             {
               icon: "qzone",
               text: "分享到空间",
               openType: "share",
-              shareType: 2,
+              shareMode: ["qzone"],
             },
             {
               icon: "moments",
               text: "分享到朋友圈",
               openType: "share",
-              shareType: 16,
+              shareMode: ["wechatMoment"],
             },
             {
               icon: "wechat",
               text: "分享给微信好友",
               openType: "share",
-              shareType: 16,
+              shareMode: ["wechatFriends"],
             }
           );
         else
