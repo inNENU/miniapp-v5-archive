@@ -11,7 +11,7 @@
   <block wx:else>
     <view
       class="back-button {{page.titleDisplay? 'fade-out': 'fade-in'}}"
-      style="top:{{page.statusBarHeight + 5.5}}px;"
+      style="top:{{page.statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
     >

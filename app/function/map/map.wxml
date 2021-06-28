@@ -15,7 +15,7 @@
 
 <view
   class="back-button"
-  style="top:{{info.statusBarHeight + 5}}px;"
+  style="top:{{info.statusBarHeight + 6}}px;"
   hover-class="button-hover"
   catch:tap="back"
 >
@@ -24,7 +24,7 @@
 
 <view
   class="area-switch"
-  style="top:{{info.statusBarHeight + 5}}px;"
+  style="top:{{info.statusBarHeight + 6}}px;"
   catch:tap="changeArea"
 >
   <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>

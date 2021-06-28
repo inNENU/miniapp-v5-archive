@@ -3,7 +3,7 @@
 <view class="music-wrapper">
   <view
     class="back-button"
-    style="top:{{info.statusBarHeight + 5}}px;"
+    style="top:{{info.statusBarHeight + 6}}px;"
     hover-class="button-hover"
     catch:tap="back"
   >
