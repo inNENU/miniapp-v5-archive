@@ -13,7 +13,8 @@ const buildWXSS = () =>
   src("app/**/*.scss")
     .pipe(
       sass({
-        // use `@` as hack for remaining '@import'
+        // use `!` as hack for remaining '@import'
+        outputStyle: "compressed",
         importer: (url) => {
           if (url.includes(".css")) return null;
 
@@ -44,7 +45,7 @@ const buildWXSS = () =>
 
           const content = chunk.contents
             .toString()
-            .replace(/@import "@(.*?)\.css"/gu, '@import "$1.wxss"');
+            .replace(/@import ?"!(.*?)\.css"/gu, '@import "$1.wxss"');
 
           chunk.contents = Buffer.from(content);
 

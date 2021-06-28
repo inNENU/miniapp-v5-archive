@@ -21,10 +21,10 @@ $register.C<{
 }>({
   properties: {
     /** 配置 */
-    config: { type: Object },
+    config: Object,
 
     /** 改变触发 */
-    change: { type: Object },
+    change: Object,
   },
 
   methods: {

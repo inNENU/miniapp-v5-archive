@@ -4,7 +4,7 @@ import { modal, savePhoto, tip } from "../../../utils/wx";
 Component<{ config: DocComponentConfig }>({
   properties: {
     /** 配置 */
-    config: { type: Object },
+    config: Object,
   },
 
   methods: {

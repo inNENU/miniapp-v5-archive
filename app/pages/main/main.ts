@@ -69,7 +69,9 @@ $register("main", {
         }
       }, 500);
     }
+  },
 
+  onShow() {
     popNotice("main");
   },
 

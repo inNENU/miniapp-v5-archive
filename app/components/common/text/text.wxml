@@ -1,10 +1,7 @@
-<!-- 段落标题 -->
-<view wx:if="{{config.heading}}" class="paragraph-header"
-  >{{config.heading}}</view
->
-<!-- 段落主体 -->
-<view class="paragraph" style="{{config.align}}">
-  <block wx:if="{{config.type === 'ol'}}">
+<wxs src="./text.wxs" module="text" />
+
+<template name="text">
+  <block wx:if="{{config.tag === 'ol' || config.type === 'ol'}}">
     <view
       wx:for="{{config.text}}"
       wx:key="*this"
@@ -15,7 +12,8 @@
       <text class="text" decode selectable space="nbsp">{{item}}</text>
     </view>
   </block>
-  <block wx:elif="{{config.type === 'ul'}}">
+
+  <block wx:elif="{{config.tag === 'ul' || config.type === 'ul'}}">
     <view
       wx:for="{{config.text}}"
       wx:key="*this"
@@ -26,6 +24,7 @@
       <text class="text" decode selectable space="nbsp">{{item}}</text>
     </view>
   </block>
+
   <block wx:else>
     <view wx:for="{{config.text}}" wx:key="*this">
       <text
@@ -38,4 +37,26 @@
       >
     </view>
   </block>
+</template>
+
+<view
+  wx:if="{{text.isContainer(config.pattern || config.type)}}"
+  class="paragraph"
+>
+  <view class="container {{config.pattern || config.type}}">
+    <view wx:if="{{config.heading !== false}}" class="container-title"
+      >{{ text.getTitle(config)}}</view
+    >
+    <template is="text" data="{{config}}" />
+  </view>
 </view>
+<!-- 段落标题 -->
+<block wx:else>
+  <view wx:if="{{config.heading}}" class="paragraph-header"
+    >{{config.heading}}</view
+  >
+  <!-- 段落主体 -->
+  <view class="paragraph" style="{{config.align}}">
+    <template is="text" data="{{config}}" />
+  </view>
+</block>

@@ -1,0 +1,25 @@
+module.exports = {
+  isContainer: function (type) {
+    return (
+      type === "tip" ||
+      type === "info" ||
+      type === "warning" ||
+      type === "danger"
+    );
+  },
+
+  getTitle: function (config) {
+    var type = config.pattern || config.type;
+
+    return (
+      config.heading ||
+      (type === "tip"
+        ? "提示"
+        : type === "info"
+        ? "信息"
+        : type === "warning"
+        ? "注意"
+        : "警告")
+    );
+  },
+};

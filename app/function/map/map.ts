@@ -276,8 +276,8 @@ $register("map", {
     }
   },
 
-  showPopup() {
-    this.setData({ showPopup: true });
+  togglePopup() {
+    this.setData({ showPopup: !this.data.showPopup });
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
@@ -289,10 +289,6 @@ $register("map", {
 
     if (path) this.$route(`/function/map/location?id=${area}/${path}`);
     else tip("该地点暂无详情");
-  },
-
-  closePopup() {
-    this.setData({ showPopup: false });
   },
 
   regionChange(event: WechatMiniprogram.RegionChange) {

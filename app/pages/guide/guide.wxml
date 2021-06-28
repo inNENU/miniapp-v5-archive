@@ -1,3 +1,4 @@
+<wxs src="./guide.wxs" module="fallback" />
 <import src="/components/template" />
 <page-meta
   background-text-style="{{darkmode? 'dark': 'light'}}"
@@ -9,5 +10,8 @@
 <view class="{{theme}} grey">
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
   <search words="{{words}}" catch:searching="searching" catch:search="search" />
-  <template is="components" data="{{content: page.content, theme}}" />
+  <template
+    is="components"
+    data="{{content: page.content || fallback.content, theme}}"
+  />
 </view>

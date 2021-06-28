@@ -17,28 +17,3 @@
 .ios.grey {
   background-color: var(--bgcolor-grey);
 }
-
-.ios-title {
-  max-width: 517px;
-  min-height: 24px;
-  margin: 0 auto;
-  padding: 12px 15px 4px;
-
-  font-weight: 500;
-  font-size: 22px;
-  text-align: left;
-
-  @media (min-width: 768px) {
-    min-height: 26px;
-    font-size: 24px;
-  }
-
-  .grey & {
-    max-width: unset;
-    padding-left: 30px;
-  }
-
-  & + & {
-    padding-top: 2px;
-  }
-}

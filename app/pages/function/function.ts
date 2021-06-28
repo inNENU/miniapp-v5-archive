@@ -1,6 +1,5 @@
 import $register = require("wxpage");
 
-import page from "./pageData";
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
@@ -22,7 +21,11 @@ $register("function", {
     },
 
     /** 页面数据 */
-    page,
+    page: {
+      title: "功能大厅",
+      grey: true,
+      hidden: true,
+    },
   },
 
   onPreload(res) {
