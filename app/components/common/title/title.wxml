@@ -1,0 +1,3 @@
+<view class="page-header" style="{{config.style || ''}}">
+  <text user-select>{{config.text}}</text>
+</view>

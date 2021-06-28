@@ -8,13 +8,18 @@ module.exports = {
     );
   },
 
-  defaultTitle: function (type) {
-    return type === "tip"
-      ? "提示"
-      : type === "info"
-      ? "信息"
-      : type === "warning"
-      ? "注意"
-      : "警告";
+  getTitle: function (config) {
+    var type = config.pattern || config.type;
+
+    return (
+      config.heading ||
+      (type === "tip"
+        ? "提示"
+        : type === "info"
+        ? "信息"
+        : type === "warning"
+        ? "注意"
+        : "警告")
+    );
   },
 };

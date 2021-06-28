@@ -116,10 +116,11 @@
     "intro": "/components/common/intro/intro",
     "list": "/components/common/list/list",
     "media": "/components/common/media/media",
-    "my-text": "/components/common/text/text",
     "navbar": "/components/common/navbar/navbar",
     "phone": "/components/common/phone/phone",
     "share": "/components/common/share/share",
+    "title": "/components/common/title/title",
+    "my-text": "/components/common/text/text",
     "my-swiper": "/components/common/swiper/swiper"
   },
   "style": "v2",

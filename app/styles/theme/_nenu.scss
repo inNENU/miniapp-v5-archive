@@ -14,17 +14,3 @@
     }
   }
 }
-
-/* paragraph */
-.nenu-title {
-  min-height: 24px;
-  padding: 9px 15px 3px;
-
-  font-weight: 500;
-  font-size: 18px;
-  text-align: left;
-
-  & + & {
-    padding-top: 2px;
-  }
-}

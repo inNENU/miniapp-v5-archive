@@ -1,3 +1,37 @@
+<!-- components -->
+<template name="components">
+  <block wx:if="{{theme && content.length}}">
+    <block wx:for="{{content}}" wx:key="id">
+      <my-text
+        wx:if="{{item.tag === 'text' || item.tag === 'p'|| item.tag === 'ul' || item.tag === 'ol'}}"
+        config="{{item}}"
+      />
+      <title wx:elif="{{item.tag === 'title'}}" config="{{item}}" />
+      <img
+        wx:elif="{{item.tag === 'img'}}"
+        config="{{item}}"
+        images="{{images}}"
+      />
+      <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
+      <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
+      <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
+      <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
+      <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
+      <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
+      <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+      <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
+      <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
+      <ex-list
+        wx:elif="{{item.tag === 'advanced-list'}}"
+        config="{{item}}"
+        change="{{event? event[index]: ''}}"
+        catch:change="list"
+      />
+      <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+    </block>
+  </block>
+</template>
+
 <!-- page with navigation bar -->
 <template name="page">
   <view
@@ -42,76 +76,16 @@
       <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
 
       <!-- 页面内容 -->
-      <block wx:for="{{page.content}}" wx:key="id">
-        <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
-        <img
-          wx:elif="{{item.tag === 'img'}}"
-          config="{{item}}"
-          images="{{page.images}}"
-        />
-        <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
-        <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
-        <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
-        <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
-        <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-        <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
-        <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
-        <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
-        <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
-        <ex-list
-          wx:elif="{{item.tag === 'advanced-list'}}"
-          config="{{item}}"
-          change="{{event? event[index]: ''}}"
-          catch:change="list"
-        />
-        <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
-        <template
-          wx:else
-          is="{{item.tag}}"
-          data="{{...item, theme, darkmode}}"
-        />
-      </block>
+      <template
+        is="components"
+        data="{{ content: page.content, darkmode, images: page.images || [], theme }}"
+      />
       <share config="{{page}}" />
       <footer config="{{page}}" wx:if="{{page.footer !== false}}" />
     </block>
   </view>
 </template>
 
-<!-- components -->
-<template name="components">
-  <block wx:if="{{theme && content.length}}">
-    <block wx:for="{{content}}" wx:key="id">
-      <my-text wx:if="{{item.tag === 'text'}}" config="{{item}}" />
-      <img wx:elif="{{item.tag === 'img'}}" config="{{item}}" />
-      <list wx:elif="{{item.tag === 'list'}}" config="{{item}}" />
-      <footer wx:elif="{{item.tag === 'footer'}}" config="{{item}}" />
-      <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
-      <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
-      <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-      <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
-      <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
-      <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
-      <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
-      <ex-list
-        wx:elif="{{item.tag === 'advanced-list'}}"
-        config="{{item}}"
-        change="{{event? event[index]: ''}}"
-        catch:change="list"
-      />
-      <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
-      <template wx:else is="{{item.tag}}" data="{{...item, theme, darkmode}}" />
-    </block>
-  </block>
-</template>
-<!-- ******************************************
-  Here are common template used by all theme
-********************************************* -->
-<!-- 标题 -->
-<template name="title">
-  <view class="{{theme}}-title" style="{{style || ''}}">
-    <text user-select>{{text}}</text>
-  </view>
-</template>
 <!-- 错误文字 -->
 <template name="error">
   <view class="error-wrapper">

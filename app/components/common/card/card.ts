@@ -12,7 +12,7 @@ const {
 
 $register.C<{ config: CardComponentConfig }>({
   properties: {
-    config: { type: Object },
+    config: Object,
   },
 
   methods: {

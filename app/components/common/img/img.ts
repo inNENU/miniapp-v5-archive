@@ -3,7 +3,7 @@ import { ImageComponentConfig } from "../../../../typings";
 Component<{ config: ImageComponentConfig; images: string[] }>({
   properties: {
     /** 图片组件配置 */
-    config: { type: Object },
+    config: Object,
 
     /** 展示图片列表 */
     images: {

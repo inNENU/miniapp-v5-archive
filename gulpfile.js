@@ -16,7 +16,6 @@ const buildWXSS = () =>
         // use `!` as hack for remaining '@import'
         outputStyle: "compressed",
         importer: (url) => {
-          console.log(url);
           if (url.includes(".css")) return null;
 
           return { contents: `@import "${url}.css"` };

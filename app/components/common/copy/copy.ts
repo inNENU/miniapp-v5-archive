@@ -3,7 +3,7 @@ import { CopyComponentConfig } from "../../../../typings";
 Component<{ config: CopyComponentConfig }>({
   properties: {
     /** 配置 */
-    config: { type: Object },
+    config: Object,
   },
 
   methods: {

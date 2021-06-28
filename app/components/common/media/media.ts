@@ -4,7 +4,7 @@ import { tip } from "../../../utils/wx";
 Component<{ config: MediaComponentConfig }>({
   properties: {
     /** 媒体组件配置 */
-    config: { type: Object },
+    config: Object,
   },
 
   methods: {
