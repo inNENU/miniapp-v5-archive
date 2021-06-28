@@ -52,6 +52,10 @@
   </view>
 </view>
 
+<view class="list-button" catch:tap="togglePopup">
+  <image class="icon" src="./icon/details.svg" />
+</view>
+
 <view class="scale-buttons">
   <view
     class="item"
@@ -79,11 +83,7 @@
   <image class="icon" src="./icon/locate.svg" />
 </view>
 
-<view class="list-button" catch:tap="showPopup">
-  <image class="icon" src="./icon/details.svg" />
-</view>
-
-<popup config="{{popup}}" show="{{showPopup}}" catch:close="closePopup">
+<popup config="{{popup}}" show="{{showPopup}}" catch:close="togglePopup">
   <view
     wx:for="{{markers}}"
     wx:key="id"
