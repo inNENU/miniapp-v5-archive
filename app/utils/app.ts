@@ -94,8 +94,8 @@ export const checkResUpdate = (): void => {
 
   // 调试
   debug(
-    `资源通知 ${notify ? "打开" : "关闭"}`,
-    "本地版本文件为: ",
+    `Resource Notify status: ${notify ? "open" : "close"}`,
+    "Local resource version: ",
     localVersion
   );
 
@@ -117,7 +117,7 @@ export const checkResUpdate = (): void => {
           // 需要更新
           if (updateList.length > 0) {
             // 调试
-            info("资源有更新");
+            info("Newer resource detected");
 
             const fileName = updateList.join("-");
             const size = versionInfo.size[fileName];
@@ -177,7 +177,7 @@ export const checkResUpdate = (): void => {
 export const appInit = (): void => {
   // 提示用户正在初始化
   wx.showLoading({ title: "初始化中...", mask: true });
-  info("初次启动");
+  info("Fist launch");
 
   // 设置主题
   if (appConfig.theme === "auto") {
@@ -221,8 +221,7 @@ export const appInit = (): void => {
       url: `${server}service/version.php`,
       enableHttp2: true,
       success: (res) => {
-        console.log(res);
-        console.log("版本信息为", res.data);
+        console.log("Version info", res.data);
         if (res.statusCode === 200) {
           writeJSON("version", res.data.version);
           // 成功初始化
@@ -392,7 +391,7 @@ interface LoginCallback {
 export const login = ({ appID, env }: GlobalData): void => {
   const openid = wx.getStorageSync<string | undefined>("openid");
 
-  if (openid) console.info(`openid为: ${openid}`);
+  if (openid) console.info(`User OPENID: ${openid}`);
   else
     wx.login({
       success: ({ code }) => {
@@ -404,12 +403,12 @@ export const login = ({ appID, env }: GlobalData): void => {
             enableHttp2: true,
             success: ({ data }) => {
               wx.setStorageSync("openid", data.openid);
-              console.info(`openid 为: ${data.openid}`);
+              console.info(`User OPENID: ${data.openid}`);
             },
           });
       },
       fail: ({ errMsg }) => {
-        console.error(`登录失败！${errMsg}`);
+        console.error(`Login failed: ${errMsg}`);
       },
     });
 };
@@ -419,7 +418,7 @@ export const registAction = (): void => {
   // 设置内存不足警告
   wx.onMemoryWarning((res) => {
     tip("内存不足");
-    console.warn("onMemoryWarningReceive");
+    console.warn("Memory warning received.");
     wx.reportAnalytics("memory_warning", {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       memory_warning: res && res.level ? res.level : 0,

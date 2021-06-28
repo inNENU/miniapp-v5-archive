@@ -106,7 +106,7 @@ $register("video", {
       source: 'url("https://mrhope.top/ttf/FZSSJW.ttf")',
       complete: (res) => {
         // 调试
-        console.info(`宋体字体${res.status}`);
+        console.info(`Font status: ${res.status}`);
       },
     });
 
@@ -150,7 +150,6 @@ $register("video", {
 
   /** 切换播放视频 */
   change(event: WechatMiniprogram.TouchEvent) {
-    console.log(event);
     const { groupID, listID } = event.currentTarget.dataset as Record<
       string,
       number

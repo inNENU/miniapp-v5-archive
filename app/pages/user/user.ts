@@ -102,7 +102,7 @@ $register("me", {
               text: "添加到桌面",
               icon: "send",
               type: "button",
-              button: "addToDesktop",
+              handler: "addToDesktop",
             },
           ],
         },
@@ -167,7 +167,7 @@ $register("me", {
   addToDesktop() {
     wx.saveAppToDesktop({
       success: () => {
-        console.log("添加成功");
+        console.log("Add to desktop success!");
       },
     });
   },

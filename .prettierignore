@@ -1,7 +1,4 @@
 dist/
 app/function/music/music.wxs
-
-doc/
-
 server/resource/**/*.json
 server/script/**/*.js

@@ -120,7 +120,7 @@ $register("weather", {
     /** 移除旋转屏幕与加速度计监听 */
     wx.offWindowResize(this.redrawCanvas);
     wx.stopAccelerometer({
-      success: () => console.info("stop accelerometer listening success"),
+      success: () => console.info("Stoped accelerometer listening"),
     });
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
@@ -355,7 +355,7 @@ $register("weather", {
 
     wx.startAccelerometer({
       interval: "normal",
-      success: () => console.info("Start accelerometer listening success"),
+      success: () => console.info("Starts accelerometer listening"),
     });
 
     wx.onAccelerometerChange((res) => {

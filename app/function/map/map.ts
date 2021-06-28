@@ -309,7 +309,6 @@ $register("map", {
   },
 
   regionChange(event: WechatMiniprogram.RegionChange) {
-    console.log(event);
     if (event.causedBy === "gesture" && event.type === "begin")
       this.state.gestureHold = true;
 

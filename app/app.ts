@@ -83,14 +83,14 @@ $register.A<AppOption>({
 
   onLaunch(opts) {
     // 调试
-    console.info("小程序启动，参数为", opts);
+    console.info("App launched with options:", opts);
 
     // 如果初次启动执行初始化
     if (!wx.getStorageSync("innenu-inited")) appInit();
 
     startup(this.globalData);
 
-    console.info("全局数据为", this.globalData);
+    console.info("GlobalData:", this.globalData);
   },
 
   onShow() {
@@ -99,7 +99,7 @@ $register.A<AppOption>({
   },
 
   onAwake(time: number) {
-    console.info(`小程序在 ${time}ms 之后被唤醒`);
+    console.info(`App awakes after ${time}ms`);
 
     // 重新应用夜间模式、
     this.globalData.darkmode = getDarkmode();
@@ -109,14 +109,14 @@ $register.A<AppOption>({
   },
 
   onError(errorMsg) {
-    console.error("出错信息为: ", errorMsg);
+    console.error("Catch error msg: ", errorMsg);
   },
 
   onPageNotFound(msg) {
     // 重定向到主界面
     wx.switchTab({ url: "pages/main/main" });
 
-    console.warn("未找到界面:", msg);
+    console.warn("Page not found:", msg);
   },
 
   onThemeChange({ theme }) {

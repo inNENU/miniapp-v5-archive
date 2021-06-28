@@ -31,7 +31,6 @@ $register("page", {
       this.state.path = option.path as string;
     } else setOnlinePage(option, this);
 
-    console.log(this.data.page);
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     wx.reportAnalytics("id_count", { id: option.id });
