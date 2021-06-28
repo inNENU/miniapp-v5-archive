@@ -1,5 +1,5 @@
 /* css引入 */
-@import "@styles/lib/animation";
-@import "@styles/lib/icon";
-@import "styles/common";
-@import "styles/theme";
+@use "styles/common";
+@use "styles/theme";
+@import "!styles/lib/animation";
+@import "!styles/lib/icon";

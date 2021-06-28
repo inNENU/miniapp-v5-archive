@@ -1,5 +1,8 @@
+<wxs src="./text.wxs" module="text" />
 <!-- 段落标题 -->
-<view wx:if="{{config.heading}}" class="paragraph-header"
+<view
+  wx:if="{{config.heading && !text.isContainer(config.type)}}"
+  class="paragraph-header"
   >{{config.heading}}</view
 >
 <!-- 段落主体 -->
@@ -15,6 +18,7 @@
       <text class="text" decode user-select space="nbsp">{{item}}</text>
     </view>
   </block>
+
   <block wx:elif="{{config.type === 'ul'}}">
     <view
       wx:for="{{config.text}}"
@@ -26,6 +30,25 @@
       <text class="text" decode user-select space="nbsp">{{item}}</text>
     </view>
   </block>
+
+  <block wx:elif="{{text.isContainer(config.type)}}">
+    <view class="container {{config.type}}">
+      <view class="container-title"
+        >{{config.heading || text.defaultTitle(config.type)}}</view
+      >
+      <view wx:for="{{config.text}}" wx:key="*this">
+        <text
+          class="text"
+          style="{{config.style || ''}}"
+          decode
+          user-select
+          space="nbsp"
+          >{{item}}</text
+        >
+      </view>
+    </view>
+  </block>
+
   <block wx:else>
     <view wx:for="{{config.text}}" wx:key="*this">
       <text

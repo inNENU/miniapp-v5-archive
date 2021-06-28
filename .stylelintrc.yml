@@ -65,6 +65,8 @@ rules:
 
   no-descending-specificity: null
 
+  no-invalid-position-at-import-rule: null
+
   no-missing-end-of-source-newline: true
 
   number-leading-zero: always
