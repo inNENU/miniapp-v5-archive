@@ -1,12 +1,12 @@
-<wxs src="./map.wxs" module="schoolMap" />
+<wxs src="./map.wxs" module="tool" />
 <map
   id="map"
   subkey="NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4"
   longitude="{{map.longitude}}"
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
-  markers="{{schoolMap.genMarker(markers)}}"
-  setting="{{darkmode? schoolMap.nightMapSettings: schoolMap.dayMapSettings}}"
+  markers="{{tool.genMarker(markers, darkmode)}}"
+  setting="{{darkmode? tool.nightMapSettings: tool.dayMapSettings}}"
   catch:markertap="markers"
   catch:callouttap="markers"
   catch:updated="update"
@@ -29,6 +29,27 @@
 >
   <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
   <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
+</view>
+
+<view
+  class="filter-button"
+  hover-class="button-hover"
+  hover-stay-time="100"
+  catch:tap="{{tool.toggleFilter}}"
+>
+  <image class="icon" src="./icon/filter.svg" />
+</view>
+<view class="select-wrapper">
+  <view
+    wx:for="{{category}}"
+    wx:key="path"
+    class="item item{{index + (currentCategory === item.path? ' active': '')}} animation-slide-top"
+    hover-class="button-hover"
+    data-index="{{index}}"
+    catch:tap="select"
+  >
+    {{item.name}}
+  </view>
 </view>
 
 <view class="scale-buttons">
@@ -58,43 +79,18 @@
   <image class="icon" src="./icon/locate.svg" />
 </view>
 
-<view
-  class="point-button"
-  hover-class="button-hover"
-  hover-stay-time="100"
-  catch:tap="point"
->
-  <image class="icon" src="./icon/point.svg" />
+<view class="list-button" catch:tap="showPopup">
+  <image class="icon" src="./icon/details.svg" />
 </view>
 
-<!-- 分类按钮 -->
-<view class="select-wrapper {{pointDisplay? 'move-left-in': 'move-left-out'}}">
-  <view
-    wx:for="{{category}}"
-    wx:key="path"
-    class="button{{selectItem === item.path? ' active': ''}} bb"
-    hover-class="button-hover"
-    data-index="{{index}}"
-    catch:tap="select"
-  >
-    {{item.name}}
-  </view>
-</view>
-
-<!-- 自定义tab栏 -->
-<view class="tab">
-  <view class="list-button" catch:tap="showPopup">
-    <image class="icon" src="./icon/list.png" />
-  </view>
-</view>
 <popup config="{{popup}}" show="{{showPopup}}" catch:close="closePopup">
   <view
     wx:for="{{markers}}"
     wx:key="id"
-    class="point"
-    data-id="{{item.id}}"
+    class="location"
     hover-class="button-hover"
-    catch:tap="navigate"
+    data-id="{{item.id}}"
+    catch:tap="openLocation"
   >
     <view class="name">{{item.name}}</view>
     <view class="desc">{{item.detail}}</view>

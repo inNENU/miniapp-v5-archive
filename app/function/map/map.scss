@@ -3,6 +3,30 @@
   height: 100%;
 }
 
+@mixin button() {
+  position: fixed;
+  background-color: var(--bgcolor);
+  box-shadow: -1px 3px 5px #dbdadfd3;
+
+  @media (prefers-color-scheme: dark) {
+    box-shadow: -1px 3px 5px #4b4d47d3;
+  }
+}
+
+@mixin single-button() {
+  @include button;
+
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  border-radius: 12px;
+
+  .icon {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 /* switch组件 */
 .area-switch {
   position: absolute;
@@ -12,7 +36,7 @@
 
   width: 120px;
   height: 30px;
-  border: 1px solid #3478f7;
+  border: 1px solid #2ecc71;
   border-radius: 14px;
 
   background-color: var(--bgcolor);
@@ -25,20 +49,35 @@
     width: 50%;
     height: 100%;
 
-    color: #3478f7;
+    color: #2ecc71;
 
     line-height: 30px;
 
     &.active {
-      background-color: #3478f7;
+      background-color: #2ecc71;
       color: var(--bgcolor);
     }
   }
 }
 
-/* scale 组件 */
+.filter-button {
+  @include single-button;
+
+  top: 120px;
+  right: 15px;
+}
+
+/* list 按钮 */
+.list-button {
+  @include single-button;
+
+  top: 180px;
+  right: 15px;
+}
+
 .scale-buttons {
-  position: fixed;
+  @include button;
+
   bottom: 60px;
   left: 20px;
 
@@ -47,13 +86,6 @@
   width: 76px;
   height: 32px;
   border-radius: 16px;
-
-  background-color: var(--bgcolor);
-  box-shadow: -1px 3px 5px #dbdadfd3;
-
-  @media (prefers-color-scheme: dark) {
-    box-shadow: -1px 3px 5px #4b4d47d3;
-  }
 
   .item {
     display: inline-block;
@@ -67,122 +99,60 @@
   }
 }
 
-/* locate组件 */
 .locate-button {
-  position: fixed;
+  @include single-button;
+
   right: 20px;
-  bottom: 90px;
-
-  width: 36px;
-  height: 36px;
-  padding: 4px;
-  border-radius: 6px;
-
-  background-color: var(--bgcolor);
-  box-shadow: -1px 3px 5px #dbdadfd3;
-
-  @media (prefers-color-scheme: dark) {
-    box-shadow: -1px 3px 5px #4b4d47d3;
-  }
-
-  .icon {
-    width: 100%;
-    height: 100%;
-  }
+  bottom: 60px;
 }
 
-/* 分类按钮 */
-.point-button {
-  position: fixed;
-  top: 120px;
-  right: 15px;
-
-  width: 36px;
-  height: 36px;
-  padding: 6px;
-  border-radius: 18px;
-
-  background-color: var(--bgcolor);
-  box-shadow: -1px 3px 5px #dbdadfd3;
-
-  @media (prefers-color-scheme: dark) {
-    box-shadow: -1px 3px 5px #4b4d47d3;
-  }
-
-  .icon {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-/* 选择按钮 */
 .select-wrapper {
   position: fixed;
   top: 120px;
   right: 60px;
   z-index: 96;
 
+  display: none;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
   overflow: hidden;
 
   border-radius: 4px;
 
-  background-color: var(--bgcolor);
+  opacity: 0;
 
-  .button {
-    padding: 5px 15px;
-    line-height: 1.3rem;
+  transition: opacity 0.5s ease;
 
-    &.bb:last-child::after {
-      display: none;
-    }
+  &.display {
+    display: flex;
+  }
+
+  .item {
+    margin: 4px;
+    padding: 5px 10px;
+    border-radius: 4px;
+
+    background-color: var(--bgcolor);
+    color: var(--dark-grey);
+
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 2px;
 
     &.active {
-      color: #3478f7;
+      color: #2ecc71;
     }
   }
 }
 
-/*****************
-      tab栏
-*****************/
-
-.tab {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99;
-
-  display: flex !important;
-  align-items: center;
-  justify-content: space-between;
-
-  min-height: 40px;
-  max-height: 52px;
-  padding: 5px 15px;
-  padding: 5px 15px calc(env(safe-area-inset-bottom) / 2 + 5px) 15px;
-
-  background-color: var(--bgcolor);
-  box-shadow: 0 -2px 5px rgba(219, 218, 223, 0.95);
-
-  @media (prefers-color-scheme: dark) {
-    box-shadow: 0 -2px 5px rgba(45, 44, 49, 0.95);
+@for $index from 1 through 7 {
+  .select-wrapper .item#{$index} {
+    animation-delay: $index * 0.08s;
   }
 }
 
-/* list 按钮 */
-.list-button {
-  padding: 2px 4px;
-  border-radius: 4px;
-  background-color: transparent;
-
-  .icon {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-.point {
+.location {
   position: relative;
   padding: 6px 0;
   line-height: 1.4;

@@ -52,9 +52,6 @@ $register("map", {
       confirm: false,
     },
 
-    /** 点分类显示状态 */
-    pointDisplay: false,
-
     /** 当前分类 */
     currentCategory: "all",
 
@@ -254,11 +251,6 @@ $register("map", {
     this.mapCtx.moveToLocation();
   },
 
-  /** 展示分类选择 */
-  point() {
-    this.setData({ pointDisplay: !this.data.pointDisplay });
-  },
-
   /** 选择分类 */
   select({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const index = currentTarget.dataset.index as number;
@@ -288,7 +280,7 @@ $register("map", {
     this.setData({ showPopup: true });
   },
 
-  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+  openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { area } = this.data;
 
     const { path } = this.data.markers.find(
