@@ -305,12 +305,17 @@ export const setPage = (
   if (page) {
     const pageData = handle ? page : disposePage(page, option);
 
-    ctx.setData({
-      color: getColor(pageData.grey),
-      theme: globalData.theme,
-      darkmode: globalData.darkmode,
-      page: pageData,
-    });
+    ctx.setData(
+      {
+        color: getColor(pageData.grey),
+        theme: globalData.theme,
+        darkmode: globalData.darkmode,
+        page: pageData,
+      },
+      () => {
+        debug(`${pageData.id || "Unknown"} pageData is set`);
+      }
+    );
   }
   // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
   else if (

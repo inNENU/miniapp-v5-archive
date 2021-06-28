@@ -1,6 +1,5 @@
 import $register = require("wxpage");
 
-import page from "./pageData";
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
@@ -26,7 +25,11 @@ $register("guide", {
     },
 
     /** 页面数据 */
-    page,
+    page: {
+      title: "东师指南",
+      grey: true,
+      hidden: true,
+    },
   },
 
   onPreload(res) {
@@ -44,7 +47,6 @@ $register("guide", {
       { option: { id: "guide" }, ctx: this },
       this.$take("guide") || this.data.page
     );
-    popNotice("guide");
   },
 
   onShow() {

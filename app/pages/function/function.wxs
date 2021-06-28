@@ -1,9 +1,4 @@
-import { PageDataWithContent } from "../../../typings";
-
-export default {
-  title: "功能大厅",
-  grey: true,
-  hidden: true,
+module.exports = {
   content: [
     {
       tag: "card",
@@ -46,4 +41,4 @@ export default {
       url: "wechat",
     },
   ],
-} as PageDataWithContent;
+};

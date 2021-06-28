@@ -11,7 +11,6 @@
 - 弹窗高度
 - 背景色
 - scroll-view 支持传递 selector 作为 scrollIntoView 的目标节点
-- 天气可以随定位选点
 - 最后更新时间自动更新
 
 ## Content

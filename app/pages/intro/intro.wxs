@@ -1,9 +1,4 @@
-import { PageDataWithContent } from "../../../typings";
-
-export default {
-  title: "东师介绍",
-  grey: true,
-  hidden: true,
+module.exports = {
   content: [
     {
       tag: "grid",
@@ -263,4 +258,4 @@ export default {
       footer: " ",
     },
   ],
-} as PageDataWithContent;
+};
