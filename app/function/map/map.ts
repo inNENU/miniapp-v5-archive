@@ -52,9 +52,6 @@ $register("map", {
       confirm: false,
     },
 
-    /** 点分类显示状态 */
-    pointDisplay: false,
-
     /** 当前分类 */
     currentCategory: "all",
 
@@ -100,11 +97,6 @@ $register("map", {
 
     this.setData({
       area,
-      /** 地图风格 */
-      mapStyle: globalData.darkmode
-        ? "46NBZ-EJ6C4-4REUO-XR7ZR-CWLG5-T3BDA"
-        : "PZGBZ-74N6F-KVYJ5-NRJDH-Y3NUT-IKFLF",
-
       /** 设备信息 */
       info: globalData.info,
       darkmode: globalData.darkmode,
@@ -245,7 +237,7 @@ $register("map", {
           map: {
             scale:
               this.data.map.scale +
-              (event.currentTarget.dataset.action === "enlarge" ? 1 : -1),
+              (event.currentTarget.dataset.action === "zoom-in" ? 1 : -1),
             latitude: res.latitude,
             longitude: res.longitude,
           },
@@ -257,11 +249,6 @@ $register("map", {
   /** 移动到当前坐标 */
   moveToLocation() {
     this.mapCtx.moveToLocation();
-  },
-
-  /** 展示分类选择 */
-  point() {
-    this.setData({ pointDisplay: !this.data.pointDisplay });
   },
 
   /** 选择分类 */
@@ -293,7 +280,7 @@ $register("map", {
     this.setData({ showPopup: true });
   },
 
-  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+  openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { area } = this.data;
 
     const { path } = this.data.markers.find(

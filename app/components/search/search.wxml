@@ -1,12 +1,11 @@
 <view class="search-bar">
   <view
-    class="search-wrapper-{{showInput? 'input': 'placeholder'}}"
+    class="search-wrapper-{{showInput? 'input': 'placeholder'}} {{words.length > 0 && focus? 'has-words': ''}}"
     catch:tap="showInput"
   >
     <icon class="search-icon" type="search" size="22" />
 
     <block wx:if="{{showInput}}">
-      <!-- <icon class="search-icon" type="search" size="22" /> -->
       <input
         class="input"
         type="text"
@@ -15,21 +14,23 @@
         focus="{{showInput && focus}}"
         confirm-type="search"
         catch:tap="focus"
-        bindinput="inputTyping"
-        catch:confirm="confirm"
+        bindinput="onInputChange"
+        bindblur="blur"
+        bindconfirm="confirm"
       />
-      <view
+
+      <icon
         wx:if="{{value.length > 0}}"
-        class="clear-wrapper"
         catch:tap="clearInput"
-      >
-        <icon class="clear" type="clear" size="18" />
-      </view>
+        class="clear"
+        type="clear"
+        size="18"
+      />
     </block>
     <text wx:else class="text">搜索</text>
   </view>
   <view hidden="{{!showInput}}" class="cancel" catch:tap="hideInput">取消</view>
-  <view class="word-wrapper" wx:if="{{words.length > 0 && showInput}}">
+  <view class="word-wrapper" wx:if="{{words.length > 0 && showInput && focus}}">
     <view
       wx:for="{{words}}"
       wx:key="*this"

@@ -1,59 +1,49 @@
-<wxs src="./map.wxs" module="schoolMap" />
+<wxs src="./map.wxs" module="tool" />
 <map
   id="map"
   subkey="NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4"
   longitude="{{map.longitude}}"
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
-  markers="{{schoolMap.genMarker(markers)}}"
-  setting="{{darkmode? schoolMap.nightMapSettings: schoolMap.dayMapSettings}}"
+  markers="{{tool.genMarker(markers, darkmode)}}"
+  setting="{{darkmode? tool.nightMapSettings: tool.dayMapSettings}}"
   catch:markertap="markers"
   catch:callouttap="markers"
   catch:updated="update"
   catch:regionchange="regionChange"
 />
-<!-- 返回按钮 -->
+
 <view
   class="back-button"
-  style="top:{{info.statusBarHeight + 5}}px;"
+  style="top:{{info.statusBarHeight + 6}}px;"
   hover-class="button-hover"
   catch:tap="back"
 >
   <view class="icon-{{firstPage? 'home': 'back'}}" />
 </view>
-<!-- 放大按钮 -->
+
 <view
-  class="scale-button zoomin"
-  hover-class="button-hover"
-  data-action="enlarge"
-  catch:tap="scale"
+  class="area-switch"
+  style="top:{{info.statusBarHeight + 6}}px;"
+  catch:tap="changeArea"
 >
-  <text>+</text>
+  <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
+  <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
 </view>
-<!-- 缩小按钮 -->
+
 <view
-  class="scale-button zoomout"
-  hover-class="button-hover"
-  data-action="narrow"
-  catch:tap="scale"
->
-  <text>-</text>
-</view>
-<!-- 点位按钮 -->
-<view
-  class="point-button"
+  class="filter-button"
   hover-class="button-hover"
   hover-stay-time="100"
-  catch:tap="point"
+  catch:tap="{{tool.toggleFilter}}"
 >
-  <image class="icon" src="./icon/point.svg" />
+  <image class="icon" src="./icon/filter.svg" />
 </view>
-<!-- 分类按钮 -->
-<view class="select-wrapper {{pointDisplay? 'move-left-in': 'move-left-out'}}">
+<view class="select-wrapper">
   <view
     wx:for="{{category}}"
     wx:key="path"
-    class="button{{selectItem === item.path? ' active': ''}} bb"
+    class="item item{{index + (currentCategory === item.path? ' active': '')}} animation-slide-top"
     hover-class="button-hover"
     data-index="{{index}}"
     catch:tap="select"
@@ -61,31 +51,46 @@
     {{item.name}}
   </view>
 </view>
-<!-- 自定义tab栏 -->
-<view class="tab" id="mapTab">
+
+<view class="scale-buttons">
   <view
-    class="locate-button"
+    class="item"
     hover-class="button-hover"
-    catch:tap="moveToLocation"
+    data-action="zoom-out"
+    catch:tap="scale"
   >
-    <image class="icon" src="./icon/locate.png" />
+    <image src="./icon/zoom-out.svg" />
   </view>
-  <view class="switch" catch:tap="changeArea">
-    <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
-    <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
-  </view>
-  <view class="list-button" catch:tap="showPopup">
-    <image class="icon" src="./icon/list.png" />
+  <view
+    class="item"
+    hover-class="button-hover"
+    data-action="zoom-in"
+    catch:tap="scale"
+  >
+    <image src="./icon/zoom-in.svg" />
   </view>
 </view>
+
+<view
+  class="locate-button"
+  hover-class="button-hover"
+  catch:tap="moveToLocation"
+>
+  <image class="icon" src="./icon/locate.svg" />
+</view>
+
+<view class="list-button" catch:tap="showPopup">
+  <image class="icon" src="./icon/details.svg" />
+</view>
+
 <popup config="{{popup}}" show="{{showPopup}}" catch:close="closePopup">
   <view
     wx:for="{{markers}}"
     wx:key="id"
-    class="point"
-    data-id="{{item.id}}"
+    class="location"
     hover-class="button-hover"
-    catch:tap="navigate"
+    data-id="{{item.id}}"
+    catch:tap="openLocation"
   >
     <view class="name">{{item.name}}</view>
     <view class="desc">{{item.detail}}</view>

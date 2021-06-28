@@ -2,7 +2,7 @@
   <block wx:if="{{nav.action === undefined}}">
     <view
       class="back-button {{borderDisplay? 'fade-in': 'fade-out'}}"
-      style="top:{{statusBarHeight + 5}}px;"
+      style="top:{{statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
     >

@@ -13,27 +13,27 @@ Component({
   },
 
   methods: {
-    /** 展示输入框 */
     showInput(): void {
       this.setData({ showInput: true, focus: true });
     },
 
-    /** 激活输入框 */
     focus(): void {
       this.setData({ focus: true });
     },
 
-    /** 隐藏输入框 */
+    blur(): void {
+      this.setData({ focus: false });
+    },
+
     hideInput(): void {
       this.setData({ value: "", showInput: false });
     },
 
-    /** 清除输入框内容 */
     clearInput(): void {
-      this.setData({ value: "" });
+      this.setData({ value: "", focus: false });
     },
 
-    inputTyping(event: WechatMiniprogram.Input): void {
+    onInputChange(event: WechatMiniprogram.Input): void {
       this.setData({ value: event.detail.value });
       this.triggerEvent("searching", { value: event.detail.value });
     },

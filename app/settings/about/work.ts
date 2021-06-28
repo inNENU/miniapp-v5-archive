@@ -84,7 +84,7 @@ $register("donate", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.getTitle(),
-      path: `/settings/donate/donate?type=${this.data.type}`,
+      path: `/settings/about/work?type=${this.data.type}`,
       imageUrl: `${getImagePrefix()}Share.jpg`,
     };
   },

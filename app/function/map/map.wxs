@@ -1,3 +1,5 @@
+var lock = false;
+
 module.exports = {
   /** 日间地图配置 */
   dayMapSettings: {
@@ -30,7 +32,7 @@ module.exports = {
    *
    * @returns 处理后的marker
    */
-  genMarker: function (markers) {
+  genMarker: function (markers, darkmode) {
     return markers.map(function (marker) {
       marker.iconPath = "/function/map/icon/marker.png";
       marker.width = 25;
@@ -38,22 +40,22 @@ module.exports = {
       marker.alpha = 0.8;
       marker.label = {
         content: marker.name,
-        color: "#1A9D5E",
+        color: "#2ecc71",
         fontSize: 10,
         anchorX: marker.name.length * -5 - 4,
         anchorY: 0,
-        bgColor: "#ffffff",
+        bgColor: darkmode ? "#1c1c1e" : "#ffffff",
         borderWidth: 1,
-        borderColor: "#efeef4",
+        borderColor: darkmode ? "#1f1f22" : "#efeef4",
         borderRadius: 2,
         padding: 3,
       };
       marker.callout = {
         content: marker.detail,
-        color: "#ffffff",
+        color: darkmode ? "#000000" : "#ffffff",
         fontSize: 16,
         borderRadius: 10,
-        bgColor: "#1A9D5E",
+        bgColor: "#2ecc71",
         padding: 10,
         display: "BYCLICK",
       };
@@ -63,5 +65,30 @@ module.exports = {
 
       return marker;
     });
+  },
+
+  toggleFilter: function (_event, ownerInstance) {
+    if (!lock) {
+      var wrapper = ownerInstance.selectComponent(".select-wrapper");
+
+      if (wrapper.hasClass("display")) {
+        wrapper.setStyle({});
+        lock = true;
+        ownerInstance.setTimeout(function () {
+          wrapper.removeClass("display");
+          lock = false;
+        }, 550);
+      } else {
+        wrapper.addClass("display");
+
+        ownerInstance.setTimeout(function () {
+          wrapper.setStyle({
+            opacity: 1,
+          });
+        }, 50);
+      }
+    }
+
+    return false;
   },
 };
