@@ -5,4 +5,8 @@ Component<{ config: TitleComponentConfig }>({
     /** 段落配置 */
     config: Object,
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });
