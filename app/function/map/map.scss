@@ -60,19 +60,25 @@
   }
 }
 
-.filter-button {
+.filter-button,
+.list-button,
+.locate-button {
   @include single-button;
+}
 
+.filter-button {
   top: 120px;
   right: 15px;
 }
 
-/* list 按钮 */
 .list-button {
-  @include single-button;
-
   top: 180px;
   right: 15px;
+}
+
+.locate-button {
+  right: 20px;
+  bottom: 60px;
 }
 
 .scale-buttons {
@@ -97,13 +103,6 @@
       height: 22px;
     }
   }
-}
-
-.locate-button {
-  @include single-button;
-
-  right: 20px;
-  bottom: 60px;
 }
 
 .select-wrapper {
