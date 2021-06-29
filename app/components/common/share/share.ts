@@ -1,5 +1,7 @@
+import { server } from "../../../utils/config";
 import { readFile } from "../../../utils/file";
-import { savePhoto } from "../../../utils/wx";
+import { debug } from "../../../utils/log";
+import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { AppOption } from "../../../app";
 import type { PageData } from "../../../../typings";
@@ -21,6 +23,8 @@ interface ActionConfig {
 
 type IconData = Record<string, string>;
 
+type LinkData = { error: true } | { error: false; link: string };
+
 const store: { iconData: IconData | null } = {
   iconData: null,
 };
@@ -36,6 +40,40 @@ Component({
       if (typeof config.qrcode === "string")
         savePhoto(`/img/QRCode/${appID}/${config.qrcode}.png`);
       else savePhoto(`/img/QRCode/${appID}/${config.id as string}.png`);
+    },
+
+    copyQQLink() {
+      const id = (this.data.config.id as string).replace(/^\/?/u, "/");
+      const link = `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
+        `module/page?id=${id}`
+      )}`;
+
+      this.copy(link);
+    },
+
+    copyWechatLink() {
+      wx.request<LinkData>({
+        url: `${server}service/sharelink.php`,
+        enableHttp2: true,
+        method: "POST",
+        data: { appID, id: this.data.config.id as string },
+        success: (res) => {
+          if (res.statusCode === 200 && !res.data.error)
+            this.copy(res.data.link);
+          else
+            modal("链接尚未生成", "请使用小程序右上角胶囊中的“···”来复制链接");
+        },
+      });
+    },
+
+    copy(data: string) {
+      wx.setClipboardData({
+        data,
+        success: () => {
+          tip("链接已复制");
+          debug(`Share link ${data} is copied`);
+        },
+      });
     },
   },
 
@@ -58,7 +96,7 @@ Component({
         if (env === "qq")
           actions.push(
             {
-              icon: "qq",
+              icon: "recent",
               text: "分享给最近联系人",
               openType: "share",
               shareMode: ["recentContacts"],
@@ -86,14 +124,26 @@ Component({
               text: "分享给微信好友",
               openType: "share",
               shareMode: ["wechatFriends"],
+            },
+            {
+              icon: "link",
+              text: "复制链接",
+              action: "copyQQLink",
             }
           );
         else
-          actions.push({
-            icon: "wechat",
-            text: "分享给好友",
-            openType: "share",
-          });
+          actions.push(
+            {
+              icon: "wechat",
+              text: "分享给好友",
+              openType: "share",
+            },
+            {
+              icon: "link",
+              text: "复制链接",
+              action: "copyWechatLink",
+            }
+          );
 
         if (config.qrcode !== false)
           actions.push({
