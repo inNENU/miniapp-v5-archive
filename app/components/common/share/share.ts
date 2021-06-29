@@ -1,4 +1,4 @@
-import { server } from "../../../utils/config";
+import { server, getTitle } from "../../../utils/config";
 import { readFile } from "../../../utils/file";
 import { debug } from "../../../utils/log";
 import { modal, savePhoto, tip } from "../../../utils/wx";
@@ -67,9 +67,9 @@ Component({
 
     copy(link: string) {
       const { title } = this.data.config;
-      const content = title
-        ? `打开 ${link} 以查看『${title as string}』`
-        : link;
+      const content = `${
+        title ? `${getTitle()}查看『${title as string}』:` : ""
+      }${link}`;
 
       wx.setClipboardData({
         data: content,
