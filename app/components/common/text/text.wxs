@@ -16,7 +16,7 @@ module.exports = {
       (type === "tip"
         ? "提示"
         : type === "info"
-        ? "信息"
+        ? "相关信息"
         : type === "warning"
         ? "注意"
         : "警告")
