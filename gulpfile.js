@@ -60,15 +60,15 @@ const buildWXSS = () =>
 const watchWXSS = () =>
   watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
 
-const buildTypesciprt = () =>
+const buildTypeScript = () =>
   src(["app/**/*.ts", "typings/**/*.ts"])
     .pipe(sourcemaps.init())
     .pipe(tSProject())
     .pipe(sourcemaps.write(".", { includeContent: false }))
     .pipe(dest("dist"));
 
-const watchTypescript = () =>
-  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildTypesciprt);
+const watchTypeScript = () =>
+  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildTypeScript);
 
 const moveFiles = () =>
   src("app/**/*.{wxml,wxs,json,svg,png,webp}").pipe(dest("dist"));
@@ -80,8 +80,8 @@ const watchFiles = () =>
     moveFiles
   );
 
-const watchCommand = parallel(watchWXSS, watchTypescript, watchFiles);
-const build = parallel(buildWXSS, buildTypesciprt, moveFiles);
+const watchCommand = parallel(watchWXSS, watchTypeScript, watchFiles);
+const build = parallel(buildWXSS, buildTypeScript, moveFiles);
 
 exports.watch = watchCommand;
 exports.build = build;
