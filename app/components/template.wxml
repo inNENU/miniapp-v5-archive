@@ -1,6 +1,6 @@
 <!-- components -->
 <template name="components">
-  <block wx:if="{{theme && content.length}}">
+  <block wx:if="{{theme && content && content.length}}">
     <block wx:for="{{content}}" wx:key="id">
       <my-text
         wx:if="{{item.tag === 'text' || item.tag === 'p'|| item.tag === 'ul' || item.tag === 'ol'}}"
@@ -78,7 +78,7 @@
       <!-- 页面内容 -->
       <template
         is="components"
-        data="{{ content: page.content, darkmode, images: page.images || [], theme }}"
+        data="{{ content: page.content || [], darkmode, images: page.images || [], theme }}"
       />
       <share config="{{page}}" />
       <footer config="{{page}}" wx:if="{{page.footer !== false}}" />

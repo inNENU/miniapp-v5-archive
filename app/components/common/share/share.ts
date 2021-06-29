@@ -43,12 +43,11 @@ Component({
     },
 
     copyQQLink() {
-      const id = (this.data.config.id as string).replace(/^\/?/u, "/");
-      const link = `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
-        `module/page?id=${id}`
-      )}`;
-
-      this.copy(link);
+      this.copy(
+        `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
+          `module/page?id=${this.data.config.id as string}`
+        )}`
+      );
     },
 
     copyWechatLink() {
@@ -66,12 +65,17 @@ Component({
       });
     },
 
-    copy(data: string) {
+    copy(link: string) {
+      const { title } = this.data.config;
+      const content = title
+        ? `打开 ${link} 以查看『${title as string}』`
+        : link;
+
       wx.setClipboardData({
-        data,
+        data: content,
         success: () => {
           tip("链接已复制");
-          debug(`Share link ${data} is copied`);
+          debug(`Share content is copied: ${content}`);
         },
       });
     },
