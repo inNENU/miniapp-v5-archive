@@ -15,14 +15,12 @@
   height: 44px;
   padding-top: 20px;
 
-  background-color: rgba(248, 248, 248, 0.6);
+  background-color: #f7f7f7;
 
   text-align: center;
 
-  backdrop-filter: saturate(180%) blur(20px);
-
   @media (prefers-color-scheme: dark) {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: #000;
   }
 }
 
