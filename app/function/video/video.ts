@@ -1,6 +1,6 @@
 import $register = require("wxpage");
 
-import { getImagePrefix } from "../../utils/config";
+import { getImagePrefix, server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
@@ -95,7 +95,7 @@ $register("video", {
   onShow() {
     wx.loadFontFace({
       family: "FZSSJW",
-      source: 'url("https://mrhope.top/ttf/FZSSJW.ttf")',
+      source: `url("${server}assets/fonts/FZSSJW.ttf")`,
       complete: (res) => {
         // 调试
         console.info(`Font status: ${res.status}`);
