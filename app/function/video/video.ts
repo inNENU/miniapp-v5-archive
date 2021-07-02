@@ -1,9 +1,9 @@
 import $register = require("wxpage");
 
-import { getImagePrefix } from "../../utils/config";
+import { getImagePrefix, server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
-import { modal, tip } from "../../utils/wx";
+import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -38,72 +38,64 @@ $register("video", {
   },
 
   onLoad(options) {
-    if (globalData.appID === "wx9ce37d9662499df3") {
-      let groupID = 0;
-      let listID = 0;
+    let groupID = 0;
+    let listID = 0;
 
-      getJSON({
-        path: "function/video/index",
-        url: "resource/function/video/index",
-        success: (videoList) => {
-          if (options.scene) {
-            const ids = options.scene.split("-").map((id) => Number(id));
+    getJSON({
+      path: "function/video/index",
+      url: "resource/function/video/index",
+      success: (videoList) => {
+        if (options.scene) {
+          const ids = options.scene.split("-").map((id) => Number(id));
 
-            [groupID, listID] = ids;
-          } else if (options.name) {
-            const name = decodeURI(options.name);
+          [groupID, listID] = ids;
+        } else if (options.name) {
+          const name = decodeURI(options.name);
 
-            (videoList as VideoGroup[]).forEach((videoGroup, groupIndex) => {
-              const listIndex = videoGroup.content.findIndex(
-                (videoItem) => videoItem.name === name
-              );
+          (videoList as VideoGroup[]).forEach((videoGroup, groupIndex) => {
+            const listIndex = videoGroup.content.findIndex(
+              (videoItem) => videoItem.name === name
+            );
 
-              if (listIndex !== -1) {
-                groupID = groupIndex;
-                listID = listIndex;
-              }
-            });
-          }
-
-          const item = (videoList as VideoGroup[])[groupID].content[listID];
-
-          this.setData({
-            groupID,
-            listID,
-
-            titles: (videoList as VideoGroup[]).map(
-              (videoListItem) => videoListItem.title
-            ),
-            videoList: videoList as VideoGroup[],
-
-            videoName: item.name,
-            videoAuthor: item.author,
-            src: item.src || "",
-            vid: item.vid || "",
-
-            firstPage: getCurrentPages().length === 1,
-            info: globalData.info,
-            darkmode: globalData.darkmode,
+            if (listIndex !== -1) {
+              groupID = groupIndex;
+              listID = listIndex;
+            }
           });
-        },
-      });
+        }
 
-      if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
+        const item = (videoList as VideoGroup[])[groupID].content[listID];
 
-      popNotice("video");
-    } else {
-      modal(
-        "禁止播放",
-        "只有企业主体小程序才可以播放视频，请使用微信搜索小程序“东师青年+”。",
-        () => this.back()
-      );
-    }
+        this.setData({
+          groupID,
+          listID,
+
+          titles: (videoList as VideoGroup[]).map(
+            (videoListItem) => videoListItem.title
+          ),
+          videoList: videoList as VideoGroup[],
+
+          videoName: item.name,
+          videoAuthor: item.author,
+          src: item.src || "",
+          vid: item.vid || "",
+
+          firstPage: getCurrentPages().length === 1,
+          info: globalData.info,
+          darkmode: globalData.darkmode,
+        });
+      },
+    });
+
+    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
+
+    popNotice("video");
   },
 
   onShow() {
     wx.loadFontFace({
       family: "FZSSJW",
-      source: 'url("https://mrhope.top/ttf/FZSSJW.ttf")',
+      source: `url("${server}assets/fonts/FZSSJW.ttf")`,
       complete: (res) => {
         // 调试
         console.info(`Font status: ${res.status}`);
