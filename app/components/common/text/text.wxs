@@ -9,7 +9,7 @@ module.exports = {
   },
 
   getTitle: function (config) {
-    var type = config.pattern || config.type;
+    var type = config.type;
 
     return (
       config.heading ||

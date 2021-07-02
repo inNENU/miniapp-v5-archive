@@ -14,7 +14,7 @@
     <view class="author">—— {{videoAuthor }} ——</view>
   </view>
   <!-- 视频窗口 -->
-  <txv-video
+  <!-- <txv-video
     wx:if="{{vid}}"
     class="player"
     vid="{{vid}}"
@@ -23,9 +23,8 @@
     catch:play="play"
     catch:waiting="wait"
     catch:error="error"
-  />
+  /> -->
   <video
-    wx:else
     class="player"
     src="{{src}}"
     title="{{videoName}}"

@@ -1,7 +1,7 @@
 <wxs src="./text.wxs" module="text" />
 
 <template name="text">
-  <block wx:if="{{config.tag === 'ol' || config.type === 'ol'}}">
+  <block wx:if="{{config.tag === 'ol'}}">
     <view
       wx:for="{{config.text}}"
       wx:key="*this"
@@ -13,7 +13,7 @@
     </view>
   </block>
 
-  <block wx:elif="{{config.tag === 'ul' || config.type === 'ul'}}">
+  <block wx:elif="{{config.tag === 'ul'}}">
     <view
       wx:for="{{config.text}}"
       wx:key="*this"
@@ -39,11 +39,8 @@
   </block>
 </template>
 
-<view
-  wx:if="{{text.isContainer(config.pattern || config.type)}}"
-  class="paragraph"
->
-  <view class="container {{config.pattern || config.type}}">
+<view wx:if="{{text.isContainer(config.type)}}" class="paragraph">
+  <view class="container {{config.type}}">
     <view wx:if="{{config.heading !== false}}" class="container-title"
       >{{ text.getTitle(config)}}</view
     >
