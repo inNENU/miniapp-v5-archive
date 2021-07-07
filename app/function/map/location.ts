@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { getJSON, readJSON } from "../../utils/file";
@@ -9,7 +9,7 @@ import type { PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
-$register("location", {
+$Page("location", {
   data: {
     page: {} as PageData,
   },
@@ -18,8 +18,8 @@ $register("location", {
     id: "",
   },
 
-  onPreload(res) {
-    resolvePage(res, readJSON(`function/map/${res.query.id}`));
+  onPreload(options) {
+    resolvePage(options, readJSON(`function/map/${options.id}`));
   },
 
   onLoad(option) {

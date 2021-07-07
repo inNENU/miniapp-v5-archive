@@ -1,5 +1,8 @@
-import $register = require("wxpage");
-import {
+import { $Component, PropType } from "@mptool/enhance";
+
+import { readFile } from "../../../utils/file";
+
+import type {
   AdvancedListComponentConfig,
   AdvancedListComponentItemConfig,
   ButtonListComponnetItemConfig,
@@ -7,21 +10,19 @@ import {
   SliderListComponentItemConfig,
   SwitchListComponentItemConfig,
 } from "../../../../typings";
-import { readFile } from "../../../utils/file";
 
 interface ListDetail<T = AdvancedListComponentItemConfig> {
   id: string;
   content: T;
 }
 
-$register.C<{
-  config: AdvancedListComponentConfig;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  change: Record<string, any>;
-}>({
+$Component({
   properties: {
     /** 配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<AdvancedListComponentConfig>,
+      required: true,
+    },
 
     /** 改变触发 */
     change: Object,
@@ -29,7 +30,13 @@ $register.C<{
 
   methods: {
     /** 控制选择器显隐 */
-    pickerTap(event: WechatMiniprogram.TouchEvent): void {
+    pickerTap(
+      event: WechatMiniprogram.TouchEvent<
+        Record<string, never>,
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       const {
         id,
         content: { visible: value },
@@ -40,7 +47,12 @@ $register.C<{
     },
 
     /** 控制选择器改变 */
-    pickerChange(event: WechatMiniprogram.PickerChange): void {
+    pickerChange(
+      event: WechatMiniprogram.PickerChange<
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
@@ -77,7 +89,12 @@ $register.C<{
     },
 
     /** 开关改变 */
-    switch(event: WechatMiniprogram.SwitchChange): void {
+    switch(
+      event: WechatMiniprogram.SwitchChange<
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
@@ -99,7 +116,12 @@ $register.C<{
     },
 
     /** 触发按钮事件 */
-    button(event: WechatMiniprogram.TouchEvent): void {
+    button(
+      event: WechatMiniprogram.PickerChange<
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { content } = this.getDetail(
         event
@@ -109,7 +131,12 @@ $register.C<{
     },
 
     /** 控制滑块显隐 */
-    sliderTap(event: WechatMiniprogram.TouchEvent): void {
+    sliderTap(
+      event: WechatMiniprogram.PickerChange<
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
@@ -120,7 +147,12 @@ $register.C<{
     },
 
     /** 滑块改变 */
-    sliderChange(event: WechatMiniprogram.SliderChange): void {
+    sliderChange(
+      event: WechatMiniprogram.SliderChange<
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
       // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
@@ -141,7 +173,11 @@ $register.C<{
     /** 获得选择器位置与内容 */
     getDetail({
       currentTarget,
-    }: WechatMiniprogram.TouchEvent<never, never, { id: string }>): ListDetail {
+    }: WechatMiniprogram.CustomEvent<
+      Record<string, unknown>,
+      Record<string, unknown>,
+      { id: string } & Record<string, unknown>
+    >): ListDetail {
       const id = currentTarget.id || currentTarget.dataset.id;
 
       return {

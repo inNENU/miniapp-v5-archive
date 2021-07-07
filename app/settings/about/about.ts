@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
@@ -16,7 +16,7 @@ const { globalData } = getApp<AppOption>();
 let clickNumber = 0;
 let developMode = false;
 
-$register("about", {
+$Page("about", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,

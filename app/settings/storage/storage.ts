@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { resDownload } from "../../utils/app";
 import { listFile, remove } from "../../utils/file";
@@ -18,7 +18,7 @@ type ListAction =
   | "clearData"
   | "resetApp";
 
-$register("storage", {
+$Page("storage", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,

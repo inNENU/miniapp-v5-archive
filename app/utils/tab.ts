@@ -1,6 +1,7 @@
 import { requestJSON } from "./wx";
 import { setPage } from "./page";
 
+import type { PageInstance } from "@mptool/enhance";
 import type { GlobalData } from "../app";
 import type { PageData } from "../../typings";
 
@@ -13,7 +14,7 @@ import type { PageData } from "../../typings";
  */
 export const refreshPage = (
   name: string,
-  ctx: WechatMiniprogram.Page.MPInstance<
+  ctx: PageInstance<
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     Record<string, any>,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

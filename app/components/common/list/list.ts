@@ -1,19 +1,24 @@
-import $register = require("wxpage");
-import {
+import { $Component, PropType } from "@mptool/enhance";
+
+import { readFile } from "../../../utils/file";
+
+import type {
   ListComponentConfig,
   ListComponentItemConfig,
 } from "../../../../typings";
-import { readFile } from "../../../utils/file";
 
-$register.C<{ config: ListComponentConfig }>({
+$Component({
   properties: {
     /** 普通列表配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<ListComponentConfig>,
+      required: true,
+    },
   },
 
   methods: {
     navigate({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      this.$route(currentTarget.dataset.url);
+      this.$go(currentTarget.dataset.url);
     },
   },
 

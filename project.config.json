@@ -2,9 +2,9 @@
   "description": "项目配置文件",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.17.3",
+  "libVersion": "2.18.0",
   "appid": "wx33acb831ee1831a5",
-  "qqLibVersion": "1.28.0",
+  "qqLibVersion": "1.29.0",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
@@ -36,10 +36,17 @@
     "enableEngineNative": false,
     "useIsolateContext": true,
     "userConfirmedBundleSwitch": true,
-    "packNpmManually": false,
-    "packNpmRelationList": [],
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./dist"
+      }
+    ],
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "showES6CompileOption": false,
+    "remoteDebugLogEnable": false,
+    "prefetch": false
   },
   "packOptions": {
     "ignore": [

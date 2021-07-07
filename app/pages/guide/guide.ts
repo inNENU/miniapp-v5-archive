@@ -1,4 +1,5 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
+import { put, take } from "@mptool/file";
 
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
@@ -10,7 +11,7 @@ import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
-$register("guide", {
+$Page("guide", {
   data: {
     theme: globalData.theme,
 
@@ -33,7 +34,7 @@ $register("guide", {
   },
 
   onPreload(res) {
-    this.$put(
+    put(
       "guide",
       resolvePage(res, wx.getStorageSync("guide") || this.data.page)
     );
@@ -45,7 +46,7 @@ $register("guide", {
   onLoad() {
     setPage(
       { option: { id: "guide" }, ctx: this },
-      this.$take("guide") || this.data.page
+      take("guide") || this.data.page
     );
   },
 
@@ -56,7 +57,7 @@ $register("guide", {
 
   onReady() {
     // 注册事件监听器
-    this.$on("theme", (theme: string) => {
+    this.$emitter.on("theme", (theme: string) => {
       this.setData({ theme });
     });
 
@@ -103,6 +104,6 @@ $register("guide", {
    * @param value 输入的搜索词
    */
   search({ detail }: WechatMiniprogram.Input) {
-    this.$route(`search?name=guide&word=${detail.value}`);
+    this.$go(`search?name=guide&word=${detail.value}`);
   },
 });

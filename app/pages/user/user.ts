@@ -1,7 +1,7 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, getTitle } from "../../utils/config";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
 import type { PageData } from "../../../typings";
@@ -9,7 +9,7 @@ import type { PageData } from "../../../typings";
 const { globalData } = getApp<AppOption>();
 const { appID, env, version } = globalData;
 
-$register("me", {
+$Page("user", {
   data: {
     theme: globalData.theme,
 
@@ -119,21 +119,14 @@ $register("me", {
     },
   },
 
-  onPreload(res) {
-    this.$put("me", resolvePage(res, this.data.page));
-    console.info(
-      `User page load time: ${new Date().getTime() - globalData.date}ms`
-    );
-  },
-
   onLoad() {
-    setPage({ option: { id: "me" }, ctx: this }, this.$take("me"));
+    setPage({ option: { id: "me" }, ctx: this });
     popNotice("me");
   },
 
   onReady() {
     // 注册事件监听器
-    this.$on("theme", (theme: string) => {
+    this.$emitter.on("theme", (theme: string) => {
       this.setData({ theme });
     });
 

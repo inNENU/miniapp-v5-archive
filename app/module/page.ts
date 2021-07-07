@@ -1,11 +1,11 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../utils/config";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
 import type { PageData } from "../../typings";
 
-$register("page", {
+$Page("page", {
   data: { page: {} as PageData & { id: string } },
 
   state: {
@@ -34,6 +34,8 @@ $register("page", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     wx.reportAnalytics("id_count", { id: option.id });
+
+    // wx.setClipboardData({ data: `"\n${option.id as string}: "` });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

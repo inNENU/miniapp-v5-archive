@@ -1,4 +1,5 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
+import { put, take } from "@mptool/file";
 
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
@@ -9,7 +10,7 @@ import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
-$register("function", {
+$Page("function", {
   data: {
     theme: globalData.theme,
 
@@ -29,7 +30,7 @@ $register("function", {
   },
 
   onPreload(res) {
-    this.$put(
+    put(
       "function",
       resolvePage(res, wx.getStorageSync("function") || this.data.page)
     );
@@ -41,7 +42,7 @@ $register("function", {
   onLoad() {
     setPage(
       { option: { id: "function" }, ctx: this },
-      this.$take("function") || this.data.page
+      take("function") || this.data.page
     );
   },
 
@@ -52,7 +53,7 @@ $register("function", {
 
   onReady() {
     // 注册事件监听器
-    this.$on("theme", (theme: string) => {
+    this.$emitter.on("theme", (theme: string) => {
       this.setData({ theme });
     });
 
@@ -89,6 +90,6 @@ $register("function", {
   },
 
   navigate() {
-    this.$route("weather");
+    this.$go("weather");
   },
 });

@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
@@ -45,7 +45,7 @@ const authorizeList: AuthorizeList[] = [
   "scope.camera",
 ];
 
-$register("authorize", {
+$Page("authorize", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,

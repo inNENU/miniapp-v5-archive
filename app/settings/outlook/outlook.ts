@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { popNotice, resolvePage, setPage } from "../../utils/page";
 
@@ -14,7 +14,7 @@ const { globalData } = getApp<AppOption>();
 /** 列表动作列表 */
 type ListAction = "updateTheme";
 
-$register("setting", {
+$Page("setting", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
@@ -93,7 +93,7 @@ $register("setting", {
     globalData.theme = theme;
     wx.setStorageSync("theme", theme);
     this.setData({ theme });
-    this.$emit("theme", theme);
+    this.$emitter.emit("theme", theme);
 
     // debug
     console.info(`Switched to ${theme} theme`);

@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -27,7 +27,7 @@ interface VideoGroup {
   content: VideoConfig[];
 }
 
-$register("video", {
+$Page("video", {
   data: { videoName: "", videoList: [] as VideoGroup[] },
 
   onNavigate() {
@@ -177,7 +177,7 @@ $register("video", {
 
   /** 返回按钮功能 */
   back() {
-    if (getCurrentPages().length === 1) this.$launch("main");
+    if (getCurrentPages().length === 1) this.$reLaunch("main");
     else this.$back();
   },
 });

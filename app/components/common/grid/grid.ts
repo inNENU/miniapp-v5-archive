@@ -1,19 +1,22 @@
-import $register = require("wxpage");
-import {
+import { $Component, PropType } from "@mptool/enhance";
+import { readFile } from "../../../utils/file";
+import type {
   GridComponentConfig,
   GridComponentItemComfig,
 } from "../../../../typings";
-import { readFile } from "../../../utils/file";
 
-$register.C<{ config: GridComponentConfig }>({
+$Component({
   properties: {
     /** 网格组件配置 */
-    config: { type: Object, value: { aim: "" } },
+    config: {
+      type: Object as PropType<GridComponentConfig>,
+      value: { aim: "" },
+    },
   },
 
   methods: {
     navigate({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      this.$route(currentTarget.dataset.url);
+      this.$go(currentTarget.dataset.url);
     },
   },
 

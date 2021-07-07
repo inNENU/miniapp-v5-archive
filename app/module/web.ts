@@ -1,8 +1,8 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getTitle } from "../utils/config";
 
-$register<{ title: string; url: string }, Record<string, unknown>>("web", {
+$Page<{ title: string; url: string }, Record<string, unknown>>("web", {
   onLoad(res) {
     // 设置导航栏标题
     const title = res.title || getTitle();

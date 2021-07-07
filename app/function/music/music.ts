@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, getTitle, server } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -13,7 +13,7 @@ const { globalData } = getApp<AppOption>();
 /** 音频管理器 */
 const manager = wx.getBackgroundAudioManager();
 
-$register("music", {
+$Page("music", {
   data: {
     /** 是否可以播放 */
     canplay: false,

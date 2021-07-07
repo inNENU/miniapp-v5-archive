@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getColor, popNotice } from "../../utils/page";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -15,7 +15,7 @@ interface CalendarDetail {
   content: TimeLineItem[];
 }
 
-$register("calendar", {
+$Page("calendar", {
   data: {
     theme: globalData.theme,
     /** 头部配置 */

@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../utils/config";
 import { listFile, remove } from "../utils/file";
@@ -10,7 +10,7 @@ const {
   globalData: { appID, theme },
 } = getApp<AppOption>();
 
-$register("function", {
+$Page("function", {
   data: { appID },
 
   onLoad(options) {
@@ -57,6 +57,6 @@ $register("function", {
 
   /** 返回主页 */
   main() {
-    this.$launch("main");
+    this.$reLaunch("main");
   },
 });

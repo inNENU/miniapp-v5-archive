@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 import { setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -14,7 +14,7 @@ interface Grade {
   gradeFocus?: boolean;
 }
 
-$register("cal", {
+$Page("cal", {
   data: {
     /** 头部配置 */
     nav: {

@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { donateListPage, donatePage, workPage } from "./pageData";
 import { getImagePrefix, server } from "../../utils/config";
@@ -17,7 +17,7 @@ interface DonateDetail {
   1: number;
 }
 
-$register("donate", {
+$Page("donate", {
   data: {
     theme: globalData.theme,
     page: workPage as PageData,

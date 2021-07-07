@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import $register = require("wxpage");
+import { $Component } from "@mptool/enhance";
 
 import { pageScrollMixin } from "../../mixins/page-scroll";
 
@@ -7,7 +6,7 @@ import type { AppOption } from "../../../app";
 
 const { globalData } = getApp<AppOption>();
 
-$register.C({
+$Component({
   properties: {
     theme: String,
     darkmode: Boolean,

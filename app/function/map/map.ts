@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -30,7 +30,7 @@ const jingyueArea = {
 
 type Area = "benbu" | "jingyue";
 
-$register("map", {
+$Page("map", {
   data: {
     /** 夜间模式状态 */
     darkmode: globalData.darkmode,
@@ -269,9 +269,9 @@ $register("map", {
     ) as MarkerData;
 
     if (event.type === "markertap") {
-      if (path) this.$preload(`/function/map/location?id=${area}/${path}`);
+      if (path) this.$preload(`location?id=${area}/${path}`);
     } else if (event.type === "callouttap") {
-      if (path) this.$route(`/function/map/location?id=${area}/${path}`);
+      if (path) this.$go(`location?id=${area}/${path}`);
       else tip("该地点暂无详情");
     }
   },
@@ -287,7 +287,7 @@ $register("map", {
       (item) => item.id === currentTarget.dataset.id
     ) as MarkerData;
 
-    if (path) this.$route(`/function/map/location?id=${area}/${path}`);
+    if (path) this.$go(`location?id=${area}/${path}`);
     else tip("该地点暂无详情");
   },
 

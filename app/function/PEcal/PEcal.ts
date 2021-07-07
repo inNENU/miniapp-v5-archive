@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/file";
@@ -62,7 +62,7 @@ interface PEScore {
   passScore: number;
 }
 
-$register("PEcal", {
+$Page("PEcal", {
   data: {
     theme: globalData.theme,
     page: { title: "体测计算器", id: "PECal", grey: true, from: "功能大厅" },
@@ -413,7 +413,7 @@ $register("PEcal", {
   },
 
   navigate() {
-    this.$route("page?from=体测计算器&id=guide/exam/pe-test/index");
+    this.$go("page?from=体测计算器&id=guide/exam/pe-test/index");
   },
 
   close() {

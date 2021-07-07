@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $App, $Config } from "@mptool/enhance";
 
 import {
   appInit,
@@ -47,18 +47,25 @@ export interface AppOption {
   globalData: GlobalData;
 }
 
-const resolvePath = (name: string): string =>
-  ["main", "function", "guide", "me", "search"].includes(name)
-    ? `/pages/${name}/${name}`
-    : ["function", "page", "web"].includes(name)
-    ? `/module/${name}`
-    : ["about", "auth", "log", "outlook", "resource", "storage"].includes(name)
-    ? `/settings/${name}/${name}`
-    : name === "work"
-    ? "/settings/about/work"
-    : `/function/${name}/${name}`;
+$Config({
+  defaultRoute: "/pages/$name$name",
+  routes: [
+    [["function", "page", "web"], "/module/$name"],
+    [
+      ["calendar", "map", "music", "PEcal", "video", "weather", "wechat"],
+      "/function/$name/$name",
+    ],
+    ["location", "/function/map/location"],
+    ["wechat-detail", "/function/wechat/detail"],
+    [
+      ["about", "auth", "log", "outlook", "resource", "storage"],
+      "/settings/$name/$name",
+    ],
+    ["work", "/settings/about/work"],
+  ],
+});
 
-$register.A<AppOption>({
+$App<AppOption>({
   /** 小程序的全局数据 */
   globalData: {
     version,
@@ -71,19 +78,9 @@ $register.A<AppOption>({
     env: "wx",
   } as unknown as GlobalData,
 
-  config: {
-    route: [
-      "/pages/$page/$page",
-      "/module/$page",
-      "/function/$page/$page",
-      "/settings/$page/$page",
-    ],
-    resolvePath,
-  },
-
-  onLaunch(opts) {
+  onLaunch(options) {
     // 调试
-    console.info("App launched with options:", opts);
+    console.info("App launched with options:", options);
 
     // 如果初次启动执行初始化
     if (!wx.getStorageSync("innenu-inited")) appInit();

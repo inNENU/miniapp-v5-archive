@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -10,7 +10,7 @@ import type { WechatDetail } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
-$register("wechat-detail", {
+$Page("wechat-detail", {
   data: {
     config: {} as WechatDetail,
 
@@ -28,7 +28,7 @@ $register("wechat-detail", {
   },
 
   onNavigate(options) {
-    ensureJSON({ path: `function/wechat/${options.query.path || "index"}` });
+    ensureJSON({ path: `function/wechat/${options.path || "index"}` });
   },
 
   onLoad({ path = "" }) {
@@ -116,11 +116,11 @@ $register("wechat-detail", {
           );
         },
       });
-    else this.$route(`web?url=${url}&title=${title}`);
+    else this.$go(`web?url=${url}&title=${title}`);
   },
 
   follow() {
-    this.$route(`web?url=${this.data.config.follow as string}&title=欢迎关注`);
+    this.$go(`web?url=${this.data.config.follow as string}&title=欢迎关注`);
   },
 
   back() {

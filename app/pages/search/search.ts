@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
@@ -8,7 +8,7 @@ import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
 
-$register("search", {
+$Page("search", {
   data: {
     theme: globalData.theme,
 
@@ -113,7 +113,7 @@ $register("search", {
   navigate({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<never, never, { id: string }>) {
-    this.$route(`page?id=${currentTarget.dataset.id}&from=搜索`);
+    this.$go(`page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 
   back() {

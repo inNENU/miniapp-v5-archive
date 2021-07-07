@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, server } from "../../utils/config";
 import { readFile } from "../../utils/file";
@@ -11,7 +11,7 @@ const {
   globalData: { darkmode, info },
 } = getApp<AppOption>();
 
-$register("weather", {
+$Page("weather", {
   data: {
     /** 天气数据 */
     weather: {} as WeatherData,
@@ -388,7 +388,7 @@ $register("weather", {
 
   /** 返回按钮功能 */
   back() {
-    if (getCurrentPages().length === 1) this.$launch("main");
+    if (getCurrentPages().length === 1) this.$reLaunch("main");
     else this.$back();
   },
 });

@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Component, PropType } from "@mptool/enhance";
 
 import { readFile } from "../../../utils/file";
 import { modal } from "../../../utils/wx";
@@ -10,9 +10,12 @@ const {
   globalData: { appID },
 } = getApp<AppOption>();
 
-$register.C<{ config: CardComponentConfig }>({
+$Component({
   properties: {
-    config: Object,
+    config: {
+      type: Object as PropType<CardComponentConfig>,
+      required: true,
+    },
   },
 
   methods: {
@@ -23,14 +26,14 @@ $register.C<{ config: CardComponentConfig }>({
       if (config.type === "web")
         if (appID === "wx9ce37d9662499df3")
           // 为企业主体微信小程序
-          this.$route(`/module/web?url=${config.url}&title=${config.title}`);
+          this.$go(`/module/web?url=${config.url}&title=${config.title}`);
         // 判断是否是可以跳转的微信图文
         else if (
           appID === "wx33acb831ee1831a5" &&
           (config.url.startsWith("https://mp.weixin.qq.com") ||
             config.url.startsWith("http://mp.weixin.qq.com"))
         )
-          this.$route(`/module/web?url=${config.url}&title=${config.title}`);
+          this.$go(`/module/web?url=${config.url}&title=${config.title}`);
         // 无法跳转，复制链接到剪切板
         else
           wx.setClipboardData({
@@ -42,7 +45,7 @@ $register.C<{ config: CardComponentConfig }>({
               );
             },
           });
-      else if (config.type === "page") this.$route(config.url);
+      else if (config.type === "page") this.$go(config.url);
     },
   },
 

@@ -3,6 +3,7 @@ import { debug, error, info, warn } from "./log";
 import { ensureJSON, readJSON, writeJSON } from "./file";
 import { modal, requestJSON } from "./wx";
 
+import type { PageInstance, PageQuery } from "@mptool/enhance";
 import type { AppOption } from "../app";
 import type { Notice } from "./app";
 import type {
@@ -13,7 +14,7 @@ import type {
   PageOption,
 } from "../../typings";
 
-type PageInstanceWithPage = WechatMiniprogram.Page.MPInstance<
+type PageInstanceWithPage = PageInstance<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   Record<string, any> & { page?: PageData },
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -158,7 +159,7 @@ const preloadPage = (page: PageData): void => {
  *
  * - 性质: 同步函数
  *
- * @param option 页面跳转参数
+ * @param options 页面跳转参数
  * @param page page 数组
  * @param setGlobal 是否将处理后的数据写入到全局数据中
  *
@@ -173,26 +174,26 @@ const preloadPage = (page: PageData): void => {
  * ```
  */
 export const resolvePage = (
-  option: MPPage.PageLifeTimeOptions,
+  options: PageQuery,
   page?: PageData,
   setGlobal = true
 ): PageData | null => {
   // 控制台输出参数
-  info("Navigating to: ", option);
+  info("Navigating to: ", options);
 
   let pageData = null;
 
-  if (page) pageData = disposePage(page, option.query);
-  else if (option.query.id) {
-    const jsonContent = readJSON<PageData>(`${option.query.id}`);
+  if (page) pageData = disposePage(page, options);
+  else if (options.id) {
+    const jsonContent = readJSON<PageData>(`${options.id}`);
 
-    if (jsonContent) pageData = disposePage(jsonContent, option.query);
-    else warn(`Can't resolve ${option.query.id} because file doesn't exist`);
+    if (jsonContent) pageData = disposePage(jsonContent, options);
+    else warn(`Can't resolve ${options.id} because file doesn't exist`);
   }
 
   if (pageData && setGlobal) {
     // 写入 globalData
-    globalData.page.id = option.query.id || pageData.title;
+    globalData.page.id = options.id || pageData.title;
     globalData.page.data = pageData;
   }
 

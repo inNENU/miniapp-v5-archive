@@ -1,4 +1,4 @@
-import $register = require("wxpage");
+import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
@@ -15,7 +15,7 @@ interface WechatConfig {
   path: string;
 }
 
-$register("wechat", {
+$Page("wechat", {
   data: {
     theme: globalData.theme,
 
@@ -80,8 +80,8 @@ $register("wechat", {
   navigate({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<never, never, { path: string }>) {
-    this.$route(
-      `/function/wechat/detail?path=${currentTarget.dataset.path}&from=校园公众号`
+    this.$go(
+      `wechat-detail?path=${currentTarget.dataset.path}&from=校园公众号`
     );
   },
 });
