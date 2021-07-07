@@ -1,8 +1,9 @@
-import { $Component, PropType } from "@mptool/enhance";
+import { $Component } from "@mptool/enhance";
 
 import { readFile } from "../../../utils/file";
 import { modal } from "../../../utils/wx";
 
+import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
 import type { CardComponentConfig } from "../../../../typings";
 

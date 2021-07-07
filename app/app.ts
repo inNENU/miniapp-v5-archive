@@ -5,43 +5,12 @@ import {
   appUpdate,
   checkResUpdate,
   getDarkmode,
+  getGlobalData,
   noticeCheck,
   startup,
 } from "./utils/app";
-import { version } from "./utils/config";
 
-import type { PageData } from "../typings";
-
-export interface GlobalData {
-  /** 小程序运行环境 */
-  env: string;
-  /** 版本号 */
-  version: string;
-  /** 播放器信息 */
-  music: {
-    /** 是否正在播放 */
-    playing: boolean;
-    /** 播放歌曲序号 */
-    index: number;
-  };
-  /** 页面信息 */
-  page: {
-    /** 页面数据 */
-    data?: PageData;
-    /** 页面标识符 */
-    id?: string;
-  };
-  /** 启动时间 */
-  date: number;
-  /** 正在应用的主题 */
-  theme: string;
-  /** 夜间模式开启状态 */
-  darkmode: boolean;
-  /** 设备信息 */
-  info: WechatMiniprogram.SystemInfo;
-  /** 小程序appid */
-  appID: string;
-}
+import type { GlobalData } from "./utils/app";
 
 export interface AppOption {
   globalData: GlobalData;
@@ -67,16 +36,7 @@ $Config({
 
 $App<AppOption>({
   /** 小程序的全局数据 */
-  globalData: {
-    version,
-    music: { playing: false, index: 0 },
-    page: {
-      data: [],
-      aim: "",
-    },
-    date: new Date().getTime(),
-    env: "wx",
-  } as unknown as GlobalData,
+  globalData: getGlobalData(),
 
   onLaunch(options) {
     // 调试

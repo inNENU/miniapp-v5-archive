@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { appConfig, server } from "./config";
+import { appConfig, server, version } from "./config";
 import { debug, error, info, warn } from "./log";
 import {
   isFileExist,
@@ -12,8 +12,38 @@ import {
 } from "./file";
 import { modal, requestJSON, tip } from "./wx";
 
-import type { GlobalData } from "../app";
-import type { VersionInfo } from "../../typings";
+import type { PageData, VersionInfo } from "../../typings";
+
+export interface GlobalData {
+  /** 小程序运行环境 */
+  env: string;
+  /** 版本号 */
+  version: string;
+  /** 播放器信息 */
+  music: {
+    /** 是否正在播放 */
+    playing: boolean;
+    /** 播放歌曲序号 */
+    index: number;
+  };
+  /** 页面信息 */
+  page: {
+    /** 页面数据 */
+    data?: PageData;
+    /** 页面标识符 */
+    id?: string;
+  };
+  /** 启动时间 */
+  date: number;
+  /** 正在应用的主题 */
+  theme: string;
+  /** 夜间模式开启状态 */
+  darkmode: boolean;
+  /** 设备信息 */
+  info: WechatMiniprogram.SystemInfo;
+  /** 小程序appid */
+  appID: string;
+}
 
 /**
  * 资源下载
@@ -462,6 +492,26 @@ export const registAction = (): void => {
     });
 };
 
+export const getGlobalData = (): GlobalData => {
+  // 获取设备与运行环境信息
+  const info = wx.getSystemInfoSync();
+
+  return {
+    version,
+    music: { playing: false, index: 0 },
+    page: {
+      data: {},
+      id: "",
+    },
+    date: new Date().getTime(),
+    env: info.AppPlatform || "wx",
+    theme: "ios",
+    info,
+    darkmode: getDarkmode(info),
+    appID: wx.getAccountInfoSync().miniProgram.appId,
+  };
+};
+
 /**
  * 小程序启动时的运行函数
  *
@@ -470,36 +520,8 @@ export const registAction = (): void => {
  * @param globalData 小程序的全局数据
  */
 export const startup = (globalData: GlobalData): void => {
-  // 获取设备与运行环境信息
-  globalData.info = wx.getSystemInfoSync();
-  if (globalData.info.AppPlatform === "qq") globalData.env = "qq";
-
   // 获取主题、夜间模式、appID
   globalData.theme = wx.getStorageSync<string>("theme");
-  globalData.darkmode = getDarkmode(globalData.info);
-  globalData.appID = wx.getAccountInfoSync().miniProgram.appId;
-
-  /*
-   * 检测基础库版本
-   * if (
-   *   ((globalData.env === "qq" &&
-   *     compareVersion(globalData.info.SDKVersion, "1.9.0") < 0) ||
-   *     (globalData.env === "wx" &&
-   *       compareVersion(globalData.info.SDKVersion, "2.8.0") < 0)) &&
-   *   wx.getStorageSync("SDKVersion") !== globalData.info.SDKVersion
-   * )
-   *   modal(
-   *     "基础库版本偏低",
-   *     `您的${
-   *       globalData.env === "qq" ? "QQ" : "微信"
-   *     }版本偏低，虽然不会影响小程序的功能，但会导致部分内容显示异常。为获得最佳体验，建议您更新至最新版本。`,
-   *     () => {
-   *       // 避免重复提示
-   *       wx.setStorageSync("SDKVersion", globalData.info.SDKVersion);
-   *       if (wx.canIUse("updateWeChatApp")) wx.updateWeChatApp();
-   *     }
-   *   );
-   */
 
   // 获取网络信息
   wx.getNetworkType({

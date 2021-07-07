@@ -1,5 +1,6 @@
-import { DocComponentConfig } from "../../../../typings";
 import { modal, savePhoto, tip } from "../../../utils/wx";
+
+import type { DocComponentConfig } from "../../../../typings";
 
 Component<{ config: DocComponentConfig }>({
   properties: {

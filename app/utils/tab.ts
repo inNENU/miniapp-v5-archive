@@ -2,7 +2,7 @@ import { requestJSON } from "./wx";
 import { setPage } from "./page";
 
 import type { PageInstance } from "@mptool/enhance";
-import type { GlobalData } from "../app";
+import type { GlobalData } from "../utils/app";
 import type { PageData } from "../../typings";
 
 /**

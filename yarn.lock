@@ -291,15 +291,15 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.0.tgz#87de7af9c231826fdd68ac7258f77c429e0e5fcf"
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
-"@mptool/enhance@0.0.1-alpha.4":
-  version "0.0.1-alpha.4"
-  resolved "https://registry.yarnpkg.com/@mptool/enhance/-/enhance-0.0.1-alpha.4.tgz#4695d1fc1c6dc272621f3b5ec159448f8be32b4b"
-  integrity sha512-QoEW51IN8UiEI6xQ0iPHtbj7ZoO8pdQ3J+30G4Wl2NCwMeiTN9A+WwQGYoipT327VD9Lk2wkxO/XlKFqkKweJA==
+"@mptool/enhance@0.0.1-alpha.6":
+  version "0.0.1-alpha.6"
+  resolved "https://registry.yarnpkg.com/@mptool/enhance/-/enhance-0.0.1-alpha.6.tgz#463e9b0371ab693a3dfa2d5f46ac2ce4946e05fc"
+  integrity sha512-MGFZ66n4487ixM/chqBX3vFo6Oyh3QEWoIlPutevJZvbZ3sib6BIimkiYdIhtFWS9ymXu5K3DlLBXD5zIkl1lw==
 
-"@mptool/file@0.0.1-alpha.4":
-  version "0.0.1-alpha.4"
-  resolved "https://registry.yarnpkg.com/@mptool/file/-/file-0.0.1-alpha.4.tgz#c6ab338ee7bc49703bf64402d2558dbe40a5a4ad"
-  integrity sha512-tNr9ya5ozjP+zJlgQju9N7BxCSLJBA63VfCV/8xJsMP6ksSNqsLqDnLv9J1YiU2b04r78EcLjUT5xRYoV9cbzQ==
+"@mptool/file@0.0.1-alpha.6":
+  version "0.0.1-alpha.6"
+  resolved "https://registry.yarnpkg.com/@mptool/file/-/file-0.0.1-alpha.6.tgz#12533f715e13cfbe6313da9f7ffca3e9f6adaa11"
+  integrity sha512-Urh6izxFTJZTe5MY9BITE+l0rjrPNpgFdR7Mo7hb88wfRTM+ejtQLnpUXW9+WMxfqv87URkSN1Yo5wQBEPeIoA==
 
 "@mr-hope/assert-type@1.2.0":
   version "1.2.0"

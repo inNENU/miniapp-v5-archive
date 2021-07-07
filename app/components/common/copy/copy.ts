@@ -1,4 +1,4 @@
-import { CopyComponentConfig } from "../../../../typings";
+import type { CopyComponentConfig } from "../../../../typings";
 
 Component<{ config: CopyComponentConfig }>({
   properties: {
