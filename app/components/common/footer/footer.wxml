@@ -1,3 +1,4 @@
+<wxs src="./year.wxs" module="footer" />
 <view class="footer-wrapper">
   <text wx:if="{{config.desc}}" decode>{{config.desc}}</text>
   <view class="info">
@@ -6,5 +7,5 @@
   </view>
 
   <view class="footer">{{text}}</view>
-  <view class="copyright">Copyright © 2017-2020 Mr.Hope</view>
+  <view class="copyright">Copyright © 2017-{{footer.year}} Mr.Hope</view>
 </view>
