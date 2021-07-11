@@ -16,7 +16,7 @@
     </scroll-view>
     <view class="edit" catch:tap="edit">{{editText}}</view>
   </view>
-  <view class="gradeinputerF">
+  <view class="grade-inputer">
     <view wx:for="{{grade}}" class="course-wrapper" id="{{item.id}}">
       <button
         class="sort {{display? '': 'hide'}}"
