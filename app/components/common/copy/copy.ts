@@ -1,9 +1,14 @@
+import { $Component } from "@mptool/enhance";
+import type { PropType } from "@mptool/enhance";
 import type { CopyComponentConfig } from "../../../../typings";
 
-Component<{ config: CopyComponentConfig }>({
+$Component({
   properties: {
     /** 配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<CopyComponentConfig>,
+      required: true,
+    },
   },
 
   methods: {

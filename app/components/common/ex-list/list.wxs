@@ -1,7 +1,7 @@
 module.exports = {
   /** 导航 */
   navigate: function (event) {
-    event.instance.callMethod("$route", event.currentTarget.dataset.url);
+    event.instance.callMethod("$go", event.currentTarget.dataset.url);
   },
 
   /** 需要渲染为按钮 */
@@ -25,9 +25,9 @@ module.exports = {
   /** 点击操作 */
   tapHandler: function (listItem) {
     return listItem.type === "picker"
-      ? "pickerTap"
+      ? "onPickerTap"
       : listItem.type === "slider"
-      ? "sliderTap"
+      ? "onSliderTap"
       : "";
   },
 };

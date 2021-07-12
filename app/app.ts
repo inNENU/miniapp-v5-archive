@@ -17,7 +17,7 @@ export interface AppOption {
 }
 
 $Config({
-  defaultRoute: "/pages/$name$name",
+  defaultRoute: "/pages/$name/$name",
   routes: [
     [["function", "page", "web"], "/module/$name"],
     [

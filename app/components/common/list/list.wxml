@@ -15,7 +15,7 @@
         hover-class="button-hover"
         hover-stay-time="100"
         data-url="{{listItem.url}}"
-        catch:tap="navigate"
+        catch:tap="$bindGo"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
         <image

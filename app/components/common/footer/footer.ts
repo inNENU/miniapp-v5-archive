@@ -1,16 +1,22 @@
+import { $Component } from "@mptool/enhance";
 import { server } from "../../../utils/config";
 
+import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
+import type { FooterComponentConfig } from "../../../../typings";
 
 const {
   // 获得当前小程序ID
   globalData: { appID },
 } = getApp<AppOption>();
 
-Component({
+$Component({
   properties: {
     /** 页脚配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<FooterComponentConfig>,
+      required: true,
+    },
   },
 
   data: {

@@ -78,7 +78,7 @@
         value="{{listItem.currentValue}}"
         range="{{listItem.select}}"
         header-text="{{listItem.header || listItem.text}}"
-        catch:change="pickerChange"
+        catch:change="onPickerChange"
       >
         <view class="text">{{listItem.text}}</view>
         <view wx:if="{{listItem.select}}" class="desc">
@@ -125,7 +125,7 @@
             checked="{{listItem.status}}"
             color="{{color}}"
             data-id="{{index}}"
-            catch:change="switch"
+            catch:change="onToggleSwitch"
           />
         </view>
       </view>
@@ -142,8 +142,8 @@
           value="{{listItem.value}}"
           step="{{listItem.step? listItem.step: '1'}}"
           data-id="{{index}}"
-          catch:changing="sliderChange"
-          catch:change="sliderChange"
+          catch:changing="onSliderChange"
+          catch:change="onSliderChange"
         />
         <!-- 嵌入式选择器显示 -->
         <picker-view
@@ -153,7 +153,7 @@
           value="{{listItem.currentValue}}"
           mask-class="pickerMask"
           data-id="{{index}}"
-          catch:change="pickerChange"
+          catch:change="onPickerChange"
         >
           <picker-view-column wx:if="{{listItem.single}}" class="column">
             <view wx:for="{{listItem.select}}" wx:key="*this" class="item"

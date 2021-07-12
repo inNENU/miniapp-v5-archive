@@ -17,12 +17,6 @@ $Component({
     },
   },
 
-  methods: {
-    navigate({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      this.$go(currentTarget.dataset.url);
-    },
-  },
-
   observers: {
     "config.content"(value: ListComponentItemConfig[]): void {
       // 设置图标

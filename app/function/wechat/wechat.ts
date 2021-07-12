@@ -76,12 +76,4 @@ $Page("wechat", {
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
-
-  navigate({
-    currentTarget,
-  }: WechatMiniprogram.TouchEvent<never, never, { path: string }>) {
-    this.$go(
-      `wechat-detail?path=${currentTarget.dataset.path}&from=校园公众号`
-    );
-  },
 });

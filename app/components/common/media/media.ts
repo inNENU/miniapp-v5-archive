@@ -1,10 +1,16 @@
-import { MediaComponentConfig } from "../../../../typings";
+import { $Component } from "@mptool/enhance";
 import { tip } from "../../../utils/wx";
 
-Component<{ config: MediaComponentConfig }>({
+import type { PropType } from "@mptool/enhance";
+import type { MediaComponentConfig } from "../../../../typings";
+
+$Component({
   properties: {
     /** 媒体组件配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<MediaComponentConfig>,
+      required: true,
+    },
   },
 
   methods: {

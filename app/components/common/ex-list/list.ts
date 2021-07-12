@@ -6,7 +6,6 @@ import type { PropType } from "@mptool/enhance";
 import type {
   AdvancedListComponentConfig,
   AdvancedListComponentItemConfig,
-  ButtonListComponnetItemConfig,
   PickerListComponentItemConfig,
   SliderListComponentItemConfig,
   SwitchListComponentItemConfig,
@@ -24,14 +23,11 @@ $Component({
       type: Object as PropType<AdvancedListComponentConfig>,
       required: true,
     },
-
-    /** 改变触发 */
-    change: Object,
   },
 
   methods: {
     /** 控制选择器显隐 */
-    pickerTap(
+    onPickerTap(
       event: WechatMiniprogram.TouchEvent<
         Record<string, never>,
         Record<string, never>,
@@ -48,7 +44,7 @@ $Component({
     },
 
     /** 控制选择器改变 */
-    pickerChange(
+    onPickerChange(
       event: WechatMiniprogram.PickerChange<
         Record<string, never>,
         { id: string }
@@ -84,13 +80,13 @@ $Component({
 
         // 将选择器的变更响应到页面上
         this.setData({ [`config.content[${id}]`]: content }, () => {
-          this.triggerEvent("change", { value, event: content.handler });
+          if (content.handler) this.$call(content.handler, value);
         });
       }
     },
 
     /** 开关改变 */
-    switch(
+    onToggleSwitch(
       event: WechatMiniprogram.SwitchChange<
         Record<string, never>,
         { id: string }
@@ -105,10 +101,7 @@ $Component({
       this.setData(
         { [`config.content[${id}].status`]: event.detail.value },
         () => {
-          this.triggerEvent("change", {
-            event: content.handler,
-            value: event.detail.value,
-          });
+          if (content.handler) this.$call(content.handler, event.detail.value);
         }
       );
 
@@ -116,23 +109,8 @@ $Component({
       wx.setStorageSync(content.key, event.detail.value);
     },
 
-    /** 触发按钮事件 */
-    button(
-      event: WechatMiniprogram.PickerChange<
-        Record<string, never>,
-        { id: string }
-      >
-    ): void {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-      const { content } = this.getDetail(
-        event
-      ) as ListDetail<ButtonListComponnetItemConfig>;
-
-      this.triggerEvent("change", { event: content.handler });
-    },
-
     /** 控制滑块显隐 */
-    sliderTap(
+    onSliderTap(
       event: WechatMiniprogram.PickerChange<
         Record<string, never>,
         { id: string }
@@ -165,7 +143,7 @@ $Component({
 
       // 写入页面数据
       this.setData({ [`config.content[${id}].value`]: value }, () => {
-        this.triggerEvent("change", { value, event: content.handler });
+        if (content.handler) this.$call(content.handler, value);
       });
 
       if (event.type === "change") wx.setStorageSync(content.key, value);
@@ -198,26 +176,6 @@ $Component({
             : ""
         ),
       });
-    },
-
-    /**
-     * 改变触发
-     *
-     * @param detail 需要改变的键及其对应值
-     */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    change(detail: Record<string, any>): void {
-      if (detail) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        const detail2: Record<string, any> = {};
-
-        Object.keys(detail).forEach((element) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          detail2[`config.${element}`] = detail[element];
-        });
-
-        this.setData(detail2);
-      }
     },
   },
 });

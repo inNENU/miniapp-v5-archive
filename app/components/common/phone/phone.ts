@@ -1,5 +1,7 @@
+import { $Component } from "@mptool/enhance";
 import { modal } from "../../../utils/wx";
 
+import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
 import type { PhoneComponentConfig } from "../../../../typings";
 
@@ -7,11 +9,15 @@ const {
   globalData: { env },
 } = getApp<AppOption>();
 
-Component<{ config: PhoneComponentConfig }>({
+$Component({
   properties: {
     /** 电话组件配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<PhoneComponentConfig>,
+      required: true,
+    },
   },
+
   methods: {
     /** 拨打电话 */
     call(): void {

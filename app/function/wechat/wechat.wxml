@@ -18,8 +18,8 @@
       class="wechat-logo"
       hover-class="button-hover"
       hover-stay-time="100"
-      data-path="{{config.path}}"
-      catch:tap="navigate"
+      data-url="{{'wechat-detail?from=校园公众号&path=' + config.path}}"
+      catch:tap="$bindGo"
     >
       <image class="logo" src="{{config.logo}}" />
       <view class="name">{{config.name}}</view>

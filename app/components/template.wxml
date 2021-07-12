@@ -24,7 +24,8 @@
       <ex-list
         wx:elif="{{item.tag === 'advanced-list'}}"
         config="{{item}}"
-        change="{{event? event[index]: ''}}"
+        ref="list{{index}}"
+        binding="$"
         catch:change="list"
       />
       <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
@@ -81,7 +82,10 @@
         data="{{ content: page.content || [], darkmode, images: page.images || [], theme }}"
       />
       <share config="{{page}}" />
-      <footer config="{{page}}" wx:if="{{page.footer !== false}}" />
+      <footer
+        wx:if="{{page.footer !== false}}"
+        config="{{ { author: page.author, time: page.time, desc: page.desc } }}"
+      />
     </block>
   </view>
 </template>

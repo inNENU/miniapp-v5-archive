@@ -1,8 +1,13 @@
-import { IntroComponentConfig } from "../../../../typings";
+import { $Component } from "@mptool/enhance";
+import type { PropType } from "@mptool/enhance";
+import type { IntroComponentConfig } from "../../../../typings";
 
-Component<{ config: IntroComponentConfig }>({
+$Component({
   properties: {
     /** 介绍组件配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<IntroComponentConfig>,
+      required: true,
+    },
   },
 });

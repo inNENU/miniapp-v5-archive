@@ -5,7 +5,12 @@
 >
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
   <view class="desc-wrapper">
-    <view class="desc-button" hover-class="button-hover" catch:tap="navigate">
+    <view
+      class="desc-button"
+      hover-class="button-hover"
+      data-url="page?from=体测计算器&id=guide/exam/pe-test/index"
+      catch:tap="$bindGo"
+    >
       <view class="text">体测说明</view>
     </view>
   </view>

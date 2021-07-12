@@ -1,8 +1,13 @@
-import { TextComponentConfig } from "../../../../typings";
+import { $Component } from "@mptool/enhance";
+import type { PropType } from "@mptool/enhance";
+import type { TextComponentConfig } from "../../../../typings";
 
-Component<{ config: TextComponentConfig }>({
+$Component({
   properties: {
     /** 段落配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<TextComponentConfig>,
+      required: true,
+    },
   },
 });

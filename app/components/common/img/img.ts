@@ -1,14 +1,19 @@
-import { ImageComponentConfig } from "../../../../typings";
+import { $Component } from "@mptool/enhance";
+import type { PropType } from "@mptool/enhance";
+import type { ImageComponentConfig } from "../../../../typings";
 
-Component<{ config: ImageComponentConfig; images: string[] }>({
+$Component({
   properties: {
     /** 图片组件配置 */
-    config: Object,
+    config: {
+      type: Object as PropType<ImageComponentConfig>,
+      required: true,
+    },
 
     /** 展示图片列表 */
     images: {
       type: Array,
-      value: [] as string[],
+      default: [] as string[],
     },
   },
 

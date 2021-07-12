@@ -13,7 +13,7 @@
     hover-class="button-hover"
     hover-stay-time="100"
     data-url="{{gridItem.url}}"
-    catch:tap="navigate"
+    catch:tap="$bindGo"
   >
     <!-- 网格图标 -->
     <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />

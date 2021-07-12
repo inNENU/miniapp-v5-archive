@@ -412,10 +412,6 @@ $Page("PEcal", {
     }
   },
 
-  navigate() {
-    this.$go("page?from=体测计算器&id=guide/exam/pe-test/index");
-  },
-
   close() {
     this.setData({ showScore: false });
   },

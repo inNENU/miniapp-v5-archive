@@ -70,17 +70,4 @@ declare namespace WechatMiniprogram {
           NodeSizeInfo;
       }
   >;
-
-  namespace Component {
-    interface Constructor {
-      <
-        TData extends DataOption = DataOption,
-        TProperty extends PropertyOption = PropertyOption,
-        TMethod extends MethodOption = MethodOption,
-        TCustomInstanceProperty extends IAnyObject = IAnyObject
-      >(
-        options: Options<TData, TProperty, TMethod, TCustomInstanceProperty>
-      ): string;
-    }
-  }
 }
