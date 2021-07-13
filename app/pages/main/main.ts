@@ -49,16 +49,7 @@ $Page("main", {
     // 设置胶囊和背景颜色
     this.setData({ color: getColor(this.data.page.grey) });
 
-    if (wx.getStorageSync("innenu-inited"))
-      refreshPage("main", this, globalData);
-    else {
-      const handler = setInterval(() => {
-        if (wx.getStorageSync("innenu-inited")) {
-          refreshPage("main", this, globalData);
-          clearInterval(handler);
-        }
-      }, 500);
-    }
+    refreshPage("main", this, globalData);
   },
 
   onShow() {

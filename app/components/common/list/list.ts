@@ -17,16 +17,30 @@ $Component({
     },
   },
 
-  observers: {
-    "config.content"(value: ListComponentItemConfig[]): void {
-      // 设置图标
+  lifetimes: {
+    attached() {
+      this.$emitter.on("inited", () => {
+        this.setLogo(this.data.config.content);
+      });
+    },
+  },
+
+  methods: {
+    // 设置图标
+    setLogo(content: ListComponentItemConfig[]) {
       this.setData({
-        icons: value.map((item) =>
+        icons: content.map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
         ),
       });
+    },
+  },
+
+  observers: {
+    "config.content"(value: ListComponentItemConfig[]): void {
+      this.setLogo(value);
     },
   },
 });

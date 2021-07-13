@@ -54,19 +54,17 @@ $Page("weather", {
         darkmode,
       });
     } else {
-      const handler = setInterval(() => {
-        if (wx.getStorageSync("innenu-inited")) {
-          this.setData({
-            weatherIcon: JSON.parse(
-              readFile("./icon/weather/icon") as string
-            ) as Record<string, string>,
-            hintIcon: JSON.parse(
-              readFile("./icon/weather/hint") as string
-            ) as Record<string, string>,
-          });
-          clearInterval(handler);
-        }
-      }, 500);
+      // update icon
+      this.$emitter.on("inited", () => {
+        this.setData({
+          weatherIcon: JSON.parse(
+            readFile("./icon/weather/icon") as string
+          ) as Record<string, string>,
+          hintIcon: JSON.parse(
+            readFile("./icon/weather/hint") as string
+          ) as Record<string, string>,
+        });
+      });
     }
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用

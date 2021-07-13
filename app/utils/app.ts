@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import { emitter } from "@mptool/enhance";
 import { appConfig, server, version } from "./config";
 import { debug, error, info, warn } from "./log";
 import {
@@ -256,6 +257,7 @@ export const appInit = (): void => {
           writeJSON("version", res.data.version);
           // 成功初始化
           wx.setStorageSync("innenu-inited", true);
+          emitter.emit("inited");
           wx.hideLoading();
         }
       },

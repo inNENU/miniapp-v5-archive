@@ -12,20 +12,34 @@ $Component({
     /** 网格组件配置 */
     config: {
       type: Object as PropType<GridComponentConfig>,
-      value: { aim: "" },
+      required: true,
     },
   },
 
-  observers: {
-    "config.content"(value: GridComponentItemComfig[]): void {
-      // 设置图标
+  lifetimes: {
+    attached() {
+      this.$emitter.on("inited", () => {
+        this.setLogo(this.data.config.content);
+      });
+    },
+  },
+
+  methods: {
+    // 设置图标
+    setLogo(content: GridComponentItemComfig[]) {
       this.setData({
-        icons: value.map((item) =>
+        icons: content.map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
         ),
       });
+    },
+  },
+
+  observers: {
+    "config.content"(value: GridComponentItemComfig[]): void {
+      this.setLogo(value);
     },
   },
 });

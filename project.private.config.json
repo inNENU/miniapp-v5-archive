@@ -19,10 +19,9 @@
           "scene": null
         },
         {
-          "id": 1,
           "name": "二维码分享",
           "pathName": "module/page",
-          "query": "scene=guide/life/express/index",
+          "query": "scene=guide/dorm/index",
           "scene": null
         },
         {
