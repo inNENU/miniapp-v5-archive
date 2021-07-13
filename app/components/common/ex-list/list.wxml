@@ -93,7 +93,7 @@
         hover-class="button-hover"
         hover-stay-time="100"
         url="{{listItem.url}}"
-        openType="{{listItem.openType}}"
+        open-type="{{listItem.openType}}"
         target="{{listItem.target}}"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
