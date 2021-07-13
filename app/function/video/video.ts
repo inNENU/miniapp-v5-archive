@@ -28,7 +28,7 @@ interface VideoGroup {
 }
 
 $Page("video", {
-  data: { videoName: "", videoList: [] as VideoGroup[] },
+  data: { type: "debug", videoName: "", videoList: [] as VideoGroup[] },
 
   onNavigate() {
     ensureJSON({
@@ -67,6 +67,8 @@ $Page("video", {
         const item = (videoList as VideoGroup[])[groupID].content[listID];
 
         this.setData({
+          type: options.type || "about",
+
           groupID,
           listID,
 
@@ -82,6 +84,7 @@ $Page("video", {
 
           firstPage: getCurrentPages().length === 1,
           info: globalData.info,
+          theme: globalData.theme,
           darkmode: globalData.darkmode,
         });
       },
@@ -104,8 +107,8 @@ $Page("video", {
 
     this.createSelectorQuery()
       .select(".video-list")
-      .fields({ size: true }, ({ height }) => {
-        this.setData({ height: height as number });
+      .fields({ size: true }, (res) => {
+        if (res) this.setData({ height: res.height as number });
       })
       .exec();
   },
@@ -113,14 +116,14 @@ $Page("video", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.videoName,
-      path: `/function/video/video?name=${this.data.videoName}`,
+      path: `/function/video/video?type=${this.data.type}&name=${this.data.videoName}`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.videoName,
-      query: `name=${this.data.videoName}`,
+      query: `type=${this.data.type}&name=${this.data.videoName}`,
     };
   },
 
@@ -128,7 +131,7 @@ $Page("video", {
     return {
       title: this.data.videoName,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `name=${this.data.videoName}`,
+      query: `type=${this.data.type}&name=${this.data.videoName}`,
     };
   },
 
@@ -141,7 +144,7 @@ $Page("video", {
   },
 
   /** 切换播放视频 */
-  change(event: WechatMiniprogram.TouchEvent) {
+  onListTap(event: WechatMiniprogram.TouchEvent) {
     const { groupID, listID } = event.currentTarget.dataset as Record<
       string,
       number
@@ -159,17 +162,17 @@ $Page("video", {
   },
 
   /** 视频缓冲时提示用户等待 */
-  wait() {
+  onVideoWait() {
     tip("缓冲中..");
   },
 
   /** 正常播放时隐藏提示 */
-  play() {
+  onVideoPlay() {
     wx.hideToast();
   },
 
   /** 提示用户视频加载出错 */
-  error() {
+  onVideoError() {
     tip("视频加载出错");
     // 调试
     wx.reportMonitor("5", 1);
