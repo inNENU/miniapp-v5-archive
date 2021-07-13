@@ -166,12 +166,6 @@ $Page("about", {
     this.setData({ darkmode: theme === "dark" });
   },
 
-  /** 列表控制函数 */
-  list({ detail }: WechatMiniprogram.TouchEvent) {
-    if (detail.event)
-      this[detail.event as "toggleDebug" | "toggleTest"](detail.value);
-  },
-
   /** 点击版本号时触发的函数 */
   debugMode() {
     // 关闭开发者模式

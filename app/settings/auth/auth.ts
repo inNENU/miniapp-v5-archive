@@ -23,16 +23,6 @@ type AuthorizeList =
   | "scope.record"
   | "scope.camera";
 
-type ListAction =
-  | "location"
-  | "album"
-  | "address"
-  | "invoiceTitle"
-  | "invoice"
-  | "werun"
-  | "record"
-  | "camera";
-
 const authorizeList: AuthorizeList[] = [
   "scope.userLocation",
   "scope.writePhotosAlbum",
@@ -128,11 +118,6 @@ $Page("authorize", {
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
-  },
-
-  /** List actions handler */
-  list({ detail }: WechatMiniprogram.TouchEvent) {
-    if (detail.event) this[detail.event as ListAction]();
   },
 
   /** 定位授权 */

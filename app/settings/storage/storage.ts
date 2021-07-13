@@ -10,14 +10,6 @@ import type { PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
-/** 列表动作 */
-type ListAction =
-  | "refreshGuide"
-  | "refreshFunc"
-  | "refreshIntro"
-  | "clearData"
-  | "resetApp";
-
 $Page("storage", {
   data: {
     theme: globalData.theme,
@@ -88,11 +80,6 @@ $Page("storage", {
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
-  },
-
-  /** List Actions Handler */
-  list({ detail }: WechatMiniprogram.TouchEvent) {
-    if (detail.event) this[detail.event as ListAction]();
   },
 
   /** 设置存储信息 */

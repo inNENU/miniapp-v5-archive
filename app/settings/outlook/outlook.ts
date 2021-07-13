@@ -11,9 +11,6 @@ import type {
 
 const { globalData } = getApp<AppOption>();
 
-/** 列表动作列表 */
-type ListAction = "updateTheme";
-
 $Page("setting", {
   data: {
     theme: globalData.theme,
@@ -74,11 +71,6 @@ $Page("setting", {
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
-  },
-
-  /** List control function */
-  list({ detail }: WechatMiniprogram.TouchEvent) {
-    if (detail.event) this[detail.event as ListAction](detail.value);
   },
 
   updateTheme(value: string) {
