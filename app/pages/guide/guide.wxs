@@ -215,7 +215,7 @@ module.exports = {
           text: "个人建议",
           color: "blue",
           name: "Advice",
-          icon: "advice",
+          icon: "idea",
           path: "guide/advice/index",
         },
       ],

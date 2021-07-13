@@ -8,7 +8,7 @@ import { refreshPage } from "../../utils/tab";
 import { requestJSON } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
-import type { PageDataWithContent } from "../../../typings";
+import type { PageData, PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -29,18 +29,8 @@ $Page("main", {
       title: "首页",
       id: "main",
       grey: true,
-      content: [
-        {
-          tag: "text",
-          heading: " ",
-          style: "text-indent: 1.5em;font-size:14px;color:#888;",
-          text: [
-            "如果您还有什么疑问，欢迎加入 in 东师咨询群 (1139044856) 进行咨询。\n   小程序都是 Mr.Hope 个人开发编写，现已花费 Mr.Hope 近 1800 小时，文字数量超过 35 万字，同时小程序服务器每年会产生开销。如果您觉得小程序很有帮助，欢迎您进行打赏。",
-          ],
-        },
-      ],
       hidden: true,
-    } as PageDataWithContent,
+    } as PageData,
   },
 
   onPageLaunch() {

@@ -23,8 +23,9 @@ $Page("page", {
     // 生成页面 ID
     if (option.scene)
       option.id = decodeURIComponent(option.scene)
-        .replace("#", "guide/")
-        .replace("@", "intro/");
+        .replace(/^#/, "guide/")
+        .replace(/^@/, "intro/")
+        .replace(/\/$/, "/index");
 
     if ("path" in option) {
       loadOnlinePage(option as Record<string, never> & { path: string }, this);
@@ -34,8 +35,6 @@ $Page("page", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     wx.reportAnalytics("id_count", { id: option.id });
-
-    // wx.setClipboardData({ data: `"\n${option.id as string}: "` });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

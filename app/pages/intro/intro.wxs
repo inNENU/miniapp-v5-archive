@@ -254,6 +254,13 @@ module.exports = {
           icon: "jwc",
           path: "apartment/course/index",
         },
+        {
+          text: "学生就业指导服务中心",
+          color: "cyan",
+          name: "Career",
+          icon: "job",
+          path: "apartment/career/index",
+        },
       ],
       footer: " ",
     },
