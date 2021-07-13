@@ -85,7 +85,7 @@ $Page("donate", {
     return {
       title: this.getTitle(),
       path: `/settings/about/work?type=${this.data.type}`,
-      imageUrl: `${getImagePrefix()}Share.jpg`,
+      imageUrl: `${getImagePrefix()}Share.png`,
     };
   },
 

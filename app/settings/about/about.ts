@@ -148,7 +148,7 @@ $Page("about", {
   onShareAppMessage: () => ({
     title: "关于",
     path: "/settings/about/about",
-    imageUrl: `${getImagePrefix()}Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.png`,
   }),
 
   onShareTimeline: () => ({ title: "关于" }),

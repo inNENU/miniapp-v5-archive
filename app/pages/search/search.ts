@@ -54,7 +54,7 @@ $Page("search", {
     return {
       title: "搜索",
       path: `/pages/search/search?name=${this.state.name}&word=${this.state.value}`,
-      imageUrl: `${getImagePrefix()}Share.jpg`,
+      imageUrl: `${getImagePrefix()}Share.png`,
     };
   },
 

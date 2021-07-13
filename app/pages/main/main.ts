@@ -108,7 +108,7 @@ $Page("main", {
   onShareAppMessage: () => ({
     title: getTitle(),
     path: "/pages/main/main",
-    imageUrl: `${getImagePrefix()}Share.jpg`,
+    imageUrl: `${getImagePrefix()}Share.png`,
   }),
 
   onShareTimeline: () => ({
