@@ -1,11 +1,10 @@
+<wxs src="./template.wxs" module="template" />
+
 <!-- components -->
 <template name="components">
   <block wx:if="{{content && content.length}}">
     <block wx:for="{{content}}" wx:key="id">
-      <my-text
-        wx:if="{{item.tag === 'text' || item.tag === 'p'|| item.tag === 'ul' || item.tag === 'ol'}}"
-        config="{{item}}"
-      />
+      <my-text wx:if="{{template.isText(item.tag)}}" config="{{item}}" />
       <title wx:elif="{{item.tag === 'title'}}" config="{{item}}" />
       <img
         wx:elif="{{item.tag === 'img'}}"
@@ -44,7 +43,7 @@
     <block wx:if="{{page.error}}">
       <navbar
         darkmode="{{darkmode}}"
-        nav="{{ { title: '页面出错', from: '返回', ...page } }}"
+        nav="{{template.getErrorNavConfig(page)}}"
       />
       <template is="error" />
     </block>
@@ -73,7 +72,7 @@
 
     <block wx:else>
       <!-- 导航栏 -->
-      <navbar darkmode="{{darkmode}}" nav="{{page}}" />
+      <navbar darkmode="{{darkmode}}" nav="{{template.getNavConfig(page)}}" />
 
       <!-- 页面内容 -->
       <template
@@ -83,7 +82,7 @@
       <share config="{{page}}" />
       <footer
         wx:if="{{page.footer !== false}}"
-        config="{{ { author: page.author, time: page.time, desc: page.desc } }}"
+        config="{{template.getFooterConfig(page)}}"
       />
     </block>
   </view>
