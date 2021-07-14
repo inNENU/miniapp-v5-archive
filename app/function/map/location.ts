@@ -1,7 +1,8 @@
 import { $Page } from "@mptool/enhance";
+import { readJSON } from "@mptool/file";
 
 import { getImagePrefix } from "../../utils/config";
-import { getJSON, readJSON } from "../../utils/file";
+import { getJSON } from "../../utils/file";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";

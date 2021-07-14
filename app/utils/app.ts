@@ -1,16 +1,16 @@
 /* eslint-disable max-lines */
-import { emitter } from "@mptool/enhance";
-import { appConfig, server, version } from "./config";
-import { debug, error, info, warn } from "./log";
+import { emitter, logger } from "@mptool/enhance";
 import {
-  isFileExist,
-  listFile,
-  readJSON,
-  remove,
-  saveFile,
+  ls,
+  rm,
   unzip,
   writeJSON,
-} from "./file";
+  saveFile,
+  readJSON,
+  exists,
+} from "@mptool/file";
+
+import { appConfig, server, version } from "./config";
 import { modal, requestJSON, tip } from "./wx";
 
 import type { PageData, VersionInfo } from "../../typings";
@@ -60,7 +60,7 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
     fileName.split("-").forEach((res) => {
       if (res) {
         wx.setStorageSync(`${res}Download`, false);
-        if (isFileExist(res)) remove(res, "dir");
+        if (exists(res)) rm(res, "dir");
       }
     });
 
@@ -77,8 +77,8 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
 
           // 解压文件到根目录
           unzip("zipTemp", "", () => {
-            // 删除压缩目录
-            remove("zipTemp", "file");
+            // 删除压缩包
+            rm("zipTemp", "file");
 
             // 将下载成功信息写入存储
             fileName.split("-").forEach((resource) => {
@@ -94,7 +94,7 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
 
       // 下载失败
       fail: ({ errMsg }) => {
-        error(`download ${fileName} fail: ${errMsg}`);
+        logger.error(`download ${fileName} fail: ${errMsg}`);
         reject(errMsg);
       },
     });
@@ -124,7 +124,7 @@ export const checkResUpdate = (): void => {
   const currentTime = Math.round(new Date().getTime() / 1000);
 
   // 调试
-  debug(
+  logger.debug(
     `Resource Notify status: ${notify ? "open" : "close"}`,
     "Local resource version: ",
     localVersion
@@ -148,7 +148,7 @@ export const checkResUpdate = (): void => {
           // 需要更新
           if (updateList.length > 0) {
             // 调试
-            info("Newer resource detected");
+            logger.info("Newer resource detected");
 
             const fileName = updateList.join("-");
             const size = versionInfo.size[fileName];
@@ -197,7 +197,7 @@ export const checkResUpdate = (): void => {
               });
           }
           // 调试
-          else debug("Newest resource already downloaded");
+          else logger.debug("Newest resource already downloaded");
         } else tip("服务器出现问题");
       },
       fail: () => tip("服务器出现问题"),
@@ -208,7 +208,7 @@ export const checkResUpdate = (): void => {
 export const appInit = (): void => {
   // 提示用户正在初始化
   wx.showLoading({ title: "初始化中...", mask: true });
-  info("Fist launch");
+  logger.info("Fist launch");
 
   // 设置主题
   if (appConfig.theme === "auto") {
@@ -311,11 +311,11 @@ export const noticeCheck = (globalData: GlobalData): void => {
     },
     () => {
       // 调试信息
-      warn("noticeList error", "Net Error");
+      logger.warn("noticeList error", "Net Error");
     },
     () => {
       // 调试信息
-      error("noticeList error", "Address Error");
+      logger.error("noticeList error", "Address Error");
     }
   );
 };
@@ -380,9 +380,7 @@ export const appUpdate = (globalData: GlobalData): void => {
                       wx.showLoading({ title: "初始化中", mask: true });
 
                       // 清除文件系统文件与数据存储
-                      listFile("").forEach((filePath) => {
-                        remove(filePath);
-                      });
+                      ls("").forEach((filePath) => rm(filePath));
                       wx.clearStorageSync();
 
                       // 隐藏提示
@@ -406,7 +404,7 @@ export const appUpdate = (globalData: GlobalData): void => {
       tip("小程序更新下载失败，请检查您的网络！");
 
       // 调试
-      warn("Upate App error because of Net Error");
+      logger.warn("Upate App error because of Net Error");
     });
   }
 };

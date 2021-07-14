@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
+import { ls, rm } from "@mptool/file";
 
 import { getImagePrefix } from "../utils/config";
-import { listFile, remove } from "../utils/file";
 import { modal } from "../utils/wx";
 
 import type { AppOption } from "../app";
@@ -42,9 +42,7 @@ $Page("function", {
     wx.showLoading({ title: "初始化中", mask: true });
 
     // 清除文件系统文件与数据存储
-    listFile("").forEach((filePath: string) => {
-      remove(filePath);
-    });
+    ls("").forEach((filePath) => rm(filePath));
     wx.clearStorageSync();
 
     // 隐藏提示

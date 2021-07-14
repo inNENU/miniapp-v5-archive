@@ -1,6 +1,6 @@
 import { $Component } from "@mptool/enhance";
+import { readFile } from "@mptool/file";
 
-import { readFile } from "../../../utils/file";
 import { modal } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";

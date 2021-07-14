@@ -1,4 +1,4 @@
-import { debug, warn } from "./log";
+import { logger } from "@mptool/enhance";
 import { server } from "./config";
 
 /**
@@ -90,12 +90,12 @@ export const netReport = (): void => {
           tip("网络连接出现问题，请稍后重试");
       }
 
-      warn("Request fail with", networkType);
+      logger.warn("Request fail with", networkType);
     },
     fail: () => {
       tip("网络连接出现问题，请稍后重试");
 
-      warn("Request fail and cannot get networkType");
+      logger.warn("Request fail and cannot get networkType");
     },
   });
 };
@@ -120,13 +120,15 @@ export const requestJSON = <T = Record<string, any>>(
     enableHttp2: true,
     success: (res) => {
       // 调试
-      debug(`Request ${path}.json success: `, res);
+      logger.debug(`Request ${path}.json success: `, res);
 
       if (res.statusCode === 200) successFunc(res.data);
       else {
         tip("服务器出现问题，请稍后重试");
         // 调试
-        warn(`Request ${path}.json failed with statusCode: ${res.statusCode}`);
+        logger.warn(
+          `Request ${path}.json failed with statusCode: ${res.statusCode}`
+        );
         wx.reportMonitor("3", 1);
 
         if (errorFunc) errorFunc(res.statusCode);
@@ -137,7 +139,7 @@ export const requestJSON = <T = Record<string, any>>(
       netReport();
 
       // 调试
-      warn(`Request ${path}.json failed: ${errMsg}`);
+      logger.warn(`Request ${path}.json failed: ${errMsg}`);
       wx.reportMonitor("4", 1);
     },
   });
@@ -169,14 +171,16 @@ export const downLoad = (
         if (errorFunc) errorFunc(res.statusCode);
 
         // 调试
-        warn(`Download ${path} failed with statusCode: ${res.statusCode}`);
+        logger.warn(
+          `Download ${path} failed with statusCode: ${res.statusCode}`
+        );
       }
     },
     fail: (failMsg) => {
       wx.hideLoading();
       if (failFunc) failFunc(failMsg);
       netReport();
-      warn(`Download ${path} failed:`, failMsg);
+      logger.warn(`Download ${path} failed:`, failMsg);
     },
   });
 

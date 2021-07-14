@@ -1,6 +1,5 @@
 import { $Component } from "@mptool/enhance";
-
-import { readFile } from "../../../utils/file";
+import { readFile } from "@mptool/file";
 
 import type { PropType } from "@mptool/enhance";
 import type {

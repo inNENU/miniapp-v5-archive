@@ -1,6 +1,7 @@
+import { logger } from "@mptool/enhance";
+import { readFile } from "@mptool/file";
+
 import { server, getTitle } from "../../../utils/config";
-import { readFile } from "../../../utils/file";
-import { debug } from "../../../utils/log";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { AppOption } from "../../../app";
@@ -75,7 +76,7 @@ Component({
         data: content,
         success: () => {
           tip("链接已复制");
-          debug(`Share content is copied: ${content}`);
+          logger.debug(`Share content is copied: ${content}`);
         },
       });
     },

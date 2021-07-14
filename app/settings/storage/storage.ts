@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
+import { ls, rm } from "@mptool/file";
 
 import { resDownload } from "../../utils/app";
-import { listFile, remove } from "../../utils/file";
 import { popNotice, setPage } from "../../utils/page";
 import { confirm, modal, tip } from "../../utils/wx";
 
@@ -164,9 +164,7 @@ $Page("storage", {
     confirm("清除小程序文件", () => {
       wx.showLoading({ title: "删除中", mask: true });
 
-      listFile("").forEach((filePath: string) => {
-        remove(filePath);
-      });
+      ls("").forEach((filePath) => rm(filePath));
 
       wx.hideLoading();
     });
@@ -179,9 +177,7 @@ $Page("storage", {
       wx.showLoading({ title: "初始化中", mask: true });
 
       // 清除文件系统文件与数据存储
-      listFile("").forEach((filePath: string) => {
-        remove(filePath);
-      });
+      ls("").forEach((filePath) => rm(filePath));
       wx.clearStorageSync();
 
       // 隐藏提示

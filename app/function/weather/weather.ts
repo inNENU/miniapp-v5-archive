@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
+import { readFile } from "@mptool/file";
 
 import { getImagePrefix, server } from "../../utils/config";
-import { readFile } from "../../utils/file";
 import { modal } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
