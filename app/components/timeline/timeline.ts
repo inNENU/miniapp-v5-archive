@@ -26,12 +26,12 @@ Component({
   },
 
   lifetimes: {
-    attached(): void {
+    attached() {
       wx.onWindowResize(this.updateTimeline);
       this.updateTimeline();
     },
 
-    detached(): void {
+    detached() {
       wx.offWindowResize(this.updateTimeline);
     },
   },

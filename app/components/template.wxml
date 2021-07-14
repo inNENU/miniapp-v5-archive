@@ -1,6 +1,6 @@
 <!-- components -->
 <template name="components">
-  <block wx:if="{{theme && content && content.length}}">
+  <block wx:if="{{content && content.length}}">
     <block wx:for="{{content}}" wx:key="id">
       <my-text
         wx:if="{{item.tag === 'text' || item.tag === 'p'|| item.tag === 'ul' || item.tag === 'ol'}}"
@@ -43,7 +43,6 @@
     <!-- 错误显示 -->
     <block wx:if="{{page.error}}">
       <navbar
-        theme="{{theme}}"
         darkmode="{{darkmode}}"
         nav="{{ { title: '页面出错', from: '返回', ...page } }}"
       />
@@ -74,12 +73,12 @@
 
     <block wx:else>
       <!-- 导航栏 -->
-      <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
+      <navbar darkmode="{{darkmode}}" nav="{{page}}" />
 
       <!-- 页面内容 -->
       <template
         is="components"
-        data="{{ content: page.content || [], darkmode, images: page.images || [], theme }}"
+        data="{{ content: page.content || [], images: page.images || [] }}"
       />
       <share config="{{page}}" />
       <footer
@@ -96,14 +95,14 @@
     <icon type="warn" size="80" />
     <view class="text">很抱歉，界面遇到了问题!</view>
     <view class="desc">
-      <text>您好，我是 Mr.Hope，很抱歉让您看到如下错误信息。\n</text>
+      <text>您好，很抱歉让您看到如下错误信息。\n</text>
       <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
       <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
     </view>
   </view>
   <view class="donate-wrapper">
     <navigator class="button" url="/settings/about/work?type=donate"
-      >支持开发者</navigator
+      >支持 Mr.Hope</navigator
     >
   </view>
 </template>

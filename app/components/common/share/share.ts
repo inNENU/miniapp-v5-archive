@@ -83,7 +83,7 @@ Component({
   },
 
   lifetimes: {
-    attached(): void {
+    attached() {
       if (!store.iconData)
         store.iconData = JSON.parse(
           (readFile("icon/shareicons") as string) || "{}"

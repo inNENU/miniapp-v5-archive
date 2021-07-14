@@ -1,6 +1,7 @@
 import { $Page } from "@mptool/enhance";
 import { readJSON } from "@mptool/file";
 
+import { defaultScroller } from "../../mixins/page-scroll";
 import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/file";
 import { resolvePage, setPage } from "../../utils/page";
@@ -47,19 +48,22 @@ $Page("location", {
       this.state.id = option.id;
     }
 
-    this.setData({ firstPage: getCurrentPages().length === 1 });
+    this.setData({
+      statusBarHeight: globalData.info.statusBarHeight,
+      firstPage: getCurrentPages().length === 1,
+    });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   /*
-   * OnReady() {
-   *   This.marker = wx.getStorageSync(`${this.xiaoqu}-all`)[this.id];
+   * onReady() {
+   *   this.marker = wx.getStorageSync(`${this.xiaoqu}-all`)[this.id];
    * },
    */
 
   /*
-   * Detail() {
+   * detail() {
    *   let markers = this.marker;
    *   wx.openLocation({
    *     latitude: marker.latitude,
@@ -70,7 +74,11 @@ $Page("location", {
    */
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onPageScroll() {},
+  onPageScroll(options) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    this.defaultScroller(options);
+  },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
@@ -101,6 +109,8 @@ $Page("location", {
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
+
+  defaultScroller,
 
   /** 返回按钮功能 */
   back() {

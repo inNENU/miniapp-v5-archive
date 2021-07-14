@@ -14,7 +14,7 @@ $Component({
     weather: {} as WeatherData,
   },
   lifetimes: {
-    attached(): void {
+    attached() {
       this.getWeather();
     },
   },

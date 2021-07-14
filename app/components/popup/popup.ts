@@ -30,7 +30,7 @@ Component({
   },
 
   lifetimes: {
-    attached(): void {
+    attached() {
       this.setData({ info: globalData.info });
     },
   },

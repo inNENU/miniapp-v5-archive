@@ -1,6 +1,6 @@
 import { $Component } from "@mptool/enhance";
 
-import { pageScrollMixin } from "../../mixins/page-scroll";
+import { defaultScroller, pageScrollMixin } from "../../../mixins/page-scroll";
 
 import type { AppOption } from "../../../app";
 
@@ -8,7 +8,6 @@ const { globalData } = getApp<AppOption>();
 
 $Component({
   properties: {
-    theme: String,
     darkmode: Boolean,
     nav: Object,
   },
@@ -21,51 +20,31 @@ $Component({
     firstPage: false,
   },
 
-  behaviors: [
-    pageScrollMixin(function (
-      this: {
-        data: {
-          titleDisplay: boolean;
-          borderDisplay: boolean;
-          shadow: boolean;
-        };
-        setData(
-          data: Partial<{
-            titleDisplay: boolean;
-            borderDisplay: boolean;
-            shadow: boolean;
-          }>
-        ): void;
-      },
-      option
-    ): void {
-      // 判断情况并赋值
-      const nav = {
-        borderDisplay: option.scrollTop >= 53,
-        titleDisplay: option.scrollTop > 42,
-        shadow: option.scrollTop > 1,
-      };
-
-      // 判断结果并更新界面数据
-      if (
-        this.data.titleDisplay !== nav.titleDisplay ||
-        this.data.borderDisplay !== nav.borderDisplay ||
-        this.data.shadow !== nav.shadow
-      )
-        this.setData(nav);
-    }),
-  ],
+  behaviors: [pageScrollMixin(defaultScroller)],
 
   methods: {
     back(): void {
       if (this.data.firstPage) this.$switch("main");
       else this.$back();
     },
+
+    setTheme(theme: string): void {
+      this.setData({ theme });
+    },
   },
 
   lifetimes: {
-    attached(): void {
-      if (getCurrentPages().length === 1) this.setData({ firstPage: true });
+    attached() {
+      this.setData({
+        theme: globalData.theme,
+        firstPage: getCurrentPages().length === 1,
+      });
+
+      this.$emitter.on("theme", this.setTheme);
+    },
+
+    detached() {
+      this.$emitter.off("theme", this.setTheme);
     },
   },
 });

@@ -17,7 +17,7 @@ Component({
   },
 
   lifetimes: {
-    ready(): void {
+    ready() {
       // 判断是否已经显示过
       const cache = wx.getStorageSync<number | undefined>("add-tip");
 

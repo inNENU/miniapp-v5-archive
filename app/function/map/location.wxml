@@ -10,16 +10,16 @@
   <template wx:if="{{page.error}}" is="{{theme}}error" data="{{...page}}" />
   <block wx:else>
     <view
-      class="back-button {{page.titleDisplay? 'fade-out': 'fade-in'}}"
-      style="top:{{page.statusBarHeight + 6}}px;"
+      class="back-button {{titleDisplay? 'fade-out': 'fade-in'}}"
+      style="top:{{statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
     >
       <view class="icon-{{firstPage? 'home': 'back'}}" />
     </view>
     <view
-      class="nenunav {{page.borderDisplay? 'fade-in': 'fade-out'}}"
-      style="background-color: {{page.color}}; padding-top: {{page.statusBarHeight}}px;"
+      class="nenunav {{borderDisplay? 'fade-in': 'fade-out'}}"
+      style="background-color: {{page.color}}; padding-top: {{statusBarHeight}}px;"
     >
       <view
         class="ios-nav-back-button"
@@ -31,13 +31,13 @@
         <view class="ios-back-arrow" style="border-color: #fff" />
         <text class="ios-nav-text" style="color: #fff">返回</text>
       </view>
-      <view class="nenu-navText">{{page.title}}</view>
+      <view class="nenu-nav-title">{{page.title}}</view>
     </view>
     <my-swiper
       wx:if="{{page.photo}}"
       config="{{ { fill: true, url: page.photo } }}"
     />
-    <view wx:else style="height: {{page.statusBarHeight + 44}}px;" />
+    <view wx:else style="height: {{statusBarHeight + 44}}px;" />
     <view class="title">{{page.title}}</view>
     <template is="components" data="{{content: page.content, theme}}" />
     <footer config="{{page}}" />
