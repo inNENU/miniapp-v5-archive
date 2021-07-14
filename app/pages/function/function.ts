@@ -88,8 +88,4 @@ $Page("function", {
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
   },
-
-  navigate() {
-    this.$go("weather");
-  },
 });

@@ -41,9 +41,4 @@ module.exports = {
       ? "stormy-bg"
       : "normal-bg";
   },
-
-  /** 导航到天气页面 */
-  navigate: function (event) {
-    event.instance.callMethod("$route", "weather");
-  },
 };

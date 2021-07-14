@@ -2,7 +2,7 @@
 <!-- 天气 -->
 <view
   class="weather-wrapper animation-fade {{tool.getBgClass(weather)}}"
-  catch:tap="{{tool.navigate}}"
+  catch:tap="navigate"
 >
   <view class="weather-pic {{tool.getClass(weather)}}" />
   <block wx:if="{{weather.observe}}">

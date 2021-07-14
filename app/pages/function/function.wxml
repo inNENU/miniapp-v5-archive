@@ -9,7 +9,7 @@
 />
 <view class="{{theme}} grey">
   <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
-  <weather catch:navigate="navigate" />
+  <weather target="weather" />
   <template
     is="components"
     data="{{content: page.content || fallback.content, theme}}"

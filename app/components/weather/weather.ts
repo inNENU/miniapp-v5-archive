@@ -1,7 +1,12 @@
-import { WeatherData } from "./typings";
+import { $Component } from "@mptool/enhance";
 import { server } from "../../utils/config";
 
-Component({
+import type { WeatherData } from "./typings";
+
+$Component({
+  properties: {
+    target: String,
+  },
   data: {
     /** 提示的索引值 */
     tipIndex: 0,
@@ -14,13 +19,6 @@ Component({
     },
   },
   methods: {
-    /** 变更提示信息 */
-    refresh(): void {
-      const { length } = this.data.weather.tips;
-      const { tipIndex } = this.data;
-
-      this.setData({ tipIndex: tipIndex === 0 ? length - 1 : tipIndex - 1 });
-    },
     /* 获取天气信息 */
     getWeather(): void {
       wx.request<WeatherData>({
@@ -37,6 +35,20 @@ Component({
           });
         },
       });
+    },
+
+    /** 变更提示信息 */
+    refresh(): void {
+      const { length } = this.data.weather.tips;
+      const { tipIndex } = this.data;
+
+      this.setData({ tipIndex: tipIndex === 0 ? length - 1 : tipIndex - 1 });
+    },
+
+    navigate(): void {
+      const { target } = this.data;
+
+      if (target) this.$go(target);
     },
   },
 });
