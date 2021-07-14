@@ -25,84 +25,72 @@
           "scene": null
         },
         {
-          "id": 2,
           "name": "天气",
           "pathName": "function/weather/weather",
           "query": "",
           "scene": null
         },
         {
-          "id": 3,
           "name": "地图",
           "pathName": "function/map/map",
           "query": "",
           "scene": null
         },
         {
-          "id": 4,
           "name": "地图地点",
           "pathName": "function/map/location",
           "query": "id=benbu/school/foreign",
           "scene": null
         },
         {
-          "id": 56,
           "name": "体测计算器",
           "pathName": "function/PEcal/PEcal",
           "query": "",
           "scene": null
         },
         {
-          "id": 6,
           "name": "校历",
           "pathName": "function/calendar/calendar",
           "query": "",
           "scene": null
         },
         {
-          "id": 7,
           "name": "播放器",
           "pathName": "function/music/music",
           "query": "",
           "scene": null
         },
         {
-          "id": 8,
           "name": "特定歌曲",
           "pathName": "function/music/music",
           "query": "index=17",
           "scene": null
         },
         {
-          "id": 9,
           "name": "客服",
           "pathName": "module/function",
           "query": "action=contact",
           "scene": null
         },
         {
-          "id": 10,
           "name": "初始化小程序",
           "pathName": "module/function",
           "query": "action=reset",
           "scene": null
         },
         {
-          "id": 11,
           "name": "关于",
           "pathName": "settings/about/work",
           "query": "",
           "scene": null
         },
         {
-          "id": 22,
           "name": "赞赏",
           "pathName": "settings/about/work",
           "query": "type=donate",
           "scene": null
         },
         {
-          "id": 12,
           "name": "赞赏列表",
           "pathName": "settings/about/work",
           "query": "type=donateList",
@@ -111,61 +99,58 @@
         {
           "id": 13,
           "name": "小程序资源",
-          "pathName": "settings/resource/resource",
-          "query": "action=redirect&from=主页",
+          "pathName": "settings/storage/storage",
           "scene": null
         },
         {
-          "id": 14,
-          "name": "视频",
+          "name": "工作室关于",
           "pathName": "function/video/video",
           "query": "",
           "scene": null
         },
         {
-          "id": 15,
-          "name": "特定视频",
+          "name": "视频",
           "pathName": "function/video/video",
-          "query": "name=东师版 “好想你” MV",
+          "query": "type=video",
           "scene": null
         },
         {
-          "id": 16,
+          "name": "特定视频",
+          "pathName": "function/video/video",
+          "query": "type=video&name=师德公约",
+          "scene": null
+        },
+        {
           "name": "公众号",
           "pathName": "function/wechat/wechat",
           "query": "",
           "scene": null
         },
         {
-          "id": 17,
           "name": "特定公众号",
           "pathName": "function/wechat/detail",
           "query": "path=nenuyouth",
           "scene": null
         },
         {
-          "id": 18,
           "name": "搜索",
           "pathName": "pages/search/search",
           "query": "",
           "scene": null
         },
         {
-          "id": 19,
           "name": "指定文字搜索",
           "pathName": "pages/search/search",
           "query": "word=浴池",
           "scene": null
         },
         {
-          "id": 20,
           "name": "绩点计算",
           "pathName": "function/cal/cal",
           "query": "",
           "scene": null
         },
         {
-          "id": 21,
           "name": "关于",
           "pathName": "settings/about/about",
           "query": "",

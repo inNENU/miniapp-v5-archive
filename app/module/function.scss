@@ -1,13 +1,11 @@
-.action {
-  position: absolute;
-  top: calc(50% - 50px);
-  left: calc(50% - 80px);
-  width: 160px !important;
-}
+.function {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
-.back {
-  position: absolute;
-  top: calc(50% + 10px);
-  left: calc(50% - 80px);
-  width: 160px !important;
+  button {
+    width: 160px !important;
+    margin: 20px auto;
+  }
 }

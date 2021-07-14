@@ -22,17 +22,8 @@ $Component({
   },
 
   behaviors: [
-    pageScrollMixin(function (option): void {
-      // 判断情况并赋值
-      const nav = {
-        borderDisplay: option.scrollTop >= 53,
-        titleDisplay: option.scrollTop > 42,
-        shadow: option.scrollTop > 1,
-      };
-
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      const that = this as {
+    pageScrollMixin(function (
+      this: {
         data: {
           titleDisplay: boolean;
           borderDisplay: boolean;
@@ -45,19 +36,23 @@ $Component({
             shadow: boolean;
           }>
         ): void;
+      },
+      option
+    ): void {
+      // 判断情况并赋值
+      const nav = {
+        borderDisplay: option.scrollTop >= 53,
+        titleDisplay: option.scrollTop > 42,
+        shadow: option.scrollTop > 1,
       };
 
       // 判断结果并更新界面数据
-      if (that.data.titleDisplay !== nav.titleDisplay)
-        that.setData({
-          titleDisplay: nav.titleDisplay,
-        });
-      else if (that.data.borderDisplay !== nav.borderDisplay)
-        that.setData({
-          borderDisplay: nav.borderDisplay,
-        });
-      else if (that.data.shadow !== nav.shadow)
-        that.setData({ shadow: nav.shadow });
+      if (
+        this.data.titleDisplay !== nav.titleDisplay ||
+        this.data.borderDisplay !== nav.borderDisplay ||
+        this.data.shadow !== nav.shadow
+      )
+        this.setData(nav);
     }),
   ],
 

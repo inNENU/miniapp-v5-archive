@@ -55,9 +55,6 @@ $Page("calendar", {
       },
     });
 
-    if (getCurrentPages().length === 1)
-      this.setData({ "nav.action": "back", "nav.from": "主页" });
-
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     popNotice("calendar");

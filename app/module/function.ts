@@ -54,7 +54,7 @@ $Page("function", {
   },
 
   /** 返回主页 */
-  main() {
+  home() {
     this.$reLaunch("main");
   },
 });

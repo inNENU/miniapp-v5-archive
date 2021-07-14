@@ -1,35 +1,15 @@
-<view class="{{theme}}">
-  <block wx:if="{{contact}}">
-    <button
-      wx:if="{{appID === 'wx9ce37d9662499df3'}}"
-      class="action"
-      open-type="contact"
-      type="primary"
-    >
-      联系校会君
-    </button>
-    <button wx:else type="primary" class="action" open-type="contact">
-      联系 Mr.Hope
-    </button>
-  </block>
-  <button
-    class="action"
-    wx:if="{{all || feedback}}"
-    open-type="feedback"
-    type="primary"
-  >
+<view class="{{theme}} function">
+  <button wx:if="{{contact}}" type="primary" open-type="contact">
+    联系{{appID === 'wx9ce37d9662499df3'?'校会君':' Mr.Hope'}}
+  </button>
+  <button wx:elif="{{all || feedback}}" open-type="feedback" type="primary">
     意见反馈
   </button>
-  <button
-    type="primary"
-    class="action"
-    wx:if="{{all || reset}}"
-    catch:tap="resetApp"
-  >
-    初始化小程序
-  </button>
-  <navigator wx:if="{{all || reset}}" open-type="exit" target="miniProgram">
-    <button type="primary" class="action">退出小程序</button>
-  </navigator>
-  <button type="default" class="back" catch:tap="main">返回主页</button>
+  <block wx:elif="{{all || reset}}">
+    <button type="primary" catch:tap="resetApp">初始化小程序</button>
+    <navigator open-type="exit" target="miniProgram">
+      <button type="primary">退出小程序</button>
+    </navigator>
+  </block>
+  <button type="default" catch:tap="home">返回主页</button>
 </view>
