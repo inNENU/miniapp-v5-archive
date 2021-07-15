@@ -9,8 +9,8 @@
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
     "urlCheck": true,
-    "es6": true,
-    "enhance": true,
+    "es6": false,
+    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -25,6 +25,7 @@
     "checkSiteMap": false,
     "uploadWithSourceMap": true,
     "compileHotReLoad": true,
+    "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
     "useApiHostProcess": false,
@@ -44,9 +45,7 @@
       }
     ],
     "minifyWXSS": true,
-    "showES6CompileOption": false,
-    "remoteDebugLogEnable": false,
-    "prefetch": false
+    "showES6CompileOption": false
   },
   "packOptions": {
     "ignore": [

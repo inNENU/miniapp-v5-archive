@@ -3,7 +3,7 @@ import { ls, rm } from "@mptool/file";
 
 import { resDownload } from "../../utils/app";
 import { popNotice, setPage } from "../../utils/page";
-import { confirm, modal, tip } from "../../utils/wx";
+import { confirmAction, modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { PageDataWithContent } from "../../../typings";
@@ -118,42 +118,42 @@ $Page("storage", {
 
   /** 刷新指南资源 */
   refreshGuide() {
-    confirm("刷新指南资源", () => {
+    confirmAction("刷新指南资源", () => {
       resDownload("guide");
     });
   },
 
   /** 刷新功能资源 */
   refreshFunc() {
-    confirm("刷新功能资源", () => {
+    confirmAction("刷新功能资源", () => {
       resDownload("function");
     });
   },
 
   /** 刷新功能资源 */
   refreshIntro() {
-    confirm("刷新介绍资源", () => {
+    confirmAction("刷新介绍资源", () => {
       resDownload("intro");
     });
   },
 
   /** 刷新图标资源 */
   refreshIcon() {
-    confirm("刷新图标资源", () => {
+    confirmAction("刷新图标资源", () => {
       resDownload("icon");
     });
   },
 
   /** 刷新所有资源 */
   refreshAll() {
-    confirm("刷新全部资源", () => {
+    confirmAction("刷新全部资源", () => {
       resDownload("function-guide-icon-intro");
     });
   },
 
   /** 清除小程序数据 */
   clearData() {
-    confirm("清除小程序数据", () => {
+    confirmAction("清除小程序数据", () => {
       wx.clearStorageSync();
       tip("数据清除完成");
     });
@@ -161,7 +161,7 @@ $Page("storage", {
 
   /** 清除小程序文件 */
   clearFiles() {
-    confirm("清除小程序文件", () => {
+    confirmAction("清除小程序文件", () => {
       wx.showLoading({ title: "删除中", mask: true });
 
       ls("").forEach((filePath) => rm(filePath));
@@ -172,7 +172,7 @@ $Page("storage", {
 
   /** 初始化小程序 */
   resetApp() {
-    confirm("初始化小程序", () => {
+    confirmAction("初始化小程序", () => {
       // 显示提示
       wx.showLoading({ title: "初始化中", mask: true });
 

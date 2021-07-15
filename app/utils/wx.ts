@@ -51,7 +51,7 @@ export const modal = (
  * @param confirmFunc 确定回调函数
  * @param cancelFunc 取消回调函数
  */
-export const confirm = (
+export const confirmAction = (
   actionText: string,
   confirmFunc: () => void,
   cancelFunc: () => void = (): void => void 0
