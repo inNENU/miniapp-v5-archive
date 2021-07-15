@@ -30,7 +30,6 @@ $Config({
       ["about", "auth", "log", "outlook", "resource", "storage"],
       "/settings/$name/$name",
     ],
-    ["work", "/settings/about/work"],
   ],
 });
 

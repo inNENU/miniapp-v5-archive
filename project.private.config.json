@@ -79,25 +79,6 @@
           "scene": null
         },
         {
-          "name": "关于",
-          "pathName": "settings/about/work",
-          "query": "",
-          "scene": null
-        },
-        {
-          "name": "赞赏",
-          "pathName": "settings/about/work",
-          "query": "type=donate",
-          "scene": null
-        },
-        {
-          "name": "赞赏列表",
-          "pathName": "settings/about/work",
-          "query": "type=donateList",
-          "scene": null
-        },
-        {
-          "id": 13,
           "name": "小程序资源",
           "pathName": "settings/storage/storage",
           "query": "",

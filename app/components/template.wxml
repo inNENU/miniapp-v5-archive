@@ -94,14 +94,8 @@
     <icon type="warn" size="80" />
     <view class="text">很抱歉，界面遇到了问题!</view>
     <view class="desc">
-      <text>您好，很抱歉让您看到如下错误信息。\n</text>
-      <text>欢迎添加 QQ 1178522294 进行反馈。\n</text>
-      <text>由于服务器一天不足 ￥2 配置不好，也欢迎您点击下方按钮支持我。</text>
+      <text>很抱歉让您看到如下错误信息。\n</text>
+      <text>请添加 QQ 1178522294 进行反馈。\n</text>
     </view>
-  </view>
-  <view class="donate-wrapper">
-    <navigator class="button" url="/settings/about/work?type=donate"
-      >支持 Mr.Hope</navigator
-    >
   </view>
 </template>

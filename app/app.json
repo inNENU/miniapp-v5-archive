@@ -8,7 +8,6 @@
     "pages/user/user",
     "pages/search/search",
     "settings/about/about",
-    "settings/about/work",
     "settings/auth/auth",
     "settings/log/log",
     "settings/outlook/outlook",
