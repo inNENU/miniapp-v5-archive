@@ -251,8 +251,8 @@ $Page("about", {
     this.setData({ page: this.data.page });
     wx.setStorageSync("debugMode", value);
 
-    if (value) wx.setEnableDebug({ enableDebug: true });
-    else wx.setEnableDebug({ enableDebug: false });
+    wx.setEnableDebug({ enableDebug: value });
+    (wx.env as Record<string, unknown>).DEBUG = value;
   },
 
   /**

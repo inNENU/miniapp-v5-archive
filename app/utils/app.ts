@@ -537,4 +537,9 @@ export const startup = (globalData: GlobalData): void => {
   appUpdate(globalData);
   registAction();
   login(globalData);
+
+  const debug = wx.getStorageSync<boolean | undefined>("debugMode") || false;
+
+  wx.setEnableDebug({ enableDebug: debug });
+  (wx.env as Record<string, unknown>).DEBUG = debug;
 };
