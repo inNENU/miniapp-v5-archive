@@ -7,29 +7,9 @@
 <view class="list-wrapper">
   <block wx:for="{{config.content}}" wx:for-item="listItem" wx:key="text">
     <block wx:if="{{!listItem.hidden}}">
-      <!-- 导航链接 -->
-      <view
-        wx:if="{{listItem.url}}"
-        id="{{index}}"
-        class="list"
-        hover-class="button-hover"
-        hover-stay-time="100"
-        data-url="{{listItem.url}}"
-        catch:tap="{{list.navigate}}"
-      >
-        <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
-        <image
-          wx:elif="{{listItem.icon}}"
-          class="icon"
-          src="{{listItem.icon}}"
-        />
-        <view class="text">{{listItem.text}}</view>
-        <view class="desc">{{listItem.desc}}</view>
-        <view class="access" />
-      </view>
       <!-- 按钮、嵌入选择器与滑块 -->
       <button
-        wx:elif="{{list.isButton(listItem)}}"
+        wx:if="{{list.isButton(listItem)}}"
         id="{{index}}"
         class="list"
         hover-class="button-hover"
@@ -68,23 +48,6 @@
           </block>
         </view>
       </button>
-      <!-- 非嵌入选择器 -->
-      <picker
-        wx:elif="{{listItem.type === 'picker'}}"
-        id="{{index}}"
-        class="list picker"
-        hover-class="button-hover"
-        hover-stay-time="100"
-        value="{{listItem.currentValue}}"
-        range="{{listItem.select}}"
-        header-text="{{listItem.header || listItem.text}}"
-        catch:change="onPickerChange"
-      >
-        <view class="text">{{listItem.text}}</view>
-        <view wx:if="{{listItem.select}}" class="desc">
-          <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
-        </view>
-      </picker>
       <!-- navigator -->
       <navigator
         wx:elif="{{listItem.type === 'navigator'}}"
@@ -107,6 +70,44 @@
           >{{listItem.desc}}</view
         >
       </navigator>
+      <!-- 导航链接 -->
+      <view
+        wx:elif="{{listItem.url}}"
+        id="{{index}}"
+        class="list"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        data-url="{{listItem.url}}"
+        catch:tap="{{list.navigate}}"
+      >
+        <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
+        <image
+          wx:elif="{{listItem.icon}}"
+          class="icon"
+          src="{{listItem.icon}}"
+        />
+        <view class="text">{{listItem.text}}</view>
+        <view class="desc">{{listItem.desc}}</view>
+        <view class="access" />
+      </view>
+      <!-- 非嵌入选择器 -->
+      <picker
+        wx:elif="{{listItem.type === 'picker'}}"
+        id="{{index}}"
+        class="list picker"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        value="{{listItem.currentValue}}"
+        range="{{listItem.select}}"
+        header-text="{{listItem.header || listItem.text}}"
+        catch:change="onPickerChange"
+      >
+        <view class="text">{{listItem.text}}</view>
+        <view wx:if="{{listItem.select}}" class="desc">
+          <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
+        </view>
+      </picker>
+
       <!-- 普通文字段落与开关 -->
       <view wx:else id="{{index}}" class="list">
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
