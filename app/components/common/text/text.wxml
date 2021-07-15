@@ -41,16 +41,19 @@
 
 <view wx:if="{{text.isContainer(config.type)}}" class="paragraph">
   <view class="container {{config.type}}">
-    <view wx:if="{{config.heading !== false}}" class="container-title"
-      >{{ text.getTitle(config)}}</view
+    <text
+      wx:if="{{config.heading !== false}}"
+      class="container-title"
+      user-select
+      >{{ text.getTitle(config)}}</text
     >
     <template is="text" data="{{config}}" />
   </view>
 </view>
 <!-- 段落标题 -->
 <block wx:else>
-  <view wx:if="{{config.heading}}" class="paragraph-header"
-    >{{config.heading}}</view
+  <text wx:if="{{config.heading}}" class="paragraph-header" user-select
+    >{{config.heading}}</text
   >
   <!-- 段落主体 -->
   <view class="paragraph" style="{{config.align}}">

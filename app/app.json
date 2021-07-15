@@ -97,7 +97,7 @@
     "uploadFile": 8000,
     "downloadFile": 25000
   },
-  "debug": true,
+  "debug": false,
   "resizable": true,
   "permission": {
     "scope.userLocation": {
