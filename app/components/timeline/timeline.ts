@@ -1,3 +1,7 @@
+import { $Component } from "@mptool/enhance";
+
+import type { PropType } from "@mptool/enhance";
+
 export interface TimeLineItem {
   /** 时间线项目标题 */
   title: string;
@@ -13,16 +17,18 @@ export interface TimeLineItem {
   class?: string;
 }
 
-Component({
+$Component({
   properties: {
     /** 时间线配置 */
-    config: Array,
+    config: {
+      type: Array as PropType<TimeLineItem[]>,
+      default: [],
+    },
   },
 
   data: {
     /** 是否使用交错布局 */
     alternate: false,
-    timeList: [] as TimeLineItem[],
   },
 
   lifetimes: {
@@ -38,9 +44,7 @@ Component({
 
   methods: {
     active({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      const { path } = (this.data.config as TimeLineItem[])[
-        currentTarget.dataset.index as number
-      ];
+      const { path } = this.data.config[currentTarget.dataset.index as number];
 
       if (path) this.triggerEvent("active", { path });
     },

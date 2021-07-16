@@ -1,6 +1,6 @@
 type Scroller = (event: WechatMiniprogram.Page.IPageScrollOption) => void;
 type TrivialInstance = WechatMiniprogram.Page.TrivialInstance & {
-  scrollHandler?: Scroller[];
+  $scrollHandler?: Scroller[];
 };
 
 const getCurrentPage = (): TrivialInstance => {
@@ -12,9 +12,9 @@ const getCurrentPage = (): TrivialInstance => {
 const onPageScroll = (
   event: WechatMiniprogram.Page.IPageScrollOption
 ): void => {
-  const { scrollHandler = [] } = getCurrentPage();
+  const { $scrollHandler = [] } = getCurrentPage();
 
-  scrollHandler.forEach((scroller) => {
+  $scrollHandler.forEach((scroller) => {
     if (typeof scroller === "function") scroller(event);
   });
 };
@@ -57,10 +57,10 @@ export const pageScrollMixin = (scroller: Scroller): string =>
     attached() {
       const page = getCurrentPage();
 
-      if (Array.isArray(page.scrollHandler))
-        page.scrollHandler.push(scroller.bind(this));
+      if (Array.isArray(page.$scrollHandler))
+        page.$scrollHandler.push(scroller.bind(this));
       else
-        page.scrollHandler =
+        page.$scrollHandler =
           typeof page.onPageScroll === "function"
             ? [page.onPageScroll.bind(page), scroller.bind(this)]
             : [scroller.bind(this)];
@@ -73,7 +73,7 @@ export const pageScrollMixin = (scroller: Scroller): string =>
     detached() {
       const page = getCurrentPage();
 
-      page.scrollHandler = (page.scrollHandler || []).filter(
+      page.$scrollHandler = (page?.$scrollHandler || []).filter(
         (item) => item !== scroller
       );
     },
