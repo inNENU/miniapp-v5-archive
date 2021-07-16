@@ -3,7 +3,7 @@ import { put, take } from "@mptool/file";
 
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
@@ -53,10 +53,7 @@ $Page("function", {
 
   onReady() {
     // 注册事件监听器
-    this.$emitter.on("theme", (theme: string) => {
-      this.setData({ theme });
-    });
-
+    this.$emitter.on("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
@@ -82,7 +79,12 @@ $Page("function", {
   }),
 
   onUnload() {
+    this.$emitter.off("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
+  },
+
+  setTheme(theme: string): void {
+    this.setData({ color: getColor(this.data.page.grey), theme });
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {

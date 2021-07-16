@@ -16,24 +16,26 @@ $Component({
     },
   },
 
-  lifetimes: {
-    attached() {
-      this.$emitter.on("inited", () => {
-        this.setLogo(this.data.config.content);
-      });
-    },
-  },
-
   methods: {
     // 设置图标
-    setLogo(content: GridComponentItemComfig[]) {
+    setLogo(content?: GridComponentItemComfig[]) {
       this.setData({
-        icons: content.map((item) =>
+        icons: (content || this.data.config.content).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
         ),
       });
+    },
+  },
+
+  lifetimes: {
+    attached() {
+      this.setLogo = this.setLogo.bind(this);
+      this.$emitter.on("inited", this.setLogo);
+    },
+    detached() {
+      this.$emitter.off("inited", this.setLogo);
     },
   },
 

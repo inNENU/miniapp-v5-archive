@@ -55,16 +55,8 @@ $Page("weather", {
       });
     } else {
       // update icon
-      this.$emitter.on("inited", () => {
-        this.setData({
-          weatherIcon: JSON.parse(
-            readFile("./icon/weather/icon") as string
-          ) as Record<string, string>,
-          hintIcon: JSON.parse(
-            readFile("./icon/weather/hint") as string
-          ) as Record<string, string>,
-        });
-      });
+      this.updateIcon = this.updateIcon.bind(this);
+      this.$emitter.on("inited", this.updateIcon);
     }
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
@@ -121,10 +113,23 @@ $Page("weather", {
       success: () => console.info("Stoped accelerometer listening"),
     });
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
+    this.$emitter.off("inited", this.updateIcon);
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
     this.setData({ darkmode: theme === "dark" });
+  },
+
+  updateIcon(): void {
+    this.setData({
+      weatherIcon: JSON.parse(
+        readFile("./icon/weather/icon") as string
+      ) as Record<string, string>,
+      hintIcon: JSON.parse(readFile("./icon/weather/hint") as string) as Record<
+        string,
+        string
+      >,
+    });
   },
 
   /**

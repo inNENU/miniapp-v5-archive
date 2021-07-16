@@ -19,14 +19,6 @@ $Component({
     },
   },
 
-  lifetimes: {
-    attached() {
-      this.$emitter.on("inited", () => {
-        this.setLogo(this.data.config.logo);
-      });
-    },
-  },
-
   methods: {
     /** 点击卡片触发的操作 */
     tap(): void {
@@ -57,12 +49,24 @@ $Component({
       else if (config.type === "page") this.$go(config.url);
     },
 
-    setLogo(logo?: string) {
+    setLogo(value?: string) {
+      const logo = value || this.data.config.logo;
+
       // 设置图标
       if (logo && !logo.includes("/"))
         this.setData({
           base64Logo: readFile(`icon/${logo}`) || "",
         });
+    },
+  },
+
+  lifetimes: {
+    attached() {
+      this.setLogo = this.setLogo.bind(this);
+      this.$emitter.on("inited", this.setLogo);
+    },
+    detached() {
+      this.$emitter.off("inited", this.setLogo);
     },
   },
 

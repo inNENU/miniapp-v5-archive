@@ -24,14 +24,6 @@ $Component({
     },
   },
 
-  lifetimes: {
-    attached() {
-      this.$emitter.on("inited", () => {
-        this.setLogo(this.data.config.content);
-      });
-    },
-  },
-
   methods: {
     /** 控制选择器显隐 */
     onPickerTap(
@@ -172,14 +164,25 @@ $Component({
       };
     },
     // 设置图标
-    setLogo(content: AdvancedListComponentItemConfig[]) {
+    setLogo(content?: AdvancedListComponentItemConfig[]) {
       this.setData({
-        icons: content.map((item) =>
+        icons: (content || this.data.config.content).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
         ),
       });
+    },
+  },
+
+  lifetimes: {
+    attached() {
+      this.setLogo = this.setLogo.bind(this);
+      this.$emitter.on("inited", this.setLogo);
+    },
+
+    detached() {
+      this.$emitter.off("inited", this.setLogo);
     },
   },
 

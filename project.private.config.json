@@ -79,6 +79,12 @@
           "scene": null
         },
         {
+          "name": "小程序外观",
+          "pathName": "settings/outlook/outlook",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "小程序资源",
           "pathName": "settings/storage/storage",
           "query": "",

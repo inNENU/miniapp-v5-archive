@@ -40,6 +40,8 @@ $Component({
         firstPage: getCurrentPages().length === 1,
       });
 
+      // bind this
+      this.setTheme = this.setTheme.bind(this);
       this.$emitter.on("theme", this.setTheme);
     },
 

@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, getTitle } from "../../utils/config";
-import { popNotice, setPage } from "../../utils/page";
+import { getColor, popNotice, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
 import type { PageData } from "../../../typings";
@@ -126,10 +126,7 @@ $Page("user", {
 
   onReady() {
     // 注册事件监听器
-    this.$emitter.on("theme", (theme: string) => {
-      this.setData({ theme });
-    });
-
+    this.$emitter.on("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
@@ -150,7 +147,12 @@ $Page("user", {
   }),
 
   onUnload() {
+    this.$emitter.off("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
+  },
+
+  setTheme(theme: string): void {
+    this.setData({ color: getColor(this.data.page.grey), theme });
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {

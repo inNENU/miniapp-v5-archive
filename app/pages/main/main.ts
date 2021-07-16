@@ -58,10 +58,7 @@ $Page("main", {
 
   onReady() {
     // 注册事件监听器
-    this.$emitter.on("theme", (theme: string) => {
-      this.setData({ color: getColor(this.data.page.grey), theme });
-    });
-
+    this.$emitter.on("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     // 执行 tab 页预加载
@@ -74,7 +71,6 @@ $Page("main", {
         }
       );
     });
-    this.$preload("me?id=me");
   },
 
   onPullDownRefresh() {
@@ -102,7 +98,12 @@ $Page("main", {
   }),
 
   onUnload() {
+    this.$emitter.off("theme", this.setTheme);
     if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
+  },
+
+  setTheme(theme: string): void {
+    this.setData({ color: getColor(this.data.page.grey), theme });
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {

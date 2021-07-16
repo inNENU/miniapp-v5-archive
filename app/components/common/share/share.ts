@@ -1,9 +1,11 @@
+import { $Component } from "@mptool/enhance";
 import { logger } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
 import { server, getTitle } from "../../../utils/config";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
+import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
 import type { PageData } from "../../../../typings";
 
@@ -30,8 +32,13 @@ const store: { iconData: IconData | null } = {
   iconData: null,
 };
 
-Component({
-  properties: { config: { type: Object, value: { id: "" } } },
+$Component({
+  properties: {
+    config: {
+      type: Object as PropType<PageData>,
+      default: { id: "" },
+    },
+  },
 
   methods: {
     /** 二维码下载 */
@@ -68,9 +75,7 @@ Component({
 
     copy(link: string) {
       const { title } = this.data.config;
-      const content = `${
-        title ? `${getTitle()}查看『${title as string}』:` : ""
-      }${link}`;
+      const content = `${title ? `${getTitle()}查看『${title}』:` : ""}${link}`;
 
       wx.setClipboardData({
         data: content,
@@ -80,16 +85,19 @@ Component({
         },
       });
     },
+
+    setIconData() {
+      if (!store.iconData)
+        store.iconData = JSON.parse(
+          (readFile("icon/shareicons") as string) || "null"
+        ) as IconData;
+    },
   },
 
   lifetimes: {
     attached() {
-      if (!store.iconData)
-        store.iconData = JSON.parse(
-          (readFile("icon/shareicons") as string) || "{}"
-        ) as IconData;
-
-      this.setData({ iconData: store.iconData });
+      this.setIconData();
+      this.setData({ iconData: store.iconData || {} });
     },
   },
 
