@@ -470,11 +470,14 @@ export const registAction = (): void => {
   // 监听用户截屏
   if (wx.getStorageSync("capture-screen") !== "never")
     wx.onUserCaptureScreen(() => {
+      // avoid issues on QQ
+      let pending = false;
       const status = wx.getStorageSync<"never" | "noticed" | undefined>(
         "capture-screen"
       );
 
-      if (status !== "never")
+      if (status !== "never" && !pending) {
+        pending = true;
         wx.showModal({
           title: "善用小程序分享",
           content:
@@ -487,8 +490,11 @@ export const registAction = (): void => {
               wx.setStorageSync("capture-screen", "never");
               if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
             }
+
+            pending = false;
           },
         });
+      }
     });
 };
 

@@ -207,6 +207,9 @@ export interface ColorConfig {
   bgColorBottom: string;
 }
 
+export const getPath = (path = ""): string =>
+  path.replace(/^#/, "guide/").replace(/^@/, "intro/").replace(/\/$/, "/index");
+
 /**
  * **简介:**
  *

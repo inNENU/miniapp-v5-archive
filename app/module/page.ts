@@ -1,9 +1,14 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../utils/config";
-import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
+import {
+  getPath,
+  loadOnlinePage,
+  resolvePage,
+  setOnlinePage,
+} from "../utils/page";
 
-import type { PageData } from "../../typings";
+import type { PageData, PageOption } from "../../typings";
 
 $Page("page", {
   data: { page: {} as PageData & { id: string } },
@@ -17,19 +22,18 @@ $Page("page", {
     resolvePage(option);
   },
 
-  onLoad(option) {
+  onLoad(option: PageOption & { path?: string }) {
     console.info("onLoad options: ", option);
 
     // 生成页面 ID
-    if (option.scene)
-      option.id = decodeURIComponent(option.scene)
-        .replace(/^#/, "guide/")
-        .replace(/^@/, "intro/")
-        .replace(/\/$/, "/index");
+    option.id = getPath(
+      option.scene ? decodeURIComponent(option.scene) : option.id
+    );
 
     if ("path" in option) {
+      option.path = getPath(option.path);
+      this.state.path = option.path;
       loadOnlinePage(option as Record<string, never> & { path: string }, this);
-      this.state.path = option.path as string;
     } else setOnlinePage(option, this);
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
