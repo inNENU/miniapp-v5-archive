@@ -13,8 +13,11 @@
   text-align: left;
 
   .grey & {
+    min-height: unset;
     padding: 21px 15px 5px;
+
     color: var(--dark-grey);
+
     font-weight: 400;
     font-size: 13px;
   }

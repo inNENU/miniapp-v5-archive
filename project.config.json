@@ -2,7 +2,7 @@
   "description": "项目配置文件",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.18.0",
+  "libVersion": "2.18.1",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.29.0",
   "qqappid": "1109559721",
@@ -173,7 +173,6 @@
           "query": "action=reset",
           "scene": null
         },
-
         {
           "id": 13,
           "name": "小程序资源",
