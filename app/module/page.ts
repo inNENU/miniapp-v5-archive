@@ -38,7 +38,7 @@ $Page("page", {
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
-    wx.reportAnalytics("id_count", { id: option.id });
+    wx.reportEvent?.("page_id", { id: option.id || option.path });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
