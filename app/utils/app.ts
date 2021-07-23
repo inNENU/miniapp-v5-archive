@@ -468,10 +468,11 @@ export const registAction = (): void => {
   });
 
   // 监听用户截屏
-  if (wx.getStorageSync("capture-screen") !== "never")
+  if (wx.getStorageSync("capture-screen") !== "never") {
+    // avoid issues on QQ
+    let pending = false;
+
     wx.onUserCaptureScreen(() => {
-      // avoid issues on QQ
-      let pending = false;
       const status = wx.getStorageSync<"never" | "noticed" | undefined>(
         "capture-screen"
       );
@@ -496,6 +497,7 @@ export const registAction = (): void => {
         });
       }
     });
+  }
 };
 
 export const getGlobalData = (): GlobalData => {
