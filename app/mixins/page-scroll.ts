@@ -73,7 +73,7 @@ export const pageScrollMixin = (scroller: Scroller): string =>
     detached() {
       const page = getCurrentPage();
 
-      page.$scrollHandler = (page?.$scrollHandler || []).filter(
+      page.$scrollHandler = (page ? page.$scrollHandler || [] : []).filter(
         (item) => item !== scroller
       );
     },
