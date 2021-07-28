@@ -344,7 +344,7 @@ interface UpdateInfo {
  * @param globalData 小程序的全局数据
  */
 export const appUpdate = (globalData: GlobalData): void => {
-  if (wx.canIUse("getUpdateManager")) {
+  if (wx.canIUse("getUpdateManager") && wx.getUpdateManager) {
     const updateManager = wx.getUpdateManager();
 
     // 检查更新
