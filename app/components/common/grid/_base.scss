@@ -34,11 +34,19 @@
 }
 
 .grid-foot {
-  min-height: 14px;
-  padding: 3px 15px;
+  min-height: 15px;
+  padding: 5px 15px;
 
-  color: #999;
+  color: var(--dark-grey);
 
-  font-size: 14px;
+  font-size: 13px;
   text-align: left;
+
+  .grey & {
+    margin: 0 10px;
+
+    @media (min-width: 768px) {
+      margin: 0 15px;
+    }
+  }
 }
