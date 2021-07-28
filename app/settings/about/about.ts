@@ -47,42 +47,6 @@ $Page("about", {
             { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
         } as AdvancedListComponentConfig,
-        {
-          tag: "list",
-          header: "小程序介绍",
-          content: [
-            { text: "   小程序全部内容均由Hope Studio独立开发。" },
-            {
-              text: "Hope Studio 介绍",
-              url: "page?path=other/about/hope-studio",
-            },
-            { text: "Mr.Hope 个人介绍", url: "page?path=other/about/mrhope" },
-            { text: "开发者访谈", url: "page?path=other/about/interview" },
-            { text: "常见问题", url: "page?path=other/about/function" },
-            { text: "致谢名单", url: "page?path=other/about/thanks" },
-          ],
-        },
-        {
-          tag: "text",
-          heading: "小程序内容",
-          text: [
-            "   小程序页面内容仓库在 Github 上开源。如果您愿意对小程序提供帮助，欢迎您点击下方链接为该仓库做贡献。您可以帮助扩充或编辑小程序的页面文字、图片以及相关文件。",
-          ],
-        },
-        {
-          tag: "copy",
-          text: "https://github.com/Hope-Studio/innenu-res",
-        },
-        {
-          tag: "list",
-          header: "内容版权及使用",
-          content: [
-            {
-              text: "   请您特别注意，除标注来源的文字、图片 Mr.Hope 没有版权外，其余文字、图片均放置在 “署名-非商业性使用-禁止演绎 4.0 国际许可证” 下。请您合法使用这些文字与图片，以避免引起纠纷。",
-            },
-            { text: "协议详情", url: "page?path=other/about/copyright" },
-          ],
-        },
       ],
     } as PageDataWithContent,
   },
