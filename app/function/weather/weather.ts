@@ -142,16 +142,21 @@ $Page("weather", {
       wx.createSelectorQuery()
         .select(".canvas")
         .fields({ node: true, size: true })
-        .exec((res: Required<WechatMiniprogram.NodeInfo>[]) => {
-          const canvas = res[0].node;
-          const context = canvas.getContext("2d");
-          const dpr = info.pixelRatio;
+        .exec(
+          ([
+            { node, width, height },
+          ]: Required<WechatMiniprogram.NodeInfo>[]) => {
+            if (node) {
+              const context = node.getContext("2d");
+              const dpr = info.pixelRatio;
 
-          canvas.width = res[0].width * dpr;
-          canvas.height = res[0].height * dpr;
-          context.scale(dpr, dpr);
-          this.draw(context, weather);
-        });
+              node.width = width * dpr;
+              node.height = height * dpr;
+              context.scale(dpr, dpr);
+              this.draw(context, weather);
+            } else this.canvasOldDraw(weather);
+          }
+        );
     else this.canvasOldDraw(weather);
   },
 
@@ -336,8 +341,9 @@ $Page("weather", {
       wx.createSelectorQuery()
         .select(".canvas")
         .fields({ node: true, size: true })
-        .exec((res: Required<WechatMiniprogram.NodeInfo>[]) => {
-          this.draw(res[0].node.getContext("2d"), this.data.weather);
+        .exec(([{ node }]: Required<WechatMiniprogram.NodeInfo>[]) => {
+          if (node) this.draw(node.getContext("2d"), this.data.weather);
+          else this.canvasOldDraw(this.data.weather);
         });
     else this.canvasOldDraw(this.data.weather);
   },
