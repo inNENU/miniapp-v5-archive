@@ -36,10 +36,10 @@ $Page("setting", {
         },
         {
           tag: "advanced-list",
-          header: "资源更新",
+          header: "内容更新",
           content: [
             {
-              text: "资源更新提示",
+              text: "内容更新提示",
               type: "switch",
               key: "resourceNotify",
             },

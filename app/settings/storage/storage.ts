@@ -30,14 +30,30 @@ $Page("storage", {
         },
         {
           tag: "advanced-list",
-          header: "资源刷新",
-          foot: "如果页面显示出现问题请刷新资源",
+          header: "内容刷新",
+          foot: "如果页面显示出现问题请刷新小程序资源文件",
           content: [
-            { text: "刷新全部资源", type: "button", handler: "refreshAll" },
-            { text: "刷新介绍资源", type: "button", handler: "refreshIntro" },
-            { text: "刷新功能资源", type: "button", handler: "refreshFunc" },
-            { text: "刷新指南资源", type: "button", handler: "refreshGuide" },
-            { text: "刷新图标资源", type: "button", handler: "refreshIcon" },
+            { text: "刷新全部资源文件", type: "button", handler: "refreshAll" },
+            {
+              text: "刷新介绍资源文件",
+              type: "button",
+              handler: "refreshIntro",
+            },
+            {
+              text: "刷新功能资源文件",
+              type: "button",
+              handler: "refreshFunc",
+            },
+            {
+              text: "刷新指南资源文件",
+              type: "button",
+              handler: "refreshGuide",
+            },
+            {
+              text: "刷新图标资源文件",
+              type: "button",
+              handler: "refreshIcon",
+            },
           ],
         },
         {
@@ -118,35 +134,35 @@ $Page("storage", {
 
   /** 刷新指南资源 */
   refreshGuide() {
-    confirmAction("刷新指南资源", () => {
+    confirmAction("刷新指南资源文件", () => {
       resDownload("guide");
     });
   },
 
   /** 刷新功能资源 */
   refreshFunc() {
-    confirmAction("刷新功能资源", () => {
+    confirmAction("刷新功能资源文件", () => {
       resDownload("function");
     });
   },
 
   /** 刷新功能资源 */
   refreshIntro() {
-    confirmAction("刷新介绍资源", () => {
+    confirmAction("刷新介绍资源文件", () => {
       resDownload("intro");
     });
   },
 
   /** 刷新图标资源 */
   refreshIcon() {
-    confirmAction("刷新图标资源", () => {
+    confirmAction("刷新图标资源文件", () => {
       resDownload("icon");
     });
   },
 
   /** 刷新所有资源 */
   refreshAll() {
-    confirmAction("刷新全部资源", () => {
+    confirmAction("刷新全部资源文件", () => {
       resDownload("function-guide-icon-intro");
     });
   },

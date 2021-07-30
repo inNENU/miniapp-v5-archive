@@ -157,7 +157,7 @@ export const checkResUpdate = (): void => {
               // 需要提醒
               wx.showModal({
                 title: "内容更新",
-                content: `请更新资源以获得最新功能与内容。(会消耗${size}K流量)`,
+                content: `请更新小程序资源以获得最新内容。(会消耗${size}K流量)`,
                 cancelText: "取消",
                 cancelColor: "#ff0000",
                 confirmText: "更新",
@@ -170,8 +170,8 @@ export const checkResUpdate = (): void => {
                   // 用户取消，询问是否关闭更新提示
                   else if (choice.cancel)
                     wx.showModal({
-                      title: "开启资源更新提示?",
-                      content: "开启后在资源有更新时会提示您更新资源文件。",
+                      title: "开启内容更新提示?",
+                      content: "开启后在内容有更新时会提示您更新资源文件。",
                       cancelText: "关闭",
                       cancelColor: "#ff0000",
                       confirmText: "保持开启",
@@ -180,7 +180,7 @@ export const checkResUpdate = (): void => {
                         if (choice2.cancel)
                           modal(
                             "更新提示已关闭",
-                            "您可以在设置中重新打开提示。\n请注意: 为保障正常运行，小程序会每周对资源进行强制更新。",
+                            "您可以在设置中重新打开提示。\n请注意: 为保障正常运行，小程序会每周对内容资源文件进行强制更新。",
                             // 关闭更新提示
                             () => {
                               wx.setStorageSync("resourceNotify", false);
