@@ -83,14 +83,14 @@ $Page("location", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
-      path: `/function/map/location?from=主页&id=${this.state.id}`,
+      path: `/function/map/location?id=${this.state.id}`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
-      query: `from=主页&id=${this.state.id}`,
+      query: `id=${this.state.id}`,
     };
   },
 
@@ -98,7 +98,7 @@ $Page("location", {
     return {
       title: this.data.page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `from=主页&id=${this.state.id}`,
+      query: `id=${this.state.id}`,
     };
   },
 

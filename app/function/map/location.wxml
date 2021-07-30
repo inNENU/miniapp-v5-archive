@@ -29,7 +29,9 @@
         catch:tap="back"
       >
         <view class="ios-back-arrow" style="border-color: #fff" />
-        <text class="ios-nav-text" style="color: #fff">返回</text>
+        <text class="ios-nav-text" style="color: #fff"
+          >{{firstPage? '主页': '返回'}}</text
+        >
       </view>
       <view class="nenu-nav-title">{{page.title}}</view>
     </view>
