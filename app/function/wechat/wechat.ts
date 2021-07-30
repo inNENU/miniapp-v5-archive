@@ -22,7 +22,6 @@ $Page("wechat", {
     /** 头部配置 */
     nav: {
       title: "校园公众号",
-      statusBarHeight: globalData.info.statusBarHeight,
       from: "功能大厅",
     },
 

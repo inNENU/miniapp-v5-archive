@@ -1,3 +1,5 @@
+<wxs src="./navbar.wxs" module="navbar" />
+
 <!-- android导航栏 -->
 <template name="androidNav">
   <view

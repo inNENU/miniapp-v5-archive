@@ -23,7 +23,6 @@ $Page("main", {
     nav: {
       title: "首页",
       action: false,
-      statusBarHeight: globalData.info.statusBarHeight,
     },
     page: {
       title: "首页",

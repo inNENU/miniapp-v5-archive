@@ -1,3 +1,5 @@
+<wxs src="./navbar.wxs" module="navbar" />
+
 <template name="nenuNav">
   <block wx:if="{{nav.action === undefined}}">
     <view

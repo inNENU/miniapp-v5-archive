@@ -18,7 +18,6 @@ $Page("function", {
     nav: {
       title: "功能大厅",
       action: false,
-      statusBarHeight: globalData.info.statusBarHeight,
     },
 
     /** 页面数据 */

@@ -54,7 +54,7 @@ $Page("page", {
     return {
       title: this.data.page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `from=主页&path=${this.data.page.id}`,
+      query: `path=${this.data.page.id}`,
     };
   },
 

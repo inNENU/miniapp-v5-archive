@@ -2,7 +2,6 @@
 <import src="./android.wxml" />
 <import src="./nenu.wxml" />
 <import src="./weui.wxml" />
-<wxs src="./navbar.wxs" module="navbar" />
 
 <template
   wx:if="{{!nav.hidden && theme}}"

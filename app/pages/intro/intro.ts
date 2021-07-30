@@ -22,7 +22,6 @@ $Page("guide", {
     nav: {
       title: "东师介绍",
       action: false,
-      statusBarHeight: globalData.info.statusBarHeight,
     },
 
     /** 页面数据 */

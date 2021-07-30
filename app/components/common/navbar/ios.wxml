@@ -1,3 +1,5 @@
+<wxs src="./navbar.wxs" module="navbar" />
+
 <template name="iosNav">
   <view class="ios-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
     <view wx:if="{{titleDisplay}}" class="ios-titletext">{{nav.title}}</view>
