@@ -67,13 +67,6 @@ $Page("user", {
               openType: "share",
             },
             {
-              hidden: env === "qq",
-              text: "Bug 反馈",
-              icon: "bug",
-              type: "button",
-              openType: "feedback",
-            },
-            {
               hidden: env === "wx",
               text: "加入 in 东师咨询群",
               icon: "qq-group",

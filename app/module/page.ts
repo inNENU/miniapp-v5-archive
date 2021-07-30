@@ -2,8 +2,8 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../utils/config";
 import {
-  getPath,
   loadOnlinePage,
+  id2path,
   resolvePage,
   setOnlinePage,
 } from "../utils/page";
@@ -13,11 +13,6 @@ import type { PageData, PageOption } from "../../typings";
 $Page("page", {
   data: { page: {} as PageData & { id: string } },
 
-  state: {
-    /** 在线文件路径 */
-    path: "",
-  },
-
   onNavigate(option) {
     resolvePage(option);
   },
@@ -25,20 +20,17 @@ $Page("page", {
   onLoad(option: PageOption & { path?: string }) {
     console.info("onLoad options: ", option);
 
-    // 生成页面 ID
-    option.id = getPath(
-      option.scene ? decodeURIComponent(option.scene) : option.id
-    );
-
     if ("path" in option) {
-      option.path = getPath(option.path);
-      this.state.path = option.path;
-      loadOnlinePage(option as Record<string, never> & { path: string }, this);
-    } else setOnlinePage(option, this);
+      loadOnlinePage(option as PageOption & { path: string }, this);
+    } else {
+      // 生成页面 ID
+      option.id = id2path(option.scene || option.id);
+      setOnlinePage(option, this);
+    }
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
-    wx.reportEvent?.("page_id", { id: option.id || option.path });
+    wx.reportEvent?.("page_id", { id: option.id });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -47,18 +39,14 @@ $Page("page", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
-      path: `/module/page?${
-        this.state.path
-          ? `path=${this.state.path}`
-          : `scene=${this.data.page.id}`
-      }`,
+      path: `/module/page?path=${this.data.page.id}`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
     return {
       title: this.data.page.title,
-      query: `id=${this.data.page.id}`,
+      query: `path=${this.data.page.id}`,
     };
   },
 
@@ -66,7 +54,7 @@ $Page("page", {
     return {
       title: this.data.page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `from=主页&id=${this.data.page.id}`,
+      query: `from=主页&path=${this.data.page.id}`,
     };
   },
 

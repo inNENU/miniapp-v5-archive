@@ -25,6 +25,20 @@ type PageInstanceWithPage = PageInstance<
 /** 全局数据 */
 const { globalData } = getApp<AppOption>();
 
+export const id2path = (id = ""): string =>
+  id
+    .replace(/^G/, "guide/")
+    .replace(/^I/, "intro/")
+    .replace(/^O/, "other/")
+    .replace(/\/$/, "/index");
+
+export const path2id = (path = ""): string =>
+  path
+    .replace(/^guide\//, "G")
+    .replace(/^intro\//, "I")
+    .replace(/^other\//, "O")
+    .replace(/\/index$/, "/");
+
 /**
  * 处理详情内容
  *
@@ -206,9 +220,6 @@ export interface ColorConfig {
   bgColorTop: string;
   bgColorBottom: string;
 }
-
-export const getPath = (path = ""): string =>
-  path.replace(/^#/, "guide/").replace(/^@/, "intro/").replace(/\/$/, "/index");
 
 /**
  * **简介:**
@@ -530,10 +541,13 @@ export const loadOnlinePage = (
   ctx: PageInstanceWithPage
 ): void => {
   if (option.path) {
-    // 需要重新载入界面
+    option.id = id2path(option.path);
+
     logger.info(`${option.path} onLoad starts with options:`, option);
+
+    // 需要在线获取界面
     requestJSON<PageData>(
-      `resource/${option.path}`,
+      `resource/${option.id}`,
       (page) => {
         if (page) {
           setPage({ option, ctx }, page);
@@ -551,7 +565,7 @@ export const loadOnlinePage = (
             statusBarHeight: globalData.info.statusBarHeight,
           }
         );
-        popNotice(option.path || "");
+        popNotice(option.id || "");
 
         // 调试
         logger.warn(`${option.path} onLoad failed with error: ${errMsg}`);

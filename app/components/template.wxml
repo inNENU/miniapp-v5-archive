@@ -79,7 +79,7 @@
         is="components"
         data="{{ content: page.content || [], images: page.images || [] }}"
       />
-      <share config="{{page}}" />
+      <share config="{{template.getShareConfig(page)}}" />
       <footer
         wx:if="{{page.footer !== false}}"
         config="{{template.getFooterConfig(page)}}"

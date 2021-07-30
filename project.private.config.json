@@ -15,7 +15,7 @@
         {
           "name": "分享",
           "pathName": "module/page",
-          "query": "id=guide/card/charge",
+          "query": "path=Gcard/",
           "scene": null
         },
         {

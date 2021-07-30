@@ -22,6 +22,16 @@ module.exports = {
     };
   },
 
+  getShareConfig: function (page) {
+    return {
+      title: page.title,
+      shareable: page.shareable,
+      contact: page.contact,
+      qrcode: page.qrcode,
+      id: page.id,
+    };
+  },
+
   getFooterConfig: function (page) {
     return { author: page.author, time: page.time, desc: page.desc };
   },

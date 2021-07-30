@@ -3,6 +3,7 @@ import { logger } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
 import { server, getTitle } from "../../../utils/config";
+import { path2id } from "../../../utils/page";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
@@ -12,6 +13,11 @@ import type { PageData } from "../../../../typings";
 const {
   globalData: { env, appID },
 } = getApp<AppOption>();
+
+type ShareConfig = Pick<
+  PageData,
+  "id" | "contact" | "qrcode" | "title" | "shareable"
+>;
 
 interface ActionConfig {
   icon: string;
@@ -35,7 +41,7 @@ const store: { iconData: IconData | null } = {
 $Component({
   properties: {
     config: {
-      type: Object as PropType<PageData>,
+      type: Object as PropType<ShareConfig>,
       default: { id: "" },
     },
   },
@@ -46,14 +52,14 @@ $Component({
       const { config } = this.data;
 
       if (typeof config.qrcode === "string")
-        savePhoto(`/img/QRCode/${appID}/${config.qrcode}.png`);
-      else savePhoto(`/img/QRCode/${appID}/${config.id as string}.png`);
+        savePhoto(`/qrcode/${appID}/${config.qrcode}.png`);
+      else savePhoto(`/qrcode/${appID}/${config.id as string}.png`);
     },
 
     copyQQLink() {
       this.copy(
         `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
-          `module/page?id=${this.data.config.id as string}`
+          `module/page?path=${path2id(this.data.config.id as string)}`
         )}`
       );
     },
@@ -102,7 +108,7 @@ $Component({
   },
 
   observers: {
-    config(config: PageData): void {
+    config(config: ShareConfig): void {
       const actions: ActionConfig[] = [];
 
       if (config.shareable) {
@@ -180,13 +186,6 @@ $Component({
             text: "联系 Mr.Hope",
             openType: "contact",
           });
-
-      if (env === "wx" && config.feedback !== false)
-        actions.push({
-          icon: "feedback",
-          text: "意见反馈",
-          openType: "feedback",
-        });
 
       this.setData({ actions });
     },
