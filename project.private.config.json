@@ -45,7 +45,7 @@
         {
           "name": "地图地点",
           "pathName": "function/map/location",
-          "query": "id=benbu/general/index",
+          "query": "area=benbu&path=general/index",
           "scene": null
         },
         {

@@ -118,7 +118,7 @@ $Page("map", {
     mapCtx.includePoints(this.data.area === "benbu" ? benbuArea : jingyueArea);
 
     // 将地图写入 options 实例中
-    this.mapCtx = mapCtx;
+    this.context = mapCtx;
     // 1000ms 之后拿到缩放值和地图中心点坐标，写入地图组件配置
     setTimeout(() => {
       this.setMap();
@@ -146,9 +146,9 @@ $Page("map", {
 
   /** 设置地图 */
   setMap() {
-    this.mapCtx.getScale({
+    this.context.getScale({
       success: (r1) => {
-        this.mapCtx.getCenterLocation({
+        this.context.getCenterLocation({
           success: (r2) => {
             this.setData({
               map: {
@@ -215,7 +215,7 @@ $Page("map", {
     this.setData({ area, markers });
 
     // 重新缩放校区
-    this.mapCtx.includePoints(area === "benbu" ? benbuArea : jingyueArea);
+    this.context.includePoints(area === "benbu" ? benbuArea : jingyueArea);
 
     // 1000ms 之后拿到缩放值和地图中心点坐标，写入地图组件配置
     setTimeout(() => {
@@ -231,7 +231,7 @@ $Page("map", {
    * @param event 触摸事件
    */
   scale(event: WechatMiniprogram.TouchEvent) {
-    this.mapCtx.getCenterLocation({
+    this.context.getCenterLocation({
       success: (res) => {
         this.setData({
           map: {
@@ -248,7 +248,7 @@ $Page("map", {
 
   /** 移动到当前坐标 */
   moveToLocation() {
-    this.mapCtx.moveToLocation();
+    this.context.moveToLocation();
   },
 
   /** 选择分类 */
@@ -258,7 +258,7 @@ $Page("map", {
     const markers = this.state[this.data.area].marker[path];
 
     this.setData({ currentCategory: path, markers, "popup.title": name });
-    this.mapCtx.includePoints({ padding: [30, 20, 30, 20], points: markers });
+    this.context.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
   markers(event: WechatMiniprogram.MarkerTap) {
@@ -269,9 +269,9 @@ $Page("map", {
     ) as MarkerData;
 
     if (event.type === "markertap") {
-      if (path) this.$preload(`location?id=${area}/${path}`);
+      if (path) this.$preload(`location?area=${area}&path=${path}`);
     } else if (event.type === "callouttap") {
-      if (path) this.$go(`location?id=${area}/${path}`);
+      if (path) this.$go(`location?area=${area}&path=${path}`);
       else tip("该地点暂无详情");
     }
   },
@@ -287,7 +287,7 @@ $Page("map", {
       (item) => item.id === currentTarget.dataset.id
     ) as MarkerData;
 
-    if (path) this.$go(`location?id=${area}/${path}`);
+    if (path) this.$go(`location?area=${area}&path=${path}`);
     else tip("该地点暂无详情");
   },
 
@@ -301,9 +301,9 @@ $Page("map", {
       event.type === "end" &&
       this.state.gestureHold
     ) {
-      this.mapCtx.getScale({
+      this.context.getScale({
         success: (res1) => {
-          this.mapCtx.getCenterLocation({
+          this.context.getCenterLocation({
             success: (res2) => {
               this.setData({
                 map: {
@@ -330,5 +330,5 @@ $Page("map", {
     else this.$back();
   },
 
-  mapCtx: {} as WechatMiniprogram.MapContext,
+  context: {} as WechatMiniprogram.MapContext,
 });

@@ -33,14 +33,25 @@
           >{{firstPage? '主页': '返回'}}</text
         >
       </view>
-      <view class="nenu-nav-title">{{page.title}}</view>
+      <view class="nenu-nav-title">{{page.title}} </view>
     </view>
     <my-swiper
       wx:if="{{page.photo}}"
       config="{{ { fill: true, url: page.photo } }}"
     />
     <view wx:else style="height: {{statusBarHeight + 44}}px;" />
-    <view class="title">{{page.title}}</view>
+    <view class="title">
+      {{page.title}}
+      <button
+        wx:if="{{marker}}"
+        type="primary"
+        size="mini"
+        class="navigate"
+        catch:tap="navigate"
+      >
+        导航
+      </button>
+    </view>
     <template is="components" data="{{content: page.content, theme}}" />
     <footer config="{{page}}" />
     <share config="{{page}}" />

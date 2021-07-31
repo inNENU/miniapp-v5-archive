@@ -2,35 +2,40 @@ import { $Page } from "@mptool/enhance";
 import { readJSON } from "@mptool/file";
 
 import { defaultScroller } from "../../mixins/page-scroll";
-import { getImagePrefix } from "../../utils/config";
+import { getTitle, getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/file";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
-import type { PageData } from "../../../typings";
+import type { MarkerConfig, PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
+
+const referer = getTitle();
 
 $Page("location", {
   data: {
     page: {} as PageData,
+    marker: "",
   },
 
-  state: {
-    id: "",
-  },
+  state: { id: "", area: "", path: "" },
 
   onPreload(options) {
     resolvePage(options, readJSON(`function/map/${options.id}`));
   },
 
   onLoad(option) {
-    if (option.id) {
-      if (globalData.page.id === option.id) setPage({ option, ctx: this });
+    const { area, path } = option;
+
+    if (area && path) {
+      const id = `${area}/${path}`;
+
+      if (globalData.page.id === id) setPage({ option, ctx: this });
       else
         getJSON<PageData>({
-          path: `function/map/${option.id}`,
-          url: `resource/function/map/${option.id}`,
+          path: `function/map/${id}`,
+          url: `resource/function/map/${id}`,
           success: (data) => {
             setPage({ option, ctx: this }, data);
           },
@@ -45,7 +50,9 @@ $Page("location", {
           },
         });
 
-      this.state.id = option.id;
+      this.state.area = area;
+      this.state.path = path;
+      this.state.id = id;
     }
 
     this.setData({
@@ -56,22 +63,30 @@ $Page("location", {
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
-  /*
-   * onReady() {
-   *   this.marker = wx.getStorageSync(`${this.xiaoqu}-all`)[this.id];
-   * },
-   */
+  onReady() {
+    getJSON<MarkerConfig>({
+      path: `function/map/marker/${this.state.area}`,
+      url: `resource/function/map/marker/${this.state.area}`,
+      success: ({ marker }) => {
+        const item = marker.all.find((item) => item.path === this.state.path);
 
-  /*
-   * detail() {
-   *   let markers = this.marker;
-   *   wx.openLocation({
-   *     latitude: marker.latitude,
-   *     longitude: markers.longitude,
-   *     name: markers.title,
-   *   });
-   * },
-   */
+        if (item)
+          this.setData({
+            marker: JSON.stringify({
+              latitude: item.latitude,
+              longitude: item.longitude,
+              name: item.name,
+            }),
+          });
+      },
+    });
+  },
+
+  navigate() {
+    wx.navigateTo({
+      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${this.data.marker}&mode=transit&themeColor=#2ecc71`,
+    });
+  },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll(options) {

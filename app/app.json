@@ -30,7 +30,13 @@
         "weather/weather",
         "wechat/wechat",
         "wechat/detail"
-      ]
+      ],
+      "plugins": {
+        "routePlan": {
+          "version": "1.0.13",
+          "provider": "wx50b5593e81dd937a"
+        }
+      }
     }
   ],
   "preloadRule": {

@@ -1,9 +1,17 @@
 .title {
+  position: relative;
+
   max-width: 517px;
   margin: 0 auto;
-  padding: 8px 15px;
+  padding: 8px 75px 8px 15px;
 
   font-weight: 500;
   font-size: 28px;
   text-align: left;
+
+  .navigate {
+    position: absolute;
+    right: 15px;
+    border-radius: 15px;
+  }
 }
