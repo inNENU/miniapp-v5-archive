@@ -5,6 +5,46 @@
 .container {
   position: relative;
 
+  max-width: var(--max-width);
+  margin: 1rem 15px;
+  padding: 1rem 1.2rem;
+  border-left-width: 0.5rem;
+  border-left-style: solid;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: justify;
+  word-wrap: break-word;
+  word-break: break-all;
+
+  @media (min-width: 768px) {
+    margin: 1rem auto;
+    font-size: 17px;
+
+    .grey & {
+      margin: 1rem 15px;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    background: #353535;
+    color: #a8a8a8;
+  }
+
+  &::before {
+    content: " ";
+
+    position: absolute;
+    top: 14px;
+    left: -16px;
+
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
+
   &.info {
     border-color: #007bff;
     background: #f4f4f4;
@@ -70,35 +110,6 @@
       @media (prefers-color-scheme: dark) {
         @include svg.background-svg(icons.$danger-dark-icon);
       }
-    }
-  }
-
-  &.info,
-  &.tip,
-  &.warning,
-  &.danger {
-    margin: 1rem 0;
-    padding: 1rem 1.2rem;
-    border-left-width: 0.5rem;
-    border-left-style: solid;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-
-    @media (prefers-color-scheme: dark) {
-      background: #353535;
-      color: #a8a8a8;
-    }
-
-    &::before {
-      content: " ";
-
-      position: absolute;
-      top: 14px;
-      left: -16px;
-
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
     }
   }
 
