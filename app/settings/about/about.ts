@@ -185,7 +185,7 @@ $Page("about", {
           title: "密码错误",
           icon: "none",
           duration: 1000,
-          image: "/icon/close.png",
+          image: "/icon/error.png",
         });
         this.setData({ debug: false });
       }
