@@ -24,7 +24,9 @@ $Page("page", {
       loadOnlinePage(option as PageOption & { path: string }, this);
     } else {
       // 生成页面 ID
-      option.id = id2path(option.scene || option.id);
+      option.id = id2path(
+        option.scene ? decodeURIComponent(option.scene) : option.id
+      );
       setOnlinePage(option, this);
     }
 
