@@ -115,7 +115,7 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
 // eslint-disable-next-line max-lines-per-function
 export const checkResUpdate = (): void => {
   /** 资源提醒状态 */
-  const notify = wx.getStorageSync<boolean | undefined>("resourceNotify");
+  let notify = wx.getStorageSync<boolean | undefined>("resourceNotify");
   /** 本地资源版本 */
   const localVersion: Record<string, number> = readJSON("version") || {};
   /** 上次更新时间 */
@@ -130,8 +130,14 @@ export const checkResUpdate = (): void => {
     localVersion
   );
 
-  if (notify || currentTime > Number(localTime) + 604800)
-    // 如果需要更新
+  if (currentTime > Number(localTime) + 604800 && !notify) {
+    notify = true;
+    wx.setStorageSync("resourceNotify", true);
+    logger.debug("Resource Notify reset to true after 7 days");
+  }
+
+  // 需要检查更新
+  if (notify)
     wx.request<VersionInfo>({
       url: `${server}service/version.php`,
       enableHttp2: true,
@@ -170,8 +176,8 @@ export const checkResUpdate = (): void => {
                   // 用户取消，询问是否关闭更新提示
                   else if (choice.cancel)
                     wx.showModal({
-                      title: "开启内容更新提示?",
-                      content: "开启后在内容有更新时会提示您更新资源文件。",
+                      title: "关闭内容更新提示?",
+                      content: "关闭后将不再提示内容更新。",
                       cancelText: "关闭",
                       cancelColor: "#ff0000",
                       confirmText: "保持开启",
@@ -180,7 +186,7 @@ export const checkResUpdate = (): void => {
                         if (choice2.cancel)
                           modal(
                             "更新提示已关闭",
-                            "您可以在设置中重新打开提示。\n请注意: 为保障正常运行，小程序会每周对内容资源文件进行强制更新。",
+                            "7天内，您不会再收到内容更新的提醒。您可随时在外观设置中重新打开提示。\n警告: 这会导致您无法获取7天内新增与修正的内容。",
                             // 关闭更新提示
                             () => {
                               wx.setStorageSync("resourceNotify", false);
