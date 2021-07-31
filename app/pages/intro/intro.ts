@@ -15,14 +15,10 @@ $Page("guide", {
   data: {
     theme: globalData.theme,
 
+    statusBarHeight: globalData.info.statusBarHeight,
+
     /** 候选词 */
     words: [] as string[],
-
-    /** 自定义导航栏配置 */
-    nav: {
-      title: "东师介绍",
-      action: false,
-    },
 
     /** 页面数据 */
     page: {

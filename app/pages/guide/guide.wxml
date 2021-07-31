@@ -7,7 +7,24 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}} grey">
-  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
-  <search words="{{words}}" catch:searching="searching" catch:search="search" />
+  <view
+    class="custom-navigation-bar"
+    style="padding-top:{{statusBarHeight}}px;"
+  >
+    <view class="search-wrapper">
+      <search
+        custom-class="search"
+        words="{{words}}"
+        catch:searching="searching"
+        catch:search="search"
+      />
+    </view>
+  </view>
+  <view
+    class="custom-nav-placeholder"
+    style="height:{{statusBarHeight + 44}}px;"
+  >
+    到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
+  </view>
   <template is="components" data="{{content: page.content, theme}}" />
 </view>

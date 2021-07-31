@@ -1,4 +1,4 @@
-<view class="search-bar">
+<view class="search-bar custom-class">
   <view
     class="search-wrapper-{{showInput? 'input': 'placeholder'}} {{words.length > 0 && focus? 'has-words': ''}}"
     catch:tap="showInput"

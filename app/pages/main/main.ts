@@ -16,14 +16,11 @@ $Page("main", {
   data: {
     theme: globalData.theme,
 
+    statusBarHeight: globalData.info.statusBarHeight,
+
     /** 候选词 */
     words: [] as string[],
 
-    /** 自定义导航栏配置 */
-    nav: {
-      title: "首页",
-      action: false,
-    },
     page: {
       title: "首页",
       id: "main",

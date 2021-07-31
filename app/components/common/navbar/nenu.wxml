@@ -3,7 +3,7 @@
 <template name="nenuNav">
   <block wx:if="{{nav.action === undefined}}">
     <view
-      class="back-button {{borderDisplay? 'fade-in': 'fade-out'}}"
+      class="left-button {{borderDisplay? 'fade-in': 'fade-out'}}"
       style="top:{{statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
@@ -16,7 +16,7 @@
     >
       <view
         class="ios-nav-back-button"
-        hover-class="back-button-hover"
+        hover-class="left-button-hover"
         style="position: absolute; left: 0"
         catch:tap="back"
       >
@@ -36,7 +36,7 @@
       <view
         wx:if="{{nav.action !== false}}"
         class="ios-nav-back-button"
-        hover-class="back-button-hover"
+        hover-class="left-button-hover"
         style="position: absolute; left: 0"
         data-action="{{nav.action}}"
         catch:tap="{{navbar.action}}"

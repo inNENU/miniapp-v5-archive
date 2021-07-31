@@ -5,7 +5,7 @@
     style="padding-top: {{info.statusBarHeight}}px;"
   >
     <view
-      class="back-button"
+      class="left-button"
       style="top: {{info.statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"

@@ -58,4 +58,6 @@ Component({
       this.setData({ value, showInput: true });
     },
   },
+
+  externalClasses: ["custom-class"],
 });

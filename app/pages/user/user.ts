@@ -13,13 +13,8 @@ $Page("user", {
   data: {
     theme: globalData.theme,
 
-    /** 自定义导航栏配置 */
-    nav: {
-      title: "我的东师",
-      action: false,
-      grey: true,
-      statusBarHeight: globalData.info.statusBarHeight,
-    },
+    statusBarHeight: globalData.info.statusBarHeight,
+
     page: {
       title: "我的东师",
       grey: true,

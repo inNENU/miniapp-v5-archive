@@ -8,7 +8,7 @@
 />
 <view class="{{theme}} grey">
   <view
-    class="back-button"
+    class="left-button"
     style="top:{{statusBarHeight + 6}}px;"
     hover-class="button-hover"
     catch:tap="back"

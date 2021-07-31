@@ -10,7 +10,7 @@
   <template wx:if="{{page.error}}" is="{{theme}}error" data="{{...page}}" />
   <block wx:else>
     <view
-      class="back-button {{titleDisplay? 'fade-out': 'fade-in'}}"
+      class="left-button {{titleDisplay? 'fade-out': 'fade-in'}}"
       style="top:{{statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
@@ -23,7 +23,7 @@
     >
       <view
         class="ios-nav-back-button"
-        hover-class="back-button-hover"
+        hover-class="left-button-hover"
         style="position: absolute; left: 0"
         plain
         catch:tap="back"
