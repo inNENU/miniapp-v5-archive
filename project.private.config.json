@@ -13,6 +13,12 @@
     "miniprogram": {
       "list": [
         {
+          "name": "功能大厅",
+          "pathName": "pages/function/function",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "分享",
           "pathName": "module/page",
           "query": "path=Gcard/",

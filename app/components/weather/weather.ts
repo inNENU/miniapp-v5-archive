@@ -2,6 +2,9 @@ import { $Component } from "@mptool/enhance";
 import { server } from "../../utils/config";
 
 import type { WeatherData } from "./typings";
+import type { AppOption } from "../../app";
+
+const { globalData } = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -12,6 +15,7 @@ $Component({
     tipIndex: 0,
     /** 天气信息 */
     weather: {} as WeatherData,
+    statusBarHeight: globalData.info.statusBarHeight,
   },
   lifetimes: {
     attached() {
@@ -51,4 +55,6 @@ $Component({
       if (target) this.$go(target);
     },
   },
+
+  externalClasses: ["custom-class"],
 });

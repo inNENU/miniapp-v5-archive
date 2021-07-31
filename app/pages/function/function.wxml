@@ -6,8 +6,9 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}} grey">
-  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{nav}}" />
-  <weather target="weather" />
-  <template is="components" data="{{content: page.content , theme}}" />
+<view class="{{theme}} function-wrapper grey">
+  <weather custom-class="weather" target="weather" />
+  <scroll-view scroll-y class="functions">
+    <template is="components" data="{{content: page.content, theme}}" />
+  </scroll-view>
 </view>

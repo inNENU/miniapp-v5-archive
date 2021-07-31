@@ -15,9 +15,15 @@
 }
 
 .icon-font {
+  position: relative;
+  bottom: -0.125em;
+
   display: inline-block;
-  width: 1rem;
-  height: 1rem;
+
+  width: 1em;
+  height: 1em;
+
+  font-size: inherit;
 }
 
 .icon-button {

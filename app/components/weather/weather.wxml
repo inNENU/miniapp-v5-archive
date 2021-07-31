@@ -1,14 +1,15 @@
 <wxs src="./weather.wxs" module="tool" />
 <!-- 天气 -->
 <view
-  class="weather-wrapper animation-fade {{tool.getBgClass(weather)}}"
+  class="weather-wrapper animation-fade {{tool.getBgClass(weather)}} custom-class"
+  style="padding-top:{{statusBarHeight}}px"
   catch:tap="navigate"
 >
-  <view class="weather-pic {{tool.getClass(weather)}}" />
+  <view class="weather-logo {{tool.getClass(weather)}}" />
   <block wx:if="{{weather.observe}}">
     <view class="detail"
-      ><text class="icon-font icon-location" /> 长春市 | {{
-      weather.observe.weather}}</view
+      ><text class="icon-font icon-location" /> 长春市 |
+      {{weather.observe.weather}}</view
     >
     <view class="temperature">
       <text style="font-size: 36px">{{weather.observe.degree}}</text>
@@ -19,8 +20,8 @@
       </view>
     </view>
     <view class="text" catch:tap="refresh"
-      ><text class="icon-font icon-refresh" />{{weather.tips[tipIndex]}}</view
-    >
+      >{{weather.tips[tipIndex]}}<text class="icon-font icon-refresh"
+    /></view>
   </block>
   <image wx:else src="/icon/loading.svg" class="loading" />
 </view>
