@@ -28,11 +28,6 @@
     }
   }
 
-  @media (prefers-color-scheme: dark) {
-    background: #353535;
-    color: #a8a8a8;
-  }
-
   &::before {
     content: " ";
 
@@ -110,6 +105,16 @@
       @media (prefers-color-scheme: dark) {
         @include svg.background-svg(icons.$danger-dark-icon);
       }
+    }
+  }
+
+  &.info,
+  &.tip,
+  &.warning,
+  &.danger {
+    @media (prefers-color-scheme: dark) {
+      background: #353535;
+      color: #a8a8a8;
     }
   }
 

@@ -52,12 +52,11 @@
     font-size: 17px;
     line-height: 1.6;
     text-align: left;
-
-    .head {
-      padding: 0 0.5em 0 0;
-    }
   }
+}
 
+.container,
+.paragraph {
   .text {
     word-wrap: break-word;
   }
@@ -70,5 +69,11 @@
     flex-shrink: 0;
     padding: 0 0.5em;
     font-weight: bolder;
+  }
+
+  .grey & {
+    .head {
+      padding: 0 0.5em 0 0;
+    }
   }
 }
