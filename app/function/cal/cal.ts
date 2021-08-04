@@ -171,7 +171,7 @@ $Page("cal", {
       wx.showModal({
         // 弹窗让用户选择
         title: "请选择计算方式",
-        content: "平均绩点是否包含未达到60的成绩？\n★为建议项",
+        content: "平均绩点是否包含未达到60的成绩?\n★为建议项",
         cancelText: "包含",
         cancelColor: "#ff0000",
         confirmText: "排除★",
