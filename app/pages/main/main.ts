@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix, getTitle } from "../../utils/config";
-import { popNotice, resolvePage, setPage } from "../../utils/page";
+import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 import { requestJSON } from "../../utils/wx";
@@ -63,7 +63,6 @@ $Page("main", {
   onReady() {
     // 注册事件监听器
     this.$emitter.on("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
     // 执行 tab 页预加载
     ["function", "guide", "intro"].forEach((x) => {
@@ -109,15 +108,10 @@ $Page("main", {
 
   onUnload() {
     this.$emitter.off("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
   setTheme(theme: string): void {
-    this.setData({ theme });
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
+    this.setData({ color: getColor(this.data.page.grey), theme });
   },
 
   /**

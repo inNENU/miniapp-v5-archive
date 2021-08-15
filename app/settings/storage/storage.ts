@@ -78,8 +78,6 @@ $Page("storage", {
   onLoad() {
     setPage({ option: { id: "storage" }, ctx: this }, this.data.page);
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("storage");
   },
 
@@ -89,14 +87,6 @@ $Page("storage", {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 设置存储信息 */
   setStorageStat() {

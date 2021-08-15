@@ -56,8 +56,6 @@ $Page("location", {
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
     });
-
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   onReady() {
@@ -110,14 +108,6 @@ $Page("location", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `id=${this.state.id}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 
   defaultScroller,

@@ -46,8 +46,6 @@ $Page("wechat", {
       });
     });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("wechat");
   },
 
@@ -64,11 +62,4 @@ $Page("wechat", {
     title: "校园公众号",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 });

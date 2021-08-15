@@ -52,8 +52,6 @@ $Page("calendar", {
         );
       });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("calendar");
   },
 
@@ -71,14 +69,6 @@ $Page("calendar", {
     title: "东师校历",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 显示校历详情 */
   display(event: WechatMiniprogram.TouchEvent<{ path: string }>) {

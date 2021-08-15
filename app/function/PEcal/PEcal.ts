@@ -156,8 +156,6 @@ $Page("PEcal", {
     if (typeof gradeIndex === "number")
       this.state.grade = this.data.grade.values[gradeIndex];
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     // 设置通知
     popNotice("PEcal");
   },
@@ -176,14 +174,6 @@ $Page("PEcal", {
     title: "体测计算器",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 性别切换 */
   genderChange({ detail }: WechatMiniprogram.PickerChange) {

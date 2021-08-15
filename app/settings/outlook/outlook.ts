@@ -59,21 +59,11 @@ $Page("setting", {
     if (globalData.page.id === "外观设置") setPage({ option, ctx: this });
     else setPage({ option, ctx: this }, this.data.page);
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("theme");
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   updateTheme(value: string) {
     // get the updated theme

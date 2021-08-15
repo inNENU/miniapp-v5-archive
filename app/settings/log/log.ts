@@ -29,8 +29,6 @@ $Page("log", {
     if (globalData.page.id === "更新日志") setPage({ option, ctx: this });
     else setPage({ option: { id: "log" }, ctx: this });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("log");
   },
 
@@ -72,12 +70,4 @@ $Page("log", {
     title: "更新日志",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 });

@@ -47,8 +47,6 @@ $Page("wechat-detail", {
 
     this.state.path = path;
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice(`wechat/${this.data.config.name}`);
   },
 
@@ -72,14 +70,6 @@ $Page("wechat-detail", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `path=${this.state.path}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 
   navigate({

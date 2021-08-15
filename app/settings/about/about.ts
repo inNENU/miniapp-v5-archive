@@ -86,8 +86,6 @@ $Page("about", {
       setPage({ option: { id: "about" }, ctx: this }, page);
     }
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("about");
   },
 
@@ -131,14 +129,6 @@ $Page("about", {
     title: "关于",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 点击版本号时触发的函数 */
   debugMode() {

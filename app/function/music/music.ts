@@ -123,8 +123,6 @@ $Page("music", {
     // 注册播放器动作
     this.managerRegister();
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("music");
   },
 
@@ -148,10 +146,6 @@ $Page("music", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `name=${this.data.currentSong.title}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {

@@ -14,12 +14,6 @@ $Page("function", {
   data: {
     theme: globalData.theme,
 
-    /** 自定义导航栏配置 */
-    nav: {
-      title: "功能大厅",
-      action: false,
-    },
-
     /** 页面数据 */
     page: {
       title: "功能大厅",
@@ -55,7 +49,6 @@ $Page("function", {
   onReady() {
     // 注册事件监听器
     this.$emitter.on("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   onPullDownRefresh() {
@@ -83,14 +76,9 @@ $Page("function", {
 
   onUnload() {
     this.$emitter.off("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
   setTheme(theme: string): void {
     this.setData({ color: getColor(this.data.page.grey), theme });
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 });

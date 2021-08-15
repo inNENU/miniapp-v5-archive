@@ -46,7 +46,6 @@ $Page("search", {
       darkmode: globalData.darkmode,
     });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
     popNotice("search");
   },
 
@@ -71,14 +70,6 @@ $Page("search", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `name=${this.state.name}&word=${this.state.value}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 
   /**

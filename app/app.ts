@@ -1,4 +1,4 @@
-import { $App, $Config } from "@mptool/enhance";
+import { $App, $Config, wrapFunction } from "@mptool/enhance";
 
 import {
   appInit,
@@ -10,6 +10,7 @@ import {
   startup,
 } from "./utils/app";
 
+import type { TrivialPageInstance } from "@mptool/enhance";
 import type { GlobalData } from "./utils/app";
 
 export interface AppOption {
@@ -31,6 +32,34 @@ $Config({
       "/settings/$name/$name",
     ],
   ],
+
+  injectPage: (_name, options) => {
+    options.onThemeChange =
+      (options.onThemeChange as (
+        this: TrivialPageInstance,
+        { theme }: WechatMiniprogram.OnThemeChangeCallbackResult
+      ) => void | undefined) ||
+      function (
+        this: TrivialPageInstance,
+        { theme }: WechatMiniprogram.OnThemeChangeCallbackResult
+      ): void {
+        this.setData({ darkmode: theme === "dark" });
+      };
+
+    options.onLoad = wrapFunction(
+      options.onLoad,
+      function (this: TrivialPageInstance) {
+        if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
+      }
+    );
+
+    options.onUnload = wrapFunction(
+      options.onUnload,
+      function (this: TrivialPageInstance) {
+        if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
+      }
+    );
+  },
 });
 
 $App<AppOption>({

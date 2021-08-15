@@ -30,8 +30,6 @@ $Page("page", {
       setOnlinePage(option, this);
     }
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     wx.reportEvent?.("page_id", { id: option.id });
   },
 
@@ -58,14 +56,5 @@ $Page("page", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `path=${this.data.page.id}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  /** 设置主题 */
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 });

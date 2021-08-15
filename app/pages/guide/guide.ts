@@ -55,7 +55,6 @@ $Page("guide", {
   onReady() {
     // 注册事件监听器
     this.$emitter.on("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
   },
 
   onPullDownRefresh() {
@@ -80,15 +79,10 @@ $Page("guide", {
 
   onUnload() {
     this.$emitter.off("theme", this.setTheme);
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
   },
 
   setTheme(theme: string): void {
     this.setData({ color: getColor(this.data.page.grey), theme });
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 
   /**

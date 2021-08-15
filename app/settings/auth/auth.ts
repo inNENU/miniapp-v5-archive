@@ -87,8 +87,6 @@ $Page("authorize", {
     if (globalData.page.id === "授权设置") setPage({ option, ctx: this });
     else setPage({ option: { id: "authorize" }, ctx: this });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("authorize");
   },
 
@@ -111,14 +109,6 @@ $Page("authorize", {
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 定位授权 */
   location() {

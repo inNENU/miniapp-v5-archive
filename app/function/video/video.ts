@@ -83,8 +83,6 @@ $Page("video", {
       });
     });
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("video");
   },
 
@@ -117,14 +115,6 @@ $Page("video", {
       imageUrl: `${getImagePrefix()}.jpg`,
       query: `type=${this.data.type}&name=${this.data.videoName}`,
     };
-  },
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
   },
 
   /** 切换播放视频 */

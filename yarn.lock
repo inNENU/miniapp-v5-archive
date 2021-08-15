@@ -308,15 +308,15 @@
   resolved "https://registry.yarnpkg.com/@hutson/parse-repository-url/-/parse-repository-url-3.0.2.tgz#98c23c950a3d9b6c8f0daed06da6c3af06981340"
   integrity sha512-H9XAx3hc0BQHY6l+IFSWHDySypcXsvsuLhgYLUGywmJ5pswRVQJUHpOsobnLYp2ZUaUlKiKDrgWWhosOwAEM8Q==
 
-"@mptool/enhance@0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@mptool/enhance/-/enhance-0.0.1-alpha.15.tgz#55f8f57147ac45a4838dc7e0c6aa37ec4bee8628"
-  integrity sha512-SMli9ML1nfXSyczK0IakgP0g+mxmHiZNV8p/b6T69chHEg4iSSEPk7oSb8+0EEv03vmZ/1Ygp49pHc50s4D8Ww==
+"@mptool/enhance@0.0.1-alpha.17":
+  version "0.0.1-alpha.17"
+  resolved "https://registry.yarnpkg.com/@mptool/enhance/-/enhance-0.0.1-alpha.17.tgz#c45ba31ad2292dfea50df154eb2652847df3cc08"
+  integrity sha512-o4m6IgSTNW+QVbrg5RHAIP+Lh/6C2LqtbYeLJE0eFvAS3W8R26XYym/IybddVlRhmfyIetCY/WVZFEsvZ+CtkQ==
 
-"@mptool/file@0.0.1-alpha.15":
-  version "0.0.1-alpha.15"
-  resolved "https://registry.yarnpkg.com/@mptool/file/-/file-0.0.1-alpha.15.tgz#da1970ac938282c83f61462d2daa58871643bc4f"
-  integrity sha512-iS6GisJN/G5c3zPvVy/fprlMPM3iRCxHPPrsC2x3I95dk3qi0xTU1Y9dTpEN0z1IfdFhnA9v044w/sUNml45Pw==
+"@mptool/file@0.0.1-alpha.17":
+  version "0.0.1-alpha.17"
+  resolved "https://registry.yarnpkg.com/@mptool/file/-/file-0.0.1-alpha.17.tgz#b1dabc31be59a520eea95d77b7900d4ea570d9ca"
+  integrity sha512-hyDoVvxFdwTvc9y6ammkMXBCDiDhO+LrCs84dTk1ulZ2ma4tI2jltRXAw7QxF4ZouO6e3V+5riQgnouiHS9nRQ==
 
 "@mr-hope/assert-type@1.2.0":
   version "1.2.0"

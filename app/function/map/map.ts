@@ -99,8 +99,6 @@ $Page("map", {
 
     this.setMarker();
 
-    if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
-
     popNotice("map");
   },
 
@@ -129,14 +127,6 @@ $Page("map", {
     title: "东师地图",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
-
-  onUnload() {
-    if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
-  },
-
-  onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {
-    this.setData({ darkmode: theme === "dark" });
-  },
 
   /** 设置地图 */
   setMap() {
