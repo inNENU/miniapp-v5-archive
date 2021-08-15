@@ -141,6 +141,7 @@ export const checkResUpdate = (): void => {
     wx.request<VersionInfo>({
       url: `${server}service/version.php`,
       enableHttp2: true,
+      method: "POST",
       success: (res) => {
         // 资源为最新
         if (res.statusCode === 200) {

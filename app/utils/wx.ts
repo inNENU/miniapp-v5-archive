@@ -224,7 +224,7 @@ export const savePhoto = (imgPath: string): void => {
               fail: () => {
                 modal(
                   "权限被拒",
-                  "如果想要保存图片，请在“我的东师” - “权限设置” 允许保存图片权限",
+                  "如果想要保存图片，请在“权限设置”允许保存图片权限",
                   () => {
                     tip("二维码保存失败");
                     wx.openSetting({});
