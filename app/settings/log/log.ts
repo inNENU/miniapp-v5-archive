@@ -36,9 +36,10 @@ $Page("log", {
 
   onReady() {
     // 在线获取日志页面文件
-    requestJSON(
-      `resource/config/${globalData.appID}/${globalData.version}/log`,
-      (data: ComponentConfig[]) => {
+    requestJSON<ComponentConfig[]>(
+      `resource/config/${globalData.appID}/${globalData.version}/log`
+    )
+      .then((data: ComponentConfig[]) => {
         setPage(
           { option: { id: "更新日志" }, ctx: this },
           {
@@ -46,8 +47,8 @@ $Page("log", {
             content: data,
           }
         );
-      },
-      () => {
+      })
+      .catch(() => {
         setPage(
           { option: { id: "更新日志" }, ctx: this },
           {
@@ -57,8 +58,7 @@ $Page("log", {
             ],
           }
         );
-      }
-    );
+      });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

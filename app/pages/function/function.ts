@@ -46,7 +46,9 @@ $Page("function", {
   },
 
   onShow() {
-    refreshPage("function", this, globalData);
+    refreshPage("function").then((data) => {
+      setPage({ ctx: this, option: { id: "function" } }, data);
+    });
     popNotice("function");
   },
 
@@ -57,7 +59,9 @@ $Page("function", {
   },
 
   onPullDownRefresh() {
-    refreshPage("function", this, globalData);
+    refreshPage("function").then((data) => {
+      setPage({ ctx: this, option: { id: "function" } }, data);
+    });
     checkResUpdate();
     wx.stopPullDownRefresh();
   },

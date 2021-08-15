@@ -2,13 +2,13 @@ import { $Page } from "@mptool/enhance";
 
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix, getTitle } from "../../utils/config";
-import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
+import { popNotice, resolvePage, setPage } from "../../utils/page";
 import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 import { requestJSON } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
-import type { PageData, PageDataWithContent } from "../../../typings";
+import type { PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -26,7 +26,8 @@ $Page("main", {
       id: "main",
       grey: true,
       hidden: true,
-    } as PageData,
+      content: [{ tag: "loading" }],
+    } as PageDataWithContent,
   },
 
   onPageLaunch() {
@@ -42,10 +43,17 @@ $Page("main", {
 
   onLoad() {
     setPage({ option: { id: "main" }, ctx: this });
-    // 设置胶囊和背景颜色
-    this.setData({ color: getColor(this.data.page.grey) });
 
-    refreshPage("main", this, globalData);
+    refreshPage("main")
+      .then((data) => {
+        setPage({ ctx: this, option: { id: "main" } }, data);
+      })
+      .catch(() => {
+        setPage(
+          { ctx: this, option: { id: "main" } },
+          wx.getStorageSync("main") || this.data.page
+        );
+      });
   },
 
   onShow() {
@@ -60,17 +68,23 @@ $Page("main", {
     // 执行 tab 页预加载
     ["function", "guide", "intro"].forEach((x) => {
       requestJSON(
-        `resource/config/${globalData.appID}/${globalData.version}/${x}`,
-        (data: PageDataWithContent) => {
+        `resource/config/${globalData.appID}/${globalData.version}/${x}`
+      )
+        .then((data) => {
           wx.setStorageSync(x, data);
           this.$preload(`${x}?id=${x}`);
-        }
-      );
+        })
+        .catch(() => {
+          this.$preload(`${x}?id=${x}`);
+        });
     });
   },
 
   onPullDownRefresh() {
-    refreshPage("main", this, globalData);
+    refreshPage("main").then((data) => {
+      setPage({ ctx: this, option: { id: "main" } }, data);
+    });
+
     checkResUpdate();
     wx.stopPullDownRefresh();
   },
@@ -99,7 +113,7 @@ $Page("main", {
   },
 
   setTheme(theme: string): void {
-    this.setData({ color: getColor(this.data.page.grey), theme });
+    this.setData({ theme });
   },
 
   onThemeChange({ theme }: WechatMiniprogram.OnThemeChangeCallbackResult) {

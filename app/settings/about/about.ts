@@ -93,9 +93,10 @@ $Page("about", {
 
   onReady() {
     // 读取在线文件更新页面显示
-    requestJSON(
-      `resource/config/${globalData.appID}/${globalData.version}/about`,
-      (data: ComponentConfig[]) => {
+    requestJSON<ComponentConfig[]>(
+      `resource/config/${globalData.appID}/${globalData.version}/about`
+    )
+      .then((data: ComponentConfig[]) => {
         setPage(
           { option: { id: "关于" }, ctx: this },
           {
@@ -103,8 +104,8 @@ $Page("about", {
             content: this.data.page.content.slice(0, 1).concat(data),
           }
         );
-      },
-      () => {
+      })
+      .catch(() => {
         setPage(
           { option: { id: "关于" }, ctx: this },
           {
@@ -112,8 +113,7 @@ $Page("about", {
             content: this.data.page.content.slice(0, 1),
           }
         );
-      }
-    );
+      });
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function

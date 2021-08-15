@@ -47,7 +47,9 @@ $Page("guide", {
   },
 
   onShow() {
-    refreshPage("intro", this, globalData);
+    refreshPage("intro").then((data) => {
+      setPage({ ctx: this, option: { id: "intro" } }, data);
+    });
     popNotice("intro");
   },
 
@@ -58,7 +60,9 @@ $Page("guide", {
   },
 
   onPullDownRefresh() {
-    refreshPage("intro", this, globalData);
+    refreshPage("intro").then((data) => {
+      setPage({ ctx: this, option: { id: "intro" } }, data);
+    });
     checkResUpdate();
     wx.stopPullDownRefresh();
   },

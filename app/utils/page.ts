@@ -466,9 +466,8 @@ export const setOnlinePage = (
       }
       // 请求页面Json
       else
-        requestJSON<PageData>(
-          `resource/${option.id}`,
-          (data) => {
+        requestJSON<PageData>(`resource/${option.id}`)
+          .then((data) => {
             // 非分享界面下将页面数据写入存储
             if (option.from !== "share")
               writeJSON(`${option.id as string}`, data);
@@ -487,8 +486,8 @@ export const setOnlinePage = (
 
             // 调试
             logger.info(`${option.id as string} onLoad Succeed`);
-          },
-          (res) => {
+          })
+          .catch((res) => {
             // 设置 error 页面并弹出通知
             setPage(
               { option, ctx },
@@ -504,21 +503,7 @@ export const setOnlinePage = (
               `${option.id as string} onLoad failed with error:`,
               res
             );
-          },
-          () => {
-            // 设置 error 界面
-            setPage(
-              { option, ctx },
-              {
-                error: true,
-                statusBarHeight: globalData.info.statusBarHeight,
-              }
-            );
-
-            // 调试
-            logger.warn(`${option.id as string} resource error`);
-          }
-        );
+          });
     }
   } else logger.error("no id");
 };
@@ -546,17 +531,16 @@ export const loadOnlinePage = (
     logger.info(`${option.path} onLoad starts with options:`, option);
 
     // 需要在线获取界面
-    requestJSON<PageData>(
-      `resource/${option.id}`,
-      (page) => {
+    requestJSON<PageData>(`resource/${option.id}`)
+      .then((page) => {
         if (page) {
           setPage({ option, ctx }, page);
           popNotice(option.path);
           logger.info(`${option.path} onLoad succeed:`, ctx.data);
           wx.reportMonitor("0", 1);
         }
-      },
-      (errMsg) => {
+      })
+      .catch((errMsg) => {
         // 设置 error 页面并弹出通知
         setPage(
           { option, ctx },
@@ -568,8 +552,7 @@ export const loadOnlinePage = (
         popNotice(option.id || "");
 
         // 调试
-        logger.warn(`${option.path} onLoad failed with error: ${errMsg}`);
-      }
-    );
+        logger.warn(`${option.path} onLoad failed with error: `, errMsg);
+      });
   } else logger.error("no path");
 };

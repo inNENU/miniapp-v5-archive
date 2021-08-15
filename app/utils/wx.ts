@@ -110,40 +110,38 @@ export const netReport = (): void => {
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const requestJSON = <T = Record<string, any>>(
-  path: string,
-  successFunc: (data: T) => void,
-  failFunc: (errMsg: string | number) => void = (): void => void 0,
-  errorFunc: (statusCode: number) => void = failFunc
-): void => {
-  wx.request<T>({
-    url: `${server}${path}.json`,
-    enableHttp2: true,
-    success: (res) => {
-      // 调试
-      logger.debug(`Request ${path}.json success: `, res);
-
-      if (res.statusCode === 200) successFunc(res.data);
-      else {
-        tip("服务器出现问题，请稍后重试");
+  path: string
+): Promise<T> =>
+  new Promise((resolve, reject) => {
+    wx.request<T>({
+      url: `${server}${path}.json`,
+      enableHttp2: true,
+      success: (res) => {
         // 调试
-        logger.warn(
-          `Request ${path}.json failed with statusCode: ${res.statusCode}`
-        );
-        wx.reportMonitor("3", 1);
+        logger.debug(`Request ${path}.json success: `, res);
 
-        if (errorFunc) errorFunc(res.statusCode);
-      }
-    },
-    fail: ({ errMsg }) => {
-      if (failFunc) failFunc(errMsg);
-      netReport();
+        if (res.statusCode === 200) resolve(res.data);
+        else {
+          tip("服务器出现问题，请稍后重试");
+          // 调试
+          logger.warn(
+            `Request ${path}.json failed with statusCode: ${res.statusCode}`
+          );
+          wx.reportMonitor("3", 1);
 
-      // 调试
-      logger.warn(`Request ${path}.json failed: ${errMsg}`);
-      wx.reportMonitor("4", 1);
-    },
+          reject(res.statusCode);
+        }
+      },
+      fail: ({ errMsg }) => {
+        reject(errMsg);
+        netReport();
+
+        // 调试
+        logger.warn(`Request ${path}.json failed: ${errMsg}`);
+        wx.reportMonitor("4", 1);
+      },
+    });
   });
-};
 
 /**
  * 下载文件

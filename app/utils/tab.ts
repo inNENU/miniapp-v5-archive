@@ -1,9 +1,9 @@
 import { requestJSON } from "./wx";
-import { setPage } from "./page";
 
-import type { PageInstance } from "@mptool/enhance";
-import type { GlobalData } from "../utils/app";
+import type { AppOption } from "../app";
 import type { PageData } from "../../typings";
+
+const { globalData } = getApp<AppOption>();
 
 /**
  * 刷新 tab 页
@@ -12,33 +12,17 @@ import type { PageData } from "../../typings";
  * @param ctx 页面指针
  * @param globalData 全局数据
  */
-export const refreshPage = (
-  name: string,
-  ctx: PageInstance<
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    Record<string, any>
-  >,
-  globalData: GlobalData
-): void => {
+export const refreshPage = (name: string): Promise<PageData> => {
   const test = wx.getStorageSync<boolean | undefined>("test");
 
-  // 开启测试后展示测试界面
-  if (test)
-    requestJSON<PageData>(
-      `resource/config/${globalData.appID}/test/${name}`,
-      (data) => {
-        setPage({ ctx, option: { id: name } }, data);
-      }
-    );
-  // 普通界面加载
-  else
-    requestJSON<PageData>(
-      `resource/config/${globalData.appID}/${globalData.version}/${name}`,
-      (data) => {
-        wx.setStorageSync(name, data);
-        setPage({ ctx, option: { id: name } }, data);
-      }
-    );
+  return requestJSON<PageData>(
+    `resource/config/${globalData.appID}/${
+      test ? "test" : globalData.version
+    }/${name}`
+  ).then((data) => {
+    // 测试页面不存储
+    if (!test) wx.setStorageSync(name, data);
+
+    return data;
+  });
 };

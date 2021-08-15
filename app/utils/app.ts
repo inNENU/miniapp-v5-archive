@@ -288,8 +288,9 @@ export interface Notice {
  */
 export const noticeCheck = (globalData: GlobalData): void => {
   requestJSON<Record<string, Notice>>(
-    `resource/config/${globalData.appID}/${globalData.version}/notice`,
-    (noticeList) => {
+    `resource/config/${globalData.appID}/${globalData.version}/notice`
+  )
+    .then((noticeList) => {
       for (const pageName in noticeList) {
         const notice = noticeList[pageName];
         const oldNotice = wx.getStorageSync<Notice | undefined>(
@@ -307,23 +308,18 @@ export const noticeCheck = (globalData: GlobalData): void => {
           wx.removeStorageSync(`${pageName}-notifyed`);
         }
 
-        // 如果找到APP级通知，进行判断
+        // 如果找到 APP 级通知，进行判断
         if (pageName === "app")
           if (!wx.getStorageSync("app-notifyed") || notice.force)
             modal(notice.title, notice.content, () =>
               wx.setStorageSync("app-notifyed", true)
             );
       }
-    },
-    () => {
+    })
+    .catch(() => {
       // 调试信息
-      logger.warn("noticeList error", "Net Error");
-    },
-    () => {
-      // 调试信息
-      logger.error("noticeList error", "Address Error");
-    }
-  );
+      logger.warn(`noticeList error`);
+    });
 };
 
 /**
@@ -361,13 +357,13 @@ export const appUpdate = (globalData: GlobalData): void => {
 
     updateManager.onUpdateReady(() => {
       // 请求配置文件
-      requestJSON<string>(
-        `resource/config/${globalData.appID}/version`,
-        (version) => {
+      requestJSON<string>(`resource/config/${globalData.appID}/version`)
+        .then((version) =>
           // 请求配置文件
           requestJSON<UpdateInfo>(
-            `resource/config/${globalData.appID}/${version}/config`,
-            ({ forceUpdate, reset }) => {
+            `resource/config/${globalData.appID}/${version}/config`
+          )
+            .then(({ forceUpdate, reset }) => {
               // 更新下载就绪，提示用户重新启动
               wx.showModal({
                 title: "已找到新版本",
@@ -398,10 +394,16 @@ export const appUpdate = (globalData: GlobalData): void => {
                   }
                 },
               });
-            }
-          );
-        }
-      );
+            })
+            .catch(() => {
+              // 调试信息
+              logger.warn(`config file error`);
+            })
+        )
+        .catch(() => {
+          // 调试信息
+          logger.warn(`version file error`);
+        });
     });
 
     // 更新下载失败
