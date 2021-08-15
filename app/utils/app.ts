@@ -76,7 +76,7 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
           if (progress) wx.showLoading({ title: "解压中...", mask: true });
 
           // 解压文件到根目录
-          unzip("zipTemp", "", () => {
+          unzip("zipTemp", "").then(() => {
             // 删除压缩包
             rm("zipTemp", "file");
 

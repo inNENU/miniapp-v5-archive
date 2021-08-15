@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
 import { modal } from "../../utils/wx";
 
@@ -28,25 +28,21 @@ $Page("wechat-detail", {
   },
 
   onNavigate(options) {
-    ensureJSON({ path: `function/wechat/${options.path || "index"}` });
+    ensureJSON(`function/wechat/${options.path || "index"}`);
   },
 
   onLoad({ path = "" }) {
-    getJSON({
-      path: `function/wechat/${path}`,
-      url: `resource/function/wechat/${path}`,
-      success: (wechat) => {
-        this.setData({
-          darkmode: globalData.darkmode,
-          firstPage: getCurrentPages().length === 1,
-          color: getColor(true),
-          config: wechat as WechatDetail,
-          follow:
-            (wechat as WechatDetail).authorized !== false &&
-            "follow" in (wechat as WechatDetail) &&
-            globalData.env === "wechat",
-        });
-      },
+    getJSON<WechatDetail>(`function/wechat/${path}`).then((wechat) => {
+      this.setData({
+        darkmode: globalData.darkmode,
+        firstPage: getCurrentPages().length === 1,
+        color: getColor(true),
+        config: wechat,
+        follow:
+          wechat.authorized !== false &&
+          "follow" in wechat &&
+          globalData.env === "wechat",
+      });
     });
 
     this.state.path = path;

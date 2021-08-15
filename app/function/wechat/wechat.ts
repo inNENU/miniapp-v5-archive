@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -33,21 +33,17 @@ $Page("wechat", {
   },
 
   onNavigate() {
-    ensureJSON({ path: "function/wechat/index" });
+    ensureJSON("function/wechat/index");
   },
 
   onLoad({ from = "功能大厅" }) {
-    getJSON({
-      path: "function/wechat/index",
-      url: "resource/function/wechat/index",
-      success: (wechat) => {
-        this.setData({
-          color: getColor(),
-          theme: globalData.theme,
-          wechat: wechat as WechatConfig[],
-          "nav.from": from,
-        });
-      },
+    getJSON<WechatConfig[]>("function/wechat/index").then((wechat) => {
+      this.setData({
+        color: getColor(),
+        theme: globalData.theme,
+        wechat,
+        "nav.from": from,
+      });
     });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);

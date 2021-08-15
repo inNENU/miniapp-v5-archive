@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
-import { getJSON } from "../../utils/file";
+import { getJSON } from "../../utils/json";
 import { popNotice, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -310,61 +310,56 @@ $Page("PEcal", {
       [peScore.bmi, peScore.passScore] = this.getBMI(result);
 
     // 读取相应配置文件
-    getJSON<GradeConfig>({
-      path: `function/PEcal/${gender}-${grade}`,
-      url: `resource/function/PEcal/${gender}-${grade}`,
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      success: (config) => {
-        // 以下三项越高越好，进行计算
-        (
-          ["vitalCapacity", "sitAndReach", "standingLongJump"] as (
-            | "vitalCapacity"
-            | "sitAndReach"
-            | "standingLongJump"
-          )[]
-        ).forEach((x) => {
-          if (result[x] && Number(result[x])) {
-            for (let i = 0; i < length; i++)
-              if (result[x] <= config[x][i]) {
-                peScore[x] = gradeLevels[i];
-                break;
-              } else if (i === length - 1) peScore[x] = gradeLevels[i];
-          } else peScore[x] = 0;
-        });
-
-        // 以下两项越低越好
-        (["shortRun", "longRun"] as ("shortRun" | "longRun")[]).forEach((x) => {
-          if (result[x]) {
-            for (let i = 0; i < length; i += 1)
-              if (result[x] >= config[x][i]) {
-                peScore[x] = gradeLevels[i];
-                break;
-              } else if (i === length - 1) peScore[x] = gradeLevels[i];
-          } else peScore[x] = 0;
-        });
-
-        // 计算特别类项目分数
-        const specialScore = gender === "male" ? "chinning" : "situp";
-
-        if (result[specialScore] && Number(result[specialScore])) {
-          for (let i = 0; i < length; i += 1)
-            if (
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              config[specialScore]![i] !== "" &&
-              // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-              result[specialScore] <= config[specialScore]![i]
-            ) {
-              peScore.special = gradeLevels[i];
+    getJSON<GradeConfig>(`function/PEcal/${gender}-${grade}`).then((config) => {
+      // 以下三项越高越好，进行计算
+      (
+        ["vitalCapacity", "sitAndReach", "standingLongJump"] as (
+          | "vitalCapacity"
+          | "sitAndReach"
+          | "standingLongJump"
+        )[]
+      ).forEach((x) => {
+        if (result[x] && Number(result[x])) {
+          for (let i = 0; i < length; i++)
+            if (result[x] <= config[x][i]) {
+              peScore[x] = gradeLevels[i];
               break;
-            } else if (i === length - 1) peScore.special = gradeLevels[i];
-        } else peScore.special = 0;
+            } else if (i === length - 1) peScore[x] = gradeLevels[i];
+        } else peScore[x] = 0;
+      });
 
-        // TODO: 计算加分
+      // 以下两项越低越好
+      (["shortRun", "longRun"] as ("shortRun" | "longRun")[]).forEach((x) => {
+        if (result[x]) {
+          for (let i = 0; i < length; i += 1)
+            if (result[x] >= config[x][i]) {
+              peScore[x] = gradeLevels[i];
+              break;
+            } else if (i === length - 1) peScore[x] = gradeLevels[i];
+        } else peScore[x] = 0;
+      });
 
-        console.info("Score:", peScore);
+      // 计算特别类项目分数
+      const specialScore = gender === "male" ? "chinning" : "situp";
 
-        callback(peScore);
-      },
+      if (result[specialScore] && Number(result[specialScore])) {
+        for (let i = 0; i < length; i += 1)
+          if (
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            config[specialScore]![i] !== "" &&
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            result[specialScore] <= config[specialScore]![i]
+          ) {
+            peScore.special = gradeLevels[i];
+            break;
+          } else if (i === length - 1) peScore.special = gradeLevels[i];
+      } else peScore.special = 0;
+
+      // TODO: 计算加分
+
+      console.info("Score:", peScore);
+
+      callback(peScore);
     });
   },
 

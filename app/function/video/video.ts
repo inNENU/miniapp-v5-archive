@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
 
@@ -31,63 +31,56 @@ $Page("video", {
   data: { type: "debug", videoName: "", videoList: [] as VideoGroup[] },
 
   onNavigate() {
-    ensureJSON({
-      path: "function/video/index",
-      url: "resource/function/video/index",
-    });
+    ensureJSON("function/video/index");
   },
 
   onLoad(options) {
-    let groupID = 0;
-    let listID = 0;
+    getJSON("function/video/index").then((videoList) => {
+      let groupID = 0;
+      let listID = 0;
 
-    getJSON({
-      path: "function/video/index",
-      url: "resource/function/video/index",
-      success: (videoList) => {
-        if (options.scene) {
-          const ids = options.scene.split("-").map((id) => Number(id));
+      if (options.scene) {
+        const ids = options.scene.split("-").map((id) => Number(id));
 
-          [groupID, listID] = ids;
-        } else if (options.name) {
-          const name = decodeURI(options.name);
+        [groupID, listID] = ids;
+      } else if (options.name) {
+        const name = decodeURI(options.name);
 
-          (videoList as VideoGroup[]).forEach((videoGroup, groupIndex) => {
-            const listIndex = videoGroup.content.findIndex(
-              (videoItem) => videoItem.name === name
-            );
+        (videoList as VideoGroup[]).forEach((videoGroup, groupIndex) => {
+          const listIndex = videoGroup.content.findIndex(
+            (videoItem) => videoItem.name === name
+          );
 
-            if (listIndex !== -1) {
-              groupID = groupIndex;
-              listID = listIndex;
-            }
-          });
-        }
-
-        const item = (videoList as VideoGroup[])[groupID].content[listID];
-
-        this.setData({
-          type: options.type || "about",
-
-          groupID,
-          listID,
-
-          titles: (videoList as VideoGroup[]).map(
-            (videoListItem) => videoListItem.title
-          ),
-          videoList: videoList as VideoGroup[],
-
-          videoName: item.name,
-          videoAuthor: item.author,
-          src: item.src || "",
-          vid: item.vid || "",
-
-          firstPage: getCurrentPages().length === 1,
-          info: globalData.info,
-          theme: globalData.theme,
-          darkmode: globalData.darkmode,
+          if (listIndex !== -1) {
+            groupID = groupIndex;
+            listID = listIndex;
+          }
         });
-      },
+      }
+
+      const item = (videoList as VideoGroup[])[groupID].content[listID];
+
+      this.setData({
+        type: options.type || "about",
+
+        groupID,
+        listID,
+
+        titles: (videoList as VideoGroup[]).map(
+          (videoListItem) => videoListItem.title
+        ),
+        videoList: videoList as VideoGroup[],
+
+        videoName: item.name,
+        videoAuthor: item.author,
+        src: item.src || "",
+        vid: item.vid || "",
+
+        firstPage: getCurrentPages().length === 1,
+        info: globalData.info,
+        theme: globalData.theme,
+        darkmode: globalData.darkmode,
+      });
     });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);

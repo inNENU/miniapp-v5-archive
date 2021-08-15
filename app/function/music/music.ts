@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix, getTitle } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
 
@@ -54,10 +54,7 @@ $Page("music", {
   },
 
   onNavigate() {
-    ensureJSON({
-      path: "function/music/index",
-      url: "resource/function/music/index",
-    });
+    ensureJSON("function/music/index");
   },
 
   // eslint-disable-next-line max-lines-per-function
@@ -82,49 +79,45 @@ $Page("music", {
       firstPage: getCurrentPages().length === 1,
     });
 
-    getJSON<SongDetail[]>({
-      path: "function/music/index",
-      url: "resource/function/music/index",
-      success: (songList) => {
-        if (option.index) globalData.music.index = Number(option.index);
-        else if (option.name) {
-          const name = decodeURI(option.name);
+    getJSON<SongDetail[]>("function/music/index").then((songList) => {
+      if (option.index) globalData.music.index = Number(option.index);
+      else if (option.name) {
+        const name = decodeURI(option.name);
 
+        globalData.music.index = songList.findIndex(
+          (song) => song.title === name
+        );
+      } else {
+        const name = wx.getStorageSync<string | undefined>("music");
+
+        if (name)
           globalData.music.index = songList.findIndex(
             (song) => song.title === name
           );
-        } else {
-          const name = wx.getStorageSync<string | undefined>("music");
+      }
 
-          if (name)
-            globalData.music.index = songList.findIndex(
-              (song) => song.title === name
-            );
-        }
+      const { index } = globalData.music;
+      const currentSong = songList[index];
 
-        const { index } = globalData.music;
-        const currentSong = songList[index];
+      // 写入歌曲列表与当前歌曲信息
+      this.setData({
+        index,
+        songList,
+        currentSong,
+      });
 
-        // 写入歌曲列表与当前歌曲信息
-        this.setData({
-          index,
-          songList,
-          currentSong,
-        });
+      // 如果正在播放，设置能够播放
+      if (globalData.music.playing) this.setData({ canplay: true });
+      // 对音频管理器进行设置
+      else {
+        manager.epname = getTitle();
+        manager.src = currentSong.src;
+        manager.title = currentSong.title;
+        manager.singer = currentSong.singer;
+        manager.coverImgUrl = currentSong.cover;
+      }
 
-        // 如果正在播放，设置能够播放
-        if (globalData.music.playing) this.setData({ canplay: true });
-        // 对音频管理器进行设置
-        else {
-          manager.epname = getTitle();
-          manager.src = currentSong.src;
-          manager.title = currentSong.title;
-          manager.singer = currentSong.singer;
-          manager.coverImgUrl = currentSong.cover;
-        }
-
-        this.initLyric();
-      },
+      this.initLyric();
     });
 
     // 注册播放器动作
@@ -242,16 +235,12 @@ $Page("music", {
     const { lyric } = this.data.currentSong;
 
     if (lyric)
-      getJSON<Lyric[]>({
-        path: `function/music/${lyric}`,
-        url: `resource/function/music/${lyric}`,
-        success: (lyrics) => {
-          this.setData({
-            currentLyric: "",
-            currentLyricId: -1,
-            lyrics,
-          });
-        },
+      getJSON<Lyric[]>(`function/music/${lyric}`).then((lyrics) => {
+        this.setData({
+          currentLyric: "",
+          currentLyricId: -1,
+          lyrics,
+        });
       });
     else
       this.setData({

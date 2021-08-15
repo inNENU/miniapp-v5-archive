@@ -3,7 +3,7 @@ import { readJSON } from "@mptool/file";
 
 import { defaultScroller } from "../../mixins/page-scroll";
 import { getTitle, getImagePrefix } from "../../utils/config";
-import { getJSON } from "../../utils/file";
+import { getJSON } from "../../utils/json";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -33,13 +33,11 @@ $Page("location", {
 
       if (globalData.page.id === id) setPage({ option, ctx: this });
       else
-        getJSON<PageData>({
-          path: `function/map/${id}`,
-          url: `resource/function/map/${id}`,
-          success: (data) => {
+        getJSON<PageData>(`function/map/${id}`)
+          .then((data) => {
             setPage({ option, ctx: this }, data);
-          },
-          fail: () => {
+          })
+          .catch(() => {
             setPage(
               { option, ctx: this },
               {
@@ -47,8 +45,7 @@ $Page("location", {
                 statusBarHeight: globalData.info.statusBarHeight,
               }
             );
-          },
-        });
+          });
 
       this.state.area = area;
       this.state.path = path;
@@ -64,10 +61,8 @@ $Page("location", {
   },
 
   onReady() {
-    getJSON<MarkerConfig>({
-      path: `function/map/marker/${this.state.area}`,
-      url: `resource/function/map/marker/${this.state.area}`,
-      success: ({ marker }) => {
+    getJSON<MarkerConfig>(`function/map/marker/${this.state.area}`).then(
+      ({ marker }) => {
         const item = marker.all.find((item) => item.path === this.state.path);
 
         if (item)
@@ -78,8 +73,8 @@ $Page("location", {
               name: item.name,
             }),
           });
-      },
-    });
+      }
+    );
   },
 
   navigate() {

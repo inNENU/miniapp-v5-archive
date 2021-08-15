@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { logger } from "@mptool/enhance";
 import { readJSON, writeJSON } from "@mptool/file";
-import { ensureJSON } from "./file";
+import { ensureJSON } from "./json";
 import { modal, requestJSON } from "./wx";
 
 import type { PageInstance, PageQuery } from "@mptool/enhance";
@@ -151,11 +151,7 @@ const preloadPage = (page: PageData): void => {
               | GridComponentItemComfig
               | ListComponentItemConfig
           ) => {
-            if ("path" in element)
-              ensureJSON({
-                path: `${element.path as string}`,
-                url: `resource/${element.path as string}`,
-              });
+            if ("path" in element) ensureJSON(`${element.path as string}`);
           }
         );
     });

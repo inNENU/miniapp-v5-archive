@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getColor, popNotice } from "../../utils/page";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { modal } from "../../utils/wx";
 import { getImagePrefix } from "../../utils/config";
 
@@ -32,28 +32,25 @@ $Page("calendar", {
   },
 
   onNavigate() {
-    ensureJSON({ path: "function/calendar/index" });
+    ensureJSON("function/calendar/index");
   },
 
   onLoad() {
-    getJSON<TimeLineItem[]>({
-      path: "function/calendar/index",
-      url: "resource/function/calendar/index",
-      success: (calendar) => {
+    getJSON<TimeLineItem[]>("function/calendar/index")
+      .then((calendar) => {
         this.setData({
           color: getColor(),
           theme: globalData.theme,
           calendar,
         });
-      },
-      fail: () => {
+      })
+      .catch(() => {
         modal(
           "获取失败",
           "校历信息获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者",
           () => this.back()
         );
-      },
-    });
+      });
 
     if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
 
@@ -85,23 +82,20 @@ $Page("calendar", {
 
   /** 显示校历详情 */
   display(event: WechatMiniprogram.TouchEvent<{ path: string }>) {
-    getJSON<CalendarDetail>({
-      path: `function/calendar/${event.detail.path}`,
-      url: `resource/function/calendar/${event.detail.path}`,
-      success: (data) => {
+    getJSON<CalendarDetail>(`function/calendar/${event.detail.path}`)
+      .then((data) => {
         this.setData({
           "popupConfig.title": data.title,
           calendarDetail: data.content,
           display: true,
         });
-      },
-      fail: () => {
+      })
+      .catch(() => {
         modal(
           "获取失败",
           "学期详情获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者"
         );
-      },
-    });
+      });
   },
 
   /** 关闭校历详情 */

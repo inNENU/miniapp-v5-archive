@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/file";
+import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 
@@ -81,14 +81,8 @@ $Page("map", {
 
   onNavigate() {
     console.info("Navigating to Map");
-    ensureJSON({
-      path: "function/map/marker/benbu",
-      url: "resource/function/map/marker/benbu",
-    });
-    ensureJSON({
-      path: "function/map/marker/jingyue",
-      url: "resource/function/map/marker/jingyue",
-    });
+    ensureJSON("function/map/marker/benbu");
+    ensureJSON("function/map/marker/jingyue");
   },
 
   onLoad() {
@@ -179,22 +173,20 @@ $Page("map", {
     const promises = ["benbu", "jingyue"].map(
       (path) =>
         new Promise<void>((resolve) => {
-          getJSON<MarkerConfig>({
-            path: `function/map/marker/${path}`,
-            url: `resource/function/map/marker/${path}`,
-            success: (markerData) => {
+          getJSON<MarkerConfig>(`function/map/marker/${path}`)
+            .then((markerData) => {
               this.state[path as Area] = markerData;
 
               resolve();
-            },
-            fail: () => {
+            })
+            .catch((err) => {
+              console.log("Marked failed with", err);
               modal(
                 "获取失败",
                 "地图点位获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者",
                 () => this.back()
               );
-            },
-          });
+            });
         })
     );
 
