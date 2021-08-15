@@ -47,6 +47,7 @@ $Page("about", {
             { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
         } as AdvancedListComponentConfig,
+        { tag: "loading" },
       ],
     } as PageDataWithContent,
   },
@@ -100,6 +101,15 @@ $Page("about", {
           {
             ...this.data.page,
             content: this.data.page.content.slice(0, 1).concat(data),
+          }
+        );
+      },
+      () => {
+        setPage(
+          { option: { id: "关于" }, ctx: this },
+          {
+            ...this.data.page,
+            content: this.data.page.content.slice(0, 1),
           }
         );
       }

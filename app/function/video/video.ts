@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix, server } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
@@ -96,15 +96,6 @@ $Page("video", {
   },
 
   onShow() {
-    wx.loadFontFace({
-      family: "FZSSJW",
-      source: `url("${server}assets/fonts/FZSSJW.ttf")`,
-      complete: (res) => {
-        // 调试
-        console.info(`Font status: ${res.status}`);
-      },
-    });
-
     this.createSelectorQuery()
       .select(".video-list")
       .fields({ size: true }, (res) => {

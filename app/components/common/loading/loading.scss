@@ -1,0 +1,20 @@
+.loading-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: calc(100% - 30px);
+  max-width: 517px;
+  margin: 20px auto;
+  padding: 8px 0;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--grey);
+
+  .icon {
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+  }
+}

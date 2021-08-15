@@ -120,6 +120,7 @@
     "img": "/components/common/img/img",
     "intro": "/components/common/intro/intro",
     "list": "/components/common/list/list",
+    "loading": "/components/common/loading/loading",
     "media": "/components/common/media/media",
     "navbar": "/components/common/navbar/navbar",
     "phone": "/components/common/phone/phone",

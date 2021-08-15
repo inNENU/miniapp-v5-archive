@@ -6,7 +6,7 @@
   position: relative;
 
   max-width: var(--max-width);
-  margin: 1rem 15px;
+  margin: 1rem var(--horizontal-margin);
   padding: 1rem 1.2rem;
   border-left-width: 0.5rem;
   border-left-style: solid;
@@ -20,12 +20,11 @@
   word-break: break-all;
 
   @media (min-width: 768px) {
-    margin: 1rem auto;
     font-size: 17px;
+  }
 
-    .grey & {
-      margin: 1rem 15px;
-    }
+  .grey & {
+    margin: 1rem 15px;
   }
 
   &::before {

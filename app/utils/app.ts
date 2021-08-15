@@ -214,7 +214,7 @@ export const checkResUpdate = (): void => {
 export const appInit = (): void => {
   // 提示用户正在初始化
   wx.showLoading({ title: "初始化中...", mask: true });
-  logger.info("Fist launch");
+  logger.info("First launch");
 
   // 设置主题
   if (appConfig.theme === "auto") {
@@ -544,6 +544,17 @@ export const startup = (globalData: GlobalData): void => {
 
       if (networkType === "none" || networkType === "unknown")
         tip("您的网络状态不佳");
+    },
+  });
+
+  // 加载字体
+  wx.loadFontFace({
+    family: "FZSSJW",
+    source: `url("${server}assets/fonts/FZSSJW.ttf")`,
+    global: true,
+    complete: (res) => {
+      // 调试
+      console.info(`Font status: ${res.status}`, res);
     },
   });
 

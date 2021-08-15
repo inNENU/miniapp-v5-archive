@@ -17,6 +17,7 @@ $Page("log", {
       title: "更新日志",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
+      content: [{ tag: "loading" }],
     } as PageDataWithContent,
   },
 
@@ -43,6 +44,17 @@ $Page("log", {
           {
             ...this.data.page,
             content: data,
+          }
+        );
+      },
+      () => {
+        setPage(
+          { option: { id: "更新日志" }, ctx: this },
+          {
+            ...this.data.page,
+            content: [
+              { tag: "p", heading: "加载失败", text: ["更新日志需要在线获取"] },
+            ],
           }
         );
       }

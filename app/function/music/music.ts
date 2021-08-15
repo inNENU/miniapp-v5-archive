@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix, getTitle, server } from "../../utils/config";
+import { getImagePrefix, getTitle } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/file";
 import { popNotice } from "../../utils/page";
 import { tip } from "../../utils/wx";
@@ -65,16 +65,6 @@ $Page("music", {
     const mode = wx.getStorageSync<PlayMode | undefined>("play-mode");
 
     if (!mode) wx.setStorageSync("play-mode", "列表循环");
-
-    // 加载字体
-    wx.loadFontFace({
-      family: "FZSSJW",
-      source: `url("${server}assets/fonts/FZSSJW.ttf")`,
-      complete: (res) => {
-        // 调试
-        console.info(`Font status: ${res.status}`);
-      },
-    });
 
     // 写入基本信息
     this.setData({

@@ -28,6 +28,7 @@
         catch:change="list"
       />
       <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+      <loading wx:elif="{{item.tag === 'loading'}}" />
     </block>
   </block>
 </template>
