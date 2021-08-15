@@ -63,12 +63,11 @@ const genWords = (word: string): WordInfo[] => {
  */
 export const searching = (
   searchWord: string,
-  category: string,
-  callback: (words: string[]) => void
-): void => {
-  const words: string[] = [];
-
+  category: string
+): Promise<string[]> =>
   requestJSON<SearchInfo>(`resource/${category}-search`).then((keywords) => {
+    const words: string[] = [];
+
     if (searchWord)
       Object.keys(keywords).forEach((jsonName) => {
         const { name = "", desc = "", title, heading } = keywords[jsonName];
@@ -100,9 +99,8 @@ export const searching = (
         });
       });
 
-    callback(words);
+    return words;
   });
-};
 
 /**
  * 搜索
@@ -112,18 +110,14 @@ export const searching = (
  *
  * @returns 匹配的结果列表
  */
-// eslint-disable-next-line max-lines-per-function
 export const search = (
   searchWord: string,
-  category: string,
-  callback: (result: SearchResult[]) => void
-): void => {
-  const wordsInfo = genWords(searchWord);
-  const result: Record<string, SearchContent> = {};
-
-  // eslint-disable-next-line max-lines-per-function
+  category: string
+): Promise<SearchResult[]> =>
   requestJSON<SearchInfo>(`resource/${category}-search`).then((searchMap) => {
-    // eslint-disable-next-line
+    const wordsInfo = genWords(searchWord);
+    const result: Record<string, SearchContent> = {};
+
     Object.keys(searchMap).forEach((pageID) => {
       let weight = 0;
       const matchList: SearchContentDetail[] = [];
@@ -235,6 +229,5 @@ export const search = (
         id,
       }));
 
-    callback(searchResult);
+    return searchResult;
   });
-};

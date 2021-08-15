@@ -79,7 +79,7 @@ $Page("search", {
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
     this.state.typing = true;
-    searching(value, this.state.name, (words) => {
+    searching(value, this.state.name).then((words) => {
       if (this.state.typing) this.setData({ words });
     });
   },
@@ -94,7 +94,7 @@ $Page("search", {
     this.setData({ words: [] });
     wx.showLoading({ title: "搜索中..." });
 
-    search(value, this.state.name, (result) => {
+    search(value, this.state.name).then((result) => {
       this.setData({ result });
       this.state.value = value;
       wx.hideLoading();

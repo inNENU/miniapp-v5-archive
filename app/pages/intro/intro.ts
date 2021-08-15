@@ -92,7 +92,7 @@ $Page("guide", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "intro", (words) => this.setData({ words }));
+    searching(value, "intro").then((words) => this.setData({ words }));
   },
 
   /**

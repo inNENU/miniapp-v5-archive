@@ -120,7 +120,7 @@ $Page("main", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "all", (words) => this.setData({ words }));
+    searching(value, "all").then((words) => this.setData({ words }));
   },
 
   /**
