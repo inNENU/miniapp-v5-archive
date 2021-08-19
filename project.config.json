@@ -2,7 +2,7 @@
   "description": "项目配置文件",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.19.1",
+  "libVersion": "2.19.2",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.29.0",
   "qqappid": "1109559721",
