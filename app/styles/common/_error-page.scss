@@ -3,15 +3,19 @@
 .error-wrapper {
   padding: 20% 10%;
 
-  .text {
-    margin: 10px 0;
+  .hint {
+    margin: 12px 0;
     color: #f00;
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .desc {
     color: #888;
     font-size: 16px;
     text-align: justify !important;
+  }
+
+  button {
+    margin-top: 2rem;
   }
 }

@@ -16,7 +16,9 @@
       catch:tap="{{nav.action? navbar.action: 'back'}}"
     >
       <view wx:if="{{!nav.action}}" class="android-back-arrow" />
-      <view class="android-back-text">{{firstPage? '主页': nav.from}}</view>
+      <view class="android-back-text"
+        >{{firstPage? '主页': (nav.from || '返回')}}</view
+      >
     </view>
   </view>
   <view

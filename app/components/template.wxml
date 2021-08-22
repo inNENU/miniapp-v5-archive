@@ -46,7 +46,10 @@
         darkmode="{{darkmode}}"
         nav="{{template.getErrorNavConfig(page)}}"
       />
-      <template is="error" />
+      <template
+        is="error"
+        data="{{ id: page.id, from: page.from, env: page.env || '' }}"
+      />
     </block>
 
     <!-- 加载页面 -->
@@ -93,10 +96,20 @@
 <template name="error">
   <view class="error-wrapper">
     <icon type="warn" size="80" />
-    <view class="text">很抱歉，界面遇到了问题!</view>
+    <view class="hint">很抱歉，界面遇到了问题!</view>
     <view class="desc">
-      <text>很抱歉让您看到如下错误信息。\n</text>
-      <text>请添加 QQ 1178522294 进行反馈。\n</text>
+      <text>希望您截屏并点击下方按钮进行反馈\n</text>
+      <text>Current: {{ id || '未知' }}\n</text>
+      <text>From: {{ from || '未知' }}</text>
     </view>
+    <button
+      wx:if="{{env === 'qq'}}"
+      type="primary"
+      open-type="addFriend"
+      open-id="868D7B2F0C609B4285698EAB77A47BA1"
+    >
+      反馈给 Mr.Hope
+    </button>
+    <button wx:else type="primary" open-type="contact">反馈给 Mr.Hope</button>
   </view>
 </template>

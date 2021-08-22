@@ -8,10 +8,17 @@ import {
   setOnlinePage,
 } from "../utils/page";
 
+import type { AppOption } from "../app";
 import type { PageData, PageOption } from "../../typings";
 
+/** 全局数据 */
+const { globalData } = getApp<AppOption>();
+
 $Page("page", {
-  data: { page: {} as PageData & { id: string } },
+  data: {
+    page: {} as PageData & { id: string },
+    env: globalData.env,
+  },
 
   onNavigate(option) {
     resolvePage(option);

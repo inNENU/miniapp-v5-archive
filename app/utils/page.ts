@@ -489,6 +489,8 @@ export const setOnlinePage = (
               { option, ctx },
               {
                 error: true,
+                id: option.id,
+                from: option.from,
                 statusBarHeight: globalData.info.statusBarHeight,
               }
             );
@@ -542,6 +544,8 @@ export const loadOnlinePage = (
           { option, ctx },
           {
             error: true,
+            id: option.id,
+            from: option.from,
             statusBarHeight: globalData.info.statusBarHeight,
           }
         );
