@@ -45,6 +45,7 @@ $Page("map", {
     /** 显示弹窗 */
     showPopup: false,
 
+    /** 弹窗设置 */
     popup: {
       title: "全部",
       subtitle: "地点列表",
@@ -86,8 +87,14 @@ $Page("map", {
   },
 
   onLoad() {
-    wx.showLoading({ title: "加载中..." });
+    wx.showLoading({ title: "加载中...", mask: true });
+
     const area = this.getArea();
+    // 创建地图对象
+    const mapCtx = wx.createMapContext("map");
+
+    // 注入地图实例
+    this.context = mapCtx;
 
     this.setData({
       area,
@@ -97,26 +104,23 @@ $Page("map", {
       firstPage: getCurrentPages().length === 1,
     });
 
-    this.setMarker();
-
     popNotice("map");
   },
 
   onReady() {
-    // 创建地图对象
-    const mapCtx = wx.createMapContext("map");
+    this.setMarker().then(() => {
+      // 将地图缩放到对应的校区
+      this.context.includePoints(
+        this.data.area === "benbu" ? benbuArea : jingyueArea
+      );
 
-    // 将地图缩放到对应的校区
-    mapCtx.includePoints(this.data.area === "benbu" ? benbuArea : jingyueArea);
+      // 1200ms 之后拿到缩放值和地图中心点坐标，写入地图组件配置
+      setTimeout(() => {
+        this.setMap();
+      }, 1200);
 
-    // 将地图写入 options 实例中
-    this.context = mapCtx;
-    // 1000ms 之后拿到缩放值和地图中心点坐标，写入地图组件配置
-    setTimeout(() => {
-      this.setMap();
-    }, 1000);
-
-    wx.hideLoading();
+      wx.hideLoading();
+    });
   },
 
   onShareAppMessage: () => ({ title: "东师地图", path: "/function/map/map" }),
@@ -160,33 +164,27 @@ $Page("map", {
 
   /** 生成点位 */
   setMarker() {
-    const promises = ["benbu", "jingyue"].map(
-      (path) =>
-        new Promise<void>((resolve) => {
-          getJSON<MarkerConfig>(`function/map/marker/${path}`)
-            .then((markerData) => {
-              this.state[path as Area] = markerData;
-
-              resolve();
-            })
-            .catch((err) => {
-              console.log("Marked failed with", err);
-              modal(
-                "获取失败",
-                "地图点位获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者",
-                () => this.back()
-              );
-            });
+    const promises = ["benbu", "jingyue"].map((path) =>
+      getJSON<MarkerConfig>(`function/map/marker/${path}`)
+        .then((markerData) => {
+          this.state[path as Area] = markerData;
+        })
+        .catch((err) => {
+          console.log("Marked failed with", err);
+          modal(
+            "获取失败",
+            "地图点位获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者",
+            () => this.back()
+          );
         })
     );
 
-    Promise.all(promises).then(() => {
-      const markerConfig = this.state[this.data.area];
+    return Promise.all(promises).then(() => {
+      const { category, marker } = this.state[this.data.area];
 
-      this.setData({
-        category: markerConfig.category,
-        markers: markerConfig.marker.all,
-      });
+      return new Promise<void>((resolve) =>
+        this.setData({ category, markers: marker.all }, resolve)
+      );
     });
   },
 
