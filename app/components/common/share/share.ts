@@ -64,6 +64,13 @@ $Component({
       );
     },
 
+    wechatMomentShare() {
+      modal(
+        "功能受限",
+        "受到微信客户端限制，请您点击右上角菜单(···)进行转发。"
+      );
+    },
+
     copyWechatLink() {
       wx.request<LinkData>({
         url: `${server}service/sharelink.php`,
@@ -73,8 +80,7 @@ $Component({
         success: (res) => {
           if (res.statusCode === 200 && !res.data.error)
             this.copy(res.data.link);
-          else
-            modal("链接尚未生成", "请使用小程序右上角胶囊中的“···”来复制链接");
+          else modal("链接尚未生成", "请使用小程序右上角菜单(···)来复制链接。");
         },
       });
     },
@@ -156,6 +162,11 @@ $Component({
               icon: "wechat",
               text: "分享给好友",
               openType: "share",
+            },
+            {
+              icon: "moments",
+              text: "分享到朋友圈",
+              action: "wechatMomentShare",
             },
             {
               icon: "link",
