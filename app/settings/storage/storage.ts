@@ -30,29 +30,18 @@ $Page("storage", {
         },
         {
           tag: "advanced-list",
-          header: "内容刷新",
-          foot: "如果页面显示出现问题请刷新小程序资源文件",
+          header: "内容更新",
           content: [
-            { text: "刷新全部资源文件", type: "button", handler: "refreshAll" },
             {
-              text: "刷新介绍资源文件",
-              type: "button",
-              handler: "refreshIntro",
+              text: "内容更新提示",
+              type: "switch",
+              key: "resourceNotify",
+              handler: "notify",
             },
             {
-              text: "刷新功能资源文件",
+              text: "更新资源文件",
               type: "button",
-              handler: "refreshFunc",
-            },
-            {
-              text: "刷新指南资源文件",
-              type: "button",
-              handler: "refreshGuide",
-            },
-            {
-              text: "刷新图标资源文件",
-              type: "button",
-              handler: "refreshIcon",
+              handler: "updateResource",
             },
           ],
         },
@@ -70,6 +59,7 @@ $Page("storage", {
               target: "miniProgram",
             },
           ],
+          foot: "如果小程序出现问题请尝试重置小程序",
         },
       ],
     } as PageDataWithContent,
@@ -122,37 +112,9 @@ $Page("storage", {
     });
   },
 
-  /** 刷新指南资源 */
-  refreshGuide() {
-    confirmAction("刷新指南资源文件", () => {
-      resDownload("guide");
-    });
-  },
-
-  /** 刷新功能资源 */
-  refreshFunc() {
-    confirmAction("刷新功能资源文件", () => {
-      resDownload("function");
-    });
-  },
-
-  /** 刷新功能资源 */
-  refreshIntro() {
-    confirmAction("刷新介绍资源文件", () => {
-      resDownload("intro");
-    });
-  },
-
-  /** 刷新图标资源 */
-  refreshIcon() {
-    confirmAction("刷新图标资源文件", () => {
-      resDownload("icon");
-    });
-  },
-
   /** 刷新所有资源 */
-  refreshAll() {
-    confirmAction("刷新全部资源文件", () => {
+  updateResource() {
+    confirmAction("更新资源文件", () => {
       resDownload("function-guide-icon-intro");
     });
   },
@@ -191,5 +153,14 @@ $Page("storage", {
       // 提示用户重启
       modal("小程序初始化完成", "请单击 “退出小程序按钮” 退出小程序");
     });
+  },
+
+  notify(status: boolean) {
+    modal(
+      `已${status ? "打开" : "关闭"}更新提示`,
+      status
+        ? "您将在内容更新时收到提醒。"
+        : "7天内，您不会再收到内容更新的提醒。\n警告: 这会导致您无法获取7天内新增与修正的内容，带来的后果请您自负!"
+    );
   },
 });

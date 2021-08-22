@@ -8,7 +8,6 @@ import type {
   PageDataWithContent,
   PickerListComponentItemConfig,
 } from "../../../typings";
-import { modal } from "../../utils/wx";
 
 const { globalData } = getApp<AppOption>();
 
@@ -32,18 +31,6 @@ $Page("setting", {
               key: "themeNum",
               handler: "updateTheme",
               single: true,
-            },
-          ],
-        },
-        {
-          tag: "advanced-list",
-          header: "内容更新",
-          content: [
-            {
-              text: "内容更新提示",
-              type: "switch",
-              key: "resourceNotify",
-              handler: "notify",
             },
           ],
         },
@@ -81,14 +68,5 @@ $Page("setting", {
 
     // debug
     console.info(`Switched to ${theme} theme`);
-  },
-
-  notify(status: boolean) {
-    modal(
-      `更新提示已${status ? "打开" : "关闭"}`,
-      status
-        ? "您将收到内容更新的提醒"
-        : "7天内，您不会再收到内容更新的提醒。\n警告: 这会导致您无法获取7天内新增与修正的内容。"
-    );
   },
 });

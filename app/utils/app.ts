@@ -105,6 +105,8 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
     });
   });
 
+let hasResPopup = false;
+
 /**
  * 检查资源更新
  *
@@ -137,7 +139,7 @@ export const checkResUpdate = (): void => {
   }
 
   // 需要检查更新
-  if (notify)
+  if (notify && !hasResPopup)
     wx.request<VersionInfo>({
       url: `${server}service/version.php`,
       enableHttp2: true,
@@ -160,48 +162,34 @@ export const checkResUpdate = (): void => {
             const fileName = updateList.join("-");
             const size = versionInfo.size[fileName];
 
-            if (notify)
-              // 需要提醒
-              wx.showModal({
-                title: "内容更新",
-                content: `请更新小程序资源以获得最新内容。(会消耗${size}K流量)`,
-                cancelText: "取消",
-                cancelColor: "#ff0000",
-                confirmText: "更新",
-                success: (choice) => {
-                  // 用户确认，下载更新
-                  if (choice.confirm)
-                    resDownload(fileName).then(() => {
-                      writeJSON("version", versionInfo.version);
-                    });
-                  // 用户取消，询问是否关闭更新提示
-                  else if (choice.cancel)
-                    wx.showModal({
-                      title: "关闭内容更新提示?",
-                      content: "关闭后将不再提示内容更新。",
-                      cancelText: "关闭",
-                      cancelColor: "#ff0000",
-                      confirmText: "保持开启",
-                      success: (choice2) => {
-                        // 用户选择关闭
-                        if (choice2.cancel)
-                          modal(
-                            "更新提示已关闭",
-                            "7天内，您不会再收到内容更新的提醒。您可随时在外观设置中重新打开提示。\n警告: 这会导致您无法获取7天内新增与修正的内容。",
-                            // 关闭更新提示
-                            () => {
-                              wx.setStorageSync("resourceNotify", false);
-                            }
-                          );
-                      },
-                    });
-                },
-              });
-            // 距上次更新已经半个月了，强制更新
-            else
-              resDownload(fileName).then(() => {
-                writeJSON("version", versionInfo.version);
-              });
+            hasResPopup = true;
+
+            // 需要提醒
+            wx.showModal({
+              title: "内容更新",
+              content: `请更新小程序资源以获得最新内容。(会消耗${size}K流量)`,
+              cancelText: "取消",
+              cancelColor: "#ff0000",
+              confirmText: "更新",
+              success: (choice) => {
+                // 用户确认，下载更新
+                if (choice.confirm)
+                  resDownload(fileName).then(() => {
+                    writeJSON("version", versionInfo.version);
+                    hasResPopup = false;
+                  });
+                // 用户取消，警告用户
+                else if (choice.cancel)
+                  wx.showModal({
+                    title: "更新已取消",
+                    content:
+                      "您会错过本次新增与修正的小程序内容，导致的后果请您自负!",
+                    confirmColor: "#ff0000",
+                    confirmText: "确定",
+                    showCancel: false,
+                  });
+              },
+            });
           }
           // 调试
           else logger.debug("Newest resource already downloaded");

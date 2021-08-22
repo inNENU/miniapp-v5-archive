@@ -43,12 +43,12 @@ $Page("user", {
               text: "更新日志",
               icon: "log",
               url: "log",
-              desc: version,
             },
             {
               text: "关于",
               icon: "about",
               url: "about",
+              desc: version,
             },
           ],
         },
