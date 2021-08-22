@@ -6,7 +6,7 @@
   font-size: 18px;
   text-align: left;
 
-  & + & {
+  + .page-header {
     padding-top: 2px;
   }
 }
