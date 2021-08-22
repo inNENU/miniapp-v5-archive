@@ -65,9 +65,17 @@ $Component({
     },
 
     wechatMomentShare() {
+      this.hint("转发到朋友圈");
+    },
+
+    wechatStar() {
+      this.hint("收藏");
+    },
+
+    hint(msg: string) {
       modal(
         "功能受限",
-        "受到微信客户端限制，请您点击右上角菜单(···)进行转发。"
+        `受到微信客户端限制，请您点击右上角菜单(···)以${msg}。`
       );
     },
 
@@ -139,10 +147,14 @@ $Component({
               shareMode: ["qzone"],
             },
             {
-              icon: "moments",
-              text: "分享到朋友圈",
-              openType: "share",
-              shareMode: ["wechatMoment"],
+              icon: "link",
+              text: "复制链接",
+              action: "copyQQLink",
+            },
+            {
+              icon: "star",
+              text: "收藏",
+              openType: "addToFavorites",
             },
             {
               icon: "wechat",
@@ -151,9 +163,10 @@ $Component({
               shareMode: ["wechatFriends"],
             },
             {
-              icon: "link",
-              text: "复制链接",
-              action: "copyQQLink",
+              icon: "moments",
+              text: "分享到朋友圈",
+              openType: "share",
+              shareMode: ["wechatMoment"],
             }
           );
         else
@@ -172,6 +185,11 @@ $Component({
               icon: "link",
               text: "复制链接",
               action: "copyWechatLink",
+            },
+            {
+              icon: "star",
+              text: "收藏",
+              action: "wechatStar",
             }
           );
 

@@ -44,7 +44,7 @@ $Component({
           // 下载失败，隐藏下载提示告知用户下载失败并上报
           fail: () => {
             wx.hideLoading();
-            tip(`Download document ${url} failed`);
+            tip(`下载文档失败`);
             wx.reportMonitor("9", 1);
           },
         });
