@@ -190,6 +190,7 @@
 .song-list {
   flex-shrink: 1;
   overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 
   .item {
     position: relative;
