@@ -3,21 +3,21 @@ module.exports = {
     return tag === "text" || tag === "p" || tag === "ul" || tag === "ol";
   },
 
-  getErrorNavConfig: function (page) {
-    return {
-      title: page.title || "页面出错",
-      desc: page.desc,
-      action: page.action,
-      color: page.color,
-    };
-  },
-
   getNavConfig: function (page) {
     return {
       title: page.title,
       desc: page.desc,
       action: page.action,
       from: page.from,
+      color: page.color,
+    };
+  },
+
+  getErrorNavConfig: function (page) {
+    return {
+      title: page.title || "页面出错",
+      desc: page.desc,
+      action: page.action,
       color: page.color,
     };
   },

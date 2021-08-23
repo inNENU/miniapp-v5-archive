@@ -59,26 +59,7 @@ $Page("location", {
   },
 
   onReady() {
-    getJSON<MarkerConfig>(`function/map/marker/${this.state.area}`).then(
-      ({ marker }) => {
-        const item = marker.all.find((item) => item.path === this.state.path);
-
-        if (item)
-          this.setData({
-            marker: JSON.stringify({
-              latitude: item.latitude,
-              longitude: item.longitude,
-              name: item.name,
-            }),
-          });
-      }
-    );
-  },
-
-  navigate() {
-    wx.navigateTo({
-      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${this.data.marker}&mode=transit&themeColor=#2ecc71`,
-    });
+    this.setMarker();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -111,6 +92,31 @@ $Page("location", {
   },
 
   defaultScroller,
+
+  /** 设置标记点 */
+  setMarker() {
+    return getJSON<MarkerConfig>(`function/map/marker/${this.state.area}`).then(
+      ({ marker }) => {
+        const item = marker.all.find((item) => item.path === this.state.path);
+
+        if (item)
+          this.setData({
+            marker: JSON.stringify({
+              latitude: item.latitude,
+              longitude: item.longitude,
+              name: item.name,
+            }),
+          });
+      }
+    );
+  },
+
+  /** 开启导航 */
+  navigate() {
+    wx.navigateTo({
+      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${this.data.marker}&mode=transit&themeColor=#2ecc71`,
+    });
+  },
 
   /** 返回按钮功能 */
   back() {
