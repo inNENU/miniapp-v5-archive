@@ -145,7 +145,7 @@
   }
 }
 
-@for $index from 1 through 7 {
+@for $index from 1 through 8 {
   .select-wrapper .item#{$index} {
     animation-delay: $index * 0.08s;
   }
