@@ -55,6 +55,7 @@ $Page("location", {
     this.setData({
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
+      env: globalData.env,
     });
   },
 
