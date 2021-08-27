@@ -14,7 +14,7 @@ import type {
 } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-const { appID, env, version } = globalData;
+const { appID, version } = globalData;
 
 $Page("user", {
   data: {
@@ -22,86 +22,7 @@ $Page("user", {
       title: "我的东师",
       grey: true,
       hidden: true,
-      content: [
-        {
-          tag: "list",
-          header: false,
-          content: [
-            {
-              type: "picker",
-              text: "主题设置",
-              select: ["ios", "android", "nenu", "weui"],
-              key: "themeNum",
-              handler: "updateTheme",
-              single: true,
-            },
-            {
-              text: "权限设置",
-              icon: "setting",
-              url: "auth",
-            },
-            {
-              text: "存储设置",
-              icon: "setting",
-              url: "storage",
-            },
-            {
-              text: "更新日志",
-              icon: "log",
-              url: "log",
-            },
-            {
-              text: "关于",
-              icon: "about",
-              url: "about",
-              desc: version,
-            },
-          ],
-        },
-        {
-          tag: "advanced-list",
-          content: [
-            {
-              text: "分享小程序",
-              icon: "share",
-              type: "button",
-              openType: "share",
-            },
-            {
-              hidden: env === "wx",
-              text: "加入 in 东师咨询群",
-              icon: "qq-group",
-              type: "button",
-              openType: "openGroupProfile",
-              groupId: "1139044856",
-            },
-            {
-              hidden: env === "wx",
-              text: "添加 Mr.Hope 好友",
-              icon: "qq",
-              type: "button",
-              openType: "addFriend",
-              openId: "868D7B2F0C609B4285698EAB77A47BA1",
-            },
-            {
-              hidden: env === "qq",
-              text:
-                appID === "wx9ce37d9662499df3" ? "联系校会君" : "联系 Mr.Hope",
-              icon: "contact",
-              type: "button",
-              openType: "contact",
-            },
-            {
-              hidden: env === "wx",
-              text: "添加到桌面",
-              icon: "send",
-              type: "button",
-              handler: "addToDesktop",
-            },
-          ],
-        },
-      ],
-    } as PageDataWithContent,
+    },
 
     footer: {
       author: "",
@@ -173,8 +94,10 @@ $Page("user", {
     // get the updated theme
     const theme = (
       (
-        (this.data.page.content[0] as AdvancedListComponentConfig)
-          .content[0] as PickerListComponentItemConfig
+        (
+          (this.data.page as PageDataWithContent)
+            .content[0] as AdvancedListComponentConfig
+        ).content[0] as PickerListComponentItemConfig
       ).select as string[]
     )[Number(value)];
 
