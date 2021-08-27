@@ -1,21 +1,33 @@
 .info-wrapper {
   display: flex;
-  align-items: flex-start;
-  padding: 10px 20px;
 
-  .avator {
+  padding: 0 20px 12px;
+  border-bottom-right-radius: 16px;
+  border-bottom-left-radius: 16px;
+
+  background-color: var(--block-bgcolor);
+
+  .avatar {
     overflow: hidden;
 
-    width: 48px;
-    height: 48px;
-    margin-right: 12px;
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem;
     border-radius: 50%;
   }
 
+  .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+
+    padding: 2px 0;
+  }
+
   .nickname {
-    font-weight: 600;
-    font-size: 18px;
-    line-height: 1.5;
+    font-weight: bold;
+    font-size: 20px;
     text-align: left;
   }
 

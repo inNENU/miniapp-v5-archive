@@ -19,6 +19,12 @@
           "scene": null
         },
         {
+          "name": "用户",
+          "pathName": "pages/user/user",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "分享",
           "pathName": "module/page",
           "query": "path=Gcard/",

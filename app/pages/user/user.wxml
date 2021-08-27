@@ -7,12 +7,11 @@
   root-background-color="{{color.bgColor}}"
 />
 <view class="{{theme}} grey">
-  <view style="height:{{statusBarHeight}}px" />
-  <view class="info-wrapper">
-    <view class="avator">
+  <view class="info-wrapper" style="padding-top:{{statusBarHeight + 20}}px">
+    <view class="avatar">
       <open-data type="userAvatarUrl" />
     </view>
-    <view>
+    <view class="info">
       <view class="nickname">
         <open-data type="userNickName" />
       </view>
