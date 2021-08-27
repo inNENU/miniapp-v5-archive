@@ -59,6 +59,9 @@ const resolveContent = (
       listElement.path as string
     }`;
 
+  if ("env" in listElement)
+    listElement.hidden = !listElement.env?.includes(globalData.env);
+
   if ("type" in listElement) {
     if (listElement.type === "switch")
       // 设置列表开关与滑块
@@ -115,6 +118,10 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
 
   if (page.content)
     page.content.forEach((element) => {
+      // 设置隐藏
+      if ("env" in element)
+        element.hidden = !element.env?.includes(globalData.env);
+
       // 设置 list 组件
       if ("content" in element)
         element.content.forEach(
