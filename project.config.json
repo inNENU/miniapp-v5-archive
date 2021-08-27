@@ -44,6 +44,7 @@
         "miniprogramNpmDistDir": "./dist"
       }
     ],
+    "minifyWXML": true,
     "minifyWXSS": true,
     "showES6CompileOption": false
   },

@@ -10,7 +10,6 @@
     "settings/about/about",
     "settings/auth/auth",
     "settings/log/log",
-    "settings/outlook/outlook",
     "settings/storage/storage",
     "module/function",
     "module/page",

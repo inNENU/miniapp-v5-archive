@@ -102,9 +102,17 @@
         header-text="{{listItem.header || listItem.text}}"
         catch:change="onPickerChange"
       >
-        <view class="text">{{listItem.text}}</view>
-        <view wx:if="{{listItem.select}}" class="desc">
-          <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
+        <view class="wrapper">
+          <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
+          <image
+            wx:elif="{{listItem.icon}}"
+            class="icon"
+            src="{{listItem.icon}}"
+          />
+          <view class="text">{{listItem.text}}</view>
+          <view wx:if="{{listItem.select}}" class="desc">
+            <block wx:for="{{listItem.value}}" wx:key="*this">{{item}}</block>
+          </view>
         </view>
       </picker>
 

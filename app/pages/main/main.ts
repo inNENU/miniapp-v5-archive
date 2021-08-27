@@ -65,7 +65,7 @@ $Page("main", {
     this.$emitter.on("theme", this.setTheme);
 
     // 执行 tab 页预加载
-    ["function", "guide", "intro"].forEach((x) => {
+    ["function", "guide", "intro", "user"].forEach((x) => {
       requestJSON(
         `resource/config/${globalData.appID}/${globalData.version}/${x}`
       )

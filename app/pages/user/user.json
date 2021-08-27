@@ -1,4 +1,5 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "add-tip": "/components/addtip/addtip"
   }

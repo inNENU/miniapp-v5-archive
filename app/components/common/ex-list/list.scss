@@ -1,11 +1,11 @@
 .list-wrapper .picker {
   display: block;
+  padding: 0;
 
-  .desc {
-    position: absolute;
-    top: 0;
-    right: 15px;
-    padding: 10px 0;
+  .wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
   }
 }
 
