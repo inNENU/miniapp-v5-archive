@@ -96,9 +96,14 @@
     nav-list="{{tool.getTitle(category)}}"
     height="{{(info.screenHeight / 2 - 20) || 300}}"
   >
-    <block wx:for="{{category}}" wx:key="name" wx:for-item="categoryItem">
+    <block
+      wx:for="{{category}}"
+      wx:key="name"
+      wx:for-item="categoryItem"
+      wx:for-index="groupIndex"
+    >
       <view
-        slot="page{{index + 1}}"
+        slot="page{{groupIndex + 1}}"
         wx:for="{{marker[categoryItem.path]}}"
         wx:key="name"
         wx:for-item="markerItem"
