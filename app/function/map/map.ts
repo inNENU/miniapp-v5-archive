@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { getTitle, getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
@@ -9,6 +9,7 @@ import type { AppOption } from "../../app";
 import type { Category, MarkerConfig, MarkerData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
+const referer = getTitle();
 
 /** 本部栅格 */
 const benbuArea = {
@@ -42,13 +43,20 @@ $Page("map", {
       scale: 17,
     },
 
-    /** 显示弹窗 */
-    showPopup: false,
+    /** 显示地点列表 */
+    showLocation: false,
+    /** 显示导航 */
+    showNavigate: false,
 
     /** 弹窗设置 */
-    popup: {
+    locationPopup: {
       title: "全部",
       subtitle: "地点列表",
+      cancel: false,
+      confirm: false,
+    },
+    navigatePopup: {
+      title: "导航",
       cancel: false,
       confirm: false,
     },
@@ -63,7 +71,7 @@ $Page("map", {
     category: [] as Category[],
 
     /** 地图点位 */
-    markers: [] as MarkerData[],
+    marker: {} as Record<string, MarkerData[]>,
   },
 
   /** 状态 */
@@ -183,16 +191,15 @@ $Page("map", {
       const { category, marker } = this.state[this.data.area];
 
       return new Promise<void>((resolve) =>
-        this.setData({ category, markers: marker.all }, resolve)
+        this.setData({ category, marker }, resolve)
       );
     });
   },
 
   changeArea() {
     const area = this.data.area === "benbu" ? "jingyue" : "benbu";
-    const markers = this.state[area].marker[this.data.currentCategory];
 
-    this.setData({ area, markers });
+    this.setData({ area, marker: this.state[area].marker });
 
     // 重新缩放校区
     this.context.includePoints(area === "benbu" ? benbuArea : jingyueArea);
@@ -237,14 +244,14 @@ $Page("map", {
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 
-    this.setData({ currentCategory: path, markers, "popup.title": name });
+    this.setData({ currentCategory: path, "locationPopup.title": name });
     this.context.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
   markers(event: WechatMiniprogram.MarkerTap) {
-    const { area } = this.data;
+    const { area, currentCategory } = this.data;
 
-    const { path } = this.data.markers.find(
+    const { path } = this.data.marker[currentCategory].find(
       (item) => item.id === event.detail.markerId
     ) as MarkerData;
 
@@ -256,14 +263,34 @@ $Page("map", {
     }
   },
 
-  togglePopup() {
-    this.setData({ showPopup: !this.data.showPopup });
+  toggleLocationPopup() {
+    this.setData({ showLocation: !this.data.showLocation });
+  },
+
+  toggleNavigatePopup() {
+    this.setData({ showNavigate: !this.data.showNavigate });
+  },
+
+  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+    const item = this.data.marker.all.find(
+      (item) => item.id === Number(currentTarget.dataset.id)
+    ) as MarkerData;
+
+    wx.navigateTo({
+      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${JSON.stringify(
+        {
+          latitude: item.latitude,
+          longitude: item.longitude,
+          name: item.name,
+        }
+      )}&mode=transit&themeColor=#2ecc71`,
+    });
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
-    const { area } = this.data;
+    const { area, currentCategory } = this.data;
 
-    const { path } = this.data.markers.find(
+    const { path } = this.data.marker[currentCategory].find(
       (item) => item.id === currentTarget.dataset.id
     ) as MarkerData;
 

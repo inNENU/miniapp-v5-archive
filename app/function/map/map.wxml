@@ -5,7 +5,7 @@
   longitude="{{map.longitude}}"
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
-  markers="{{tool.genMarker(markers, darkmode)}}"
+  markers="{{tool.genMarker(marker[currentCategory], darkmode)}}"
   setting="{{darkmode? tool.nightMapSettings: tool.dayMapSettings}}"
   catch:markertap="markers"
   catch:callouttap="markers"
@@ -52,7 +52,11 @@
   </view>
 </view>
 
-<view class="list-button" catch:tap="togglePopup">
+<view class="navigate-button" catch:tap="toggleNavigatePopup">
+  <image class="icon" src="./icon/navigate.svg" />
+</view>
+
+<view class="location-button" catch:tap="toggleLocationPopup">
   <image class="icon" src="./icon/details.svg" />
 </view>
 
@@ -83,9 +87,40 @@
   <image class="icon" src="./icon/locate.svg" />
 </view>
 
-<popup config="{{popup}}" show="{{showPopup}}" catch:close="togglePopup">
+<popup
+  config="{{navigatePopup}}"
+  show="{{showNavigate}}"
+  catch:close="toggleNavigatePopup"
+>
+  <tab-bar
+    nav-list="{{tool.getTitle(category)}}"
+    height="{{(info.screenHeight / 2 - 20) || 300}}"
+  >
+    <block wx:for="{{category}}" wx:key="name" wx:for-item="categoryItem">
+      <view
+        slot="page{{index + 1}}"
+        wx:for="{{marker[categoryItem.path]}}"
+        wx:key="name"
+        wx:for-item="markerItem"
+        class="navigate"
+        hover-class="button-hover"
+        data-id="{{markerItem.id}}"
+        catch:tap="navigate"
+      >
+        <view class="name">{{markerItem.name}}</view>
+        <view class="desc">{{markerItem.detail}}</view>
+      </view>
+    </block>
+  </tab-bar>
+</popup>
+
+<popup
+  config="{{locationPopup}}"
+  show="{{showLocation}}"
+  catch:close="toggleLocationPopup"
+>
   <view
-    wx:for="{{markers}}"
+    wx:for="{{marker[currentCategory]}}"
     wx:key="id"
     class="location"
     hover-class="button-hover"

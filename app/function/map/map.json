@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "东师校园地图",
   "usingComponents": {
-    "popup": "/components/popup/popup"
+    "popup": "/components/popup/popup",
+    "tab-bar": "/components/top-tab/tab"
   }
 }
