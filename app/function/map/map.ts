@@ -283,7 +283,7 @@ $Page("map", {
           longitude: item.longitude,
           name: item.name,
         }
-      )}&mode=transit&themeColor=#2ecc71`,
+      )}&mode=walking&themeColor=#2ecc71`,
     });
   },
 
