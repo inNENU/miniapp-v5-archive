@@ -442,6 +442,8 @@ export const setOnlinePage = (
         },
         () => {
           logger.debug(`${option.id as string} pageData is set`);
+          popNotice(option.id as string);
+
           if (preload) {
             preloadPage(ctx.data.page as PageData);
             logger.debug(`Preloaded ${option.id as string} links`);
