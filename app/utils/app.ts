@@ -539,15 +539,15 @@ export const startup = (globalData: GlobalData): void => {
   });
 
   // 加载字体
-  wx.loadFontFace({
-    family: "FZSSJW",
-    source: `url("${server}assets/fonts/FZSSJW.ttf")`,
-    global: true,
-    complete: (res) => {
-      // 调试
-      console.info(`Font status: ${res.status}`, res);
-    },
-  });
+  // wx.loadFontFace({
+  //   family: "FZSSJW",
+  //   source: `url("${server}assets/fonts/FZSSJW.ttf")`,
+  //   global: true,
+  //   complete: (res) => {
+  //     // 调试
+  //     console.info(`Font status: ${res.status}`, res);
+  //   },
+  // });
 
   noticeCheck(globalData);
   appUpdate(globalData);
