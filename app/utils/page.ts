@@ -9,7 +9,7 @@ import type { AppOption } from "../app";
 import type { Notice } from "./app";
 import type {
   AdvancedListComponentItemConfig,
-  GridComponentItemComfig,
+  GridComponentItemConfig,
   ListComponentItemConfig,
   PageData,
   PageOption,
@@ -46,10 +46,11 @@ export const path2id = (path = ""): string =>
  * @param page 页面内容
  */
 const resolveContent = (
-  listElement:
+  listElement: (
     | AdvancedListComponentItemConfig
-    | GridComponentItemComfig
-    | ListComponentItemConfig,
+    | GridComponentItemConfig
+    | ListComponentItemConfig
+  ) & { hidden?: boolean },
   page: PageData
 ): void => {
   // 设置列表导航
@@ -126,10 +127,11 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
       if ("content" in element)
         element.content.forEach(
           (
-            listElement:
+            listElement: (
               | AdvancedListComponentItemConfig
-              | GridComponentItemComfig
+              | GridComponentItemConfig
               | ListComponentItemConfig
+            ) & { hidden?: boolean }
           ) => resolveContent(listElement, page)
         );
     });
@@ -153,10 +155,11 @@ const preloadPage = (page: PageData): void => {
         // 该组件是列表或九宫格，需要预加载界面，提前获取界面到存储
         component.content.forEach(
           (
-            element:
+            element: (
               | AdvancedListComponentItemConfig
-              | GridComponentItemComfig
+              | GridComponentItemConfig
               | ListComponentItemConfig
+            ) & { hidden?: boolean }
           ) => {
             if ("path" in element) ensureJSON(`${element.path as string}`);
           }

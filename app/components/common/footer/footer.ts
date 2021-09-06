@@ -3,7 +3,7 @@ import { server } from "../../../utils/config";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
-import type { FooterComponentConfig } from "../../../../typings";
+import type { FooterComponentOptions } from "../../../../typings";
 
 const {
   // 获得当前小程序ID
@@ -14,7 +14,7 @@ $Component({
   properties: {
     /** 页脚配置 */
     config: {
-      type: Object as PropType<FooterComponentConfig>,
+      type: Object as PropType<FooterComponentOptions>,
       required: true,
     },
   },

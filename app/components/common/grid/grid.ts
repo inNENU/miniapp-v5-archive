@@ -3,22 +3,22 @@ import { readFile } from "@mptool/file";
 
 import type { PropType } from "@mptool/enhance";
 import type {
-  GridComponentConfig,
-  GridComponentItemComfig,
+  GridComponentOptions,
+  GridComponentItemOptions,
 } from "../../../../typings";
 
 $Component({
   properties: {
     /** 网格组件配置 */
     config: {
-      type: Object as PropType<GridComponentConfig>,
+      type: Object as PropType<GridComponentOptions>,
       required: true,
     },
   },
 
   methods: {
     // 设置图标
-    setLogo(content?: GridComponentItemComfig[]) {
+    setLogo(content?: GridComponentItemOptions[]) {
       this.setData({
         icons: (content || this.data.config.content).map((item) =>
           item.icon && !item.icon.includes("/")
@@ -40,7 +40,7 @@ $Component({
   },
 
   observers: {
-    "config.content"(value: GridComponentItemComfig[]): void {
+    "config.content"(value: GridComponentItemOptions[]): void {
       this.setLogo(value);
     },
   },

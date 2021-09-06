@@ -1,12 +1,12 @@
 import { $Component } from "@mptool/enhance";
 import type { PropType } from "@mptool/enhance";
-import type { ImageComponentConfig } from "../../../../typings";
+import type { ImageComponentOptions } from "../../../../typings";
 
 $Component({
   properties: {
     /** 图片组件配置 */
     config: {
-      type: Object as PropType<ImageComponentConfig>,
+      type: Object as PropType<ImageComponentOptions>,
       required: true,
     },
 

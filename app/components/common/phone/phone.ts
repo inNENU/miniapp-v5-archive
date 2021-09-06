@@ -3,7 +3,7 @@ import { modal } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
-import type { PhoneComponentConfig } from "../../../../typings";
+import type { PhoneComponentOptions } from "../../../../typings";
 
 const {
   globalData: { env },
@@ -13,7 +13,7 @@ $Component({
   properties: {
     /** 电话组件配置 */
     config: {
-      type: Object as PropType<PhoneComponentConfig>,
+      type: Object as PropType<PhoneComponentOptions>,
       required: true,
     },
   },

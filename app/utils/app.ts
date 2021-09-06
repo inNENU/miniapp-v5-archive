@@ -444,7 +444,7 @@ export const login = ({ appID, env }: GlobalData): void => {
 export const registAction = (): void => {
   // 设置内存不足警告
   wx.onMemoryWarning((res) => {
-    tip("内存不足");
+    // tip("内存不足");
     console.warn("Memory warning received.");
     wx.reportAnalytics("memory_warning", {
       // eslint-disable-next-line @typescript-eslint/naming-convention

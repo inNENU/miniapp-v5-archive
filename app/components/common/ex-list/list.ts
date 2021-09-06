@@ -4,13 +4,13 @@ import { readFile } from "@mptool/file";
 import type { PropType } from "@mptool/enhance";
 import type {
   AdvancedListComponentConfig,
-  AdvancedListComponentItemConfig,
+  AdvancedListComponentItemOptions,
   PickerListComponentItemConfig,
   SliderListComponentItemConfig,
   SwitchListComponentItemConfig,
 } from "../../../../typings";
 
-interface ListDetail<T = AdvancedListComponentItemConfig> {
+interface ListDetail<T = AdvancedListComponentItemOptions> {
   id: string;
   content: T;
 }
@@ -164,7 +164,7 @@ $Component({
       };
     },
     // 设置图标
-    setLogo(content?: AdvancedListComponentItemConfig[]) {
+    setLogo(content?: AdvancedListComponentItemOptions[]) {
       this.setData({
         icons: (content || this.data.config.content).map((item) =>
           item.icon && !item.icon.includes("/")
@@ -187,7 +187,7 @@ $Component({
   },
 
   observers: {
-    "config.content"(value: AdvancedListComponentItemConfig[]): void {
+    "config.content"(value: AdvancedListComponentItemOptions[]): void {
       this.setLogo(value);
     },
   },

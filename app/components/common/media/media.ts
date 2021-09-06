@@ -2,13 +2,13 @@ import { $Component } from "@mptool/enhance";
 import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
-import type { MediaComponentConfig } from "../../../../typings";
+import type { MediaComponentOptions } from "../../../../typings";
 
 $Component({
   properties: {
     /** 媒体组件配置 */
     config: {
-      type: Object as PropType<MediaComponentConfig>,
+      type: Object as PropType<MediaComponentOptions>,
       required: true,
     },
   },
