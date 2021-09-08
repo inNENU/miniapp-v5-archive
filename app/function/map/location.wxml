@@ -43,7 +43,7 @@
     <view class="title">
       {{page.title}}
       <button
-        wx:if="{{marker && env === 'wechat'}}"
+        wx:if="{{marker && env === 'wx'}}"
         type="primary"
         size="mini"
         class="navigate"
