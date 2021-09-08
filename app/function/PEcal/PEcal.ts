@@ -310,22 +310,22 @@ $Page("PEcal", {
         )[]
       ).forEach((x) => {
         if (result[x] && Number(result[x])) {
-          for (let i = 0; i < length; i++)
-            if (result[x] <= config[x][i]) {
+          for (let i = length; i >= 0; i -= 1)
+            if (result[x] >= config[x][i]) {
               peScore[x] = gradeLevels[i];
               break;
-            } else if (i === length - 1) peScore[x] = gradeLevels[i];
+            } else if (i === 0) peScore[x] = 0;
         } else peScore[x] = 0;
       });
 
       // 以下两项越低越好
       (["shortRun", "longRun"] as ("shortRun" | "longRun")[]).forEach((x) => {
         if (result[x]) {
-          for (let i = 0; i < length; i += 1)
-            if (result[x] >= config[x][i]) {
+          for (let i = length; i >= 0; i -= 1)
+            if (result[x] <= config[x][i]) {
               peScore[x] = gradeLevels[i];
               break;
-            } else if (i === length - 1) peScore[x] = gradeLevels[i];
+            } else if (i === 0) peScore[x] = 0;
         } else peScore[x] = 0;
       });
 
@@ -333,16 +333,16 @@ $Page("PEcal", {
       const specialScore = gender === "male" ? "chinning" : "situp";
 
       if (result[specialScore] && Number(result[specialScore])) {
-        for (let i = 0; i < length; i += 1)
+        for (let i = length; i >= 0; i -= 1)
           if (
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             config[specialScore]![i] !== "" &&
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            result[specialScore] <= config[specialScore]![i]
+            result[specialScore] >= config[specialScore]![i]
           ) {
             peScore.special = gradeLevels[i];
             break;
-          } else if (i === length - 1) peScore.special = gradeLevels[i];
+          } else if (i === 0) peScore.special = 0;
       } else peScore.special = 0;
 
       // TODO: 计算加分
