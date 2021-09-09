@@ -2,7 +2,7 @@
   "description": "项目配置文件",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.19.2",
+  "libVersion": "2.19.4",
   "appid": "wx33acb831ee1831a5",
   "qqLibVersion": "1.29.0",
   "qqappid": "1109559721",
@@ -28,7 +28,7 @@
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": false,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -44,9 +44,11 @@
         "miniprogramNpmDistDir": "./dist"
       }
     ],
-    "minifyWXML": true,
     "minifyWXSS": true,
-    "showES6CompileOption": false
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false
   },
   "packOptions": {
     "ignore": [
