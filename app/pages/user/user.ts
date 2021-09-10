@@ -95,7 +95,7 @@ $Page("user", {
     // get the updated theme
     const theme = (
       (
-        (this.data.page.content[0] as AdvancedListComponentConfig)
+        (this.data.page.content[1] as AdvancedListComponentConfig)
           .content[0] as PickerListComponentItemConfig
       ).select as string[]
     )[Number(value)];
