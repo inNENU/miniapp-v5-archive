@@ -11,6 +11,8 @@
 - 弹窗高度
 - 背景色
 - scroll-view 支持传递 selector 作为 scrollIntoView 的目标节点
+- 黄页
+- QQ 号集群
 
 ## Content
 
@@ -27,6 +29,7 @@
 - 火车站介绍
 - 买火车票
 - 生活页面照片
+- 本科免修、补考申请
 
 ## Checklist
 
