@@ -23,22 +23,18 @@
       <image class="icon" src="{{config.logo}}" />
       <!-- 名称 -->
       <view class="name">{{config.name}}</view>
-      <!-- 详情介绍 -->
+      <!-- 详情 -->
+      <view class="detail">{{config.detail}}</view>
+      <!-- 介绍 -->
       <view class="desc">{{config.desc}}</view>
       <!-- 关注 -->
-      <view
-        wx:if="{{config.follow}}"
-        class="follow"
-        hover-class="hover"
-        catch:tap="follow"
-        >关注</view
-      >
+      <view class="follow" hover-class="hover" catch:tap="follow">关注</view>
     </view>
   </view>
   <view class="wechat-wrapper">
     <view
       class="card"
-      wx:for="{{config.content}}"
+      wx:for="{{config.article}}"
       wx:key="title"
       hover-class="button-hover"
       hover-stay-time="100"

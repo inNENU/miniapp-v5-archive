@@ -30,20 +30,19 @@ $Page("about", {
           header: "版本号",
           content: [
             { text: globalData.version, type: "button", handler: "debugMode" },
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             {
               text: "启用测试功能",
               type: "switch",
               key: "test",
               handler: "toggleTest",
             },
-            // eslint-disable-next-line @typescript-eslint/naming-convention
             {
               text: "调试开关",
               type: "switch",
               key: "debugMode",
               handler: "toggleDebug",
             },
+            { text: "复制用户APPID", type: "button", handler: "copyAppID" },
             { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
         } as AdvancedListComponentConfig,
@@ -226,5 +225,12 @@ $Page("about", {
    */
   toggleTest(value: boolean) {
     tip(`已${value ? "启用" : "关闭"}测试功能`);
+  },
+
+  /**
+   * 复制 APPID
+   */
+  copyAppID() {
+    wx.setClipboardData({ data: wx.getStorageSync("openid") });
   },
 });

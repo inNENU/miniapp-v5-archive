@@ -192,54 +192,50 @@ export const downLoad = (
  *
  * @param imgPath 图片地址
  */
-export const savePhoto = (imgPath: string): void => {
-  downLoad(
-    imgPath,
-    (path) => {
-      // 获取用户设置
-      wx.getSetting({
-        success: (res) => {
-          // 如果已经授权相册直接写入图片
-          if (res.authSetting["scope.writePhotosAlbum"])
-            wx.saveImageToPhotosAlbum({
-              filePath: path,
-              success: () => {
-                tip("保存成功");
-              },
-            });
-          // 没有授权——>提示用户授权
-          else
-            wx.authorize({
-              scope: "scope.writePhotosAlbum",
-              success: () => {
-                wx.saveImageToPhotosAlbum({
-                  filePath: path,
-                  success: () => {
-                    tip("保存成功");
-                  },
-                });
-              },
+export const savePhoto = (imgPath: string): Promise<void> =>
+  new Promise((resolve, reject) => {
+    downLoad(
+      imgPath,
+      (path) => {
+        // 获取用户设置
+        wx.getSetting({
+          success: (res) => {
+            // 如果已经授权相册直接写入图片
+            if (res.authSetting["scope.writePhotosAlbum"])
+              wx.saveImageToPhotosAlbum({
+                filePath: path,
+                success: () => resolve(),
+              });
+            // 没有授权——>提示用户授权
+            else
+              wx.authorize({
+                scope: "scope.writePhotosAlbum",
+                success: () => {
+                  wx.saveImageToPhotosAlbum({
+                    filePath: path,
+                    success: () => resolve(),
+                  });
+                },
 
-              // 用户拒绝权限，提示用户开启权限
-              fail: () => {
-                modal(
-                  "权限被拒",
-                  "如果想要保存图片，请在“权限设置”允许保存图片权限",
-                  () => {
-                    tip("二维码保存失败");
-                    wx.openSetting({});
-                  }
-                );
-              },
-            });
-        },
-      });
-    },
-    () => {
-      tip("图片下载失败");
-    }
-  );
-};
+                // 用户拒绝权限，提示用户开启权限
+                fail: () => {
+                  modal(
+                    "权限被拒",
+                    "如果想要保存图片，请在“权限设置”允许保存图片权限",
+                    () => {
+                      wx.openSetting({
+                        success: () => reject(),
+                      });
+                    }
+                  );
+                },
+              });
+          },
+        });
+      },
+      () => reject()
+    );
+  });
 
 /**
  * 比较版本号

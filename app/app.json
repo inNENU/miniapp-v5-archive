@@ -19,6 +19,8 @@
     {
       "root": "function",
       "pages": [
+        "account/account",
+        "account/detail",
         "cal/cal",
         "calendar/calendar",
         "map/map",
@@ -26,9 +28,7 @@
         "music/music",
         "video/video",
         "PEcal/PEcal",
-        "weather/weather",
-        "wechat/wechat",
-        "wechat/detail"
+        "weather/weather"
       ],
       "plugins": {
         "routePlan": {

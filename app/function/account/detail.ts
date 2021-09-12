@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
-import { modal } from "../../utils/wx";
+import { modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { WechatDetail } from "../../../typings";
@@ -13,13 +13,9 @@ const { globalData } = getApp<AppOption>();
 $Page("wechat-detail", {
   data: {
     config: {} as WechatDetail,
-
-    /** 是否显示关注按钮 */
-    follow: false,
-
     statusBarHeight: globalData.info.statusBarHeight,
     footer: {
-      desc: "更新文章，请联系 QQ 1178522294",
+      desc: "更新文章，请联系 Mr.Hope",
     },
   },
 
@@ -28,32 +24,28 @@ $Page("wechat-detail", {
   },
 
   onNavigate(options) {
-    ensureJSON(`function/wechat/${options.path || "index"}`);
+    if (options.path) ensureJSON(`function/account/${options.path}`);
   },
 
   onLoad({ path = "" }) {
-    getJSON<WechatDetail>(`function/wechat/${path}`).then((wechat) => {
+    getJSON<WechatDetail>(`function/account/${path}`).then((config) => {
       this.setData({
         darkmode: globalData.darkmode,
         firstPage: getCurrentPages().length === 1,
         color: getColor(true),
-        config: wechat,
-        follow:
-          wechat.authorized !== false &&
-          "follow" in wechat &&
-          globalData.env === "wechat",
+        config,
       });
     });
 
     this.state.path = path;
 
-    popNotice(`wechat/${this.data.config.name}`);
+    popNotice(`account/${this.data.config.name}`);
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.config.name,
-      path: `/function/wechat/detail?path=${this.state.path}`,
+      path: `/function/account/detail?path=${this.state.path}`,
     };
   },
 
@@ -81,18 +73,7 @@ $Page("wechat-detail", {
   >) {
     const { title, url } = currentTarget.dataset;
 
-    // 无法跳转，复制链接到剪切板
-    if (this.data.config.authorized === false)
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "尚未授权",
-            "目前暂不支持跳转到该微信公众号图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
-    else if (globalData.env === "qq")
+    if (globalData.env === "qq")
       wx.setClipboardData({
         data: url,
         success: () => {
@@ -102,11 +83,29 @@ $Page("wechat-detail", {
           );
         },
       });
-    else this.$go(`web?url=${url}&title=${title}`);
+    else if (this.data.config.authorized)
+      this.$go(`web?url=${url}&title=${title}`);
+    // 无法跳转，复制链接到剪切板
+    else
+      wx.setClipboardData({
+        data: url,
+        success: () => {
+          modal(
+            "尚未授权",
+            "目前暂不支持跳转到该微信公众号图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+          );
+        },
+      });
   },
 
   follow() {
-    this.$go(`web?url=${this.data.config.follow as string}&title=欢迎关注`);
+    const { follow, qrcode } = this.data.config;
+
+    if (follow) this.$go(`web?url=${follow}&title=欢迎关注`);
+    else
+      savePhoto(qrcode)
+        .then(() => tip("二维码已存至相册"))
+        .catch(() => tip("二维码保存失败"));
   },
 
   back() {

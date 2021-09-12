@@ -52,4 +52,6 @@ Component({
   options: {
     multipleSlots: true,
   },
+
+  externalClasses: ["tab-class"],
 });

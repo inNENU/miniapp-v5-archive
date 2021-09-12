@@ -28,7 +28,7 @@
     "lazyloadPlaceholderEnable": false,
     "useMultiFrameRuntime": true,
     "useApiHook": true,
-    "useApiHostProcess": true,
+    "useApiHostProcess": false,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -49,6 +49,9 @@
     "minifyWXML": true,
     "showES6CompileOption": false,
     "useCompilerPlugins": false
+  },
+  "watchOptions": {
+    "ignore": ["app/**", "node_modules/**", "server/**"]
   },
   "packOptions": {
     "ignore": [
@@ -200,14 +203,14 @@
         {
           "id": 16,
           "name": "公众号",
-          "pathName": "function/wechat/wechat",
+          "pathName": "function/account/account",
           "query": "",
           "scene": null
         },
         {
           "id": 17,
           "name": "特定公众号",
-          "pathName": "function/wechat/detail",
+          "pathName": "function/account/detail",
           "query": "path=nenuyouth",
           "scene": null
         },

@@ -76,7 +76,7 @@ $Component({
         });
       else if (["jpg", "png", "gif"].includes(icon))
         // 检测到图片，开始图片下载
-        savePhoto(url);
+        savePhoto(url).then(() => tip("已保存至相册"));
     },
   },
 });

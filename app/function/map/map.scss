@@ -32,10 +32,12 @@
   position: absolute;
   left: calc(50% - 60px);
 
+  display: flex;
+
   overflow: hidden;
 
   width: 120px;
-  height: 30px;
+  height: 32px;
   border: 1px solid #2ecc71;
   border-radius: 14px;
 
@@ -44,13 +46,8 @@
   font-size: 14px;
 
   .item {
-    display: inline-block;
-
     width: 50%;
-    height: 100%;
-
     color: #2ecc71;
-
     line-height: 30px;
 
     &.active {

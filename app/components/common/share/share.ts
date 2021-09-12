@@ -51,9 +51,15 @@ $Component({
     download(): void {
       const { config } = this.data;
 
-      if (typeof config.qrcode === "string")
-        savePhoto(`/qrcode/${appID}/${config.qrcode}.png`);
-      else savePhoto(`/qrcode/${appID}/${config.id as string}.png`);
+      savePhoto(
+        `/qrcode/${appID}/${
+          typeof config.qrcode === "string"
+            ? config.qrcode
+            : (config.id as string)
+        }.png`
+      )
+        .then(() => tip("二维码已存至相册"))
+        .catch(() => tip("二维码保存失败"));
     },
 
     copyQQLink() {

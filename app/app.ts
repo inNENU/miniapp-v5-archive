@@ -22,11 +22,11 @@ $Config({
   routes: [
     [["function", "page", "web"], "/module/$name"],
     [
-      ["calendar", "map", "music", "PEcal", "video", "weather", "wechat"],
+      ["account", "calendar", "map", "music", "PEcal", "video", "weather"],
       "/function/$name/$name",
     ],
     ["location", "/function/map/location"],
-    ["wechat-detail", "/function/wechat/detail"],
+    ["account-detail", "/function/account/detail"],
     [
       ["about", "auth", "log", "outlook", "resource", "storage"],
       "/settings/$name/$name",

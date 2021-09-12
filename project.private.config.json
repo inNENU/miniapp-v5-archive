@@ -122,13 +122,13 @@
         },
         {
           "name": "公众号",
-          "pathName": "function/wechat/wechat",
+          "pathName": "function/account/account",
           "query": "",
           "scene": null
         },
         {
           "name": "特定公众号",
-          "pathName": "function/wechat/detail",
+          "pathName": "function/account/detail",
           "query": "path=nenuyouth",
           "scene": null
         },

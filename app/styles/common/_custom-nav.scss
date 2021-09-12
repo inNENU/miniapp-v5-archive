@@ -49,3 +49,16 @@
     color: #555;
   }
 }
+
+.custom-header {
+  padding: 0 15px 20px;
+  border-radius: 0 0 12px 12px;
+
+  background-color: #2ecc71;
+  color: var(--bgcolor);
+
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 32px;
+  letter-spacing: 2px;
+}
