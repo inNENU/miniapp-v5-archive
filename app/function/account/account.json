@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "校园媒体",
   "usingComponents": {
+    "header": "/components/header/header",
     "tab-bar": "/components/top-tab/tab"
   }
 }

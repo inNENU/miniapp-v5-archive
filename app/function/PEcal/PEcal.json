@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "体测计算器",
   "usingComponents": {
+    "header": "/components/header/header",
     "popup": "/components/popup/popup"
   }
 }

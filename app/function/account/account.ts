@@ -86,9 +86,4 @@ $Page("account", {
       .then(() => tip("二维码已保存至相册"))
       .catch(() => tip("二维码下载失败"));
   },
-
-  back() {
-    if (getCurrentPages().length === 1) this.$switch("main");
-    else this.$back();
-  },
 });

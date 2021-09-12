@@ -18,12 +18,8 @@ interface CalendarDetail {
 $Page("calendar", {
   data: {
     theme: globalData.theme,
-    /** 头部配置 */
-    nav: {
-      title: "东师校历",
-      statusBarHeight: globalData.info.statusBarHeight,
-      from: "功能大厅",
-    },
+    info: globalData.info,
+
     calendar: [] as TimeLineItem[],
     popupConfig: {
       title: "校历详情",
@@ -41,6 +37,8 @@ $Page("calendar", {
         this.setData({
           color: getColor(),
           theme: globalData.theme,
+          info: globalData.info,
+          firstPage: getCurrentPages().length === 1,
           calendar,
         });
       })

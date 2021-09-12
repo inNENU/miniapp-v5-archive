@@ -3,7 +3,7 @@
   class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
 >
-  <navbar theme="{{theme}}" darkmode="{{darkmode}}" nav="{{page}}" />
+  <header title="体测计算器" />
   <view class="desc-wrapper">
     <view
       class="desc-button"

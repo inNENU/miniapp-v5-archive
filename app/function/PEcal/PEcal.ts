@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
-import { popNotice, setPage } from "../../utils/page";
+import { popNotice } from "../../utils/page";
 
 import type { AppOption } from "../../app";
 
@@ -64,8 +64,7 @@ interface PEScore {
 
 $Page("PEcal", {
   data: {
-    theme: globalData.theme,
-    page: { title: "体测计算器", id: "PECal", grey: true, from: "功能大厅" },
+    info: globalData.info,
 
     /** 性别选择器 */
     gender: {
@@ -127,15 +126,16 @@ $Page("PEcal", {
     grade: "",
   },
 
-  onLoad(option) {
-    setPage({ option, ctx: this }, this.data.page);
-
+  onLoad() {
     const genderIndex = wx.getStorageSync<number | "">("gender");
     const gradeIndex = wx.getStorageSync<number | "">("grade");
     const genderKeys = this.data.gender.keys;
     const gradeKeys = this.data.grade.keys;
 
     this.setData({
+      info: globalData.info,
+      firstPage: getCurrentPages().length === 1,
+
       // 写入性别
       "gender.key":
         typeof genderIndex === "number" ? genderKeys[genderIndex] : "",

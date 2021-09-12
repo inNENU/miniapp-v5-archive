@@ -1,6 +1,7 @@
 {
   "navigationBarTitleText": "校历详情",
   "usingComponents": {
+    "header": "/components/header/header",
     "popup": "/components/popup/popup",
     "time-line": "/components/timeline/timeline"
   }
