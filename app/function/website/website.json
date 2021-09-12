@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "东师网站",
+  "usingComponents": {
+    "header": "/components/header/header",
+    "tab-bar": "/components/top-tab/tab"
+  }
+}

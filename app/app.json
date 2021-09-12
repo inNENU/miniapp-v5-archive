@@ -28,7 +28,8 @@
         "music/music",
         "video/video",
         "PEcal/PEcal",
-        "weather/weather"
+        "weather/weather",
+        "website/website"
       ],
       "plugins": {
         "routePlan": {

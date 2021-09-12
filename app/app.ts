@@ -22,7 +22,16 @@ $Config({
   routes: [
     [["function", "page", "web"], "/module/$name"],
     [
-      ["account", "calendar", "map", "music", "PEcal", "video", "weather"],
+      [
+        "account",
+        "calendar",
+        "map",
+        "music",
+        "PEcal",
+        "video",
+        "weather",
+        "website",
+      ],
       "/function/$name/$name",
     ],
     ["location", "/function/map/location"],

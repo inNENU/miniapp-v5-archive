@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
-import { getColor, popNotice } from "../../utils/page";
+import { popNotice } from "../../utils/page";
 import { savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
@@ -14,7 +14,6 @@ $Page("account", {
   data: {
     config: [] as unknown[],
 
-    theme: globalData.theme,
     info: globalData.info,
     env: globalData.env,
     type: globalData.env,
@@ -30,14 +29,7 @@ $Page("account", {
 
   onLoad({ type = env }) {
     getJSON<unknown[]>(`function/account/${type}`).then((config) => {
-      this.setData({
-        config,
-
-        type,
-        color: getColor(),
-        theme: globalData.theme,
-        firstPage: getCurrentPages().length === 1,
-      });
+      this.setData({ config, type, info: globalData.info });
     });
 
     popNotice("account");

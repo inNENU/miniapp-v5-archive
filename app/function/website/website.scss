@@ -1,0 +1,35 @@
+.website-wrapper {
+  height: 100%;
+  text-align: justify;
+}
+
+.website {
+  position: relative;
+
+  display: inline-block;
+
+  width: calc(100% - 30px);
+  margin: 8px 15px;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  @media (min-width: 768px) {
+    width: calc(50% - 37.5px);
+    padding: 8px 12px;
+
+    &:nth-last-child(2).bb::after {
+      display: none;
+    }
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 2;
+  }
+
+  .desc {
+    color: var(--dark-grey);
+    font-size: 14px;
+  }
+}

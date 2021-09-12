@@ -1,4 +1,3 @@
-<import src="/components/template" />
 <view
   class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"

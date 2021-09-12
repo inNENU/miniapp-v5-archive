@@ -33,4 +33,6 @@ $Component({
       else this.$back();
     },
   },
+
+  externalClasses: ["header-class"],
 });

@@ -1,4 +1,3 @@
-<import src="/components/template" />
 <wxs module="account" src="./account.wxs" />
 
 <template name="account">
@@ -17,7 +16,7 @@
   root-background-color="{{color.bgColor}}"
 />
 
-<view class="{{theme}} {{grey? 'grey': ''}}">
+<view class="ios">
   <header title="校园媒体" />
   <view class="switch">
     <view

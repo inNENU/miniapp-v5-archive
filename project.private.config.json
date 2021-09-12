@@ -79,6 +79,12 @@
           "scene": null
         },
         {
+          "name": "东师网站",
+          "pathName": "function/website/website",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "客服",
           "pathName": "module/function",
           "query": "action=contact",
