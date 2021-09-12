@@ -67,31 +67,6 @@
   font-size: 17px;
   line-height: 1.75;
   text-align: right;
-
-  &::before,
-  &::after {
-    content: " ";
-
-    position: absolute;
-    right: 0;
-    left: 0;
-
-    height: 1px;
-
-    transform: scaleY(0.4);
-  }
-
-  &::before {
-    top: 0;
-    border-top: 1px solid var(--border-color);
-    transform-origin: 0 0;
-  }
-
-  &::after {
-    bottom: 0;
-    border-bottom: 1px solid var(--border-color);
-    transform-origin: 0 100%;
-  }
 }
 
 .list-item {
@@ -118,7 +93,7 @@
     transform-origin: 0 100%;
   }
 
-  &::after :last-child {
+  &:last-child::after {
     display: none;
   }
 
