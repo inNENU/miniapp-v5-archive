@@ -114,7 +114,7 @@ export const requestJSON = <T = Record<string, any>>(
 ): Promise<T> =>
   new Promise((resolve, reject) => {
     wx.request<T>({
-      url: `${server}${path}.json`,
+      url: path.startsWith("http") ? path : `${server}${path}.json`,
       enableHttp2: true,
       success: (res) => {
         // 调试
@@ -160,7 +160,7 @@ export const downLoad = (
   errorFunc?: (/** 服务器状态码 */ statusCode: number) => void
 ): void => {
   const progress = wx.downloadFile({
-    url: `${server}${path}`,
+    url: path.startsWith("http") ? path : `${server}${path}`,
     success: (res) => {
       wx.hideLoading();
       if (res.statusCode === 200) successFunc(res.tempFilePath);

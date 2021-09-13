@@ -11,6 +11,7 @@ import type {
   CopyComponentOptions,
   LoadingComponentOptions,
   IntroComponentOptions,
+  AccountComponentOptions,
   AdvancedListComponentOptions,
   ButtonListComponnetItemOptions,
   GridComponentItemOptions,
@@ -104,6 +105,7 @@ export type ComponentConfig = (
   | CardComponentOptions
   | CopyComponentOptions
   | LoadingComponentOptions
+  | AccountComponentOptions
   | IntroComponentOptions
 ) & {
   /**

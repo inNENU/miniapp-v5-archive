@@ -1,5 +1,4 @@
-import { $Component } from "@mptool/enhance";
-import { logger } from "@mptool/enhance";
+import { $Component, logger } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
 import { server, getTitle } from "../../../utils/config";

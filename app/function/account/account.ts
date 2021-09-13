@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { savePhoto, tip } from "../../utils/wx";
+import { modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -64,18 +64,28 @@ $Page("account", {
     });
   },
 
-  qrcode({
-    currentTarget,
-  }: WechatMiniprogram.Touch<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    WechatMiniprogram.TouchDetail,
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    { qrcode: string }
-  >) {
-    savePhoto(currentTarget.dataset.qrcode)
-      .then(() => tip("二维码已保存至相册"))
-      .catch(() => tip("二维码下载失败"));
+  detail(
+    event: WechatMiniprogram.Touch<
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      WechatMiniprogram.TouchDetail,
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      { id: number; qrcode?: string }
+    >
+  ) {
+    const { id, qrcode } = event.currentTarget.dataset;
+
+    if (qrcode)
+      savePhoto(qrcode)
+        .then(() => tip("二维码已保存至相册"))
+        .catch(() => tip("二维码下载失败"));
+    else
+      wx.setClipboardData({
+        data: id.toString(),
+        success: () => {
+          modal("复制成功", "由于暂无二维码，QQ号已复制至您的剪切板");
+        },
+      });
   },
 });
