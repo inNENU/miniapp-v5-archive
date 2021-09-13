@@ -54,7 +54,7 @@
             <button
               wx:for="{{category.account}}"
               wx:key="name"
-              class="account bb"
+              class="account-item bb"
               hover-class="button-hover"
               open-type="addFriend"
               open-id="{{item.openid}}"
@@ -66,7 +66,7 @@
             <view
               wx:for="{{category.account}}"
               wx:key="name"
-              class="account bb"
+              class="account-item bb"
               hover-class="button-hover"
               data-id="{{item.id}}"
               data-qrcode="{{item.qrcode}}"
@@ -80,7 +80,7 @@
           <view
             wx:for="{{category.account}}"
             wx:key="name"
-            class="account bb"
+            class="account-item bb"
             hover-class="button-hover"
             hover-stay-time="100"
             data-url="{{'account-detail?from=校园媒体&path=' + item.path}}"
