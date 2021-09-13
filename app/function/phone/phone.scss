@@ -1,0 +1,62 @@
+.phone-wrapper {
+  height: 100%;
+  text-align: justify;
+}
+
+.phone {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+
+  width: calc(100% - 30px);
+  margin: 8px 15px;
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  @media (min-width: 768px) {
+    width: calc(50% - 37.5px);
+    padding: 8px 12px;
+
+    &:nth-last-child(2).bb::after {
+      display: none;
+    }
+  }
+
+  .info {
+    flex: 1;
+    text-align: justify;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 2;
+  }
+
+  .num {
+    color: var(--dark-grey);
+    font-size: 14px;
+  }
+
+  .actions {
+    width: 68px;
+  }
+
+  .call,
+  .add {
+    display: inline-block;
+
+    overflow: hidden;
+
+    width: 26px;
+    height: 26px;
+    margin: 0 4px;
+    border-radius: 13px;
+  }
+
+  .icon {
+    width: 100%;
+    height: 100%;
+  }
+}

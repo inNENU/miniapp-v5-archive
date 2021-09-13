@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "师大黄页",
+  "usingComponents": {
+    "header": "/components/header/header",
+    "tab-bar": "/components/top-tab/tab"
+  }
+}

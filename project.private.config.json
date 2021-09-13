@@ -79,6 +79,12 @@
           "scene": null
         },
         {
+          "name": "师大黄页",
+          "pathName": "function/phone/phone",
+          "query": "",
+          "scene": null
+        },
+        {
           "name": "东师网站",
           "pathName": "function/website/website",
           "query": "",

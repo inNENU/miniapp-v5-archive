@@ -28,6 +28,7 @@ $Config({
         "map",
         "music",
         "PEcal",
+        "phone",
         "video",
         "weather",
         "website",
