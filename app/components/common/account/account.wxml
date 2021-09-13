@@ -1,0 +1,45 @@
+<view class="account">
+  <image class="logo" src="{{config.logo}}" />
+  <view class="info">
+    <view class="name">{{config.name}}</view>
+    <view wx:if="{{config.detail}}" class="detail">{{config.detail}}</view>
+    <view wx:if="{{config.desc}}" class="desc bt">{{config.desc}}</view>
+  </view>
+  <view class="action-list">
+    <button
+      wx:if="{{config.openid}}"
+      class="action"
+      hover-class="button-hover"
+      open-type="addFriend"
+      open-id="{{config.openid}}"
+    >
+      <image class="icon" src="{{icon.qq}}" />
+    </button>
+    <view
+      wx:elif="{{config.qq}}"
+      class="action"
+      hover-class="button-hover"
+      catch:tap="qq"
+    >
+      <image class="icon" src="{{icon.qq}}" />
+    </view>
+    <view
+      wx:if="{{config.path}}"
+      class="action"
+      hover-class="button-hover"
+      hover-stay-time="100"
+      data-url="{{'account-detail?path=' + config.path}}"
+      catch:tap="$bindGo"
+    >
+      <image class="icon" src="{{icon.wx}}" />
+    </view>
+    <view
+      wx:elif="{{config.wx}}"
+      class="action"
+      hover-class="button-hover"
+      catch:tap="wechat"
+    >
+      <image class="icon" src="{{icon.wx}}" />
+    </view>
+  </view>
+</view>

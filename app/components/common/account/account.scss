@@ -1,0 +1,83 @@
+.account {
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  max-width: var(--max-width);
+  margin: 8px var(--horizontal-margin);
+  padding: 8px 12px;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--text-color);
+
+  .logo {
+    overflow: hidden;
+
+    width: 60px;
+    height: 60px;
+    margin: 8px;
+    border-radius: 50%;
+  }
+
+  .info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: 4px 8px;
+
+    text-align: justify;
+  }
+
+  .name {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 1.5;
+  }
+
+  .detail {
+    padding-bottom: 4px;
+    color: var(--dark-grey);
+    font-size: 12px;
+    line-height: 1.2;
+  }
+
+  .desc {
+    padding-top: 4px;
+    color: var(--grey3);
+    font-size: 14px;
+    line-height: 1.2;
+  }
+
+  .action-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 40px;
+  }
+
+  .action {
+    overflow: hidden;
+
+    width: 36px;
+    height: 36px;
+    margin: 4px;
+    margin-right: 0;
+    border-radius: 50%;
+
+    background-color: var(--bgcolor);
+
+    .grey & {
+      background-color: var(--bgcolor-grey);
+    }
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    margin: 4px;
+  }
+}

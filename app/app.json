@@ -111,6 +111,7 @@
   },
   "requiredBackgroundModes": ["audio"],
   "usingComponents": {
+    "account-info": "/components/common/account/account",
     "card": "/components/common/card/card",
     "copy": "/components/common/copy/copy",
     "doc": "/components/common/doc/doc",

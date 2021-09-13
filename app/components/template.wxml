@@ -29,6 +29,7 @@
           catch:change="list"
         />
         <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+        <account-info wx:elif="{{item.tag === 'account'}}" config="{{item}}" />
         <loading wx:elif="{{item.tag === 'loading'}}" />
       </block>
     </block>
