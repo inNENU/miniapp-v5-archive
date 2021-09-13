@@ -6,13 +6,14 @@ import { getColor, popNotice } from "../../utils/page";
 import { modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
-import type { WechatDetail } from "../../../typings";
+import type { WechatConfig } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
+const { env } = globalData;
 
 $Page("wechat-detail", {
   data: {
-    config: {} as WechatDetail,
+    config: {} as WechatConfig,
     statusBarHeight: globalData.info.statusBarHeight,
     footer: {
       desc: "更新文章，请联系 Mr.Hope",
@@ -28,7 +29,7 @@ $Page("wechat-detail", {
   },
 
   onLoad({ path = "" }) {
-    getJSON<WechatDetail>(`function/account/${path}`).then((config) => {
+    getJSON<WechatConfig>(`function/account/${path}`).then((config) => {
       this.setData({
         darkmode: globalData.darkmode,
         firstPage: getCurrentPages().length === 1,
@@ -73,7 +74,7 @@ $Page("wechat-detail", {
   >) {
     const { title, url } = currentTarget.dataset;
 
-    if (globalData.env === "qq")
+    if (env === "qq")
       wx.setClipboardData({
         data: url,
         success: () => {
@@ -102,6 +103,7 @@ $Page("wechat-detail", {
     const { follow, qrcode } = this.data.config;
 
     if (follow) this.$go(`web?url=${follow}&title=欢迎关注`);
+    else if (env === "wx") wx.previewImage({ urls: [qrcode] });
     else
       savePhoto(qrcode)
         .then(() => tip("二维码已存至相册"))
