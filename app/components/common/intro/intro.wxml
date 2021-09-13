@@ -3,10 +3,49 @@
   <image class="background" src="{{config.logo}}" mode="aspectFill" lazy-load />
   <view class="intro">
     <!-- 图标 -->
-    <image class="icon" src="{{config.logo}}" lazy-load />
+    <image class="logo" src="{{config.logo}}" lazy-load />
     <!-- 名称 -->
     <view class="name">{{config.name}}</view>
+    <view wx:if="{{config.detail}}" class="detail">{{config.detail}}</view>
     <!-- 详情介绍 -->
-    <view class="desc">{{config.desc}}</view>
+    <view wx:if="{{config.desc}}" class="desc bt">{{config.desc}}</view>
+
+    <view class="action-list">
+      <button
+        wx:if="{{config.openid && env === 'qq'}}"
+        class="action"
+        hover-class="button-hover"
+        open-type="addFriend"
+        open-id="{{config.openid}}"
+      >
+        <image class="icon" src="{{icon.qq}}" />
+      </button>
+      <view
+        wx:elif="{{config.qq || config.qqQRCode}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="qq"
+      >
+        <image class="icon" src="{{icon.qq}}" />
+      </view>
+      <view
+        wx:if="{{config.path}}"
+        class="action"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        data-url="{{'account-detail?path=' + config.path}}"
+        catch:tap="$bindGo"
+      >
+        <image class="icon" src="{{icon.wx}}" />
+      </view>
+      <view
+        wx:elif="{{config.wx || config.wxQRCode}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="wechat"
+      >
+        <image class="icon" src="{{icon.wx}}" />
+      </view>
+    </view>
   </view>
 </view>

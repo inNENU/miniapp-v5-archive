@@ -32,7 +32,7 @@
     height: 100%;
   }
 
-  .icon {
+  .logo {
     width: 200rpx;
     max-width: 150px;
     height: 200rpx;
@@ -49,5 +49,28 @@
     max-width: 80%;
     color: var(--grey3);
     font-size: 14px;
+  }
+
+  .action-list {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  .action {
+    overflow: hidden;
+
+    width: 36px;
+    height: 36px;
+    margin: 4px;
+    padding: 0;
+    border-radius: 50%;
+
+    background-color: var(--bgcolor);
+  }
+
+  .icon {
+    width: 28px;
+    height: 28px;
+    margin: 4px;
   }
 }
