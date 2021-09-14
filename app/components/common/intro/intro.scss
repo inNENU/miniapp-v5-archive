@@ -2,7 +2,6 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  height: 380rpx;
 
   .background {
     position: absolute;
@@ -18,7 +17,7 @@
   }
 
   .intro {
-    position: absolute;
+    position: relative;
     top: 0;
     left: 0;
     z-index: 2;
@@ -37,6 +36,7 @@
     max-width: 150px;
     height: 200rpx;
     max-height: 150px;
+    margin-top: 12px;
   }
 
   .name {
@@ -47,6 +47,7 @@
 
   .desc {
     max-width: 80%;
+    margin: 4px auto;
     color: var(--grey3);
     font-size: 14px;
   }
@@ -59,9 +60,9 @@
   .action {
     overflow: hidden;
 
-    width: 36px;
-    height: 36px;
-    margin: 4px;
+    width: 40px;
+    height: 40px;
+    margin: 6px;
     padding: 0;
     border-radius: 50%;
 
@@ -69,8 +70,8 @@
   }
 
   .icon {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     margin: 4px;
   }
 }
