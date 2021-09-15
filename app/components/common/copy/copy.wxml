@@ -1,6 +1,8 @@
 <!-- 标题 -->
 <view wx:if="{{config.header}}" class="copy-header">{{config.header}}</view>
 <view class="copy-wrapper">
+  <!-- 待复制文字 -->
+  <view class="text">{{config.text}}</view>
   <!-- 复制按钮 -->
   <view
     class="copy"
@@ -10,6 +12,4 @@
   >
     <image class="icon" src="./icon/copy.svg" />
   </view>
-  <!-- 待复制文字 -->
-  <view class="text">{{config.text}}</view>
 </view>

@@ -5,7 +5,7 @@
 .container {
   position: relative;
 
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) - 48px);
   margin: 16px var(--horizontal-margin);
   padding: 16px 20px;
   border-left-width: 8px;

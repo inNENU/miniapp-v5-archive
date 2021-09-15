@@ -19,39 +19,36 @@
 }
 
 .copy-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
   overflow: hidden;
 
   max-width: var(--max-width);
-  margin: 2px var(--horizontal-margin);
-  padding: 8px 15px;
+  margin: 0 var(--horizontal-margin);
   border-radius: 8px;
 
   background-color: var(--block-bgcolor);
   color: var(--text-color);
 
-  line-height: 1.2;
+  line-height: 1.5;
 
   .text {
-    padding: 8px 0;
+    flex: 1;
+
+    padding: 10px 15px;
+
     font-size: 17px;
     text-align: justify;
     word-break: break-all;
-
-    &::before {
-      content: " ";
-      display: inline-block;
-      vertical-align: middle;
-      min-height: 13px;
-    }
   }
 
   .copy {
-    float: right;
-
     width: 20px;
     height: 20px;
-    margin: 2px;
-    margin-right: 0;
+    margin-right: 8px;
     padding: 6px;
 
     .icon {
