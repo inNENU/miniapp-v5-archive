@@ -3,9 +3,8 @@
   align-items: center;
   justify-content: center;
 
-  width: calc(100% - 30px);
-  max-width: 517px;
-  margin: 20px auto;
+  max-width: var(--max-width);
+  margin: 20px var(--horizontal-margin);
   padding: 8px 0;
   border-radius: 8px;
 

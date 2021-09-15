@@ -4,7 +4,6 @@
   overflow: hidden;
 
   width: 120px;
-  height: 32px;
   margin: 12px auto;
   border: 1px solid #2ecc71;
   border-radius: 14px;
@@ -35,21 +34,25 @@
 
   display: inline-flex;
 
-  width: calc(100% - 30px);
+  width: calc(100% - 54px);
   margin: 8px 15px;
   padding: 8px 12px;
   border-radius: 8px;
 
   @media (min-width: 768px) {
-    width: calc(50% - 37.5px);
+    width: calc(50% - 61.5px);
     padding: 8px 12px;
 
-    &:nth-last-child(2).bb::after {
+    &:nth-last-child(2)::after {
       display: none;
     }
   }
 
-  &:last-child.bb::after {
+  &::after {
+    top: calc(100% + 8px);
+  }
+
+  &:last-child::after {
     display: none;
   }
 

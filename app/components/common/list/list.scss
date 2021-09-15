@@ -1,8 +1,10 @@
 /* list */
 
 .list-header {
+  display: block;
+
   max-width: var(--max-width);
-  min-height: 36px;
+  min-height: 13px;
   margin: 0 var(--horizontal-margin);
   padding: 12px 15px 4px;
 

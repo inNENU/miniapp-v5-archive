@@ -45,14 +45,12 @@
   </view>
   <view class="forecast bb">
     <view class="item">
-      <view class="top">
-        <text class="date">今天</text>
-        <text class="temperature"
-          >{{tool.getTemperature(weather.dayForecast[1])}}</text
-        >
+      <view class="day-detail">
+        <text>今天</text>
+        <text>{{tool.getTemperature(weather.dayForecast[1])}}</text>
       </view>
-      <view class="bottom">
-        <text class="weather">{{tool.getWeather(weather.dayForecast[1])}}</text>
+      <view class="day-detail">
+        <text>{{tool.getWeather(weather.dayForecast[1])}}</text>
         <image
           class="icon"
           src="{{weatherIcon[weather.dayForecast[1].dayWeatherCode]}}"
@@ -60,14 +58,12 @@
       </view>
     </view>
     <view class="item">
-      <view class="top">
-        <text class="date">明天</text>
-        <text class="temperature"
-          >{{tool.getTemperature(weather.dayForecast[2])}}</text
-        >
+      <view class="day-detail">
+        <text>明天</text>
+        <text>{{tool.getTemperature(weather.dayForecast[2])}}</text>
       </view>
-      <view class="bottom">
-        <text class="weather">{{tool.getWeather(weather.dayForecast[2])}}</text>
+      <view class="day-detail">
+        <text>{{tool.getWeather(weather.dayForecast[2])}}</text>
         <image
           class="icon"
           src="{{weatherIcon[weather.dayForecast[2].dayWeatherCode]}}"

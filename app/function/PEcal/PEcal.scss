@@ -71,11 +71,8 @@
 
 .list-item {
   position: relative;
-
   display: flex;
   align-items: center;
-
-  width: 100%;
   padding: 12px 24px;
 
   &::after {
@@ -131,8 +128,8 @@
 .score-list {
   position: relative;
 
-  margin: 0 15px;
-  border-radius: 5px;
+  margin: 15px 0;
+  border-radius: 8px;
 
   background-color: var(--block-bgcolor);
   color: var(--text-color);
@@ -143,7 +140,6 @@
   .item {
     position: relative;
     display: flex;
-    width: 100%;
     padding: 6px 15px;
 
     &::before {

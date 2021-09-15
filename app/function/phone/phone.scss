@@ -9,18 +9,26 @@
   display: inline-flex;
   align-items: center;
 
-  width: calc(100% - 30px);
+  width: calc(100% - 54px);
   margin: 8px 15px;
   padding: 8px 12px;
   border-radius: 8px;
 
   @media (min-width: 768px) {
-    width: calc(50% - 37.5px);
+    width: calc(50% - 61.5px);
     padding: 8px 12px;
 
-    &:nth-last-child(2).bb::after {
+    &:nth-last-child(2)::after {
       display: none;
     }
+  }
+
+  &::after {
+    top: calc(100% + 8px);
+  }
+
+  &:last-child::after {
+    display: none;
   }
 
   .info {

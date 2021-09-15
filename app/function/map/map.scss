@@ -16,8 +16,8 @@
 @mixin single-button() {
   @include button;
 
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   padding: 4px;
   border-radius: 12px;
 
@@ -37,7 +37,6 @@
   overflow: hidden;
 
   width: 120px;
-  height: 32px;
   border: 1px solid #2ecc71;
   border-radius: 14px;
 
