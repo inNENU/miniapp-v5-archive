@@ -24,7 +24,7 @@
 
   overflow: hidden;
 
-  max-width: var(--max-width);
+  max-width: calc(var(--max-width) - 30px);
   margin: 2px var(--horizontal-margin);
   padding: 0 15px;
   border-radius: 8px;
@@ -51,10 +51,12 @@
   .add {
     overflow: hidden;
 
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
     margin: 0 4px;
-    border-radius: 13px;
+    border-radius: 14px;
+
+    line-height: 1;
   }
 
   .icon {
