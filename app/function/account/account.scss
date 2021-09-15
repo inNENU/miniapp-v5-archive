@@ -26,7 +26,6 @@
 
 .account-wrapper {
   height: 100%;
-  text-align: justify;
 }
 
 .account-item {
@@ -38,6 +37,9 @@
   margin: 8px 15px;
   padding: 8px 12px;
   border-radius: 8px;
+
+  line-height: 1.2;
+  text-align: justify;
 
   @media (min-width: 768px) {
     width: calc(50% - 61.5px);
