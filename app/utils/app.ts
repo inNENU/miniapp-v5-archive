@@ -398,7 +398,7 @@ export const appUpdate = (globalData: GlobalData): void => {
     // 更新下载失败
     updateManager.onUpdateFailed(() => {
       // 提示用户网络出现问题
-      tip("小程序更新下载失败，请检查您的网络！");
+      tip("小程序更新下载失败，请检查您的网络!");
 
       // 调试
       logger.warn("Upate App error because of Net Error");
