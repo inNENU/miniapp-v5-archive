@@ -1,6 +1,8 @@
 <!-- 标题 -->
-<view wx:if="{{config.header}}" class="phone-header">{{config.header}}</view>
-<view class="phone-wrapper">
+<view wx:if="{{config.header}}" class="phone-component-header"
+  >{{config.header}}</view
+>
+<view class="phone-component-wrapper">
   <!-- 电话图标 -->
   <image class="phone-icon" mode="widthFix" src="./phone.svg" />
   <!-- 电话号码 -->

@@ -1,11 +1,11 @@
 <view
-  class="doc-wrapper"
+  class="doc"
   hover-class="button-hover"
   hover-stay-time="100"
   catch:tap="view"
 >
   <!-- 文档图标 -->
-  <image class="doc-icon" src="./icon/{{config.icon}}.svg" />
+  <image class="type-icon" src="./icon/{{config.icon}}.svg" />
   <!-- 文档名称 -->
   <view class="name">{{config.name}}</view>
   <!-- 下载按钮 -->

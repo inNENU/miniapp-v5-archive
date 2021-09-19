@@ -1,4 +1,4 @@
-.phone-header {
+.phone-component-header {
   max-width: var(--max-width);
   min-height: 13px;
   margin: 0 var(--horizontal-margin);
@@ -18,7 +18,7 @@
   }
 }
 
-.phone-wrapper {
+.phone-component-wrapper {
   display: flex;
   align-items: center;
 

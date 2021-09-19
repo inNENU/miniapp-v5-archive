@@ -1,4 +1,4 @@
-.footer-wrapper {
+.footer {
   max-width: var(--max-width);
   margin: auto auto 0;
   padding: 10px 15px 8px;
@@ -21,7 +21,7 @@
     justify-content: space-between;
   }
 
-  .footer {
+  .content {
     display: flex;
     align-items: center;
     justify-content: center;

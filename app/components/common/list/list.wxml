@@ -1,9 +1,9 @@
 <!-- 列表头部文字 -->
-<view wx:if="{{config.header !== false}}" class="list-header"
+<view wx:if="{{config.header !== false}}" class="list-component-header"
   >{{config.header}}</view
 >
 <!-- 列表主体 -->
-<view class="list-wrapper">
+<view class="list-component-content">
   <!-- 列表每一项 -->
   <block wx:for="{{config.content}}" wx:for-item="listItem" wx:key="text">
     <!-- 判断是否隐藏列表这一项 -->
@@ -11,7 +11,7 @@
       <!-- 导航链接 -->
       <view
         wx:if="{{listItem.url}}"
-        class="list"
+        class="list-item"
         hover-class="button-hover"
         hover-stay-time="100"
         data-url="{{listItem.url}}"
@@ -28,7 +28,7 @@
         <view class="access" />
       </view>
       <!-- 普通文字段落 -->
-      <view wx:else class="list">
+      <view wx:else class="list-item">
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
         <image
           wx:elif="{{listItem.icon}}"
@@ -46,4 +46,6 @@
   </block>
 </view>
 <!-- 列表尾部文字 -->
-<view wx:if="{{config.footer}}" class="list-footer">{{config.footer}}</view>
+<view wx:if="{{config.footer}}" class="list-component-footer"
+  >{{config.footer}}</view
+>

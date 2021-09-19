@@ -1,15 +1,17 @@
 <!-- 标题 -->
-<view wx:if="{{config.header}}" class="copy-header">{{config.header}}</view>
-<view class="copy-wrapper">
+<view wx:if="{{config.header}}" class="copy-component-header"
+  >{{config.header}}</view
+>
+<view class="copy-component-wrapper">
   <!-- 待复制文字 -->
-  <view class="text">{{config.text}}</view>
+  <view class="copy-text">{{config.text}}</view>
   <!-- 复制按钮 -->
   <view
-    class="copy"
+    class="copy-button"
     hover-class="button-hover"
     hover-stay-time="100"
     catch:tap="copy"
   >
-    <image class="icon" src="./icon/copy.svg" />
+    <image class="copy-icon" src="./icon/copy.svg" />
   </view>
 </view>

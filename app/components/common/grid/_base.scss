@@ -1,4 +1,4 @@
-.grid-head {
+.grid-component-header {
   min-height: 13px;
   padding: 12px 15px 4px;
 
@@ -28,12 +28,12 @@
   }
 }
 
-.grid-wrapper {
+.grid-component-wrapper {
   display: flex;
   flex-wrap: wrap;
 }
 
-.grid-foot {
+.grid-component-footer {
   min-height: 15px;
   padding: 5px 15px;
 

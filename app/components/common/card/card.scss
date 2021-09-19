@@ -1,4 +1,4 @@
-.card {
+.card-component {
   overflow: hidden;
 
   max-width: 517px;
@@ -14,7 +14,7 @@
     margin: 12px auto;
   }
 
-  .img {
+  .cover {
     width: 100%;
     height: 290rpx;
     max-height: 220px;
@@ -46,7 +46,7 @@
     }
   }
 
-  .icon-wrapper {
+  .info {
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,6 +1,6 @@
 .phone-wrapper {
   height: 100%;
-  text-align: justify;
+  text-align: left;
 }
 
 .phone {
@@ -13,6 +13,8 @@
   margin: 8px 15px;
   padding: 8px 12px;
   border-radius: 8px;
+
+  text-align: justify;
 
   @media (min-width: 768px) {
     width: calc(50% - 61.5px);

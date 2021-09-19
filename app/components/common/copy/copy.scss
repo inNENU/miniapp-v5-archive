@@ -1,4 +1,4 @@
-.copy-header {
+.copy-component-header {
   max-width: var(--max-width);
   min-height: 13px;
   margin: 0 var(--horizontal-margin);
@@ -18,7 +18,7 @@
   }
 }
 
-.copy-wrapper {
+.copy-component-wrapper {
   position: relative;
 
   display: flex;
@@ -36,7 +36,7 @@
 
   line-height: 1.5;
 
-  .text {
+  .copy-text {
     flex: 1;
 
     padding: 10px 0;
@@ -46,14 +46,14 @@
     word-break: break-all;
   }
 
-  .copy {
+  .copy-button {
     width: 20px;
     height: 20px;
     padding: 6px;
+  }
 
-    .icon {
-      width: 100%;
-      height: 100%;
-    }
+  .copy-icon {
+    width: 100%;
+    height: 100%;
   }
 }

@@ -1,6 +1,6 @@
 /* list */
 
-.list-header {
+.list-component-header {
   display: block;
 
   max-width: var(--max-width);
@@ -22,19 +22,7 @@
   }
 }
 
-.list-footer {
-  max-width: var(--max-width);
-  min-height: 16px;
-  margin: 0 15px;
-  padding: 5px 15px 0;
-
-  color: var(--dark-grey);
-
-  font-size: 13px;
-  text-align: left;
-}
-
-.list-wrapper {
+.list-component-content {
   position: relative;
 
   overflow: hidden;
@@ -45,7 +33,7 @@
 
   background-color: var(--block-bgcolor);
 
-  .list {
+  .list-item {
     position: relative;
 
     display: flex;
@@ -160,4 +148,16 @@
       display: none;
     }
   }
+}
+
+.list-component-footer {
+  max-width: var(--max-width);
+  min-height: 16px;
+  margin: 0 15px;
+  padding: 5px 15px 0;
+
+  color: var(--dark-grey);
+
+  font-size: 13px;
+  text-align: left;
 }

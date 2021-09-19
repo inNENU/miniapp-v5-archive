@@ -1,9 +1,9 @@
 <!-- 网格头部文字 -->
-<view wx:if="{{config.header !== false}}" class="grid-head"
+<view wx:if="{{config.header !== false}}" class="grid-component-header"
   >{{config.header}}</view
 >
 <!-- 网格主体 -->
-<view class="grid-wrapper">
+<view class="grid-component-wrapper">
   <!-- 每个网格 -->
   <view
     wx:for="{{config.content}}"
@@ -25,4 +25,6 @@
   </view>
 </view>
 <!-- 网格尾部文字 -->
-<view wx:if="{{config.footer}}" class="grid-foot">{{config.footer}}</view>
+<view wx:if="{{config.footer}}" class="grid-component-footer"
+  >{{config.footer}}</view
+>

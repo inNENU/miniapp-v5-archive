@@ -1,7 +1,7 @@
-<view class="intro-wrapper">
+<view class="intro">
   <!-- 高斯模糊背景 -->
   <image class="background" src="{{config.logo}}" mode="aspectFill" lazy-load />
-  <view class="intro">
+  <view class="content">
     <!-- 图标 -->
     <image class="logo" src="{{config.logo}}" lazy-load />
     <!-- 名称 -->

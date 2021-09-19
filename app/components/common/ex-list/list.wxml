@@ -1,17 +1,17 @@
 <wxs src="./list.wxs" module="list" />
 <!-- 列表头部注释文字 -->
-<view wx:if="{{config.header !== false}}" class="list-header"
+<view wx:if="{{config.header !== false}}" class="list-component-header"
   >{{config.header}}</view
 >
 <!-- 列表主体 -->
-<view class="list-wrapper">
+<view class="list-component-content">
   <block wx:for="{{config.content}}" wx:for-item="listItem" wx:key="text">
     <block wx:if="{{!listItem.hidden}}">
       <!-- 按钮、嵌入选择器与滑块 -->
       <button
         wx:if="{{list.isButton(listItem)}}"
         id="{{index}}"
-        class="list"
+        class="list-item"
         hover-class="button-hover"
         hover-stay-time="100"
         disabled="{{listItem.disabled}}"
@@ -52,7 +52,7 @@
       <navigator
         wx:elif="{{listItem.type === 'navigator'}}"
         id="{{index}}"
-        class="list"
+        class="list-item"
         hover-class="button-hover"
         hover-stay-time="100"
         url="{{listItem.url}}"
@@ -74,7 +74,7 @@
       <view
         wx:elif="{{listItem.url}}"
         id="{{index}}"
-        class="list"
+        class="list-item"
         hover-class="button-hover"
         hover-stay-time="100"
         data-url="{{listItem.url}}"
@@ -117,7 +117,7 @@
       </picker>
 
       <!-- 普通文字段落与开关 -->
-      <view wx:else id="{{index}}" class="list">
+      <view wx:else id="{{index}}" class="list-item">
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
         <image
           wx:elif="{{listItem.icon}}"
@@ -186,4 +186,6 @@
   </block>
 </view>
 <!-- 列表尾部注释文字 -->
-<view wx:if="{{config.footer}}" class="list-footer">{{config.footer}}</view>
+<view wx:if="{{config.footer}}" class="list-component-footer"
+  >{{config.footer}}</view
+>
