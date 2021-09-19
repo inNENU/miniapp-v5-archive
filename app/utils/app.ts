@@ -530,11 +530,8 @@ export const startup = (globalData: GlobalData): void => {
 
   // 获取网络信息
   wx.getNetworkType({
-    success: (res) => {
-      const { networkType } = res;
-
-      if (networkType === "none" || networkType === "unknown")
-        tip("您的网络状态不佳");
+    success: ({ networkType }) => {
+      if (networkType === "none") tip("您的网络状态不佳");
     },
   });
 

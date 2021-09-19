@@ -72,7 +72,6 @@ export const netReport = (): void => {
           tip("您的网络状态不佳");
           break;
         case "none":
-        case "unknown":
           tip("您没有连接到网络");
           break;
         case "wifi":
