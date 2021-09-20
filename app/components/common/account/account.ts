@@ -5,7 +5,7 @@ import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
-import type { IntroComponentOptions } from "../../../../typings";
+import type { AccountComponentOptions } from "../../../../typings";
 
 type IconData = Record<string, string>;
 
@@ -19,7 +19,7 @@ $Component({
   properties: {
     /** 介绍组件配置 */
     config: {
-      type: Object as PropType<IntroComponentOptions>,
+      type: Object as PropType<AccountComponentOptions>,
       required: true,
     },
   },

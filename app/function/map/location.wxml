@@ -18,7 +18,7 @@
       <view class="icon-{{firstPage? 'home': 'back'}}" />
     </view>
     <view
-      class="nenunav {{borderDisplay? 'fade-in': 'fade-out'}}"
+      class="nenu-navigation-bar {{borderDisplay? 'fade-in': 'fade-out'}}"
       style="background-color: {{page.color}}; padding-top: {{statusBarHeight}}px;"
     >
       <view

@@ -59,7 +59,7 @@ $Page("authorize", {
           ],
         },
         {
-          tag: "advanced-list",
+          tag: "functional-list",
           header: "进行授权",
           content: [
             { text: "地理位置", type: "button", handler: "location" },

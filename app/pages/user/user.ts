@@ -8,7 +8,7 @@ import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
 import type {
-  AdvancedListComponentConfig,
+  FunctionalListComponentConfig,
   PageDataWithContent,
   PickerListComponentItemConfig,
 } from "../../../typings";
@@ -95,7 +95,7 @@ $Page("user", {
     // get the updated theme
     const theme = (
       (
-        (this.data.page.content[1] as AdvancedListComponentConfig)
+        (this.data.page.content[1] as FunctionalListComponentConfig)
           .content[0] as PickerListComponentItemConfig
       ).select as string[]
     )[Number(value)];

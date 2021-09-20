@@ -1,27 +1,21 @@
 /* nenu nav */
-.nenunav,
-.nenunav2 {
+.nenu-navigation-bar {
   position: fixed;
   z-index: 99;
 
   display: flex;
   align-items: center;
-  justify-content: center;
-
-  width: 100%;
-
-  background-color: #5ab879;
-  color: #fff;
-}
-
-.nenunav {
   justify-content: flex-start;
 
   box-sizing: content-box;
 
+  width: 100%;
   height: 44px;
   padding: 2px 0;
   border-bottom: 1rpx solid var(--bgcolor-grey);
+
+  background-color: #5ab879;
+  color: #fff;
 }
 
 .nenu-nav-title {

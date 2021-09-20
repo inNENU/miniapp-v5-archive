@@ -1,4 +1,4 @@
-.paragraph-header {
+.text-component-header {
   display: block;
 
   max-width: var(--max-width);
@@ -23,7 +23,7 @@
   }
 }
 
-.paragraph {
+.text-component {
   max-width: var(--max-width);
   margin: 0 var(--paragraph-horizontal-margin);
   padding: 0 15px;
@@ -55,8 +55,8 @@
   }
 }
 
-.container,
-.paragraph {
+.container-component,
+.text-component {
   .text {
     word-wrap: break-word;
   }

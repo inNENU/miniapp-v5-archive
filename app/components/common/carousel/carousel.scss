@@ -1,29 +1,28 @@
-/* swiper */
-.swiper-wrapper {
+.carousel {
   position: relative;
   width: 100%;
-}
 
-.swiper {
-  width: 100%;
-  height: 400rpx;
-
-  .image {
+  .item {
     width: 100%;
-    height: 100%;
-  }
+    height: 400rpx;
 
-  &.card .image {
-    overflow: hidden;
+    .image {
+      width: 100%;
+      height: 100%;
+    }
 
-    width: calc(100% - 30px);
-    height: 360rpx;
-    margin: 20px 15px;
-    border-radius: 16rpx;
+    &.card .image {
+      overflow: hidden;
+
+      width: calc(100% - 30px);
+      height: 360rpx;
+      margin: 20px 15px;
+      border-radius: 16rpx;
+    }
   }
 }
 
-.swiper-dots {
+.carousel-dots {
   position: absolute;
   right: 0;
   bottom: 20rpx;

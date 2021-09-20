@@ -6,7 +6,7 @@ import { requestJSON, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {
-  AdvancedListComponentConfig,
+  FunctionalListComponentConfig,
   ComponentConfig,
   PageDataWithContent,
   SwitchListComponentItemConfig,
@@ -26,7 +26,7 @@ $Page("about", {
       grey: true,
       content: [
         {
-          tag: "advanced-list",
+          tag: "functional-list",
           header: "版本号",
           content: [
             { text: globalData.version, type: "button", handler: "debugMode" },
@@ -45,7 +45,7 @@ $Page("about", {
             { text: "复制用户APPID", type: "button", handler: "copyAppID" },
             { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
-        } as AdvancedListComponentConfig,
+        } as FunctionalListComponentConfig,
         { tag: "loading" },
       ],
     } as PageDataWithContent,
@@ -58,7 +58,7 @@ $Page("about", {
     if (wx.getStorageSync<boolean | undefined>("developMode"))
       developMode = true;
     if (!developMode)
-      (page.content[0] as AdvancedListComponentConfig).content.forEach(
+      (page.content[0] as FunctionalListComponentConfig).content.forEach(
         (x, y) => {
           x.hidden = y !== 0;
         }
@@ -76,7 +76,7 @@ $Page("about", {
       if (wx.getStorageSync<boolean | undefined>("developMode"))
         developMode = true;
       if (!developMode)
-        (page.content[0] as AdvancedListComponentConfig).content.forEach(
+        (page.content[0] as FunctionalListComponentConfig).content.forEach(
           (x, y) => {
             x.hidden = y !== 0;
           }
@@ -135,7 +135,7 @@ $Page("about", {
     if (developMode) {
       wx.setStorageSync("developMode", false);
       (
-        this.data.page.content[0] as AdvancedListComponentConfig
+        this.data.page.content[0] as FunctionalListComponentConfig
       ).content.forEach((x, y) => {
         x.hidden = y !== 0;
       });
@@ -171,7 +171,7 @@ $Page("about", {
       if (event.detail.value === "5201314") {
         tip("已启用开发者模式");
         (
-          this.data.page.content[0] as AdvancedListComponentConfig
+          this.data.page.content[0] as FunctionalListComponentConfig
         ).content.forEach((x) => {
           x.hidden = false;
         });
@@ -208,7 +208,7 @@ $Page("about", {
    */
   toggleDebug(value: boolean) {
     (
-      (this.data.page.content[0] as AdvancedListComponentConfig)
+      (this.data.page.content[0] as FunctionalListComponentConfig)
         .content[2] as SwitchListComponentItemConfig
     ).status = value;
     this.setData({ page: this.data.page });

@@ -8,7 +8,7 @@ import type { PageInstance, PageQuery } from "@mptool/enhance";
 import type { AppOption } from "../app";
 import type { Notice } from "./app";
 import type {
-  AdvancedListComponentItemConfig,
+  FunctionalListComponentItemConfig,
   GridComponentItemConfig,
   ListComponentItemConfig,
   PageData,
@@ -47,7 +47,7 @@ export const path2id = (path = ""): string =>
  */
 const resolveContent = (
   listElement: (
-    | AdvancedListComponentItemConfig
+    | FunctionalListComponentItemConfig
     | GridComponentItemConfig
     | ListComponentItemConfig
   ) & { hidden?: boolean },
@@ -128,7 +128,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
         element.content.forEach(
           (
             listElement: (
-              | AdvancedListComponentItemConfig
+              | FunctionalListComponentItemConfig
               | GridComponentItemConfig
               | ListComponentItemConfig
             ) & { hidden?: boolean }
@@ -156,7 +156,7 @@ const preloadPage = (page: PageData): void => {
         component.content.forEach(
           (
             element: (
-              | AdvancedListComponentItemConfig
+              | FunctionalListComponentItemConfig
               | GridComponentItemConfig
               | ListComponentItemConfig
             ) & { hidden?: boolean }

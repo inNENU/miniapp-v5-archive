@@ -1,26 +1,26 @@
 import type {
-  TitleComponentOptions,
-  TextComponentOptions,
-  ImageComponentOptions,
-  FooterComponentOptions,
-  DocComponentOptions,
-  PhoneComponentOptions,
-  SwiperComponentOptions,
-  MediaComponentOptions,
+  AccountComponentOptions,
   CardComponentOptions,
-  CopyComponentOptions,
-  LoadingComponentOptions,
-  IntroComponentOptions,
-  AdvancedListComponentOptions,
   ButtonListComponnetItemOptions,
+  CarouselComponentOptions,
+  CopyComponentOptions,
+  DocComponentOptions,
+  FooterComponentOptions,
+  FunctionalListComponentOptions,
   GridComponentItemOptions,
   GridComponentOptions,
+  ImageComponentOptions,
   ListComponentItemOptions,
   ListComponentOptions,
+  LoadingComponentOptions,
+  MediaComponentOptions,
   NaviagatorListComponentItemOptions,
+  PickerListComponentItemOptions,
+  PhoneComponentOptions,
   SwitchListComponentItemOptions,
   SliderListComponentItemOptions,
-  PickerListComponentItemOptions,
+  TextComponentOptions,
+  TitleComponentOptions,
 } from "../server/typings";
 
 export interface GridComponentItemConfig extends GridComponentItemOptions {
@@ -75,7 +75,7 @@ export interface ButtonListComponnetItemConfig
   disabled?: boolean;
 }
 
-export type AdvancedListComponentItemConfig =
+export type FunctionalListComponentItemConfig =
   | ListComponentItemOptions
   | NaviagatorListComponentItemOptions
   | SwitchListComponentItemConfig
@@ -83,28 +83,28 @@ export type AdvancedListComponentItemConfig =
   | SliderListComponentItemConfig
   | ButtonListComponnetItemConfig;
 
-export interface AdvancedListComponentConfig
-  extends AdvancedListComponentOptions {
+export interface FunctionalListComponentConfig
+  extends FunctionalListComponentOptions {
   /** 列表内容 */
-  content: AdvancedListComponentItemConfig[];
+  content: FunctionalListComponentItemConfig[];
 }
 
 export type ComponentConfig = (
-  | TitleComponentOptions
-  | TextComponentOptions
+  | AccountComponentOptions
+  | CardComponentOptions
+  | CarouselComponentOptions
+  | CopyComponentOptions
+  | DocComponentOptions
+  | FooterComponentOptions
+  | FunctionalListComponentConfig
+  | GridComponentConfig
   | ImageComponentOptions
   | ListComponentConfig
-  | AdvancedListComponentConfig
-  | GridComponentConfig
-  | FooterComponentOptions
-  | DocComponentOptions
-  | PhoneComponentOptions
-  | SwiperComponentOptions
-  | MediaComponentOptions
-  | CardComponentOptions
-  | CopyComponentOptions
   | LoadingComponentOptions
-  | IntroComponentOptions
+  | MediaComponentOptions
+  | PhoneComponentOptions
+  | TextComponentOptions
+  | TitleComponentOptions
 ) & {
   /**
    * 是否隐藏

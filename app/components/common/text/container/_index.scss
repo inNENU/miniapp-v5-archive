@@ -2,7 +2,7 @@
 @use "../../../../styles/lib/svg";
 @use "icons";
 
-.container {
+.container-component {
   position: relative;
 
   max-width: calc(var(--max-width) - 48px);

@@ -5,7 +5,7 @@
   <block wx:if="{{content && content.length}}">
     <block wx:for="{{content}}" wx:key="id">
       <block wx:if="{{!item.hidden}}">
-        <my-text wx:if="{{template.isText(item.tag)}}" config="{{item}}" />
+        <plain-text wx:if="{{template.isText(item.tag)}}" config="{{item}}" />
         <title wx:elif="{{item.tag === 'title'}}" config="{{item}}" />
         <img
           wx:elif="{{item.tag === 'img'}}"
@@ -17,12 +17,18 @@
         <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
         <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
         <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-        <my-swiper wx:elif="{{item.tag === 'swiper'}}" config="{{item}}" />
-        <intro wx:elif="{{item.tag === 'intro'}}" config="{{item}}" />
+        <carousel
+          wx:elif="{{item.tag === 'carousel' || item.tag === 'swiper'}}"
+          config="{{item}}"
+        />
+        <account
+          wx:elif="{{item.tag === 'account' || item.tag === 'intro'}}"
+          config="{{item}}"
+        />
         <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
         <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
-        <ex-list
-          wx:elif="{{item.tag === 'advanced-list'}}"
+        <functional-list
+          wx:elif="{{item.tag === 'functional-list' || item.tag === 'advanced-list'}}"
           config="{{item}}"
           ref="list{{index}}"
           binding="$"

@@ -1,4 +1,4 @@
-.nenu .page-header {
+.nenu .title-component {
   min-height: 24px;
   padding: 9px 15px 3px;
 
@@ -6,7 +6,7 @@
   font-size: 18px;
   text-align: left;
 
-  + .page-header {
+  + .title-component {
     padding-top: 2px;
   }
 }

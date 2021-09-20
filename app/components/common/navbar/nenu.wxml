@@ -11,7 +11,7 @@
       <view class="icon-{{firstPage? 'home': 'back'}}" />
     </view>
     <view
-      class="nenunav {{titleDisplay? 'fade-out': 'fade-in'}}"
+      class="nenu-navigation-bar {{titleDisplay? 'fade-out': 'fade-in'}}"
       style="background-color: {{color}}; padding-top: {{statusBarHeight}}px;"
     >
       <view
@@ -30,7 +30,7 @@
   </block>
   <block wx:else>
     <view
-      class="nenunav"
+      class="nenu-navigation-bar"
       style="{{nav.color? 'background-color:' + nav.color + '; ': ''}}padding-top: {{statusBarHeight}}px;"
     >
       <view

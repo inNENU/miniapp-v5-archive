@@ -29,7 +29,7 @@ $Page("storage", {
           ],
         },
         {
-          tag: "advanced-list",
+          tag: "functional-list",
           header: "内容更新",
           content: [
             {
@@ -46,7 +46,7 @@ $Page("storage", {
           ],
         },
         {
-          tag: "advanced-list",
+          tag: "functional-list",
           header: "重置",
           content: [
             { text: "清除小程序数据", type: "button", handler: "clearData" },

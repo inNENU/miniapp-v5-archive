@@ -1,6 +1,6 @@
-<view class="swiper-wrapper">
+<view class="carousel">
   <swiper
-    class="{{config.class || config.fill? 'swiper': 'swiper card'}}"
+    class="{{config.class || ('item' + config.fill? '': ' card')}}"
     style="{{config.style}}"
     autoplay="{{config.autoplay !== false}}"
     interval="{{config.interval || '5000'}}"
@@ -24,13 +24,13 @@
 
   <view
     wx:if="{{config.indicatorDots !== false && config.url.length > 1}}"
-    class="swiper-dots"
+    class="carousel-dots"
   >
     <view
       wx:for="{{config.url}}"
       wx:key="*this"
       class="dot {{index === current? 'active' : ''}}"
-      style="backgrpund-color: {{config.dotColor || '#fff'}}"
+      style="background-color: {{config.dotColor || '#fff'}}"
     />
   </view>
 </view>

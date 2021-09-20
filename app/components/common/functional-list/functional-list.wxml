@@ -1,4 +1,4 @@
-<wxs src="./list.wxs" module="list" />
+<wxs src="./functional-list.wxs" module="list" />
 <!-- 列表头部注释文字 -->
 <view wx:if="{{config.header !== false}}" class="list-component-header"
   >{{config.header}}</view
