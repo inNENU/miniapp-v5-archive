@@ -17,18 +17,12 @@
         <grid wx:elif="{{item.tag === 'grid'}}" config="{{item}}" />
         <doc wx:elif="{{item.tag === 'doc'}}" config="{{item}}" />
         <phone wx:elif="{{item.tag === 'phone'}}" config="{{item}}" />
-        <carousel
-          wx:elif="{{item.tag === 'carousel' || item.tag === 'swiper'}}"
-          config="{{item}}"
-        />
-        <account
-          wx:elif="{{item.tag === 'account' || item.tag === 'intro'}}"
-          config="{{item}}"
-        />
+        <carousel wx:elif="{{item.tag === 'carousel'}}" config="{{item}}" />
+        <account wx:elif="{{item.tag === 'account'}}" config="{{item}}" />
         <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
         <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
         <functional-list
-          wx:elif="{{item.tag === 'functional-list' || item.tag === 'advanced-list'}}"
+          wx:elif="{{item.tag === 'functional-list'}}"
           config="{{item}}"
           ref="list{{index}}"
           binding="$"
