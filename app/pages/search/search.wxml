@@ -32,7 +32,7 @@
 
   <title config="{{ { text: '搜索结果' } }}" />
 
-  <view wx:if="{{result.content.length === 0 }}" class="info"
+  <view wx:if="{{result.length === 0 }}" class="info"
     >Oops... 没有找到任何结果</view
   >
 
