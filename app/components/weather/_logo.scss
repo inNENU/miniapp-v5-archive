@@ -194,9 +194,8 @@
 
 @keyframes starry-star {
   50% {
-    box-shadow: rgb(255 255 255 / 10%) 26px 7px 0 -1px,
-      #fff -36px -19px 0 -1px, #fff -51px -34px 0 -1px,
-      rgb(255 255 255 / 10%) -52px -62px 0 -1px,
+    box-shadow: rgb(255 255 255 / 10%) 26px 7px 0 -1px, #fff -36px -19px 0 -1px,
+      #fff -51px -34px 0 -1px, rgb(255 255 255 / 10%) -52px -62px 0 -1px,
       rgb(255 255 255 / 10%) 14px -37px, #fff 41px -19px,
       rgb(255 255 255 / 10%) 34px -50px, #fff 14px -71px 0 -1px,
       rgb(255 255 255 / 10%) 64px -21px 0 -1px, #fff 32px -85px 0 -1px,
@@ -392,9 +391,9 @@
 
 @keyframes snowy-snow {
   0% {
-    box-shadow: rgb(238 238 238 / 0%) 30px 30px,
-      rgb(238 238 238 / 0%) 40px 40px, #eee 50px 75px, #eee 55px 50px,
-      #eee 70px 100px, #eee 80px 95px, #eee 110px 45px, #eee 90px 35px;
+    box-shadow: rgb(238 238 238 / 0%) 30px 30px, rgb(238 238 238 / 0%) 40px 40px,
+      #eee 50px 75px, #eee 55px 50px, #eee 70px 100px, #eee 80px 95px,
+      #eee 110px 45px, #eee 90px 35px;
   }
 
   25% {
@@ -410,9 +409,9 @@
   }
 
   50% {
-    box-shadow: #eee 30px 70px, #eee 40px 80px,
-      rgb(238 238 238 / 0%) 50px 100px, #eee 55px 80px, #eee 70px 60px,
-      #eee 80px 45px, #eee 110px 95px, #eee 90px 85px;
+    box-shadow: #eee 30px 70px, #eee 40px 80px, rgb(238 238 238 / 0%) 50px 100px,
+      #eee 55px 80px, #eee 70px 60px, #eee 80px 45px, #eee 110px 95px,
+      #eee 90px 85px;
   }
 
   51% {
