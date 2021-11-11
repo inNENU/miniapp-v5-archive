@@ -1,8 +1,8 @@
 .weui {
   .grid-component-wrapper {
     overflow: hidden;
-    border-top: 1rpx solid rgba(0, 0, 0, 0.1);
-    border-left: 1rpx solid rgba(0, 0, 0, 0.1);
+    border-top: 1rpx solid rgb(0 0 0 / 10%);
+    border-left: 1rpx solid rgb(0 0 0 / 10%);
 
     .grid {
       position: relative;
@@ -13,14 +13,14 @@
 
       width: 25%;
       padding: 20px 10px;
-      border-right: 1rpx solid rgba(0, 0, 0, 0.1);
-      border-bottom: 1rpx solid rgba(0, 0, 0, 0.1);
+      border-right: 1rpx solid rgb(0 0 0 / 10%);
+      border-bottom: 1rpx solid rgb(0 0 0 / 10%);
 
       background-color: #fff;
 
       @media (prefers-color-scheme: dark) {
-        border-right: 1rpx solid rgba(255, 255, 255, 0.1);
-        border-bottom: 1rpx solid rgba(255, 255, 255, 0.1);
+        border-right: 1rpx solid rgb(255 255 255 / 10%);
+        border-bottom: 1rpx solid rgb(255 255 255 / 10%);
         background-color: #000;
       }
     }
@@ -39,7 +39,7 @@
 
       margin-top: 5px;
 
-      color: rgba(0, 0, 0, 0.9);
+      color: rgb(0 0 0 / 90%);
 
       font-size: 14px;
       text-align: center;
@@ -47,7 +47,7 @@
       white-space: nowrap;
 
       @media (prefers-color-scheme: dark) {
-        color: rgba(255, 255, 255, 0.9);
+        color: rgb(255 255 255 / 90%);
       }
     }
   }

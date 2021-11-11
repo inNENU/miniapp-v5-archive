@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../../styles/lib/svg";
 
 .custom-navigation-bar {
@@ -15,14 +16,14 @@
   height: 44px;
   padding: 20px 120px 0 10px;
 
-  background-color: rgba(248, 248, 248, 0.6);
+  background-color: rgb(248 248 248 / 60%);
 
   text-align: center;
-
+  /* stylelint-disable-next-line scss/no-global-function-names */
   backdrop-filter: saturate(180%) blur(20px);
 
   @media (prefers-color-scheme: dark) {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgb(0 0 0 / 60%);
   }
 
   .search-wrapper {

@@ -54,58 +54,58 @@
 
 @keyframes fade {
   0% {
-    opacity: 0;
+    opacity: 0%;
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
   }
 }
 
 @keyframes scale-up {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: scale(0.2);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: scale(1);
   }
 }
 
 @keyframes scale-down {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: scale(1.8);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: scale(1);
   }
 }
 
 @keyframes slide-top {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: translateY(-100%);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: translateY(0);
   }
 }
 
 @keyframes slide-bottom {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: translateY(100%);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: translateY(0);
   }
 }
@@ -155,24 +155,24 @@
 
 @keyframes slide-left {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: translateX(-100%);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: translateX(0);
   }
 }
 
 @keyframes slide-right {
   0% {
-    opacity: 0;
+    opacity: 0%;
     transform: translateX(100%);
   }
 
   100% {
-    opacity: 1;
+    opacity: 100%;
     transform: translateX(0);
   }
 }
@@ -185,11 +185,11 @@
 }
 
 .fade-in {
-  opacity: 1 !important;
+  opacity: 100% !important;
 }
 
 .fade-out {
-  opacity: 0 !important;
+  opacity: 0% !important;
 }
 
 .move-left-in,

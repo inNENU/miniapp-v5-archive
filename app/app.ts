@@ -58,14 +58,14 @@ $Config({
 
     options.onLoad = wrapFunction(
       options.onLoad,
-      function (this: TrivialPageInstance) {
+      function (this: TrivialPageInstance & { onThemeChange: () => void }) {
         if (wx.canIUse("onThemeChange")) wx.onThemeChange(this.onThemeChange);
       }
     );
 
     options.onUnload = wrapFunction(
       options.onUnload,
-      function (this: TrivialPageInstance) {
+      function (this: TrivialPageInstance & { onThemeChange: () => void }) {
         if (wx.canIUse("onThemeChange")) wx.offThemeChange(this.onThemeChange);
       }
     );

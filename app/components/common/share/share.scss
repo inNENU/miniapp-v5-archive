@@ -12,10 +12,10 @@
   height: 36px;
   border-radius: 50%;
 
-  box-shadow: 1px 1px 3px rgba(127, 127, 127, 0.15);
+  box-shadow: 1px 1px 3px rgb(127 127 127 / 15%);
 
   &.hover {
-    background-color: rgba(127, 127, 127, 0.15);
+    background-color: rgb(127 127 127 / 15%);
   }
 
   .icon {
@@ -25,12 +25,12 @@
 }
 
 .share-wrapper {
-  opacity: 0;
+  opacity: 0%;
   visibility: hidden;
   transition: all 0.3s;
 
   &.show {
-    opacity: 1;
+    opacity: 100%;
     visibility: visible;
   }
 
