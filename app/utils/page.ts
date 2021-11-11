@@ -52,16 +52,26 @@ const resolveContent = (
     | ListComponentItemConfig
   ) & { hidden?: boolean },
   page: PageData
-): void => {
+):
+  | ((
+      | FunctionalListComponentItemConfig
+      | GridComponentItemConfig
+      | ListComponentItemConfig
+    ) & { hidden?: boolean })
+  | null => {
+  if (
+    "env" in listElement &&
+    listElement.env &&
+    !listElement.env?.includes(globalData.env)
+  )
+    return null;
+
   // 设置列表导航
   if ("url" in listElement) listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
     listElement.url = `page?from=${page.title || "返回"}&id=${
       listElement.path as string
     }`;
-
-  if ("env" in listElement)
-    listElement.hidden = !listElement.env?.includes(globalData.env);
 
   if ("type" in listElement) {
     if (listElement.type === "switch")
@@ -101,6 +111,8 @@ const resolveContent = (
         });
       }
   }
+
+  return listElement;
 };
 
 /**
@@ -125,15 +137,20 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
 
       // 设置 list 组件
       if ("content" in element)
-        element.content.forEach(
-          (
-            listElement: (
-              | FunctionalListComponentItemConfig
-              | GridComponentItemConfig
-              | ListComponentItemConfig
-            ) & { hidden?: boolean }
-          ) => resolveContent(listElement, page)
-        );
+        element.content = element.content
+          .map(
+            (
+              listElement: (
+                | FunctionalListComponentItemConfig
+                | GridComponentItemConfig
+                | ListComponentItemConfig
+              ) & { hidden?: boolean }
+            ) => resolveContent(listElement, page)
+          )
+          .filter((listElement) => listElement !== null) as
+          | FunctionalListComponentItemConfig[]
+          | GridComponentItemConfig[]
+          | ListComponentItemConfig[];
     });
 
   // 调试
