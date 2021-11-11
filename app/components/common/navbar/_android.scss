@@ -24,10 +24,10 @@
   }
 
   &.shadow {
-    box-shadow: 0 0 4px 1.5px rgba(208, 208, 208, 80);
+    box-shadow: 0 0 4px 1.5px rgb(208 208 208 / 8000%);
 
     @media (prefers-color-scheme: dark) {
-      box-shadow: 0 0 4px 1.5px rgba(47, 47, 47, 80);
+      box-shadow: 0 0 4px 1.5px rgb(47 47 47 / 8000%);
     }
   }
 }

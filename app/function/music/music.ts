@@ -418,7 +418,13 @@ $Page("music", {
   },
 
   // 点击列表具体歌曲项时触发
-  change(res: WechatMiniprogram.TouchEvent) {
+  change(
+    res: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { index: number }
+    >
+  ) {
     this.list();
     this.switchSong(res.currentTarget.dataset.index);
   },

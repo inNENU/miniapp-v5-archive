@@ -10,8 +10,8 @@ page {
   --dark-grey: #666;
   --light-grey: #999;
   --arrow-color: #c5c5c7;
-  --hover: rgba(0, 0, 0, 0.1);
-  --card-shadow: rgba(191, 192, 195, 0.15);
+  --hover: rgb(0 0 0 / 10%);
+  --card-shadow: rgb(191 192 195 / 15%);
   --max-width: 517px;
   --horizontal-margin: 15px;
   --paragraph-horizontal-margin: auto;
@@ -29,49 +29,49 @@ page {
   --pink: #e03997;
   --brown: #a5673f;
   --black: #333;
-  --darkGray: #666;
+  --dark-gray: #666;
   --gray: #aaa;
-  --ghostWhite: #f1f1f1;
+  --ghost-white: #f1f1f1;
   --white: #fff;
 
   /* 浅色 */
-  --redLight: #fadbd9;
-  --orangeLight: #fde6d2;
-  --yellowLight: #fef2ce;
-  --oliveLight: #e8f4d9;
-  --greenLight: #d7f0db;
-  --cyanLight: #d2f1f0;
-  --blueLight: #cce6ff;
-  --purpleLight: #e1d7f0;
-  --mauveLight: #ebd4ef;
-  --pinkLight: #f9d7ea;
-  --brownLight: #ede1d9;
-  --greyLight: #e7ebed;
+  --red-light: #fadbd9;
+  --orange-light: #fde6d2;
+  --yellow-light: #fef2ce;
+  --olive-light: #e8f4d9;
+  --green-light: #d7f0db;
+  --cyan-light: #d2f1f0;
+  --blue-light: #cce6ff;
+  --purple-light: #e1d7f0;
+  --mauve-light: #ebd4ef;
+  --pink-light: #f9d7ea;
+  --brown-light: #ede1d9;
+  --grey-light: #e7ebed;
 
   /* 渐变色 */
-  --gradualRed: linear-gradient(45deg, #f43f3b, #ec008c);
-  --gradualOrange: linear-gradient(45deg, #ff9700, #ed1c24);
-  --gradualGreen: linear-gradient(45deg, #39b54a, #8dc63f);
-  --gradualPurple: linear-gradient(45deg, #9000ff, #5e00ff);
-  --gradualPink: linear-gradient(45deg, #ec008c, #6739b6);
-  --gradualBlue: linear-gradient(45deg, #0081ff, #1cbbb4);
+  --gradual-red: linear-gradient(45deg, #f43f3b, #ec008c);
+  --gradual-orange: linear-gradient(45deg, #ff9700, #ed1c24);
+  --gradual-green: linear-gradient(45deg, #39b54a, #8dc63f);
+  --gradual-purple: linear-gradient(45deg, #9000ff, #5e00ff);
+  --gradual-pink: linear-gradient(45deg, #ec008c, #6739b6);
+  --gradual-blue: linear-gradient(45deg, #0081ff, #1cbbb4);
 
   /* 阴影透明色 */
-  --ShadowSize: 6rpx 6rpx 8rpx;
-  --redShadow: rgba(204, 69, 59, 0.2);
-  --orangeShadow: rgba(217, 109, 26, 0.2);
-  --yellowShadow: rgba(224, 170, 7, 0.2);
-  --oliveShadow: rgba(124, 173, 55, 0.2);
-  --greenShadow: rgba(48, 156, 63, 0.2);
-  --cyanShadow: rgba(28, 187, 180, 0.2);
-  --blueShadow: rgba(0, 102, 204, 0.2);
-  --purpleShadow: rgba(88, 48, 156, 0.2);
-  --mauveShadow: rgba(133, 33, 150, 0.2);
-  --pinkShadow: rgba(199, 50, 134, 0.2);
-  --brownShadow: rgba(140, 88, 53, 0.2);
-  --greyShadow: rgba(114, 130, 138, 0.2);
-  --grayShadow: rgba(114, 130, 138, 0.2);
-  --blackShadow: rgba(26, 26, 26, 0.2);
+  --shadow-size: 6rpx 6rpx 8rpx;
+  --red-shadow: rgb(204 69 59 / 20%);
+  --orange-shadow: rgb(217 109 26 / 20%);
+  --yellow-shadow: rgb(224 170 7 / 20%);
+  --olive-shadow: rgb(124 173 55 / 20%);
+  --green-shadow: rgb(48 156 63 / 20%);
+  --cyan-shadow: rgb(28 187 180 / 20%);
+  --blue-shadow: rgb(0 102 204 / 20%);
+  --purple-shadow: rgb(88 48 156 / 20%);
+  --mauve-shadow: rgb(133 33 150 / 20%);
+  --pink-shadow: rgb(199 50 134 / 20%);
+  --brown-shadow: rgb(140 88 53 / 20%);
+  --grey-shadow: rgb(114 130 138 / 20%);
+  --gray-shadow: rgb(114 130 138 / 20%);
+  --black-shadow: rgb(26 26 26 / 20%);
 
   @media (min-width: 547px) {
     --horizontal-margin: auto;
@@ -89,8 +89,8 @@ page {
     --dark-grey: #666;
     --light-grey: #999;
     --arrow-color: #c5c5c7;
-    --hover: rgba(0, 0, 0, 0.1);
-    --card-shadow: rgba(191, 192, 195, 0.15);
+    --hover: rgb(0 0 0 / 10%);
+    --card-shadow: rgb(191 192 195 / 15%);
   }
 
   @media (prefers-color-scheme: dark) {
@@ -105,8 +105,8 @@ page {
     --dark-grey: #999;
     --light-grey: #666;
     --arrow-color: #5a5a5f;
-    --hover: rgba(255, 255, 255, 0.1);
-    --card-shadow: rgba(64, 63, 60, 0.15);
+    --hover: rgb(255 255 255 / 10%);
+    --card-shadow: rgb(64 63 60 / 15%);
   }
 
   .grey {
@@ -198,95 +198,95 @@ page {
 
 .bg-white {
   background-color: var(--white);
-  color: var(--darkGray);
+  color: var(--dark-gray);
 }
 
 .bg-red.light {
-  background-color: var(--redLight);
+  background-color: var(--red-light);
   color: var(--red);
 }
 
 .bg-orange.light {
-  background-color: var(--orangeLight);
+  background-color: var(--orange-light);
   color: var(--orange);
 }
 
 .bg-yellow.light {
-  background-color: var(--yellowLight);
+  background-color: var(--yellow-light);
   color: var(--yellow);
 }
 
 .bg-olive.light {
-  background-color: var(--oliveLight);
+  background-color: var(--olive-light);
   color: var(--olive);
 }
 
 .bg-green.light {
-  background-color: var(--greenLight);
+  background-color: var(--green-light);
   color: var(--green);
 }
 
 .bg-cyan.light {
-  background-color: var(--cyanLight);
+  background-color: var(--cyan-light);
   color: var(--cyan);
 }
 
 .bg-blue.light {
-  background-color: var(--blueLight);
+  background-color: var(--blue-light);
   color: var(--blue);
 }
 
 .bg-purple.light {
-  background-color: var(--purpleLight);
+  background-color: var(--purple-light);
   color: var(--purple);
 }
 
 .bg-mauve.light {
-  background-color: var(--mauveLight);
+  background-color: var(--mauve-light);
   color: var(--mauve);
 }
 
 .bg-pink.light {
-  background-color: var(--pinkLight);
+  background-color: var(--pink-light);
   color: var(--pink);
 }
 
 .bg-brown.light {
-  background-color: var(--brownLight);
+  background-color: var(--brown-light);
   color: var(--brown);
 }
 
 .bg-grey.light {
-  background-color: var(--greyLight);
+  background-color: var(--grey-light);
   color: var(--grey);
 }
 
 .bg-gradual-red {
-  background-image: var(--gradualRed);
+  background-image: var(--gradual-red);
   color: var(--white);
 }
 
 .bg-gradual-orange {
-  background-image: var(--gradualOrange);
+  background-image: var(--gradual-orange);
   color: var(--white);
 }
 
 .bg-gradual-green {
-  background-image: var(--gradualGreen);
+  background-image: var(--gradual-green);
   color: var(--white);
 }
 
 .bg-gradual-purple {
-  background-image: var(--gradualPurple);
+  background-image: var(--gradual-purple);
   color: var(--white);
 }
 
 .bg-gradual-pink {
-  background-image: var(--gradualPink);
+  background-image: var(--gradual-pink);
   color: var(--white);
 }
 
 .bg-gradual-blue {
-  background-image: var(--gradualBlue);
+  background-image: var(--gradual-blue);
   color: var(--white);
 }

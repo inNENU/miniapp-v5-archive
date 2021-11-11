@@ -41,10 +41,10 @@
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 
-  box-shadow: 0 -2px 5px rgba(219, 218, 223, 0.95);
+  box-shadow: 0 -2px 5px rgb(219 218 223 / 95%);
 
   @media (prefers-color-scheme: dark) {
-    box-shadow: 0 -2px 5px rgba(36, 37, 32, 0.95);
+    box-shadow: 0 -2px 5px rgb(36 37 32 / 95%);
   }
 
   .title {
