@@ -1,6 +1,7 @@
 .carousel {
   position: relative;
-  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
 
   .item {
     width: 100%;
