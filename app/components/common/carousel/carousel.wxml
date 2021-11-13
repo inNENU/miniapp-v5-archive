@@ -1,6 +1,6 @@
 <view class="carousel">
   <swiper
-    class="{{config.class || ('item' + config.fill? '': ' card')}}"
+    class="{{config.class || ('item' + (config.fill? '': ' card'))}}"
     style="{{config.style}}"
     autoplay="{{config.autoplay !== false}}"
     interval="{{config.interval || '5000'}}"
