@@ -22,7 +22,10 @@ $Page("location", {
   state: { id: "", area: "", path: "" },
 
   onPreload(options) {
-    resolvePage(options, readJSON(`function/map/${options.id}`));
+    const { area, path } = options;
+    const id = `${area}/${path}`;
+
+    resolvePage({ id }, readJSON(`function/map/${id}`));
   },
 
   onLoad(option) {
