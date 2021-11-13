@@ -1,73 +1,9 @@
 var lock = false;
 
 module.exports = {
-  /** 日间地图配置 */
-  dayMapSettings: {
-    layerStyle: 1,
-    showLocation: true,
-    showScale: true,
-    enableRotate: true,
-    showCompass: true,
-    enable3D: true,
-    enableOverlooking: true,
-    enableTraffic: true,
-  },
-  /** 夜间地图配置 */
-  nightMapSettings: {
-    layerStyle: 2,
-    showLocation: true,
-    showScale: true,
-    enableRotate: true,
-    showCompass: true,
-    enable3D: true,
-    enableOverlooking: true,
-  },
-
   getTitle: function (category) {
     return category.map(function (item) {
       return item.name;
-    });
-  },
-
-  /**
-   * 处理 marker
-   *
-   * @param marker 待处理的 Marker
-   *
-   * @returns 处理后的marker
-   */
-  genMarker: function (markers, darkmode) {
-    return (markers || []).map(function (marker) {
-      marker.iconPath = "/function/map/icon/marker.png";
-      marker.width = 25;
-      marker.height = 25;
-      marker.alpha = 0.8;
-      marker.label = {
-        content: marker.name,
-        color: "#2ecc71",
-        fontSize: 10,
-        anchorX: marker.name.length * -5 - 4,
-        anchorY: 0,
-        bgColor: darkmode ? "#1c1c1e" : "#ffffff",
-        borderWidth: 1,
-        borderColor: darkmode ? "#1f1f22" : "#efeef4",
-        borderRadius: 2,
-        padding: 3,
-      };
-      marker.callout = {
-        content: marker.detail,
-        color: darkmode ? "#000000" : "#ffffff",
-        fontSize: 16,
-        borderRadius: 10,
-        bgColor: "#2ecc71",
-        padding: 10,
-        display: "BYCLICK",
-      };
-
-      delete marker.name;
-      delete marker.detail;
-
-      return marker;
     });
   },
 

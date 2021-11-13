@@ -1,12 +1,12 @@
+<wxs src="../../utils/map.wxs" module="helper" />
 <wxs src="./map.wxs" module="tool" />
 <map
   id="map"
-  subkey="NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4"
   longitude="{{map.longitude}}"
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
-  markers="{{tool.genMarker(marker[currentCategory], darkmode)}}"
-  setting="{{darkmode? tool.nightMapSettings: tool.dayMapSettings}}"
+  markers="{{helper.getMarkers(marker[currentCategory], darkmode)}}"
+  setting="{{helper.getSetting(env, darkmode)}}"
   catch:markertap="markers"
   catch:callouttap="markers"
   catch:updated="update"

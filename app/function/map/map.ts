@@ -35,6 +35,7 @@ $Page("map", {
   data: {
     /** 夜间模式状态 */
     darkmode: globalData.darkmode,
+    env: globalData.env,
 
     /** 地图数据 */
     map: {
