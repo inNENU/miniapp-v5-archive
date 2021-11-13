@@ -35,7 +35,7 @@
       </view>
       <view class="nenu-nav-title">{{page.title}} </view>
     </view>
-    <my-swiper
+    <carousel
       wx:if="{{page.photo}}"
       config="{{ { fill: true, url: page.photo } }}"
     />
