@@ -4,7 +4,7 @@
 >
 <view class="phone-component-wrapper">
   <!-- 电话图标 -->
-  <image class="phone-icon" mode="widthFix" src="./phone.svg" />
+  <image class="phone-icon" mode="widthFix" src="./icon/phone.svg" />
   <!-- 电话号码 -->
   <view class="number">{{config.num}}</view>
   <!-- 拨打电话按钮 -->
@@ -14,7 +14,7 @@
     hover-stay-time="100"
     catch:tap="call"
   >
-    <image class="icon" mode="widthFix" src="./call.svg" />
+    <image class="icon" mode="widthFix" src="./icon/call.svg" />
   </view>
   <!-- 添加联系人按钮 -->
   <view
@@ -23,6 +23,6 @@
     hover-stay-time="100"
     catch:tap="addContact"
   >
-    <image class="icon" mode="widthFix" src="./add.svg" />
+    <image class="icon" mode="widthFix" src="./icon/add.svg" />
   </view>
 </view>
