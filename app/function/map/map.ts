@@ -100,10 +100,10 @@ $Page("map", {
 
     const area = this.getArea();
     // 创建地图对象
-    const mapCtx = wx.createMapContext("map");
+    const mapContext = wx.createMapContext("map");
 
     // 注入地图实例
-    this.context = mapCtx;
+    this.context = mapContext;
 
     this.setData({
       area,
@@ -249,7 +249,7 @@ $Page("map", {
     this.context.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
-  markers(event: WechatMiniprogram.MarkerTap) {
+  markerTap(event: WechatMiniprogram.MarkerTap) {
     const { area, currentCategory } = this.data;
 
     const { path } = this.data.marker[currentCategory].find(

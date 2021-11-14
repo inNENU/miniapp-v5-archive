@@ -123,6 +123,7 @@
     "img": "/components/common/img/img",
     "list": "/components/common/list/list",
     "loading": "/components/common/loading/loading",
+    "location": "/components/common/location/location",
     "media": "/components/common/media/media",
     "navbar": "/components/common/navbar/navbar",
     "plain-text": "/components/common/text/text",

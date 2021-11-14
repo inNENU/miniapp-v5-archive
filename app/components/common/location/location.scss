@@ -1,0 +1,42 @@
+.location-component {
+  overflow: hidden;
+
+  width: calc(100% - 30px);
+  max-width: var(--max-width);
+  margin: 8px 15px;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+
+  .map {
+    width: 100%;
+    height: 200px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 15px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1.5;
+    text-align: left;
+  }
+
+  .navigate {
+    width: 28px;
+    height: 28px;
+    padding: 4px;
+    border-radius: 50%;
+  }
+
+  .icon {
+    width: 100%;
+    height: 100%;
+  }
+}
