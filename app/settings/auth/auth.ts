@@ -72,6 +72,14 @@ $Page("authorize", {
           ],
           footer: " ",
         },
+        {
+          tag: "ul",
+          heading: "隐私说明",
+          text: [
+            "我们会“获取地理位置”，用于校园地图导航。",
+            "我们会“保存图片到系统相册”，用于保存小程序二维码共分享。",
+          ],
+        },
       ],
     } as PageDataWithContent,
 
