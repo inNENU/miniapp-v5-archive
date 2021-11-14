@@ -13,7 +13,7 @@ const { globalData } = getApp<AppOption>();
 const { env } = globalData;
 const referer = getTitle();
 
-const navigate = (point: LocationConfig & { id: number }): void => {
+const startNavigation = (point: LocationConfig & { id: number }): void => {
   wx.navigateTo({
     url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${JSON.stringify(
       {
@@ -64,12 +64,14 @@ $Component({
 
   methods: {
     navigate() {
-      const { id, markers } = this.data;
+      const { config, id, markers } = this.data;
 
-      if (id === -1) {
-        if (markers.length === 1) navigate(markers[0]);
-        else tip("请选择一个点");
-      } else navigate(markers[id]);
+      if (config.navigate !== false) {
+        if (id === -1) {
+          if (markers.length === 1) startNavigation(markers[0]);
+          else tip("请选择一个点");
+        } else startNavigation(markers[id]);
+      }
     },
 
     markerTap({ detail }: WechatMiniprogram.MarkerTap) {
@@ -80,7 +82,10 @@ $Component({
     },
 
     calloutTap({ detail }: WechatMiniprogram.CalloutTap) {
-      if (env === "wx") navigate(this.data.markers[detail.markerId]);
+      const { navigate } = this.data.config;
+
+      if (env === "wx" && navigate !== false)
+        startNavigation(this.data.markers[detail.markerId]);
     },
   },
 });

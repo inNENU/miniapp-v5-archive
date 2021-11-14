@@ -12,7 +12,7 @@
   <view class="footer">
     <view class="title">{{title}}</view>
     <view
-      wx:if="{{env === 'wx'}}"
+      wx:if="{{env === 'wx' && config.navigate !== false}}"
       class="navigate"
       hover-class="button-hover"
       catch:tap="navigate"
