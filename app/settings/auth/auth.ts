@@ -15,7 +15,6 @@ const { globalData } = getApp<AppOption>();
 type AuthorizeList =
   | "scope.userLocation"
   | "scope.writePhotosAlbum"
-  | "scope.userInfo"
   | "scope.address"
   | "scope.invoiceTitle"
   | "scope.invoice"
@@ -26,13 +25,12 @@ type AuthorizeList =
 const authorizeList: AuthorizeList[] = [
   "scope.userLocation",
   "scope.writePhotosAlbum",
-  "scope.userInfo",
-  "scope.address",
-  "scope.invoiceTitle",
-  "scope.invoice",
-  "scope.werun",
-  "scope.record",
-  "scope.camera",
+  // "scope.address",
+  // "scope.invoiceTitle",
+  // "scope.invoice",
+  // "scope.werun",
+  // "scope.record",
+  // "scope.camera",
 ];
 
 $Page("authorize", {
@@ -49,13 +47,13 @@ $Page("authorize", {
           content: [
             { text: "地理位置", desc: "未授权×" },
             { text: "保存到相册", desc: "未授权×" },
-            { text: "用户信息", desc: "未授权×" },
-            { text: "通讯地址", desc: "未授权×" },
-            { text: "发票抬头", desc: "未授权×" },
-            { text: "获取发票", desc: "未授权×" },
-            { text: "微信运动步数", desc: "未授权×" },
-            { text: "录音", desc: "未授权×" },
-            { text: "摄像头", desc: "未授权×" },
+            // { text: "用户信息", desc: "未授权×" },
+            // { text: "通讯地址", desc: "未授权×" },
+            // { text: "发票抬头", desc: "未授权×" },
+            // { text: "获取发票", desc: "未授权×" },
+            // { text: "微信运动步数", desc: "未授权×" },
+            // { text: "录音", desc: "未授权×" },
+            // { text: "摄像头", desc: "未授权×" },
           ],
         },
         {
@@ -64,12 +62,13 @@ $Page("authorize", {
           content: [
             { text: "地理位置", type: "button", handler: "location" },
             { text: "保存到相册", type: "button", handler: "album" },
-            { text: "通讯地址", type: "button", handler: "address" },
-            { text: "发票抬头", type: "button", handler: "invoiceTitle" },
-            { text: "获取发票", type: "button", handler: "invoice" },
-            { text: "微信运动步数", type: "button", handler: "werun" },
-            { text: "录音", type: "button", handler: "record" },
-            { text: "摄像头", type: "button", handler: "camera" },
+            // { text: "用户信息", type: "button", openType: "getUserInfo" },
+            // { text: "通讯地址", type: "button", handler: "address" },
+            // { text: "发票抬头", type: "button", handler: "invoiceTitle" },
+            // { text: "获取发票", type: "button", handler: "invoice" },
+            // { text: "微信运动步数", type: "button", handler: "werun" },
+            // { text: "录音", type: "button", handler: "record" },
+            // { text: "摄像头", type: "button", handler: "camera" },
           ],
           footer: " ",
         },
@@ -120,35 +119,35 @@ $Page("authorize", {
     this.authorize(1);
   },
 
-  /** 通讯地址授权 */
-  address() {
-    this.authorize(3);
-  },
+  // /** 通讯地址授权 */
+  // address() {
+  //   this.authorize(2);
+  // },
 
-  /** 发票抬头授权 */
-  invoiceTitle() {
-    this.authorize(4);
-  },
+  // /** 发票抬头授权 */
+  // invoiceTitle() {
+  //   this.authorize(3);
+  // },
 
-  /** 发票授权 */
-  invoice() {
-    this.authorize(5);
-  },
+  // /** 发票授权 */
+  // invoice() {
+  //   this.authorize(4);
+  // },
 
-  /** 微信运动数据授权 */
-  werun() {
-    this.authorize(6);
-  },
+  // /** 微信运动数据授权 */
+  // werun() {
+  //   this.authorize(5);
+  // },
 
-  /** 录音授权 */
-  record() {
-    this.authorize(7);
-  },
+  // /** 录音授权 */
+  // record() {
+  //   this.authorize(6);
+  // },
 
-  /** 摄像头授权 */
-  camera() {
-    this.authorize(8);
-  },
+  // /** 摄像头授权 */
+  // camera() {
+  //   this.authorize(7);
+  // },
 
   /** 授权函数 */
   authorize(type: number) {
