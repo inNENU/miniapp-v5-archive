@@ -7,7 +7,7 @@ import { getJSON } from "../../utils/json";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
-import type { MarkerConfig, PageData } from "../../../typings";
+import type { PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -19,21 +19,18 @@ $Page("location", {
     marker: "",
   },
 
-  state: { id: "", area: "", path: "" },
+  state: { id: "" },
 
   onPreload(options) {
-    const { area, path } = options;
-    const id = `${area}/${path}`;
+    const { id } = options;
 
     resolvePage({ id }, readJSON(`function/map/${id}`));
   },
 
   onLoad(option) {
-    const { area, path } = option;
+    const { id, marker = "" } = option;
 
-    if (area && path) {
-      const id = `${area}/${path}`;
-
+    if (id) {
       if (globalData.page.id === id) setPage({ option, ctx: this });
       else
         getJSON<PageData>(`function/map/${id}`)
@@ -50,8 +47,6 @@ $Page("location", {
             );
           });
 
-      this.state.area = area;
-      this.state.path = path;
       this.state.id = id;
     }
 
@@ -59,11 +54,8 @@ $Page("location", {
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
       env: globalData.env,
+      marker,
     });
-  },
-
-  onReady() {
-    this.setMarker();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -74,46 +66,36 @@ $Page("location", {
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
+    const { page, marker } = this.data;
+
     return {
-      title: this.data.page.title,
-      path: `/function/map/location?id=${this.state.id}`,
+      title: page.title,
+      path: `/function/map/location?id=${this.state.id}${
+        marker ? `&marker=${marker}` : ""
+      }`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
+    const { page, marker } = this.data;
+
     return {
-      title: this.data.page.title,
-      query: `id=${this.state.id}`,
+      title: page.title,
+      query: `id=${this.state.id}${marker ? `&marker=${marker}` : ""}`,
     };
   },
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    const { page, marker } = this.data;
+
     return {
-      title: this.data.page.title,
+      title: page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `id=${this.state.id}`,
+      query: `id=${this.state.id}${marker ? `&marker=${marker}` : ""}`,
     };
   },
 
   defaultScroller,
-
-  /** 设置标记点 */
-  setMarker() {
-    return getJSON<MarkerConfig>(`function/map/marker/${this.state.area}`).then(
-      ({ marker }) => {
-        const item = marker.all.find((item) => item.path === this.state.path);
-
-        if (item)
-          this.setData({
-            marker: JSON.stringify({
-              latitude: item.latitude,
-              longitude: item.longitude,
-              name: item.name,
-            }),
-          });
-      }
-    );
-  },
 
   /** 开启导航 */
   navigate() {

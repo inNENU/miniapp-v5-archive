@@ -252,15 +252,22 @@ $Page("map", {
   markerTap(event: WechatMiniprogram.MarkerTap) {
     const { area, currentCategory } = this.data;
 
-    const { path } = this.data.marker[currentCategory].find(
+    const item = this.data.marker[currentCategory].find(
       (item) => item.id === event.detail.markerId
     ) as MarkerData;
 
     if (event.type === "markertap") {
-      if (path) this.$preload(`location?area=${area}&path=${path}`);
+      if (item.path) this.$preload(`location?id=${area}/${item.path}`);
     } else if (event.type === "callouttap") {
-      if (path) this.$go(`location?area=${area}&path=${path}`);
-      else tip("该地点暂无详情");
+      if (item.path) {
+        const marker = JSON.stringify({
+          latitude: item.latitude,
+          longitude: item.longitude,
+          name: item.name,
+        });
+
+        this.$go(`location?id=${area}/${item.path}&marker=${marker}`);
+      } else tip("该地点暂无详情");
     }
   },
 
@@ -291,12 +298,19 @@ $Page("map", {
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { area, currentCategory } = this.data;
 
-    const { path } = this.data.marker[currentCategory].find(
+    const item = this.data.marker[currentCategory].find(
       (item) => item.id === currentTarget.dataset.id
     ) as MarkerData;
 
-    if (path) this.$go(`location?area=${area}&path=${path}`);
-    else tip("该地点暂无详情");
+    if (item.path) {
+      const marker = JSON.stringify({
+        latitude: item.latitude,
+        longitude: item.longitude,
+        name: item.name,
+      });
+
+      this.$go(`location?id=${area}/${item.path}&marker=${marker}`);
+    } else tip("该地点暂无详情");
   },
 
   regionChange(event: WechatMiniprogram.RegionChange) {

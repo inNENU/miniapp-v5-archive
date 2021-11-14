@@ -13,14 +13,17 @@ const { globalData } = getApp<AppOption>();
 const { env } = globalData;
 const referer = getTitle();
 
+const getMarker = (point: LocationConfig & { id: number }): string =>
+  JSON.stringify({
+    name: point.name,
+    latitude: point.latitude,
+    longitude: point.longitude,
+  });
+
 const startNavigation = (point: LocationConfig & { id: number }): void => {
   wx.navigateTo({
-    url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${JSON.stringify(
-      {
-        name: point.name,
-        latitude: point.latitude,
-        longitude: point.longitude,
-      }
+    url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${getMarker(
+      point
     )}&mode=walking&themeColor=#2ecc71`,
   });
 };
@@ -50,7 +53,7 @@ $Component({
         title: config.title,
         markers: config.points.map((point, index) => ({
           name: config.title,
-          detail: env === "wx" ? "导航" : "",
+          detail: "详情",
           id: index,
           ...point,
         })),
@@ -76,14 +79,19 @@ $Component({
 
     markerTap({ detail }: WechatMiniprogram.MarkerTap) {
       const id = detail.markerId;
-      const { markers } = this.data;
+      const point = this.data.markers[id];
 
-      this.setData({ id, title: markers[id].name });
+      this.setData({ id, title: point.name });
+
+      if (point.path) this.$preload(`location?id=${point.path}`);
     },
 
     calloutTap({ detail }: WechatMiniprogram.CalloutTap) {
+      const point = this.data.markers[detail.markerId];
       const { navigate } = this.data.config;
 
+      if (point.path)
+        this.$go(`location?id=${point.path}&marker=${getMarker(point)}`);
       if (env === "wx" && navigate !== false)
         startNavigation(this.data.markers[detail.markerId]);
     },
