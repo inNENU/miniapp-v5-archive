@@ -28,6 +28,7 @@
           binding="$"
           catch:change="list"
         />
+        <location wx:elif="{{item.tag === 'location'}}" config="{{item}}" />
         <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
         <loading wx:elif="{{item.tag === 'loading'}}" />
       </block>
