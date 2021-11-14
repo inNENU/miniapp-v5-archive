@@ -17,7 +17,7 @@
 
       width: calc(100% - 30px);
       height: 360rpx;
-      margin: 20px 15px;
+      margin: 8px 15px;
       border-radius: 16rpx;
     }
   }
@@ -26,24 +26,28 @@
 .carousel-dots {
   position: absolute;
   right: 0;
-  bottom: 20rpx;
+  bottom: 10px;
   left: 0;
 
   display: flex;
   justify-content: center;
 
+  &.card {
+    padding-bottom: 8px;
+  }
+
   .dot {
-    width: 14rpx;
-    height: 14rpx;
-    margin: 0 8rpx;
-    border-radius: 8rpx;
+    width: 8px;
+    height: 8px;
+    margin: 0 4px;
+    border-radius: 4px;
 
     background: #fff;
 
     transition: all 0.6s;
 
     &.active {
-      width: 24rpx;
+      width: 12px;
       background: #fff;
     }
   }

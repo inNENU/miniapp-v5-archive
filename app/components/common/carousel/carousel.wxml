@@ -24,7 +24,7 @@
 
   <view
     wx:if="{{config.indicatorDots !== false && config.url.length > 1}}"
-    class="carousel-dots"
+    class="carousel-dots{{(config.fill? '': ' card')}}"
   >
     <view
       wx:for="{{config.url}}"
