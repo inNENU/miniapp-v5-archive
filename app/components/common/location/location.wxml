@@ -11,13 +11,23 @@
   />
   <view class="footer">
     <view class="title">{{title}}</view>
-    <view
-      wx:if="{{env === 'wx' && config.navigate !== false}}"
-      class="navigate"
-      hover-class="button-hover"
-      catch:tap="navigate"
-    >
-      <image class="icon" src="/icon/navigate.svg" />
+    <view class="actions">
+      <view
+        wx:if="{{hasDetail}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="detail"
+      >
+        <image class="icon" src="./icon/info.svg" />
+      </view>
+      <view
+        wx:if="{{env === 'wx' && config.navigate !== false}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="navigate"
+      >
+        <image class="icon" src="/icon/navigate.svg" />
+      </view>
     </view>
   </view>
 </view>

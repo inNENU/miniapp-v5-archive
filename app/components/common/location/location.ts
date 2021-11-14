@@ -43,6 +43,7 @@ $Component({
     markers: [] as (LocationConfig & { id: number })[],
     id: -1,
     title: "",
+    hasDetail: false,
   },
 
   lifetimes: {
@@ -77,11 +78,23 @@ $Component({
       }
     },
 
+    detail() {
+      const { id, hasDetail } = this.data;
+
+      if (hasDetail) {
+        const point = this.data.markers[id];
+
+        this.$go(
+          `location?id=${point.path as string}&marker=${getMarker(point)}`
+        );
+      }
+    },
+
     markerTap({ detail }: WechatMiniprogram.MarkerTap) {
       const id = detail.markerId;
       const point = this.data.markers[id];
 
-      this.setData({ id, title: point.name });
+      this.setData({ id, title: point.name, hasDetail: Boolean(point.path) });
 
       if (point.path) this.$preload(`location?id=${point.path}`);
     },
@@ -92,7 +105,7 @@ $Component({
 
       if (point.path)
         this.$go(`location?id=${point.path}&marker=${getMarker(point)}`);
-      if (env === "wx" && navigate !== false)
+      else if (env === "wx" && navigate !== false)
         startNavigation(this.data.markers[detail.markerId]);
     },
   },
