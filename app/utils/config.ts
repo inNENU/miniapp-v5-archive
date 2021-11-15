@@ -4,7 +4,7 @@ import type { AppOption } from "../app";
 export const server = "https://mp.innenu.com/";
 
 /** 小程序版本 */
-export const version = "4.4.0";
+export const version = "4.4.1";
 
 /** App初始化选项 */
 export interface AppConfig {

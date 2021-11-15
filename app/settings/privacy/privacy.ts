@@ -33,17 +33,34 @@ const authorizeList: AuthorizeList[] = [
   // "scope.camera",
 ];
 
-$Page("authorize", {
+$Page("privacy", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
     page: {
-      title: "授权设置",
-      grey: true,
+      title: "隐私说明",
       content: [
         {
+          tag: "title",
+          text: "隐私说明",
+        },
+        {
           tag: "list",
-          header: "授权信息",
+          header: false,
+          content: [
+            {
+              text: "查看详情",
+              url: `page?path=other/about/${globalData.env}-privacy`,
+            },
+          ],
+        },
+        {
+          tag: "title",
+          text: "授权管理",
+        },
+        {
+          tag: "list",
+          header: "授权状态",
           content: [
             { text: "地理位置", desc: "未授权×" },
             { text: "保存到相册", desc: "未授权×" },
@@ -72,14 +89,6 @@ $Page("authorize", {
           ],
           footer: " ",
         },
-        {
-          tag: "ul",
-          heading: "隐私说明",
-          text: [
-            "我们会“获取地理位置”，用于校园地图导航。",
-            "我们会“保存图片到系统相册”，用于保存小程序二维码共分享。",
-          ],
-        },
       ],
     } as PageDataWithContent,
 
@@ -94,13 +103,11 @@ $Page("authorize", {
     if (globalData.page.id === "授权设置") setPage({ option, ctx: this });
     else setPage({ option: { id: "authorize" }, ctx: this });
 
-    popNotice("authorize");
+    popNotice("privacy");
   },
 
   onReady() {
-    const list = (this.data.page.content[0] as ListComponentConfig).content;
-
-    popNotice("authorize");
+    const list = (this.data.page.content[3] as ListComponentConfig).content;
 
     // update authorize status
     wx.getSetting({
@@ -109,9 +116,11 @@ $Page("authorize", {
           if (res.authSetting[type]) list[index].desc = "已授权✓";
         });
 
-        this.setData({ "page.content[0].content": list });
+        this.setData({ "page.content[3].content": list });
       },
     });
+
+    popNotice("privacy");
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -157,6 +166,11 @@ $Page("authorize", {
   //   this.authorize(7);
   // },
 
+  /** 添加好友授权 */
+  addFriend() {
+    this.authorize(2);
+  },
+
   /** 授权函数 */
   authorize(type: number) {
     wx.showLoading({ title: "授权中" });
@@ -166,7 +180,7 @@ $Page("authorize", {
       success: () => {
         wx.hideLoading();
         tip("授权成功");
-        this.setData({ [`page.content[0].content.[${type}].desc`]: "已授权✓" });
+        this.setData({ [`page.content[3].content.[${type}].desc`]: "已授权✓" });
       },
       fail: () => {
         // 用户拒绝权限，提示用户开启权限
@@ -180,7 +194,7 @@ $Page("authorize", {
               wx.getSetting({
                 success: (res2) => {
                   const list = (
-                    this.data.page.content[0] as ListComponentConfig
+                    this.data.page.content[3] as ListComponentConfig
                   ).content;
 
                   authorizeList.forEach((type2, index) => {
@@ -190,7 +204,7 @@ $Page("authorize", {
                       : "未授权×";
                   });
 
-                  this.setData({ "page.content[0].content": list });
+                  this.setData({ "page.content[3].content": list });
                 },
               });
             },

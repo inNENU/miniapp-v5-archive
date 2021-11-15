@@ -25,6 +25,7 @@ $Config({
       [
         "account",
         "calendar",
+        "location",
         "map",
         "music",
         "PEcal",
@@ -35,12 +36,8 @@ $Config({
       ],
       "/function/$name/$name",
     ],
-    ["location", "/function/map/location"],
     ["account-detail", "/function/account/detail"],
-    [
-      ["about", "auth", "log", "outlook", "resource", "storage"],
-      "/settings/$name/$name",
-    ],
+    [["about", "log", "privacy", "storage"], "/settings/$name/$name"],
   ],
 
   injectPage: (_name, options) => {
