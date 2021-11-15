@@ -53,7 +53,7 @@
 </view>
 
 <view class="navigate-button" catch:tap="toggleNavigatePopup">
-  <image class="icon" src="/icon/navigate.svg" />
+  <image class="icon" src="./icon/navigate.svg" />
 </view>
 
 <view class="location-button" catch:tap="toggleLocationPopup">

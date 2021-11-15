@@ -48,6 +48,14 @@
         <image class="icon" src="/icon/wechat.svg" />
       </view>
       <view
+        wx:if="{{config.link}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="link"
+      >
+        <image class="icon" src="./icon/web.svg" />
+      </view>
+      <view
         wx:if="{{config.location && env === 'wx'}}"
         class="action"
         hover-class="button-hover"

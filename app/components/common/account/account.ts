@@ -60,6 +60,15 @@ $Component({
         });
     },
 
+    link(): void {
+      const { link } = this.data.config;
+
+      wx.setClipboardData({
+        data: link as string,
+        success: () => tip("网址已复制"),
+      });
+    },
+
     navigate(): void {
       const { location, name } = this.data.config;
 
