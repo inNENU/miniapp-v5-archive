@@ -48,10 +48,10 @@
         <image class="icon" src="/icon/wechat.svg" />
       </view>
       <view
-        wx:if="{{config.link}}"
+        wx:if="{{config.site}}"
         class="action"
         hover-class="button-hover"
-        catch:tap="link"
+        catch:tap="site"
       >
         <image class="icon" src="./icon/web.svg" />
       </view>

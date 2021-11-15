@@ -322,7 +322,8 @@ interface SetPageOption {
  *  **简介:**
  *
  * - 描述: 设置本地界面数据，如果传入 `page` 参数，则根据 `handle` 的值决定是否在 `setData` 前处理 `page`。
- * 如果没有传入 `page`，则使用 `PageOption.data.page`。之后根据 `preload` 的值决定是否对页面链接进行预加载。
+ *
+ *   如果没有传入 `page`，则使用 `PageOption.data.page`。之后根据 `preload` 的值决定是否对页面链接进行预加载。
  *
  * - 用法: 在页面 `onLoad` 时调用
  *

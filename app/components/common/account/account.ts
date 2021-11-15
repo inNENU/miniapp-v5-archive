@@ -60,11 +60,11 @@ $Component({
         });
     },
 
-    link(): void {
-      const { link } = this.data.config;
+    site(): void {
+      const { site } = this.data.config;
 
       wx.setClipboardData({
-        data: link as string,
+        data: site as string,
         success: () => tip("网址已复制"),
       });
     },
