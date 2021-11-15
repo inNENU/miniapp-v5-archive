@@ -6,8 +6,9 @@
     <image class="logo" src="{{config.logo}}" lazy-load />
     <!-- 名称 -->
     <view class="name">{{config.name}}</view>
+    <!-- 详情 -->
     <view wx:if="{{config.detail}}" class="detail">{{config.detail}}</view>
-    <!-- 详情介绍 -->
+    <!-- 描述 -->
     <view wx:if="{{config.desc}}" class="desc bt">{{config.desc}}</view>
 
     <view class="action-list">
@@ -18,7 +19,7 @@
         open-type="addFriend"
         open-id="{{config.openid}}"
       >
-        <image class="icon" src="{{icon.qq}}" />
+        <image class="icon" src="/icon/qq.svg" />
       </button>
       <view
         wx:elif="{{config.qq || config.qqQRCode}}"
@@ -26,7 +27,7 @@
         hover-class="button-hover"
         catch:tap="qq"
       >
-        <image class="icon" src="{{icon.qq}}" />
+        <image class="icon" src="/icon/qq.svg" />
       </view>
       <view
         wx:if="{{config.path}}"
@@ -36,7 +37,7 @@
         data-url="{{'account-detail?path=' + config.path}}"
         catch:tap="$bindGo"
       >
-        <image class="icon" src="{{icon.wx}}" />
+        <image class="icon" src="/icon/wechat.svg" />
       </view>
       <view
         wx:elif="{{config.wx || config.wxQRCode}}"
@@ -44,7 +45,15 @@
         hover-class="button-hover"
         catch:tap="wechat"
       >
-        <image class="icon" src="{{icon.wx}}" />
+        <image class="icon" src="/icon/wechat.svg" />
+      </view>
+      <view
+        wx:if="{{config.location && env === 'wx'}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="navigate"
+      >
+        <image class="icon" src="/icon/navigate.svg" />
       </view>
     </view>
   </view>

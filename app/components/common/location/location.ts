@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { startNavigation } from "../../../utils/location";
+import { navigation } from "../../../utils/location";
 import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
@@ -63,9 +63,9 @@ $Component({
 
       if (config.navigate !== false) {
         if (id === -1) {
-          if (markers.length === 1) startNavigation(getPoint(markers[0]));
+          if (markers.length === 1) navigation(getPoint(markers[0]));
           else tip("请选择一个点");
-        } else startNavigation(getPoint(markers[id]));
+        } else navigation(getPoint(markers[id]));
       }
     },
 
@@ -97,7 +97,7 @@ $Component({
       if (point.path)
         this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
       else if (env === "wx" && navigate !== false)
-        startNavigation(getPoint(this.data.markers[detail.markerId]));
+        navigation(getPoint(this.data.markers[detail.markerId]));
     },
   },
 });

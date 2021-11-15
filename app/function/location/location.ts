@@ -4,7 +4,7 @@ import { readJSON } from "@mptool/file";
 import { defaultScroller } from "../../mixins/page-scroll";
 import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
-import { startNavigation } from "../../utils/location";
+import { navigation } from "../../utils/location";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -98,7 +98,7 @@ $Page("location", {
 
   /** 开启导航 */
   navigate() {
-    startNavigation(this.data.point);
+    navigation(this.data.point);
   },
 
   /** 返回按钮功能 */

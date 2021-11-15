@@ -1,19 +1,15 @@
 import { $Component } from "@mptool/enhance";
-import { readFile } from "@mptool/file";
 
+import { navigation } from "../../../utils/location";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
 import type { AccountComponentOptions } from "../../../../typings";
 
-type IconData = Record<string, string>;
-
 const {
   globalData: { env },
 } = getApp<AppOption>();
-
-let store: { qq: string; wx: string } | null = null;
 
 $Component({
   properties: {
@@ -29,15 +25,15 @@ $Component({
   methods: {
     /** QQ */
     qq(): void {
-      const { qq, qqQRCode = "" } = this.data.config;
+      const { qq, qqcode = "" } = this.data.config;
 
-      if (qqQRCode)
+      if (qqcode)
         if (env === "qq")
           wx.previewImage({
-            urls: [qqQRCode],
+            urls: [qqcode],
           });
         else
-          savePhoto(qqQRCode)
+          savePhoto(qqcode)
             .then(() => tip("二维码已存至相册"))
             .catch(() => tip("二维码保存失败"));
       else if (qq)
@@ -51,37 +47,23 @@ $Component({
 
     /** 微信 */
     wechat(): void {
-      const { path, wx: wechat, wxQRCode } = this.data.config;
+      const { account, wxid, wxcode } = this.data.config;
 
-      if (path) this.$go(`account-detail?path=${path}`);
-      else if (wxQRCode)
-        savePhoto(wxQRCode)
+      if (account) this.$go(`account-detail?path=${account}`);
+      else if (wxcode)
+        savePhoto(wxcode)
           .then(() => tip("二维码已存至相册"))
           .catch(() => tip("二维码保存失败"));
-      else if (wechat)
+      else if (wxid)
         wx.previewImage({
-          urls: [`https://open.weixin.qq.com/qr/code?username=${wechat}`],
+          urls: [`https://open.weixin.qq.com/qr/code?username=${wxid}`],
         });
     },
 
-    setIconData() {
-      if (!store) {
-        const data = JSON.parse(
-          (readFile("icon/shareicons") as string) || "null"
-        ) as IconData;
+    navigate(): void {
+      const { location, name } = this.data.config;
 
-        store = {
-          wx: data.wechat,
-          qq: data.qq,
-        };
-      }
-    },
-  },
-
-  lifetimes: {
-    attached() {
-      this.setIconData();
-      this.setData({ icon: store });
+      navigation(JSON.stringify({ name, ...location }));
     },
   },
 });

@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
-import { startNavigation } from "../../utils/location";
+import { navigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 
@@ -284,7 +284,7 @@ $Page("map", {
       (item) => item.id === Number(currentTarget.dataset.id)
     ) as MarkerData;
 
-    startNavigation(
+    navigation(
       JSON.stringify({
         latitude: item.latitude,
         longitude: item.longitude,
