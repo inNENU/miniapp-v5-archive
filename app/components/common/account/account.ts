@@ -69,6 +69,15 @@ $Component({
       });
     },
 
+    email(): void {
+      const { mail } = this.data.config;
+
+      wx.setClipboardData({
+        data: mail as string,
+        success: () => tip("邮箱已复制"),
+      });
+    },
+
     navigate(): void {
       const { location, name } = this.data.config;
 
