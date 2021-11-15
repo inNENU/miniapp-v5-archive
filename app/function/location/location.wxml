@@ -43,7 +43,7 @@
     <view class="title">
       {{page.title}}
       <button
-        wx:if="{{marker && env === 'wx'}}"
+        wx:if="{{point && env === 'wx'}}"
         type="primary"
         size="mini"
         class="navigate"

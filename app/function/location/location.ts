@@ -2,8 +2,9 @@ import { $Page } from "@mptool/enhance";
 import { readJSON } from "@mptool/file";
 
 import { defaultScroller } from "../../mixins/page-scroll";
-import { getTitle, getImagePrefix } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
+import { startNavigation } from "../../utils/location";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -11,12 +12,10 @@ import type { PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
-const referer = getTitle();
-
 $Page("location", {
   data: {
     page: {} as PageData,
-    marker: "",
+    point: "",
   },
 
   state: { id: "" },
@@ -28,7 +27,7 @@ $Page("location", {
   },
 
   onLoad(option) {
-    const { id, marker = "" } = option;
+    const { id, point = "" } = option;
 
     if (id) {
       if (globalData.page.id === id) setPage({ option, ctx: this });
@@ -54,7 +53,7 @@ $Page("location", {
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
       env: globalData.env,
-      marker,
+      point,
     });
   },
 
@@ -66,32 +65,32 @@ $Page("location", {
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
-    const { page, marker } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
       path: `/function/map/location?id=${this.state.id}${
-        marker ? `&marker=${marker}` : ""
+        point ? `&point=${point}` : ""
       }`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
-    const { page, marker } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
-      query: `id=${this.state.id}${marker ? `&marker=${marker}` : ""}`,
+      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
     };
   },
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
-    const { page, marker } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `id=${this.state.id}${marker ? `&marker=${marker}` : ""}`,
+      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
     };
   },
 
@@ -99,9 +98,7 @@ $Page("location", {
 
   /** 开启导航 */
   navigate() {
-    wx.navigateTo({
-      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${this.data.marker}&mode=walking&themeColor=#2ecc71`,
-    });
+    startNavigation(this.data.point);
   },
 
   /** 返回按钮功能 */

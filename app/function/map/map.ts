@@ -1,7 +1,8 @@
 import { $Page } from "@mptool/enhance";
 
-import { getTitle, getImagePrefix } from "../../utils/config";
+import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
+import { startNavigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/wx";
 
@@ -9,7 +10,6 @@ import type { AppOption } from "../../app";
 import type { Category, MarkerConfig, MarkerData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-const referer = getTitle();
 
 /** 本部栅格 */
 const benbuArea = {
@@ -260,13 +260,13 @@ $Page("map", {
       if (item.path) this.$preload(`location?id=${area}/${item.path}`);
     } else if (event.type === "callouttap") {
       if (item.path) {
-        const marker = JSON.stringify({
+        const point = JSON.stringify({
           latitude: item.latitude,
           longitude: item.longitude,
           name: item.name,
         });
 
-        this.$go(`location?id=${area}/${item.path}&marker=${marker}`);
+        this.$go(`location?id=${area}/${item.path}&point=${point}`);
       } else tip("该地点暂无详情");
     }
   },
@@ -284,15 +284,13 @@ $Page("map", {
       (item) => item.id === Number(currentTarget.dataset.id)
     ) as MarkerData;
 
-    wx.navigateTo({
-      url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${JSON.stringify(
-        {
-          latitude: item.latitude,
-          longitude: item.longitude,
-          name: item.name,
-        }
-      )}&mode=walking&themeColor=#2ecc71`,
-    });
+    startNavigation(
+      JSON.stringify({
+        latitude: item.latitude,
+        longitude: item.longitude,
+        name: item.name,
+      })
+    );
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
@@ -303,13 +301,13 @@ $Page("map", {
     ) as MarkerData;
 
     if (item.path) {
-      const marker = JSON.stringify({
+      const point = JSON.stringify({
         latitude: item.latitude,
         longitude: item.longitude,
         name: item.name,
       });
 
-      this.$go(`location?id=${area}/${item.path}&marker=${marker}`);
+      this.$go(`location?id=${area}/${item.path}&point=${point}`);
     } else tip("该地点暂无详情");
   },
 

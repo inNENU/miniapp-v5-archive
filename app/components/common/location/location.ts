@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { getTitle } from "../../../utils/config";
+import { startNavigation } from "../../../utils/location";
 import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
@@ -11,22 +11,13 @@ import type { AppOption } from "../../../app";
 
 const { globalData } = getApp<AppOption>();
 const { env } = globalData;
-const referer = getTitle();
 
-const getMarker = (point: LocationConfig & { id: number }): string =>
+const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
     name: point.name,
     latitude: point.latitude,
     longitude: point.longitude,
   });
-
-const startNavigation = (point: LocationConfig & { id: number }): void => {
-  wx.navigateTo({
-    url: `plugin://routePlan/index?key=NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4&referer=${referer}&endPoint=${getMarker(
-      point
-    )}&mode=walking&themeColor=#2ecc71`,
-  });
-};
 
 $Component({
   properties: {
@@ -72,9 +63,9 @@ $Component({
 
       if (config.navigate !== false) {
         if (id === -1) {
-          if (markers.length === 1) startNavigation(markers[0]);
+          if (markers.length === 1) startNavigation(getPoint(markers[0]));
           else tip("请选择一个点");
-        } else startNavigation(markers[id]);
+        } else startNavigation(getPoint(markers[id]));
       }
     },
 
@@ -85,7 +76,7 @@ $Component({
         const point = this.data.markers[id];
 
         this.$go(
-          `location?id=${point.path as string}&marker=${getMarker(point)}`
+          `location?id=${point.path as string}&point=${getPoint(point)}`
         );
       }
     },
@@ -104,9 +95,9 @@ $Component({
       const { navigate } = this.data.config;
 
       if (point.path)
-        this.$go(`location?id=${point.path}&marker=${getMarker(point)}`);
+        this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
       else if (env === "wx" && navigate !== false)
-        startNavigation(this.data.markers[detail.markerId]);
+        startNavigation(getPoint(this.data.markers[detail.markerId]));
     },
   },
 });
