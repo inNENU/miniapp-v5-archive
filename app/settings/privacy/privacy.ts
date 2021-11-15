@@ -171,6 +171,11 @@ $Page("privacy", {
   //   this.authorize(7);
   // },
 
+  /** 添加好友授权 */
+  addFriend() {
+    this.authorize(2);
+  },
+
   /** 授权函数 */
   authorize(type: number) {
     wx.showLoading({ title: "授权中" });
