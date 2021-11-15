@@ -18,7 +18,10 @@
     hover-class="button-hover"
     catch:tap="back"
   >
-    返回
+    <cover-image
+      class="icon-back"
+      src="/icon/back{{darkmode?'White':''}}.png"
+    />
   </cover-view>
 
   <cover-view
