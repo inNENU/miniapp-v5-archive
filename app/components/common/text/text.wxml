@@ -9,7 +9,7 @@
       style="{{config.style || ''}}"
     >
       <view class="head">{{index + 1}}.</view>
-      <text class="text" decode user-select space="nbsp">{{item}}</text>
+      <text class="text" decode selectable space="nbsp">{{item}}</text>
     </view>
   </block>
 
@@ -21,7 +21,7 @@
       style="{{config.style || ''}}"
     >
       <view class="head">·</view>
-      <text class="text" decode user-select space="nbsp">{{item}}</text>
+      <text class="text" decode selectable space="nbsp">{{item}}</text>
     </view>
   </block>
 
@@ -31,7 +31,7 @@
         class="text"
         style="{{config.style || ''}}"
         decode
-        user-select
+        selectable
         space="nbsp"
         >{{item}}</text
       >

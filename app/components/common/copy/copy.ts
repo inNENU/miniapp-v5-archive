@@ -21,4 +21,8 @@ $Component({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

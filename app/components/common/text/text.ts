@@ -10,4 +10,8 @@ $Component({
       required: true,
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

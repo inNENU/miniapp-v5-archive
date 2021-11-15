@@ -13,10 +13,10 @@
         value="{{value}}"
         focus="{{showInput && focus}}"
         confirm-type="search"
-        bind:blur="blur"
         catch:tap="focus"
-        catch:input="onInputChange"
-        catch:confirm="confirm"
+        bindinput="onInputChange"
+        bindblur="blur"
+        bindconfirm="confirm"
       />
 
       <icon

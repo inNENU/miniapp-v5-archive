@@ -20,7 +20,8 @@ type AuthorizeList =
   | "scope.invoice"
   | "scope.werun"
   | "scope.record"
-  | "scope.camera";
+  | "scope.camera"
+  | "setting.addFriend";
 
 const authorizeList: AuthorizeList[] = [
   "scope.userLocation",
@@ -31,6 +32,7 @@ const authorizeList: AuthorizeList[] = [
   // "scope.werun",
   // "scope.record",
   // "scope.camera",
+  "setting.addFriend",
 ];
 
 $Page("privacy", {
@@ -63,6 +65,7 @@ $Page("privacy", {
             // { text: "微信运动步数", desc: "未授权×" },
             // { text: "录音", desc: "未授权×" },
             // { text: "摄像头", desc: "未授权×" },
+            { text: "添加好友", desc: "未授权×" },
           ],
         },
         {
@@ -78,6 +81,7 @@ $Page("privacy", {
             // { text: "微信运动步数", type: "button", handler: "werun" },
             // { text: "录音", type: "button", handler: "record" },
             // { text: "摄像头", type: "button", handler: "camera" },
+            { text: "添加好友", type: "button", handler: "addFriend" },
           ],
           footer: " ",
         },

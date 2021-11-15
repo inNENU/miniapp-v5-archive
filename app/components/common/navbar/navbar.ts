@@ -49,4 +49,8 @@ $Component({
       this.$emitter.off("theme", this.setTheme);
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });
