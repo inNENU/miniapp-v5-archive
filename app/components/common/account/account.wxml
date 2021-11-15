@@ -56,6 +56,14 @@
         <image class="icon" src="./icon/web.svg" />
       </view>
       <view
+        wx:if="{{config.mail}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="email"
+      >
+        <image class="icon" src="./icon/mail.svg" />
+      </view>
+      <view
         wx:if="{{config.location && env === 'wx'}}"
         class="action"
         hover-class="button-hover"

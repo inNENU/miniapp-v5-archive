@@ -56,7 +56,7 @@ $Component({
           addressPostalCode: config.postCode,
           title: config.title,
           hostNumber: config.hostNum,
-          email: config.email,
+          email: config.mail,
           url: config.site,
           homePhoneNumber: config.homeNum,
         });
