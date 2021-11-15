@@ -23,7 +23,7 @@ $Page("storage", {
           tag: "list",
           header: "空间占用",
           content: [
-            { text: "小程序体积", desc: "387K" },
+            { text: "小程序体积", desc: "601K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],
