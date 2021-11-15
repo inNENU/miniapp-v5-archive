@@ -47,7 +47,7 @@ $Component({
           organization: config.org,
           workPhoneNumber: config.workNum,
           remark: config.remark,
-          photoFilePath: config.head,
+          photoFilePath: config.avatar,
           nickName: config.nickName,
           weChatNumber: config.wechat,
           addressState: config.province,
@@ -57,7 +57,7 @@ $Component({
           title: config.title,
           hostNumber: config.hostNum,
           email: config.email,
-          url: config.website,
+          url: config.site,
           homePhoneNumber: config.homeNum,
         });
     },
