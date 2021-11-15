@@ -41,22 +41,14 @@ $Page("privacy", {
       title: "隐私说明",
       content: [
         {
-          tag: "title",
-          text: "隐私说明",
-        },
-        {
           tag: "list",
-          header: false,
+          header: "隐私声明",
           content: [
             {
               text: "查看详情",
               url: `page?path=other/about/${globalData.env}-privacy`,
             },
           ],
-        },
-        {
-          tag: "title",
-          text: "授权管理",
         },
         {
           tag: "list",
@@ -89,6 +81,15 @@ $Page("privacy", {
           ],
           footer: " ",
         },
+        {
+          tag: "functional-list",
+          header: "取消授权",
+          content: [
+            { text: "取消授权请进入设置页。" },
+            { text: "打开设置页", type: "button", handler: "openSetting" },
+          ],
+          footer: " ",
+        },
       ],
     } as PageDataWithContent,
 
@@ -107,7 +108,7 @@ $Page("privacy", {
   },
 
   onReady() {
-    const list = (this.data.page.content[3] as ListComponentConfig).content;
+    const list = (this.data.page.content[1] as ListComponentConfig).content;
 
     // update authorize status
     wx.getSetting({
@@ -116,7 +117,7 @@ $Page("privacy", {
           if (res.authSetting[type]) list[index].desc = "已授权✓";
         });
 
-        this.setData({ "page.content[3].content": list });
+        this.setData({ "page.content[1].content": list });
       },
     });
 
@@ -180,7 +181,7 @@ $Page("privacy", {
       success: () => {
         wx.hideLoading();
         tip("授权成功");
-        this.setData({ [`page.content[3].content.[${type}].desc`]: "已授权✓" });
+        this.setData({ [`page.content[1].content.[${type}].desc`]: "已授权✓" });
       },
       fail: () => {
         // 用户拒绝权限，提示用户开启权限
@@ -194,7 +195,7 @@ $Page("privacy", {
               wx.getSetting({
                 success: (res2) => {
                   const list = (
-                    this.data.page.content[3] as ListComponentConfig
+                    this.data.page.content[1] as ListComponentConfig
                   ).content;
 
                   authorizeList.forEach((type2, index) => {
@@ -204,11 +205,33 @@ $Page("privacy", {
                       : "未授权×";
                   });
 
-                  this.setData({ "page.content[3].content": list });
+                  this.setData({ "page.content[1].content": list });
                 },
               });
             },
           });
+        });
+      },
+    });
+  },
+
+  openSetting() {
+    wx.openSetting({
+      success: () => {
+        wx.getSetting({
+          success: (res2) => {
+            const list = (this.data.page.content[1] as ListComponentConfig)
+              .content;
+
+            authorizeList.forEach((type2, index) => {
+              (list as ButtonListComponnetItemConfig[])[index].desc = res2
+                .authSetting[type2]
+                ? "已授权✓"
+                : "未授权×";
+            });
+
+            this.setData({ "page.content[1].content": list });
+          },
         });
       },
     });
