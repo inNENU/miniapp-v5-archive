@@ -9,7 +9,7 @@
   catch:touchmove="{{share.button}}"
   catch:touchend="{{share.button}}"
 >
-  <image class="icon" src="./share.svg" />
+  <image class="icon" src="./icon/share.svg" />
 </view>
 <!-- 分享菜单 -->
 <view class="share-wrapper" catch:tap="{{share.hideMenu}}">
@@ -31,11 +31,7 @@
             share-mode="{{item.shareMode}}"
             bind:tap="{{item.action || ''}}"
           >
-            <image
-              wx:if="{{iconData[item.icon]}}"
-              class="icon"
-              src="{{iconData[item.icon]}}"
-            />
+            <image class="icon" src="{{item.icon}}.svg" />
           </button>
           <view class="text">{{item.text}}</view>
         </view>
