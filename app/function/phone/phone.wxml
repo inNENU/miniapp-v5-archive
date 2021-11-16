@@ -32,7 +32,7 @@
               <image
                 class="icon"
                 mode="widthFix"
-                src="/components/common/phone/call.svg"
+                src="/components/common/phone/icon/call.svg"
               />
             </view>
             <!-- 添加联系人按钮 -->
@@ -47,7 +47,7 @@
               <image
                 class="icon"
                 mode="widthFix"
-                src="/components/common/phone/add.svg"
+                src="/components/common/phone/icon/add.svg"
               />
             </view>
           </view>
