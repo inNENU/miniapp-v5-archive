@@ -63,10 +63,10 @@ $Component({
   lifetimes: {
     attached() {
       this.setLogo = this.setLogo.bind(this);
-      this.$emitter.on("inited", this.setLogo);
+      this.$on("inited", this.setLogo);
     },
     detached() {
-      this.$emitter.off("inited", this.setLogo);
+      this.$off("inited", this.setLogo);
     },
   },
 

@@ -25,6 +25,11 @@ $Component({
   },
 
   methods: {
+    /** 小程序跳转 */
+    miniprogram(options: { appId: string; path?: string; shortLink?: string }) {
+      wx.navigateToMiniProgram(options);
+    },
+
     /** 控制选择器显隐 */
     onPickerTap(
       event: WechatMiniprogram.TouchEvent<
@@ -163,7 +168,8 @@ $Component({
         content: this.data.config.content[Number(id)],
       };
     },
-    // 设置图标
+
+    /** 设置图标 */
     setLogo(content?: FunctionalListComponentItemOptions[]) {
       this.setData({
         icons: (content || this.data.config.content).map((item) =>
@@ -178,11 +184,11 @@ $Component({
   lifetimes: {
     attached() {
       this.setLogo = this.setLogo.bind(this);
-      this.$emitter.on("inited", this.setLogo);
+      this.$on("inited", this.setLogo);
     },
 
     detached() {
-      this.$emitter.off("inited", this.setLogo);
+      this.$off("inited", this.setLogo);
     },
   },
 

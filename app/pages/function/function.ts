@@ -48,7 +48,7 @@ $Page("function", {
 
   onReady() {
     // 注册事件监听器
-    this.$emitter.on("theme", this.setTheme);
+    this.$on("theme", this.setTheme);
   },
 
   onPullDownRefresh() {
@@ -75,7 +75,7 @@ $Page("function", {
   }),
 
   onUnload() {
-    this.$emitter.off("theme", this.setTheme);
+    this.$off("theme", this.setTheme);
   },
 
   setTheme(theme: string): void {

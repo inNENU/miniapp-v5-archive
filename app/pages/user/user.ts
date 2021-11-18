@@ -103,7 +103,7 @@ $Page("user", {
     globalData.theme = theme;
     wx.setStorageSync("theme", theme);
     this.setData({ color: getColor(this.data.page.grey), theme });
-    this.$emitter.emit("theme", theme);
+    this.$emit("theme", theme);
 
     // debug
     console.info(`Switched to ${theme} theme`);

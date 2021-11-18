@@ -1,7 +1,10 @@
 module.exports = {
   /** 导航 */
   navigate: function (event) {
-    event.instance.callMethod("$go", event.currentTarget.dataset.url);
+    var dataset = event.currentTarget.dataset;
+
+    if (dataset.appid) event.instance.callMethod("miniprogram", dataset);
+    else event.instance.callMethod("$go", dataset.url);
   },
 
   /** 需要渲染为按钮 */
