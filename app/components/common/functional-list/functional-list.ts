@@ -25,11 +25,6 @@ $Component({
   },
 
   methods: {
-    /** 小程序跳转 */
-    miniprogram(options: { appId: string; path?: string; shortLink?: string }) {
-      wx.navigateToMiniProgram(options);
-    },
-
     /** 控制选择器显隐 */
     onPickerTap(
       event: WechatMiniprogram.TouchEvent<

@@ -78,9 +78,6 @@
         hover-class="button-hover"
         hover-stay-time="100"
         data-url="{{listItem.url}}"
-        data-app-id="{{listItem.appid}}"
-        data-path="{{listItem.path}}"
-        data-short-link="{{listItem.shortLink}}"
         catch:tap="{{list.navigate}}"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />

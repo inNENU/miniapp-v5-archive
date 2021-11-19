@@ -1,5 +1,16 @@
-<view class="card-component" hover-class="button-hover" catch:tap="tap">
-  <image class="cover" src="{{config.src}}" mode="aspectFill" lazy-load />
+<view
+  wx:if="{{!config.options || env === 'wx'}}"
+  class="card-component"
+  hover-class="button-hover"
+  catch:tap="tap"
+>
+  <image
+    wx:if="{{config.cover}}"
+    class="cover"
+    src="{{config.cover}}"
+    mode="aspectFill"
+    lazy-load
+  />
   <view class="detail">
     <view wx:if="{{base64Logo || config.logo}}" class="info">
       <image class="logo" src="{{base64Logo || config.logo}}" lazy-load />

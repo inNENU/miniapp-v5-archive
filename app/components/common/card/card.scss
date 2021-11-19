@@ -26,22 +26,22 @@
   }
 
   .title {
-    margin-bottom: 8px;
     font-weight: 500;
     font-size: 16px;
 
     @media (min-width: 480px) {
-      margin-bottom: 10px;
       font-size: 20px;
     }
   }
 
   .desc {
+    margin-top: 8px;
     color: var(--dark-grey);
     font-size: 14px;
     line-height: 1.4;
 
     @media (min-width: 480px) {
+      margin-top: 10px;
       font-size: 18px;
     }
   }
