@@ -42,11 +42,11 @@ $Component({
 
       // bind this
       this.setTheme = this.setTheme.bind(this);
-      this.$emitter.on("theme", this.setTheme);
+      this.$on("theme", this.setTheme);
     },
 
     detached() {
-      this.$emitter.off("theme", this.setTheme);
+      this.$off("theme", this.setTheme);
     },
   },
 

@@ -163,7 +163,8 @@ $Component({
         content: this.data.config.content[Number(id)],
       };
     },
-    // 设置图标
+
+    /** 设置图标 */
     setLogo(content?: FunctionalListComponentItemOptions[]) {
       this.setData({
         icons: (content || this.data.config.content).map((item) =>
@@ -178,11 +179,11 @@ $Component({
   lifetimes: {
     attached() {
       this.setLogo = this.setLogo.bind(this);
-      this.$emitter.on("inited", this.setLogo);
+      this.$on("inited", this.setLogo);
     },
 
     detached() {
-      this.$emitter.off("inited", this.setLogo);
+      this.$off("inited", this.setLogo);
     },
   },
 

@@ -144,7 +144,7 @@
         <view class="divline" />
         <!-- 滑块显示 -->
         <slider
-          wx:if="{{listItem.slider}}"
+          wx:if="{{listItem.type === 'slider' }}"
           class="slider"
           min="{{listItem.min? listItem.min: '0'}}"
           max="{{listItem.max? listItem.max: '100'}}"

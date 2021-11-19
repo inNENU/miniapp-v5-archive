@@ -3,7 +3,7 @@
 
   width: calc(100% - 30px);
   max-width: var(--max-width);
-  margin: 8px 15px;
+  margin: 8px var(--horizontal-margin);
   border-radius: 8px;
 
   background-color: var(--block-bgcolor);

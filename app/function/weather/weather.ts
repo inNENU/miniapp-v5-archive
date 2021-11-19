@@ -56,7 +56,7 @@ $Page("weather", {
     } else {
       // update icon
       this.updateIcon = this.updateIcon.bind(this);
-      this.$emitter.on("inited", this.updateIcon);
+      this.$on("inited", this.updateIcon);
     }
 
     // 如果天气数据获取时间小于 5 分钟，则可以使用
@@ -110,7 +110,7 @@ $Page("weather", {
     wx.stopAccelerometer({
       success: () => console.info("Stoped accelerometer listening"),
     });
-    this.$emitter.off("inited", this.updateIcon);
+    this.$off("inited", this.updateIcon);
   },
 
   updateIcon(): void {

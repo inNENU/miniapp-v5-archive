@@ -8,7 +8,7 @@ import type { AppOption } from "../../../app";
 import type { CardComponentOptions } from "../../../../typings";
 
 const {
-  globalData: { appID },
+  globalData: { appID, env },
 } = getApp<AppOption>();
 
 $Component({
@@ -19,13 +19,19 @@ $Component({
     },
   },
 
+  data: { env },
+
   methods: {
     /** 点击卡片触发的操作 */
     tap(): void {
       const { config } = this.data;
 
-      if (config.type === "web")
-        if (appID === "wx9ce37d9662499df3")
+      if ("options" in config) wx.navigateToMiniProgram(config.options);
+      else {
+        // 页面路径
+        if (!config.url.startsWith("http")) this.$go(config.url);
+        // 网页
+        else if (appID === "wx9ce37d9662499df3")
           // 为企业主体微信小程序
           this.$go(`/module/web?url=${config.url}&title=${config.title}`);
         // 判断是否是可以跳转的微信图文
@@ -46,7 +52,7 @@ $Component({
               );
             },
           });
-      else if (config.type === "page") this.$go(config.url);
+      }
     },
 
     setLogo(value?: string) {
@@ -63,10 +69,10 @@ $Component({
   lifetimes: {
     attached() {
       this.setLogo = this.setLogo.bind(this);
-      this.$emitter.on("inited", this.setLogo);
+      this.$on("inited", this.setLogo);
     },
     detached() {
-      this.$emitter.off("inited", this.setLogo);
+      this.$off("inited", this.setLogo);
     },
   },
 

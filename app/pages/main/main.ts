@@ -62,7 +62,7 @@ $Page("main", {
 
   onReady() {
     // 注册事件监听器
-    this.$emitter.on("theme", this.setTheme);
+    this.$on("theme", this.setTheme);
 
     // 执行 tab 页预加载
     ["function", "guide", "intro", "user"].forEach((x) => {
@@ -107,7 +107,7 @@ $Page("main", {
   }),
 
   onUnload() {
-    this.$emitter.off("theme", this.setTheme);
+    this.$off("theme", this.setTheme);
   },
 
   setTheme(theme: string): void {

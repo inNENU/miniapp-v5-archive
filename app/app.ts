@@ -37,7 +37,7 @@ $Config({
       "/function/$name/$name",
     ],
     ["account-detail", "/function/account/detail"],
-    [["about", "log", "privacy", "storage"], "/settings/$name/$name"],
+    [["about", "privacy", "storage"], "/settings/$name/$name"],
   ],
 
   injectPage: (_name, options) => {
