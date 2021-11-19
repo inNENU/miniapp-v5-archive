@@ -13,16 +13,16 @@
 
     <view class="action-list">
       <button
-        wx:if="{{config.openid && env === 'qq'}}"
+        wx:if="{{config.qqid && env === 'qq'}}"
         class="action"
         hover-class="button-hover"
         open-type="addFriend"
-        open-id="{{config.openid}}"
+        open-id="{{config.qqid}}"
       >
         <image class="icon" src="/icon/qq.svg" />
       </button>
       <view
-        wx:elif="{{config.qq || config.qqQRCode}}"
+        wx:elif="{{config.qq || config.qqcode}}"
         class="action"
         hover-class="button-hover"
         catch:tap="qq"
@@ -30,17 +30,17 @@
         <image class="icon" src="/icon/qq.svg" />
       </view>
       <view
-        wx:if="{{config.path}}"
+        wx:if="{{config.account}}"
         class="action"
         hover-class="button-hover"
         hover-stay-time="100"
-        data-url="{{'account-detail?path=' + config.path}}"
+        data-url="{{'account-detail?path=' + config.account}}"
         catch:tap="$bindGo"
       >
         <image class="icon" src="/icon/wechat.svg" />
       </view>
       <view
-        wx:elif="{{config.wx || config.wxQRCode}}"
+        wx:elif="{{config.wxid || config.wxcode}}"
         class="action"
         hover-class="button-hover"
         catch:tap="wechat"
