@@ -70,7 +70,12 @@ export const searching = (
 
     if (searchWord)
       Object.keys(keywords).forEach((jsonName) => {
-        const { name = "", desc = "", title, heading } = keywords[jsonName];
+        const {
+          name = "",
+          desc = "",
+          title = [],
+          heading = [],
+        } = keywords[jsonName];
 
         // 检查标题是否包含了 searchWord
         if (name.indexOf(searchWord) !== -1 && words.indexOf(name) === -1)
@@ -124,11 +129,11 @@ export const search = (
       const {
         name = "",
         desc = "",
-        title,
-        heading,
-        card,
-        doc,
-        text,
+        title = [],
+        heading = [],
+        card = [],
+        doc = [],
+        text = [],
       } = searchMap[pageID];
 
       for (let i = 0; i < wordsInfo.length; i++) {
