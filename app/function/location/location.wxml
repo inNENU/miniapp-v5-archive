@@ -37,7 +37,7 @@
     </view>
     <carousel
       wx:if="{{page.photo}}"
-      config="{{ { fill: true, url: page.photo } }}"
+      config="{{ { fill: true, images: page.photo } }}"
     />
     <view wx:else style="height: {{statusBarHeight + 44}}px;" />
     <view class="title">
