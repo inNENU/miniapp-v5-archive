@@ -5,6 +5,9 @@
     <text wx:if="{{config.author}}" decode>作者: {{config.author}}</text>
     <text wx:if="{{config.time}}" decode>最后更新于: {{config.time}}</text>
   </view>
+  <view wx:if="{{config.cite}}" class="cite" catch:tap="copyCite"
+    >原文地址</view
+  >
 
   <view class="content">{{text}}</view>
   <view class="copyright">Copyright © 2017-{{footer.year}} Mr.Hope</view>
