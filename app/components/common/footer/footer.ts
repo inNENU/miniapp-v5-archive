@@ -1,4 +1,5 @@
 import { $Component } from "@mptool/enhance";
+import { modal } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
@@ -23,5 +24,20 @@ $Component({
       appID === "wx9ce37d9662499df3"
         ? "走出半生，归来仍是——东师青年"
         : "in 东师，就用 in 东师",
+  },
+
+  methods: {
+    copyCite() {
+      wx.setClipboardData({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        data: this.data.config.cite!,
+        success: () => {
+          modal(
+            "无法直接打开",
+            "小程序无法直接打开网页，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+          );
+        },
+      });
+    },
   },
 });

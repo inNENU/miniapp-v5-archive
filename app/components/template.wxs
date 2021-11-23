@@ -33,6 +33,11 @@ module.exports = {
   },
 
   getFooterConfig: function (page) {
-    return { author: page.author, time: page.time, desc: page.desc };
+    return {
+      author: page.author,
+      time: page.time,
+      desc: page.desc,
+      cite: page.cite,
+    };
   },
 };
