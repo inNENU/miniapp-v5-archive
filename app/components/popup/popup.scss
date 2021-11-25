@@ -3,12 +3,12 @@
 
 .popup-wrapper {
   position: absolute;
-  opacity: 0%;
+  opacity: 0;
   visibility: hidden;
   transition: all 0.3s;
 
   &.show {
-    opacity: 100%;
+    opacity: 1;
     visibility: visible;
 
     .popup {
