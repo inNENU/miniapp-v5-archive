@@ -33,7 +33,7 @@
       ],
       "plugins": {
         "routePlan": {
-          "version": "1.0.17",
+          "version": "1.0.18",
           "provider": "wx50b5593e81dd937a"
         }
       }
