@@ -23,7 +23,7 @@
 
 @keyframes cloud-shadow {
   50% {
-    opacity: 5%;
+    opacity: 0.05;
     transform: translateY(20px) scale(1);
   }
 }
@@ -56,7 +56,7 @@
 
     background: #000;
 
-    opacity: 20%;
+    opacity: 0.2;
 
     transform: scale(0.7);
     animation: cloud-shadow 5s ease-in-out infinite;
@@ -111,7 +111,7 @@
       rgb(255 255 255 / 0%) 100%
     );
 
-    opacity: 100%;
+    opacity: 1;
 
     transform: rotate(90deg);
   }
@@ -142,7 +142,7 @@
 
 @keyframes rainbow-shadow {
   50% {
-    opacity: 5%;
+    opacity: 0.05;
     transform: rotate(-50deg) translate(10px) scale(0.7);
   }
 }
@@ -176,7 +176,7 @@
 
     background: #000;
 
-    opacity: 20%;
+    opacity: 0.2;
 
     transform: rotate(-40deg);
     transform-origin: 50% 50%;
@@ -222,7 +222,7 @@
     rgb(255 255 255 / 10%) 60px -67px 0 -1px, #fff 34px -127px,
     rgb(255 255 255 / 10%) -26px -103px 0 -1px;
 
-  opacity: 100%;
+  opacity: 1;
 
   animation: starry-star 5s ease-in-out infinite;
 
@@ -328,7 +328,7 @@
 
     background: #ccc;
 
-    opacity: 30%;
+    opacity: 0.3;
 
     transform: scale(0.9);
     animation: rainy-rain 0.7s infinite linear;
@@ -339,22 +339,22 @@
 
 @keyframes stormy-thunder {
   0% {
-    opacity: 100%;
+    opacity: 1;
     transform: rotate(20deg);
   }
 
   5% {
-    opacity: 100%;
+    opacity: 1;
     transform: rotate(-34deg);
   }
 
   10% {
-    opacity: 100%;
+    opacity: 1;
     transform: rotate(0deg);
   }
 
   15% {
-    opacity: 0%;
+    opacity: 0;
     transform: rotate(-34deg);
   }
 }
@@ -453,7 +453,7 @@
     height: 7px;
     border-radius: 50%;
 
-    opacity: 80%;
+    opacity: 0.8;
 
     transform: scale(0.9);
     animation: snowy-snow 2s infinite linear;

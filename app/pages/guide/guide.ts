@@ -8,6 +8,7 @@ import { searching } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
+import type { PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -39,9 +40,11 @@ $Page("guide", {
   },
 
   onLoad() {
+    const preloadData = take<PageDataWithContent>("guide");
+
     setPage(
-      { option: { id: "guide" }, ctx: this },
-      take("guide") || this.data.page
+      { option: { id: "guide" }, ctx: this, handle: Boolean(preloadData) },
+      preloadData || wx.getStorageSync("guide") || this.data.page
     );
   },
 

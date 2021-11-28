@@ -48,7 +48,7 @@ $Component({
           workPhoneNumber: config.workNum,
           remark: config.remark,
           photoFilePath: config.avatar,
-          nickName: config.nickName,
+          nickName: config.nick,
           weChatNumber: config.wechat,
           addressState: config.province,
           addressCity: config.city,

@@ -46,9 +46,11 @@ $Page("user", {
   },
 
   onLoad() {
+    const preloadData = take<PageDataWithContent>("user");
+
     setPage(
-      { option: { id: "user" }, ctx: this },
-      take("user") || this.data.page
+      { option: { id: "user" }, ctx: this, handle: Boolean(preloadData) },
+      preloadData || wx.getStorageSync("user") || this.data.page
     );
   },
 
