@@ -7,6 +7,7 @@ import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
+import type { PageDataWithContent } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -33,9 +34,11 @@ $Page("function", {
   },
 
   onLoad() {
+    const preloadData = take<PageDataWithContent>("function");
+
     setPage(
-      { option: { id: "function" }, ctx: this },
-      take("function") || this.data.page
+      { option: { id: "function" }, ctx: this, handle: Boolean(preloadData) },
+      preloadData || wx.getStorageSync("function") || this.data.page
     );
   },
 
