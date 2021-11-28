@@ -27,10 +27,19 @@ $Component({
   },
 
   methods: {
-    copyCite() {
+    copyCite({
+      currentTarget,
+    }: WechatMiniprogram.Touch<
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      WechatMiniprogram.TouchDetail,
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      { index: number }
+    >) {
       wx.setClipboardData({
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        data: this.data.config.cite!,
+        data: this.data.config.cite![currentTarget.dataset.index],
         success: () => {
           modal(
             "无法直接打开",
