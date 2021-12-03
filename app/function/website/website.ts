@@ -41,10 +41,9 @@ $Page("website", {
 
   copy({
     currentTarget,
-  }: WechatMiniprogram.Touch<
+  }: WechatMiniprogram.TouchEvent<
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
-    WechatMiniprogram.TouchDetail,
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
     { link: string }

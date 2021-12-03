@@ -15,13 +15,6 @@ module.exports = {
     );
   },
 
-  /** 按钮操作 */
-  button: function (event) {
-    var listItem = event.currentTarget.dataset.item;
-
-    if (listItem.handler) event.instance.callMethod(listItem.handler, event);
-  },
-
   /** 点击操作 */
   tapHandler: function (listItem) {
     return listItem.type === "picker"

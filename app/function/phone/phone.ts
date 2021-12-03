@@ -53,10 +53,9 @@ $Page("phone", {
 
   getConfig({
     currentTarget,
-  }: WechatMiniprogram.Touch<
+  }: WechatMiniprogram.TouchEvent<
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
-    WechatMiniprogram.TouchDetail,
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
     { group: number; index: number }
@@ -73,10 +72,9 @@ $Page("phone", {
   },
 
   call(
-    event: WechatMiniprogram.Touch<
+    event: WechatMiniprogram.TouchEvent<
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
-      WechatMiniprogram.TouchDetail,
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
       { group: number; index: number }
@@ -88,10 +86,9 @@ $Page("phone", {
   },
 
   addContact(
-    event: WechatMiniprogram.Touch<
+    event: WechatMiniprogram.TouchEvent<
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
-      WechatMiniprogram.TouchDetail,
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
       { group: number; index: number }

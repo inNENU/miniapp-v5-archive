@@ -3,6 +3,7 @@ import { readFile } from "@mptool/file";
 
 import type { PropType } from "@mptool/enhance";
 import type {
+  ButtonListComponnetItemConfig,
   FunctionalListComponentConfig,
   FunctionalListComponentItemOptions,
   PickerListComponentItemConfig,
@@ -25,6 +26,21 @@ $Component({
   },
 
   methods: {
+    /** 按钮设置 */
+    onButtonTap(
+      event: WechatMiniprogram.TouchEvent<
+        Record<string, never>,
+        Record<string, never>,
+        { id: string }
+      >
+    ): void {
+      const { content } = this.getDetail(
+        event
+      ) as ListDetail<ButtonListComponnetItemConfig>;
+
+      if (content.handler) this.$call(content.handler, event);
+    },
+
     /** 控制选择器显隐 */
     onPickerTap(
       event: WechatMiniprogram.TouchEvent<
@@ -36,7 +52,6 @@ $Component({
       const {
         id,
         content: { visible: value },
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       } = this.getDetail(event) as ListDetail<PickerListComponentItemConfig>;
 
       this.setData({ [`config.content[${id}].visible`]: !value });
@@ -49,7 +64,6 @@ $Component({
         { id: string }
       >
     ): void {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<PickerListComponentItemConfig>;
@@ -91,7 +105,6 @@ $Component({
         { id: string }
       >
     ): void {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SwitchListComponentItemConfig>;
@@ -115,7 +128,6 @@ $Component({
         { id: string }
       >
     ): void {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;
@@ -131,7 +143,6 @@ $Component({
         { id: string }
       >
     ): void {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
       const { id, content } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;

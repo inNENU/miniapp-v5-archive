@@ -49,10 +49,9 @@ $Page("account", {
 
   switch({
     currentTarget,
-  }: WechatMiniprogram.Touch<
+  }: WechatMiniprogram.TouchEvent<
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
-    WechatMiniprogram.TouchDetail,
     // eslint-disable-next-line @typescript-eslint/ban-types
     {},
     { type: string }
@@ -65,10 +64,9 @@ $Page("account", {
   },
 
   detail(
-    event: WechatMiniprogram.Touch<
+    event: WechatMiniprogram.TouchEvent<
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
-      WechatMiniprogram.TouchDetail,
       // eslint-disable-next-line @typescript-eslint/ban-types
       {},
       { id: number; qrcode?: string }

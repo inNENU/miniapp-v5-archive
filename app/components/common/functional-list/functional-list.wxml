@@ -19,8 +19,7 @@
         open-type="{{listItem.openType}}"
         open-id="{{listItem.openId}}"
         group-id="{{listItem.groupId}}"
-        data-item="{{listItem}}"
-        catch:tap="{{list.button}}"
+        catch:tap="onButtonTap"
         capture-bind:tap="{{list.tapHandler(listItem)}}"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
