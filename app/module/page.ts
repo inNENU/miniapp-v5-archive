@@ -1,12 +1,8 @@
 import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../utils/config";
-import {
-  loadOnlinePage,
-  id2path,
-  resolvePage,
-  setOnlinePage,
-} from "../utils/page";
+import { id2path } from "../utils/id";
+import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
 import type { AppOption } from "../app";
 import type { PageData, PageOption } from "../../typings";

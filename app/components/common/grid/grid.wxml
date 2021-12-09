@@ -6,7 +6,7 @@
 <view class="grid-component-wrapper">
   <!-- 每个网格 -->
   <view
-    wx:for="{{config.content}}"
+    wx:for="{{config.items}}"
     wx:for-item="gridItem"
     wx:key="text"
     class="bg-{{gridItem.color}} grid"

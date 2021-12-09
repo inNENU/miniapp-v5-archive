@@ -1,8 +1,9 @@
 import type { ComponentConfig } from "./components";
-import type { PageConfig } from "../server/typings";
+import type { GeneralScopeData } from "./scopeData";
+import type { PageOptions } from "../server/typings";
 
 /** 页面数据 */
-export interface PageData extends Partial<PageConfig> {
+export interface PageData extends Partial<PageOptions> {
   /** 状态栏高度 */
   statusBarHeight?: number;
   /** 页面深度 */
@@ -20,7 +21,9 @@ export interface PageData extends Partial<PageConfig> {
   borderDisplay?: boolean;
   /** 是否显示阴影(仅 Android 主题) */
   shadow?: boolean;
+  image?: string[];
   content?: ComponentConfig[];
+  scopeData?: GeneralScopeData;
 }
 
 export interface PageDataWithContent extends PageData {

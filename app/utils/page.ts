@@ -2,6 +2,8 @@
 import { logger } from "@mptool/enhance";
 import { readJSON, writeJSON } from "@mptool/file";
 import { ensureJSON } from "./json";
+import { id2path } from "./id";
+import { genScopeData } from "./scopeData";
 import { modal, requestJSON } from "./wx";
 
 import type { PageInstance, PageQuery } from "@mptool/enhance";
@@ -12,6 +14,7 @@ import type {
   GridComponentItemConfig,
   ListComponentItemConfig,
   PageData,
+  PageDataWithContent,
   PageOption,
 } from "../../typings";
 
@@ -24,20 +27,6 @@ type PageInstanceWithPage = PageInstance<
 
 /** 全局数据 */
 const { globalData } = getApp<AppOption>();
-
-export const id2path = (id = ""): string =>
-  id
-    .replace(/^G/, "guide/")
-    .replace(/^I/, "intro/")
-    .replace(/^O/, "other/")
-    .replace(/\/$/, "/index");
-
-export const path2id = (path = ""): string =>
-  path
-    .replace(/^guide\//, "G")
-    .replace(/^intro\//, "I")
-    .replace(/^other\//, "O")
-    .replace(/\/index$/, "/");
 
 /**
  * 处理详情内容
@@ -128,16 +117,37 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
   page.id = option.id || page.title;
   // 设置页面来源
   page.from = option.from || "返回";
+  page.images = [];
 
-  if (page.content)
-    page.content.forEach((element) => {
+  if (page.content) {
+    page.content.forEach((component) => {
       // 设置隐藏
-      if ("env" in element)
-        element.hidden = !element.env?.includes(globalData.env);
+      if ("env" in component)
+        component.hidden = !component.env?.includes(globalData.env);
+
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      if (component.tag === "img") page.images!.push(component.src);
+
+      if (
+        "path" in component &&
+        (component.tag === "p" ||
+          component.tag === "ol" ||
+          component.tag === "ul" ||
+          component.tag === "text")
+      ) {
+        component.path = `page?from=${page.title || "返回"}&id=${
+          component.path as string
+        }`;
+      }
 
       // 设置 list 组件
-      if ("content" in element)
-        element.content = element.content
+      if (
+        "items" in component &&
+        (component.tag === "list" ||
+          component.tag === "grid" ||
+          component.tag === "functional-list")
+      )
+        component.items = component.items
           .map(
             (
               listElement: (
@@ -152,6 +162,9 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           | GridComponentItemConfig[]
           | ListComponentItemConfig[];
     });
+
+    page.scopeData = genScopeData(page as PageDataWithContent);
+  }
 
   // 调试
   logger.info(`Resolve ${page.id as string} page success`);
@@ -168,9 +181,14 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
 const preloadPage = (page: PageData): void => {
   if (page && page.content)
     page.content.forEach((component) => {
-      if ("content" in component)
+      if (
+        "items" in component &&
+        (component.tag === "list" ||
+          component.tag === "grid" ||
+          component.tag === "functional-list")
+      )
         // 该组件是列表或九宫格，需要预加载界面，提前获取界面到存储
-        component.content.forEach(
+        component.items.forEach(
           (
             element: (
               | FunctionalListComponentItemConfig
@@ -492,7 +510,7 @@ export const setOnlinePage = (
       }
       // 请求页面Json
       else
-        requestJSON<PageData>(`resource/${option.id}`)
+        requestJSON<PageData>(`r/${option.id}`)
           .then((data) => {
             // 非分享界面下将页面数据写入存储
             if (option.from !== "share")
@@ -559,7 +577,7 @@ export const loadOnlinePage = (
     logger.info(`${option.path} onLoad starts with options:`, option);
 
     // 需要在线获取界面
-    requestJSON<PageData>(`resource/${option.id}`)
+    requestJSON<PageData>(`r/${option.id}`)
       .then((page) => {
         if (page) {
           setPage({ option, ctx }, page);

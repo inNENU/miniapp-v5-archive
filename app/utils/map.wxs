@@ -7,14 +7,15 @@ module.exports = {
    *
    * @returns 地图设置
    */
-  getSetting: function (env, darkmode) {
+  getSetting: function (env, darkmode, showSatellite) {
     var settings = {
       showLocation: true,
       showScale: true,
       showCompass: true,
       enableRotate: true,
       enable3D: true,
-      enableOverlooking: true,
+      enableOverlooking: false,
+      enableSatellite: showSatellite || false,
       enableTraffic: true,
     };
 

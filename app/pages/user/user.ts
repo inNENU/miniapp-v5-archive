@@ -98,7 +98,7 @@ $Page("user", {
     const theme = (
       (
         (this.data.page.content[1] as FunctionalListComponentConfig)
-          .content[0] as PickerListComponentItemConfig
+          .items[0] as PickerListComponentItemConfig
       ).select as string[]
     )[Number(value)];
 

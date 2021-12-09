@@ -5,7 +5,7 @@
 >
 <!-- 列表主体 -->
 <view class="list-component-content">
-  <block wx:for="{{config.content}}" wx:for-item="listItem" wx:key="text">
+  <block wx:for="{{config.items}}" wx:for-item="listItem" wx:key="text">
     <block wx:if="{{!listItem.hidden}}">
       <!-- 按钮、嵌入选择器与滑块 -->
       <button
@@ -77,7 +77,7 @@
         hover-class="button-hover"
         hover-stay-time="100"
         data-url="{{listItem.url}}"
-        catch:tap="{{list.navigate}}"
+        catch:tap="$bindGo"
       >
         <image wx:if="{{icons[index]}}" class="icon" src="{{icons[index]}}" />
         <image

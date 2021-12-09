@@ -43,7 +43,7 @@ $Page("privacy", {
         {
           tag: "list",
           header: "隐私声明",
-          content: [
+          items: [
             {
               text: "查看详情",
               url: `page?path=other/about/${globalData.env}-privacy`,
@@ -53,7 +53,7 @@ $Page("privacy", {
         {
           tag: "list",
           header: "授权状态",
-          content: [
+          items: [
             { text: "地理位置", desc: "未授权×" },
             { text: "保存到相册", desc: "未授权×" },
             // { text: "用户信息", desc: "未授权×" },
@@ -68,7 +68,7 @@ $Page("privacy", {
         {
           tag: "functional-list",
           header: "进行授权",
-          content: [
+          items: [
             { text: "地理位置", type: "button", handler: "location" },
             { text: "保存到相册", type: "button", handler: "album" },
             // { text: "用户信息", type: "button", openType: "getUserInfo" },
@@ -84,7 +84,7 @@ $Page("privacy", {
         {
           tag: "functional-list",
           header: "取消授权",
-          content: [
+          items: [
             { text: "取消授权请进入设置页。" },
             { text: "打开设置页", type: "button", handler: "openSetting" },
           ],
@@ -108,16 +108,16 @@ $Page("privacy", {
   },
 
   onReady() {
-    const list = (this.data.page.content[1] as ListComponentConfig).content;
+    const { items } = this.data.page.content[1] as ListComponentConfig;
 
     // update authorize status
     wx.getSetting({
       success: (res) => {
         authorizeList.forEach((type, index) => {
-          if (res.authSetting[type]) list[index].desc = "已授权✓";
+          if (res.authSetting[type]) items[index].desc = "已授权✓";
         });
 
-        this.setData({ "page.content[1].content": list });
+        this.setData({ "page.content[1].items": items });
       },
     });
 
@@ -176,7 +176,7 @@ $Page("privacy", {
       success: () => {
         wx.hideLoading();
         tip("授权成功");
-        this.setData({ [`page.content[1].content.[${type}].desc`]: "已授权✓" });
+        this.setData({ [`page.content[1].items[${type}].desc`]: "已授权✓" });
       },
       fail: () => {
         // 用户拒绝权限，提示用户开启权限
@@ -189,18 +189,15 @@ $Page("privacy", {
 
               wx.getSetting({
                 success: (res2) => {
-                  const list = (
-                    this.data.page.content[1] as ListComponentConfig
-                  ).content;
+                  const { items } = this.data.page
+                    .content[1] as ListComponentConfig;
 
                   authorizeList.forEach((type2, index) => {
-                    (list as ButtonListComponnetItemConfig[])[index].desc = res2
-                      .authSetting[type2]
-                      ? "已授权✓"
-                      : "未授权×";
+                    (items as ButtonListComponnetItemConfig[])[index].desc =
+                      res2.authSetting[type2] ? "已授权✓" : "未授权×";
                   });
 
-                  this.setData({ "page.content[1].content": list });
+                  this.setData({ "page.content[1].items": items });
                 },
               });
             },
@@ -215,17 +212,16 @@ $Page("privacy", {
       success: () => {
         wx.getSetting({
           success: (res2) => {
-            const list = (this.data.page.content[1] as ListComponentConfig)
-              .content;
+            const { items } = this.data.page.content[1] as ListComponentConfig;
 
             authorizeList.forEach((type2, index) => {
-              (list as ButtonListComponnetItemConfig[])[index].desc = res2
+              (items as ButtonListComponnetItemConfig[])[index].desc = res2
                 .authSetting[type2]
                 ? "已授权✓"
                 : "未授权×";
             });
 
-            this.setData({ "page.content[1].content": list });
+            this.setData({ "page.content[1].items": items });
           },
         });
       },

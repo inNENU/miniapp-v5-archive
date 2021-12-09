@@ -22,7 +22,7 @@ $Page("storage", {
         {
           tag: "list",
           header: "空间占用",
-          content: [
+          items: [
             { text: "小程序体积", desc: "601K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
@@ -31,7 +31,7 @@ $Page("storage", {
         {
           tag: "functional-list",
           header: "内容更新",
-          content: [
+          items: [
             {
               text: "内容更新提示",
               type: "switch",
@@ -48,7 +48,7 @@ $Page("storage", {
         {
           tag: "functional-list",
           header: "重置",
-          content: [
+          items: [
             { text: "清除小程序数据", type: "button", handler: "clearData" },
             { text: "清除小程序文件", type: "button", handler: "clearFiles" },
             { text: "初始化小程序", type: "button", handler: "resetApp" },
@@ -84,7 +84,7 @@ $Page("storage", {
       success: ({ currentSize }) => {
         // 写入存储大小
         this.setData({
-          "page.content[0].content[1].desc": `${currentSize}K/10240K`,
+          "page.content[0].items[1].desc": `${currentSize}K/10240K`,
         });
       },
     });
@@ -104,7 +104,7 @@ $Page("storage", {
 
         // 写入文件大小
         this.setData({
-          "page.content[0].content[2].desc": `${Math.ceil(
+          "page.content[0].items[2].desc": `${Math.ceil(
             fileSize / 1024
           )}K/10240K`,
         });

@@ -1,0 +1,27 @@
+@use "../../../../styles/lib/svg";
+@use "icons";
+
+.container-component.danger {
+  border-color: #e13238;
+  background: #ffebec;
+
+  @media (prefers-color-scheme: dark) {
+    background: #4b1113;
+  }
+
+  .container-title {
+    color: #4b1113;
+
+    @media (prefers-color-scheme: dark) {
+      color: #ffebec;
+    }
+
+    &::before {
+      @include svg.background-svg(icons.$danger-icon);
+
+      @media (prefers-color-scheme: dark) {
+        @include svg.background-svg(icons.$danger-dark-icon);
+      }
+    }
+  }
+}

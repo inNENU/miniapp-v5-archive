@@ -78,7 +78,7 @@ $App<AppOption>({
     console.info("App launched with options:", options);
 
     // 如果初次启动执行初始化
-    if (!wx.getStorageSync("innenu-inited")) appInit();
+    if (!wx.getStorageSync("app-inited")) appInit();
 
     startup(this.globalData);
 
@@ -87,7 +87,7 @@ $App<AppOption>({
 
   onShow() {
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("innenu-inited")) checkResUpdate();
+    if (wx.getStorageSync("app-inited")) checkResUpdate();
   },
 
   onAwake(time: number) {

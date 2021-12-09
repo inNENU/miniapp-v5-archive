@@ -18,9 +18,9 @@ $Component({
 
   methods: {
     // 设置图标
-    setLogo(content?: ListComponentItemConfig[]) {
+    setLogo(items?: ListComponentItemConfig[]) {
       this.setData({
-        icons: (content || this.data.config.content).map((item) =>
+        icons: (items || this.data.config.items).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
@@ -40,7 +40,7 @@ $Component({
   },
 
   observers: {
-    "config.content"(value: ListComponentItemConfig[]): void {
+    "config.items"(value: ListComponentItemConfig[]): void {
       this.setLogo(value);
     },
   },

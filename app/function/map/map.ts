@@ -48,6 +48,8 @@ $Page("map", {
     showLocation: false,
     /** 显示导航 */
     showNavigate: false,
+    /** 显示卫星图 */
+    showSatellite: false,
 
     /** 弹窗设置 */
     locationPopup: {
@@ -194,6 +196,12 @@ $Page("map", {
       return new Promise<void>((resolve) =>
         this.setData({ category, marker }, resolve)
       );
+    });
+  },
+
+  changeSatellite() {
+    this.setData({
+      showSatellite: !this.data.showSatellite,
     });
   },
 

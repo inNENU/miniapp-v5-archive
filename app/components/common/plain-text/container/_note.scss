@@ -1,0 +1,27 @@
+@use "../../../../styles/lib/svg";
+@use "icons";
+
+.container-component.note {
+  border-color: #d4d5d8;
+  background: #fdfdfe;
+
+  @media (prefers-color-scheme: dark) {
+    background: #474748;
+  }
+
+  .container-title {
+    color: #474748;
+
+    @media (prefers-color-scheme: dark) {
+      color: #fdfdfe;
+    }
+
+    &::before {
+      @include svg.background-svg(icons.$note-icon);
+
+      @media (prefers-color-scheme: dark) {
+        @include svg.background-svg(icons.$note-dark-icon);
+      }
+    }
+  }
+}

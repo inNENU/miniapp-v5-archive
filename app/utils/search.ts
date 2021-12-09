@@ -65,7 +65,7 @@ export const searching = (
   searchWord: string,
   category: string
 ): Promise<string[]> =>
-  requestJSON<SearchInfo>(`resource/${category}-search`).then((keywords) => {
+  requestJSON<SearchInfo>(`r/${category}-search`).then((keywords) => {
     const words: string[] = [];
 
     if (searchWord)
@@ -119,7 +119,7 @@ export const search = (
   searchWord: string,
   category: string
 ): Promise<SearchResult[]> =>
-  requestJSON<SearchInfo>(`resource/${category}-search`).then((searchMap) => {
+  requestJSON<SearchInfo>(`r/${category}-search`).then((searchMap) => {
     const wordsInfo = genWords(searchWord);
     const result: Record<string, SearchContent> = {};
 

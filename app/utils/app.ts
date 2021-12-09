@@ -65,7 +65,7 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
     });
 
     const downLoadTask = wx.downloadFile({
-      url: `${server}resource/${fileName}.zip`,
+      url: `${server}r/${fileName}.zip`,
       success: (res) => {
         if (res.statusCode === 200) {
           if (progress) wx.showLoading({ title: "保存中...", mask: true });
@@ -141,7 +141,7 @@ export const checkResUpdate = (): void => {
   // 需要检查更新
   if (notify && !hasResPopup)
     wx.request<VersionInfo>({
-      url: `${server}service/version.php`,
+      url: `${server}service/resource.php`,
       enableHttp2: true,
       method: "POST",
       success: (res) => {
@@ -244,14 +244,14 @@ export const appInit = (): void => {
     wx.setStorageSync("resourceUpdateTime", Math.round(timeStamp / 1000));
 
     wx.request<VersionInfo>({
-      url: `${server}service/version.php`,
+      url: `${server}service/resource.php`,
       enableHttp2: true,
       success: (res) => {
         console.log("Version info", res.data);
         if (res.statusCode === 200) {
           writeJSON("version", res.data.version);
           // 成功初始化
-          wx.setStorageSync("innenu-inited", true);
+          wx.setStorageSync("app-inited", true);
           emitter.emit("inited");
           wx.hideLoading();
         }
@@ -277,7 +277,7 @@ export interface Notice {
  */
 export const noticeCheck = (globalData: GlobalData): void => {
   requestJSON<Record<string, Notice>>(
-    `resource/config/${globalData.appID}/${globalData.version}/notice`
+    `r/config/${globalData.appID}/${globalData.version}/notice`
   )
     .then((noticeList) => {
       for (const pageName in noticeList) {
@@ -346,11 +346,11 @@ export const appUpdate = (globalData: GlobalData): void => {
 
     updateManager.onUpdateReady(() => {
       // 请求配置文件
-      requestJSON<string>(`resource/config/${globalData.appID}/version`)
+      requestJSON<string>(`r/config/${globalData.appID}/version`)
         .then((version) =>
           // 请求配置文件
           requestJSON<UpdateInfo>(
-            `resource/config/${globalData.appID}/${version}/config`
+            `r/config/${globalData.appID}/${version}/config`
           )
             .then(({ forceUpdate, reset }) => {
               // 更新下载就绪，提示用户重新启动

@@ -1,7 +1,7 @@
 import { $Component, logger } from "@mptool/enhance";
 
 import { server, getTitle } from "../../../utils/config";
-import { path2id } from "../../../utils/page";
+import { path2id } from "../../../utils/id";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
@@ -79,7 +79,7 @@ $Component({
 
     copyWechatLink() {
       wx.request<LinkData>({
-        url: `${server}service/sharelink.php`,
+        url: `${server}service/share-link.php`,
         enableHttp2: true,
         method: "POST",
         data: { appID, id: this.data.config.id as string },

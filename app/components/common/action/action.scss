@@ -1,4 +1,4 @@
-.copy-component-header {
+.action-component-header {
   max-width: var(--max-width);
   min-height: 13px;
   margin: 0 var(--horizontal-margin);
@@ -18,7 +18,7 @@
   }
 }
 
-.copy-component-wrapper {
+.action-component-wrapper {
   position: relative;
 
   display: flex;
@@ -36,7 +36,7 @@
 
   line-height: 1.5;
 
-  .copy-text {
+  .action-text {
     flex: 1;
 
     padding: 10px 0;

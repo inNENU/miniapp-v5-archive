@@ -1,4 +1,4 @@
-<wxs src="./text.wxs" module="text" />
+<wxs src="./plain-text.wxs" module="plainText" />
 
 <template name="text">
   <block wx:if="{{config.tag === 'ol'}}">
@@ -29,7 +29,7 @@
     <view wx:for="{{config.text}}" wx:key="*this">
       <text
         class="text"
-        style="{{config.style || ''}}"
+        style="{{config.tag === 'p'? 'text-indent: 1.5em; ': ''}}{{config.style || ''}}"
         decode
         user-select
         space="nbsp"
@@ -40,11 +40,16 @@
 </template>
 
 <view
-  wx:if="{{text.isContainer(config.type)}}"
+  wx:if="{{plainText.isContainer(config.type)}}"
   class="container-component {{config.type}}"
+  data-url="{{config.path}}"
+  catch:tap="$bindGo"
 >
-  <text wx:if="{{config.heading !== false}}" class="container-title" user-select
-    >{{ text.getTitle(config)}}</text
+  <text
+    wx:if="{{config.heading !== false}}"
+    class="container-title {{config.path? 'access': ''}}"
+    user-select
+    >{{plainText.getTitle(config)}}</text
   >
   <template is="text" data="{{config}}" />
 </view>
@@ -54,7 +59,7 @@
     >{{config.heading}}</text
   >
   <!-- 段落主体 -->
-  <view class="text-component" style="{{config.align}}">
+  <view class="text-component" style="{{plainText.getAlign(config.align)}}">
     <template is="text" data="{{config}}" />
   </view>
 </block>

@@ -2,6 +2,16 @@
   "name": "mynenu",
   "version": "2.4.1",
   "private": true,
+  "homepage": "https://mrhope.site",
+  "bugs": {
+    "url": "https://github.com/Mister-Hope/inNENU/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mister-Hope/inNENU.git"
+  },
+  "license": "Mr.Hope LICENSE",
+  "author": "Mr.Hope",
   "workspaces": [
     "app/",
     "server/"
@@ -14,8 +24,8 @@
     "lint": "yarn run lint:prettier --write && yarn run lint:wxs --write && yarn run lint:wxml --write && yarn run lint:eslint --fix && yarn run lint:style --fix",
     "lint:check": "yarn run lint:prettier && yarn run lint:wxs && yarn run lint:wxml && yarn run lint:eslint && yarn run lint:style",
     "lint:eslint": "eslint --ext .ts,.wxs .",
-    "lint:style": "stylelint **/*.scss",
     "lint:prettier": "prettier --check .",
+    "lint:style": "stylelint **/*.scss",
     "lint:wxml": "prettier --check --parser html **/*.wxml",
     "lint:wxs": "prettier --check --parser babel-flow **/*.wxs",
     "packages:check-update": "ncu --deep --timeout 600000",
@@ -23,27 +33,30 @@
     "prepare": "husky install",
     "watch": "gulp watch"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Mister-Hope/inNENU.git"
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix",
+    "*.{js,ts,json,yaml,.md}": "prettier --write",
+    "*.wxss": "stylelint --fix",
+    "*.wxml": "prettier --parser html --write",
+    "*.wxs": "prettier --parser babel-flow --write",
+    "package.json": "sort-package-json"
   },
-  "author": "Mr.Hope",
-  "license": "Mr.Hope LICENSE",
-  "bugs": {
-    "url": "https://github.com/Mister-Hope/inNENU/issues"
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   },
-  "homepage": "https://mrhope.site",
   "dependencies": {
     "@mptool/enhance": "0.0.1-alpha.18",
     "@mptool/file": "0.0.1-alpha.18"
   },
   "devDependencies": {
     "@mr-hope/gulp-sass": "2.0.0",
-    "@typescript-eslint/eslint-plugin": "5.4.0",
-    "@typescript-eslint/parser": "5.4.0",
+    "@typescript-eslint/eslint-plugin": "5.5.0",
+    "@typescript-eslint/parser": "5.5.0",
     "conventional-changelog-cli": "2.1.1",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "8.3.0",
+    "eslint": "8.4.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "gulp": "4.0.2",
@@ -54,24 +67,13 @@
     "lint-staged": "12.1.2",
     "miniprogram-api-typings": "3.4.4",
     "npm-check-updates": "12.0.2",
-    "prettier": "2.4.1",
+    "prettier": "2.5.1",
+    "sort-package-json": "1.53.1",
     "stylelint": "14.1.0",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-standard": "24.0.0",
     "stylelint-config-standard-scss": "3.0.0",
     "stylelint-order": "5.0.0",
     "typescript": "4.5.2"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
-  },
-  "lint-staged": {
-    "*.{js,ts}": "eslint --fix",
-    "*.{js,ts,json,yaml,.md}": "prettier --write",
-    "*.wxss": "stylelint --fix",
-    "*.wxml": "prettier --parser html --write",
-    "*.wxs": "prettier --parser babel-flow --write"
   }
 }

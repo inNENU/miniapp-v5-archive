@@ -20,7 +20,7 @@
         <carousel wx:elif="{{item.tag === 'carousel'}}" config="{{item}}" />
         <account wx:elif="{{item.tag === 'account'}}" config="{{item}}" />
         <card wx:elif="{{item.tag === 'card'}}" config="{{item}}" />
-        <copy wx:elif="{{item.tag === 'copy'}}" config="{{item}}" />
+        <action wx:elif="{{item.tag === 'action'}}" config="{{item}}" />
         <functional-list
           wx:elif="{{item.tag === 'functional-list'}}"
           config="{{item}}"
@@ -29,7 +29,10 @@
           catch:change="list"
         />
         <location wx:elif="{{item.tag === 'location'}}" config="{{item}}" />
-        <media wx:elif="{{item.tag === 'media'}}" config="{{item}}" />
+        <!-- 音频组件 -->
+        <audio-player wx:elif="{{item.tag === 'audio'}}" config="{{item}}" />
+        <!-- 视频组件 -->
+        <video-player wx:elif="{{item.tag === 'video'}}" config="{{item}}" />
         <loading wx:elif="{{item.tag === 'loading'}}" />
       </block>
     </block>

@@ -1,9 +1,10 @@
 import type {
   AccountComponentOptions,
+  ActionComponentOptions,
+  AudioComponentOptions,
   CardComponentOptions,
   ButtonListComponnetItemOptions,
   CarouselComponentOptions,
-  CopyComponentOptions,
   DocComponentOptions,
   FooterComponentOptions,
   FunctionalListComponentOptions,
@@ -13,7 +14,6 @@ import type {
   ListComponentItemOptions,
   ListComponentOptions,
   LoadingComponentOptions,
-  MediaComponentOptions,
   NaviagatorListComponentItemOptions,
   PickerListComponentItemOptions,
   PhoneComponentOptions,
@@ -21,6 +21,7 @@ import type {
   SliderListComponentItemOptions,
   TextComponentOptions,
   TitleComponentOptions,
+  VideoComponentOptions,
 } from "../server/typings";
 
 export interface GridComponentItemConfig extends GridComponentItemOptions {
@@ -89,11 +90,21 @@ export interface FunctionalListComponentConfig
   content: FunctionalListComponentItemConfig[];
 }
 
+export interface CommonComponentConfig {
+  /**
+   * 是否隐藏
+   *
+   * @default false
+   */
+  hidden?: boolean;
+}
+
 export type ComponentConfig = (
   | AccountComponentOptions
+  | ActionComponentOptions
+  | AudioComponentOptions
   | CardComponentOptions
   | CarouselComponentOptions
-  | CopyComponentOptions
   | DocComponentOptions
   | FooterComponentOptions
   | FunctionalListComponentConfig
@@ -101,15 +112,9 @@ export type ComponentConfig = (
   | ImageComponentOptions
   | ListComponentConfig
   | LoadingComponentOptions
-  | MediaComponentOptions
   | PhoneComponentOptions
   | TextComponentOptions
   | TitleComponentOptions
-) & {
-  /**
-   * 是否隐藏
-   *
-   * @default false
-   */
-  hidden?: boolean;
-};
+  | VideoComponentOptions
+) &
+  CommonComponentConfig;

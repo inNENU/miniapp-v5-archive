@@ -13,8 +13,10 @@ const buildWXSS = () =>
     .pipe(
       sassSync({
         sync: "sync",
+        // TODO: Check out why it has problems
+        // outputStyle: "compressed",
+        outputStyle: "expanded",
         // use `!` as hack for remaining '@import'
-        outputStyle: "compressed",
         importer: (url) => {
           if (url.includes(".css")) return null;
 

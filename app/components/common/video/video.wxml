@@ -1,18 +1,5 @@
-<!-- 音频组件 -->
-<audio
-  wx:if="{{config.type === 'audio'}}"
-  class="audio"
-  poster="{{config.poster}}"
-  src="{{config.src}}"
-  name="{{config.name}}"
-  author="{{config.author}}"
-  loop="{{config.loop}}"
-  controls="{{config.controls !== false}}"
-/>
-<!-- 视频组件 -->
 <video
-  wx:elif="{{config.type === 'video'}}"
-  class="video"
+  class="video-component"
   src="{{config.src}}"
   controls="{{config.controls !== false}}"
   loop="{{config.loop}}"

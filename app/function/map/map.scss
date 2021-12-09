@@ -56,6 +56,7 @@
   }
 }
 
+.satellite-button,
 .filter-button,
 .location-button,
 .locate-button,
@@ -63,18 +64,23 @@
   @include single-button;
 }
 
-.filter-button {
+.satellite-button {
   top: 120px;
   right: 15px;
 }
 
-.location-button {
+.filter-button {
   top: 180px;
   right: 15px;
 }
 
-.navigate-button {
+.location-button {
   top: 240px;
+  right: 15px;
+}
+
+.navigate-button {
+  top: 300px;
   right: 15px;
 }
 
@@ -109,7 +115,7 @@
 
 .select-wrapper {
   position: fixed;
-  top: 120px;
+  top: 180px;
   right: 60px;
   z-index: 96;
 

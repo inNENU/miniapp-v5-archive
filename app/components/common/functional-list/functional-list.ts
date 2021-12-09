@@ -13,7 +13,7 @@ import type {
 
 interface ListDetail<T = FunctionalListComponentItemOptions> {
   id: string;
-  content: T;
+  item: T;
 }
 
 $Component({
@@ -34,11 +34,11 @@ $Component({
         { id: string }
       >
     ): void {
-      const { content } = this.getDetail(
+      const { item } = this.getDetail(
         event
       ) as ListDetail<ButtonListComponnetItemConfig>;
 
-      if (content.handler) this.$call(content.handler, event);
+      if (item.handler) this.$call(item.handler, event);
     },
 
     /** 控制选择器显隐 */
@@ -51,10 +51,10 @@ $Component({
     ): void {
       const {
         id,
-        content: { visible: value },
+        item: { visible: value },
       } = this.getDetail(event) as ListDetail<PickerListComponentItemConfig>;
 
-      this.setData({ [`config.content[${id}].visible`]: !value });
+      this.setData({ [`config.items[${id}].visible`]: !value });
     },
 
     /** 控制选择器改变 */
@@ -64,7 +64,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, content } = this.getDetail(
+      const { id, item } = this.getDetail(
         event
       ) as ListDetail<PickerListComponentItemConfig>;
 
@@ -75,25 +75,23 @@ $Component({
         if (Array.isArray(value)) {
           value.forEach((x: string | number, y: number) => {
             // eslint-disable-next-line
-            (content.value as any[])[y] = (content.select as any[][])[y][
-              Number(x)
-            ];
+            (item.value as any[])[y] = (item.select as any[][])[y][Number(x)];
             // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-            (content.currentValue as number[])![y] = Number(x);
+            (item.currentValue as number[])![y] = Number(x);
           });
-          wx.setStorageSync(content.key, value.join("-"));
+          wx.setStorageSync(item.key, value.join("-"));
 
           // 判断为单列选择器，更新页面数据并存储选择器值
         } else {
           // eslint-disable-next-line
-          content.value = content.select[Number(value)];
-          content.currentValue = Number(value);
-          wx.setStorageSync(content.key, Number(value));
+          item.value = item.select[Number(value)];
+          item.currentValue = Number(value);
+          wx.setStorageSync(item.key, Number(value));
         }
 
         // 将选择器的变更响应到页面上
-        this.setData({ [`config.content[${id}]`]: content }, () => {
-          if (content.handler) this.$call(content.handler, value);
+        this.setData({ [`config.items[${id}]`]: item }, () => {
+          if (item.handler) this.$call(item.handler, value);
         });
       }
     },
@@ -105,20 +103,20 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, content } = this.getDetail(
+      const { id, item } = this.getDetail(
         event
       ) as ListDetail<SwitchListComponentItemConfig>;
 
       // 更新页面数据
       this.setData(
-        { [`config.content[${id}].status`]: event.detail.value },
+        { [`config.items[${id}].status`]: event.detail.value },
         () => {
-          if (content.handler) this.$call(content.handler, event.detail.value);
+          if (item.handler) this.$call(item.handler, event.detail.value);
         }
       );
 
       // 将开关值写入存储的 key 变量中
-      wx.setStorageSync(content.key, event.detail.value);
+      wx.setStorageSync(item.key, event.detail.value);
     },
 
     /** 控制滑块显隐 */
@@ -128,12 +126,12 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, content } = this.getDetail(
+      const { id, item } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;
 
       // 更新页面数据
-      this.setData({ [`config.content[${id}].visible`]: !content.visible });
+      this.setData({ [`config.items[${id}].visible`]: !item.visible });
     },
 
     /** 滑块改变 */
@@ -143,20 +141,20 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, content } = this.getDetail(
+      const { id, item } = this.getDetail(
         event
       ) as ListDetail<SliderListComponentItemConfig>;
       const { value } = event.detail;
 
       // 更新页面数据，并写入值到存储
-      content.value = value;
+      item.value = value;
 
       // 写入页面数据
-      this.setData({ [`config.content[${id}].value`]: value }, () => {
-        if (content.handler) this.$call(content.handler, value);
+      this.setData({ [`config.items[${id}].value`]: value }, () => {
+        if (item.handler) this.$call(item.handler, value);
       });
 
-      if (event.type === "change") wx.setStorageSync(content.key, value);
+      if (event.type === "change") wx.setStorageSync(item.key, value);
     },
 
     /** 获得选择器位置与内容 */
@@ -171,14 +169,14 @@ $Component({
 
       return {
         id,
-        content: this.data.config.content[Number(id)],
+        item: this.data.config.items[Number(id)],
       };
     },
 
     /** 设置图标 */
-    setLogo(content?: FunctionalListComponentItemOptions[]) {
+    setLogo(items?: FunctionalListComponentItemOptions[]) {
       this.setData({
-        icons: (content || this.data.config.content).map((item) =>
+        icons: (items || this.data.config.items).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
@@ -199,7 +197,7 @@ $Component({
   },
 
   observers: {
-    "config.content"(value: FunctionalListComponentItemOptions[]): void {
+    "config.items"(value: FunctionalListComponentItemOptions[]): void {
       this.setLogo(value);
     },
   },

@@ -1,0 +1,27 @@
+@use "../../../../styles/lib/svg";
+@use "icons";
+
+.container-component.info {
+  border-color: #4cb3d4;
+  background: #eef9fd;
+
+  @media (prefers-color-scheme: dark) {
+    background: #193c47;
+  }
+
+  .container-title {
+    color: #193c47;
+
+    @media (prefers-color-scheme: dark) {
+      color: #eef9fd;
+    }
+
+    &::before {
+      @include svg.background-svg(icons.$info-icon);
+
+      @media (prefers-color-scheme: dark) {
+        @include svg.background-svg(icons.$info-dark-icon);
+      }
+    }
+  }
+}

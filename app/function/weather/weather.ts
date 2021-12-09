@@ -34,7 +34,7 @@ $Page("weather", {
       | undefined
     >("weather");
 
-    if (wx.getStorageSync("innenu-inited")) {
+    if (wx.getStorageSync("app-inited")) {
       const weatherIcon = JSON.parse(
         (readFile("./icon/weather/icon") as string) || "{}"
       ) as Record<string, string>;
@@ -70,7 +70,7 @@ $Page("weather", {
     // 需要重新获取并处理
     else
       wx.request({
-        url: `${server}service/weatherData.php`,
+        url: `${server}service/weather.php`,
         enableHttp2: true,
         success: (res) => {
           this.initcanvas(res.data as WeatherData);

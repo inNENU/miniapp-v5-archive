@@ -18,9 +18,9 @@ $Component({
 
   methods: {
     // 设置图标
-    setLogo(content?: GridComponentItemOptions[]) {
+    setLogo(items?: GridComponentItemOptions[]) {
       this.setData({
-        icons: (content || this.data.config.content).map((item) =>
+        icons: (items || this.data.config.items).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
@@ -40,7 +40,7 @@ $Component({
   },
 
   observers: {
-    "config.content"(value: GridComponentItemOptions[]): void {
+    "config.items"(value: GridComponentItemOptions[]): void {
       this.setLogo(value);
     },
   },

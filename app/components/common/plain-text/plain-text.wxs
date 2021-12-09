@@ -22,4 +22,8 @@ module.exports = {
         : "警告")
     );
   },
+
+  getAlign: function (align) {
+    return align ? "text-align:" + align : "";
+  },
 };

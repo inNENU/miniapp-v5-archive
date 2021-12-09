@@ -26,7 +26,7 @@ $Component({
     /* 获取天气信息 */
     getWeather(): void {
       wx.request<WeatherData>({
-        url: `${server}service/weatherData.php`,
+        url: `${server}service/weather.php`,
         method: "POST",
         enableHttp2: true,
         success: ({ data }) => {

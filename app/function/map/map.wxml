@@ -6,7 +6,7 @@
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
   markers="{{helper.getMarkers(marker[currentCategory], darkmode)}}"
-  setting="{{helper.getSetting(env, darkmode)}}"
+  setting="{{helper.getSetting(env, darkmode, showSatellite)}}"
   catch:markertap="markerTap"
   catch:callouttap="markerTap"
   catch:updated="update"
@@ -29,6 +29,15 @@
 >
   <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
   <view class="item {{area === 'jingyue'? 'active': ''}}">净月</view>
+</view>
+
+<view
+  class="satellite-button"
+  hover-class="button-hover"
+  hover-stay-time="100"
+  catch:tap="changeSatellite"
+>
+  <image class="icon" src="./icon/satellite.svg" />
 </view>
 
 <view

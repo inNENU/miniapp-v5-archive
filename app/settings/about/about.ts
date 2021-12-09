@@ -28,7 +28,7 @@ $Page("about", {
         {
           tag: "functional-list",
           header: "版本号",
-          content: [
+          items: [
             { text: globalData.version, type: "button", handler: "debugMode" },
             {
               text: "启用测试功能",
@@ -58,7 +58,7 @@ $Page("about", {
     if (wx.getStorageSync<boolean | undefined>("developMode"))
       developMode = true;
     if (!developMode)
-      (page.content[0] as FunctionalListComponentConfig).content.forEach(
+      (page.content[0] as FunctionalListComponentConfig).items.forEach(
         (x, y) => {
           x.hidden = y !== 0;
         }
@@ -76,7 +76,7 @@ $Page("about", {
       if (wx.getStorageSync<boolean | undefined>("developMode"))
         developMode = true;
       if (!developMode)
-        (page.content[0] as FunctionalListComponentConfig).content.forEach(
+        (page.content[0] as FunctionalListComponentConfig).items.forEach(
           (x, y) => {
             x.hidden = y !== 0;
           }
@@ -136,7 +136,7 @@ $Page("about", {
       wx.setStorageSync("developMode", false);
       (
         this.data.page.content[0] as FunctionalListComponentConfig
-      ).content.forEach((x, y) => {
+      ).items.forEach((x, y) => {
         x.hidden = y !== 0;
       });
       this.setData({ page: this.data.page });
@@ -172,7 +172,7 @@ $Page("about", {
         tip("已启用开发者模式");
         (
           this.data.page.content[0] as FunctionalListComponentConfig
-        ).content.forEach((x) => {
+        ).items.forEach((x) => {
           x.hidden = false;
         });
         this.setData({ page: this.data.page, debug: false });
@@ -209,7 +209,7 @@ $Page("about", {
   toggleDebug(value: boolean) {
     (
       (this.data.page.content[0] as FunctionalListComponentConfig)
-        .content[2] as SwitchListComponentItemConfig
+        .items[2] as SwitchListComponentItemConfig
     ).status = value;
     this.setData({ page: this.data.page });
     wx.setStorageSync("debugMode", value);
