@@ -4,7 +4,7 @@ import { put, take } from "@mptool/file";
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
-import { searching } from "../../utils/search";
+import { search } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
@@ -94,7 +94,9 @@ $Page("guide", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "intro").then((words) => this.setData({ words }));
+    search<string[]>({ scope: "intro", type: "word", word: value }).then(
+      (words) => this.setData({ words })
+    );
   },
 
   /**

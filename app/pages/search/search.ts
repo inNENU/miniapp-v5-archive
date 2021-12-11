@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
-import { SearchResult, search, searching } from "../../utils/search";
+import { SearchResult, search } from "../../utils/search";
 
 import type { AppOption } from "../../app";
 
@@ -27,7 +27,7 @@ $Page("search", {
 
   state: {
     /** 分类 */
-    name: "all",
+    name: "all" as "all" | "guide" | "intro",
     /** 是否正在输入 */
     typing: false,
     /** 搜索框中的内容 */
@@ -35,7 +35,8 @@ $Page("search", {
   },
 
   onLoad(options) {
-    if (options.name) this.state.name = options.name;
+    if (options.name)
+      this.state.name = options.name as "all" | "guide" | "intro";
     if (options.word) this.search({ detail: { value: options.word } });
 
     this.setData({
@@ -79,7 +80,11 @@ $Page("search", {
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
     this.state.typing = true;
-    searching(value, this.state.name).then((words) => {
+    search<string[]>({
+      word: value,
+      scope: this.state.name,
+      type: "word",
+    }).then((words) => {
       if (this.state.typing) this.setData({ words });
     });
   },
@@ -94,17 +99,15 @@ $Page("search", {
     this.setData({ words: [] });
     wx.showLoading({ title: "搜索中..." });
 
-    search(value, this.state.name).then((result) => {
+    search<SearchResult[]>({
+      word: value,
+      scope: this.state.name,
+      type: "result",
+    }).then((result) => {
       this.setData({ result });
       this.state.value = value;
       wx.hideLoading();
     });
-  },
-
-  navigate({
-    currentTarget,
-  }: WechatMiniprogram.TouchEvent<never, never, { id: string }>) {
-    this.$go(`page?id=${currentTarget.dataset.id}&from=搜索`);
   },
 
   back() {

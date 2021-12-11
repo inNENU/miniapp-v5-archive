@@ -16,7 +16,7 @@
     <view class="icon-{{firstPage? 'home': 'back'}}" />
   </view>
   <view class="ios-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
-    <view class="ios-titletext">搜索</view>
+    <view class="ios-nav-title">搜索</view>
   </view>
   <view class="ios-nav-border" style="top:{{statusBarHeight + 44}}px;" />
   <view class="ios-nav-placeholder" style="height:{{statusBarHeight + 44}}px;">
@@ -42,36 +42,40 @@
       hover-class="button-hover"
       wx:for="{{result}}"
       wx:key="title"
-      data-id="{{item.id}}"
-      catch:tap="navigate"
+      data-url="{{'page?id=' + item.id + '&from=搜索'}}"
+      catch:tap="$bindGo"
     >
       <view class="title">{{item.title}}</view>
       <view class="list">
-        <block
-          class="item"
-          wx:for="{{item.content}}"
-          wx:for-item="config"
-          wx:key="title"
-        >
-          <view class="title" wx:if="{{config.type === 'title'}}"
-            >{{config.text}}</view
+        <block wx:for="{{item.index}}" wx:for-item="config" wx:key>
+          <view class="title" wx:if="{{config[0] === 'title'}}"
+            >{{config[1]}}</view
           >
-          <view class="heading" wx:elif="{{config.type === 'title'}}"
-            >{{config.text}}</view
+          <view class="heading" wx:elif="{{config[0] === 'heading'}}"
+            >{{config[1]}}</view
           >
-          <view class="text" wx:elif="{{config.type === 'text'}}"
-            >{{config.text}}</view
+          <view class="text" wx:elif="{{config[0] === 'text'}}"
+            >{{config[1].pre}}<text style="font-weight: bold"
+              >{{config[1].word}}</text
+            >{{config[1].after}}</view
           >
-          <view class="doc" wx:elif="{{config.type === 'doc'}}">
+          <view class="doc" wx:elif="{{config[0] === 'img'}}">
             <image
               class="icon"
-              src="/components/common/doc/icon/{{config.icon}}.svg"
+              src="/components/common/doc/icon/{{config[1].icon}}.svg"
             />
-            <view class="text">{{config.name}}</view>
+            <view class="text">{{config[1].desc}}</view>
           </view>
-          <view class="card" wx:elif="{{config.type === 'card'}}">
-            <view class="title">{{config.title}}</view>
-            <view class="desc">{{config.desc}}</view>
+          <view class="doc" wx:elif="{{config[0] === 'doc'}}">
+            <image
+              class="icon"
+              src="/components/common/doc/icon/{{config[1].icon}}.svg"
+            />
+            <view class="text">{{config[1].name}}</view>
+          </view>
+          <view class="card" wx:elif="{{config[0] === 'card'}}">
+            <view class="title">{{config[1].title}}</view>
+            <view class="desc">{{config[1].desc}}</view>
           </view>
         </block>
       </view>

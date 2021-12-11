@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix, getTitle } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
-import { searching } from "../../utils/search";
+import { search } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 import { requestJSON } from "../../utils/wx";
 
@@ -118,7 +118,9 @@ $Page("main", {
    * @param value 输入的搜索词
    */
   searching({ detail: { value } }: WechatMiniprogram.Input) {
-    searching(value, "all").then((words) => this.setData({ words }));
+    search<string[]>({ scope: "all", type: "word", word: value }).then(
+      (words) => this.setData({ words })
+    );
   },
 
   /**

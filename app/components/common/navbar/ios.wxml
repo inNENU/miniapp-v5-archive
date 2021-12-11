@@ -2,7 +2,7 @@
 
 <template name="iosNav">
   <view class="ios-navigation-bar" style="padding-top:{{statusBarHeight}}px;">
-    <view wx:if="{{titleDisplay}}" class="ios-titletext">{{nav.title}}</view>
+    <view wx:if="{{titleDisplay}}" class="ios-nav-title">{{nav.title}}</view>
     <view
       wx:if="{{nav.action !== false}}"
       class="ios-nav-back-button"
