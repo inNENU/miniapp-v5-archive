@@ -10,12 +10,10 @@ Component({
     change(event: WechatMiniprogram.SwiperChange): void {
       this.setData({ current: event.detail.current });
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.triggerEvent("change", event as any);
+      this.triggerEvent("change", event);
     },
     animation(event: WechatMiniprogram.SwiperAnimationFinish): void {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.triggerEvent("animation", event as any);
+      this.triggerEvent("animation", event);
     },
   },
 });

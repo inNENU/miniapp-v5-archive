@@ -335,9 +335,7 @@ $Page("PEcal", {
       if (result[specialScore] && Number(result[specialScore])) {
         for (let i = length; i >= 0; i -= 1)
           if (
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             config[specialScore]![i] !== "" &&
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             result[specialScore] >= config[specialScore]![i]
           ) {
             peScore.special = gradeLevels[i];

@@ -34,9 +34,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { item } = this.getDetail(
-        event
-      ) as ListDetail<ButtonListComponnetItemConfig>;
+      const { item } = this.getDetail<ButtonListComponnetItemConfig>(event);
 
       if (item.handler) this.$call(item.handler, event);
     },
@@ -49,12 +47,9 @@ $Component({
         { id: string }
       >
     ): void {
-      const {
-        id,
-        item: { visible: value },
-      } = this.getDetail(event) as ListDetail<PickerListComponentItemConfig>;
+      const { id, item } = this.getDetail<PickerListComponentItemConfig>(event);
 
-      this.setData({ [`config.items[${id}].visible`]: !value });
+      this.setData({ [`config.items[${id}].visible`]: !item.visible });
     },
 
     /** 控制选择器改变 */
@@ -64,9 +59,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, item } = this.getDetail(
-        event
-      ) as ListDetail<PickerListComponentItemConfig>;
+      const { id, item } = this.getDetail<PickerListComponentItemConfig>(event);
 
       if (event.type === "change") {
         const { value } = event.detail;
@@ -75,8 +68,8 @@ $Component({
         if (Array.isArray(value)) {
           value.forEach((x: string | number, y: number) => {
             // eslint-disable-next-line
-            (item.value as any[])[y] = (item.select as any[][])[y][Number(x)];
-            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            (item.value as any[])[y] = (item.select as any[][])[y]![Number(x)];
+
             (item.currentValue as number[])![y] = Number(x);
           });
           wx.setStorageSync(item.key, value.join("-"));
@@ -103,9 +96,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, item } = this.getDetail(
-        event
-      ) as ListDetail<SwitchListComponentItemConfig>;
+      const { id, item } = this.getDetail<SwitchListComponentItemConfig>(event);
 
       // 更新页面数据
       this.setData(
@@ -126,9 +117,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, item } = this.getDetail(
-        event
-      ) as ListDetail<SliderListComponentItemConfig>;
+      const { id, item } = this.getDetail<SliderListComponentItemConfig>(event);
 
       // 更新页面数据
       this.setData({ [`config.items[${id}].visible`]: !item.visible });
@@ -141,9 +130,7 @@ $Component({
         { id: string }
       >
     ): void {
-      const { id, item } = this.getDetail(
-        event
-      ) as ListDetail<SliderListComponentItemConfig>;
+      const { id, item } = this.getDetail<SliderListComponentItemConfig>(event);
       const { value } = event.detail;
 
       // 更新页面数据，并写入值到存储
@@ -158,18 +145,20 @@ $Component({
     },
 
     /** 获得选择器位置与内容 */
-    getDetail({
+    getDetail<
+      T extends FunctionalListComponentItemOptions = FunctionalListComponentItemOptions
+    >({
       currentTarget,
     }: WechatMiniprogram.CustomEvent<
       Record<string, unknown>,
       Record<string, unknown>,
       { id: string } & Record<string, unknown>
-    >): ListDetail {
+    >): ListDetail<T> {
       const id = currentTarget.id || currentTarget.dataset.id;
 
       return {
         id,
-        item: this.data.config.items[Number(id)],
+        item: this.data.config.items[Number(id)] as T,
       };
     },
 

@@ -37,7 +37,6 @@ $Component({
       { index: number }
     >) {
       wx.setClipboardData({
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         data: this.data.config.cite![currentTarget.dataset.index],
         success: () => {
           modal(

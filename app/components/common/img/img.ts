@@ -12,8 +12,8 @@ $Component({
 
     /** 展示图片列表 */
     images: {
-      type: Array,
-      default: [] as string[],
+      type: Array as PropType<string[]>,
+      default: [],
     },
   },
 

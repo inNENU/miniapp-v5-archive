@@ -35,7 +35,7 @@ $Page("video", {
   },
 
   onLoad(options) {
-    getJSON("function/video/index").then((videoList) => {
+    getJSON<VideoGroup[]>("function/video/index").then((videoList) => {
       let groupID = 0;
       let listID = 0;
 
@@ -46,7 +46,7 @@ $Page("video", {
       } else if (options.name) {
         const name = decodeURI(options.name);
 
-        (videoList as VideoGroup[]).forEach((videoGroup, groupIndex) => {
+        videoList.forEach((videoGroup, groupIndex) => {
           const listIndex = videoGroup.content.findIndex(
             (videoItem) => videoItem.name === name
           );
@@ -58,7 +58,7 @@ $Page("video", {
         });
       }
 
-      const item = (videoList as VideoGroup[])[groupID].content[listID];
+      const item = videoList[groupID].content[listID];
 
       this.setData({
         type: options.type || "about",
@@ -66,10 +66,8 @@ $Page("video", {
         groupID,
         listID,
 
-        titles: (videoList as VideoGroup[]).map(
-          (videoListItem) => videoListItem.title
-        ),
-        videoList: videoList as VideoGroup[],
+        titles: videoList.map((videoListItem) => videoListItem.title),
+        videoList,
 
         videoName: item.name,
         videoAuthor: item.author,
@@ -118,11 +116,17 @@ $Page("video", {
   },
 
   /** 切换播放视频 */
-  onListTap(event: WechatMiniprogram.TouchEvent) {
-    const { groupID, listID } = event.currentTarget.dataset as Record<
-      string,
-      number
-    >;
+  onListTap(
+    event: WechatMiniprogram.TouchEvent<
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      { groupID: number; listID: number }
+    >
+  ) {
+    const { groupID, listID } = event.currentTarget.dataset;
+
     const item = this.data.videoList[groupID].content[listID];
 
     this.setData({

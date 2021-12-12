@@ -1,6 +1,17 @@
-Component({
+import { $Component } from "@mptool/enhance";
+
+import type { PropType } from "@mptool/enhance";
+
+$Component({
   properties: {
-    words: Array,
+    words: {
+      type: Array as PropType<string[]>,
+      default: [],
+    },
+    placeholder: {
+      type: String,
+      default: "搜索",
+    },
     searchword: String,
   },
   data: {
@@ -38,10 +49,11 @@ Component({
       this.triggerEvent("searching", { value: event.detail.value });
     },
 
-    select(event: WechatMiniprogram.TouchEvent): void {
-      const value = (this.data.words as string[])[
-        event.currentTarget.dataset.index as number
-      ];
+    select(
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      event: WechatMiniprogram.TouchEvent<{}, {}, { index: number }>
+    ): void {
+      const value = this.data.words[event.currentTarget.dataset.index];
 
       this.setData({ value, words: [], focus: false });
       this.triggerEvent("search", { value });

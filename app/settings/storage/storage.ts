@@ -95,10 +95,14 @@ $Page("storage", {
       path: wx.env.USER_DATA_PATH,
       recursive: true,
       success: (res) => {
-        // TODO: update
+        // FIXME: https://github.com/wechat-miniprogram/api-typings/issues/226
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (res.stats as unknown as any[]).forEach((element) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        (
+          res.stats as unknown as {
+            path: string;
+            stats: WechatMiniprogram.Stats;
+          }[]
+        ).forEach((element) => {
           fileSize += element.stats.size;
         });
 

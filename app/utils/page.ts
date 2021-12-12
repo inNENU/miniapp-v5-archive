@@ -125,7 +125,6 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
       if ("env" in component)
         component.hidden = !component.env?.includes(globalData.env);
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       if (component.tag === "img") page.images!.push(component.src);
 
       if (
@@ -167,7 +166,8 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
   }
 
   // 调试
-  logger.info(`Resolve ${page.id as string} page success`);
+
+  logger.info(`Resolve ${page.id!} page success`);
 
   // 返回处理后的 page
   return page;
@@ -276,7 +276,7 @@ export interface ColorConfig {
  * @returns 页面实际的胶囊与背景颜色
  */
 export const getColor = (grey = false): ColorConfig => {
-  let temp;
+  let temp: [string, string, string];
 
   if (globalData.darkmode && grey)
     switch (globalData.theme) {
@@ -395,7 +395,7 @@ export const setPage = (
       () => {
         logger.debug(`${id} pageData is set`);
         if (preload) {
-          preloadPage(ctx.data.page as PageData);
+          preloadPage(ctx.data.page!);
           logger.debug(`Preloaded ${id} links`);
         }
       }
@@ -466,70 +466,70 @@ export const setOnlinePage = (
   ctx: PageInstanceWithPage,
   preload = true
 ): void => {
-  if (option.id) {
+  const { id } = option;
+
+  if (id) {
     // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
-    if (globalData.page.id === option.id) {
-      logger.debug(`${option.id} has been resolved`);
+    if (globalData.page.id === id) {
+      logger.debug(`${id} has been resolved`);
 
       ctx.setData(
         {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           color: getColor(globalData.page.data!.grey),
           theme: globalData.theme,
           darkmode: globalData.darkmode,
           page: globalData.page.data,
         },
         () => {
-          logger.debug(`${option.id as string} pageData is set`);
-          popNotice(option.id as string);
+          logger.debug(`${id} pageData is set`);
+          popNotice(id);
 
           if (preload) {
-            preloadPage(ctx.data.page as PageData);
-            logger.debug(`Preloaded ${option.id as string} links`);
+            preloadPage(ctx.data.page!);
+            logger.debug(`Preloaded ${id} links`);
           }
         }
       );
     } else {
       // 需要重新载入界面
-      logger.info(`${option.id} onLoad with options: `, option);
+      logger.info(`${id} onLoad with options: `, option);
 
-      const page = readJSON<PageData>(`${option.id}`);
+      const page = readJSON<PageData>(`${id}`);
 
       // 如果本地存储中含有 page 直接处理
       if (page) {
         setPage({ option, ctx }, page);
-        popNotice(option.id);
-        logger.info(`${option.id} onLoad success: `, ctx.data);
+        popNotice(id);
+        logger.info(`${id} onLoad success: `, ctx.data);
         wx.reportMonitor("0", 1);
 
         // 如果需要执行预加载，则执行
         if (preload) {
-          preloadPage(ctx.data.page as PageData);
-          logger.debug(`${option.id} preload complete`);
+          preloadPage(ctx.data.page!);
+          logger.debug(`${id} preload complete`);
         }
       }
       // 请求页面Json
       else
-        requestJSON<PageData>(`r/${option.id}`)
+        requestJSON<PageData>(`r/${id}`)
           .then((data) => {
             // 非分享界面下将页面数据写入存储
-            if (option.from !== "share")
-              writeJSON(`${option.id as string}`, data);
+            if (option.from !== "share") writeJSON(`${id}`, data);
 
             // 设置界面
             setPage({ option, ctx }, data);
 
             // 如果需要执行预加载，则执行
             if (preload) {
-              preloadPage(ctx.data.page as PageData);
-              logger.debug(`Preload ${option.id as string} complete`);
+              preloadPage(ctx.data.page!);
+              logger.debug(`Preload ${id} complete`);
             }
 
             // 弹出通知
-            popNotice(option.id as string);
+            popNotice(id);
 
             // 调试
-            logger.info(`${option.id as string} onLoad Succeed`);
+            logger.info(`${id} onLoad Succeed`);
           })
           .catch((res) => {
             // 设置 error 页面并弹出通知
@@ -545,10 +545,7 @@ export const setOnlinePage = (
             popNotice(option.id || "");
 
             // 调试
-            logger.warn(
-              `${option.id as string} onLoad failed with error:`,
-              res
-            );
+            logger.warn(`${id} onLoad failed with error:`, res);
           });
     }
   } else logger.error("no id");
