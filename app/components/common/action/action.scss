@@ -36,7 +36,8 @@
 
   line-height: 1.5;
 
-  .action-text {
+  .action-text,
+  .link-text {
     flex: 1;
 
     padding: 10px 0;
@@ -44,6 +45,17 @@
     font-size: 17px;
     text-align: justify;
     word-break: break-all;
+  }
+
+  .link-icon {
+    width: 20px;
+    height: 20px;
+    padding: 6px;
+    margin: 0 4px 0 -5px;
+  }
+
+  .link-text {
+    color: #3478f7;
   }
 
   .copy-button {

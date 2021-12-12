@@ -1,6 +1,7 @@
 import { $Component } from "@mptool/enhance";
 import type { PropType } from "@mptool/enhance";
 import type { ActionComponentOptions } from "../../../../typings";
+import { modal } from "../../../utils/wx";
 
 $Component({
   properties: {
@@ -11,6 +12,11 @@ $Component({
     },
   },
 
+  data: {
+    type: "text",
+    content: "",
+  },
+
   methods: {
     copy(): void {
       const { content } = this.data.config;
@@ -18,6 +24,29 @@ $Component({
       wx.setClipboardData({
         data: content,
         success: () => console.log(`Copied '${content}'`),
+      });
+    },
+
+    link(): void {
+      const { content } = this.data.config;
+
+      wx.setClipboardData({
+        data: content,
+        success: () => {
+          modal("功能受限", "小程序无法直接打开网页，链接已复制至剪切板");
+          console.log(`Copied '${content}'`);
+        },
+      });
+    },
+  },
+
+  observers: {
+    "config.content"(value: string) {
+      const isLink = value.match(/^https?:\/\//);
+
+      this.setData({
+        type: isLink ? "link" : "text",
+        content: isLink ? value.replace(/^https?:\/\//, "") : value,
       });
     },
   },
