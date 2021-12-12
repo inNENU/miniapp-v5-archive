@@ -47,7 +47,7 @@
     >
       <view class="title">{{item.title}}</view>
       <view class="list">
-        <block wx:for="{{item.index}}" wx:for-item="config" wx:key>
+        <block wx:for="{{item.index}}" wx:for-item="config">
           <view class="title" wx:if="{{config[0] === 'title'}}"
             >{{config[1]}}</view
           >
@@ -55,8 +55,7 @@
             >{{config[1]}}</view
           >
           <view class="text" wx:elif="{{config[0] === 'text'}}"
-            >{{config[1].pre}}<text style="font-weight: bold"
-              >{{config[1].word}}</text
+            >{{config[1].pre}}<text class="keyword">{{config[1].word}}</text
             >{{config[1].after}}</view
           >
           <view class="doc" wx:elif="{{config[0] === 'img'}}">

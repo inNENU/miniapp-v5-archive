@@ -46,6 +46,11 @@
     font-size: 14px;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    .keyword {
+      color: var(--dark-grey);
+      font-weight: bold;
+    }
   }
 
   .doc {
