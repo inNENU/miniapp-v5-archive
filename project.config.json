@@ -34,7 +34,6 @@
       "disablePlugins": [],
       "outputPath": ""
     },
-    "enableEngineNative": false,
     "useIsolateContext": false,
     "userConfirmedBundleSwitch": true,
     "packNpmManually": true,
