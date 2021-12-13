@@ -30,12 +30,15 @@
 
     display: block;
 
-    margin-bottom: 12px;
     padding-left: 24px;
 
     color: ​var(--container-title-color);
     font-weight: 600;
     line-height: 1.25;
+
+    &:not(:only-child) {
+      margin-bottom: 12px;
+    }
 
     &::before {
       content: " ";
