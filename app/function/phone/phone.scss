@@ -53,8 +53,7 @@
     width: 68px;
   }
 
-  .call,
-  .add {
+  .action {
     display: inline-block;
 
     overflow: hidden;
@@ -63,10 +62,10 @@
     height: 26px;
     margin: 0 4px;
     border-radius: 13px;
-  }
 
-  .icon {
-    width: 100%;
-    height: 100%;
+    .icon {
+      width: 100%;
+      height: 100%;
+    }
   }
 }

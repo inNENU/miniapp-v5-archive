@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { modal } from "../../../utils/wx";
+import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
@@ -18,6 +18,8 @@ $Component({
     },
   },
 
+  data: { env },
+
   methods: {
     /** 拨打电话 */
     call(): void {
@@ -28,38 +30,36 @@ $Component({
     addContact(): void {
       const { config } = this.data;
 
-      if (env === "qq")
-        wx.setClipboardData({
-          data: config.num,
-          success: () => {
-            modal(
-              "号码已复制到剪切板",
-              "QQ暂不支持直接添加联系人，请自行添加联系人"
-            );
-          },
-        });
-      else
-        wx.addPhoneContact({
-          // 添加联系人
-          firstName: config.fName,
-          lastName: config.lName,
-          mobilePhoneNumber: config.num,
-          organization: config.org,
-          workPhoneNumber: config.workNum,
-          remark: config.remark,
-          photoFilePath: config.avatar,
-          nickName: config.nick,
-          weChatNumber: config.wechat,
-          addressState: config.province,
-          addressCity: config.city,
-          addressStreet: config.street,
-          addressPostalCode: config.postCode,
-          title: config.title,
-          hostNumber: config.hostNum,
-          email: config.mail,
-          url: config.site,
-          homePhoneNumber: config.homeNum,
-        });
+      wx.addPhoneContact({
+        // 添加联系人
+        firstName: config.fName,
+        lastName: config.lName,
+        mobilePhoneNumber: config.num,
+        organization: config.org,
+        workPhoneNumber: config.workNum,
+        remark: config.remark,
+        photoFilePath: config.avatar,
+        nickName: config.nick,
+        weChatNumber: config.wechat,
+        addressState: config.province,
+        addressCity: config.city,
+        addressStreet: config.street,
+        addressPostalCode: config.postCode,
+        title: config.title,
+        hostNumber: config.hostNum,
+        email: config.mail,
+        url: config.site,
+        homePhoneNumber: config.homeNum,
+      });
+    },
+
+    copyContact() {
+      wx.setClipboardData({
+        data: this.data.config.num,
+        success: () => {
+          tip("号码已复制");
+        },
+      });
     },
   },
 });

@@ -22,7 +22,7 @@
           <!-- 拨打电话按钮 -->
           <view class="actions">
             <view
-              class="call"
+              class="action"
               hover-class="button-hover"
               hover-stay-time="100"
               data-group="{{groupIndex}}"
@@ -35,19 +35,19 @@
                 src="/components/common/phone/icon/call.svg"
               />
             </view>
-            <!-- 添加联系人按钮 -->
+            <!-- 复制 -->
             <view
-              class="add"
+              class="action"
               hover-class="button-hover"
               hover-stay-time="100"
               data-group="{{groupIndex}}"
               data-index="{{index}}"
-              catch:tap="addContact"
+              catch:tap="{{ env === 'wx'?'addContact':'copyContact'}}"
             >
               <image
                 class="icon"
                 mode="widthFix"
-                src="/components/common/phone/icon/add.svg"
+                src="/components/common/phone/icon/{{env === 'wx'? 'add': 'copy'}}.svg"
               />
             </view>
           </view>

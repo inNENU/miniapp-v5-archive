@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { modal } from "../../utils/wx";
+import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -24,6 +24,7 @@ interface PhoneConfig {
 $Page("phone", {
   data: {
     config: [] as PhoneConfig[],
+    env,
     info: globalData.info,
   },
 
@@ -96,28 +97,36 @@ $Page("phone", {
   ) {
     const item = this.getConfig(event);
 
-    if (env === "qq")
-      wx.setClipboardData({
-        data: this.getNumber(item),
-        success: () => {
-          modal(
-            "号码已复制到剪切板",
-            "QQ暂不支持直接添加联系人，请自行添加联系人"
-          );
-        },
-      });
-    else
-      wx.addPhoneContact({
-        // 添加联系人
-        firstName: item.name,
-        hostNumber: this.getNumber(item),
-        org: "东北师范大学",
-        postCode: '"130024',
-        ...(item.locate === "benbu"
-          ? { street: "吉林省长春市人民大街5268号" }
-          : item.locate === "jingyue"
-          ? { street: "吉林省长春市净月大街2555号" }
-          : {}),
-      });
+    wx.addPhoneContact({
+      // 添加联系人
+      firstName: item.name,
+      hostNumber: this.getNumber(item),
+      org: "东北师范大学",
+      postCode: '"130024',
+      ...(item.locate === "benbu"
+        ? { street: "吉林省长春市人民大街5268号" }
+        : item.locate === "jingyue"
+        ? { street: "吉林省长春市净月大街2555号" }
+        : {}),
+    });
+  },
+
+  copyContact(
+    event: WechatMiniprogram.TouchEvent<
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      // eslint-disable-next-line @typescript-eslint/ban-types
+      {},
+      { group: number; index: number }
+    >
+  ) {
+    const item = this.getConfig(event);
+
+    wx.setClipboardData({
+      data: this.getNumber(item),
+      success: () => {
+        tip("号码已复制");
+      },
+    });
   },
 });
