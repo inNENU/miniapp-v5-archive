@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 
 import { getColor, popNotice } from "../../utils/page";
 import { ensureJSON, getJSON } from "../../utils/json";
-import { modal } from "../../utils/wx";
+import { modal, tip } from "../../utils/wx";
 import { getImagePrefix } from "../../utils/config";
 
 import type { AppOption } from "../../app";
@@ -70,20 +70,24 @@ $Page("calendar", {
 
   /** 显示校历详情 */
   display(event: WechatMiniprogram.TouchEvent<{ path: string }>) {
-    getJSON<CalendarDetail>(`function/calendar/${event.detail.path}`)
-      .then((data) => {
-        this.setData({
-          "popupConfig.title": data.title,
-          calendarDetail: data.content,
-          display: true,
+    const { path } = event.detail;
+
+    if (path)
+      getJSON<CalendarDetail>(`function/calendar/${path}`)
+        .then((data) => {
+          this.setData({
+            "popupConfig.title": data.title,
+            calendarDetail: data.content,
+            display: true,
+          });
+        })
+        .catch(() => {
+          modal(
+            "获取失败",
+            "学期详情获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者"
+          );
         });
-      })
-      .catch(() => {
-        modal(
-          "获取失败",
-          "学期详情获取失败，请稍后重试。如果该情况持续发生，请反馈给开发者"
-        );
-      });
+    else tip("所选内容暂无详情");
   },
 
   /** 关闭校历详情 */

@@ -44,9 +44,10 @@ $Component({
 
   methods: {
     active({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      const { path } = this.data.config[currentTarget.dataset.index as number];
+      const { path = "" } =
+        this.data.config[currentTarget.dataset.index as number];
 
-      if (path) this.triggerEvent("active", { path });
+      this.triggerEvent("active", { path });
     },
 
     /** 更新时间线视图 */
