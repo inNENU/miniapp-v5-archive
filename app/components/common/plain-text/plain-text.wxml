@@ -42,6 +42,7 @@
 <view
   wx:if="{{plainText.isContainer(config.type)}}"
   class="container-component {{config.type}}"
+  hover-class="{{config.path? 'container-hover': ''}}"
   data-url="{{config.path}}"
   catch:tap="$bindGo"
 >

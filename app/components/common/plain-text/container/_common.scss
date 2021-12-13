@@ -79,3 +79,11 @@
     padding-left: 0;
   }
 }
+
+.container-hover {
+  filter: brightness(1.05);
+
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0.9);
+  }
+}
