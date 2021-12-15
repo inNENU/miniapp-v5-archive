@@ -84,9 +84,9 @@
 }
 
 .container-hover {
-  filter: brightness(1.05);
+  filter: brightness(0.95);
 
   @media (prefers-color-scheme: dark) {
-    filter: brightness(0.9);
+    filter: brightness(1.1);
   }
 }
