@@ -13,7 +13,9 @@ module.exports = {
 
     return (
       config.heading ||
-      (type === "tip"
+      (type === "note"
+        ? "注"
+        : type === "tip"
         ? "提示"
         : type === "info"
         ? "相关信息"
