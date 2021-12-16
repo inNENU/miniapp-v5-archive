@@ -1,6 +1,7 @@
 module.exports = {
   isContainer: function (type) {
     return (
+      type === "note" ||
       type === "tip" ||
       type === "info" ||
       type === "warning" ||
