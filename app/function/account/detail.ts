@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
-import { ensureJSON, getJSON } from "../../utils/json";
+import { getImagePrefix, server } from "../../utils/config";
+import { ensureJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
 import { modal, savePhoto, tip } from "../../utils/wx";
 
@@ -13,6 +13,7 @@ const { env } = globalData;
 
 $Page("wechat-detail", {
   data: {
+    loading: true,
     config: {} as WechatConfig,
     statusBarHeight: globalData.info.statusBarHeight,
     footer: {
@@ -29,13 +30,25 @@ $Page("wechat-detail", {
   },
 
   onLoad({ path = "" }) {
-    getJSON<WechatConfig>(`function/account/${path}`).then((config) => {
-      this.setData({
-        darkmode: globalData.darkmode,
-        firstPage: getCurrentPages().length === 1,
-        color: getColor(true),
-        config,
-      });
+    this.setData({
+      darkmode: globalData.darkmode,
+      firstPage: getCurrentPages().length === 1,
+      color: getColor(true),
+    });
+
+    wx.request<WechatConfig>({
+      url: `${server}service/account.php`,
+      enableHttp2: true,
+      method: "POST",
+      data: { id: path },
+      success: (res) => {
+        if (res.statusCode === 200)
+          this.setData({
+            loading: false,
+            config: res.data,
+          });
+        else tip("服务器出现问题");
+      },
     });
 
     this.state.path = path;

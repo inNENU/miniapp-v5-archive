@@ -39,6 +39,18 @@
   </block>
 </template>
 
+<template name="loading">
+  <view class="loading-logo">
+    <view class="logo">
+      <view class="in">in</view>
+      <view class="dong">东</view>
+      <view class="shi">师</view>
+    </view>
+    <view class="shadow" />
+    <view class="text">加载中...</view>
+  </view>
+</template>
+
 <!-- page with navigation bar -->
 <template name="page">
   <view
@@ -69,15 +81,7 @@
       >
         <view class="icon-{{firstPage? 'home': 'back'}}" />
       </view>
-      <view class="loading-logo">
-        <view class="logo">
-          <view class="in">in</view>
-          <view class="dong">东</view>
-          <view class="shi">师</view>
-        </view>
-        <view class="shadow" />
-        <view class="text">加载中...</view>
-      </view>
+      <template is="loading" />
     </view>
 
     <block wx:else>

@@ -1,3 +1,4 @@
+<import src="/components/template.wxml" />
 <page-meta
   background-text-style="{{darkmode? 'dark': 'light'}}"
   background-color="{{color.bgColor}}"
@@ -15,43 +16,48 @@
   >
     <view class="icon-{{firstPage? 'home': 'back'}}" />
   </view>
-  <view class="intro-wrapper" style="padding-top: {{statusBarHeight}}px;">
-    <!-- 高斯模糊背景 -->
-    <image class="background" src="{{config.logo}}" mode="aspectFill" />
-    <view class="intro">
-      <!-- 图标 -->
-      <image class="icon" src="{{config.logo}}" />
-      <!-- 名称 -->
-      <view class="name">{{config.name}}</view>
-      <!-- 详情 -->
-      <view class="detail">{{config.detail}}</view>
-      <!-- 介绍 -->
-      <view class="desc">{{config.desc}}</view>
-      <!-- 关注 -->
-      <view class="follow" hover-class="hover" catch:tap="follow">关注</view>
-    </view>
+  <view wx:if="{{loading}}" class="loading-logo-wrapper">
+    <template is="loading" />
   </view>
-  <view class="wechat-wrapper">
-    <view
-      class="card"
-      wx:for="{{config.article}}"
-      wx:key="title"
-      hover-class="button-hover"
-      hover-stay-time="100"
-      data-title="{{item.title}}"
-      data-url="{{item.url}}"
-      catch:tap="navigate"
-    >
-      <image class="img" src="{{item.cover}}" mode="aspectFill" />
-      <view class="detail">
-        <view wx:if="{{item.logo}}" class="icon">
-          <image class="logo" src="{{item.logo}}" />
-          <view class="name">{{item.name}}</view>
-        </view>
-        <view class="title">{{item.title}}</view>
-        <view class="desc">{{item.desc}}</view>
+  <block wx:else>
+    <view class="intro-wrapper" style="padding-top: {{statusBarHeight}}px;">
+      <!-- 高斯模糊背景 -->
+      <image class="background" src="{{config.logo}}" mode="aspectFill" />
+      <view class="intro">
+        <!-- 图标 -->
+        <image class="icon" src="{{config.logo}}" />
+        <!-- 名称 -->
+        <view class="name">{{config.name}}</view>
+        <!-- 详情 -->
+        <view class="detail">{{config.detail}}</view>
+        <!-- 介绍 -->
+        <view class="desc">{{config.desc}}</view>
+        <!-- 关注 -->
+        <view class="follow" hover-class="hover" catch:tap="follow">关注</view>
       </view>
     </view>
-  </view>
+    <view class="wechat-wrapper">
+      <view
+        class="card"
+        wx:for="{{config.article}}"
+        wx:key="title"
+        hover-class="button-hover"
+        hover-stay-time="100"
+        data-title="{{item.title}}"
+        data-url="{{item.url}}"
+        catch:tap="navigate"
+      >
+        <image class="img" src="{{item.cover}}" mode="aspectFill" />
+        <view class="detail">
+          <view wx:if="{{item.logo}}" class="icon">
+            <image class="logo" src="{{item.logo}}" />
+            <view class="name">{{item.name}}</view>
+          </view>
+          <view class="title">{{item.title}}</view>
+          <view class="desc">{{item.desc}}</view>
+        </view>
+      </view>
+    </view>
+  </block>
   <footer config="{{footer}}" />
 </view>
