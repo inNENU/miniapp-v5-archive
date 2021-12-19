@@ -24,7 +24,7 @@ interface VideoGroup {
   /** 分组名称 */
   title: string;
   /** 分组内容 */
-  content: VideoConfig[];
+  list: VideoConfig[];
 }
 
 $Page("video", {
@@ -35,9 +35,18 @@ $Page("video", {
   },
 
   onLoad(options) {
-    getJSON<VideoGroup[]>("function/video/index").then((videoList) => {
+    getJSON<VideoGroup[]>("function/video/index").then((list) => {
       let groupID = 0;
       let listID = 0;
+      const videoList =
+        globalData.appID === "wx9ce37d9662499df3"
+          ? list
+          : list
+              .map((category) => ({
+                title: category.title,
+                list: category.list.filter((item) => !("vid" in item)),
+              }))
+              .filter((item) => item.list.length);
 
       if (options.scene) {
         const ids = options.scene.split("-").map((id) => Number(id));
@@ -47,7 +56,7 @@ $Page("video", {
         const name = decodeURI(options.name);
 
         videoList.forEach((videoGroup, groupIndex) => {
-          const listIndex = videoGroup.content.findIndex(
+          const listIndex = videoGroup.list.findIndex(
             (videoItem) => videoItem.name === name
           );
 
@@ -58,7 +67,7 @@ $Page("video", {
         });
       }
 
-      const item = videoList[groupID].content[listID];
+      const item = videoList[groupID].list[listID];
 
       this.setData({
         type: options.type || "about",
@@ -127,7 +136,7 @@ $Page("video", {
   ) {
     const { groupID, listID } = event.currentTarget.dataset;
 
-    const item = this.data.videoList[groupID].content[listID];
+    const item = this.data.videoList[groupID].list[listID];
 
     this.setData({
       groupID,

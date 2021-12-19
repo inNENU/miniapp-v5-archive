@@ -17,12 +17,11 @@
     <view class="author">—— {{videoAuthor }} ——</view>
   </view>
   <!-- 视频窗口 -->
-  <!-- <txv-video
+  <!-- <player-component
     wx:if="{{vid}}"
     class="player"
     vid="{{vid}}"
-    playerid="video"
-    controls
+    use-legacy-adapter="{{false}}"
     catch:play="play"
     catch:waiting="wait"
     catch:error="error"
@@ -49,7 +48,7 @@
       >
         <view
           slot="page{{groupIndex + 1}}"
-          wx:for="{{videoGroup.content}}"
+          wx:for="{{videoGroup.list}}"
           wx:key="name"
           class="item{{groupIndex === groupID && listID === index? ' active': ''}}"
           data-group-i-d="{{groupIndex}}"

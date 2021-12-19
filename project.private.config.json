@@ -50,8 +50,8 @@
         },
         {
           "name": "地图地点",
-          "pathName": "function/map/location",
-          "query": "area=benbu&path=general/index",
+          "pathName": "function/location/location",
+          "query": "id=benbu/general/index&point={\"latitude\":43.86188,\"longitude\":125.33137,\"name\":\"自由校区\"}",
           "scene": null
         },
         {
@@ -100,12 +100,6 @@
           "name": "初始化小程序",
           "pathName": "module/function",
           "query": "action=reset",
-          "scene": null
-        },
-        {
-          "name": "小程序外观",
-          "pathName": "settings/outlook/outlook",
-          "query": "",
           "scene": null
         },
         {

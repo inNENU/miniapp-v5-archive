@@ -147,7 +147,7 @@
           "id": 6,
           "name": "地图地点",
           "pathName": "function/map/location",
-          "query": "area=benbu&path=general/index",
+          "query": "id=benbu/general/index",
           "scene": null
         },
         {
@@ -204,13 +204,6 @@
           "name": "初始化小程序",
           "pathName": "module/function",
           "query": "action=reset",
-          "scene": null
-        },
-        {
-          "id": 15,
-          "name": "小程序外观",
-          "pathName": "settings/outlook/outlook",
-          "query": "",
           "scene": null
         },
         {
@@ -297,8 +290,7 @@
           "query": "id=other/about/notexist",
           "scene": null
         }
-      ],
-      "current": -1
+      ]
     }
   }
 }

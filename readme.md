@@ -9,9 +9,11 @@ wx9ce37d9662499df3
 
 wx33acb831ee1831a5
 
+  "player-component": "plugin://player/video",
+
   "plugins": {
-    "tencentvideo": {
-      "version": "1.3.16",
+    "player": {
+      "version": "2.0.2",
       "provider": "wxa75efa648b60994b"
     }
   },
