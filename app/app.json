@@ -68,31 +68,31 @@
         "pagePath": "pages/main/main",
         "text": "首页",
         "iconPath": "@homeIcon",
-        "selectedIconPath": "icon/tab/home-active.png"
+        "selectedIconPath": "icon/tab/home.png"
       },
       {
         "pagePath": "pages/intro/intro",
         "text": "东师介绍",
         "iconPath": "@introIcon",
-        "selectedIconPath": "icon/tab/intro-active.png"
+        "selectedIconPath": "icon/tab/intro.png"
       },
       {
         "pagePath": "pages/guide/guide",
         "text": "东师指南",
         "iconPath": "@guideIcon",
-        "selectedIconPath": "icon/tab/guide-active.png"
+        "selectedIconPath": "icon/tab/guide.png"
       },
       {
         "pagePath": "pages/function/function",
         "text": "功能大厅",
         "iconPath": "@functionIcon",
-        "selectedIconPath": "icon/tab/function-active.png"
+        "selectedIconPath": "icon/tab/function.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的东师",
         "iconPath": "@userIcon",
-        "selectedIconPath": "icon/tab/user-active.png"
+        "selectedIconPath": "icon/tab/user.png"
       }
     ]
   },
