@@ -464,8 +464,11 @@ export const registAction = (): void => {
     }
   });
 
-  // 监听用户截屏
-  if (wx.getStorageSync("capture-screen") !== "never") {
+  if (
+    wx.canIUse("onUserCaptureScreen") &&
+    wx.getStorageSync("capture-screen") !== "never"
+  ) {
+    // 监听用户截屏
     // avoid issues on QQ
     let pending = false;
 
