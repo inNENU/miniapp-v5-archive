@@ -1,15 +1,15 @@
-.container-component {
+.hintbox-component {
   position: relative;
 
   max-width: calc(var(--max-width) - 48px);
   margin: 12px var(--horizontal-margin);
   padding: 16px;
-  border-color: var(--container-border-color);
+  border-color: var(--hint-box-border-color);
   border-left-width: 5px;
   border-left-style: solid;
   border-radius: 6px;
 
-  background: ​var(--container-bgcolor);
+  background: var(--hint-box-bgcolor);
 
   font-size: 16px;
   line-height: 1.6;
@@ -21,20 +21,28 @@
     font-size: 17px;
   }
 
+  @media (prefers-color-scheme: dark) {
+    background: var(--hint-box-title-color);
+  }
+
   .grey & {
     margin: 16px;
   }
 
-  .container-title {
+  .hint-title {
     position: relative;
 
     display: block;
 
     padding-left: 24px;
 
-    color: ​var(--container-title-color);
+    color: var(--hint-box-title-color);
     font-weight: 600;
     line-height: 1.25;
+
+    @media (prefers-color-scheme: dark) {
+      color: var(--hint-box-bgcolor);
+    }
 
     &:not(:only-child) {
       margin-bottom: 12px;
@@ -44,7 +52,6 @@
       content: " ";
 
       position: absolute;
-      // top: 0.125em;
       left: 0;
 
       width: 20px;
@@ -83,7 +90,7 @@
   }
 }
 
-.container-hover {
+.hintbox-hover {
   filter: brightness(0.95);
 
   @media (prefers-color-scheme: dark) {

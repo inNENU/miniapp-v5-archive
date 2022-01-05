@@ -41,14 +41,14 @@
 
 <view
   wx:if="{{plainText.isContainer(config.type)}}"
-  class="container-component {{config.type}}"
-  hover-class="{{config.path? 'container-hover': ''}}"
+  class="hintbox-component {{config.type}}"
+  hover-class="{{config.path? 'hintbox-hover': ''}}"
   data-url="{{config.path}}"
   catch:tap="$bindGo"
 >
   <text
     wx:if="{{config.heading !== false}}"
-    class="container-title {{config.path? 'access': ''}}"
+    class="hint-title {{config.path? 'access': ''}}"
     user-select
     >{{plainText.getTitle(config)}}</text
   >

@@ -1,21 +1,12 @@
 @use "../../../../styles/lib/svg";
 @use "icons";
 
-.container-component.tip {
-  border-color: #009400;
-  background: #e6f6e6;
+.hintbox-component.tip {
+  --hint-box-border-color: #009400;
+  --hint-box-bgcolor: #e6f6e6;
+  --hint-box-title-color: #003100;
 
-  @media (prefers-color-scheme: dark) {
-    background: #003100;
-  }
-
-  .container-title {
-    color: #003100;
-
-    @media (prefers-color-scheme: dark) {
-      color: #e6f6e6;
-    }
-
+  .hint-title {
     &::before {
       @include svg.background-svg(icons.$tip-icon);
 
