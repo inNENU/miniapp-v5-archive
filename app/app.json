@@ -103,6 +103,7 @@
     "downloadFile": 25000
   },
   "debug": false,
+  "frameset": true,
   "resizable": true,
   "permission": {
     "scope.userLocation": {
