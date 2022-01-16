@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { modal, savePhoto, tip } from "../../utils/wx";
+import { getWindowInfo, modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -14,7 +14,6 @@ $Page("account", {
   data: {
     config: [] as unknown[],
 
-    info: globalData.info,
     env: globalData.env,
     type: globalData.env,
 
@@ -29,7 +28,13 @@ $Page("account", {
 
   onLoad({ type = env }) {
     getJSON<unknown[]>(`function/account/${type}`).then((config) => {
-      this.setData({ config, type, info: globalData.info });
+      const info = getWindowInfo();
+
+      this.setData({
+        config,
+        type,
+        height: info.windowHeight - info.statusBarHeight - 229,
+      });
     });
 
     popNotice("account");
@@ -46,6 +51,12 @@ $Page("account", {
     title: "校园媒体",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
+
+  onResize({ size }) {
+    this.setData({
+      height: size.windowHeight - globalData.info.statusBarHeight - 229,
+    });
+  },
 
   switch({
     currentTarget,

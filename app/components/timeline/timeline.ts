@@ -31,14 +31,9 @@ $Component({
     alternate: false,
   },
 
-  lifetimes: {
-    attached() {
-      wx.onWindowResize(this.updateTimeline);
-      this.updateTimeline();
-    },
-
-    detached() {
-      wx.offWindowResize(this.updateTimeline);
+  pageLifetimes: {
+    resize({ size }) {
+      this.setData({ alternate: size.windowWidth >= 750 });
     },
   },
 
@@ -48,13 +43,6 @@ $Component({
         this.data.config[currentTarget.dataset.index as number];
 
       this.triggerEvent("active", { path });
-    },
-
-    /** 更新时间线视图 */
-    updateTimeline(): void {
-      const res = wx.getSystemInfoSync();
-
-      this.setData({ alternate: res.windowWidth >= 750 });
     },
   },
 });

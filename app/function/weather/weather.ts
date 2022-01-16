@@ -50,7 +50,7 @@ $Page("weather", {
         hintIcon,
 
         firstPage: getCurrentPages().length === 1,
-        info,
+        statusBarHeight: info.statusBarHeight,
         darkmode,
       });
     } else {
@@ -63,7 +63,7 @@ $Page("weather", {
     if (weatherData && weatherData.date > new Date().getTime() - 300000) {
       const weather = weatherData.data;
 
-      this.initcanvas(weather);
+      this.drawcanvas(weather);
 
       this.setData({ weather });
     }
@@ -73,7 +73,7 @@ $Page("weather", {
         url: `${server}service/weather.php`,
         enableHttp2: true,
         success: (res) => {
-          this.initcanvas(res.data as WeatherData);
+          this.drawcanvas(res.data as WeatherData);
 
           this.setData({
             weather: res.data as WeatherData,
@@ -88,7 +88,6 @@ $Page("weather", {
       backgroundColorBottom: darkmode ? "#000000" : "#efeef4",
     });
 
-    wx.onWindowResize(this.redrawCanvas);
     this.backgroundChange();
   },
 
@@ -106,11 +105,15 @@ $Page("weather", {
 
   onUnload() {
     /** 移除旋转屏幕与加速度计监听 */
-    wx.offWindowResize(this.redrawCanvas);
     wx.stopAccelerometer({
       success: () => console.info("Stoped accelerometer listening"),
     });
     this.$off("inited", this.updateIcon);
+  },
+
+  /** 屏幕变化时重绘画布 */
+  onResize({ size }) {
+    this.drawcanvas(this.data.weather, size.windowWidth);
   },
 
   updateIcon(): void {
@@ -130,7 +133,10 @@ $Page("weather", {
    *
    * @param weather 天气详情
    */
-  initcanvas(weather: WeatherData) {
+  drawcanvas(
+    weather: WeatherData,
+    windowWidth = wx.getSystemInfoSync().windowWidth
+  ) {
     if (wx.canIUse("canvas.type"))
       wx.createSelectorQuery()
         .select(".canvas")
@@ -146,17 +152,20 @@ $Page("weather", {
               node.width = width * dpr;
               node.height = height * dpr;
               context.scale(dpr, dpr);
-              this.draw(context, weather);
-            } else this.canvasOldDraw(weather);
+              this.draw(context, weather, windowWidth);
+            } else this.canvasOldDraw(weather, windowWidth);
           }
         );
-    else this.canvasOldDraw(weather);
+    else this.canvasOldDraw(weather, windowWidth);
   },
 
   // eslint-disable-next-line
-  draw(canvasContent: WechatMiniprogram.CanvasContext, weather: WeatherData) {
-    // 为了防止 iPad 等设备可以转屏，必须即时获取
-    const width = info.windowWidth;
+  draw(
+    canvasContent: WechatMiniprogram.CanvasContext,
+    weather: WeatherData,
+    // 屏幕宽度可能发生变化
+    width: number
+  ) {
     const highTemperature: number[] = [];
     const lowTemperature: number[] = [];
     const { dayForecast } = weather;
@@ -240,9 +249,11 @@ $Page("weather", {
    * @param weather 天气详情
    */
   // eslint-disable-next-line
-  canvasOldDraw(weather: WeatherData) {
-    // 为了防止 iPad 等设备可以转屏，必须即时获取
-    const width = wx.getSystemInfoSync().windowWidth;
+  canvasOldDraw(
+    weather: WeatherData,
+    // 屏幕宽度可能发生变化
+    width: number
+  ) {
     /** 天气画布组件 */
     const canvasContent = wx.createCanvasContext("weather");
     const highTemperature: number[] = [];
@@ -326,19 +337,6 @@ $Page("weather", {
       canvasContent.fillText(`${dayForecast[i].minDegree}°`, x - 10, y + 44);
       canvasContent.draw(true);
     }
-  },
-
-  /** 旋转屏幕时重绘画布 */
-  redrawCanvas() {
-    if (wx.canIUse("canvas.type"))
-      wx.createSelectorQuery()
-        .select(".canvas")
-        .fields({ node: true, size: true })
-        .exec(([{ node }]: Required<WechatMiniprogram.NodeInfo>[]) => {
-          if (node) this.draw(node.getContext("2d"), this.data.weather);
-          else this.canvasOldDraw(this.data.weather);
-        });
-    else this.canvasOldDraw(this.data.weather);
   },
 
   /** 改变背景动画 */

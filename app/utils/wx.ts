@@ -76,9 +76,8 @@ export const netReport = (): void => {
           break;
         case "wifi":
           wx.getConnectedWifi({
-            success: (info) => {
-              if (info.wifi.signalStrength < 0.5)
-                tip("Wifi信号不佳，网络链接失败");
+            success: ({ wifi }) => {
+              if (wifi.signalStrength < 0.5) tip("Wifi信号不佳，网络链接失败");
             },
             fail: () => {
               tip("无法连接网络");
@@ -235,6 +234,9 @@ export const savePhoto = (imgPath: string): Promise<void> =>
       () => reject()
     );
   });
+
+export const getWindowInfo = (): WechatMiniprogram.WindowInfo =>
+  wx.getWindowInfo?.() || wx.getSystemInfoSync();
 
 /**
  * 比较版本号

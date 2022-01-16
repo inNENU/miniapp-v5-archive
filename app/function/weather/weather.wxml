@@ -2,11 +2,11 @@
 <view class="wrapper grey">
   <view
     class="weather-wrapper {{night? 'night': 'day'}}"
-    style="padding-top: {{info.statusBarHeight}}px;"
+    style="padding-top: {{statusBarHeight}}px;"
   >
     <view
       class="left-button"
-      style="top: {{info.statusBarHeight + 6}}px;"
+      style="top: {{statusBarHeight + 6}}px;"
       hover-class="button-hover"
       catch:tap="back"
     >

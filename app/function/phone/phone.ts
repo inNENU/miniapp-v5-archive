@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { tip } from "../../utils/wx";
+import { getWindowInfo, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -25,7 +25,6 @@ $Page("phone", {
   data: {
     config: [] as PhoneConfig[],
     env,
-    info: globalData.info,
   },
 
   onNavigate() {
@@ -34,7 +33,12 @@ $Page("phone", {
 
   onLoad() {
     getJSON<PhoneConfig[]>("function/phone/index").then((config) => {
-      this.setData({ config, info: globalData.info });
+      const info = getWindowInfo();
+
+      this.setData({
+        config,
+        height: info.windowHeight - info.statusBarHeight - 160,
+      });
     });
 
     popNotice("account");
@@ -51,6 +55,12 @@ $Page("phone", {
     title: "师大黄页",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
+
+  onResize({ size }) {
+    this.setData({
+      height: size.windowHeight - globalData.info.statusBarHeight - 160,
+    });
+  },
 
   getConfig({
     currentTarget,

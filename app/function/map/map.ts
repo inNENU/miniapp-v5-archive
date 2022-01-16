@@ -4,7 +4,7 @@ import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { navigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
-import { modal, tip } from "../../utils/wx";
+import { getWindowInfo, modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { Category, MarkerConfig, MarkerData } from "../../../typings";
@@ -103,15 +103,16 @@ $Page("map", {
     const area = this.getArea();
     // 创建地图对象
     const mapContext = wx.createMapContext("map");
+    const info = getWindowInfo();
 
     // 注入地图实例
     this.context = mapContext;
 
     this.setData({
       area,
-      /** 设备信息 */
-      info: globalData.info,
       darkmode: globalData.darkmode,
+      statusBarHeight: info.statusBarHeight,
+      tabHeight: info.windowHeight / 2 - 20,
       firstPage: getCurrentPages().length === 1,
     });
 
@@ -142,6 +143,12 @@ $Page("map", {
     title: "东师地图",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
+
+  onResize({ size }) {
+    this.setData({
+      tabHeight: size.windowHeight / 2 - 20,
+    });
+  },
 
   /** 设置地图 */
   setMap() {

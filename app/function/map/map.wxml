@@ -15,7 +15,7 @@
 
 <view
   class="left-button"
-  style="top:{{info.statusBarHeight + 6}}px;"
+  style="top:{{statusBarHeight + 6}}px;"
   hover-class="button-hover"
   catch:tap="back"
 >
@@ -24,7 +24,7 @@
 
 <view
   class="area-switch"
-  style="top:{{info.statusBarHeight + 6}}px;"
+  style="top:{{statusBarHeight + 6}}px;"
   catch:tap="changeArea"
 >
   <view class="item {{area === 'benbu'? 'active': ''}}">本部</view>
@@ -101,10 +101,7 @@
   show="{{showNavigate}}"
   catch:close="toggleNavigatePopup"
 >
-  <tab-bar
-    nav-list="{{tool.getTitle(category)}}"
-    height="{{(info.screenHeight / 2 - 20) || 300}}"
-  >
+  <tab-bar nav-list="{{tool.getTitle(category)}}" height="{{tabHeight || 300}}">
     <block
       wx:for="{{category}}"
       wx:key="name"

@@ -1,6 +1,4 @@
-import type { AppOption } from "../../app";
-
-const { globalData } = getApp<AppOption>();
+import { getWindowInfo } from "../../utils/wx";
 
 export interface PopupConfig {
   /** 主标题 */
@@ -31,7 +29,21 @@ Component({
 
   lifetimes: {
     attached() {
-      this.setData({ info: globalData.info });
+      const info = getWindowInfo();
+
+      this.setData({
+        paddingBottom: info.windowHeight - info.safeArea.bottom,
+      });
+    },
+  },
+
+  pageLifetimes: {
+    resize() {
+      const info = getWindowInfo();
+
+      this.setData({
+        paddingBottom: info.windowHeight - info.safeArea.bottom,
+      });
     },
   },
 

@@ -3,10 +3,7 @@
 <view class="ios">
   <header title="东师网站" />
   <view style="height: 15px" />
-  <tab-bar
-    nav-list="{{website.getName(config)}}"
-    height="{{(info.screenHeight - info.statusBarHeight - 160) || 300}}"
-  >
+  <tab-bar nav-list="{{website.getName(config)}}" height="{{height || 300}}">
     <block
       wx:for="{{config}}"
       wx:key="name"

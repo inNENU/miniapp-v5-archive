@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { modal } from "../../utils/wx";
+import { getWindowInfo, modal } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -12,7 +12,6 @@ const { globalData } = getApp<AppOption>();
 $Page("website", {
   data: {
     config: [] as unknown[],
-    info: globalData.info,
   },
 
   onNavigate() {
@@ -21,7 +20,12 @@ $Page("website", {
 
   onLoad() {
     getJSON<unknown[]>("function/website/index").then((config) => {
-      this.setData({ config, info: globalData.info });
+      const info = getWindowInfo();
+
+      this.setData({
+        config,
+        height: info.windowHeight - info.statusBarHeight - 229,
+      });
     });
 
     popNotice("account");
@@ -38,6 +42,12 @@ $Page("website", {
     title: "东师网站",
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
+
+  onResize({ size }) {
+    this.setData({
+      height: size.windowHeight - globalData.info.statusBarHeight - 229,
+    });
+  },
 
   copy({
     currentTarget,

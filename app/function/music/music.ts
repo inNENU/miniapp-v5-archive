@@ -68,7 +68,7 @@ $Page("music", {
       playing: globalData.music.playing,
       mode: mode || "列表循环",
 
-      info: globalData.info,
+      statusBarHeight: globalData.info.statusBarHeight,
       darkmode: globalData.darkmode,
       indicatorColor: globalData.darkmode
         ? "rgba(255, 255, 255, 0.15)"

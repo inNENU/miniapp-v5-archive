@@ -17,6 +17,13 @@ Component({
     current: 0,
   },
 
+  pageLifetimes: {
+    resize({ size }) {
+      globalData.info.windowWidth = size.windowWidth;
+      globalData.info.windowHeight = size.windowHeight;
+    },
+  },
+
   methods: {
     changeTab({ currentTarget }: WechatMiniprogram.TouchEvent): void {
       this.setData({ current: Number(currentTarget.dataset.index) });
@@ -30,7 +37,7 @@ Component({
     transition({ detail }: WechatMiniprogram.SwiperTransition): void {
       this.setData({
         barleft:
-          (detail.dx + globalData.info.screenWidth * currentSwipe) /
+          (detail.dx + globalData.info.windowWidth * currentSwipe) /
           this.data.navList.length,
       });
     },
