@@ -125,7 +125,8 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
       if ("env" in component)
         component.hidden = !component.env?.includes(globalData.env);
 
-      if (component.tag === "img") page.images!.push(component.src);
+      if (component.tag === "img")
+        page.images!.push(component.res || component.src);
 
       if (
         "path" in component &&
@@ -201,9 +202,6 @@ const preloadPage = (page: PageData): void => {
         );
     });
   else logger.warn(`Page is empty`);
-
-  // 统计报告
-  wx.reportMonitor("1", 1);
 };
 
 /**
@@ -501,7 +499,6 @@ export const setOnlinePage = (
         setPage({ option, ctx }, page);
         popNotice(id);
         logger.info(`${id} onLoad success: `, ctx.data);
-        wx.reportMonitor("0", 1);
 
         // 如果需要执行预加载，则执行
         if (preload) {
@@ -580,7 +577,6 @@ export const loadOnlinePage = (
           setPage({ option, ctx }, page);
           popNotice(option.path);
           logger.info(`${option.path} onLoad succeed:`, ctx.data);
-          wx.reportMonitor("0", 1);
         }
       })
       .catch((errMsg) => {
