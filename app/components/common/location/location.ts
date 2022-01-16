@@ -49,11 +49,28 @@ $Component({
           id: index,
           ...point,
         })),
-        includePoints: config.points.map((point) => ({
-          longitude: point.longitude,
-          latitude: point.latitude,
-        })),
       });
+    },
+
+    ready() {
+      // add delay to make sure `<map />` is rendered
+      setTimeout(() => {
+        wx.createSelectorQuery()
+          .in(this)
+          .select("#location")
+          .context(({ context }) => {
+            console.log(context);
+
+            (context as WechatMiniprogram.MapContext).includePoints({
+              points: this.data.config.points.map((point) => ({
+                longitude: point.longitude,
+                latitude: point.latitude,
+              })),
+              padding: [24, 24, 24, 24],
+            });
+          })
+          .exec();
+      }, 500);
     },
   },
 
