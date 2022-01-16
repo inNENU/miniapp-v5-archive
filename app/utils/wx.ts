@@ -149,41 +149,38 @@ export const requestJSON = <T = Record<string, any>>(
  * @param failFunc 失败回调函数
  * @param errorFunc 状态码错误回调函数
  */
-export const downLoad = (
-  path: string,
-  successFunc: (/** 缓存文件路径 */ tempFilePath: string) => void,
-  failFunc?: (
-    /** 失败信息 */ errMsg: WechatMiniprogram.GeneralCallbackResult
-  ) => void,
-  errorFunc?: (/** 服务器状态码 */ statusCode: number) => void
-): void => {
-  const progress = wx.downloadFile({
-    url: path.startsWith("http") ? path : `${server}${path}`,
-    success: (res) => {
-      wx.hideLoading();
-      if (res.statusCode === 200) successFunc(res.tempFilePath);
-      else {
-        tip("服务器出现问题，请稍后重试");
-        if (errorFunc) errorFunc(res.statusCode);
+export const downLoad = (path: string, mask = false): Promise<string> =>
+  new Promise((resolve, reject) => {
+    const progress = wx.downloadFile({
+      url: path.startsWith("http") ? path : `${server}${path}`,
+      success: (res) => {
+        wx.hideLoading();
+        if (res.statusCode === 200) resolve(res.tempFilePath);
+        else {
+          tip("服务器出现问题，请稍后重试");
 
-        // 调试
-        logger.warn(
-          `Download ${path} failed with statusCode: ${res.statusCode}`
-        );
-      }
-    },
-    fail: (failMsg) => {
-      wx.hideLoading();
-      if (failFunc) failFunc(failMsg);
-      netReport();
-      logger.warn(`Download ${path} failed:`, failMsg);
-    },
-  });
+          // 调试
+          logger.warn(
+            `Download ${path} failed with statusCode: ${res.statusCode}`
+          );
 
-  progress.onProgressUpdate((res) => {
-    wx.showLoading({ title: `下载中${Math.round(res.progress)}%` });
+          reject(res.statusCode);
+        }
+      },
+      fail: ({ errMsg }) => {
+        wx.hideLoading();
+
+        reject(errMsg);
+
+        netReport();
+        logger.warn(`Download ${path} failed:`, errMsg);
+      },
+    });
+
+    progress.onProgressUpdate((res) => {
+      wx.showLoading({ title: `下载中...${Math.round(res.progress)}%`, mask });
+    });
   });
-};
 
 /**
  * 保存图片到相册
@@ -192,9 +189,8 @@ export const downLoad = (
  */
 export const savePhoto = (imgPath: string): Promise<void> =>
   new Promise((resolve, reject) => {
-    downLoad(
-      imgPath,
-      (path) => {
+    downLoad(imgPath)
+      .then((path) => {
         // 获取用户设置
         wx.getSetting({
           success: (res) => {
@@ -230,9 +226,8 @@ export const savePhoto = (imgPath: string): Promise<void> =>
               });
           },
         });
-      },
-      () => reject()
-    );
+      })
+      .catch(() => reject());
   });
 
 /**
