@@ -30,20 +30,26 @@ $Page("main", {
     } as PageDataWithContent,
   },
 
-  onPageLaunch() {
+  onRegister() {
     console.info(
-      "Main Page Launched: ",
+      "Main Page registerd: ",
       new Date().getTime() - globalData.date,
       "ms"
     );
-    const page = wx.getStorageSync<PageDataWithContent | undefined>("main");
+    const page = resolvePage(
+      { id: "main" },
+      wx.getStorageSync<PageDataWithContent | undefined>("main") ||
+        this.data.page
+    );
 
-    resolvePage({ id: "main" }, page ? page : this.data.page);
+    if (page) this.data.page = page as PageDataWithContent;
   },
 
   onLoad() {
-    setPage({ option: { id: "main" }, ctx: this });
+    setPage({ option: { id: "main" }, ctx: this, handle: true });
+  },
 
+  onShow() {
     refreshPage("main")
       .then((data) => {
         setPage({ ctx: this, option: { id: "main" } }, data);
@@ -54,9 +60,7 @@ $Page("main", {
           wx.getStorageSync("main") || this.data.page
         );
       });
-  },
 
-  onShow() {
     popNotice("main");
   },
 

@@ -27,8 +27,9 @@
         {
           "name": "分享",
           "pathName": "module/page",
-          "query": "path=Garrival/train-w-benbu/",
-          "scene": null
+          "query": "path=Gprepare/check-in-time",
+          "scene": null,
+          "launchMode": "default"
         },
         {
           "name": "二维码分享",

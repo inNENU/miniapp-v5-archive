@@ -356,64 +356,70 @@ export const setPage = (
   { option, ctx, handle = false }: SetPageOption,
   page?: PageData,
   preload = true
-): void => {
-  // 设置页面数据
-  if (page) {
-    const pageData = handle ? page : disposePage(page, option);
-
-    ctx.setData(
-      {
-        color: getColor(pageData.grey),
-        theme: globalData.theme,
-        darkmode: globalData.darkmode,
-        page: pageData,
-      },
-      () => {
-        logger.debug(`${pageData.id || "Unknown"} pageData is set`);
-      }
-    );
-  }
-  // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
-  else if (
-    (option.id && globalData.page.id === option.id) ||
-    (ctx.data.page &&
-      ctx.data.page.title &&
-      globalData.page.id === ctx.data.page.title)
-  ) {
-    const { id } = globalData.page;
-
-    logger.debug(`${id} has been resloved`);
-    ctx.setData(
-      {
-        color: getColor(globalData.page.data?.grey),
-        theme: globalData.theme,
-        darkmode: globalData.darkmode,
-        page: globalData.page.data,
-      },
-      () => {
-        logger.debug(`${id} pageData is set`);
-        if (preload) {
-          preloadPage(ctx.data.page!);
-          logger.debug(`Preloaded ${id} links`);
-        }
-      }
-    );
-  } else if (ctx.data.page) {
-    logger.debug(`${option.id || "Unknown"} not resolved`);
-
-    const pageData: PageData = handle
-      ? ctx.data.page
-      : disposePage(ctx.data.page, option);
-
+): Promise<void> =>
+  new Promise((resolve) => {
     // 设置页面数据
-    ctx.setData({
-      color: getColor(pageData.grey),
-      theme: globalData.theme,
-      darkmode: globalData.darkmode,
-      page: pageData,
-    });
-  }
-};
+    if (page) {
+      const pageData = handle ? page : disposePage(page, option);
+
+      ctx.setData(
+        {
+          color: getColor(pageData.grey),
+          theme: globalData.theme,
+          darkmode: globalData.darkmode,
+          page: pageData,
+        },
+        () => {
+          logger.debug(`${pageData.id || "Unknown"} pageData is set`);
+          resolve();
+        }
+      );
+    }
+    // 页面已经预处理完毕，立即写入 page 并执行本界面的预加载
+    else if (
+      (option.id && globalData.page.id === option.id) ||
+      (ctx.data.page &&
+        ctx.data.page.title &&
+        globalData.page.id === ctx.data.page.title)
+    ) {
+      const { id } = globalData.page;
+
+      logger.debug(`${id} has been resloved`);
+      ctx.setData(
+        {
+          color: getColor(globalData.page.data?.grey),
+          theme: globalData.theme,
+          darkmode: globalData.darkmode,
+          page: globalData.page.data,
+        },
+        () => {
+          logger.debug(`${id} pageData is set`);
+          if (preload) {
+            preloadPage(ctx.data.page!);
+            logger.debug(`Preloaded ${id} links`);
+          }
+          resolve();
+        }
+      );
+    } else if (ctx.data.page) {
+      logger.debug(`${option.id || "Unknown"} not resolved`);
+
+      const pageData: PageData = handle
+        ? ctx.data.page
+        : disposePage(ctx.data.page, option);
+
+      // 设置页面数据
+      ctx.setData(
+        {
+          color: getColor(pageData.grey),
+          theme: globalData.theme,
+          darkmode: globalData.darkmode,
+          page: pageData,
+        },
+        resolve
+      );
+    }
+  });
 
 /**
  * **简介:**

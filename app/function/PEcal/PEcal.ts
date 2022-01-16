@@ -4,10 +4,6 @@ import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
-import type { AppOption } from "../../app";
-
-const { globalData } = getApp<AppOption>();
-
 /** 分数段设置 */
 const gradeLevels = [
   10, 20, 30, 40, 50, 60, 62, 64, 66, 68, 70, 72, 74, 76, 78, 80, 85, 90, 95,
@@ -64,8 +60,6 @@ interface PEScore {
 
 $Page("PEcal", {
   data: {
-    info: globalData.info,
-
     /** 性别选择器 */
     gender: {
       keys: ["男", "女"],
@@ -133,7 +127,6 @@ $Page("PEcal", {
     const gradeKeys = this.data.grade.keys;
 
     this.setData({
-      info: globalData.info,
       firstPage: getCurrentPages().length === 1,
 
       // 写入性别

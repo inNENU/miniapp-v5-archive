@@ -32,7 +32,7 @@ Component({
       const info = getWindowInfo();
 
       this.setData({
-        paddingBottom: info.windowHeight - info.safeArea.bottom,
+        paddingBottom: info.windowHeight - Math.max(info.safeArea.bottom, 24),
       });
     },
   },
@@ -42,7 +42,7 @@ Component({
       const info = getWindowInfo();
 
       this.setData({
-        paddingBottom: info.windowHeight - info.safeArea.bottom,
+        paddingBottom: info.windowHeight - Math.max(info.safeArea.bottom, 24),
       });
     },
   },

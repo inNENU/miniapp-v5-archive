@@ -18,9 +18,9 @@ interface CalendarDetail {
 $Page("calendar", {
   data: {
     theme: globalData.theme,
-    info: globalData.info,
 
     calendar: [] as TimeLineItem[],
+    calendarDetail: [] as TimeLineItem[],
     popupConfig: {
       title: "校历详情",
       cancel: false,
@@ -37,7 +37,6 @@ $Page("calendar", {
         this.setData({
           color: getColor(),
           theme: globalData.theme,
-          info: globalData.info,
           firstPage: getCurrentPages().length === 1,
           calendar,
         });
