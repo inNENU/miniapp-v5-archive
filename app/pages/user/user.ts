@@ -5,6 +5,7 @@ import { checkResUpdate } from "../../utils/app";
 import { getImagePrefix, getTitle } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
+import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {
@@ -84,6 +85,14 @@ $Page("user", {
     title: getTitle(),
     imageUrl: `${getImagePrefix()}.jpg`,
   }),
+
+  openProfile() {
+    if (wx.canIUse("openChannelsUserProfile"))
+      wx.openChannelsUserProfile?.({
+        finderUserName: "sphYDhg2G2Qp1Mt",
+      });
+    else tip("请升级微信版本");
+  },
 
   addToDesktop() {
     wx.saveAppToDesktop({

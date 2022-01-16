@@ -78,4 +78,23 @@ declare namespace WechatMiniprogram {
      */
     "scope.addPhoneContact"?: boolean;
   }
+
+  // FIXME: Wait for tool chain
+  interface OpenChannelsUserProfileOptions {
+    /**
+     * 视频号 id
+     */
+    finderUserName: string;
+    /** 接口调用成功的回调函数 */
+    success?: (res: GeneralCallbackResult) => void;
+    /** 接口调用完成的回调函数 */
+    complete?: (res: GeneralCallbackResult) => void;
+    /** 接口调用失败的回调函数 */
+    fail?: (res: GeneralCallbackResult) => void;
+  }
+
+  interface Wx {
+    // FIXME: Wait for tool chain
+    openChannelsUserProfile(options: OpenChannelsUserProfileOptions): void;
+  }
 }
