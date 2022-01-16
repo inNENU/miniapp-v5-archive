@@ -3,7 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, tip } from "../../utils/wx";
+import { addPhoneContact, getWindowInfo, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -107,16 +107,16 @@ $Page("phone", {
   ) {
     const item = this.getConfig(event);
 
-    wx.addPhoneContact({
+    addPhoneContact({
       // 添加联系人
       firstName: item.name,
       hostNumber: this.getNumber(item),
-      org: "东北师范大学",
-      postCode: '"130024',
+      organization: "东北师范大学",
+      addressPostalCode: '"130024',
       ...(item.locate === "benbu"
-        ? { street: "吉林省长春市人民大街5268号" }
+        ? { addressStreet: "吉林省长春市人民大街5268号" }
         : item.locate === "jingyue"
-        ? { street: "吉林省长春市净月大街2555号" }
+        ? { addressStreet: "吉林省长春市净月大街2555号" }
         : {}),
     });
   },

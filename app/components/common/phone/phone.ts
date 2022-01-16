@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { tip } from "../../../utils/wx";
+import { addPhoneContact, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";
@@ -30,8 +30,7 @@ $Component({
     addContact(): void {
       const { config } = this.data;
 
-      wx.addPhoneContact({
-        // 添加联系人
+      addPhoneContact({
         firstName: config.fName,
         lastName: config.lName,
         mobilePhoneNumber: config.num,

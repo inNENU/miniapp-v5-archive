@@ -20,11 +20,13 @@ type AuthorizeList =
   | "scope.invoice"
   | "scope.werun"
   | "scope.record"
-  | "scope.camera";
+  | "scope.camera"
+  | "scope.addPhoneContact";
 
 const authorizeList: AuthorizeList[] = [
   "scope.userLocation",
   "scope.writePhotosAlbum",
+  "scope.addPhoneContact",
   // "scope.address",
   // "scope.invoiceTitle",
   // "scope.invoice",
@@ -56,6 +58,11 @@ $Page("privacy", {
           items: [
             { text: "地理位置", desc: "未授权×" },
             { text: "保存到相册", desc: "未授权×" },
+            {
+              text: "添加电话到通讯录",
+              desc: "未授权×",
+              hidden: new Date().getTime() < 1645459200000,
+            },
             // { text: "用户信息", desc: "未授权×" },
             // { text: "通讯地址", desc: "未授权×" },
             // { text: "发票抬头", desc: "未授权×" },
@@ -71,6 +78,12 @@ $Page("privacy", {
           items: [
             { text: "地理位置", type: "button", handler: "location" },
             { text: "保存到相册", type: "button", handler: "album" },
+            {
+              text: "添加到通讯录",
+              type: "button",
+              handler: "contact",
+              hidden: new Date().getTime() < 1645459200000,
+            },
             // { text: "用户信息", type: "button", openType: "getUserInfo" },
             // { text: "通讯地址", type: "button", handler: "address" },
             // { text: "发票抬头", type: "button", handler: "invoiceTitle" },
@@ -135,6 +148,11 @@ $Page("privacy", {
   /** 相册授权 */
   album() {
     this.authorize(1);
+  },
+
+  /** 通讯录授权 */
+  contact() {
+    this.authorize(2);
   },
 
   // /** 通讯地址授权 */

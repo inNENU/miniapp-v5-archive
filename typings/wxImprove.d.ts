@@ -70,4 +70,12 @@ declare namespace WechatMiniprogram {
           NodeSizeInfo;
       }
   >;
+
+  // FIXME: Wait for tool chain
+  interface AuthSetting {
+    /**
+     * Will be added in Feb. 24 2022
+     */
+    "scope.addPhoneContact"?: boolean;
+  }
 }
