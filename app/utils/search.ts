@@ -49,7 +49,6 @@ export const search = <T extends string[] | SearchResult[]>(
           tip("服务器出现问题，请稍后重试");
           // 调试
           logger.warn(`Request failed with statusCode: ${res.statusCode}`);
-          wx.reportMonitor("3", 1);
 
           reject(res.statusCode);
         }
@@ -63,4 +62,7 @@ export const search = <T extends string[] | SearchResult[]>(
         wx.reportMonitor("4", 1);
       },
     });
+
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    wx.reportEvent?.("search", { search_word: data.word });
   });

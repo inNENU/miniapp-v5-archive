@@ -28,7 +28,10 @@ $Component({
       this.setData({ error: true });
 
       console.warn(`${this.data.config.src}图片加载失败`);
-      wx.reportMonitor("10", 1);
+      wx.reportEvent?.("resource_load_failed", {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        broken_url: this.data.config.src,
+      });
     },
 
     /** 进行图片预览 */

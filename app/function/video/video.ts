@@ -28,7 +28,12 @@ interface VideoGroup {
 }
 
 $Page("video", {
-  data: { type: "debug", videoName: "", videoList: [] as VideoGroup[] },
+  data: {
+    type: "debug",
+    videoName: "",
+    videoList: [] as VideoGroup[],
+    src: "",
+  },
 
   onNavigate() {
     ensureJSON("function/video/index");
@@ -84,7 +89,7 @@ $Page("video", {
         vid: item.vid || "",
 
         firstPage: getCurrentPages().length === 1,
-        info: globalData.info,
+        statusBarHeight: globalData.info.statusBarHeight,
         theme: globalData.theme,
         darkmode: globalData.darkmode,
       });
@@ -162,7 +167,10 @@ $Page("video", {
   onVideoError() {
     tip("视频加载出错");
     // 调试
-    wx.reportMonitor("5", 1);
+    wx.reportEvent?.("resource_load_failed", {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      broken_url: this.data.src,
+    });
   },
 
   /** 返回按钮功能 */

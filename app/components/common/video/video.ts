@@ -27,8 +27,10 @@ $Component({
     /** 提示用户加载出错 */
     error(): void {
       tip("视频加载出错");
-      // 调试
-      wx.reportMonitor("5", 1);
+      wx.reportEvent?.("resource_load_failed", {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        broken_url: this.data.config.src,
+      });
     },
   },
 });

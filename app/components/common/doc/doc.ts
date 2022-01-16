@@ -45,7 +45,10 @@ $Component({
           fail: () => {
             wx.hideLoading();
             tip(`下载文档失败`);
-            wx.reportMonitor("9", 1);
+            wx.reportEvent?.("resource_load_failed", {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              broken_url: url,
+            });
           },
         });
 
