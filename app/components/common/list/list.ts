@@ -20,7 +20,7 @@ $Component({
     // 设置图标
     setLogo(items?: ListComponentItemConfig[]) {
       this.setData({
-        icons: (items || this.data.config.items).map((item) =>
+        icons: (items || this.data.config.items || []).map((item) =>
           item.icon && !item.icon.includes("/")
             ? readFile(`icon/${item.icon}`) || ""
             : ""
@@ -30,8 +30,10 @@ $Component({
   },
 
   lifetimes: {
-    attached() {
+    created() {
       this.setLogo = this.setLogo.bind(this);
+    },
+    attached() {
       this.$on("inited", this.setLogo);
     },
     detached() {
