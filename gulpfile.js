@@ -1,6 +1,6 @@
 const { dest, parallel, src, watch } = require("gulp");
 const rename = require("gulp-rename");
-const { sassSync } = require("@mr-hope/gulp-sass");
+const { sass } = require("@mr-hope/gulp-sass");
 const PluginError = require("plugin-error");
 const typescript = require("gulp-typescript");
 const { Transform } = require("stream");
@@ -11,16 +11,24 @@ const tSProject = typescript.createProject("tsconfig.json");
 const buildWXSS = () =>
   src("app/**/*.scss")
     .pipe(
-      sassSync({
-        sync: "sync",
+      sass({
         outputStyle: "compressed",
-        // use `!` as hack for remaining '@import'
-        importer: (url) => {
-          if (url.includes(".css")) return null;
-
-          return { contents: `@import "${url}.css"` };
-        },
-      }).on("error", sassSync.logError)
+        importers: [
+          // use `import:` as hack for remaining '@import'
+          {
+            canonicalize: (url, { fromImport }) =>
+              fromImport
+                ? new URL(`wx:import?path=${url.replace(/^import:/, "")}`)
+                : null,
+            load: (canonicalUrl) => ({
+              contents: `@import "${canonicalUrl.searchParams.get(
+                "path"
+              )}.wxss"`,
+              syntax: "css",
+            }),
+          },
+        ],
+      }).on("error", sass.logError)
     )
     .pipe(rename({ extname: ".wxss" }))
     .pipe(

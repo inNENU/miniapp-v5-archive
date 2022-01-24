@@ -1,5 +1,5 @@
-@import "../../styles/common/mask";
-@import "!../../styles/lib/icon";
+@use "../../styles/common/mask";
+@import "../../styles/lib/icon";
 
 .popup-wrapper {
   position: absolute;
