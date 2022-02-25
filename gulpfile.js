@@ -12,7 +12,7 @@ const buildWXSS = () =>
       sass({
         style: "compressed",
         importers: [
-          // use `import:` as hack for remaining '@import'
+          // preserve `@import` rules
           {
             canonicalize: (url, { fromImport }) =>
               fromImport
