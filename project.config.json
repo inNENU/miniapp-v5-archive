@@ -2,9 +2,9 @@
   "description": "项目配置文件",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.21.4",
+  "libVersion": "2.23.0",
   "appid": "wx33acb831ee1831a5",
-  "qqLibVersion": "1.46.5",
+  "qqLibVersion": "1.46.8",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
@@ -47,7 +47,9 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "remoteDebugLogEnable": false,
+    "prefetch": false
   },
   "watchOptions": {
     "ignore": ["app/**", "node_modules/**", "server/**"]

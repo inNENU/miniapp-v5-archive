@@ -37,6 +37,7 @@
     padding-left: 24px;
 
     color: var(--hint-box-title-color);
+
     font-weight: 600;
     line-height: 1.25;
 
@@ -65,9 +66,9 @@
       padding-right: 16px;
 
       &::after {
-        position: absolute;
         content: " ";
 
+        position: absolute;
         top: 50%;
         right: 2px;
 

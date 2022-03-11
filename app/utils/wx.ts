@@ -248,11 +248,7 @@ export const addPhoneContact = (
         console.warn(res);
 
         // 如果已经授权直接写入联系人
-        if (
-          res.authSetting["scope.addPhoneContact"] ||
-          // TODO: Remove
-          new Date().getTime() < 1645459200000
-        )
+        if (res.authSetting["scope.addPhoneContact"])
           wx.addPhoneContact({
             ...config,
             success: () => resolve(),
