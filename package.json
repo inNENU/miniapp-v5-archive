@@ -52,7 +52,7 @@
   },
   "devDependencies": {
     "@mr-hope/gulp-sass": "3.0.2",
-    "@typescript-eslint/eslint-plugin": "5.14.0",
+    "@typescript-eslint/eslint-plugin": "5.15.0",
     "@typescript-eslint/parser": "5.14.0",
     "conventional-changelog-cli": "2.2.2",
     "cz-conventional-changelog": "3.3.0",
