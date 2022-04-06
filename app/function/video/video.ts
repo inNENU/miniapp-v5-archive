@@ -160,7 +160,8 @@ $Page("video", {
 
   /** 正常播放时隐藏提示 */
   onVideoPlay() {
-    wx.hideToast();
+    // TODO: Wait for api-typinsg to fix
+    wx.hideToast({});
   },
 
   /** 提示用户视频加载出错 */
