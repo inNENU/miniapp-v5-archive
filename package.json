@@ -64,7 +64,7 @@
     "gulp-sourcemaps": "3.0.0",
     "gulp-typescript": "6.0.0-alpha.1",
     "husky": "7.0.4",
-    "lint-staged": "12.4.0",
+    "lint-staged": "12.4.1",
     "miniprogram-api-typings": "3.4.6",
     "npm-check-updates": "12.5.9",
     "prettier": "2.6.2",
