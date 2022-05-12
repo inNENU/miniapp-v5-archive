@@ -130,7 +130,10 @@ $Page("privacy", {
           if (res.authSetting[type]) items[index].desc = "已授权✓";
         });
 
-        this.setData({ "page.content[1].items": items });
+        this.setData({
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          "page.content[1].items": items,
+        });
       },
     });
 
@@ -215,7 +218,10 @@ $Page("privacy", {
                       res2.authSetting[type2] ? "已授权✓" : "未授权×";
                   });
 
-                  this.setData({ "page.content[1].items": items });
+                  this.setData({
+                    // eslint-disable-next-line @typescript-eslint/naming-convention
+                    "page.content[1].items": items,
+                  });
                 },
               });
             },
@@ -239,7 +245,10 @@ $Page("privacy", {
                 : "未授权×";
             });
 
-            this.setData({ "page.content[1].items": items });
+            this.setData({
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              "page.content[1].items": items,
+            });
           },
         });
       },

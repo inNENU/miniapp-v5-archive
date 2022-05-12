@@ -44,6 +44,8 @@ rules:
 
   function-comma-space-after: always-single-line
 
+  function-no-unknown: null
+
   function-url-quotes: always
 
   length-zero-no-unit: true

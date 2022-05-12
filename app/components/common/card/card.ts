@@ -77,6 +77,7 @@ $Component({
   },
 
   observers: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     "config.logo"(value: string): void {
       this.setLogo(value);
     },

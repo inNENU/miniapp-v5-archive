@@ -75,6 +75,7 @@ $Page("calendar", {
       getJSON<CalendarDetail>(`function/calendar/${path}`)
         .then((data) => {
           this.setData({
+            // eslint-disable-next-line @typescript-eslint/naming-convention
             "popupConfig.title": data.title,
             calendarDetail: data.content,
             display: true,

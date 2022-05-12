@@ -84,6 +84,7 @@ $Page("storage", {
       success: ({ currentSize }) => {
         // 写入存储大小
         this.setData({
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           "page.content[0].items[1].desc": `${currentSize}K/10240K`,
         });
       },
@@ -108,6 +109,7 @@ $Page("storage", {
 
         // 写入文件大小
         this.setData({
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           "page.content[0].items[2].desc": `${Math.ceil(
             fileSize / 1024
           )}K/10240K`,

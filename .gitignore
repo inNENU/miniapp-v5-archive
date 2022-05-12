@@ -3,8 +3,6 @@ node_modules/**
 
 # Output Files
 dist/**
-!dist/package.json
-!dist/yarn.lock
 
 # VSCode config
 .vscode/

@@ -1,4 +1,5 @@
 export interface GeneralScopeData {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   "@type": "general";
   /**
    * 内容标识

@@ -52,6 +52,7 @@ const getImages = (page: PageDataWithContent): string[] =>
     : ["https://mp.innenu.com/img/inNENU.jpg"];
 
 export const genScopeData = (page: PageDataWithContent): GeneralScopeData => ({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   "@type": "general",
   // eslint-disable-next-line
   uniq_id: page.id!,

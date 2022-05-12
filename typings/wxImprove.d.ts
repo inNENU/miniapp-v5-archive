@@ -76,6 +76,7 @@ declare namespace WechatMiniprogram {
     /**
      * Will be added in Feb. 24 2022
      */
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     "scope.addPhoneContact"?: boolean;
   }
 }

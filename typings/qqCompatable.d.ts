@@ -6,6 +6,7 @@ declare namespace WechatMiniprogram {
   }
 
   interface AuthSetting {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     "setting.addFriend"?: boolean;
   }
 

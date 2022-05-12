@@ -260,7 +260,11 @@ $Page("map", {
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 
-    this.setData({ currentCategory: path, "locationPopup.title": name });
+    this.setData({
+      currentCategory: path,
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      "locationPopup.title": name,
+    });
     this.context.includePoints({ padding: [30, 20, 30, 20], points: markers });
   },
 
