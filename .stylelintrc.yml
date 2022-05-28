@@ -10,8 +10,6 @@ rules:
   at-rule-disallowed-list:
     - debug
 
-  at-rule-no-unknown: null
-
   at-rule-no-vendor-prefix: true
 
   block-no-empty: true
@@ -64,8 +62,6 @@ rules:
   media-feature-parentheses-space-inside: never
 
   no-descending-specificity: null
-
-  no-invalid-position-at-import-rule: null
 
   no-missing-end-of-source-newline: true
 

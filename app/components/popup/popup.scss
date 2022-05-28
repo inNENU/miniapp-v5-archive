@@ -7,15 +7,6 @@
   visibility: hidden;
   transition: all 0.3s;
 
-  &.show {
-    opacity: 1;
-    visibility: visible;
-
-    .popup {
-      transform: translateY(0);
-    }
-  }
-
   .popup {
     position: fixed;
     right: 0;
@@ -38,6 +29,15 @@
 
     @media (prefers-color-scheme: dark) {
       background-color: #1c1c1e;
+    }
+  }
+
+  &.show {
+    opacity: 1;
+    visibility: visible;
+
+    .popup {
+      transform: translateY(0);
     }
   }
 }
