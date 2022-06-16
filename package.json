@@ -62,7 +62,7 @@
     "gulp-sourcemaps": "3.0.0",
     "gulp-typescript": "6.0.0-alpha.1",
     "husky": "8.0.1",
-    "lint-staged": "12.4.2",
+    "lint-staged": "13.0.2",
     "miniprogram-api-typings": "3.4.6",
     "npm-check-updates": "13.0.3",
     "postcss": "8.4.14",
