@@ -21,6 +21,7 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
     "clean": "rimraf dist/components dist/frameset dist/function dist/icon dist/mixins dist/module/ dist/pages/ dist/settings dist/styles dist/utils dist/app.js dist/app.js.map dist/app.json dist/app.wxss dist/sitemap.json",
     "commit": "git cz",
+    "dev": "gulp watch",
     "lint": "pnpm lint:prettier --write && pnpm lint:wxs --write && pnpm lint:wxml --write && pnpm lint:eslint --fix && pnpm lint:stylelint --fix",
     "lint:check": "pnpm lint:prettier && pnpm lint:wxs && pnpm lint:wxml && pnpm lint:eslint && pnpm lint:stylelint",
     "lint:eslint": "eslint --ext .ts,.wxs .",
@@ -28,12 +29,11 @@
     "lint:stylelint": "stylelint **/*.scss",
     "lint:wxml": "prettier --check --parser html **/*.wxml",
     "lint:wxs": "prettier --check --parser babel-flow **/*.wxs",
-    "prepare": "husky install",
-    "watch": "gulp watch"
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{js,ts}": "eslint --fix",
-    "*.{js,ts,json,yaml,.md}": "prettier --write",
+    "*.{js,ts,json,yaml,yml,md}": "prettier --write",
     "*.wxss": "stylelint --fix",
     "*.wxml": "prettier --parser html --write",
     "*.wxs": "prettier --parser babel-flow --write",

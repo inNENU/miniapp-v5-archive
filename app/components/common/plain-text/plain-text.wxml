@@ -9,7 +9,13 @@
       style="{{config.style || ''}}"
     >
       <view class="head">{{index + 1}}.</view>
-      <text class="text" decode user-select space="nbsp">{{item}}</text>
+      <text
+        class="text"
+        decode
+        user-select="{{plainText.getSelectable(config.style)}}"
+        space="nbsp"
+        >{{item}}</text
+      >
     </view>
   </block>
 
@@ -21,7 +27,13 @@
       style="{{config.style || ''}}"
     >
       <view class="head">·</view>
-      <text class="text" decode user-select space="nbsp">{{item}}</text>
+      <text
+        class="text"
+        decode
+        user-select="{{plainText.getSelectable(config.style)}}"
+        space="nbsp"
+        >{{item}}</text
+      >
     </view>
   </block>
 
@@ -31,7 +43,7 @@
         class="text"
         style="{{config.tag === 'p'? 'text-indent: 1.5em; ': ''}}{{config.style || ''}}"
         decode
-        user-select
+        user-select="{{plainText.getSelectable(config.style)}}"
         space="nbsp"
         >{{item}}</text
       >
@@ -49,7 +61,7 @@
   <text
     wx:if="{{config.heading !== false}}"
     class="hint-title {{config.path? 'access': ''}}"
-    user-select
+    user-select="{{plainText.getSelectable(config.style)}}"
     >{{plainText.getTitle(config)}}</text
   >
   <template is="text" data="{{config}}" />
