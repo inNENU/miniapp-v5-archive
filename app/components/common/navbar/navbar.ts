@@ -49,4 +49,8 @@ $Component({
       this.$off("theme", this.setTheme);
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

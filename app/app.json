@@ -30,13 +30,7 @@
         "phone/phone",
         "weather/weather",
         "website/website"
-      ],
-      "plugins": {
-        "routePlan": {
-          "version": "1.0.19",
-          "provider": "wx50b5593e81dd937a"
-        }
-      }
+      ]
     }
   ],
   "preloadRule": {
@@ -46,52 +40,52 @@
     }
   },
   "window": {
-    "navigationBarBackgroundColor": "@navBgColor",
-    "navigationBarTextStyle": "@navTextStyle",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "in 东师",
     "navigationStyle": "custom",
-    "backgroundColor": "@bgColor",
-    "backgroundTextStyle": "@bgTxtStyle",
-    "backgroundColorTop": "@bgColorTop",
-    "backgroundColorBottom": "@bgColorBottom",
+    "backgroundColor": "#efeef4",
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#f5f5f7",
+    "backgroundColorBottom": "#efeef4",
     "pageOrientation": "portrait"
   },
   "tabBar": {
     "custom": false,
-    "color": "@tabColor",
+    "color": "#bbbbbb",
     "selectedColor": "#2ecc71",
-    "borderStyle": "@tabBorderStyle",
-    "backgroundColor": "@tabBgColor",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
     "position": "bottom",
     "list": [
       {
         "pagePath": "pages/main/main",
         "text": "首页",
-        "iconPath": "@homeIcon",
+        "iconPath": "icon/tab/home-light.png",
         "selectedIconPath": "icon/tab/home.png"
       },
       {
         "pagePath": "pages/intro/intro",
         "text": "东师介绍",
-        "iconPath": "@introIcon",
+        "iconPath": "icon/tab/intro-light.png",
         "selectedIconPath": "icon/tab/intro.png"
       },
       {
         "pagePath": "pages/guide/guide",
         "text": "东师指南",
-        "iconPath": "@guideIcon",
+        "iconPath": "icon/tab/guide-light.png",
         "selectedIconPath": "icon/tab/guide.png"
       },
       {
         "pagePath": "pages/function/function",
         "text": "功能大厅",
-        "iconPath": "@functionIcon",
+        "iconPath": "icon/tab/function-light.png",
         "selectedIconPath": "icon/tab/function.png"
       },
       {
         "pagePath": "pages/user/user",
         "text": "我的东师",
-        "iconPath": "@userIcon",
+        "iconPath": "icon/tab/user-light.png",
         "selectedIconPath": "icon/tab/user.png"
       }
     ]
@@ -137,5 +131,6 @@
   "themeLocation": "styles/theme.json",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
+  "groupIdList": ["1139044856"],
   "singlePage": { "navigationBarFit": "float" }
 }

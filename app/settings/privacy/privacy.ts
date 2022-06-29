@@ -18,21 +18,23 @@ type AuthorizeList =
   | "scope.address"
   | "scope.invoiceTitle"
   | "scope.invoice"
-  | "scope.werun"
+  | "scope.qqrun"
   | "scope.record"
   | "scope.camera"
-  | "scope.addPhoneContact";
+  // | "scope.addPhoneContact"
+  | "setting.addFriend";
 
 const authorizeList: AuthorizeList[] = [
   "scope.userLocation",
   "scope.writePhotosAlbum",
-  "scope.addPhoneContact",
+  // "scope.addPhoneContact",
   // "scope.address",
   // "scope.invoiceTitle",
   // "scope.invoice",
-  // "scope.werun",
+  // "scope.qqrun",
   // "scope.record",
   // "scope.camera",
+  "setting.addFriend",
 ];
 
 $Page("privacy", {
@@ -58,11 +60,11 @@ $Page("privacy", {
           items: [
             { text: "地理位置", desc: "未授权×" },
             { text: "保存到相册", desc: "未授权×" },
-            {
-              text: "添加电话到通讯录",
-              desc: "未授权×",
-              hidden: new Date().getTime() < 1645459200000,
-            },
+            // {
+            //   text: "添加电话到通讯录",
+            //   desc: "未授权×",
+            //   hidden: new Date().getTime() < 1645459200000,
+            // },
             // { text: "用户信息", desc: "未授权×" },
             // { text: "通讯地址", desc: "未授权×" },
             // { text: "发票抬头", desc: "未授权×" },
@@ -70,6 +72,7 @@ $Page("privacy", {
             // { text: "微信运动步数", desc: "未授权×" },
             // { text: "录音", desc: "未授权×" },
             // { text: "摄像头", desc: "未授权×" },
+            { text: "添加好友", desc: "未授权×" },
           ],
         },
         {
@@ -78,12 +81,12 @@ $Page("privacy", {
           items: [
             { text: "地理位置", type: "button", handler: "location" },
             { text: "保存到相册", type: "button", handler: "album" },
-            {
-              text: "添加到通讯录",
-              type: "button",
-              handler: "contact",
-              hidden: new Date().getTime() < 1645459200000,
-            },
+            // {
+            //   text: "添加到通讯录",
+            //   type: "button",
+            //   handler: "contact",
+            //   hidden: new Date().getTime() < 1645459200000,
+            // },
             // { text: "用户信息", type: "button", openType: "getUserInfo" },
             // { text: "通讯地址", type: "button", handler: "address" },
             // { text: "发票抬头", type: "button", handler: "invoiceTitle" },
@@ -91,6 +94,7 @@ $Page("privacy", {
             // { text: "微信运动步数", type: "button", handler: "werun" },
             // { text: "录音", type: "button", handler: "record" },
             // { text: "摄像头", type: "button", handler: "camera" },
+            { text: "添加好友", type: "button", handler: "addFriend" },
           ],
           footer: " ",
         },
@@ -153,10 +157,10 @@ $Page("privacy", {
     this.authorize(1);
   },
 
-  /** 通讯录授权 */
-  contact() {
-    this.authorize(2);
-  },
+  // /** 通讯录授权 */
+  // contact() {
+  //   this.authorize(2);
+  // },
 
   // /** 通讯地址授权 */
   // address() {
@@ -187,6 +191,11 @@ $Page("privacy", {
   // camera() {
   //   this.authorize(7);
   // },
+
+  /** 添加好友授权 */
+  addFriend() {
+    this.authorize(2);
+  },
 
   /** 授权函数 */
   authorize(type: number) {

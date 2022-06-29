@@ -51,4 +51,8 @@ $Component({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

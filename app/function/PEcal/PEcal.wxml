@@ -55,9 +55,9 @@
           type="{{item.type}}"
           adjust-position="{{false}}"
           placeholder="{{item.desc}}"
-          catch:focus="focus"
-          catch:input="input"
-          catch:blur="blur"
+          bindfocus="focus"
+          bindinput="input"
+          bindblur="blur"
         />
         <view class="unit">{{item.unit}}</view>
       </view>
@@ -81,9 +81,9 @@
         type="{{special.type}}"
         adjust-position="{{false}}"
         placeholder="{{special.desc}}"
-        catch:focus="focus"
-        catch:input="input"
-        catch:blur="blur"
+        bindfocus="focus"
+        bindinput="input"
+        bindblur="blur"
       />
       <view class="unit">{{special.unit}}</view>
     </view>

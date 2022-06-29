@@ -61,4 +61,8 @@ $Component({
       });
     },
   },
+
+  options: {
+    styleIsolation: "shared",
+  },
 });

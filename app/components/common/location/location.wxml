@@ -5,8 +5,8 @@
     id="location"
     markers="{{helper.getMarkers(markers, darkmode)}}"
     setting="{{helper.getSetting(env, darkmode)}}"
-    catch:markertap="markerTap"
-    catch:callouttap="calloutTap"
+    bindmarkertap="markerTap"
+    bindcallouttap="calloutTap"
   />
   <view class="footer">
     <view class="title">{{title}}</view>

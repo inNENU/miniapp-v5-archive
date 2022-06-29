@@ -8,6 +8,7 @@ declare namespace WechatMiniprogram {
   interface AuthSetting {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     "setting.addFriend"?: boolean;
+    "scope.qqrun"?: boolean;
   }
 
   /** 接口调用结束的回调函数(调用成功、失败都会执行) */

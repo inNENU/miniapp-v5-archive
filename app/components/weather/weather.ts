@@ -56,5 +56,9 @@ $Component({
     },
   },
 
+  options: {
+    styleIsolation: "apply-shared",
+  },
+
   externalClasses: ["custom-class"],
 });

@@ -19,6 +19,6 @@
     password
     value="{{value}}"
     focus="{{focus}}"
-    catch:input="password"
+    bindinput="password"
   />
 </view>
