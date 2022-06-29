@@ -11,7 +11,11 @@
     "url": "git+https://github.com/Mister-Hope/inNENU.git"
   },
   "license": "Mr.Hope LICENSE",
-  "author": "Mr.Hope",
+  "author": {
+    "name": "Mr.Hope",
+    "email": "mister-hope@outlook.com",
+    "url": "https://mrhope.site"
+  },
   "workspaces": [
     "app/",
     "server/"
@@ -50,13 +54,13 @@
   },
   "devDependencies": {
     "@mr-hope/gulp-sass": "3.0.2",
-    "@typescript-eslint/eslint-plugin": "5.29.0",
-    "@typescript-eslint/parser": "5.29.0",
+    "@typescript-eslint/eslint-plugin": "5.30.0",
+    "@typescript-eslint/parser": "5.30.0",
     "conventional-changelog-cli": "2.2.2",
     "cz-conventional-changelog": "3.3.0",
     "eslint": "8.18.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-prettier": "4.1.0",
     "gulp": "4.0.2",
     "gulp-rename": "2.0.0",
     "gulp-sourcemaps": "3.0.0",
@@ -67,6 +71,7 @@
     "npm-check-updates": "14.1.1",
     "postcss": "8.4.14",
     "prettier": "2.7.1",
+    "rimraf": "3.0.2",
     "sort-package-json": "1.57.0",
     "stylelint": "14.9.1",
     "stylelint-config-prettier": "9.0.3",
@@ -75,5 +80,5 @@
     "stylelint-order": "5.0.0",
     "typescript": "4.7.4"
   },
-  "packageManager": "pnpm@7.3.0"
+  "packageManager": "pnpm@7.4.0"
 }

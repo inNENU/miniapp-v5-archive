@@ -89,11 +89,6 @@
     "tabIndent": "insertSpaces",
     "tabSize": 4
   },
-  "scripts": {
-    "beforeCompile": "",
-    "beforePreview": "",
-    "beforeUpload": ""
-  },
   "condition": {
     "plugin": {
       "list": []
