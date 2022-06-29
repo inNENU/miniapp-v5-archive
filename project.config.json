@@ -4,7 +4,7 @@
   "compileType": "miniprogram",
   "libVersion": "2.24.7",
   "appid": "wx33acb831ee1831a5",
-  "qqLibVersion": "1.48.0",
+  "qqLibVersion": "1.52.7",
   "qqappid": "1109559721",
   "projectname": "in%E4%B8%9C%E5%B8%88",
   "setting": {
@@ -88,6 +88,11 @@
   "editorSetting": {
     "tabIndent": "insertSpaces",
     "tabSize": 4
+  },
+  "scripts": {
+    "beforeCompile": "",
+    "beforePreview": "",
+    "beforeUpload": ""
   },
   "condition": {
     "plugin": {
