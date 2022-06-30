@@ -43,7 +43,7 @@
     <view class="title">
       {{page.title}}
       <button
-        wx:if="{{point && env === 'wx'}}"
+        wx:if="{{point && appID === 'wx9ce37d9662499df3'}}"
         type="primary"
         size="mini"
         class="navigate"

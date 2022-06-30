@@ -8,7 +8,7 @@ import type { AppOption } from "../../../app";
 import type { AccountComponentOptions } from "../../../../typings";
 
 const {
-  globalData: { env },
+  globalData: { appID, env },
 } = getApp<AppOption>();
 
 $Component({
@@ -20,7 +20,7 @@ $Component({
     },
   },
 
-  data: { env },
+  data: { appID, env },
 
   methods: {
     /** QQ */

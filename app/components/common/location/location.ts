@@ -10,7 +10,7 @@ import type {
 import type { AppOption } from "../../../app";
 
 const { globalData } = getApp<AppOption>();
-const { env } = globalData;
+const { appID, env } = globalData;
 
 const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
@@ -29,6 +29,7 @@ $Component({
   },
 
   data: {
+    appID,
     darkmode: globalData.darkmode,
     env,
     markers: [] as (LocationConfig & { id: number })[],
@@ -113,7 +114,7 @@ $Component({
 
       if (point.path)
         this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
-      else if (env === "wx" && navigate !== false)
+      else if (appID === "wx9ce37d9662499df3" && navigate !== false)
         navigation(getPoint(this.data.markers[detail.markerId]));
     },
   },

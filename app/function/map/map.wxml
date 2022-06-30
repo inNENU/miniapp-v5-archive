@@ -61,7 +61,11 @@
   </view>
 </view>
 
-<view class="navigate-button" catch:tap="toggleNavigatePopup">
+<view
+  wx:if="{{appID === 'wx9ce37d9662499df3'}}"
+  class="navigate-button"
+  catch:tap="toggleNavigatePopup"
+>
   <image class="icon" src="./icon/navigate.svg" />
 </view>
 
@@ -97,6 +101,7 @@
 </view>
 
 <popup
+  wx:if="{{appID === 'wx9ce37d9662499df3'}}"
   config="{{navigatePopup}}"
   show="{{showNavigate}}"
   catch:close="toggleNavigatePopup"
