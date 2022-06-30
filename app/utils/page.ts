@@ -56,7 +56,8 @@ const resolveContent = (
     return null;
 
   // 设置列表导航
-  if ("url" in listElement) listElement.url += `?from=${page.title || "返回"}`;
+  if ("url" in listElement && !listElement.url!.startsWith("plugin://"))
+    listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
     listElement.url = `page?from=${page.title || "返回"}&id=${
       listElement.path as string
@@ -71,7 +72,7 @@ const resolveContent = (
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       listElement.value = wx.getStorageSync(listElement.key);
     // 设置列表选择器
-    else if (listElement.type === "picker")
+    else if (listElement.type === "picker") {
       if (listElement.single) {
         // 单列选择器
         const selectIndex = wx.getStorageSync<number>(listElement.key);
@@ -99,6 +100,12 @@ const resolveContent = (
           (listElement.currentValue as any[])[index] = Number(pickerElement);
         });
       }
+    } else if (listElement.type === "navigator")
+      if (
+        listElement.url?.startsWith("plugin://") &&
+        globalData.appID !== "wx9ce37d9662499df3"
+      )
+        return null;
   }
 
   return listElement;

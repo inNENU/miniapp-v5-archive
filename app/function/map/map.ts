@@ -34,6 +34,7 @@ type Area = "benbu" | "jingyue";
 $Page("map", {
   data: {
     /** 夜间模式状态 */
+    appID: globalData.appID,
     darkmode: globalData.darkmode,
     env: globalData.env,
 

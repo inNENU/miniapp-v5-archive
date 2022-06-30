@@ -43,7 +43,7 @@ export interface GlobalData {
   /** 设备信息 */
   info: WechatMiniprogram.SystemInfo;
   /** 小程序appid */
-  appID: string;
+  appID: "wx33acb831ee1831a5" | "wx9ce37d9662499df3" | 1109559721;
 }
 
 /**
@@ -516,7 +516,10 @@ export const getGlobalData = (): GlobalData => {
     theme: "ios",
     info,
     darkmode: getDarkmode(info),
-    appID: wx.getAccountInfoSync().miniProgram.appId,
+    appID: wx.getAccountInfoSync().miniProgram.appId as
+      | "wx33acb831ee1831a5"
+      | "wx9ce37d9662499df3"
+      | 1109559721,
   };
 };
 

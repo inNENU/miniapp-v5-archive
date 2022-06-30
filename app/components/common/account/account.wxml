@@ -64,7 +64,7 @@
         <image class="icon" src="./icon/mail.svg" />
       </view>
       <view
-        wx:if="{{config.location && env === 'wx'}}"
+        wx:if="{{config.location && appID === 'wx9ce37d9662499df3'}}"
         class="action"
         hover-class="button-hover"
         catch:tap="navigate"
