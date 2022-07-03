@@ -8,10 +8,10 @@
 />
 <view class="{{theme}} grey">
   <view class="info-wrapper" style="padding-top:{{statusBarHeight + 20}}px">
-    <image class="avatar" src="https://mp.innenu.com/img/inNENU.png" />
+    <image class="avatar" src="{{logo}}" />
     <view class="info">
-      <view class="nickname">in 东师</view>
-      <view class="detail">in 东师，就用 in 东师 </view>
+      <view class="nickname">{{title}}</view>
+      <view class="detail">{{desc}}</view>
     </view>
   </view>
   <official-account />
