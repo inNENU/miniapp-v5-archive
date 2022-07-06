@@ -31,6 +31,6 @@ module.exports = {
   },
 
   getSelectable: function (style) {
-    return style && style.indexOf("text-decoration") === -1;
+    return !style || style.indexOf("text-decoration") === -1;
   },
 };

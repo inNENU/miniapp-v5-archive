@@ -44,6 +44,8 @@ export interface GlobalData {
   info: WechatMiniprogram.SystemInfo;
   /** 小程序appid */
   appID: "wx33acb831ee1831a5" | "wx9ce37d9662499df3" | 1109559721;
+  /** 是否能复制 */
+  selectable: boolean;
 }
 
 /**
@@ -520,6 +522,7 @@ export const getGlobalData = (): GlobalData => {
       | "wx33acb831ee1831a5"
       | "wx9ce37d9662499df3"
       | 1109559721,
+    selectable: wx.getStorageSync<boolean>("selectable") || false,
   };
 };
 

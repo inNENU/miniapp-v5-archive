@@ -9,14 +9,6 @@ wx9ce37d9662499df3
 
 wx33acb831ee1831a5
 
-  "player-component": "plugin://player/video",
-
-  "plugins": {
-    "player": {
-      "version": "2.0.2",
-      "provider": "wxa75efa648b60994b"
-    }
-  },
 -->
 
 ## 目前 QQ 与微信小程序的差异
@@ -45,6 +37,6 @@ wx33acb831ee1831a5
 
 ### 无法兼容的
 
-- QQ 不兼容 darkmode, app.json 写法有差异 (编译失败)
+- QQ 不兼容 darkmode 的主题配置， app.json 写法有差异 (编译失败)
 - QQ 不支持 text 的 user-select (旧写法出现警告)
 - QQ 的 app.json 声明了 groupIdList (旧写法出现警告)
