@@ -1,6 +1,9 @@
 import { $Component } from "@mptool/enhance";
 import type { PropType } from "@mptool/enhance";
+import type { AppOption } from "../../../app";
 import type { TitleComponentOptions } from "../../../../typings";
+
+const { globalData } = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -8,6 +11,14 @@ $Component({
     config: {
       type: Object as PropType<TitleComponentOptions>,
       required: true,
+    },
+  },
+
+  lifetimes: {
+    attached() {
+      const { selectable } = globalData;
+
+      this.setData({ selectable });
     },
   },
 });

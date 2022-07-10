@@ -1,6 +1,9 @@
 import { $Component } from "@mptool/enhance";
 
 import type { PropType } from "@mptool/enhance";
+import type { AppOption } from "../../app";
+
+const { globalData } = getApp<AppOption>();
 
 export interface TimeLineItem {
   /** 时间线项目标题 */
@@ -34,6 +37,14 @@ $Component({
   pageLifetimes: {
     resize({ size }) {
       this.setData({ alternate: size.windowWidth >= 750 });
+    },
+  },
+
+  lifetimes: {
+    attached() {
+      const { selectable } = globalData;
+
+      this.setData({ selectable });
     },
   },
 
