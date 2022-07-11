@@ -8,6 +8,7 @@
   <block wx:for="{{config.items}}" wx:for-item="listItem" wx:key="text">
     <block wx:if="{{!listItem.hidden}}">
       <!-- 按钮、嵌入选择器与滑块 -->
+      <!-- open-id group-id guide-id 仅 QQ 小程序可用 -->
       <button
         wx:if="{{list.isButton(listItem)}}"
         id="{{index}}"
@@ -19,6 +20,7 @@
         open-type="{{listItem.openType}}"
         open-id="{{listItem.openId}}"
         group-id="{{listItem.groupId}}"
+        guild-id="{{listItem.guildId}}"
         catch:tap="onButtonTap"
         capture-bind:tap="{{list.tapHandler(listItem)}}"
       >
