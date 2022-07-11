@@ -3,6 +3,3 @@ node_modules/**
 
 # Output Files
 dist/**
-
-# VSCode config
-.vscode/

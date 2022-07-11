@@ -282,6 +282,7 @@ export const addPhoneContact = (
   });
 
 export const getWindowInfo = (): WechatMiniprogram.WindowInfo =>
+  /** @desc >2.20.1 */
   wx.getWindowInfo?.() || wx.getSystemInfoSync();
 
 /**

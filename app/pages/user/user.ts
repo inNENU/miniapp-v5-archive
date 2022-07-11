@@ -19,6 +19,13 @@ const { appID, version } = globalData;
 
 $Page("user", {
   data: {
+    appID,
+    title: appID === "wx9ce37d9662499df3" ? "东师青年+" : "in 东师",
+    logo: "/frameset/placeholder.png",
+    desc:
+      appID === "wx9ce37d9662499df3"
+        ? "走出半生，归来仍是东师青年"
+        : "in 东师，就用 in 东师",
     page: {
       title: "我的东师",
       grey: true,

@@ -2,10 +2,13 @@ import { $Component } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
 import type { PropType } from "@mptool/enhance";
+import type { AppOption } from "../../../app";
 import type {
   ListComponentConfig,
   ListComponentItemConfig,
 } from "../../../../typings";
+
+const { globalData } = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -30,10 +33,11 @@ $Component({
   },
 
   lifetimes: {
-    created() {
-      this.setLogo = this.setLogo.bind(this);
-    },
     attached() {
+      const { selectable } = globalData;
+
+      this.setData({ selectable });
+      this.setLogo = this.setLogo.bind(this);
       this.$on("inited", this.setLogo);
     },
     detached() {

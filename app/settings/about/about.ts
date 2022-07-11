@@ -31,6 +31,12 @@ $Page("about", {
           items: [
             { text: globalData.version, type: "button", handler: "debugMode" },
             {
+              text: "允许复制",
+              type: "switch",
+              key: "selectable",
+              handler: "toggleSelectable",
+            },
+            {
               text: "启用测试功能",
               type: "switch",
               key: "test",
@@ -216,6 +222,15 @@ $Page("about", {
 
     wx.setEnableDebug({ enableDebug: value });
     (wx.env as Record<string, unknown>).DEBUG = value;
+  },
+
+  /**
+   * 控制复制开关
+   *
+   * @param value 开关状态
+   */
+  toggleSelectable(value: boolean) {
+    globalData.selectable = value;
   },
 
   /**

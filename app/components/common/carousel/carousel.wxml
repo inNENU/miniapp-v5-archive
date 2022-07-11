@@ -23,11 +23,11 @@
   </swiper>
 
   <view
-    wx:if="{{config.indicatorDots !== false && config.url.length > 1}}"
+    wx:if="{{config.indicatorDots !== false && config.images.length > 1}}"
     class="carousel-dots{{(config.fill? '': ' card')}}"
   >
     <view
-      wx:for="{{config.url}}"
+      wx:for="{{config.images}}"
       wx:key="*this"
       class="dot {{index === current? 'active' : ''}}"
       style="background-color: {{config.dotColor || '#fff'}}"
