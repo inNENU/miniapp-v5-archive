@@ -127,7 +127,6 @@
     "video-player": "/components/common/video/video"
   },
   "style": "v2",
-  "darkmode": true,
   "themeLocation": "styles/theme.json",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
