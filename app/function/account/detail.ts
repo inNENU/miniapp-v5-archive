@@ -14,7 +14,7 @@ const { env } = globalData;
 $Page("wechat-detail", {
   data: {
     loading: true,
-    config: {} as WechatConfig,
+    config: <WechatConfig>{},
     statusBarHeight: globalData.info.statusBarHeight,
     footer: {
       desc: "更新文章，请联系 Mr.Hope",
@@ -41,12 +41,8 @@ $Page("wechat-detail", {
       enableHttp2: true,
       method: "POST",
       data: { id: path },
-      success: (res) => {
-        if (res.statusCode === 200)
-          this.setData({
-            loading: false,
-            config: res.data,
-          });
+      success: ({ data, statusCode }) => {
+        if (statusCode === 200) this.setData({ loading: false, config: data });
         else tip("服务器出现问题");
       },
     });

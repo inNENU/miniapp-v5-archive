@@ -26,20 +26,20 @@ $Page("music", {
     /** 歌曲总长度 */
     totalTime: 1,
     /** 当前歌曲信息 */
-    currentSong: {} as SongDetail,
+    currentSong: <SongDetail>{},
     /** 是否展示歌曲列表 */
     showSongList: false,
     /** 歌曲列表 */
-    songList: [] as SongDetail[],
+    songList: <SongDetail[]>[],
     /** 播放模式 */
-    mode: "列表循环" as PlayMode,
+    mode: <PlayMode>"列表循环",
 
     /** 激活的歌词序号 */
     currentLyricId: -1,
     /** 当前歌词 */
     currentLyric: "",
     /** 歌词配置 */
-    lyrics: [] as Lyric[],
+    lyrics: <Lyric[]>[],
 
     /** 弹窗配置 */
     popupConfig: {
@@ -240,7 +240,7 @@ $Page("music", {
       this.setData({
         currentLyric: "",
         currentLyricId: -1,
-        lyrics: [] as Lyric[],
+        lyrics: <Lyric[]>[],
       });
   },
 
@@ -418,15 +418,15 @@ $Page("music", {
   },
 
   // 点击列表具体歌曲项时触发
-  change(
-    res: WechatMiniprogram.TouchEvent<
-      Record<string, never>,
-      Record<string, never>,
-      { index: number }
-    >
-  ) {
+  change({
+    currentTarget,
+  }: WechatMiniprogram.TouchEvent<
+    Record<string, never>,
+    Record<string, never>,
+    { index: number }
+  >) {
     this.list();
-    this.switchSong(res.currentTarget.dataset.index);
+    this.switchSong(currentTarget.dataset.index);
   },
 
   back() {

@@ -19,15 +19,15 @@ $Page("main", {
     statusBarHeight: globalData.info.statusBarHeight,
 
     /** 候选词 */
-    words: [] as string[],
+    words: <string[]>[],
 
-    page: {
+    page: <PageDataWithContent>{
       title: "首页",
       id: "main",
       grey: true,
       hidden: true,
       content: [{ tag: "loading" }],
-    } as PageDataWithContent,
+    },
   },
 
   onRegister() {
@@ -40,9 +40,9 @@ $Page("main", {
       { id: "main" },
       wx.getStorageSync<PageDataWithContent | undefined>("main") ||
         this.data.page
-    );
+    ) as PageDataWithContent;
 
-    if (page) this.data.page = page as PageDataWithContent;
+    if (page) this.data.page = page;
   },
 
   onLoad() {

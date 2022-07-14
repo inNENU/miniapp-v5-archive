@@ -6,15 +6,14 @@ import type {
 } from "../../typings";
 
 const getText = (page: PageDataWithContent): string => {
-  const pageContent = (
-    page.content.filter(
-      (element) =>
+  const pageContent = page.content
+    .filter(
+      (element): element is TextComponentOptions =>
         element.tag === "text" ||
         element.tag === "p" ||
         element.tag === "ul" ||
         element.tag === "ol"
-    ) as TextComponentOptions[]
-  )
+    )
     .map(
       (element) =>
         `${typeof element.heading === "string" ? `${element.heading} ` : ""}${
@@ -27,11 +26,11 @@ const getText = (page: PageDataWithContent): string => {
 };
 
 const getTags = (page: PageDataWithContent): string[] => {
-  const titles = (
-    page.content.filter(
-      (element) => element.tag === "title"
-    ) as TitleComponentOptions[]
-  ).map((element) => element.text);
+  const titles = page.content
+    .filter(
+      (element): element is TitleComponentOptions => element.tag === "title"
+    )
+    .map((element) => element.text);
 
   return titles.length
     ? titles.length <= 10

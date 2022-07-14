@@ -10,7 +10,7 @@
       data-url="page?from=体测计算器&id=guide/test/pe-test/index"
       catch:tap="$bindGo"
     >
-      <view class="text">体测说明</view>
+      体测说明
     </view>
   </view>
   <view class="score-wrapper">
@@ -46,22 +46,20 @@
         {{grade.key || '请选择'}}
       </picker>
     </view>
-    <block wx:for="{{list}}" wx:key="id">
-      <view class="list-item">
-        <view class="text">{{item.text}}</view>
-        <input
-          id="{{item.id}}"
-          class="input"
-          type="{{item.type}}"
-          adjust-position="{{false}}"
-          placeholder="{{item.desc}}"
-          catch:focus="focus"
-          catch:input="input"
-          catch:blur="blur"
-        />
-        <view class="unit">{{item.unit}}</view>
-      </view>
-    </block>
+    <view wx:for="{{list}}" wx:key="id" class="list-item">
+      <view class="text">{{item.text}}</view>
+      <input
+        id="{{item.id}}"
+        class="input"
+        type="{{item.type}}"
+        adjust-position="{{false}}"
+        placeholder="{{item.desc}}"
+        catch:focus="focus"
+        catch:input="input"
+        catch:blur="blur"
+      />
+      <view class="unit">{{item.unit}}</view>
+    </view>
     <view class="list-item">
       <view class="text">{{longRun.text}}</view>
       <picker
@@ -88,7 +86,7 @@
       <view class="unit">{{special.unit}}</view>
     </view>
   </view>
-  <button type="primary" class="button calculate" catch:tap="calculate">
+  <button type="primary" class="calculate-button" catch:tap="calculate">
     计算
   </button>
 

@@ -37,9 +37,9 @@ export const modal = (
     title,
     content,
     showCancel,
-    success: (res) => {
-      if (res.confirm && confirmFunc) confirmFunc();
-      else if (res.cancel && cancelFunc) cancelFunc();
+    success: ({ cancel, confirm }) => {
+      if (confirm && confirmFunc) confirmFunc();
+      else if (cancel && cancelFunc) cancelFunc();
     },
   });
 };
@@ -63,9 +63,7 @@ export const confirmAction = (
 export const netReport = (): void => {
   // 获取网络信息
   wx.getNetworkType({
-    success: (res) => {
-      const { networkType } = res;
-
+    success: ({ networkType }) => {
       switch (networkType) {
         case "2g":
         case "3g":
@@ -114,20 +112,21 @@ export const requestJSON = <T = Record<string, any>>(
     wx.request<T>({
       url: path.startsWith("http") ? path : `${server}${path}.json`,
       enableHttp2: true,
-      success: (res) => {
-        // 调试
-        logger.debug(`Request ${path}.json success: `, res);
+      success: ({ data, statusCode }) => {
+        if (statusCode === 200) {
+          // 调试
+          logger.debug(`Request ${path}.json: `, data);
 
-        if (res.statusCode === 200) resolve(res.data);
-        else {
+          resolve(data);
+        } else {
           tip("服务器出现问题，请稍后重试");
           // 调试
           logger.warn(
-            `Request ${path}.json failed with statusCode: ${res.statusCode}`
+            `Request ${path}.json failed with statusCode: ${statusCode}`
           );
           wx.reportMonitor("3", 1);
 
-          reject(res.statusCode);
+          reject(statusCode);
         }
       },
       fail: ({ errMsg }) => {
@@ -153,18 +152,16 @@ export const downLoad = (path: string, mask = false): Promise<string> =>
   new Promise((resolve, reject) => {
     const progress = wx.downloadFile({
       url: path.startsWith("http") ? path : `${server}${path}`,
-      success: (res) => {
+      success: ({ statusCode, tempFilePath }) => {
         wx.hideLoading();
-        if (res.statusCode === 200) resolve(res.tempFilePath);
+        if (statusCode === 200) resolve(tempFilePath);
         else {
           tip("服务器出现问题，请稍后重试");
 
           // 调试
-          logger.warn(
-            `Download ${path} failed with statusCode: ${res.statusCode}`
-          );
+          logger.warn(`Download ${path} failed with statusCode: ${statusCode}`);
 
-          reject(res.statusCode);
+          reject(statusCode);
         }
       },
       fail: ({ errMsg }) => {
@@ -177,8 +174,8 @@ export const downLoad = (path: string, mask = false): Promise<string> =>
       },
     });
 
-    progress.onProgressUpdate((res) => {
-      wx.showLoading({ title: `下载中...${Math.round(res.progress)}%`, mask });
+    progress.onProgressUpdate(({ progress }) => {
+      wx.showLoading({ title: `下载中...${Math.round(progress)}%`, mask });
     });
   });
 
@@ -193,9 +190,9 @@ export const savePhoto = (imgPath: string): Promise<void> =>
       .then((path) => {
         // 获取用户设置
         wx.getSetting({
-          success: (res) => {
+          success: ({ authSetting }) => {
             // 如果已经授权相册直接写入图片
-            if (res.authSetting["scope.writePhotosAlbum"])
+            if (authSetting["scope.writePhotosAlbum"])
               wx.saveImageToPhotosAlbum({
                 filePath: path,
                 success: () => resolve(),
@@ -244,11 +241,9 @@ export const addPhoneContact = (
   new Promise((resolve, reject) => {
     // 获取用户设置
     wx.getSetting({
-      success: (res) => {
-        console.warn(res);
-
+      success: ({ authSetting }) => {
         // 如果已经授权直接写入联系人
-        if (res.authSetting["scope.addPhoneContact"])
+        if (authSetting["scope.addPhoneContact"])
           wx.addPhoneContact({
             ...config,
             success: () => resolve(),

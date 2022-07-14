@@ -14,7 +14,7 @@ const { globalData } = getApp<AppOption>();
 
 $Page("location", {
   data: {
-    page: {} as PageData,
+    page: <PageData>{},
     point: "",
   },
 

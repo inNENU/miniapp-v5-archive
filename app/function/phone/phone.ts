@@ -23,7 +23,7 @@ interface PhoneConfig {
 
 $Page("phone", {
   data: {
-    config: [] as PhoneConfig[],
+    config: <PhoneConfig[]>[],
     env,
   },
 

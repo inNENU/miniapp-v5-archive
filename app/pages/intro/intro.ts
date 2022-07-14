@@ -19,7 +19,7 @@ $Page("guide", {
     statusBarHeight: globalData.info.statusBarHeight,
 
     /** 候选词 */
-    words: [] as string[],
+    words: <string[]>[],
 
     /** 页面数据 */
     page: {

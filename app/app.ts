@@ -24,6 +24,7 @@ $Config({
     [
       [
         "account",
+        "admission",
         "calendar",
         "location",
         "map",

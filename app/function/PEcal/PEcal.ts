@@ -113,7 +113,7 @@ $Page("PEcal", {
 
   state: {
     /** 测试成绩 */
-    result: {} as Record<string, number>,
+    result: <Record<string, number>>{},
     /** 性别 */
     gender: "",
     /** 年级 */
@@ -121,8 +121,8 @@ $Page("PEcal", {
   },
 
   onLoad() {
-    const genderIndex = wx.getStorageSync<number | "">("gender");
-    const gradeIndex = wx.getStorageSync<number | "">("grade");
+    const genderIndex = wx.getStorageSync<number | undefined>("gender");
+    const gradeIndex = wx.getStorageSync<number | undefined>("grade");
     const genderKeys = this.data.gender.keys;
     const gradeKeys = this.data.grade.keys;
 
@@ -225,9 +225,7 @@ $Page("PEcal", {
 
   /** 输入成绩 */
   input({ currentTarget, detail }: WechatMiniprogram.Input) {
-    const project = currentTarget.id;
-
-    this.state.result[project] = Number(detail.value);
+    this.state.result[currentTarget.id] = Number(detail.value);
   },
 
   blur() {
@@ -305,13 +303,11 @@ $Page("PEcal", {
     // 读取相应配置文件
     getJSON<GradeConfig>(`function/PEcal/${gender}-${grade}`).then((config) => {
       // 以下三项越高越好，进行计算
-      (
-        ["vitalCapacity", "sitAndReach", "standingLongJump"] as (
-          | "vitalCapacity"
-          | "sitAndReach"
-          | "standingLongJump"
-        )[]
-      ).forEach((x) => {
+      (<("vitalCapacity" | "sitAndReach" | "standingLongJump")[]>[
+        "vitalCapacity",
+        "sitAndReach",
+        "standingLongJump",
+      ]).forEach((x) => {
         if (result[x] && Number(result[x])) {
           for (let i = length; i >= 0; i -= 1)
             if (result[x] >= config[x][i]) {
@@ -322,7 +318,7 @@ $Page("PEcal", {
       });
 
       // 以下两项越低越好
-      (["shortRun", "longRun"] as ("shortRun" | "longRun")[]).forEach((x) => {
+      (<("shortRun" | "longRun")[]>["shortRun", "longRun"]).forEach((x) => {
         if (result[x]) {
           for (let i = length; i >= 0; i -= 1)
             if (result[x] <= config[x][i]) {
@@ -393,7 +389,7 @@ $Page("PEcal", {
       wx.showToast({
         title: "请选择性别年级",
         duration: 2500,
-        image: "./close.png",
+        image: "/icon/close.png",
       });
     }
   },

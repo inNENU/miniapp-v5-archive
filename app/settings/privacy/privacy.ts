@@ -39,7 +39,7 @@ $Page("privacy", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
-    page: {
+    page: <PageDataWithContent>{
       title: "隐私说明",
       content: [
         {
@@ -104,7 +104,7 @@ $Page("privacy", {
           footer: " ",
         },
       ],
-    } as PageDataWithContent,
+    },
 
     authorize: {},
   },
@@ -125,9 +125,9 @@ $Page("privacy", {
 
     // update authorize status
     wx.getSetting({
-      success: (res) => {
+      success: ({ authSetting }) => {
         authorizeList.forEach((type, index) => {
-          if (res.authSetting[type]) items[index].desc = "已授权✓";
+          if (authSetting[type]) items[index].desc = "已授权✓";
         });
 
         this.setData({
@@ -204,18 +204,18 @@ $Page("privacy", {
         wx.hideLoading();
         modal("权限被拒", "您拒绝了权限授予，请在小程序设置页允许权限", () => {
           wx.openSetting({
-            success: (res) => {
-              if (res.authSetting[authorizeList[type]]) tip("授权成功");
+            success: ({ authSetting }) => {
+              if (authSetting[authorizeList[type]]) tip("授权成功");
               else tip("授权失败，您没有授权");
 
               wx.getSetting({
-                success: (res2) => {
+                success: ({ authSetting }) => {
                   const { items } = this.data.page
                     .content[1] as ListComponentConfig;
 
                   authorizeList.forEach((type2, index) => {
                     (items as ButtonListComponnetItemConfig[])[index].desc =
-                      res2.authSetting[type2] ? "已授权✓" : "未授权×";
+                      authSetting[type2] ? "已授权✓" : "未授权×";
                   });
 
                   this.setData({
@@ -235,14 +235,12 @@ $Page("privacy", {
     wx.openSetting({
       success: () => {
         wx.getSetting({
-          success: (res2) => {
+          success: ({ authSetting }) => {
             const { items } = this.data.page.content[1] as ListComponentConfig;
 
             authorizeList.forEach((type2, index) => {
-              (items as ButtonListComponnetItemConfig[])[index].desc = res2
-                .authSetting[type2]
-                ? "已授权✓"
-                : "未授权×";
+              (items as ButtonListComponnetItemConfig[])[index].desc =
+                authSetting[type2] ? "已授权✓" : "未授权×";
             });
 
             this.setData({

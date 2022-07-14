@@ -20,6 +20,7 @@
       "pages": [
         "account/account",
         "account/detail",
+        "admission/admission",
         "cal/cal",
         "calendar/calendar",
         "location/location",

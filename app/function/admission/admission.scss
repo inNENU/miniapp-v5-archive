@@ -1,39 +1,26 @@
-/* 右上角解释文字 */
-.desc-wrapper {
-  margin: 4px 8px;
-  text-align: right;
-}
-
-.desc-button {
-  width: auto;
-  padding: 6px;
-  color: var(--grey);
-  font-size: 15px;
-}
-
-/* 分数部分 */
-
-.score-wrapper {
+.switch {
   display: flex;
-  width: 100%;
-  height: 120px;
-  background-color: var(--bgcolor-grey);
 
-  .bmi,
-  .score {
+  overflow: hidden;
+
+  width: 140px;
+  margin: 12px auto;
+  border: 1px solid #2ecc71;
+  border-radius: 14px;
+
+  background-color: var(--bgcolor);
+  color: #2ecc71;
+
+  font-weight: bold;
+  line-height: 30px;
+
+  .item {
     width: 50%;
-    height: 100%;
-  }
 
-  .title {
-    margin: 20px;
-    font-weight: 500;
-    font-size: 24px;
-  }
-
-  .result {
-    font-weight: 500;
-    font-size: 20px;
+    &.active {
+      background-color: #2ecc71;
+      color: var(--bgcolor);
+    }
   }
 }
 
@@ -44,7 +31,7 @@
 
   overflow: hidden;
 
-  margin: 0 15px;
+  margin: 15px;
   border-radius: 8px;
 
   background-color: var(--block-bgcolor);
@@ -52,7 +39,6 @@
 
   font-size: 17px;
   line-height: 1.75;
-  text-align: right;
 }
 
 .list-item {
@@ -81,36 +67,35 @@
   }
 
   .text {
+    min-width: 3.5rem;
     flex: none;
     padding-right: 16px;
-    text-align: left;
+    text-align: right;
   }
 
   .input {
+    text-align: left;
     flex: 1;
-  }
-
-  .unit {
-    flex: none;
-    padding-left: 15px;
-    color: var(--grey4);
   }
 
   .picker {
+    text-align: left;
     flex: 1;
+  }
+
+  .verify-code {
+    width: 85px;
+    height: 28px;
+    margin-left: auto;
   }
 }
 
-/* 计算按钮 */
-
-.calculate-button {
+.search-button {
   width: 92% !important;
   margin: 12px 4% !important;
 }
 
-/* 成绩列表 */
-
-.score-list {
+.result-list {
   position: relative;
 
   margin: 15px 0;
@@ -146,9 +131,56 @@
       display: none;
     }
 
-    .score {
+    .result {
       flex: auto;
       text-align: right;
     }
+  }
+}
+
+.error {
+  .icon {
+    margin: 12px auto;
+  }
+
+  .hint {
+    color: red;
+    font-size: 18px;
+  }
+}
+
+/* 右上角解释文字 */
+.notice {
+  position: relative;
+
+  overflow: hidden;
+
+  margin: 15px;
+  padding: 15px;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--text-color);
+
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.75;
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 4px;
+    margin-bottom: 10px;
+  }
+
+  .detail-button {
+    float: right;
+
+    margin: -4px -8px 0 0;
+    padding: 4px 8px;
+    color: var(--grey);
+    font-size: 15px;
+    letter-spacing: 0;
+    font-weight: normal;
   }
 }
