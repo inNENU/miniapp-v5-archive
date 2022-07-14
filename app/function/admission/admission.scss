@@ -1,0 +1,186 @@
+.switch {
+  display: flex;
+
+  overflow: hidden;
+
+  width: 140px;
+  margin: 12px auto;
+  border: 1px solid #2ecc71;
+  border-radius: 14px;
+
+  background-color: var(--bgcolor);
+  color: #2ecc71;
+
+  font-weight: bold;
+  line-height: 30px;
+
+  .item {
+    width: 50%;
+
+    &.active {
+      background-color: #2ecc71;
+      color: var(--bgcolor);
+    }
+  }
+}
+
+/* 输入列表 */
+
+.input-list-wrapper {
+  position: relative;
+
+  overflow: hidden;
+
+  margin: 15px;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--text-color);
+
+  font-size: 17px;
+  line-height: 1.75;
+}
+
+.list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+
+  &::after {
+    content: " ";
+
+    position: absolute;
+    right: 24px;
+    bottom: 0;
+    left: 24px;
+
+    height: 1px;
+    border-bottom: 1px solid var(--border-color);
+
+    transform: scaleY(0.4);
+    transform-origin: 0 100%;
+  }
+
+  &:last-child::after {
+    display: none;
+  }
+
+  .text {
+    min-width: 3.5rem;
+    flex: none;
+    padding-right: 16px;
+    text-align: right;
+  }
+
+  .input {
+    text-align: left;
+    flex: 1;
+  }
+
+  .picker {
+    text-align: left;
+    flex: 1;
+  }
+
+  .verify-code {
+    width: 85px;
+    height: 28px;
+    margin-left: auto;
+  }
+}
+
+.search-button {
+  width: 92% !important;
+  margin: 12px 4% !important;
+}
+
+.result-list {
+  position: relative;
+
+  margin: 15px 0;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--text-color);
+
+  font-size: 17px;
+  line-height: 1.75;
+
+  .item {
+    position: relative;
+    display: flex;
+    padding: 6px 15px;
+
+    &::before {
+      content: " ";
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+
+      height: 1px;
+      border-top: 1px solid var(--border-color);
+
+      transform: scaleY(0.4);
+      transform-origin: 0 0;
+    }
+
+    &:first-child::before {
+      display: none;
+    }
+
+    .result {
+      flex: auto;
+      text-align: right;
+    }
+  }
+}
+
+.error {
+  .icon {
+    margin: 12px auto;
+  }
+
+  .hint {
+    color: red;
+    font-size: 18px;
+  }
+}
+
+/* 右上角解释文字 */
+.notice {
+  position: relative;
+
+  overflow: hidden;
+
+  margin: 15px;
+  padding: 15px;
+  border-radius: 8px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--text-color);
+
+  text-align: left;
+  font-size: 17px;
+  line-height: 1.75;
+
+  .title {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 0 4px;
+    margin-bottom: 10px;
+  }
+
+  .detail-button {
+    float: right;
+
+    margin: -4px -8px 0 0;
+    padding: 4px 8px;
+    color: var(--grey);
+    font-size: 15px;
+    letter-spacing: 0;
+    font-weight: normal;
+  }
+}
