@@ -277,20 +277,27 @@
         },
         {
           "id": 25,
+          "name": "录取查询",
+          "pathName": "function/admission/admission",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 26,
           "name": "关于",
           "pathName": "settings/about/about",
           "query": "",
           "scene": null
         },
         {
-          "id": 26,
+          "id": 27,
           "name": "欢迎入群",
           "pathName": "module/page",
           "query": "id=other/about/welcome",
           "scene": null
         },
         {
-          "id": 27,
+          "id": 28,
           "name": "错误页",
           "pathName": "module/page",
           "query": "id=other/about/notexist",
