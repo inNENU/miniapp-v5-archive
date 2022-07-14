@@ -30,7 +30,7 @@
       <text
         class="text"
         decode
-        user-select="{{plainText.getSelectable(config.style)}}"
+        user-select="{{selectable && plainText.getSelectable(config.style)}}"
         space="nbsp"
         >{{item}}</text
       >
@@ -43,7 +43,7 @@
         class="text"
         style="{{config.tag === 'p'? 'text-indent: 1.5em; ': ''}}{{config.style || ''}}"
         decode
-        user-select="{{plainText.getSelectable(config.style)}}"
+        user-select="{{selectable && plainText.getSelectable(config.style)}}"
         space="nbsp"
         >{{item}}</text
       >
@@ -61,18 +61,21 @@
   <text
     wx:if="{{config.heading !== false}}"
     class="hint-title {{config.path? 'access': ''}}"
-    user-select="{{plainText.getSelectable(config.style)}}"
+    user-select="{{selectable && plainText.getSelectable(config.style)}}"
     >{{plainText.getTitle(config)}}</text
   >
   <template is="text" data="{{config}}" />
 </view>
 <!-- 段落标题 -->
 <block wx:else>
-  <text wx:if="{{config.heading}}" class="text-component-header" user-select
+  <text
+    wx:if="{{config.heading}}"
+    class="text-component-header"
+    user-select="{{selectable}}"
     >{{config.heading}}</text
   >
   <!-- 段落主体 -->
   <view class="text-component" style="{{plainText.getAlign(config.align)}}">
-    <template is="text" data="{{config}}" />
+    <template is="text" data="{{config, selectable}}" />
   </view>
 </block>
