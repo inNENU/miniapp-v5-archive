@@ -52,30 +52,33 @@ export interface GlobalData {
  * 资源下载
  *
  * @param fileName 下载资源名称
- * @param progress 是否开启进度提示
+ * @param showProgress 是否开启进度提示
  */
-export const resDownload = (fileName: string, progress = true): Promise<void> =>
+export const resourceDownload = (
+  fileName: string,
+  showProgress = true
+): Promise<void> =>
   new Promise((resolve, reject) => {
-    if (progress) wx.showLoading({ title: "下载中...", mask: true });
+    if (showProgress) wx.showLoading({ title: "下载中...", mask: true });
 
     // 取消下载成功提示并移除对应资源文件
-    fileName.split("-").forEach((res) => {
-      if (res) {
-        wx.setStorageSync(`${res}Download`, false);
-        if (exists(res)) rm(res, "dir");
+    fileName.split("-").forEach((resource) => {
+      if (resource) {
+        wx.setStorageSync(`${resource}Download`, false);
+        if (exists(resource)) rm(resource, "dir");
       }
     });
 
     const downLoadTask = wx.downloadFile({
       url: `${server}r/${fileName}.zip`,
-      success: (res) => {
-        if (res.statusCode === 200) {
-          if (progress) wx.showLoading({ title: "保存中...", mask: true });
+      success: ({ statusCode, tempFilePath }) => {
+        if (statusCode === 200) {
+          if (showProgress) wx.showLoading({ title: "保存中...", mask: true });
 
           // 保存压缩文件到压缩目录
-          saveFile(res.tempFilePath, "zipTemp");
+          saveFile(tempFilePath, "zipTemp");
 
-          if (progress) wx.showLoading({ title: "解压中...", mask: true });
+          if (showProgress) wx.showLoading({ title: "解压中...", mask: true });
 
           // 解压文件到根目录
           unzip("zipTemp", "").then(() => {
@@ -88,10 +91,10 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
             });
 
             // 判断取消提示
-            if (progress) wx.hideLoading();
+            if (showProgress) wx.hideLoading();
             resolve();
           });
-        } else reject(res.statusCode);
+        } else reject(statusCode);
       },
 
       // 下载失败
@@ -101,9 +104,9 @@ export const resDownload = (fileName: string, progress = true): Promise<void> =>
       },
     });
 
-    downLoadTask.onProgressUpdate((res) => {
-      if (progress)
-        wx.showLoading({ title: `下载中...${res.progress}%`, mask: true });
+    downLoadTask.onProgressUpdate(({ progress }) => {
+      if (showProgress)
+        wx.showLoading({ title: `下载中...${progress}%`, mask: true });
     });
   });
 
@@ -146,15 +149,13 @@ export const checkResUpdate = (): void => {
       url: `${server}service/resource.php`,
       enableHttp2: true,
       method: "POST",
-      success: (res) => {
+      success: ({ statusCode, data }) => {
         // 资源为最新
-        if (res.statusCode === 200) {
-          const versionInfo = res.data;
+        if (statusCode === 200) {
           const updateList: string[] = [];
 
-          for (const key in versionInfo.version)
-            if (versionInfo.version[key] !== localVersion[key])
-              updateList.push(key);
+          for (const key in data.version)
+            if (data.version[key] !== localVersion[key]) updateList.push(key);
 
           // 需要更新
           if (updateList.length > 0) {
@@ -162,7 +163,7 @@ export const checkResUpdate = (): void => {
             logger.info("Newer resource detected");
 
             const fileName = updateList.join("-");
-            const size = versionInfo.size[fileName];
+            const size = data.size[fileName];
 
             hasResPopup = true;
 
@@ -173,15 +174,15 @@ export const checkResUpdate = (): void => {
               cancelText: "取消",
               cancelColor: "#ff0000",
               confirmText: "更新",
-              success: (choice) => {
+              success: ({ confirm, cancel }) => {
                 // 用户确认，下载更新
-                if (choice.confirm)
-                  resDownload(fileName).then(() => {
-                    writeJSON("version", versionInfo.version);
+                if (confirm)
+                  resourceDownload(fileName).then(() => {
+                    writeJSON("version", data.version);
                     hasResPopup = false;
                   });
                 // 用户取消，警告用户
-                else if (choice.cancel)
+                else if (cancel)
                   wx.showModal({
                     title: "更新已取消",
                     content:
@@ -239,7 +240,7 @@ export const appInit = (): void => {
     wx.setStorageSync(data, appConfig[data]);
   });
 
-  resDownload("function-guide-icon-intro", false).then(() => {
+  resourceDownload("function-guide-icon-intro", false).then(() => {
     // 下载资源文件并写入更新时间
     const timeStamp = new Date().getTime();
 
@@ -248,10 +249,10 @@ export const appInit = (): void => {
     wx.request<VersionInfo>({
       url: `${server}service/resource.php`,
       enableHttp2: true,
-      success: (res) => {
-        console.log("Version info", res.data);
-        if (res.statusCode === 200) {
-          writeJSON("version", res.data.version);
+      success: ({ statusCode, data }) => {
+        console.log("Version info", data);
+        if (statusCode === 200) {
+          writeJSON("version", data.version);
           // 成功初始化
           wx.setStorageSync("app-inited", true);
           emitter.emit("inited");
@@ -364,9 +365,9 @@ export const appUpdate = (globalData: GlobalData): void => {
                 showCancel: !reset && !forceUpdate,
                 confirmText: "应用",
                 cancelText: "取消",
-                success: (res) => {
+                success: ({ confirm }) => {
                   // 用户确认，应用更新
-                  if (res.confirm) {
+                  if (confirm) {
                     // 需要初始化
                     if (reset) {
                       // 显示提示
@@ -455,9 +456,9 @@ export const registAction = (): void => {
   });
 
   // 监听网络状态
-  wx.onNetworkStatusChange((res) => {
+  wx.onNetworkStatusChange(({ isConnected }) => {
     // 显示提示
-    if (!res.isConnected) {
+    if (!isConnected) {
       tip("网络连接中断,部分小程序功能暂不可用");
       wx.setStorageSync("networkError", true);
     } else if (wx.getStorageSync("network")) {
@@ -487,9 +488,9 @@ export const registAction = (): void => {
             "您可以点击右上角选择分享到好友、分享到朋友圈/空间\n您也可以点击页面右下角的分享图标，选择保存二维码分享小程序",
           showCancel: status === "noticed",
           cancelText: "不再提示",
-          success: (res) => {
-            if (res.confirm) wx.setStorageSync("capture-screen", "noticed");
-            else if (res.cancel) {
+          success: ({ cancel, confirm }) => {
+            if (confirm) wx.setStorageSync("capture-screen", "noticed");
+            else if (cancel) {
               wx.setStorageSync("capture-screen", "never");
               if (wx.canIUse("offUserCaptureScreen")) wx.offUserCaptureScreen();
             }

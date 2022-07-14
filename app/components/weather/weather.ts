@@ -14,7 +14,7 @@ $Component({
     /** 提示的索引值 */
     tipIndex: 0,
     /** 天气信息 */
-    weather: {} as WeatherData,
+    weather: <WeatherData>{},
     statusBarHeight: globalData.info.statusBarHeight,
   },
   lifetimes: {

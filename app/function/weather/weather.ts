@@ -14,7 +14,7 @@ const {
 $Page("weather", {
   data: {
     /** 天气数据 */
-    weather: {} as WeatherData,
+    weather: <WeatherData>{},
     /** 当前 tips 的索引值 */
     tipIndex: 0,
     /** 动画对象 */
@@ -22,7 +22,7 @@ $Page("weather", {
   },
 
   state: {
-    weatherIcon: {} as Record<string, string>,
+    weatherIcon: <Record<string, string>>{},
   },
 
   onLoad() {
@@ -35,12 +35,12 @@ $Page("weather", {
     >("weather");
 
     if (wx.getStorageSync("app-inited")) {
-      const weatherIcon = JSON.parse(
-        (readFile("./icon/weather/icon") as string) || "{}"
-      ) as Record<string, string>;
-      const hintIcon = JSON.parse(
-        (readFile("./icon/weather/hint") as string) || "{}"
-      ) as Record<string, string>;
+      const weatherIcon = <Record<string, string>>(
+        JSON.parse((readFile("./icon/weather/icon") as string) || "{}")
+      );
+      const hintIcon = <Record<string, string>>(
+        JSON.parse((readFile("./icon/weather/hint") as string) || "{}")
+      );
 
       this.setData({
         // 18 点至次日 5 点为夜间
@@ -69,15 +69,12 @@ $Page("weather", {
     }
     // 需要重新获取并处理
     else
-      wx.request({
+      wx.request<WeatherData>({
         url: `${server}service/weather.php`,
         enableHttp2: true,
-        success: (res) => {
-          this.drawcanvas(res.data as WeatherData);
-
-          this.setData({
-            weather: res.data as WeatherData,
-          });
+        success: ({ data }) => {
+          this.drawcanvas(data);
+          this.setData({ weather: data });
         },
       });
 
@@ -118,13 +115,12 @@ $Page("weather", {
 
   updateIcon(): void {
     this.setData({
-      weatherIcon: JSON.parse(
-        readFile("./icon/weather/icon") as string
-      ) as Record<string, string>,
-      hintIcon: JSON.parse(readFile("./icon/weather/hint") as string) as Record<
-        string,
-        string
-      >,
+      weatherIcon: <Record<string, string>>(
+        JSON.parse(readFile("./icon/weather/icon") as string)
+      ),
+      hintIcon: <Record<string, string>>(
+        JSON.parse(readFile("./icon/weather/hint") as string)
+      ),
     });
   },
 
@@ -358,10 +354,10 @@ $Page("weather", {
       success: () => console.info("Starts accelerometer listening"),
     });
 
-    wx.onAccelerometerChange((res) => {
-      layer1Animation.translateX(res.x * 13.5).step();
-      layer2Animation.translateX(res.x * 18).step();
-      layer3Animation.translateX(res.x * 22.5).step();
+    wx.onAccelerometerChange(({ x }) => {
+      layer1Animation.translateX(x * 13.5).step();
+      layer2Animation.translateX(x * 18).step();
+      layer3Animation.translateX(x * 22.5).step();
 
       this.setData({
         animation1: layer1Animation.export(),

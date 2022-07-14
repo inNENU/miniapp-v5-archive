@@ -26,12 +26,12 @@ $Page("user", {
       appID === "wx9ce37d9662499df3"
         ? "走出半生，归来仍是东师青年"
         : "in 东师，就用 in 东师",
-    page: {
+    page: <PageDataWithContent>{
       title: "我的东师",
       grey: true,
       hidden: true,
       content: [{ tag: "loading" }],
-    } as PageDataWithContent,
+    },
 
     footer: {
       author: "",

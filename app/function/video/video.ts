@@ -31,7 +31,7 @@ $Page("video", {
   data: {
     type: "debug",
     videoName: "",
-    videoList: [] as VideoGroup[],
+    videoList: <VideoGroup[]>[],
     src: "",
   },
 

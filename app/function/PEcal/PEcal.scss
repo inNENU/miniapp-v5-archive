@@ -5,24 +5,10 @@
 }
 
 .desc-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: flex-end;
-
   width: auto;
   padding: 6px;
-
-  .icon {
-    display: block;
-    width: 18px;
-    height: 18px;
-    margin-right: 4px;
-  }
-
-  .text {
-    color: var(--grey);
-    font-size: 15px;
-  }
+  color: var(--grey);
+  font-size: 15px;
 }
 
 /* 分数部分 */
@@ -94,6 +80,12 @@
     display: none;
   }
 
+  .text {
+    flex: none;
+    padding-right: 16px;
+    text-align: left;
+  }
+
   .input {
     flex: 1;
   }
@@ -109,16 +101,9 @@
   }
 }
 
-.list-item .text,
-.score-item .text {
-  flex: none;
-  padding-right: 16px;
-  text-align: left;
-}
-
 /* 计算按钮 */
 
-.calculate.button {
+.calculate-button {
   width: 92% !important;
   margin: 12px 4% !important;
 }

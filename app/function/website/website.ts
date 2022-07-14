@@ -11,7 +11,7 @@ const { globalData } = getApp<AppOption>();
 
 $Page("website", {
   data: {
-    config: [] as unknown[],
+    config: <unknown[]>[],
   },
 
   onNavigate() {

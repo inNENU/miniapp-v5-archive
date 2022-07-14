@@ -59,9 +59,9 @@ const resolveContent = (
   if ("url" in listElement && !listElement.url!.startsWith("plugin://"))
     listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
-    listElement.url = `page?from=${page.title || "返回"}&id=${
-      listElement.path as string
-    }`;
+    listElement.url = `page?from=${
+      page.title || "返回"
+    }&id=${listElement.path!}`;
 
   if ("type" in listElement) {
     if (listElement.type === "switch")
@@ -142,9 +142,9 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           component.tag === "ul" ||
           component.tag === "text")
       ) {
-        component.path = `page?from=${page.title || "返回"}&id=${
-          component.path as string
-        }`;
+        component.path = `page?from=${
+          page.title || "返回"
+        }&id=${component.path!}`;
       }
 
       // 设置 list 组件
@@ -204,7 +204,7 @@ const preloadPage = (page: PageData): void => {
               | ListComponentItemConfig
             ) & { hidden?: boolean }
           ) => {
-            if ("path" in element) ensureJSON(`${element.path as string}`);
+            if ("path" in element) ensureJSON(`${element.path!}`);
           }
         );
     });
@@ -541,7 +541,7 @@ export const setOnlinePage = (
             // 调试
             logger.info(`${id} onLoad Succeed`);
           })
-          .catch((res) => {
+          .catch((err) => {
             // 设置 error 页面并弹出通知
             setPage(
               { option, ctx },
@@ -555,7 +555,7 @@ export const setOnlinePage = (
             popNotice(option.id || "");
 
             // 调试
-            logger.warn(`${id} onLoad failed with error:`, res);
+            logger.warn(`${id} onLoad failed with error:`, err);
           });
     }
   } else logger.error("no id");

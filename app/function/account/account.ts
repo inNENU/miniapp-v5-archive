@@ -12,7 +12,7 @@ const { env } = globalData;
 
 $Page("account", {
   data: {
-    config: [] as unknown[],
+    config: <unknown[]>[],
 
     env: globalData.env,
     type: globalData.env,

@@ -32,7 +32,7 @@ $Component({
     appID,
     darkmode: globalData.darkmode,
     env,
-    markers: [] as (LocationConfig & { id: number })[],
+    markers: <(LocationConfig & { id: number })[]>[],
     id: -1,
     title: "",
     hasDetail: false,
@@ -60,8 +60,6 @@ $Component({
           .in(this)
           .select("#location")
           .context(({ context }) => {
-            console.log(context);
-
             (context as WechatMiniprogram.MapContext).includePoints({
               points: this.data.config.points.map((point) => ({
                 longitude: point.longitude,
@@ -93,9 +91,7 @@ $Component({
       if (hasDetail) {
         const point = this.data.markers[id];
 
-        this.$go(
-          `location?id=${point.path as string}&point=${getPoint(point)}`
-        );
+        this.$go(`location?id=${point.path!}&point=${getPoint(point)}`);
       }
     },
 

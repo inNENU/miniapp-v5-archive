@@ -69,13 +69,13 @@ $Page("map", {
     currentCategory: "all",
 
     /** 校区 */
-    area: "benbu" as Area,
+    area: <Area>"benbu",
 
     /** 点位分类 */
-    category: [] as Category[],
+    category: <Category[]>[],
 
     /** 地图点位 */
-    marker: {} as Record<string, MarkerData[]>,
+    marker: <Record<string, MarkerData[]>>{},
   },
 
   /** 状态 */
@@ -83,14 +83,16 @@ $Page("map", {
     gestureHold: false,
     isSet: false,
     benbu: {
-      category: [] as Category[],
-      marker: {} as Record<string, MarkerData[]>,
+      category: <Category[]>[],
+      marker: <Record<string, MarkerData[]>>{},
     },
     jingyue: {
-      category: [] as Category[],
-      marker: {} as Record<string, MarkerData[]>,
+      category: <Category[]>[],
+      marker: <Record<string, MarkerData[]>>{},
     },
   },
+
+  context: <WechatMiniprogram.MapContext>{},
 
   onNavigate() {
     console.info("Navigating to Map");
@@ -154,14 +156,14 @@ $Page("map", {
   /** 设置地图 */
   setMap() {
     this.context.getScale({
-      success: (r1) => {
+      success: ({ scale }) => {
         this.context.getCenterLocation({
-          success: (r2) => {
+          success: ({ latitude, longitude }) => {
             this.setData({
               map: {
-                scale: r1.scale,
-                latitude: r2.latitude,
-                longitude: r2.longitude,
+                scale,
+                latitude,
+                longitude,
               },
             });
           },
@@ -236,14 +238,14 @@ $Page("map", {
    */
   scale(event: WechatMiniprogram.TouchEvent) {
     this.context.getCenterLocation({
-      success: (res) => {
+      success: ({ latitude, longitude }) => {
         this.setData({
           map: {
             scale:
               this.data.map.scale +
               (event.currentTarget.dataset.action === "zoom-in" ? 1 : -1),
-            latitude: res.latitude,
-            longitude: res.longitude,
+            latitude,
+            longitude,
           },
         });
       },
@@ -256,8 +258,14 @@ $Page("map", {
   },
 
   /** 选择分类 */
-  select({ currentTarget }: WechatMiniprogram.TouchEvent) {
-    const index = currentTarget.dataset.index as number;
+  select({
+    currentTarget,
+  }: WechatMiniprogram.TouchEvent<
+    Record<string, never>,
+    Record<string, never>,
+    { index: number }
+  >) {
+    const { index } = currentTarget.dataset;
     const { name, path } = this.data.category[index];
     const markers = this.state[this.data.area].marker[path];
 
@@ -274,7 +282,7 @@ $Page("map", {
 
     const item = this.data.marker[currentCategory].find(
       (item) => item.id === event.detail.markerId
-    ) as MarkerData;
+    )!;
 
     if (event.type === "markertap") {
       if (item.path) this.$preload(`location?id=${area}/${item.path}`);
@@ -300,34 +308,24 @@ $Page("map", {
   },
 
   navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
-    const item = this.data.marker.all.find(
+    const { name, latitude, longitude } = this.data.marker.all.find(
       (item) => item.id === Number(currentTarget.dataset.id)
-    ) as MarkerData;
+    )!;
 
-    navigation(
-      JSON.stringify({
-        latitude: item.latitude,
-        longitude: item.longitude,
-        name: item.name,
-      })
-    );
+    navigation(JSON.stringify({ latitude, longitude, name }));
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {
     const { area, currentCategory } = this.data;
 
-    const item = this.data.marker[currentCategory].find(
-      (item) => item.id === currentTarget.dataset.id
-    ) as MarkerData;
+    const { name, latitude, longitude, path } = this.data.marker[
+      currentCategory
+    ].find((item) => item.id === currentTarget.dataset.id)!;
 
-    if (item.path) {
-      const point = JSON.stringify({
-        latitude: item.latitude,
-        longitude: item.longitude,
-        name: item.name,
-      });
+    if (path) {
+      const point = JSON.stringify({ latitude, longitude, name });
 
-      this.$go(`location?id=${area}/${item.path}&point=${point}`);
+      this.$go(`location?id=${area}/${path}&point=${point}`);
     } else tip("该地点暂无详情");
   },
 
@@ -342,15 +340,11 @@ $Page("map", {
       this.state.gestureHold
     ) {
       this.context.getScale({
-        success: (res1) => {
+        success: ({ scale }) => {
           this.context.getCenterLocation({
-            success: (res2) => {
+            success: ({ latitude, longitude }) => {
               this.setData({
-                map: {
-                  scale: res1.scale,
-                  latitude: res2.latitude,
-                  longitude: res2.longitude,
-                },
+                map: { scale, latitude, longitude },
               });
             },
           });
@@ -369,6 +363,4 @@ $Page("map", {
     if (getCurrentPages().length === 1) this.$switch("main");
     else this.$back();
   },
-
-  context: {} as WechatMiniprogram.MapContext,
 });
