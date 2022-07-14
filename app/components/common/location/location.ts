@@ -56,19 +56,12 @@ $Component({
     ready() {
       // add delay to make sure `<map />` is rendered
       setTimeout(() => {
-        wx.createSelectorQuery()
-          .in(this)
-          .select("#location")
-          .context(({ context }) => {
-            (context as WechatMiniprogram.MapContext).includePoints({
-              points: this.data.config.points.map((point) => ({
-                longitude: point.longitude,
-                latitude: point.latitude,
-              })),
-              padding: [24, 24, 24, 24],
-            });
-          })
-          .exec();
+        this.setData({
+          includePoints: this.data.config.points.map((point) => ({
+            longitude: point.longitude,
+            latitude: point.latitude,
+          })),
+        });
       }, 500);
     },
   },

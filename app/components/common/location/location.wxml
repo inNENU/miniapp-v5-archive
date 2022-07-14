@@ -4,6 +4,7 @@
     class="map"
     id="location"
     markers="{{helper.getMarkers(markers, darkmode)}}"
+    include-points="{{includePoints}}"
     setting="{{helper.getSetting(env, darkmode)}}"
     bindmarkertap="markerTap"
     bindcallouttap="calloutTap"
