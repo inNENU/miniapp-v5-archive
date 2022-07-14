@@ -7,7 +7,7 @@ declare namespace WechatMiniprogram {
 
   interface LaunchOptionsApp {
     /** 群信息hash值 */
-    entryDataHash: string;
+    entryDataHash?: string;
   }
 
   interface AuthSetting {

@@ -506,22 +506,23 @@ export const registAction = (): void => {
 export const checkGroupApp = (): void => {
   const { entryDataHash } = wx.getLaunchOptionsSync();
 
-  wx.getGroupInfo({
-    entryDataHash,
-    success: ({ isGroupManager }) => {
-      if (isGroupManager)
-        wx.getGroupAppStatus({
-          entryDataHash,
-          success: ({ isExisted }) => {
-            if (!isExisted) {
-              modal("尊敬的管理员", "请考虑添加小程序到群应用!", () => {
-                wx.navigateTo({ url: "/moule/function?action=addGroupApp" });
-              });
-            }
-          },
-        });
-    },
-  });
+  if (entryDataHash)
+    wx.getGroupInfo({
+      entryDataHash,
+      success: ({ isGroupManager }) => {
+        if (isGroupManager)
+          wx.getGroupAppStatus({
+            entryDataHash,
+            success: ({ isExisted }) => {
+              if (!isExisted) {
+                modal("尊敬的管理员", "请考虑添加小程序到群应用!", () => {
+                  wx.navigateTo({ url: "/moule/function?action=addGroupApp" });
+                });
+              }
+            },
+          });
+      },
+    });
 };
 
 export const getGlobalData = (): GlobalData => {
