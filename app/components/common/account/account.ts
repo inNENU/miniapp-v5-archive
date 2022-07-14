@@ -64,7 +64,7 @@ $Component({
       const { site } = this.data.config;
 
       wx.setClipboardData({
-        data: site as string,
+        data: site!,
         success: () =>
           modal("功能受限", "小程序无法直接打开网页，链接已复制至剪切板"),
       });
@@ -74,7 +74,7 @@ $Component({
       const { mail } = this.data.config;
 
       wx.setClipboardData({
-        data: mail as string,
+        data: mail!,
         success: () =>
           modal("复制成功", `邮箱地址 ${mail!} 已成功复制至剪切板`),
       });

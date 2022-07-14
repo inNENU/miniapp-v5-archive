@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
-import { resDownload } from "../../utils/app";
+import { resourceDownload } from "../../utils/app";
 import { popNotice, setPage } from "../../utils/page";
 import { confirmAction, modal, tip } from "../../utils/wx";
 
@@ -14,7 +14,7 @@ $Page("storage", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
-    page: {
+    page: <PageDataWithContent>{
       title: "存储设置",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
@@ -23,7 +23,7 @@ $Page("storage", {
           tag: "list",
           header: "空间占用",
           items: [
-            { text: "小程序体积", desc: "478K" },
+            { text: "小程序体积", desc: "487K" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],
@@ -62,7 +62,7 @@ $Page("storage", {
           foot: "如果小程序出现问题请尝试重置小程序",
         },
       ],
-    } as PageDataWithContent,
+    },
   },
 
   onLoad() {
@@ -95,11 +95,11 @@ $Page("storage", {
     wx.getFileSystemManager().stat({
       path: wx.env.USER_DATA_PATH,
       recursive: true,
-      success: (res) => {
+      success: ({ stats }) => {
         // FIXME: https://github.com/wechat-miniprogram/api-typings/issues/226
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (
-          res.stats as unknown as {
+          stats as unknown as {
             path: string;
             stats: WechatMiniprogram.Stats;
           }[]
@@ -121,7 +121,7 @@ $Page("storage", {
   /** 刷新所有资源 */
   updateResource() {
     confirmAction("更新资源文件", () => {
-      resDownload("function-guide-icon-intro");
+      resourceDownload("function-guide-icon-intro");
     });
   },
 

@@ -23,7 +23,7 @@ $Page("cal", {
       from: "功能大厅",
     },
 
-    grade: [] as Grade[],
+    grade: <Grade[]>[],
 
     /** 总学分 */
     totalCredit: 0,
@@ -175,8 +175,8 @@ $Page("cal", {
         cancelText: "包含",
         cancelColor: "#ff0000",
         confirmText: "排除★",
-        success: (res) => {
-          if (res.cancel) {
+        success: ({ confirm, cancel }) => {
+          if (cancel) {
             // 包含不及格成绩
             totalCredit += flunkingCredit;
             totalGradeCal += flunkingGradeCal;
@@ -184,7 +184,7 @@ $Page("cal", {
             console.log("不及格学分成绩被计入");
             console.log(`新总学分是${totalCredit}`);
             console.log(`新总计算是${totalGradeCal}`);
-          } else if (res.confirm) console.log("都及格了");
+          } else if (confirm) console.log("都及格了");
 
           /*
            * 不包含不及格成绩，什么都不做

@@ -40,17 +40,18 @@ export const search = <T extends string[] | SearchResult[]>(
       method: "POST",
       enableHttp2: true,
       data,
-      success: (res) => {
-        // 调试
-        logger.debug(`Request success: `, res);
+      success: ({ data, statusCode }) => {
+        if (statusCode === 200) {
+          // 调试
+          logger.debug(`Request success: `, data);
 
-        if (res.statusCode === 200) resolve(res.data);
-        else {
+          resolve(data);
+        } else {
           tip("服务器出现问题，请稍后重试");
           // 调试
-          logger.warn(`Request failed with statusCode: ${res.statusCode}`);
+          logger.warn(`Request failed with statusCode: ${statusCode}`);
 
-          reject(res.statusCode);
+          reject(statusCode);
         }
       },
       fail: ({ errMsg }) => {

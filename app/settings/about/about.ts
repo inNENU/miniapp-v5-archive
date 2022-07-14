@@ -20,7 +20,7 @@ $Page("about", {
   data: {
     theme: globalData.theme,
     darkmode: globalData.darkmode,
-    page: {
+    page: <PageDataWithContent>{
       title: "关于",
       desc: `当前版本: ${globalData.version}`,
       grey: true,
@@ -51,10 +51,10 @@ $Page("about", {
             { text: "复制用户APPID", type: "button", handler: "copyAppID" },
             { text: "退出开发者模式", type: "button", handler: "debugMode" },
           ],
-        } as FunctionalListComponentConfig,
+        },
         { tag: "loading" },
       ],
-    } as PageDataWithContent,
+    },
   },
 
   onNavigate(res) {

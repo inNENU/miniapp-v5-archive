@@ -12,7 +12,7 @@ const { globalData } = getApp<AppOption>();
 
 $Page("page", {
   data: {
-    page: {} as PageData & { id: string },
+    page: <PageData & { id: string }>{},
     env: globalData.env,
   },
 
@@ -24,7 +24,7 @@ $Page("page", {
     console.info("onLoad options: ", option);
 
     if ("path" in option) {
-      loadOnlinePage(option as PageOption & { path: string }, this);
+      loadOnlinePage(<PageOption & { path: string }>option, this);
     } else {
       // 生成页面 ID
       option.id = id2path(

@@ -16,10 +16,10 @@ $Page("search", {
     statusBarHeight: globalData.info.statusBarHeight,
 
     /** 候选词 */
-    words: [] as string[],
+    words: <string[]>[],
 
     /** 搜索结果 */
-    result: [] as SearchResult[],
+    result: <SearchResult[]>[],
 
     /** 搜索词 */
     searchword: "",
@@ -27,7 +27,7 @@ $Page("search", {
 
   state: {
     /** 分类 */
-    name: "all" as "all" | "guide" | "intro",
+    name: <"all" | "guide" | "intro">"all",
     /** 是否正在输入 */
     typing: false,
     /** 搜索框中的内容 */

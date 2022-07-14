@@ -45,9 +45,7 @@ $Component({
 
       savePhoto(
         `/qrcode/${appID}/${
-          typeof config.qrcode === "string"
-            ? config.qrcode
-            : (config.id as string)
+          typeof config.qrcode === "string" ? config.qrcode : config.id!
         }.png`
       )
         .then(() => tip("二维码已存至相册"))
@@ -57,7 +55,7 @@ $Component({
     copyQQLink() {
       this.copy(
         `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
-          `module/page?path=${path2id(this.data.config.id as string)}`
+          `module/page?path=${path2id(this.data.config.id)}`
         )}`
       );
     },
@@ -82,10 +80,9 @@ $Component({
         url: `${server}service/share-link.php`,
         enableHttp2: true,
         method: "POST",
-        data: { appID, id: this.data.config.id as string },
-        success: (res) => {
-          if (res.statusCode === 200 && !res.data.error)
-            this.copy(res.data.link);
+        data: { appID, id: this.data.config.id! },
+        success: ({ data, statusCode }) => {
+          if (statusCode === 200 && !data.error) this.copy(data.link);
           else modal("链接尚未生成", "请使用小程序右上角菜单(···)来复制链接。");
         },
       });

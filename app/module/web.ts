@@ -3,12 +3,12 @@ import { $Page } from "@mptool/enhance";
 import { getTitle } from "../utils/config";
 
 $Page<{ title: string; url: string }, Record<string, unknown>>("web", {
-  onLoad(res) {
+  onLoad({ title, url }) {
     // 设置导航栏标题
-    const title = res.title || getTitle();
+    const navigationBarTitle = title || getTitle();
 
-    wx.setNavigationBarTitle({ title });
-    this.setData({ url: res.url, title });
+    wx.setNavigationBarTitle({ title: navigationBarTitle });
+    this.setData({ url, title: navigationBarTitle });
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {

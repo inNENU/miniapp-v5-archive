@@ -49,9 +49,14 @@ $Component({
   },
 
   methods: {
-    active({ currentTarget }: WechatMiniprogram.TouchEvent): void {
-      const { path = "" } =
-        this.data.config[currentTarget.dataset.index as number];
+    active({
+      currentTarget,
+    }: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { index: number }
+    >): void {
+      const { path = "" } = this.data.config[currentTarget.dataset.index];
 
       this.triggerEvent("active", { path });
     },
