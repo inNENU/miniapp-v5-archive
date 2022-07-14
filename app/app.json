@@ -131,6 +131,12 @@
   "themeLocation": "styles/theme.json",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
-  "groupIdList": ["594493757", "1139044856", "154562293"],
+  "groupIdList": [
+    "594493757",
+    "1139044856",
+    "154562293",
+    "284291586",
+    "670581382"
+  ],
   "singlePage": { "navigationBarFit": "float" }
 }
