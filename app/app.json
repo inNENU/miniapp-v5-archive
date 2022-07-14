@@ -36,10 +36,6 @@
         "player": {
           "version": "2.1.1",
           "provider": "wxa75efa648b60994b"
-        },
-        "routePlan": {
-          "version": "1.0.19",
-          "provider": "wx50b5593e81dd937a"
         }
       }
     }
@@ -48,6 +44,12 @@
     "pages/function/function": {
       "network": "all",
       "packages": ["function"]
+    }
+  },
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.19",
+      "provider": "wx50b5593e81dd937a"
     }
   },
   "window": {
