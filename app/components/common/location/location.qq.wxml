@@ -1,0 +1,33 @@
+<wxs src="../../../utils/map.wxs" module="helper" />
+<view class="location-component">
+  <map
+    class="map"
+    id="location"
+    markers="{{helper.getMarkers(markers, darkmode)}}"
+    include-points="{{includePoints}}"
+    setting="{{helper.getSetting(env, darkmode)}}"
+    bindmarkertap="markerTap"
+    bindcallouttap="calloutTap"
+  />
+  <view class="footer">
+    <view class="title">{{title}}</view>
+    <view class="actions">
+      <view
+        wx:if="{{hasDetail}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="detail"
+      >
+        <image class="icon" src="./icon/info.svg" />
+      </view>
+      <view
+        wx:if="{{appID === 'wx9ce37d9662499df3' && config.navigate !== false}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="navigate"
+      >
+        <image class="icon" src="/icon/navigate.svg" />
+      </view>
+    </view>
+  </view>
+</view>

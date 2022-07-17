@@ -503,6 +503,28 @@ export const registAction = (): void => {
   }
 };
 
+export const checkGroupApp = (): void => {
+  const { entryDataHash } = wx.getLaunchOptionsSync();
+
+  if (entryDataHash)
+    wx.getGroupInfo({
+      entryDataHash,
+      success: ({ isGroupManager }) => {
+        if (isGroupManager)
+          wx.getGroupAppStatus({
+            entryDataHash,
+            success: ({ isExisted }) => {
+              if (!isExisted) {
+                modal("尊敬的管理员", "请考虑添加小程序到群应用!", () => {
+                  wx.navigateTo({ url: "/module/function?action=addGroupApp" });
+                });
+              }
+            },
+          });
+      },
+    });
+};
+
 export const getGlobalData = (): GlobalData => {
   // 获取设备与运行环境信息
   const info = wx.getSystemInfoSync();
@@ -560,6 +582,7 @@ export const startup = (globalData: GlobalData): void => {
   appUpdate(globalData);
   registAction();
   login(globalData);
+  if (globalData.env === "qq") checkGroupApp();
 
   const debug = wx.getStorageSync<boolean | undefined>("debugMode") || false;
 
