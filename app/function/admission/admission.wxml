@@ -54,7 +54,9 @@
       />
     </view>
   </view>
-  <button type="primary" class="search-button" catch:tap="search">查询</button>
+  <button type="primary" class="search-button primary" catch:tap="search">
+    查询
+  </button>
 
   <view class="notice" hover-class="button-hover" catch:tap="showDetail">
     <view class="title">
