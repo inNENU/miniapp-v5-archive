@@ -107,6 +107,15 @@ const getAssetsJob = (id) => {
   return assetsJob;
 };
 
+const getConfigJob = (id) => {
+  const configJob = () =>
+    src(`project.config.${id}.json`)
+      .pipe(rename("project.config.json"))
+      .pipe(dest("."));
+
+  return configJob;
+};
+
 /* Wechat */
 
 const buildWechatScript = getScriptJob("wx");
@@ -153,13 +162,15 @@ const watchWechat = parallel(
   watchWechatScript,
   watchWechatWXSS,
   watchWechatAssets,
-  watchWechatFiles
+  watchWechatFiles,
+  getConfigJob("wx")
 );
 const buildWechat = parallel(
   buildWechatWXSS,
   buildWechatScript,
   moveWechatAssets,
-  moveWechatFiles
+  moveWechatFiles,
+  getConfigJob("wx")
 );
 
 /* Nenuyouth, marked as qy */
@@ -212,13 +223,15 @@ const watchNenuyouth = parallel(
   watchNenuyouthScript,
   watchNenuyouthWXSS,
   watchNenuyouthAssets,
-  watchNenuyouthFiles
+  watchNenuyouthFiles,
+  getConfigJob("qy")
 );
 const buildNenuyouth = parallel(
   buildNenuyouthWXSS,
   buildNenuyouthScript,
   moveNenuyouthAssets,
-  moveNenuyouthFiles
+  moveNenuyouthFiles,
+  getConfigJob("qy")
 );
 
 /* QQ */
@@ -282,9 +295,16 @@ const watchQQ = parallel(
   watchQQScript,
   watchQQWXSS,
   watchQQAssets,
-  watchQQFiles
+  watchQQFiles,
+  getConfigJob("qq")
 );
-const buildQQ = parallel(buildQQWXSS, buildQQScript, moveQQAssets, moveQQFiles);
+const buildQQ = parallel(
+  buildQQWXSS,
+  buildQQScript,
+  moveQQAssets,
+  moveQQFiles,
+  getConfigJob("qq")
+);
 
 /* exports */
 
