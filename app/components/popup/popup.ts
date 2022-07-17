@@ -29,25 +29,25 @@ Component({
 
   lifetimes: {
     attached() {
-      const info = getWindowInfo();
-
-      this.setData({
-        paddingBottom: info.windowHeight - Math.max(info.safeArea.bottom, 24),
-      });
+      this.updateLayout();
     },
   },
 
   pageLifetimes: {
     resize() {
-      const info = getWindowInfo();
-
-      this.setData({
-        paddingBottom: info.windowHeight - Math.max(info.safeArea.bottom, 24),
-      });
+      this.updateLayout();
     },
   },
 
   methods: {
+    updateLayout() {
+      const { windowHeight, safeArea } = getWindowInfo();
+
+      this.setData({
+        // issues in qq where safeArea is not defined
+        paddingBottom: windowHeight - Math.max(safeArea?.bottom, 24),
+      });
+    },
     // 用户确认
     confirm(): void {
       this.triggerEvent("confirm");

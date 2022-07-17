@@ -9,7 +9,4 @@
 <view class="header" style="padding-top:{{statusBarHeight + 6}}px;">
   {{title}}
 </view>
-<view
-  class="placeholder"
-  style="height: {{height || statusBarHeight + 60}}px"
-/>
+<view class="placeholder" style="height: {{height}}px" />
