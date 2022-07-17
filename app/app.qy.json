@@ -1,0 +1,148 @@
+{
+  "entryPagePath": "pages/main/main",
+  "pages": [
+    "pages/main/main",
+    "pages/function/function",
+    "pages/guide/guide",
+    "pages/intro/intro",
+    "pages/user/user",
+    "pages/search/search",
+    "settings/about/about",
+    "settings/privacy/privacy",
+    "settings/storage/storage",
+    "module/function",
+    "module/page",
+    "module/web"
+  ],
+  "subPackages": [
+    {
+      "root": "function",
+      "pages": [
+        "account/account",
+        "account/detail",
+        "admission/admission",
+        "cal/cal",
+        "calendar/calendar",
+        "location/location",
+        "map/map",
+        "music/music",
+        "video/video",
+        "PEcal/PEcal",
+        "phone/phone",
+        "weather/weather",
+        "website/website"
+      ],
+      "plugins": {
+        "player": {
+          "version": "2.1.1",
+          "provider": "wxa75efa648b60994b"
+        }
+      }
+    }
+  ],
+  "preloadRule": {
+    "pages/function/function": {
+      "network": "all",
+      "packages": ["function"]
+    }
+  },
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.19",
+      "provider": "wx50b5593e81dd937a"
+    }
+  },
+  "window": {
+    "navigationBarBackgroundColor": "@navBgColor",
+    "navigationBarTextStyle": "@navTextStyle",
+    "navigationBarTitleText": "in 东师",
+    "navigationStyle": "custom",
+    "backgroundColor": "@bgColor",
+    "backgroundTextStyle": "@bgTxtStyle",
+    "backgroundColorTop": "@bgColorTop",
+    "backgroundColorBottom": "@bgColorBottom",
+    "pageOrientation": "portrait"
+  },
+  "tabBar": {
+    "custom": false,
+    "color": "@tabColor",
+    "selectedColor": "#2ecc71",
+    "borderStyle": "@tabBorderStyle",
+    "backgroundColor": "@tabBgColor",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/main/main",
+        "text": "首页",
+        "iconPath": "@homeIcon",
+        "selectedIconPath": "icon/tab/home.png"
+      },
+      {
+        "pagePath": "pages/intro/intro",
+        "text": "东师介绍",
+        "iconPath": "@introIcon",
+        "selectedIconPath": "icon/tab/intro.png"
+      },
+      {
+        "pagePath": "pages/guide/guide",
+        "text": "东师指南",
+        "iconPath": "@guideIcon",
+        "selectedIconPath": "icon/tab/guide.png"
+      },
+      {
+        "pagePath": "pages/function/function",
+        "text": "功能大厅",
+        "iconPath": "@functionIcon",
+        "selectedIconPath": "icon/tab/function.png"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "text": "我的东师",
+        "iconPath": "@userIcon",
+        "selectedIconPath": "icon/tab/user.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 5000,
+    "connectSocket": 8000,
+    "uploadFile": 8000,
+    "downloadFile": 25000
+  },
+  "debug": false,
+  "frameset": true,
+  "resizable": true,
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于校园地图导航"
+    }
+  },
+  "requiredBackgroundModes": ["audio"],
+  "usingComponents": {
+    "account": "/components/common/account/account",
+    "audio-player": "/components/common/audio/audio",
+    "action": "/components/common/action/action",
+    "card": "/components/common/card/card",
+    "carousel": "/components/common/carousel/carousel",
+    "doc": "/components/common/doc/doc",
+    "functional-list": "/components/common/functional-list/functional-list",
+    "footer": "/components/common/footer/footer",
+    "grid": "/components/common/grid/grid",
+    "img": "/components/common/img/img",
+    "list": "/components/common/list/list",
+    "loading": "/components/common/loading/loading",
+    "location": "/components/common/location/location",
+    "navbar": "/components/common/navbar/navbar",
+    "plain-text": "/components/common/plain-text/plain-text",
+    "phone": "/components/common/phone/phone",
+    "share": "/components/common/share/share",
+    "title": "/components/common/title/title",
+    "video-player": "/components/common/video/video"
+  },
+  "style": "v2",
+  "darkmode": true,
+  "themeLocation": "styles/theme.json",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents",
+  "singlePage": { "navigationBarFit": "float" }
+}
