@@ -91,7 +91,7 @@ const getAssetsJob = (id) => {
         if (name.includes(".")) return name.endsWith(`.${id}`);
 
         return !existsSync(
-          resolve("app", value.path).replace(new RegExp(ext), `.${id}.${ext}`)
+          resolve("app", value.path).replace(new RegExp(ext), `.${id}${ext}`)
         );
       },
       since: lastRun(assetsJob),
@@ -142,7 +142,7 @@ const moveWechatFiles = () =>
       if (name.includes(".")) return name.endsWith(".wx");
 
       return !existsSync(
-        resolve("app", value.path).replace(new RegExp(ext), `.wx.${ext}`)
+        resolve("app", value.path).replace(new RegExp(ext), `.wx${ext}`)
       );
     },
     since: lastRun(moveWechatFiles),
@@ -203,7 +203,7 @@ const moveNenuyouthFiles = () =>
       if (name.includes(".")) return name.endsWith(".qy");
 
       return !existsSync(
-        resolve("app", value.path).replace(new RegExp(ext), `.qy.${ext}`)
+        resolve("app", value.path).replace(new RegExp(ext), `.qy${ext}`)
       );
     },
     since: lastRun(moveNenuyouthFiles),
@@ -269,7 +269,7 @@ const moveQQFiles = () =>
 
       if (
         existsSync(
-          resolve("app", value.path).replace(new RegExp(ext), `.qq.${ext}`)
+          resolve("app", value.path).replace(new RegExp(ext), `.qq${ext}`)
         )
       )
         return false;
