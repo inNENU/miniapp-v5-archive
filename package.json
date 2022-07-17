@@ -21,11 +21,15 @@
     "server/"
   ],
   "scripts": {
-    "build": "gulp build",
+    "build:qq": "gulp buildQQ",
+    "build:qy": "gulp buildNenuyouth",
+    "build:wx": "gulp buildWechat",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2",
-    "clean": "rimraf dist/components dist/frameset dist/function dist/icon dist/mixins dist/module/ dist/pages/ dist/settings dist/styles dist/utils dist/app.js dist/app.js.map dist/app.json dist/app.wxss dist/sitemap.json",
+    "clean": "node scripts/del.js",
     "commit": "git cz",
-    "dev": "gulp watch",
+    "dev:qq": "gulp watchQQ",
+    "dev:qy": "gulp watchNenuyouth",
+    "dev:wx": "gulp watchWechat",
     "lint": "pnpm lint:prettier --write && pnpm lint:wxs --write && pnpm lint:wxml --write && pnpm lint:eslint --fix && pnpm lint:stylelint --fix",
     "lint:check": "pnpm lint:prettier && pnpm lint:wxs && pnpm lint:wxml && pnpm lint:eslint && pnpm lint:stylelint",
     "lint:eslint": "eslint --ext .ts,.wxs .",
@@ -58,6 +62,7 @@
     "@typescript-eslint/parser": "5.30.6",
     "conventional-changelog-cli": "2.2.2",
     "cz-conventional-changelog": "3.3.0",
+    "del": "6.1.1",
     "eslint": "8.19.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
@@ -71,7 +76,6 @@
     "npm-check-updates": "15.2.6",
     "postcss": "8.4.14",
     "prettier": "2.7.1",
-    "rimraf": "3.0.2",
     "sort-package-json": "1.57.0",
     "stylelint": "14.9.1",
     "stylelint-config-prettier": "9.0.3",
@@ -80,5 +84,5 @@
     "stylelint-order": "5.0.0",
     "typescript": "4.7.4"
   },
-  "packageManager": "pnpm@7.5.1"
+  "packageManager": "pnpm@7.5.2"
 }

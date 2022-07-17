@@ -1,63 +1,300 @@
-const { dest, parallel, src, watch } = require("gulp");
+const { existsSync } = require("fs");
+const { dest, parallel, src, watch, lastRun } = require("gulp");
 const rename = require("gulp-rename");
 const { sass } = require("@mr-hope/gulp-sass");
 const typescript = require("gulp-typescript");
 const sourcemaps = require("gulp-sourcemaps");
+const { parse, resolve } = require("path");
 
-const tSProject = typescript.createProject("tsconfig.json");
+const tsProject = typescript.createProject("tsconfig.json");
 
-const buildWXSS = () =>
-  src("app/**/*.scss")
-    .pipe(
-      sass({
-        style: "compressed",
-        importers: [
-          // preserve `@import` rules
-          {
-            canonicalize: (url, { fromImport }) =>
-              fromImport
-                ? new URL(`wx:import?path=${url.replace(/^import:/, "")}`)
-                : null,
-            load: (canonicalUrl) => ({
-              contents: `@import "${canonicalUrl.searchParams.get(
-                "path"
-              )}.wxss"`,
-              syntax: "css",
-            }),
-          },
-        ],
-      }).on("error", sass.logError)
-    )
-    .pipe(rename({ extname: ".wxss" }))
-    .pipe(dest("dist"));
+const getScriptJob = (id) => {
+  const script = () =>
+    src(["app/**/*.ts", "typings/**/*.ts"], {
+      read: (value) => {
+        const name = parse(value.path).name.replace(/\.d$/, "");
 
-const watchWXSS = () =>
-  watch("app/**/*.scss", { ignoreInitial: false }, buildWXSS);
+        if (name.includes(".")) return name.endsWith(`.${id}`);
 
-const buildTypeScript = () =>
-  src(["app/**/*.ts", "typings/**/*.ts"])
-    .pipe(sourcemaps.init())
-    .pipe(tSProject())
-    .pipe(sourcemaps.write(".", { includeContent: false }))
-    .pipe(dest("dist"));
+        return !existsSync(
+          resolve("app", value.path).replace(/\.ts$/, `.${id}.ts`)
+        );
+      },
+    })
+      .pipe(
+        rename((path) => {
+          if (path.basename.endsWith(`.${id}`))
+            path.basename = path.basename.replace(new RegExp(`\\.${id}$`), "");
+        })
+      )
+      .pipe(sourcemaps.init())
+      .pipe(tsProject())
+      .pipe(sourcemaps.write(".", { includeContent: false }))
+      .pipe(dest("dist"));
 
-const watchTypeScript = () =>
-  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildTypeScript);
+  return script;
+};
 
-const moveFiles = () =>
-  src("app/**/*.{wxml,wxs,json,svg,png,webp}").pipe(dest("dist"));
+const getStyleJob = (id, ext = "wxss") => {
+  const style = () =>
+    src("app/**/*.scss", {
+      read: (value) => {
+        const { name } = parse(value.path);
 
-const watchFiles = () =>
+        if (name.includes(".")) return name.endsWith(`.${id}`);
+
+        return !existsSync(
+          resolve("app", value.path).replace(/\.scss$/, `.${id}.scss`)
+        );
+      },
+    })
+      .pipe(
+        rename((path) => {
+          if (path.basename.endsWith(`.${id}`))
+            path.basename = path.basename.replace(new RegExp(`\\.${id}$`), "");
+        })
+      )
+      .pipe(
+        sass({
+          style: "compressed",
+          importers: [
+            // preserve `@import` rules
+            {
+              canonicalize: (url, { fromImport }) =>
+                fromImport
+                  ? new URL(
+                      `miniapp:import?path=${url.replace(/^import:/, "")}`
+                    )
+                  : null,
+              load: (canonicalUrl) => ({
+                contents: `@import "${canonicalUrl.searchParams.get(
+                  "path"
+                )}.${ext}"`,
+                syntax: "css",
+              }),
+            },
+          ],
+        }).on("error", sass.logError)
+      )
+      .pipe(rename({ extname: `.${ext}` }))
+      .pipe(dest("dist"));
+
+  return style;
+};
+
+const getAssetsJob = (id) => {
+  const assetsJob = () =>
+    src("app/**/*.{json,svg,png,webp}", {
+      read: (value) => {
+        const { name, ext } = parse(value.path);
+
+        if (name.includes(".")) return name.endsWith(`.${id}`);
+
+        return !existsSync(
+          resolve("app", value.path).replace(new RegExp(ext), `.${id}.${ext}`)
+        );
+      },
+      since: lastRun(assetsJob),
+    })
+      .pipe(
+        rename((path) => {
+          if (path.basename.endsWith(`.${id}`))
+            path.basename = path.basename.replace(new RegExp(`\\.${id}$`), "");
+        })
+      )
+      .pipe(dest("dist"));
+
+  return assetsJob;
+};
+
+/* Wechat */
+
+const buildWechatScript = getScriptJob("wx");
+const watchWechatScript = () =>
+  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildWechatScript);
+
+const buildWechatWXSS = getStyleJob("wx");
+const watchWechatWXSS = () =>
+  watch("app/**/*.scss", { ignoreInitial: false }, buildWechatWXSS);
+
+const moveWechatAssets = getAssetsJob("wx");
+const watchWechatAssets = () =>
   watch(
-    "app/**/*.{wxml,wxs,json,svg,png,webp}",
+    "app/**/*.{json,svg,png,webp}",
     { ignoreInitial: false },
-    moveFiles
+    moveWechatAssets
   );
 
-const watchCommand = parallel(watchWXSS, watchTypeScript, watchFiles);
-const build = parallel(buildWXSS, buildTypeScript, moveFiles);
+const moveWechatFiles = () =>
+  src("app/**/*.{wxml,wxs}", {
+    read: (value) => {
+      const { name, ext } = parse(value.path);
 
-exports.watch = watchCommand;
-exports.build = build;
+      if (name.includes(".")) return name.endsWith(".wx");
 
-exports.default = build;
+      return !existsSync(
+        resolve("app", value.path).replace(new RegExp(ext), `.wx.${ext}`)
+      );
+    },
+    since: lastRun(moveWechatFiles),
+  })
+    .pipe(
+      rename((path) => {
+        if (path.basename.endsWith(".wx"))
+          path.basename = path.basename.replace(/\.wx$/, "");
+      })
+    )
+    .pipe(dest("dist"));
+
+const watchWechatFiles = () =>
+  watch("app/**/*.{wxml,wxs}", { ignoreInitial: false }, moveWechatFiles);
+
+const watchWechat = parallel(
+  watchWechatScript,
+  watchWechatWXSS,
+  watchWechatAssets,
+  watchWechatFiles
+);
+const buildWechat = parallel(
+  buildWechatWXSS,
+  buildWechatScript,
+  moveWechatAssets,
+  moveWechatFiles
+);
+
+/* Nenuyouth, marked as qy */
+
+const buildNenuyouthScript = getScriptJob("qy");
+const watchNenuyouthScript = () =>
+  watch(
+    "{app,typings}/**/*.ts",
+    { ignoreInitial: false },
+    buildNenuyouthScript
+  );
+
+const buildNenuyouthWXSS = getStyleJob("qy");
+const watchNenuyouthWXSS = () =>
+  watch("app/**/*.scss", { ignoreInitial: false }, buildNenuyouthWXSS);
+
+const moveNenuyouthAssets = getAssetsJob("qy");
+const watchNenuyouthAssets = () =>
+  watch(
+    "app/**/*.{json,svg,png,webp}",
+    { ignoreInitial: false },
+    moveNenuyouthAssets
+  );
+
+const moveNenuyouthFiles = () =>
+  src("app/**/*.{wxml,wxs}", {
+    read: (value) => {
+      const { name, ext } = parse(value.path);
+
+      if (name.includes(".")) return name.endsWith(".qy");
+
+      return !existsSync(
+        resolve("app", value.path).replace(new RegExp(ext), `.qy.${ext}`)
+      );
+    },
+    since: lastRun(moveNenuyouthFiles),
+  })
+    .pipe(
+      rename((path) => {
+        if (path.basename.endsWith(".qy"))
+          path.basename = path.basename.replace(/\.qy$/, "");
+      })
+    )
+    .pipe(dest("dist"));
+
+const watchNenuyouthFiles = () =>
+  watch("app/**/*.{wxml,wxs}", { ignoreInitial: false }, moveNenuyouthFiles);
+
+const watchNenuyouth = parallel(
+  watchNenuyouthScript,
+  watchNenuyouthWXSS,
+  watchNenuyouthAssets,
+  watchNenuyouthFiles
+);
+const buildNenuyouth = parallel(
+  buildNenuyouthWXSS,
+  buildNenuyouthScript,
+  moveNenuyouthAssets,
+  moveNenuyouthFiles
+);
+
+/* QQ */
+
+const buildQQScript = getScriptJob("qq");
+const watchQQScript = () =>
+  watch("{app,typings}/**/*.ts", { ignoreInitial: false }, buildQQScript);
+
+const buildQQWXSS = getStyleJob("qq");
+const watchQQWXSS = () =>
+  watch("app/**/*.scss", { ignoreInitial: false }, buildQQWXSS);
+
+const moveQQAssets = getAssetsJob("qq");
+const watchQQAssets = () =>
+  watch("app/**/*.{json,svg,png,webp}", { ignoreInitial: false }, moveQQAssets);
+
+const moveQQFiles = () =>
+  src("app/**/*.{wxml,wxs,qml,qs}", {
+    read: (value) => {
+      const { name, ext } = parse(value.path);
+
+      if (name.includes(".")) return name.endsWith(".qq");
+
+      if (
+        ext === "wxml" &&
+        existsSync(resolve("app", value.path).replace(/\.wxml$/, `.qml`))
+      )
+        return false;
+
+      if (
+        ext === "wxs" &&
+        existsSync(resolve("app", value.path).replace(/\.wxs$/, `.qs`))
+      )
+        return false;
+
+      if (
+        existsSync(
+          resolve("app", value.path).replace(new RegExp(ext), `.qq.${ext}`)
+        )
+      )
+        return false;
+
+      return true;
+    },
+    since: lastRun(moveQQFiles),
+  })
+    .pipe(
+      rename((path) => {
+        if (path.basename.endsWith(".qq"))
+          path.basename = path.basename.replace(/\.qq$/, "");
+        else if (path.extname === ".qs") path.extname = ".wxs";
+        else if (path.extname === ".qml") path.extname = ".wxml";
+      })
+    )
+    .pipe(dest("dist"));
+
+const watchQQFiles = () =>
+  watch("app/**/*.{wxml,wxs,qml,qs}", { ignoreInitial: false }, moveQQFiles);
+
+const watchQQ = parallel(
+  watchQQScript,
+  watchQQWXSS,
+  watchQQAssets,
+  watchQQFiles
+);
+const buildQQ = parallel(buildQQWXSS, buildQQScript, moveQQAssets, moveQQFiles);
+
+/* exports */
+
+exports.default = buildWechat;
+
+exports.watchWechat = watchWechat;
+exports.buildWechat = buildWechat;
+
+exports.watchNenuyouth = watchNenuyouth;
+exports.buildNenuyouth = buildNenuyouth;
+
+exports.watchQQ = watchQQ;
+exports.buildQQ = buildQQ;
