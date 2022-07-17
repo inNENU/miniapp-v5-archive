@@ -5,7 +5,7 @@
     type="primary"
     open-type="contact"
   >
-    联系{{appID === 'wx9ce37d9662499df3'? '校会君': ' Mr.Hope'}}
+    联系 Mr.Hope
   </button>
   <button
     wx:if="{{all || feedback}}"

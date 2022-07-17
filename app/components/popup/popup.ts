@@ -44,8 +44,7 @@ Component({
       const { windowHeight, safeArea } = getWindowInfo();
 
       this.setData({
-        // issues in qq where safeArea is not defined
-        paddingBottom: windowHeight - Math.max(safeArea?.bottom, 24),
+        paddingBottom: windowHeight - Math.max(safeArea.bottom, 24),
       });
     },
     // 用户确认

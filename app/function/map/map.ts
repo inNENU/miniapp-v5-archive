@@ -2,7 +2,6 @@ import { $Page } from "@mptool/enhance";
 
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
-import { navigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
 import { getWindowInfo, modal, tip } from "../../utils/wx";
 
@@ -34,9 +33,7 @@ type Area = "benbu" | "jingyue";
 $Page("map", {
   data: {
     /** 夜间模式状态 */
-    appID: globalData.appID,
     darkmode: globalData.darkmode,
-    env: globalData.env,
 
     /** 地图数据 */
     map: {
@@ -48,7 +45,7 @@ $Page("map", {
     /** 显示地点列表 */
     showLocation: false,
     /** 显示导航 */
-    showNavigate: false,
+
     /** 显示卫星图 */
     showSatellite: false,
 
@@ -56,11 +53,6 @@ $Page("map", {
     locationPopup: {
       title: "全部",
       subtitle: "地点列表",
-      cancel: false,
-      confirm: false,
-    },
-    navigatePopup: {
-      title: "导航",
       cancel: false,
       confirm: false,
     },
@@ -159,13 +151,7 @@ $Page("map", {
       success: ({ scale }) => {
         this.context.getCenterLocation({
           success: ({ latitude, longitude }) => {
-            this.setData({
-              map: {
-                scale,
-                latitude,
-                longitude,
-              },
-            });
+            this.setData({ map: { scale, latitude, longitude } });
           },
         });
       },
@@ -301,18 +287,6 @@ $Page("map", {
 
   toggleLocationPopup() {
     this.setData({ showLocation: !this.data.showLocation });
-  },
-
-  toggleNavigatePopup() {
-    this.setData({ showNavigate: !this.data.showNavigate });
-  },
-
-  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
-    const { name, latitude, longitude } = this.data.marker.all.find(
-      (item) => item.id === Number(currentTarget.dataset.id)
-    )!;
-
-    navigation(JSON.stringify({ latitude, longitude, name }));
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {

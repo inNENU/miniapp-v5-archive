@@ -7,7 +7,7 @@ module.exports = {
    *
    * @returns 地图设置
    */
-  getSetting: function (env, darkmode, showSatellite) {
+  getSetting: function (darkmode, showSatellite) {
     var settings = {
       showLocation: true,
       showScale: true,
@@ -19,10 +19,8 @@ module.exports = {
       enableTraffic: true,
     };
 
-    if (env === "wx") {
-      settings.subkey = "NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4";
-      settings.layerStyle = darkmode ? 2 : 1;
-    }
+    settings.subkey = "NLVBZ-PGJRQ-T7K5F-GQ54N-GIXDH-FCBC4";
+    settings.layerStyle = darkmode ? 2 : 1;
 
     return settings;
   },

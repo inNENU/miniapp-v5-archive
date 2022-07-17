@@ -4,7 +4,6 @@ import { readJSON } from "@mptool/file";
 import { defaultScroller } from "../../mixins/page-scroll";
 import { getImagePrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
-import { navigation } from "../../utils/location";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
@@ -15,7 +14,6 @@ const { globalData } = getApp<AppOption>();
 $Page("location", {
   data: {
     page: <PageData>{},
-    point: "",
   },
 
   state: { id: "" },
@@ -27,7 +25,7 @@ $Page("location", {
   },
 
   onLoad(option) {
-    const { id, point = "" } = option;
+    const { id } = option;
 
     if (id) {
       if (globalData.page.id === id) setPage({ option, ctx: this });
@@ -52,8 +50,6 @@ $Page("location", {
     this.setData({
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
-      env: globalData.env,
-      point,
     });
   },
 
@@ -65,41 +61,34 @@ $Page("location", {
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
-    const { page, point } = this.data;
+    const { page } = this.data;
 
     return {
       title: page.title,
-      path: `/function/map/location?id=${this.state.id}${
-        point ? `&point=${point}` : ""
-      }`,
+      path: `/function/map/location?id=${this.state.id}`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
-    const { page, point } = this.data;
+    const { page } = this.data;
 
     return {
       title: page.title,
-      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
+      query: `id=${this.state.id}`,
     };
   },
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
-    const { page, point } = this.data;
+    const { page } = this.data;
 
     return {
       title: page.title,
       imageUrl: `${getImagePrefix()}.jpg`,
-      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
+      query: `id=${this.state.id}`,
     };
   },
 
   defaultScroller,
-
-  /** 开启导航 */
-  navigate() {
-    navigation(this.data.point);
-  },
 
   /** 返回按钮功能 */
   back() {

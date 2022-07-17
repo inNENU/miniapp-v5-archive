@@ -4,16 +4,11 @@ import { getImagePrefix } from "../utils/config";
 import { id2path } from "../utils/id";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
-import type { AppOption } from "../app";
 import type { PageData, PageOption } from "../../typings";
-
-/** 全局数据 */
-const { globalData } = getApp<AppOption>();
 
 $Page("page", {
   data: {
     page: <PageData & { id: string }>{},
-    env: globalData.env,
   },
 
   onNavigate(option) {

@@ -5,8 +5,8 @@
   longitude="{{map.longitude}}"
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
-  markers="{{helper.getMarkers(marker[currentCategory], darkmode)}}"
-  setting="{{helper.getSetting(env, darkmode)}}"
+  markers="{{helper.getMarkers(marker[currentCategory])}}"
+  setting="{{helper.getSetting()}}"
   bindmarkertap="markerTap"
   bindcallouttap="markerTap"
   bindupdated="update"
@@ -20,7 +20,7 @@
   >
     <cover-image
       class="icon-back"
-      src="/icon/back{{darkmode?'White':''}}.png"
+      src="/icon/back{{darkmode? 'White': ''}}.png"
     />
   </cover-view>
 

@@ -1,7 +1,6 @@
 import { $Component, logger } from "@mptool/enhance";
 
 import { server, getTitle } from "../../../utils/config";
-import { path2id } from "../../../utils/id";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
@@ -9,7 +8,7 @@ import type { AppOption } from "../../../app";
 import type { PageData } from "../../../../typings";
 
 const {
-  globalData: { env, appID },
+  globalData: { appID },
 } = getApp<AppOption>();
 
 type ShareConfig = Pick<
@@ -22,9 +21,6 @@ interface ActionConfig {
   text: string;
   hidden?: boolean;
   openType?: string;
-  openId?: string;
-  groupId?: string;
-  shareMode?: string[];
   action?: string;
 }
 
@@ -50,14 +46,6 @@ $Component({
       )
         .then(() => tip("二维码已存至相册"))
         .catch(() => tip("二维码保存失败"));
-    },
-
-    copyQQLink() {
-      this.copy(
-        `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
-          `module/page?path=${path2id(this.data.config.id)}`
-        )}`
-      );
     },
 
     wechatMomentShare() {
@@ -107,72 +95,28 @@ $Component({
       const actions: ActionConfig[] = [];
 
       if (config.shareable) {
-        if (env === "qq")
-          actions.push(
-            {
-              icon: "./icon/recent",
-              text: "分享给最近联系人",
-              openType: "share",
-              shareMode: ["recentContacts"],
-            },
-            {
-              icon: "/icon/qq",
-              text: "分享给好友",
-              openType: "share",
-              shareMode: ["qq"],
-            },
-            {
-              icon: "./icon/qzone",
-              text: "分享到空间",
-              openType: "share",
-              shareMode: ["qzone"],
-            },
-            {
-              icon: "./icon/link",
-              text: "复制链接",
-              action: "copyQQLink",
-            },
-            {
-              icon: "./icon/star",
-              text: "收藏",
-              openType: "addToFavorites",
-            },
-            {
-              icon: "/icon/wechat",
-              text: "分享给微信好友",
-              openType: "share",
-              shareMode: ["wechatFriends"],
-            },
-            {
-              icon: "./icon/moments",
-              text: "分享到朋友圈",
-              openType: "share",
-              shareMode: ["wechatMoment"],
-            }
-          );
-        else
-          actions.push(
-            {
-              icon: "/icon/wechat",
-              text: "分享给好友",
-              openType: "share",
-            },
-            {
-              icon: "./icon/moments",
-              text: "分享到朋友圈",
-              action: "wechatMomentShare",
-            },
-            {
-              icon: "./icon/link",
-              text: "复制链接",
-              action: "copyWechatLink",
-            },
-            {
-              icon: "./icon/star",
-              text: "收藏",
-              action: "wechatStar",
-            }
-          );
+        actions.push(
+          {
+            icon: "/icon/wechat",
+            text: "分享给好友",
+            openType: "share",
+          },
+          {
+            icon: "./icon/moments",
+            text: "分享到朋友圈",
+            action: "wechatMomentShare",
+          },
+          {
+            icon: "./icon/link",
+            text: "复制链接",
+            action: "copyWechatLink",
+          },
+          {
+            icon: "./icon/star",
+            text: "收藏",
+            action: "wechatStar",
+          }
+        );
 
         if (config.qrcode !== false)
           actions.push({
@@ -186,8 +130,7 @@ $Component({
         actions.push({
           icon: "./icon/contact",
           text: "联系 Mr.Hope",
-          openType: env === "qq" ? "addFriend" : "contact",
-          openId: env === "qq" ? "868D7B2F0C609B4285698EAB77A47BA1" : "",
+          openType: "contact",
         });
 
       this.setData({ actions });

@@ -9,6 +9,7 @@ $Component({
       type: String,
     },
   },
+
   lifetimes: {
     attached() {
       const { statusBarHeight } = globalData.info;
@@ -19,17 +20,14 @@ $Component({
       });
 
       this.createSelectorQuery()
-        .in(this)
         .select(".header")
-        .boundingClientRect((res) => {
-          this.setData({
-            // issues in QQ where the selector not working
-            height: res?.height || statusBarHeight + 60,
-          });
+        .boundingClientRect(({ height }) => {
+          this.setData({ height });
         })
         .exec();
     },
   },
+
   methods: {
     back() {
       if (getCurrentPages().length === 1) this.$switch("main");

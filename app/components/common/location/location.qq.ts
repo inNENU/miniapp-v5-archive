@@ -1,16 +1,10 @@
 import { $Component } from "@mptool/enhance";
-import { navigation } from "../../../utils/location";
-import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type {
   LocationComponentOptions,
   LocationConfig,
 } from "../../../../typings";
-import type { AppOption } from "../../../app";
-
-const { globalData } = getApp<AppOption>();
-const { appID, env } = globalData;
 
 const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
@@ -29,9 +23,6 @@ $Component({
   },
 
   data: {
-    appID,
-    darkmode: globalData.darkmode,
-    env,
     markers: <(LocationConfig & { id: number })[]>[],
     id: -1,
     title: "",
@@ -67,17 +58,6 @@ $Component({
   },
 
   methods: {
-    navigate() {
-      const { config, id, markers } = this.data;
-
-      if (config.navigate !== false) {
-        if (id === -1) {
-          if (markers.length === 1) navigation(getPoint(markers[0]));
-          else tip("请选择一个点");
-        } else navigation(getPoint(markers[id]));
-      }
-    },
-
     detail() {
       const { id, hasDetail } = this.data;
 
@@ -95,16 +75,6 @@ $Component({
       this.setData({ id, title: point.name, hasDetail: Boolean(point.path) });
 
       if (point.path) this.$preload(`location?id=${point.path}`);
-    },
-
-    calloutTap({ detail }: WechatMiniprogram.CalloutTap) {
-      const point = this.data.markers[detail.markerId];
-      const { navigate } = this.data.config;
-
-      if (point.path)
-        this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
-      else if (appID === "wx9ce37d9662499df3" && navigate !== false)
-        navigation(getPoint(this.data.markers[detail.markerId]));
     },
   },
 });

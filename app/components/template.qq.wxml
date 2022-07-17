@@ -64,10 +64,7 @@
         darkmode="{{darkmode}}"
         nav="{{template.getErrorNavConfig(page)}}"
       />
-      <template
-        is="error"
-        data="{{ id: page.id, from: page.from, env: page.env || '' }}"
-      />
+      <template is="error" data="{{ id: page.id, from: page.from }}" />
     </block>
 
     <!-- 加载页面 -->
@@ -117,15 +114,11 @@
       <text>From: {{ from || '未知' }}</text>
     </view>
     <button
-      wx:if="{{env === 'qq'}}"
       type="primary"
       class="primary"
       open-type="addFriend"
       open-id="868D7B2F0C609B4285698EAB77A47BA1"
     >
-      反馈给 Mr.Hope
-    </button>
-    <button wx:else class="primary" type="primary" open-type="contact">
       反馈给 Mr.Hope
     </button>
   </view>

@@ -41,11 +41,11 @@ Component({
 
   methods: {
     updateLayout() {
-      const { windowHeight, safeArea } = getWindowInfo();
+      const { windowHeight } = getWindowInfo();
 
+      // TODO: issues in qq where safeArea is not defined
       this.setData({
-        // issues in qq where safeArea is not defined
-        paddingBottom: windowHeight - Math.max(safeArea?.bottom, 24),
+        paddingBottom: windowHeight - 24,
       });
     },
     // 用户确认

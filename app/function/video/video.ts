@@ -43,15 +43,12 @@ $Page("video", {
     getJSON<VideoGroup[]>("function/video/index").then((list) => {
       let groupID = 0;
       let listID = 0;
-      const videoList =
-        globalData.appID === "wx9ce37d9662499df3"
-          ? list
-          : list
-              .map((category) => ({
-                title: category.title,
-                list: category.list.filter((item) => !("vid" in item)),
-              }))
-              .filter((item) => item.list.length);
+      const videoList = list
+        .map((category) => ({
+          title: category.title,
+          list: category.list.filter((item) => !("vid" in item)),
+        }))
+        .filter((item) => item.list.length);
 
       if (options.scene) {
         const ids = options.scene.split("-").map((id) => Number(id));
@@ -132,10 +129,8 @@ $Page("video", {
   /** 切换播放视频 */
   onListTap(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { groupID: number; listID: number }
     >
   ) {
@@ -160,8 +155,7 @@ $Page("video", {
 
   /** 正常播放时隐藏提示 */
   onVideoPlay() {
-    // TODO: Wait for api-typinsg to fix
-    wx.hideToast({});
+    wx.hideToast();
   },
 
   /** 提示用户视频加载出错 */

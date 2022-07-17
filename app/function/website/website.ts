@@ -52,10 +52,8 @@ $Page("website", {
   copy({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
+    Record<string, never>,
+    Record<string, never>,
     { link: string }
   >) {
     wx.setClipboardData({

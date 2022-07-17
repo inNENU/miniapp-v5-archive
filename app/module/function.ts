@@ -7,12 +7,10 @@ import { modal } from "../utils/wx";
 import type { AppOption } from "../app";
 
 const {
-  globalData: { appID, theme },
+  globalData: { theme },
 } = getApp<AppOption>();
 
 $Page("function", {
-  data: { appID },
-
   onLoad(options) {
     if (options.scene) {
       const arg = decodeURIComponent(options.scene);

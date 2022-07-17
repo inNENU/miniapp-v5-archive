@@ -12,20 +12,11 @@
     <view wx:if="{{config.desc}}" class="desc bt">{{config.desc}}</view>
 
     <view class="action-list">
-      <button
-        wx:if="{{config.qqid && env === 'qq'}}"
-        class="action"
-        hover-class="button-hover"
-        open-type="addFriend"
-        open-id="{{config.qqid}}"
-      >
-        <image class="icon" src="/icon/qq.svg" />
-      </button>
       <view
-        wx:elif="{{config.qq || config.qqcode}}"
+        wx:if="{{config.qq || config.qqcode}}"
         class="action"
         hover-class="button-hover"
-        catch:tap="qq"
+        catch:tap="addQQ"
       >
         <image class="icon" src="/icon/qq.svg" />
       </view>
@@ -43,7 +34,7 @@
         wx:elif="{{config.wxid || config.wxcode}}"
         class="action"
         hover-class="button-hover"
-        catch:tap="wechat"
+        catch:tap="addWechat"
       >
         <image class="icon" src="/icon/wechat.svg" />
       </view>
@@ -51,7 +42,7 @@
         wx:if="{{config.site}}"
         class="action"
         hover-class="button-hover"
-        catch:tap="site"
+        catch:tap="openSite"
       >
         <image class="icon" src="./icon/web.svg" />
       </view>
@@ -59,17 +50,9 @@
         wx:if="{{config.mail}}"
         class="action"
         hover-class="button-hover"
-        catch:tap="email"
+        catch:tap="copyEMail"
       >
         <image class="icon" src="./icon/mail.svg" />
-      </view>
-      <view
-        wx:if="{{config.location && appID === 'wx9ce37d9662499df3'}}"
-        class="action"
-        hover-class="button-hover"
-        catch:tap="navigate"
-      >
-        <image class="icon" src="/icon/navigate.svg" />
       </view>
     </view>
   </view>

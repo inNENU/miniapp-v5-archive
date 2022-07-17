@@ -39,12 +39,12 @@
               hover-stay-time="100"
               data-group="{{groupIndex}}"
               data-index="{{index}}"
-              catch:tap="{{ env === 'wx'?'addContact':'copyContact'}}"
+              catch:tap="addContact"
             >
               <image
                 class="icon"
                 mode="widthFix"
-                src="/components/common/phone/icon/{{env === 'wx'? 'add': 'copy'}}.svg"
+                src="/components/common/phone/icon/add.svg"
               />
             </view>
           </view>

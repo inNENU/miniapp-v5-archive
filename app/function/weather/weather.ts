@@ -376,8 +376,13 @@ $Page("weather", {
   },
 
   /** 贴士详情 */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  hint(event: WechatMiniprogram.TouchEvent<{}, {}, { id: number }>) {
+  hint(
+    event: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { id: number }
+    >
+  ) {
     const hint = this.data.weather.hints[event.currentTarget.dataset.id];
 
     modal(hint.name, hint.detail);

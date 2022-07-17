@@ -3,13 +3,12 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix, server } from "../../utils/config";
 import { ensureJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
-import { modal, savePhoto, tip } from "../../utils/wx";
+import { modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { WechatConfig } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-const { env } = globalData;
 
 $Page("wechat-detail", {
   data: {
@@ -83,18 +82,7 @@ $Page("wechat-detail", {
   >) {
     const { title, url } = currentTarget.dataset;
 
-    if (env === "qq")
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "无法跳转",
-            "QQ小程序并不支持跳转微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
-    else if (this.data.config.authorized)
-      this.$go(`web?url=${url}&title=${title}`);
+    if (this.data.config.authorized) this.$go(`web?url=${url}&title=${title}`);
     // 无法跳转，复制链接到剪切板
     else
       wx.setClipboardData({
@@ -112,11 +100,7 @@ $Page("wechat-detail", {
     const { follow, qrcode } = this.data.config;
 
     if (follow) this.$go(`web?url=${follow}&title=欢迎关注`);
-    else if (env === "wx") wx.previewImage({ urls: [qrcode] });
-    else
-      savePhoto(qrcode)
-        .then(() => tip("二维码已存至相册"))
-        .catch(() => tip("二维码保存失败"));
+    else wx.previewImage({ urls: [qrcode] });
   },
 
   back() {

@@ -1,0 +1,56 @@
+<wxs module="phone" src="./phone.wxs" />
+
+<view class="ios">
+  <header title="师大黄页" />
+  <view style="height: 15px" />
+  <tab-bar nav-list="{{phone.getName(config)}}" height="{{height || 300}}">
+    <block
+      wx:for="{{config}}"
+      wx:key="name"
+      wx:for-item="category"
+      wx:for-index="groupIndex"
+    >
+      <scroll-view scroll-y class="phone-wrapper" slot="page{{groupIndex + 1}}">
+        <view wx:for="{{category.list}}" wx:key="name" class="phone bb">
+          <view class="info">
+            <view class="name">{{item.name}}</view>
+            <view class="num">{{item.num}}</view>
+          </view>
+          <!-- 拨打电话按钮 -->
+          <view class="actions">
+            <view
+              class="action"
+              hover-class="button-hover"
+              hover-stay-time="100"
+              data-group="{{groupIndex}}"
+              data-index="{{index}}"
+              catch:tap="call"
+            >
+              <image
+                class="icon"
+                mode="widthFix"
+                src="/components/common/phone/icon/call.svg"
+              />
+            </view>
+            <!-- 复制 -->
+            <view
+              class="action"
+              hover-class="button-hover"
+              hover-stay-time="100"
+              data-group="{{groupIndex}}"
+              data-index="{{index}}"
+              catch:tap="copyContact"
+            >
+              <image
+                class="icon"
+                mode="widthFix"
+                src="/components/common/phone/icon/copy.svg"
+              />
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+  </tab-bar>
+  <footer />
+</view>

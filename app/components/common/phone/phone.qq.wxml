@@ -1,0 +1,27 @@
+<!-- 标题 -->
+<view wx:if="{{config.header}}" class="phone-component-header"
+  >{{config.header}}</view
+>
+<view class="phone-component-wrapper">
+  <!-- 电话图标 -->
+  <image class="phone-icon" mode="widthFix" src="./icon/phone.svg" />
+  <!-- 电话号码 -->
+  <view class="number">{{config.num}}</view>
+  <!-- 拨打电话按钮 -->
+  <view
+    class="action"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    catch:tap="call"
+  >
+    <image class="icon" mode="widthFix" src="./icon/call.svg" />
+  </view>
+  <view
+    class="action"
+    hover-class="button-hover"
+    hover-stay-time="100"
+    catch:tap="copyContact"
+  >
+    <image class="icon" mode="widthFix" src="./icon/copy.svg" />
+  </view>
+</view>

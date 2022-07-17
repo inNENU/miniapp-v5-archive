@@ -4,12 +4,7 @@ import { navigation } from "../../../utils/location";
 import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
-import type { AppOption } from "../../../app";
 import type { AccountComponentOptions } from "../../../../typings";
-
-const {
-  globalData: { appID, env },
-} = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -20,22 +15,15 @@ $Component({
     },
   },
 
-  data: { appID, env },
-
   methods: {
-    /** QQ */
-    qq(): void {
+    /** 添加 QQ */
+    addQQ(): void {
       const { qq, qqcode = "" } = this.data.config;
 
       if (qqcode)
-        if (env === "qq")
-          wx.previewImage({
-            urls: [qqcode],
-          });
-        else
-          savePhoto(qqcode)
-            .then(() => tip("二维码已存至相册"))
-            .catch(() => tip("二维码保存失败"));
+        savePhoto(qqcode)
+          .then(() => tip("二维码已存至相册"))
+          .catch(() => tip("二维码保存失败"));
       else if (qq)
         wx.setClipboardData({
           data: qq.toString(),
@@ -46,7 +34,7 @@ $Component({
     },
 
     /** 微信 */
-    wechat(): void {
+    addWechat(): void {
       const { account, wxid, wxcode } = this.data.config;
 
       if (account) this.$go(`account-detail?path=${account}`);
@@ -60,7 +48,7 @@ $Component({
         });
     },
 
-    site(): void {
+    openSite(): void {
       const { site } = this.data.config;
 
       wx.setClipboardData({
@@ -70,7 +58,7 @@ $Component({
       });
     },
 
-    email(): void {
+    copyEmail(): void {
       const { mail } = this.data.config;
 
       wx.setClipboardData({

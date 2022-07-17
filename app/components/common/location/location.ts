@@ -3,14 +3,13 @@ import { navigation } from "../../../utils/location";
 import { tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
+import type { AppOption } from "../../../app";
 import type {
   LocationComponentOptions,
   LocationConfig,
 } from "../../../../typings";
-import type { AppOption } from "../../../app";
 
 const { globalData } = getApp<AppOption>();
-const { appID, env } = globalData;
 
 const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
@@ -29,9 +28,7 @@ $Component({
   },
 
   data: {
-    appID,
     darkmode: globalData.darkmode,
-    env,
     markers: <(LocationConfig & { id: number })[]>[],
     id: -1,
     title: "",
@@ -106,12 +103,9 @@ $Component({
 
     calloutTap({ detail }: WechatMiniprogram.CalloutTap) {
       const point = this.data.markers[detail.markerId];
-      const { navigate } = this.data.config;
 
       if (point.path)
         this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
-      else if (appID === "wx9ce37d9662499df3" && navigate !== false)
-        navigation(getPoint(this.data.markers[detail.markerId]));
     },
   },
 });

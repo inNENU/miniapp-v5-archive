@@ -14,6 +14,7 @@ $Component({
     },
     searchword: String,
   },
+
   data: {
     /** 是否展示输入框 */
     showInput: false,
@@ -50,8 +51,11 @@ $Component({
     },
 
     select(
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      event: WechatMiniprogram.TouchEvent<{}, {}, { index: number }>
+      event: WechatMiniprogram.TouchEvent<
+        Record<string, never>,
+        Record<string, never>,
+        { index: number }
+      >
     ): void {
       const value = this.data.words[event.currentTarget.dataset.index];
 

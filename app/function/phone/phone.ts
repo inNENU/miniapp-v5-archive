@@ -3,12 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { addPhoneContact, getWindowInfo, tip } from "../../utils/wx";
-
-import type { AppOption } from "../../app";
-
-const { globalData } = getApp<AppOption>();
-const { env } = globalData;
+import { addPhoneContact, getWindowInfo } from "../../utils/wx";
 
 interface PhoneItemConfig {
   name: string;
@@ -24,7 +19,6 @@ interface PhoneConfig {
 $Page("phone", {
   data: {
     config: <PhoneConfig[]>[],
-    env,
   },
 
   onNavigate() {
@@ -57,18 +51,18 @@ $Page("phone", {
   }),
 
   onResize({ size }) {
+    const info = getWindowInfo();
+
     this.setData({
-      height: size.windowHeight - globalData.info.statusBarHeight - 160,
+      height: size.windowHeight - info.statusBarHeight - 160,
     });
   },
 
   getConfig({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
+    Record<string, never>,
+    Record<string, never>,
     { group: number; index: number }
   >): PhoneItemConfig {
     const { group, index } = currentTarget.dataset;
@@ -84,10 +78,8 @@ $Page("phone", {
 
   call(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { group: number; index: number }
     >
   ) {
@@ -98,10 +90,8 @@ $Page("phone", {
 
   addContact(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { group: number; index: number }
     >
   ) {
@@ -118,25 +108,6 @@ $Page("phone", {
         : item.locate === "jingyue"
         ? { addressStreet: "吉林省长春市净月大街2555号" }
         : {}),
-    });
-  },
-
-  copyContact(
-    event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      { group: number; index: number }
-    >
-  ) {
-    const item = this.getConfig(event);
-
-    wx.setClipboardData({
-      data: this.getNumber(item),
-      success: () => {
-        tip("号码已复制");
-      },
     });
   },
 });

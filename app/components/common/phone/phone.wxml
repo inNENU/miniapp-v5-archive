@@ -20,12 +20,8 @@
     class="action"
     hover-class="button-hover"
     hover-stay-time="100"
-    catch:tap="{{ env === 'wx'?'addContact':'copyContact'}}"
+    catch:tap="addContact"
   >
-    <image
-      class="icon"
-      mode="widthFix"
-      src="./icon/{{env === 'wx'? 'add': 'copy'}}.svg"
-    />
+    <image class="icon" mode="widthFix" src="./icon/add.svg" />
   </view>
 </view>

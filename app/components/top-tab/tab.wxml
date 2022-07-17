@@ -23,9 +23,9 @@
     class="page-wrapper"
     style="{{height? 'height:' + (height - 37) + 'px;': ''}}"
     current="{{current}}"
-    bindchange="change"
-    bindtransition="transition"
-    bindanimationfinish="aminationFinish"
+    catch:change="change"
+    catch:transition="transition"
+    catch:animationfinish="aminationFinish"
   >
     <swiper-item class="tab-page" wx:for="{{navList}}" wx:key="index">
       <slot name="page{{index + 1}}" />
