@@ -57,22 +57,6 @@
   "packOptions": {
     "ignore": [
       {
-        "value": "package.json",
-        "type": "file"
-      },
-      {
-        "value": "md",
-        "type": "suffix"
-      },
-      {
-        "value": "scss",
-        "type": "suffix"
-      },
-      {
-        "value": "ts",
-        "type": "suffix"
-      },
-      {
         "value": "bak",
         "type": "suffix"
       }
