@@ -406,6 +406,11 @@ export const startup = (globalData: GlobalData): void => {
     },
   });
 
+  if (wx.canIUse("onThemeChange"))
+    wx.onThemeChange(({ theme }) => {
+      globalData.theme = theme;
+    });
+
   // 加载字体
   // wx.loadFontFace({
   //   family: "FZSSJW",

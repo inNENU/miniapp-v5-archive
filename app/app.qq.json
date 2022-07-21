@@ -97,8 +97,8 @@
     "uploadFile": 8000,
     "downloadFile": 25000
   },
+  "darkmode": true,
   "debug": false,
-  "frameset": true,
   "resizable": true,
   "permission": {
     "scope.userLocation": {
