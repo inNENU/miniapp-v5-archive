@@ -3,7 +3,7 @@ import { put, take } from "@mptool/file";
 
 import { checkResUpdate } from "../../utils/app";
 import { tip } from "../../utils/api";
-import { getImagePrefix, getTitle } from "../../utils/config";
+import { getImagePrefix, getTitle, server } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
 
@@ -19,7 +19,7 @@ const { globalData } = getApp<AppOption>();
 $Page("user", {
   data: {
     title: "in 东师",
-    logo: "/frameset/placeholder.png",
+    logo: `${server}/img/inNENU.png`,
     desc: "in 东师，就用 in 东师",
     page: <PageDataWithContent>{
       title: "我的东师",
