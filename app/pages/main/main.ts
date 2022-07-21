@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { checkResUpdate } from "../../utils/app";
 import { requestJSON } from "../../utils/api";
-import { getImagePrefix, getTitle } from "../../utils/config";
+import { appCoverPrefix, appName } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
+import { checkResource } from "../../utils/resource";
 import { search } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
 
@@ -86,7 +86,7 @@ $Page("main", {
       setPage({ ctx: this, option: { id: "main" } }, data);
     });
 
-    checkResUpdate();
+    checkResource();
     wx.stopPullDownRefresh();
   },
 
@@ -94,18 +94,18 @@ $Page("main", {
   onPageScroll() {},
 
   onShareAppMessage: () => ({
-    title: getTitle(),
+    title: appName,
     path: "/pages/main/main",
-    imageUrl: `${getImagePrefix()}Share.png`,
+    imageUrl: `${appCoverPrefix}Share.png`,
   }),
 
   onShareTimeline: () => ({
-    title: getTitle(),
+    title: appName,
   }),
 
   onAddToFavorites: () => ({
-    title: getTitle(),
-    imageUrl: `${getImagePrefix()}.jpg`,
+    title: appName,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onUnload() {

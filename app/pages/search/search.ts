@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getColor, popNotice } from "../../utils/page";
 import { SearchResult, search } from "../../utils/search";
 
@@ -54,7 +54,7 @@ $Page("search", {
     return {
       title: "搜索",
       path: `/pages/search/search?name=${this.state.name}&word=${this.state.value}`,
-      imageUrl: `${getImagePrefix()}Share.png`,
+      imageUrl: `${appCoverPrefix}Share.png`,
     };
   },
 
@@ -68,7 +68,7 @@ $Page("search", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: "搜索",
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `name=${this.state.name}&word=${this.state.value}`,
     };
   },

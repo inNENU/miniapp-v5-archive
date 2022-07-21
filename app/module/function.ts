@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
 import { modal } from "../utils/api";
-import { getImagePrefix } from "../utils/config";
+import { appCoverPrefix } from "../utils/config";
 
 import type { AppOption } from "../app";
 
@@ -29,7 +29,7 @@ $Page("function", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: "功能页",
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: "action=all",
     };
   },

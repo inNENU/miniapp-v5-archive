@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
 import { modal } from "../../utils/api";
-import { getImagePrefix, server } from "../../utils/config";
+import { appCoverPrefix, server } from "../../utils/config";
 
 import type { AppOption } from "../../app";
 import type { WeatherData } from "../../components/weather/typings";
@@ -97,7 +97,7 @@ $Page("weather", {
 
   onAddToFavorites: () => ({
     title: "体测计算器",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onUnload() {

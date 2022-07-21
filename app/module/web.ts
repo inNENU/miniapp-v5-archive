@@ -1,11 +1,11 @@
 import { $Page } from "@mptool/enhance";
 
-import { getTitle } from "../utils/config";
+import { appName } from "../utils/config";
 
 $Page<{ title: string; url: string }, Record<string, unknown>>("web", {
   onLoad({ title, url }) {
     // 设置导航栏标题
-    const navigationBarTitle = title || getTitle();
+    const navigationBarTitle = title || appName;
 
     wx.setNavigationBarTitle({ title: navigationBarTitle });
     this.setData({ url, title: navigationBarTitle });

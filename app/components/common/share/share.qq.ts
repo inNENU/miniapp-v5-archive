@@ -1,7 +1,7 @@
 import { $Component, logger } from "@mptool/enhance";
 
 import { savePhoto, tip } from "../../../utils/api";
-import { getTitle } from "../../../utils/config";
+import { appName } from "../../../utils/config";
 import { path2id } from "../../../utils/id";
 
 import type { PropType } from "@mptool/enhance";
@@ -59,7 +59,7 @@ $Component({
 
     copy(link: string) {
       const { title } = this.data.config;
-      const content = `${title ? `${getTitle()}查看『${title}』:` : ""}${link}`;
+      const content = `${title ? `${appName}查看『${title}』:` : ""}${link}`;
 
       wx.setClipboardData({
         data: content,

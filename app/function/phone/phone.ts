@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { addPhoneContact, getWindowInfo } from "../../utils/api";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
@@ -47,7 +47,7 @@ $Page("phone", {
 
   onAddToFavorites: () => ({
     title: "师大黄页",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {

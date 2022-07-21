@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { modal, tip } from "../../utils/api";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
 
@@ -64,7 +64,7 @@ $Page("calendar", {
 
   onAddToFavorites: () => ({
     title: "东师校历",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   /** 显示校历详情 */

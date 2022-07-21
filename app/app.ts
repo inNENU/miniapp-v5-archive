@@ -1,14 +1,14 @@
 import { $App, $Config, wrapFunction } from "@mptool/enhance";
 
 import {
-  appInit,
-  appUpdate,
-  checkResUpdate,
-  getDarkmode,
+  updateApp,
+  initializeApp,
   getGlobalData,
-  noticeCheck,
+  updateNotice,
   startup,
 } from "./utils/app";
+import { getDarkmode } from "./utils/api";
+import { checkResource } from "./utils/resource";
 
 import type { TrivialPageInstance } from "@mptool/enhance";
 import type { GlobalData } from "./utils/app";
@@ -79,7 +79,7 @@ $App<AppOption>({
     console.info("App launched with options:", options);
 
     // 如果初次启动执行初始化
-    if (!wx.getStorageSync("app-inited")) appInit();
+    if (!wx.getStorageSync("app-inited")) initializeApp();
 
     startup(this.globalData);
 
@@ -88,7 +88,7 @@ $App<AppOption>({
 
   onShow() {
     // 小程序已经初始化完成，检查页面资源
-    if (wx.getStorageSync("app-inited")) checkResUpdate();
+    if (wx.getStorageSync("app-inited")) checkResource();
   },
 
   onAwake(time: number) {
@@ -97,8 +97,8 @@ $App<AppOption>({
     // 重新应用夜间模式、
     this.globalData.darkmode = getDarkmode();
 
-    noticeCheck(this.globalData);
-    appUpdate(this.globalData);
+    updateNotice(this.globalData);
+    updateApp(this.globalData);
   },
 
   onError(errorMsg) {

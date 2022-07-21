@@ -2,7 +2,7 @@ import { $Page } from "@mptool/enhance";
 import { readJSON } from "@mptool/file";
 
 import { defaultScroller } from "../../mixins/page-scroll";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
 import { resolvePage, setPage } from "../../utils/page";
 
@@ -83,7 +83,7 @@ $Page("location", {
 
     return {
       title: page.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `id=${this.state.id}`,
     };
   },

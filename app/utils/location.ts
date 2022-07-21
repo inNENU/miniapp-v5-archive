@@ -1,6 +1,6 @@
-import { getTitle } from "./config";
+import { appName } from "./config";
 
-const referer = getTitle();
+const referer = appName;
 
 export const navigation = (point: string): void => {
   wx.navigateTo({

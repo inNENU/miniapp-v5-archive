@@ -1,5 +1,5 @@
 import { $Page } from "@mptool/enhance";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { popNotice } from "../../utils/page";
 import { validateId } from "../../utils/validate";
 
@@ -119,7 +119,7 @@ $Page("admission", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: "录取查询",
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `type=${this.data.type}`,
     };
   },

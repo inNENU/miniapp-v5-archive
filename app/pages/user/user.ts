@@ -1,10 +1,10 @@
 import { $Page } from "@mptool/enhance";
 import { put, take } from "@mptool/file";
 
-import { checkResUpdate } from "../../utils/app";
 import { tip } from "../../utils/api";
-import { getImagePrefix, getTitle, server } from "../../utils/config";
+import { appCoverPrefix, appName, server } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
+import { checkResource } from "../../utils/resource";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
@@ -64,7 +64,7 @@ $Page("user", {
     refreshPage("user").then((data) => {
       setPage({ ctx: this, option: { id: "user" } }, data);
     });
-    checkResUpdate();
+    checkResource();
     wx.stopPullDownRefresh();
   },
 
@@ -72,16 +72,16 @@ $Page("user", {
   onPageScroll() {},
 
   onShareAppMessage: () => ({
-    title: getTitle(),
+    title: appName,
     path: "/pages/main/main",
-    imageUrl: `${getImagePrefix()}Share.png`,
+    imageUrl: `${appCoverPrefix}Share.png`,
   }),
 
-  onShareTimeline: () => ({ title: getTitle() }),
+  onShareTimeline: () => ({ title: appName }),
 
   onAddToFavorites: () => ({
-    title: getTitle(),
-    imageUrl: `${getImagePrefix()}.jpg`,
+    title: appName,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   openProfile() {

@@ -21,6 +21,6 @@ export const appConfig: AppConfig = {
   developMode: false,
 };
 
-export const appName = "in东师";
+export const appName = "myNENU";
 
-export const appCoverPrefix = `${server}img/inNENU`;
+export const appCoverPrefix = `${server}img/myNENU`;

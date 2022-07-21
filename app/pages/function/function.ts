@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 import { put, take } from "@mptool/file";
 
-import { checkResUpdate } from "../../utils/app";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
+import { checkResource } from "../../utils/resource";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
@@ -58,7 +58,7 @@ $Page("function", {
     refreshPage("function").then((data) => {
       setPage({ ctx: this, option: { id: "function" } }, data);
     });
-    checkResUpdate();
+    checkResource();
     wx.stopPullDownRefresh();
   },
 
@@ -74,7 +74,7 @@ $Page("function", {
 
   onAddToFavorites: () => ({
     title: "功能大厅",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onUnload() {

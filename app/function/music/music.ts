@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { tip } from "../../utils/api";
-import { getImagePrefix, getTitle } from "../../utils/config";
+import { appCoverPrefix, appName } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
@@ -108,7 +108,7 @@ $Page("music", {
       if (music.playing) this.setData({ canplay: true });
       // 对音频管理器进行设置
       else {
-        manager.epname = getTitle();
+        manager.epname = appName;
         manager.src = currentSong.src;
         manager.title = currentSong.title;
         manager.singer = currentSong.singer;
@@ -141,7 +141,7 @@ $Page("music", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.currentSong.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `name=${this.data.currentSong.title}`,
     };
   },

@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { tip } from "../../utils/api";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
@@ -115,7 +115,7 @@ $Page("video", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.videoName,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `type=${this.data.type}&name=${this.data.videoName}`,
     };
   },

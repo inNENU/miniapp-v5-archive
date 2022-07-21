@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
 import { getWindowInfo, modal } from "../../utils/api";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
@@ -40,7 +40,7 @@ $Page("website", {
 
   onAddToFavorites: () => ({
     title: "东师网站",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {

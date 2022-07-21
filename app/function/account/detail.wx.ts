@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix, server } from "../../utils/config";
+import { appCoverPrefix, server } from "../../utils/config";
 import { ensureJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
 import { modal, tip } from "../../utils/api";
@@ -68,7 +68,7 @@ $Page("wechat-detail", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.config.name,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `path=${this.state.path}`,
     };
   },

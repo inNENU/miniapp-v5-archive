@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../utils/config";
+import { appCoverPrefix } from "../utils/config";
 import { id2path } from "../utils/id";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
@@ -51,7 +51,7 @@ $Page("page", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.page.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `path=${this.data.page.id}`,
     };
   },
