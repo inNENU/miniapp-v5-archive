@@ -81,7 +81,7 @@ $Page("admission", {
     cookies: <unknown[]>[],
   },
 
-  onLoad() {
+  onLoad({ type = "debug" }) {
     const level =
       wx.getStorageSync<"本科生" | "研究生" | undefined>("level") || "本科生";
     const info = wx.getStorageSync<Record<string, string> | undefined>(
@@ -90,6 +90,7 @@ $Page("admission", {
 
     this.setData({
       firstPage: getCurrentPages().length === 1,
+      type,
       level,
     });
 
