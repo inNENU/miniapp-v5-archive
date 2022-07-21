@@ -1,4 +1,8 @@
+<import src="/components/template.wxml" />
+<wxs src="./admission.wxs" module="admission" />
+
 <view
+  wx:if="{{type === 'search'}}"
   class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
 >
@@ -67,6 +71,12 @@
 
   <footer />
 </view>
+
+<template
+  wx:else
+  is="page"
+  data="{{theme: 'ios', darkmode, page: admission.page}}"
+/>
 
 <!-- 录取结果 -->
 <popup

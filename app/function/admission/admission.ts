@@ -42,6 +42,8 @@ const INPUT_CONFIG = <InputConfig[]>[
 
 $Page("admission", {
   data: {
+    type: "debug",
+
     /** 层次选择器 */
     level: "本科生",
 
@@ -102,17 +104,24 @@ $Page("admission", {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
 
-  onShareAppMessage: () => ({
-    title: "录取查询",
-    path: "/function/admission/admission",
-  }),
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
+    return {
+      title: "录取查询",
+      path: `/function/admission/admission?type=${this.data.type}`,
+    };
+  },
 
-  onShareTimeline: () => ({ title: "录取查询" }),
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
+    return { title: "录取查询", query: "type=${this.data.type}" };
+  },
 
-  onAddToFavorites: () => ({
-    title: "录取查询",
-    imageUrl: `${getImagePrefix()}.jpg`,
-  }),
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: "录取查询",
+      imageUrl: `${getImagePrefix()}.jpg`,
+      query: `type=${this.data.type}`,
+    };
+  },
 
   /** 层次切换 */
   levelChange({
