@@ -44,7 +44,7 @@ Component({
       const { windowHeight, safeArea } = getWindowInfo();
 
       this.setData({
-        paddingBottom: windowHeight - Math.max(safeArea.bottom, 24),
+        paddingBottom: Math.max(windowHeight - safeArea.bottom, 24),
       });
     },
     // 用户确认
