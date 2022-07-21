@@ -226,6 +226,7 @@ $Page("admission", {
         level: this.data.level,
         cookies: this.state.cookies,
         ...this.state.input,
+        verifyCode: this.state.verifyCode,
       },
       success: ({ data, statusCode }) => {
         if (statusCode === 200) {
