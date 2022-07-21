@@ -10,8 +10,8 @@ import {
   exists,
 } from "@mptool/file";
 
+import { modal, requestJSON, tip } from "./api";
 import { appConfig, server, version } from "./config";
-import { modal, requestJSON, tip } from "./wx";
 
 import type { PageData, VersionInfo } from "../../typings";
 

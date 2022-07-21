@@ -1,7 +1,7 @@
 import { $Component, logger } from "@mptool/enhance";
 
+import { modal, savePhoto, tip } from "../../../utils/api";
 import { server, getTitle } from "../../../utils/config";
-import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";

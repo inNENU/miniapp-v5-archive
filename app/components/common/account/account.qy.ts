@@ -1,7 +1,7 @@
 import { $Component } from "@mptool/enhance";
 
+import { modal, savePhoto, tip } from "../../../utils/api";
 import { navigation } from "../../../utils/location";
-import { modal, savePhoto, tip } from "../../../utils/wx";
 
 import type { PropType } from "@mptool/enhance";
 import type { AccountComponentOptions } from "../../../../typings";

@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
+import { modal, tip } from "../../utils/api";
 import { getImagePrefix, server } from "../../utils/config";
 import { ensureJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
-import { modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { WechatConfig } from "../../../typings";

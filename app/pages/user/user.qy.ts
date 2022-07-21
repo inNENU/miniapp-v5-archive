@@ -2,10 +2,10 @@ import { $Page } from "@mptool/enhance";
 import { put, take } from "@mptool/file";
 
 import { checkResUpdate } from "../../utils/app";
+import { tip } from "../../utils/api";
 import { getImagePrefix, getTitle } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { refreshPage } from "../../utils/tab";
-import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {

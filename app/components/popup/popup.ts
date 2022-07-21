@@ -1,4 +1,4 @@
-import { getWindowInfo } from "../../utils/wx";
+import { getWindowInfo } from "../../utils/api";
 
 export interface PopupConfig {
   /** 主标题 */

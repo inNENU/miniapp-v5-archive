@@ -1,7 +1,6 @@
 import { $Component } from "@mptool/enhance";
 
-import { navigation } from "../../../utils/location";
-import { modal, savePhoto, tip } from "../../../utils/wx";
+import { modal, savePhoto, tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { AccountComponentOptions } from "../../../../typings";
@@ -66,12 +65,6 @@ $Component({
         success: () =>
           modal("复制成功", `邮箱地址 ${mail!} 已成功复制至剪切板`),
       });
-    },
-
-    navigate(): void {
-      const { location, name } = this.data.config;
-
-      navigation(JSON.stringify({ name, ...location }));
     },
   },
 });

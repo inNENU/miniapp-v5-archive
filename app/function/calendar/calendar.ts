@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { getColor, popNotice } from "../../utils/page";
-import { ensureJSON, getJSON } from "../../utils/json";
-import { modal, tip } from "../../utils/wx";
+import { modal, tip } from "../../utils/api";
 import { getImagePrefix } from "../../utils/config";
+import { ensureJSON, getJSON } from "../../utils/json";
+import { getColor, popNotice } from "../../utils/page";
 
 import type { AppOption } from "../../app";
 import type { TimeLineItem } from "../../components/timeline/timeline";

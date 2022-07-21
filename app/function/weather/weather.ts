@@ -1,8 +1,8 @@
 import { $Page } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
+import { modal } from "../../utils/api";
 import { getImagePrefix, server } from "../../utils/config";
-import { modal } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { WeatherData } from "../../components/weather/typings";

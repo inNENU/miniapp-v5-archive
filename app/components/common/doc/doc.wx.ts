@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { downLoad, modal, savePhoto, tip } from "../../../utils/wx";
+import { downLoad, modal, savePhoto, tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { DocComponentOptions } from "../../../../typings";

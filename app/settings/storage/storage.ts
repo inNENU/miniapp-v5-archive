@@ -2,8 +2,8 @@ import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
 import { resourceDownload } from "../../utils/app";
+import { confirmAction, modal, tip } from "../../utils/api";
 import { popNotice, setPage } from "../../utils/page";
-import { confirmAction, modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { PageDataWithContent } from "../../../typings";

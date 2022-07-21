@@ -1,8 +1,8 @@
 import { $Page } from "@mptool/enhance";
 
+import { requestJSON, tip } from "../../utils/api";
 import { getImagePrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { requestJSON, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {

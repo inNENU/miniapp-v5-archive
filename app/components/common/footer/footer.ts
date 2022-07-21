@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { modal } from "../../../utils/wx";
+import { modal } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { FooterComponentOptions } from "../../../../typings";

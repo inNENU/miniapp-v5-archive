@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { addPhoneContact } from "../../../utils/wx";
+import { addPhoneContact } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { PhoneComponentOptions } from "../../../../typings";

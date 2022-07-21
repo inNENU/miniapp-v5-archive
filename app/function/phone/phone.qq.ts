@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
+import { getWindowInfo, tip } from "../../utils/api";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, tip } from "../../utils/wx";
 
 interface PhoneItemConfig {
   name: string;

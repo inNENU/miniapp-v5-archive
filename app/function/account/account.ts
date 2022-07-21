@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
+import { getWindowInfo, modal, savePhoto, tip } from "../../utils/api";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 

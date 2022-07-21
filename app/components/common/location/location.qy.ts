@@ -1,6 +1,6 @@
 import { $Component } from "@mptool/enhance";
 import { navigation } from "../../../utils/location";
-import { tip } from "../../../utils/wx";
+import { tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { AppOption } from "../../../app";

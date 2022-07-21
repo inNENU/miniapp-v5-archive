@@ -1,11 +1,11 @@
 import { $Page } from "@mptool/enhance";
 
 import { checkResUpdate } from "../../utils/app";
+import { requestJSON } from "../../utils/api";
 import { getImagePrefix, getTitle } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { search } from "../../utils/search";
 import { refreshPage } from "../../utils/tab";
-import { requestJSON } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { PageDataWithContent } from "../../../typings";

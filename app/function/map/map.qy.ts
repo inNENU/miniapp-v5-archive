@@ -1,10 +1,10 @@
 import { $Page } from "@mptool/enhance";
 
+import { getWindowInfo, modal, tip } from "../../utils/api";
 import { getImagePrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { navigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { Category, MarkerConfig, MarkerData } from "../../../typings";

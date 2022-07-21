@@ -1,6 +1,7 @@
 import { logger } from "@mptool/enhance";
+
+import { netReport, tip } from "./api";
 import { server } from "./config";
-import { netReport, tip } from "./wx";
 
 import type { SearchIndex } from "../../typings";
 
