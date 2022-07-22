@@ -30,9 +30,9 @@
         type="{{item.type}}"
         adjust-position="{{false}}"
         placeholder="{{item.placeholder}}"
-        catch:focus="focus"
-        catch:input="input"
-        catch:blur="blur"
+        bindfocus="focus"
+        bindinput="input"
+        bindblur="blur"
       />
     </view>
     <view wx:if="{{verifyCode}}" class="list-item">
@@ -43,9 +43,9 @@
         type="text"
         adjust-position="{{false}}"
         placeholder="请输入验证码"
-        catch:focus="focus"
-        catch:input="inputVerifyCode"
-        catch:blur="blur"
+        bindfocus="focus"
+        bindinput="input"
+        bindblur="blur"
       />
       <image
         class="verify-code"
