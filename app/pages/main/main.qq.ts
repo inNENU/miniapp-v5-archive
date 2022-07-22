@@ -96,9 +96,9 @@ $Page("main", {
       selectedIconPath: `/icon/tab/user.png`,
     });
     wx.setTabBarStyle({
-      color: darkmode ? "#333333" : "#e6e6e6",
-      backgroundColor: darkmode ? "#ffffff" : "#000000",
-      borderStyle: darkmode ? "black" : "white",
+      color: darkmode ? "#e6e6e6" : "#333333",
+      backgroundColor: darkmode ? "#000000" : "#ffffff",
+      borderStyle: darkmode ? "white" : "black",
     });
 
     popNotice("main");
