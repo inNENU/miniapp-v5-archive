@@ -12,7 +12,7 @@
       <text
         class="text"
         decode
-        selectable="{{plainText.getSelectable(config.style)}}"
+        selectable="{{selectable && plainText.getSelectable(config.style)}}"
         space="nbsp"
         >{{item}}</text
       >
