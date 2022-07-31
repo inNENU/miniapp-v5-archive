@@ -127,8 +127,6 @@
     "title": "/components/common/title/title",
     "video-player": "/components/common/video/video"
   },
-  "style": "v2",
-  "themeLocation": "styles/theme.json",
   "sitemapLocation": "sitemap.json",
   "lazyCodeLoading": "requiredComponents",
   "groupIdList": [
@@ -137,6 +135,5 @@
     "154562293",
     "284291586",
     "670581382"
-  ],
-  "singlePage": { "navigationBarFit": "float" }
+  ]
 }
