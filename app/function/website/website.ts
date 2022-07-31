@@ -24,7 +24,7 @@ $Page("website", {
 
       this.setData({
         config,
-        height: info.windowHeight - info.statusBarHeight - 229,
+        height: info.windowHeight - info.statusBarHeight - 160,
       });
     });
 
