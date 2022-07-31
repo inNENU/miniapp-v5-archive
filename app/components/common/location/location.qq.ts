@@ -6,6 +6,10 @@ import type {
   LocationConfig,
 } from "../../../../typings";
 
+import type { AppOption } from "../../../app";
+
+const { globalData } = getApp<AppOption>();
+
 const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
     name: point.name,
@@ -47,12 +51,27 @@ $Component({
     ready() {
       // add delay to make sure `<map />` is rendered
       setTimeout(() => {
-        this.setData({
-          includePoints: this.data.config.points.map((point) => ({
-            longitude: point.longitude,
-            latitude: point.latitude,
-          })),
-        });
+        // FIXME: fix crash on iOS
+        if (
+          this.data.config.points.length === 1 &&
+          globalData.info.platform === "ios"
+        ) {
+          const { latitude, longitude } = this.data.config.points[0];
+
+          this.setData({
+            includePoints: [
+              { latitude, longitude },
+              { latitude: latitude - 0.03, longitude: longitude - 0.03 },
+              { latitude: latitude + 0.03, longitude: longitude + 0.03 },
+            ],
+          });
+        } else
+          this.setData({
+            includePoints: this.data.config.points.map((point) => ({
+              longitude: point.longitude,
+              latitude: point.latitude,
+            })),
+          });
       }, 500);
     },
   },
