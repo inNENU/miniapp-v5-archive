@@ -45,7 +45,7 @@ $Page("map", {
     /** 显示地点列表 */
     showLocation: false,
     /** 显示导航 */
-
+    showNavigate: false,
     /** 显示卫星图 */
     showSatellite: false,
 
@@ -53,6 +53,11 @@ $Page("map", {
     locationPopup: {
       title: "全部",
       subtitle: "地点列表",
+      cancel: false,
+      confirm: false,
+    },
+    navigatePopup: {
+      title: "导航",
       cancel: false,
       confirm: false,
     },
@@ -287,6 +292,22 @@ $Page("map", {
 
   toggleLocationPopup() {
     this.setData({ showLocation: !this.data.showLocation });
+  },
+
+  toggleNavigatePopup() {
+    this.setData({ showNavigate: !this.data.showNavigate });
+  },
+
+  navigate({ currentTarget }: WechatMiniprogram.TouchEvent) {
+    const { name, latitude, longitude } = this.data.marker.all.find(
+      (item) => item.id === Number(currentTarget.dataset.id)
+    )!;
+
+    this.context.openMapApp({
+      latitude,
+      longitude,
+      destination: name,
+    });
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {

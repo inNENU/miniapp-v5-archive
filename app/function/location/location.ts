@@ -7,13 +7,14 @@ import { getJSON } from "../../utils/json";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
-import type { PageData } from "../../../typings";
+import type { LocationConfig, PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
 $Page("location", {
   data: {
     page: <PageData>{},
+    point: "",
   },
 
   state: { id: "" },
@@ -25,7 +26,7 @@ $Page("location", {
   },
 
   onLoad(option) {
-    const { id } = option;
+    const { id, point = "" } = option;
 
     if (id) {
       if (globalData.page.id === id) setPage({ option, ctx: this });
@@ -50,6 +51,7 @@ $Page("location", {
     this.setData({
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
+      point,
     });
   },
 
@@ -61,34 +63,56 @@ $Page("location", {
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
-    const { page } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
-      path: `/function/map/location?id=${this.state.id}`,
+      path: `/function/map/location?id=${this.state.id}${
+        point ? `&point=${point}` : ""
+      }`,
     };
   },
 
   onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
-    const { page } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
-      query: `id=${this.state.id}`,
+      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
     };
   },
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
-    const { page } = this.data;
+    const { page, point } = this.data;
 
     return {
       title: page.title,
       imageUrl: `${appCoverPrefix}.jpg`,
-      query: `id=${this.state.id}`,
+      query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
     };
   },
 
   defaultScroller,
+
+  /** 开启导航 */
+  navigate() {
+    const {
+      latitude,
+      longitude,
+      name = "目的地",
+    } = <LocationConfig>JSON.parse(this.data.point);
+
+    wx.createSelectorQuery()
+      .select("#tool")
+      .context(({ context }) => {
+        (context as WechatMiniprogram.MapContext).openMapApp({
+          latitude,
+          longitude,
+          destination: name,
+        });
+      })
+      .exec();
+  },
 
   /** 返回按钮功能 */
   back() {

@@ -40,9 +40,21 @@
       config="{{ { fill: true, images: page.photo } }}"
     />
     <view wx:else style="height: {{statusBarHeight + 44}}px;" />
-    <view class="title">{{page.title}}</view>
+    <view class="title">
+      {{page.title}}
+      <button
+        wx:if="{{point}}"
+        type="primary"
+        size="mini"
+        class="navigate"
+        catch:tap="navigate"
+      >
+        导航
+      </button>
+    </view>
     <template is="components" data="{{content: page.content, theme}}" />
     <footer config="{{page}}" />
     <share config="{{page}}" />
   </block>
 </view>
+<map id="tool" style="width: 0; height: 0" />

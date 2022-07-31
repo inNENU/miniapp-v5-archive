@@ -19,6 +19,14 @@
       >
         <image class="icon" src="./icon/info.svg" />
       </view>
+      <view
+        wx:if="{{config.navigate !== false}}"
+        class="action"
+        hover-class="button-hover"
+        catch:tap="navigate"
+      >
+        <image class="icon" src="/icon/navigate.svg" />
+      </view>
     </view>
   </view>
 </view>

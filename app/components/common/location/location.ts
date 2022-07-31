@@ -1,5 +1,4 @@
 import { $Component } from "@mptool/enhance";
-import { navigation } from "../../../utils/location";
 import { tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
@@ -71,14 +70,31 @@ $Component({
   },
 
   methods: {
+    startNavigation({
+      latitude,
+      longitude,
+      name,
+    }: LocationConfig & { id: number }) {
+      wx.createSelectorQuery()
+        .in(this)
+        .select("#location")
+        .context(({ context }) => {
+          (context as WechatMiniprogram.MapContext).openMapApp({
+            latitude,
+            longitude,
+            destination: name || this.data.config.title,
+          });
+        })
+        .exec();
+    },
+
     navigate() {
       const { config, id, markers } = this.data;
 
       if (config.navigate !== false) {
-        if (id === -1) {
-          if (markers.length === 1) navigation(getPoint(markers[0]));
-          else tip("请选择一个点");
-        } else navigation(getPoint(markers[id]));
+        if (id === -1 && markers.length !== 1) return tip("请选择一个点");
+
+        this.startNavigation(markers[id === -1 ? 0 : id]);
       }
     },
 
@@ -103,9 +119,12 @@ $Component({
 
     calloutTap({ detail }: WechatMiniprogram.CalloutTap) {
       const point = this.data.markers[detail.markerId];
+      const { navigate } = this.data.config;
 
       if (point.path)
         this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
+      else if (navigate !== false)
+        this.startNavigation(this.data.markers[detail.markerId]);
     },
   },
 });
