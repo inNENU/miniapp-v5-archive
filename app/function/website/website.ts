@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { getWindowInfo, modal } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, modal } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -24,7 +24,7 @@ $Page("website", {
 
       this.setData({
         config,
-        height: info.windowHeight - info.statusBarHeight - 229,
+        height: info.windowHeight - info.statusBarHeight - 160,
       });
     });
 
@@ -40,7 +40,7 @@ $Page("website", {
 
   onAddToFavorites: () => ({
     title: "东师网站",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {
@@ -52,10 +52,8 @@ $Page("website", {
   copy({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
+    Record<string, never>,
+    Record<string, never>,
     { link: string }
   >) {
     wx.setClipboardData({

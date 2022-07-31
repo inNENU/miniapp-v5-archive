@@ -3,17 +3,10 @@ name: "CodeQL"
 on:
   push:
     branches:
-      - wechat/v3
-      - wechat/v4
-      - qq/v3
-      - qq/v4
-
+      - main
   pull_request:
     branches:
-      - wechat/v3
-      - wechat/v4
-      - qq/v3
-      - qq/v4
+      - main
 
   schedule:
     - cron: "30 7 * * 3"

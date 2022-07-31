@@ -1,8 +1,8 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { requestJSON, tip } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { requestJSON, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {
@@ -125,14 +125,14 @@ $Page("about", {
   onShareAppMessage: () => ({
     title: "关于",
     path: "/settings/about/about",
-    imageUrl: `${getImagePrefix()}Share.png`,
+    imageUrl: `${appCoverPrefix}Share.png`,
   }),
 
   onShareTimeline: () => ({ title: "关于" }),
 
   onAddToFavorites: () => ({
     title: "关于",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   /** 点击版本号时触发的函数 */

@@ -2,6 +2,15 @@ import { logger } from "@mptool/enhance";
 import { server } from "./config";
 
 /**
+ * 根据用户设置，判断当前小程序是否应启用夜间模式
+ *
+ * @returns 夜间模式状态
+ */
+export const getDarkmode = (
+  sysInfo: WechatMiniprogram.SystemInfo = wx.getSystemInfoSync()
+): boolean => (sysInfo.AppPlatform ? false : sysInfo.theme === "dark");
+
+/**
  * 显示提示文字
  *
  * @param text 提示文字

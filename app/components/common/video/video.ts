@@ -1,5 +1,5 @@
 import { $Component } from "@mptool/enhance";
-import { tip } from "../../../utils/wx";
+import { tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
 import type { VideoComponentOptions } from "../../../../typings";
@@ -21,8 +21,7 @@ $Component({
 
     /** 正常播放时隐藏提示 */
     play(): void {
-      // TODO: Wait for api-typinsg to fix
-      wx.hideToast({});
+      wx.hideToast();
     },
 
     /** 提示用户加载出错 */

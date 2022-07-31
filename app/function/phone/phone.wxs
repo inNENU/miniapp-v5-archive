@@ -4,4 +4,10 @@ module.exports = {
       return item.name;
     });
   },
+
+  getNumber: function (config) {
+    var num = config.toString();
+
+    return num.length === 8 ? "0431-" + num : num;
+  },
 };

@@ -1,19 +1,14 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../utils/config";
+import { appCoverPrefix } from "../utils/config";
 import { id2path } from "../utils/id";
 import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
 
-import type { AppOption } from "../app";
 import type { PageData, PageOption } from "../../typings";
-
-/** 全局数据 */
-const { globalData } = getApp<AppOption>();
 
 $Page("page", {
   data: {
     page: <PageData & { id: string }>{},
-    env: globalData.env,
   },
 
   onNavigate(option) {
@@ -56,7 +51,7 @@ $Page("page", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.page.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `path=${this.data.page.id}`,
     };
   },

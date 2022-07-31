@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
 
@@ -169,7 +169,7 @@ $Page("PEcal", {
 
   onAddToFavorites: () => ({
     title: "体测计算器",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   /** 性别切换 */

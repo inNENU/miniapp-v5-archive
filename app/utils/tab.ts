@@ -1,4 +1,4 @@
-import { requestJSON } from "./wx";
+import { requestJSON } from "./api";
 
 import type { AppOption } from "../app";
 import type { PageData } from "../../typings";

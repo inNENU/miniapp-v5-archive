@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { getWindowInfo, modal, savePhoto, tip } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 
@@ -14,7 +14,6 @@ $Page("account", {
   data: {
     config: <unknown[]>[],
 
-    env: globalData.env,
     type: globalData.env,
 
     footer: {
@@ -49,7 +48,7 @@ $Page("account", {
 
   onAddToFavorites: () => ({
     title: "校园媒体",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {
@@ -61,10 +60,8 @@ $Page("account", {
   switch({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
+    Record<string, never>,
+    Record<string, never>,
     { type: string }
   >) {
     const { type = "" } = currentTarget.dataset;
@@ -76,10 +73,8 @@ $Page("account", {
 
   detail(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { id: number; qrcode?: string }
     >
   ) {

@@ -1,0 +1,3 @@
+<view class="title-component" style="{{config.style || ''}}">
+  <text selectable="{{selectable}}">{{config.text}}</text>
+</view>

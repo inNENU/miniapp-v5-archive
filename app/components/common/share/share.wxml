@@ -26,9 +26,6 @@
             hover-start-time="0"
             plain
             open-type="{{item.openType}}"
-            open-id="{{item.openId}}"
-            group-id="{{item.groupId}}"
-            share-mode="{{item.shareMode}}"
             bind:tap="{{item.action || ''}}"
           >
             <image class="icon" src="{{item.icon}}.svg" />

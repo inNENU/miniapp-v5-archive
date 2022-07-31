@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
-import { resourceDownload } from "../../utils/app";
+import { confirmAction, modal, tip } from "../../utils/api";
 import { popNotice, setPage } from "../../utils/page";
-import { confirmAction, modal, tip } from "../../utils/wx";
+import { downloadResource } from "../../utils/resource";
 
 import type { AppOption } from "../../app";
 import type { PageDataWithContent } from "../../../typings";
@@ -121,7 +121,7 @@ $Page("storage", {
   /** 刷新所有资源 */
   updateResource() {
     confirmAction("更新资源文件", () => {
-      resourceDownload("function-guide-icon-intro");
+      downloadResource("function-guide-icon-intro");
     });
   },
 

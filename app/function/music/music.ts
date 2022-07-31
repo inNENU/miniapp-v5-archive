@@ -1,14 +1,15 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix, getTitle } from "../../utils/config";
+import { tip } from "../../utils/api";
+import { appCoverPrefix, appName } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { Lyric, PlayMode, SongDetail } from "./typings";
 
 const { globalData } = getApp<AppOption>();
+const { music } = globalData;
 
 /** 音频管理器 */
 const manager = wx.getBackgroundAudioManager();
@@ -60,43 +61,40 @@ $Page("music", {
   // eslint-disable-next-line max-lines-per-function
   onLoad(option) {
     const mode = wx.getStorageSync<PlayMode | undefined>("play-mode");
+    const { darkmode, info } = globalData;
 
     if (!mode) wx.setStorageSync("play-mode", "列表循环");
 
     // 写入基本信息
     this.setData({
-      playing: globalData.music.playing,
+      playing: music.playing,
       mode: mode || "列表循环",
 
-      statusBarHeight: globalData.info.statusBarHeight,
-      darkmode: globalData.darkmode,
-      indicatorColor: globalData.darkmode
+      statusBarHeight: info.statusBarHeight,
+      darkmode,
+      indicatorColor: darkmode
         ? "rgba(255, 255, 255, 0.15)"
         : "rgba(0, 0, 0, 0.15)",
-      indicatorActiveColor: globalData.darkmode
+      indicatorActiveColor: darkmode
         ? "rgba(255, 255, 255, 0.45)"
         : "rgba(0, 0, 0, 0.45)",
       firstPage: getCurrentPages().length === 1,
     });
 
     getJSON<SongDetail[]>("function/music/index").then((songList) => {
-      if (option.index) globalData.music.index = Number(option.index);
+      if (option.index) music.index = Number(option.index);
       else if (option.name) {
         const name = decodeURI(option.name);
 
-        globalData.music.index = songList.findIndex(
-          (song) => song.title === name
-        );
+        music.index = songList.findIndex((song) => song.title === name);
       } else {
         const name = wx.getStorageSync<string | undefined>("music");
 
         if (name)
-          globalData.music.index = songList.findIndex(
-            (song) => song.title === name
-          );
+          music.index = songList.findIndex((song) => song.title === name);
       }
 
-      const { index } = globalData.music;
+      const { index } = music;
       const currentSong = songList[index];
 
       // 写入歌曲列表与当前歌曲信息
@@ -107,10 +105,10 @@ $Page("music", {
       });
 
       // 如果正在播放，设置能够播放
-      if (globalData.music.playing) this.setData({ canplay: true });
+      if (music.playing) this.setData({ canplay: true });
       // 对音频管理器进行设置
       else {
-        manager.epname = getTitle();
+        manager.epname = appName;
         manager.src = currentSong.src;
         manager.title = currentSong.title;
         manager.singer = currentSong.singer;
@@ -143,7 +141,7 @@ $Page("music", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.currentSong.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `name=${this.data.currentSong.title}`,
     };
   },
@@ -170,12 +168,12 @@ $Page("music", {
     // 在相应动作时改变状态
     manager.onPlay(() => {
       this.setData({ playing: true });
-      globalData.music.playing = true;
+      music.playing = true;
     });
 
     manager.onPause(() => {
       this.setData({ playing: false });
-      globalData.music.playing = false;
+      music.playing = false;
     });
 
     manager.onTimeUpdate(() => {
@@ -187,7 +185,7 @@ $Page("music", {
       });
 
       // 设置播放状态
-      if (!globalData.music.playing) globalData.music.playing = true;
+      if (!music.playing) music.playing = true;
 
       this.lyric();
     });
@@ -387,7 +385,7 @@ $Page("music", {
       manager.title = currentSong.title;
       manager.singer = currentSong.singer;
       manager.coverImgUrl = currentSong.cover;
-      globalData.music.index = Number(index);
+      music.index = Number(index);
 
       this.initLyric();
 

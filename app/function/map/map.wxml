@@ -6,7 +6,7 @@
   latitude="{{map.latitude}}"
   scale="{{map.scale}}"
   markers="{{helper.getMarkers(marker[currentCategory], darkmode)}}"
-  setting="{{helper.getSetting(env, darkmode, showSatellite)}}"
+  setting="{{helper.getSetting(darkmode, showSatellite)}}"
   catch:markertap="markerTap"
   catch:callouttap="markerTap"
   catch:updated="update"
@@ -61,11 +61,7 @@
   </view>
 </view>
 
-<view
-  wx:if="{{appID === 'wx9ce37d9662499df3'}}"
-  class="navigate-button"
-  catch:tap="toggleNavigatePopup"
->
+<view class="navigate-button" catch:tap="toggleNavigatePopup">
   <image class="icon" src="./icon/navigate.svg" />
 </view>
 
@@ -101,7 +97,6 @@
 </view>
 
 <popup
-  wx:if="{{appID === 'wx9ce37d9662499df3'}}"
   config="{{navigatePopup}}"
   show="{{showNavigate}}"
   catch:close="toggleNavigatePopup"

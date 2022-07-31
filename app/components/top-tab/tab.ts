@@ -1,7 +1,6 @@
 import type { AppOption } from "../../app";
 
 const { globalData } = getApp<AppOption>();
-let currentSwipe: number;
 
 Component({
   properties: {
@@ -15,6 +14,7 @@ Component({
     curNavItem: [],
     barleft: 0,
     current: 0,
+    currentSwipe: 0,
   },
 
   pageLifetimes: {
@@ -37,7 +37,7 @@ Component({
     transition({ detail }: WechatMiniprogram.SwiperTransition): void {
       this.setData({
         barleft:
-          (detail.dx + globalData.info.windowWidth * currentSwipe) /
+          (detail.dx + globalData.info.windowWidth * this.data.currentSwipe) /
           this.data.navList.length,
       });
     },
@@ -45,7 +45,7 @@ Component({
     aminationFinish({
       detail: { current },
     }: WechatMiniprogram.SwiperAnimationFinish): void {
-      currentSwipe = current;
+      this.setData({ currentSwipe: current });
       if (!this.data.immediate) this.setData({ current });
     },
   },

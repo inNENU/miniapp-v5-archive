@@ -1,0 +1,290 @@
+{
+  "miniprogramRoot": "dist/",
+  "compileType": "miniprogram",
+  "qqLibVersion": "1.54.0",
+  "qqappid": "1109559721",
+  "projectname": "in%E4%B8%9C%E5%B8%88",
+  "setting": {
+    "urlCheck": true,
+    "es6": false,
+    "enhance": false,
+    "postcss": true,
+    "preloadBackgroundData": false,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "nodeModules": true,
+    "autoAudits": false,
+    "showShadowRootInWxmlPanel": true,
+    "ignoreDevUnusedFiles": true,
+    "scopeDataCheck": true,
+    "uglifyFileName": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": true,
+    "lazyloadPlaceholderEnable": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useIsolateContext": true,
+    "userConfirmedBundleSwitch": true,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./dist"
+      }
+    ],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "minifyWXML": true,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false,
+    "remoteDebugLogEnable": false,
+    "prefetch": false,
+    "ignoreUploadUnusedFiles": true,
+    "useStaticServer": true
+  },
+  "watchOptions": {
+    "ignore": ["app/**", "node_modules/**", "server/**"]
+  },
+  "packOptions": {
+    "ignore": [
+      {
+        "value": "bak",
+        "type": "suffix"
+      }
+    ],
+    "include": []
+  },
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
+  "srcMiniprogramRoot": "dist/",
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 4
+  },
+  "condition": {
+    "plugin": {
+      "list": []
+    },
+    "game": {
+      "list": []
+    },
+    "gamePlugin": {
+      "list": []
+    },
+    "search": {
+      "list": []
+    },
+    "conversation": {
+      "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "id": 0,
+          "name": "功能大厅",
+          "pathName": "pages/function/function",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 1,
+          "name": "用户",
+          "pathName": "pages/user/user",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 2,
+          "name": "分享",
+          "pathName": "module/page",
+          "query": "path=Garrival/train-w-benbu/",
+          "scene": null
+        },
+        {
+          "id": 3,
+          "name": "二维码分享",
+          "pathName": "module/page",
+          "query": "scene=guide/dorm/index",
+          "scene": null
+        },
+        {
+          "id": 4,
+          "name": "天气",
+          "pathName": "function/weather/weather",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 5,
+          "name": "地图",
+          "pathName": "function/map/map",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 6,
+          "name": "地图地点",
+          "pathName": "function/map/location",
+          "query": "id=benbu/general/index",
+          "scene": null
+        },
+        {
+          "id": 7,
+          "name": "体测计算器",
+          "pathName": "function/PEcal/PEcal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 8,
+          "name": "校历",
+          "pathName": "function/calendar/calendar",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 9,
+          "name": "播放器",
+          "pathName": "function/music/music",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 10,
+          "name": "特定歌曲",
+          "pathName": "function/music/music",
+          "query": "index=17",
+          "scene": null
+        },
+        {
+          "id": 11,
+          "name": "师大黄页",
+          "pathName": "function/phone/phone",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 12,
+          "name": "东师网站",
+          "pathName": "function/website/website",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 13,
+          "name": "客服",
+          "pathName": "module/function",
+          "query": "action=contact",
+          "scene": null
+        },
+        {
+          "id": 14,
+          "name": "初始化小程序",
+          "pathName": "module/function",
+          "query": "action=reset",
+          "scene": null
+        },
+        {
+          "id": 16,
+          "name": "小程序资源",
+          "pathName": "settings/storage/storage",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 17,
+          "name": "工作室关于",
+          "pathName": "function/video/video",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 18,
+          "name": "视频",
+          "pathName": "function/video/video",
+          "query": "type=video",
+          "scene": null
+        },
+        {
+          "id": 19,
+          "name": "特定视频",
+          "pathName": "function/video/video",
+          "query": "type=video&name=师德公约",
+          "scene": null
+        },
+        {
+          "id": 20,
+          "name": "公众号",
+          "pathName": "function/account/account",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 21,
+          "name": "特定公众号",
+          "pathName": "function/account/detail",
+          "query": "path=nenuyouth",
+          "scene": null
+        },
+        {
+          "id": 22,
+          "name": "搜索",
+          "pathName": "pages/search/search",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 23,
+          "name": "指定文字搜索",
+          "pathName": "pages/search/search",
+          "query": "word=浴池",
+          "scene": null
+        },
+        {
+          "id": 24,
+          "name": "绩点计算",
+          "pathName": "function/cal/cal",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 25,
+          "name": "录取查询",
+          "pathName": "function/admission/admission",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 26,
+          "name": "关于",
+          "pathName": "settings/about/about",
+          "query": "",
+          "scene": null
+        },
+        {
+          "id": 27,
+          "name": "欢迎入群",
+          "pathName": "module/page",
+          "query": "id=other/about/welcome",
+          "scene": null
+        },
+        {
+          "id": 28,
+          "name": "错误页",
+          "pathName": "module/page",
+          "query": "id=other/about/notexist",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

@@ -12,6 +12,7 @@ Component({
 
       this.triggerEvent("change", event);
     },
+
     animation(event: WechatMiniprogram.SwiperAnimationFinish): void {
       this.triggerEvent("animation", event);
     },

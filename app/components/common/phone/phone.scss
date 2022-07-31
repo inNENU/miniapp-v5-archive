@@ -1,32 +1,9 @@
-.phone-component-header {
-  max-width: var(--max-width);
-  min-height: 13px;
-  margin: 0 var(--horizontal-margin);
-  padding: 12px 15px 4px;
-
-  color: var(--text-color);
-
-  font-weight: 500;
-  font-size: 19px;
-  text-align: left;
-
-  .grey & {
-    padding: 21px 15px 5px;
-    color: var(--dark-grey);
-    font-weight: 400;
-    font-size: 13px;
-  }
-}
-
 .phone-component-wrapper {
-  display: flex;
-  align-items: center;
-
   overflow: hidden;
 
   max-width: calc(var(--max-width) - 30px);
   margin: 2px var(--horizontal-margin);
-  padding: 0 15px;
+  padding: 4px 15px;
   border-radius: 8px;
 
   background-color: var(--block-bgcolor);
@@ -34,16 +11,44 @@
 
   line-height: 2.5;
 
+  .header {
+    min-height: 13px;
+
+    color: var(--text-color);
+
+    font-weight: 500;
+    font-size: 19px;
+    text-align: left;
+  }
+
+  .info-button {
+    float: right;
+    margin-top: 8px !important;
+  }
+
+  .info-icon {
+    width: 100%;
+    height: 100%;
+  }
+
   .phone-icon {
+    vertical-align: baseline;
     width: 24px;
     height: 24px;
     margin-right: 15px;
   }
 
+  .info {
+    display: flex;
+    align-items: center;
+  }
+
   .number {
     flex: 1 1 auto;
+
     font-weight: 500;
     font-size: 20px;
+    line-height: 2;
     text-align: left;
   }
 
@@ -61,5 +66,67 @@
       width: 100%;
       height: 100%;
     }
+  }
+}
+
+.phone-popup {
+  position: fixed;
+  top: 50%;
+  right: 16px;
+  left: 16px;
+  z-index: 5000;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  max-height: 90%;
+  border-radius: 12px;
+
+  background-color: var(--block-bgcolor);
+  color: var(--grey3);
+
+  text-align: center;
+
+  transform: translate(0, -50%);
+
+  .title {
+    padding: 32px 24px 16px;
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  .body {
+    overflow-y: auto;
+
+    margin-bottom: 32px;
+    padding: 0 24px;
+
+    color: var(--grey);
+
+    font-size: 17px;
+    line-height: 1.7;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+
+  .button {
+    position: relative;
+
+    display: block;
+
+    overflow: hidden;
+
+    padding: 16px 0;
+    border-top: 1px solid var(--border-color);
+
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.4;
+    text-decoration: none;
+
+    user-select: none;
   }
 }

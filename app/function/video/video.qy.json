@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "影约东师",
+  "usingComponents": {
+    "player-component": "plugin://player/video",
+    "tab-bar": "/components/top-tab/tab"
+  }
+}

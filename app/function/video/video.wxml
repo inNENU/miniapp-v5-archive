@@ -17,15 +17,6 @@
     <view class="author">—— {{videoAuthor }} ——</view>
   </view>
   <!-- 视频窗口 -->
-  <!-- <player-component
-    wx:if="{{vid}}"
-    class="player"
-    vid="{{vid}}"
-    use-legacy-adapter="{{false}}"
-    catch:play="play"
-    catch:waiting="wait"
-    catch:error="error"
-  /> -->
   <video
     class="player"
     src="{{src}}"

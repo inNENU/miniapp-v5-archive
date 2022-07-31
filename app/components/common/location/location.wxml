@@ -4,7 +4,7 @@
     class="map"
     id="location"
     markers="{{helper.getMarkers(markers, darkmode)}}"
-    setting="{{helper.getSetting(env, darkmode)}}"
+    setting="{{helper.getSetting(darkmode)}}"
     catch:markertap="markerTap"
     catch:callouttap="calloutTap"
   />
@@ -20,7 +20,7 @@
         <image class="icon" src="./icon/info.svg" />
       </view>
       <view
-        wx:if="{{appID === 'wx9ce37d9662499df3' && config.navigate !== false}}"
+        wx:if="{{config.navigate !== false}}"
         class="action"
         hover-class="button-hover"
         catch:tap="navigate"

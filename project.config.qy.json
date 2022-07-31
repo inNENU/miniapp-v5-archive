@@ -1,42 +1,30 @@
 {
-  "description": "项目配置文件，详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
   "miniprogramRoot": "dist/",
   "compileType": "miniprogram",
-  "libVersion": "2.25.0",
-  "appid": "wx33acb831ee1831a5",
-  "qqLibVersion": "1.52.7",
-  "qqappid": "1109559721",
-  "projectname": "in%E4%B8%9C%E5%B8%88",
+
   "setting": {
-    "urlCheck": true,
     "es6": false,
     "enhance": false,
     "postcss": true,
-    "preloadBackgroundData": false,
     "minified": true,
-    "newFeature": true,
-    "coverView": true,
-    "nodeModules": true,
-    "autoAudits": false,
-    "showShadowRootInWxmlPanel": true,
-    "ignoreDevUnusedFiles": true,
-    "scopeDataCheck": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
     "uglifyFileName": false,
-    "checkInvalidKey": true,
-    "checkSiteMap": true,
-    "uploadWithSourceMap": true,
+    "ignoreUploadUnusedFiles": false,
+    "autoAudits": false,
+    "urlCheck": true,
     "compileHotReLoad": true,
+    "preloadBackgroundData": false,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": true,
-    "useApiHook": true,
-    "useApiHostProcess": true,
+
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
       "outputPath": ""
     },
-    "useIsolateContext": true,
-    "userConfirmedBundleSwitch": true,
+    "useCompilerPlugins": false,
+    "disableUseStrict": false,
+    "uploadWithSourceMap": true,
     "packNpmManually": true,
     "packNpmRelationList": [
       {
@@ -44,37 +32,21 @@
         "miniprogramNpmDistDir": "./dist"
       }
     ],
-    "minifyWXSS": true,
-    "disableUseStrict": false,
-    "minifyWXML": true,
-    "showES6CompileOption": false,
-    "useCompilerPlugins": false,
-    "remoteDebugLogEnable": false,
-    "prefetch": false,
-    "ignoreUploadUnusedFiles": true,
-    "useStaticServer": true
+    "coverView": true,
+    "ignoreDevUnusedFiles": true,
+    "checkInvalidKey": true,
+    "showShadowRootInWxmlPanel": true,
+    "useIsolateContext": true,
+    "useApiHook": false,
+    "useApiHostProcess": true,
+    "showES6CompileOption": false
   },
-  "watchOptions": {
-    "ignore": ["app/**", "node_modules/**", "server/**"]
-  },
+  "libVersion": "trial",
+  "appid": "wx9ce37d9662499df3",
+  "projectname": "my nenu",
+
   "packOptions": {
     "ignore": [
-      {
-        "value": "package.json",
-        "type": "file"
-      },
-      {
-        "value": "md",
-        "type": "suffix"
-      },
-      {
-        "value": "scss",
-        "type": "suffix"
-      },
-      {
-        "value": "ts",
-        "type": "suffix"
-      },
       {
         "value": "bak",
         "type": "suffix"
@@ -82,225 +54,206 @@
     ],
     "include": []
   },
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "srcMiniprogramRoot": "dist/",
-  "editorSetting": {
-    "tabIndent": "insertSpaces",
-    "tabSize": 4
+  "watchOptions": {
+    "ignore": ["app/**", "node_modules/**", "server/**"]
   },
   "condition": {
-    "plugin": {
-      "list": []
-    },
-    "game": {
-      "list": []
-    },
-    "gamePlugin": {
-      "list": []
-    },
-    "search": {
-      "list": []
-    },
-    "conversation": {
-      "list": []
-    },
     "miniprogram": {
       "list": [
         {
-          "id": 0,
           "name": "功能大厅",
           "pathName": "pages/function/function",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 1,
           "name": "用户",
           "pathName": "pages/user/user",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 2,
           "name": "分享",
           "pathName": "module/page",
-          "query": "path=Garrival/train-w-benbu/",
+          "query": "path=Gprepare/check-in-time",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 3,
           "name": "二维码分享",
           "pathName": "module/page",
           "query": "scene=guide/dorm/index",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 4,
           "name": "天气",
           "pathName": "function/weather/weather",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 5,
           "name": "地图",
           "pathName": "function/map/map",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 6,
           "name": "地图地点",
-          "pathName": "function/map/location",
-          "query": "id=benbu/general/index",
+          "pathName": "function/location/location",
+          "query": "id=benbu/general/index&point={\"latitude\":43.86188,\"longitude\":125.33137,\"name\":\"自由校区\"}",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 7,
           "name": "体测计算器",
           "pathName": "function/PEcal/PEcal",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 8,
           "name": "校历",
           "pathName": "function/calendar/calendar",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 9,
           "name": "播放器",
           "pathName": "function/music/music",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 10,
           "name": "特定歌曲",
           "pathName": "function/music/music",
           "query": "index=17",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 11,
           "name": "师大黄页",
           "pathName": "function/phone/phone",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 12,
           "name": "东师网站",
           "pathName": "function/website/website",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 13,
           "name": "客服",
           "pathName": "module/function",
           "query": "action=contact",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 14,
           "name": "初始化小程序",
           "pathName": "module/function",
           "query": "action=reset",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 16,
           "name": "小程序资源",
           "pathName": "settings/storage/storage",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 17,
           "name": "工作室关于",
           "pathName": "function/video/video",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 18,
           "name": "视频",
           "pathName": "function/video/video",
           "query": "type=video",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 19,
           "name": "特定视频",
           "pathName": "function/video/video",
           "query": "type=video&name=师德公约",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 20,
           "name": "公众号",
           "pathName": "function/account/account",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 21,
           "name": "特定公众号",
           "pathName": "function/account/detail",
           "query": "path=nenuyouth",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 22,
           "name": "搜索",
           "pathName": "pages/search/search",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 23,
           "name": "指定文字搜索",
           "pathName": "pages/search/search",
           "query": "word=浴池",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 24,
           "name": "绩点计算",
           "pathName": "function/cal/cal",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 25,
-          "name": "录取查询",
-          "pathName": "function/admission/admission",
-          "query": "",
-          "scene": null
-        },
-        {
-          "id": 26,
           "name": "关于",
           "pathName": "settings/about/about",
           "query": "",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 27,
           "name": "欢迎入群",
           "pathName": "module/page",
           "query": "id=other/about/welcome",
+          "launchMode": "default",
           "scene": null
         },
         {
-          "id": 28,
           "name": "错误页",
           "pathName": "module/page",
           "query": "id=other/about/notexist",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "录取查询",
+          "pathName": "function/admission/admission",
+          "query": "",
+          "launchMode": "default",
           "scene": null
         }
       ]

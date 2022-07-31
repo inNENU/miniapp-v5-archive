@@ -1,15 +1,14 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix, server } from "../../utils/config";
+import { modal, savePhoto, tip } from "../../utils/api";
+import { appCoverPrefix, server } from "../../utils/config";
 import { ensureJSON } from "../../utils/json";
 import { getColor, popNotice } from "../../utils/page";
-import { modal, savePhoto, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { WechatConfig } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-const { env } = globalData;
 
 $Page("wechat-detail", {
   data: {
@@ -69,7 +68,7 @@ $Page("wechat-detail", {
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
     return {
       title: this.data.config.name,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `path=${this.state.path}`,
     };
   },
@@ -81,42 +80,25 @@ $Page("wechat-detail", {
     never,
     { title: string; url: string }
   >) {
-    const { title, url } = currentTarget.dataset;
+    const { url } = currentTarget.dataset;
 
-    if (env === "qq")
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "无法跳转",
-            "QQ小程序并不支持跳转微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
-    else if (this.data.config.authorized)
-      this.$go(`web?url=${url}&title=${title}`);
-    // 无法跳转，复制链接到剪切板
-    else
-      wx.setClipboardData({
-        data: url,
-        success: () => {
-          modal(
-            "尚未授权",
-            "目前暂不支持跳转到该微信公众号图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
-          );
-        },
-      });
+    wx.setClipboardData({
+      data: url,
+      success: () => {
+        modal(
+          "无法跳转",
+          "QQ小程序并不支持跳转微信图文，链接地址已复制至剪切板。请打开浏览器粘贴查看"
+        );
+      },
+    });
   },
 
   follow() {
-    const { follow, qrcode } = this.data.config;
+    const { qrcode } = this.data.config;
 
-    if (follow) this.$go(`web?url=${follow}&title=欢迎关注`);
-    else if (env === "wx") wx.previewImage({ urls: [qrcode] });
-    else
-      savePhoto(qrcode)
-        .then(() => tip("二维码已存至相册"))
-        .catch(() => tip("二维码保存失败"));
+    savePhoto(qrcode)
+      .then(() => tip("二维码已存至相册"))
+      .catch(() => tip("二维码保存失败"));
   },
 
   back() {

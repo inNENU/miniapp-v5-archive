@@ -1,5 +1,62 @@
 {
-  "setting": {},
+  "miniprogramRoot": "dist/",
+  "compileType": "miniprogram",
+
+  "setting": {
+    "es6": false,
+    "enhance": false,
+    "postcss": true,
+    "minified": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "uglifyFileName": false,
+    "ignoreUploadUnusedFiles": false,
+    "autoAudits": false,
+    "urlCheck": true,
+    "compileHotReLoad": true,
+    "preloadBackgroundData": false,
+    "lazyloadPlaceholderEnable": false,
+
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    },
+    "useCompilerPlugins": false,
+    "disableUseStrict": false,
+    "uploadWithSourceMap": true,
+    "packNpmManually": true,
+    "packNpmRelationList": [
+      {
+        "packageJsonPath": "./package.json",
+        "miniprogramNpmDistDir": "./dist"
+      }
+    ],
+    "coverView": true,
+    "ignoreDevUnusedFiles": true,
+    "checkInvalidKey": true,
+    "showShadowRootInWxmlPanel": true,
+    "useIsolateContext": true,
+    "useApiHook": false,
+    "useApiHostProcess": true,
+    "showES6CompileOption": false
+  },
+  "libVersion": "trial",
+  "appid": "wx33acb831ee1831a5",
+  "projectname": "in%E4%B8%9C%E5%B8%88",
+
+  "packOptions": {
+    "ignore": [
+      {
+        "value": "bak",
+        "type": "suffix"
+      }
+    ],
+    "include": []
+  },
+  "watchOptions": {
+    "ignore": ["app/**", "node_modules/**", "server/**"]
+  },
   "condition": {
     "miniprogram": {
       "list": [
@@ -201,7 +258,5 @@
         }
       ]
     }
-  },
-  "description": "项目私有配置文件。此文件中的内容将覆盖 project.config.json 中的相同字段。项目的改动优先同步到此文件中。详见文档：https://developers.weixin.qq.com/miniprogram/dev/devtools/projectconfig.html",
-  "libVersion": "2.25.0"
+  }
 }

@@ -1,19 +1,14 @@
 /* eslint-disable max-lines */
 import { emitter, logger } from "@mptool/enhance";
-import {
-  ls,
-  rm,
-  unzip,
-  writeJSON,
-  saveFile,
-  readJSON,
-  exists,
-} from "@mptool/file";
+import { ls, rm, writeJSON } from "@mptool/file";
 
+import { getDarkmode, modal, requestJSON, tip } from "./api";
 import { appConfig, server, version } from "./config";
-import { modal, requestJSON, tip } from "./wx";
+import { downloadResource } from "./resource";
 
 import type { PageData, VersionInfo } from "../../typings";
+
+export type AppID = "wx33acb831ee1831a5" | "wx9ce37d9662499df3" | 1109559721;
 
 export interface GlobalData {
   /** 小程序运行环境 */
@@ -43,167 +38,15 @@ export interface GlobalData {
   /** 设备信息 */
   info: WechatMiniprogram.SystemInfo;
   /** 小程序appid */
-  appID: "wx33acb831ee1831a5" | "wx9ce37d9662499df3" | 1109559721;
+  appID: AppID;
+  /** 用户 OPENID */
+  openid: string;
   /** 是否能复制 */
   selectable: boolean;
 }
 
-/**
- * 资源下载
- *
- * @param fileName 下载资源名称
- * @param showProgress 是否开启进度提示
- */
-export const resourceDownload = (
-  fileName: string,
-  showProgress = true
-): Promise<void> =>
-  new Promise((resolve, reject) => {
-    if (showProgress) wx.showLoading({ title: "下载中...", mask: true });
-
-    // 取消下载成功提示并移除对应资源文件
-    fileName.split("-").forEach((resource) => {
-      if (resource) {
-        wx.setStorageSync(`${resource}Download`, false);
-        if (exists(resource)) rm(resource, "dir");
-      }
-    });
-
-    const downLoadTask = wx.downloadFile({
-      url: `${server}r/${fileName}.zip`,
-      success: ({ statusCode, tempFilePath }) => {
-        if (statusCode === 200) {
-          if (showProgress) wx.showLoading({ title: "保存中...", mask: true });
-
-          // 保存压缩文件到压缩目录
-          saveFile(tempFilePath, "zipTemp");
-
-          if (showProgress) wx.showLoading({ title: "解压中...", mask: true });
-
-          // 解压文件到根目录
-          unzip("zipTemp", "").then(() => {
-            // 删除压缩包
-            rm("zipTemp", "file");
-
-            // 将下载成功信息写入存储
-            fileName.split("-").forEach((resource) => {
-              if (resource) wx.setStorageSync(`${resource}Download`, true);
-            });
-
-            // 判断取消提示
-            if (showProgress) wx.hideLoading();
-            resolve();
-          });
-        } else reject(statusCode);
-      },
-
-      // 下载失败
-      fail: ({ errMsg }) => {
-        logger.error(`download ${fileName} fail: ${errMsg}`);
-        reject(errMsg);
-      },
-    });
-
-    downLoadTask.onProgressUpdate(({ progress }) => {
-      if (showProgress)
-        wx.showLoading({ title: `下载中...${progress}%`, mask: true });
-    });
-  });
-
-let hasResPopup = false;
-
-/**
- * 检查资源更新
- *
- * @param path 检查资源的路径
- * @param name 检查资源的名称
- * @param dataUsage 消耗的数据流量
- */
-// eslint-disable-next-line max-lines-per-function
-export const checkResUpdate = (): void => {
-  /** 资源提醒状态 */
-  let notify = wx.getStorageSync<boolean | undefined>("resourceNotify");
-  /** 本地资源版本 */
-  const localVersion: Record<string, number> = readJSON("version") || {};
-  /** 上次更新时间 */
-  const localTime = wx.getStorageSync<number | undefined>(`resourceUpdateTime`);
-  /** 当前时间 */
-  const currentTime = Math.round(new Date().getTime() / 1000);
-
-  // 调试
-  logger.debug(
-    `Resource Notify status: ${notify ? "open" : "close"}`,
-    "Local resource version: ",
-    localVersion
-  );
-
-  if (currentTime > Number(localTime) + 604800 && !notify) {
-    notify = true;
-    wx.setStorageSync("resourceNotify", true);
-    logger.debug("Resource Notify reset to true after 7 days");
-  }
-
-  // 需要检查更新
-  if (notify && !hasResPopup)
-    wx.request<VersionInfo>({
-      url: `${server}service/resource.php`,
-      enableHttp2: true,
-      method: "POST",
-      success: ({ statusCode, data }) => {
-        // 资源为最新
-        if (statusCode === 200) {
-          const updateList: string[] = [];
-
-          for (const key in data.version)
-            if (data.version[key] !== localVersion[key]) updateList.push(key);
-
-          // 需要更新
-          if (updateList.length > 0) {
-            // 调试
-            logger.info("Newer resource detected");
-
-            const fileName = updateList.join("-");
-            const size = data.size[fileName];
-
-            hasResPopup = true;
-
-            // 需要提醒
-            wx.showModal({
-              title: "内容更新",
-              content: `请更新小程序资源以获得最新内容。(会消耗${size}K流量)`,
-              cancelText: "取消",
-              cancelColor: "#ff0000",
-              confirmText: "更新",
-              success: ({ confirm, cancel }) => {
-                // 用户确认，下载更新
-                if (confirm)
-                  resourceDownload(fileName).then(() => {
-                    writeJSON("version", data.version);
-                    hasResPopup = false;
-                  });
-                // 用户取消，警告用户
-                else if (cancel)
-                  wx.showModal({
-                    title: "更新已取消",
-                    content:
-                      "您会错过本次新增与修正的小程序内容，导致的后果请您自负!",
-                    confirmColor: "#ff0000",
-                    confirmText: "确定",
-                    showCancel: false,
-                  });
-              },
-            });
-          }
-          // 调试
-          else logger.debug("Newest resource already downloaded");
-        } else tip("服务器出现问题");
-      },
-      fail: () => tip("服务器出现问题"),
-    });
-};
-
 /** 初始化小程序 */
-export const appInit = (): void => {
+export const initializeApp = (): void => {
   // 提示用户正在初始化
   wx.showLoading({ title: "初始化中...", mask: true });
   logger.info("First launch");
@@ -240,7 +83,7 @@ export const appInit = (): void => {
     wx.setStorageSync(data, appConfig[data]);
   });
 
-  resourceDownload("function-guide-icon-intro", false).then(() => {
+  downloadResource("function-guide-icon-intro", false).then(() => {
     // 下载资源文件并写入更新时间
     const timeStamp = new Date().getTime();
 
@@ -278,7 +121,7 @@ export interface Notice {
  *
  * @param globalData 小程序的全局数据
  */
-export const noticeCheck = (globalData: GlobalData): void => {
+export const updateNotice = (globalData: GlobalData): void => {
   requestJSON<Record<string, Notice>>(
     `r/config/${globalData.appID}/${globalData.version}/notice`
   )
@@ -314,15 +157,6 @@ export const noticeCheck = (globalData: GlobalData): void => {
     });
 };
 
-/**
- * 根据用户设置，判断当前小程序是否应启用夜间模式
- *
- * @returns 夜间模式状态
- */
-export const getDarkmode = (
-  sysInfo: WechatMiniprogram.SystemInfo = wx.getSystemInfoSync()
-): boolean => (sysInfo.AppPlatform ? false : sysInfo.theme === "dark");
-
 interface UpdateInfo {
   /** 是否进行强制更新 */
   forceUpdate: boolean;
@@ -337,7 +171,7 @@ interface UpdateInfo {
  *
  * @param globalData 小程序的全局数据
  */
-export const appUpdate = (globalData: GlobalData): void => {
+export const updateApp = (globalData: GlobalData): void => {
   const updateManager = wx.getUpdateManager?.();
 
   if (updateManager) {
@@ -418,11 +252,17 @@ interface LoginCallback {
  *
  * @param appID 小程序的appID
  */
-export const login = ({ appID, env }: GlobalData): void => {
+const login = (
+  appID: AppID,
+  env: string,
+  callback: (openid: string) => void
+): void => {
   const openid = wx.getStorageSync<string | undefined>("openid");
 
-  if (openid) console.info(`User OPENID: ${openid}`);
-  else
+  if (openid) {
+    console.info(`User OPENID: ${openid}`);
+    callback(openid);
+  } else
     wx.login({
       success: ({ code }) => {
         if (code)
@@ -434,6 +274,7 @@ export const login = ({ appID, env }: GlobalData): void => {
             success: ({ data }) => {
               wx.setStorageSync("openid", data.openid);
               console.info(`User OPENID: ${data.openid}`);
+              callback(data.openid);
             },
           });
       },
@@ -444,7 +285,7 @@ export const login = ({ appID, env }: GlobalData): void => {
 };
 
 /** 注册全局监听 */
-export const registAction = (): void => {
+const registerActions = (): void => {
   // 设置内存不足警告
   wx.onMemoryWarning((res) => {
     // tip("内存不足");
@@ -503,6 +344,28 @@ export const registAction = (): void => {
   }
 };
 
+const checkGroupApp = (): void => {
+  const { entryDataHash } = wx.getLaunchOptionsSync();
+
+  if (entryDataHash)
+    wx.getGroupInfo({
+      entryDataHash,
+      success: ({ isGroupManager }) => {
+        if (isGroupManager)
+          wx.getGroupAppStatus({
+            entryDataHash,
+            success: ({ isExisted }) => {
+              if (!isExisted) {
+                modal("尊敬的管理员", "请考虑添加小程序到群应用!", () => {
+                  wx.navigateTo({ url: "/module/function?action=addGroupApp" });
+                });
+              }
+            },
+          });
+      },
+    });
+};
+
 export const getGlobalData = (): GlobalData => {
   // 获取设备与运行环境信息
   const info = wx.getSystemInfoSync();
@@ -519,10 +382,8 @@ export const getGlobalData = (): GlobalData => {
     theme: "ios",
     info,
     darkmode: getDarkmode(info),
-    appID: wx.getAccountInfoSync().miniProgram.appId as
-      | "wx33acb831ee1831a5"
-      | "wx9ce37d9662499df3"
-      | 1109559721,
+    appID: wx.getAccountInfoSync().miniProgram.appId as AppID,
+    openid: "",
     selectable: wx.getStorageSync<boolean>("selectable") || false,
   };
 };
@@ -545,6 +406,11 @@ export const startup = (globalData: GlobalData): void => {
     },
   });
 
+  if (wx.canIUse("onThemeChange"))
+    wx.onThemeChange(({ theme }) => {
+      globalData.theme = theme;
+    });
+
   // 加载字体
   // wx.loadFontFace({
   //   family: "FZSSJW",
@@ -556,10 +422,13 @@ export const startup = (globalData: GlobalData): void => {
   //   },
   // });
 
-  noticeCheck(globalData);
-  appUpdate(globalData);
-  registAction();
-  login(globalData);
+  updateNotice(globalData);
+  updateApp(globalData);
+  registerActions();
+  login(globalData.appID, globalData.env, (openid) => {
+    globalData.openid = openid;
+  });
+  if (globalData.env === "qq") checkGroupApp();
 
   const debug = wx.getStorageSync<boolean | undefined>("debugMode") || false;
 

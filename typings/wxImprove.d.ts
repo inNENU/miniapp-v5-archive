@@ -74,7 +74,7 @@ declare namespace WechatMiniprogram {
   // FIXME: Wait for tool chain
   interface AuthSetting {
     /**
-     * Will be added in Feb. 24 2022
+     * Added in Feb. 24 2022
      */
     // eslint-disable-next-line @typescript-eslint/naming-convention
     "scope.addPhoneContact"?: boolean;

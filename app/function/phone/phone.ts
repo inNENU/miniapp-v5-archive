@@ -1,14 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { addPhoneContact, getWindowInfo } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
-import { addPhoneContact, getWindowInfo, tip } from "../../utils/wx";
-
-import type { AppOption } from "../../app";
-
-const { globalData } = getApp<AppOption>();
-const { env } = globalData;
 
 interface PhoneItemConfig {
   name: string;
@@ -24,7 +19,8 @@ interface PhoneConfig {
 $Page("phone", {
   data: {
     config: <PhoneConfig[]>[],
-    env,
+    showInfo: false,
+    info: <PhoneItemConfig>{},
   },
 
   onNavigate() {
@@ -53,22 +49,22 @@ $Page("phone", {
 
   onAddToFavorites: () => ({
     title: "师大黄页",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {
+    const info = getWindowInfo();
+
     this.setData({
-      height: size.windowHeight - globalData.info.statusBarHeight - 160,
+      height: size.windowHeight - info.statusBarHeight - 160,
     });
   },
 
   getConfig({
     currentTarget,
   }: WechatMiniprogram.TouchEvent<
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    {},
+    Record<string, never>,
+    Record<string, never>,
     { group: number; index: number }
   >): PhoneItemConfig {
     const { group, index } = currentTarget.dataset;
@@ -84,10 +80,8 @@ $Page("phone", {
 
   call(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { group: number; index: number }
     >
   ) {
@@ -98,10 +92,8 @@ $Page("phone", {
 
   addContact(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { group: number; index: number }
     >
   ) {
@@ -112,31 +104,31 @@ $Page("phone", {
       firstName: item.name,
       hostNumber: this.getNumber(item),
       organization: "东北师范大学",
-      addressPostalCode: '"130024',
       ...(item.locate === "benbu"
-        ? { addressStreet: "吉林省长春市人民大街5268号" }
+        ? {
+            addressPostalCode: "130024",
+            addressStreet: "吉林省长春市人民大街 5268 号",
+          }
         : item.locate === "jingyue"
-        ? { addressStreet: "吉林省长春市净月大街2555号" }
+        ? {
+            addressPostalCode: "130117",
+            addressStreet: "吉林省长春市净月大街 2555 号",
+          }
         : {}),
     });
   },
 
-  copyContact(
+  openInfo(
     event: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { group: number; index: number }
     >
-  ) {
-    const item = this.getConfig(event);
+  ): void {
+    this.setData({ info: this.getConfig(event), showInfo: true });
+  },
 
-    wx.setClipboardData({
-      data: this.getNumber(item),
-      success: () => {
-        tip("号码已复制");
-      },
-    });
+  closeInfo(): void {
+    this.setData({ showInfo: false });
   },
 });

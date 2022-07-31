@@ -1,5 +1,5 @@
 import { $Page } from "@mptool/enhance";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { popNotice } from "../../utils/page";
 import { validateId } from "../../utils/validate";
 
@@ -42,6 +42,8 @@ const INPUT_CONFIG = <InputConfig[]>[
 
 $Page("admission", {
   data: {
+    type: "debug",
+
     /** 层次选择器 */
     level: "本科生",
 
@@ -79,7 +81,7 @@ $Page("admission", {
     cookies: <unknown[]>[],
   },
 
-  onLoad() {
+  onLoad({ type = "debug" }) {
     const level =
       wx.getStorageSync<"本科生" | "研究生" | undefined>("level") || "本科生";
     const info = wx.getStorageSync<Record<string, string> | undefined>(
@@ -88,6 +90,7 @@ $Page("admission", {
 
     this.setData({
       firstPage: getCurrentPages().length === 1,
+      type,
       level,
     });
 
@@ -102,17 +105,24 @@ $Page("admission", {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onPageScroll() {},
 
-  onShareAppMessage: () => ({
-    title: "录取查询",
-    path: "/function/admission/admission",
-  }),
+  onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
+    return {
+      title: "录取查询",
+      path: `/function/admission/admission?type=${this.data.type}`,
+    };
+  },
 
-  onShareTimeline: () => ({ title: "录取查询" }),
+  onShareTimeline(): WechatMiniprogram.Page.ICustomTimelineContent {
+    return { title: "录取查询", query: "type=${this.data.type}" };
+  },
 
-  onAddToFavorites: () => ({
-    title: "录取查询",
-    imageUrl: `${getImagePrefix()}.jpg`,
-  }),
+  onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {
+    return {
+      title: "录取查询",
+      imageUrl: `${appCoverPrefix}.jpg`,
+      query: `type=${this.data.type}`,
+    };
+  },
 
   /** 层次切换 */
   levelChange({
@@ -226,6 +236,7 @@ $Page("admission", {
         level: this.data.level,
         cookies: this.state.cookies,
         ...this.state.input,
+        verifyCode: this.state.verifyCode,
       },
       success: ({ data, statusCode }) => {
         if (statusCode === 200) {

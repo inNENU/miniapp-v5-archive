@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 import { logger } from "@mptool/enhance";
 import { readJSON, writeJSON } from "@mptool/file";
+
+import { modal, requestJSON } from "./api";
 import { ensureJSON } from "./json";
 import { id2path } from "./id";
 import { genScopeData } from "./scopeData";
-import { modal, requestJSON } from "./wx";
 
 import type { PageInstance, PageQuery } from "@mptool/enhance";
 import type { AppOption } from "../app";
