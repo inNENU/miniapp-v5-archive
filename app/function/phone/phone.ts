@@ -19,6 +19,8 @@ interface PhoneConfig {
 $Page("phone", {
   data: {
     config: <PhoneConfig[]>[],
+    showInfo: false,
+    info: <PhoneItemConfig>{},
   },
 
   onNavigate() {
@@ -102,12 +104,31 @@ $Page("phone", {
       firstName: item.name,
       hostNumber: this.getNumber(item),
       organization: "东北师范大学",
-      addressPostalCode: '"130024',
       ...(item.locate === "benbu"
-        ? { addressStreet: "吉林省长春市人民大街5268号" }
+        ? {
+            addressPostalCode: "130024",
+            addressStreet: "吉林省长春市人民大街 5268 号",
+          }
         : item.locate === "jingyue"
-        ? { addressStreet: "吉林省长春市净月大街2555号" }
+        ? {
+            addressPostalCode: "130117",
+            addressStreet: "吉林省长春市净月大街 2555 号",
+          }
         : {}),
     });
+  },
+
+  openInfo(
+    event: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { group: number; index: number }
+    >
+  ): void {
+    this.setData({ info: this.getConfig(event), showInfo: true });
+  },
+
+  closeInfo(): void {
+    this.setData({ showInfo: false });
   },
 });

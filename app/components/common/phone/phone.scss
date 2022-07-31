@@ -1,32 +1,9 @@
-.phone-component-header {
-  max-width: var(--max-width);
-  min-height: 13px;
-  margin: 0 var(--horizontal-margin);
-  padding: 12px 15px 4px;
-
-  color: var(--text-color);
-
-  font-weight: 500;
-  font-size: 19px;
-  text-align: left;
-
-  .grey & {
-    padding: 21px 15px 5px;
-    color: var(--dark-grey);
-    font-weight: 400;
-    font-size: 13px;
-  }
-}
-
 .phone-component-wrapper {
-  display: flex;
-  align-items: center;
-
   overflow: hidden;
 
   max-width: calc(var(--max-width) - 30px);
   margin: 2px var(--horizontal-margin);
-  padding: 0 15px;
+  padding: 4px 15px;
   border-radius: 8px;
 
   background-color: var(--block-bgcolor);
@@ -34,10 +11,36 @@
 
   line-height: 2.5;
 
+  .header {
+    min-height: 13px;
+
+    color: var(--text-color);
+
+    font-weight: 500;
+    font-size: 19px;
+    text-align: left;
+  }
+
+  .info-button {
+    float: right;
+    margin-top: 8px !important;
+  }
+
+  .info-icon {
+    width: 100%;
+    height: 100%;
+  }
+
   .phone-icon {
     width: 24px;
     height: 24px;
     margin-right: 15px;
+    vertical-align: baseline;
+  }
+
+  .info {
+    display: flex;
+    align-items: center;
   }
 
   .number {
@@ -45,6 +48,7 @@
     font-weight: 500;
     font-size: 20px;
     text-align: left;
+    line-height: 2;
   }
 
   .action {
@@ -61,5 +65,55 @@
       width: 100%;
       height: 100%;
     }
+  }
+}
+
+.phone-popup {
+  position: fixed;
+  z-index: 5000;
+  top: 50%;
+  left: 16px;
+  right: 16px;
+  transform: translate(0, -50%);
+  background-color: var(--white);
+  text-align: center;
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+  max-height: 90%;
+
+  .title {
+    padding: 32px 24px 16px;
+
+    font-weight: 700;
+    font-size: 17px;
+    line-height: 1.4;
+  }
+
+  .body {
+    overflow-y: auto;
+    padding: 0 24px;
+    margin-bottom: 32px;
+    font-size: 17px;
+    line-height: 1.7;
+    word-wrap: break-word;
+    hyphens: auto;
+    color: var(--grey);
+  }
+
+  .button {
+    display: block;
+    line-height: 1.41176471;
+    padding: 16px 0;
+    font-size: 17px;
+    border-top: 1px solid var(--border-color);
+    font-weight: 700;
+    text-decoration: none;
+    user-select: none;
+    position: relative;
+    overflow: hidden;
   }
 }

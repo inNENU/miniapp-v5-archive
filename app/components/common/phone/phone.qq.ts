@@ -13,6 +13,10 @@ $Component({
     },
   },
 
+  data: {
+    showInfo: false,
+  },
+
   methods: {
     /** 拨打电话 */
     call(): void {
@@ -25,6 +29,12 @@ $Component({
         success: () => {
           tip("号码已复制");
         },
+      });
+    },
+
+    toggleInfo(): void {
+      this.setData({
+        showInfo: !this.data.showInfo,
       });
     },
   },

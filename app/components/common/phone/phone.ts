@@ -13,6 +13,10 @@ $Component({
     },
   },
 
+  data: {
+    showInfo: false,
+  },
+
   methods: {
     /** 拨打电话 */
     call(): void {
@@ -42,6 +46,12 @@ $Component({
         email: config.mail,
         url: config.site,
         homePhoneNumber: config.homeNum,
+      });
+    },
+
+    toggleInfo(): void {
+      this.setData({
+        showInfo: !this.data.showInfo,
       });
     },
   },

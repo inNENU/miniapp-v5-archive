@@ -19,6 +19,8 @@ interface PhoneConfig {
 $Page("phone", {
   data: {
     config: <PhoneConfig[]>[],
+    showInfo: false,
+    info: <PhoneItemConfig>{},
   },
 
   onNavigate() {
@@ -103,5 +105,19 @@ $Page("phone", {
         tip("号码已复制");
       },
     });
+  },
+
+  openInfo(
+    event: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { group: number; index: number }
+    >
+  ): void {
+    this.setData({ info: this.getConfig(event), showInfo: true });
+  },
+
+  closeInfo(): void {
+    this.setData({ showInfo: false });
   },
 });
