@@ -67,20 +67,20 @@
   }
 
   .text {
-    min-width: 3.5rem;
     flex: none;
+    min-width: 3.5rem;
     padding-right: 16px;
     text-align: right;
   }
 
   .input {
-    text-align: left;
     flex: 1;
+    text-align: left;
   }
 
   .picker {
-    text-align: left;
     flex: 1;
+    text-align: left;
   }
 
   .verify-code {
@@ -162,15 +162,15 @@
   background-color: var(--block-bgcolor);
   color: var(--text-color);
 
-  text-align: left;
   font-size: 17px;
   line-height: 1.75;
+  text-align: left;
 
   .title {
-    font-size: 18px;
-    font-weight: bold;
-    padding: 0 4px;
     margin-bottom: 10px;
+    padding: 0 4px;
+    font-weight: bold;
+    font-size: 18px;
   }
 
   .detail-button {
@@ -178,9 +178,11 @@
 
     margin: -4px -8px 0 0;
     padding: 4px 8px;
+
     color: var(--grey);
+
+    font-weight: normal;
     font-size: 15px;
     letter-spacing: 0;
-    font-weight: normal;
   }
 }
