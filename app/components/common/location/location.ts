@@ -43,7 +43,7 @@ $Component({
         title: config.title,
         markers: config.points.map((point, index) => ({
           name: config.title,
-          detail: "详情",
+          detail: point.path ? "详情" : "",
           id: index,
           ...point,
         })),
