@@ -41,7 +41,7 @@
     <view wx:for="{{config.text}}" wx:key="*this">
       <text
         class="text"
-        style="{{config.tag === 'p'? 'text-indent: 1.5em; ': ''}}{{config.style || ''}}"
+        style="{{config.tag === 'p'? 'display: inline-block;text-indent: 1.5em; ': ''}}{{config.style || ''}}"
         decode
         user-select="{{selectable && plainText.getSelectable(config.style)}}"
         space="nbsp"
