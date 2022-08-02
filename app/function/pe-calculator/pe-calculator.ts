@@ -58,7 +58,7 @@ interface PEScore {
   passScore: number;
 }
 
-$Page("PEcal", {
+$Page("pe-calculator", {
   data: {
     /** 性别选择器 */
     gender: {
@@ -154,7 +154,7 @@ $Page("PEcal", {
       this.state.grade = this.data.grade.values[gradeIndex];
 
     // 设置通知
-    popNotice("PEcal");
+    popNotice("pe-calculator");
   },
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -162,7 +162,7 @@ $Page("PEcal", {
 
   onShareAppMessage: () => ({
     title: "体测计算器",
-    path: "/function/PEcal/PEcal",
+    path: "/function/pe-calculator/pe-calculator",
   }),
 
   onShareTimeline: () => ({ title: "体测计算器" }),
@@ -301,53 +301,55 @@ $Page("PEcal", {
       [peScore.bmi, peScore.passScore] = this.getBMI(result);
 
     // 读取相应配置文件
-    getJSON<GradeConfig>(`function/PEcal/${gender}-${grade}`).then((config) => {
-      // 以下三项越高越好，进行计算
-      (<("vitalCapacity" | "sitAndReach" | "standingLongJump")[]>[
-        "vitalCapacity",
-        "sitAndReach",
-        "standingLongJump",
-      ]).forEach((x) => {
-        if (result[x] && Number(result[x])) {
+    getJSON<GradeConfig>(`function/pe-calculator/${gender}-${grade}`).then(
+      (config) => {
+        // 以下三项越高越好，进行计算
+        (<("vitalCapacity" | "sitAndReach" | "standingLongJump")[]>[
+          "vitalCapacity",
+          "sitAndReach",
+          "standingLongJump",
+        ]).forEach((x) => {
+          if (result[x] && Number(result[x])) {
+            for (let i = length; i >= 0; i -= 1)
+              if (result[x] >= config[x][i]) {
+                peScore[x] = gradeLevels[i];
+                break;
+              } else if (i === 0) peScore[x] = 0;
+          } else peScore[x] = 0;
+        });
+
+        // 以下两项越低越好
+        (<("shortRun" | "longRun")[]>["shortRun", "longRun"]).forEach((x) => {
+          if (result[x]) {
+            for (let i = length; i >= 0; i -= 1)
+              if (result[x] <= config[x][i]) {
+                peScore[x] = gradeLevels[i];
+                break;
+              } else if (i === 0) peScore[x] = 0;
+          } else peScore[x] = 0;
+        });
+
+        // 计算特别类项目分数
+        const specialScore = gender === "male" ? "chinning" : "situp";
+
+        if (result[specialScore] && Number(result[specialScore])) {
           for (let i = length; i >= 0; i -= 1)
-            if (result[x] >= config[x][i]) {
-              peScore[x] = gradeLevels[i];
+            if (
+              config[specialScore]![i] !== "" &&
+              result[specialScore] >= config[specialScore]![i]
+            ) {
+              peScore.special = gradeLevels[i];
               break;
-            } else if (i === 0) peScore[x] = 0;
-        } else peScore[x] = 0;
-      });
+            } else if (i === 0) peScore.special = 0;
+        } else peScore.special = 0;
 
-      // 以下两项越低越好
-      (<("shortRun" | "longRun")[]>["shortRun", "longRun"]).forEach((x) => {
-        if (result[x]) {
-          for (let i = length; i >= 0; i -= 1)
-            if (result[x] <= config[x][i]) {
-              peScore[x] = gradeLevels[i];
-              break;
-            } else if (i === 0) peScore[x] = 0;
-        } else peScore[x] = 0;
-      });
+        // TODO: 计算加分
 
-      // 计算特别类项目分数
-      const specialScore = gender === "male" ? "chinning" : "situp";
+        console.info("Score:", peScore);
 
-      if (result[specialScore] && Number(result[specialScore])) {
-        for (let i = length; i >= 0; i -= 1)
-          if (
-            config[specialScore]![i] !== "" &&
-            result[specialScore] >= config[specialScore]![i]
-          ) {
-            peScore.special = gradeLevels[i];
-            break;
-          } else if (i === 0) peScore.special = 0;
-      } else peScore.special = 0;
-
-      // TODO: 计算加分
-
-      console.info("Score:", peScore);
-
-      callback(peScore);
-    });
+        callback(peScore);
+      }
+    );
   },
 
   /** 计算最终结果 */

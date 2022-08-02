@@ -7,7 +7,7 @@
     <view
       class="desc-button"
       hover-class="button-hover"
-      data-url="page?from=体测计算器&id=guide/test/pe-test/index"
+      data-url="info?from=体测计算器&id=guide/test/pe-test/index"
       catch:tap="$bindGo"
     >
       体测说明

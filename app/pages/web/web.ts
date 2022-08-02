@@ -1,6 +1,6 @@
 import { $Page } from "@mptool/enhance";
 
-import { appName } from "../utils/config";
+import { appName } from "../../utils/config";
 
 $Page<{ title: string; url: string }, Record<string, unknown>>("web", {
   onLoad({ title, url }) {
@@ -12,7 +12,10 @@ $Page<{ title: string; url: string }, Record<string, unknown>>("web", {
   },
 
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
-    return { title: this.data.title, path: `/module/web?url=${this.data.url}` };
+    return {
+      title: this.data.title,
+      path: `/pages/web/web?url=${this.data.url}`,
+    };
   },
 
   onAddToFavorites(): WechatMiniprogram.Page.IAddToFavoritesContent {

@@ -1,12 +1,12 @@
 import { $Page } from "@mptool/enhance";
 
-import { appCoverPrefix } from "../utils/config";
-import { id2path } from "../utils/id";
-import { loadOnlinePage, resolvePage, setOnlinePage } from "../utils/page";
+import { appCoverPrefix } from "../../utils/config";
+import { id2path } from "../../utils/id";
+import { loadOnlinePage, resolvePage, setOnlinePage } from "../../utils/page";
 
-import type { PageData, PageOption } from "../../typings";
+import type { PageData, PageOption } from "../../../typings";
 
-$Page("page", {
+$Page("info", {
   data: {
     page: <PageData & { id: string }>{},
   },
@@ -37,7 +37,7 @@ $Page("page", {
   onShareAppMessage(): WechatMiniprogram.Page.ICustomShareContent {
     return {
       title: this.data.page.title,
-      path: `/module/page?path=${this.data.page.id}`,
+      path: `/pages/info/info?path=${this.data.page.id}`,
     };
   },
 

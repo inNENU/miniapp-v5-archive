@@ -1,16 +1,16 @@
 import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
-import { modal } from "../utils/api";
-import { appCoverPrefix } from "../utils/config";
+import { modal } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 
-import type { AppOption } from "../app";
+import type { AppOption } from "../../app";
 
 const {
   globalData: { theme },
 } = getApp<AppOption>();
 
-$Page("function", {
+$Page("action", {
   onLoad(options) {
     if (options.scene) {
       const arg = decodeURIComponent(options.scene);
@@ -21,7 +21,7 @@ $Page("function", {
 
   onShareAppMessage: () => ({
     title: "功能页",
-    path: "/module/function/function?action=all",
+    path: "/pages/action/action?action=all",
   }),
 
   onShareTimeline: () => ({ title: "功能页", query: "action=all" }),

@@ -52,7 +52,7 @@ $Component({
     copyQQLink() {
       this.copy(
         `https://m.q.qq.com/a/p/${appID}?s=${encodeURI(
-          `module/page?path=${path2id(this.data.config.id)}`
+          `pages/info/info?path=${path2id(this.data.config.id)}`
         )}`
       );
     },

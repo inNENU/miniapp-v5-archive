@@ -22,7 +22,7 @@ $Component({
         // 页面路径
         if (!config.url.match(/^https?:\/\//)) this.$go(config.url);
         // 网页
-        else this.$go(`/module/web?url=${config.url}&title=${config.title}`);
+        else this.$go(`web?url=${config.url}&title=${config.title}`);
       }
     },
 

@@ -60,7 +60,7 @@ const resolveContent = (
   if ("url" in listElement && !listElement.url!.startsWith("plugin://"))
     listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
-    listElement.url = `page?from=${
+    listElement.url = `info?from=${
       page.title || "返回"
     }&id=${listElement.path!}`;
 
@@ -143,7 +143,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           component.tag === "ul" ||
           component.tag === "text")
       ) {
-        component.path = `page?from=${
+        component.path = `info?from=${
           page.title || "返回"
         }&id=${component.path!}`;
       }

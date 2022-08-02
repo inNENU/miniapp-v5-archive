@@ -20,7 +20,11 @@ export interface AppOption {
 $Config({
   defaultRoute: "/pages/$name/$name",
   routes: [
-    [["function", "page", "web"], "/module/$name"],
+    // TODO: Remove these
+    ["function", "/pages/action/action"],
+    ["page", "/pages/info/info"],
+    ["PEcal", "/function/pe-calculator/pe-calculator"],
+
     [
       [
         "account",
@@ -29,7 +33,7 @@ $Config({
         "location",
         "map",
         "music",
-        "PEcal",
+        "pe-calculator",
         "phone",
         "video",
         "weather",

@@ -6,13 +6,13 @@
     "pages/guide/guide",
     "pages/intro/intro",
     "pages/user/user",
+    "pages/info/info",
     "pages/search/search",
+    "pages/action/action",
+    "pages/web/web",
     "settings/about/about",
     "settings/privacy/privacy",
-    "settings/storage/storage",
-    "module/function",
-    "module/page",
-    "module/web"
+    "settings/storage/storage"
   ],
   "subPackages": [
     {

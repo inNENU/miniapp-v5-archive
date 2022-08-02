@@ -357,7 +357,9 @@ const checkGroupApp = (): void => {
             success: ({ isExisted }) => {
               if (!isExisted) {
                 modal("尊敬的管理员", "请考虑添加小程序到群应用!", () => {
-                  wx.navigateTo({ url: "/module/function?action=addGroupApp" });
+                  wx.navigateTo({
+                    url: "/pages/action/action?action=addGroupApp",
+                  });
                 });
               }
             },

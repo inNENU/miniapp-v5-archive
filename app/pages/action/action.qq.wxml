@@ -1,4 +1,4 @@
-<view class="{{theme}} function">
+<view class="{{theme}} action-page">
   <button
     wx:if="{{all || contact}}"
     class="primary"

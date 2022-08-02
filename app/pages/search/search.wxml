@@ -42,7 +42,7 @@
       hover-class="button-hover"
       wx:for="{{result}}"
       wx:key="title"
-      data-url="{{'page?id=' + item.id + '&from=搜索'}}"
+      data-url="{{'info?id=' + item.id + '&from=搜索'}}"
       catch:tap="$bindGo"
     >
       <view class="title">{{item.title}}</view>

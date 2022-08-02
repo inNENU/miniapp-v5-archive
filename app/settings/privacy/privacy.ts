@@ -48,7 +48,7 @@ $Page("privacy", {
           items: [
             {
               text: "查看详情",
-              url: `page?path=other/about/${globalData.env}-privacy`,
+              url: `info?path=other/about/${globalData.env}-privacy`,
             },
           ],
         },
