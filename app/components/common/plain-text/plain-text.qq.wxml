@@ -26,7 +26,7 @@
       class="list"
       style="{{config.style || ''}}"
     >
-      <view class="head">·</view>
+      <view class="head">•</view>
       <text
         class="text"
         decode
