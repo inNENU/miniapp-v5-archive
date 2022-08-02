@@ -4,7 +4,7 @@ server/r/**/*.json
 server/resource/**/*.json
 server/script/**/*.js
 server/service/vendor/
-server\service\composer.lock
+server/service/composer.lock
 
 project.config.json
 

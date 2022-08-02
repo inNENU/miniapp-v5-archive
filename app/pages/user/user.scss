@@ -1,10 +1,11 @@
 .info-wrapper {
   position: fixed;
   top: 0;
-  left: 0;
   right: 0;
-  display: flex;
+  left: 0;
   z-index: 990;
+
+  display: flex;
 
   margin-bottom: 16px;
   padding: 0 20px 12px;

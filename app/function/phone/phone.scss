@@ -76,13 +76,13 @@
   right: 16px;
   left: 16px;
   z-index: 5000;
-  max-width: var(--max-width);
 
   display: flex;
   flex-direction: column;
 
   overflow: hidden;
 
+  max-width: var(--max-width);
   max-height: 90%;
   border-radius: 12px;
 
