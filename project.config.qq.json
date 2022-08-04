@@ -105,14 +105,14 @@
         {
           "id": 2,
           "name": "分享",
-          "pathName": "module/page",
-          "query": "path=Garrival/train-w-benbu/",
+          "pathName": "pages/info/info",
+          "query": "path=Gdorm/electricity/power",
           "scene": null
         },
         {
           "id": 3,
           "name": "二维码分享",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "scene=guide/dorm/index",
           "scene": null
         },
@@ -140,7 +140,7 @@
         {
           "id": 7,
           "name": "体测计算器",
-          "pathName": "function/PEcal/PEcal",
+          "pathName": "function/pe-calculator/pe-calculator",
           "query": "",
           "scene": null
         },
@@ -182,14 +182,14 @@
         {
           "id": 13,
           "name": "客服",
-          "pathName": "module/function",
+          "pathName": "pages/action/action",
           "query": "action=contact",
           "scene": null
         },
         {
           "id": 14,
           "name": "初始化小程序",
-          "pathName": "module/function",
+          "pathName": "pages/action/action",
           "query": "action=reset",
           "scene": null
         },
@@ -273,14 +273,14 @@
         {
           "id": 27,
           "name": "欢迎入群",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "id=other/about/welcome",
           "scene": null
         },
         {
           "id": 28,
           "name": "错误页",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "id=other/about/notexist",
           "scene": null
         }

@@ -76,14 +76,14 @@
         },
         {
           "name": "分享",
-          "pathName": "module/page",
-          "query": "path=Gprepare/check-in-time",
+          "pathName": "pages/info/info",
+          "query": "path=Gdorm/electricity/power",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "二维码分享",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "scene=guide/dorm/index",
           "launchMode": "default",
           "scene": null
@@ -111,7 +111,7 @@
         },
         {
           "name": "体测计算器",
-          "pathName": "function/PEcal/PEcal",
+          "pathName": "function/pe-calculator/pe-calculator",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -153,14 +153,14 @@
         },
         {
           "name": "客服",
-          "pathName": "module/function",
+          "pathName": "pages/action/action",
           "query": "action=contact",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "初始化小程序",
-          "pathName": "module/function",
+          "pathName": "pages/action/action",
           "query": "action=reset",
           "launchMode": "default",
           "scene": null
@@ -237,14 +237,14 @@
         },
         {
           "name": "欢迎入群",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "id=other/about/welcome",
           "launchMode": "default",
           "scene": null
         },
         {
           "name": "错误页",
-          "pathName": "module/page",
+          "pathName": "pages/info/info",
           "query": "id=other/about/notexist",
           "launchMode": "default",
           "scene": null
