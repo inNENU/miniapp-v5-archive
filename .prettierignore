@@ -1,8 +1,8 @@
-dist/
 app/function/music/music.wxs
-server/r/**/*.json
-server/resource/**/*.json
-server/script/**/*.js
+
+dist/
+
+server/r/
 server/service/vendor/
 server/service/composer.lock
 
