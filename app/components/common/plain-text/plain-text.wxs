@@ -30,7 +30,9 @@ module.exports = {
     return align ? "text-align:" + align : "";
   },
 
-  getSelectable: function (style) {
-    return !style || style.indexOf("text-decoration") === -1;
+  getStyle: function (config, selectable) {
+    return config.tag === "p"
+      ? (selectable ? "" : "display: block;") + "text-indent: 1.5em"
+      : "";
   },
 };
