@@ -29,7 +29,7 @@
         class="text"
         decode
         space="nbsp"
-        style="{{plainText.getStyle(config, selectable)}}"
+        style="{{config.tag === 'p'? 'display: block;': ''}}{{plainText.getStyle(config, selectable)}}"
         selectable="{{selectable}}"
         ><text>{{item}}</text></text
       >
