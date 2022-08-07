@@ -5,7 +5,7 @@ import { readJSON, writeJSON } from "@mptool/file";
 import { modal, requestJSON } from "./api";
 import { ensureJSON } from "./json";
 import { id2path } from "./id";
-import { genScopeData } from "./scopeData";
+import { getScopeData } from "./scopeData";
 
 import type { PageInstance, PageQuery } from "@mptool/enhance";
 import type { AppOption } from "../app";
@@ -171,7 +171,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           | ListComponentItemConfig[];
     });
 
-    page.scopeData = genScopeData(page as PageDataWithContent);
+    page.scopeData = getScopeData(page as PageDataWithContent);
   }
 
   // 调试
