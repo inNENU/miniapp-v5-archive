@@ -20,11 +20,6 @@ export interface AppOption {
 $Config({
   defaultRoute: "/pages/$name/$name",
   routes: [
-    // TODO: Remove these
-    ["function", "/pages/action/action"],
-    ["page", "/pages/info/info"],
-    ["PEcal", "/function/pe-calculator/pe-calculator"],
-
     [
       [
         "account",
