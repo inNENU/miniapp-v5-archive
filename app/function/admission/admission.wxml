@@ -1,10 +1,11 @@
 <import src="/components/template.wxml" />
 <wxs src="./admission.wxs" module="admission" />
 
-<view
+<scroll-view
   wx:if="{{type === 'search'}}"
   class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
+  scroll-y
 >
   <header title="录取查询" />
 
@@ -70,7 +71,7 @@
   </view>
 
   <footer />
-</view>
+</scroll-view>
 
 <template
   wx:else

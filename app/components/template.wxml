@@ -53,10 +53,11 @@
 
 <!-- page with navigation bar -->
 <template name="page">
-  <view
+  <scroll-view
     wx:if="{{page}}"
     wx:scope-data="{{...page.scopeData}}"
     class="{{theme}} {{page.grey? 'grey': ''}}"
+    scroll-y
   >
     <!-- 错误显示 -->
     <block wx:if="{{page.error}}">
@@ -100,7 +101,7 @@
         config="{{template.getFooterConfig(page)}}"
       />
     </block>
-  </view>
+  </scroll-view>
 </template>
 
 <!-- 错误文字 -->

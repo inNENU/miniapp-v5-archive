@@ -7,7 +7,7 @@
   root-background-color="{{color.bgColor}}"
 />
 
-<view class="ios grey">
+<scroll-view class="ios grey" scroll-y>
   <view
     class="left-button"
     style="top: {{statusBarHeight + 6}}px;"
@@ -60,4 +60,4 @@
     </view>
   </block>
   <footer config="{{footer}}" />
-</view>
+</scroll-view>

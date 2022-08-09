@@ -6,7 +6,7 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}} grey">
+<scroll-view class="{{theme}} grey" scroll-y>
   <view
     class="left-button"
     style="top:{{statusBarHeight + 6}}px;"
@@ -82,4 +82,4 @@
   </block>
 
   <footer />
-</view>
+</scroll-view>

@@ -6,7 +6,7 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}} grey">
+<scroll-view class="{{theme}} grey" scroll-y>
   <view class="info-wrapper" style="padding-top:{{statusBarHeight + 20}}px">
     <image class="avatar" src="{{logo}}" />
     <view class="info">
@@ -18,5 +18,5 @@
   <official-account />
   <template is="components" data="{{content: page.content, theme}}" />
   <footer config="{{footer}}" />
-</view>
+</scroll-view>
 <add-tip />

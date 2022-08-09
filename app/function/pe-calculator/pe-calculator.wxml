@@ -1,6 +1,7 @@
-<view
+<scroll-view
   class="ios grey"
   style="{{isTyping? 'padding-bottom:' + keyboardHeight + 'px;': ''}}"
+  scroll-y
 >
   <header title="体测计算器" />
   <view class="desc-wrapper">
@@ -91,7 +92,7 @@
   </button>
 
   <footer />
-</view>
+</scroll-view>
 
 <!-- 成绩列表 -->
 <popup

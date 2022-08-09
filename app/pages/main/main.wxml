@@ -6,7 +6,7 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}} grey">
+<scroll-view class="{{theme}} grey" scroll-y>
   <view
     class="custom-navigation-bar"
     style="padding-top:{{statusBarHeight}}px;"
@@ -27,4 +27,4 @@
     到头啦~人家被你拉得好痛阿(*´д`*) 不许你再拉人家~╭(╯^╰)╮
   </view>
   <template is="components" data="{{content: page.content, theme}}" />
-</view>
+</scroll-view>

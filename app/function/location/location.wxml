@@ -6,7 +6,7 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}} {{page.grey? 'grey': ''}}">
+<scroll-view class="{{theme}} {{page.grey? 'grey': ''}}" scroll-y>
   <template wx:if="{{page.error}}" is="error" data="{{ id: page.id }}" />
   <block wx:else>
     <view
@@ -56,5 +56,5 @@
     <footer config="{{page}}" />
     <share config="{{page}}" />
   </block>
-</view>
+</scroll-view>
 <map id="tool" style="width: 0; height: 0" />

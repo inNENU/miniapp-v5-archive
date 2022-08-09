@@ -1,5 +1,5 @@
 <wxs src="./weather.wxs" module="tool" />
-<view class="wrapper grey">
+<scroll-view class="wrapper grey" scroll-y>
   <view
     class="weather-wrapper {{night? 'night': 'day'}}"
     style="padding-top: {{statusBarHeight}}px;"
@@ -112,4 +112,4 @@
   </view>
 
   <view class="footer">数据来源: 中国天气网</view>
-</view>
+</scroll-view>

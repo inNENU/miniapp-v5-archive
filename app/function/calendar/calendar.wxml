@@ -5,14 +5,14 @@
   background-color-bottom="{{color.bgColorBottom}}"
   root-background-color="{{color.bgColor}}"
 />
-<view class="{{theme}}">
+<scroll-view class="{{theme}}" scroll-y>
   <header title="校历" />
   <view class="desc">点击对应学期可查看详情</view>
   <view class="calendar-wrapper">
     <time-line config="{{calendar}}" catch:active="display" />
   </view>
   <footer />
-</view>
+</scroll-view>
 
 <!-- 校历详情 -->
 <popup

@@ -4,6 +4,10 @@
 
 > 请注意，此项目虽然公开了源代码，但是包含了对应的 [协议](https://github.com/Hope-Studio/innenu-miniapp/tree/wechat/v4/LICENSE) 进行限制。请勿以为本项目代码可随意使用。
 
+## 已知 bug
+
+- 暂停已播放的音乐后退出再重进会导致进度条和时间异常，以及播放暂停键失效
+
 ## 目前 QQ 与微信小程序的差异
 
 ### 已兼容的
@@ -33,3 +37,14 @@
 - QQ 不兼容 darkmode 的主题配置， app.json 写法有差异 (编译失败)
 - QQ 不支持 text 的 user-select (旧写法出现警告)
 - QQ 的 app.json 声明了 groupIdList (旧写法出现警告)
+
+### Skyline
+
+兼容模式下:
+
+- 文本选择暂不可用 (skyline 未支持)
+- 夜间模式暂不可用 (skyline 未支持)
+- 输入框会因为页面上滑导致错位
+- 点击输入框页面不会为键盘额外生成位置
+- iOS 导航栏 blur 频闪
+- 安卓导航栏阴影失效
