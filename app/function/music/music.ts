@@ -161,31 +161,31 @@ $Page("music", {
     // 能够播放 100ms 后设置可以播放
     manager.onCanplay(() => {
       // 调试
-      console.info("Canplay");
+      console.info("Canplay current music");
       this.setData({ canplay: true });
     });
 
     // 在相应动作时改变状态
     manager.onPlay(() => {
+      console.log("play");
       this.setData({ playing: true });
       music.playing = true;
     });
 
     manager.onPause(() => {
+      console.log("pause");
       this.setData({ playing: false });
       music.playing = false;
     });
 
     manager.onTimeUpdate(() => {
+      console.log("timeupdate:", manager.currentTime);
       // 更新歌曲信息
       this.setData({
         currentTime: Math.round(manager.currentTime * 100) / 100,
         totalTime: Math.round(manager.duration * 100) / 100,
         canplay: true,
       });
-
-      // 设置播放状态
-      if (!music.playing) music.playing = true;
 
       this.lyric();
     });
@@ -197,13 +197,14 @@ $Page("music", {
     });
 
     manager.onPrev(() => {
+      console.log("previous");
       this.previous();
     });
 
     // 歌曲播放结束
     manager.onEnded(() => {
-      this.end();
       console.log("Music ends");
+      this.end();
     });
 
     // 歌曲播放结束
