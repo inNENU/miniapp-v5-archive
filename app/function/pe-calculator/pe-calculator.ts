@@ -3,6 +3,7 @@ import { $Page } from "@mptool/enhance";
 import { appCoverPrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
 import { popNotice } from "../../utils/page";
+import { modal } from "../../utils/api";
 
 /** 分数段设置 */
 const gradeLevels = [
@@ -295,6 +296,13 @@ $Page("pe-calculator", {
       special: 0,
       passScore: 60,
     };
+
+    // 校验数据的合法性
+    if (result.height < 2) {
+      modal("请输入正确的身高", "身高的单位是厘米");
+
+      return;
+    }
 
     // 可以计算 BMI
     if (result.height && result.weight)
