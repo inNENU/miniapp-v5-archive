@@ -58,12 +58,12 @@
   },
   "devDependencies": {
     "@mr-hope/gulp-sass": "3.0.2",
-    "@typescript-eslint/eslint-plugin": "5.31.0",
-    "@typescript-eslint/parser": "5.31.0",
+    "@typescript-eslint/eslint-plugin": "5.33.0",
+    "@typescript-eslint/parser": "5.33.0",
     "conventional-changelog-cli": "2.2.2",
     "cz-conventional-changelog": "3.3.0",
-    "del": "6.1.1",
-    "eslint": "8.20.0",
+    "del": "7.0.0",
+    "eslint": "8.21.0",
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
     "gulp": "4.0.2",
@@ -73,8 +73,8 @@
     "husky": "8.0.1",
     "lint-staged": "13.0.3",
     "miniprogram-api-typings": "3.5.0",
-    "npm-check-updates": "16.0.1",
-    "postcss": "8.4.14",
+    "npm-check-updates": "16.0.5",
+    "postcss": "8.4.16",
     "prettier": "2.7.1",
     "sort-package-json": "1.57.0",
     "stylelint": "14.9.1",
@@ -84,5 +84,5 @@
     "stylelint-order": "5.0.0",
     "typescript": "4.7.4"
   },
-  "packageManager": "pnpm@7.6.0"
+  "packageManager": "pnpm@7.9.0"
 }
