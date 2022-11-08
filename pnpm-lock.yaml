@@ -21,7 +21,7 @@ importers:
       gulp-typescript: 6.0.0-alpha.1
       husky: 8.0.1
       lint-staged: 13.0.3
-      miniprogram-api-typings: 3.5.0
+      miniprogram-api-typings: 3.6.0
       npm-check-updates: 16.3.18
       postcss: 8.4.18
       prettier: 2.7.1
@@ -34,7 +34,7 @@ importers:
       typescript: 4.7.4
     dependencies:
       '@mptool/enhance': 0.0.1-beta.1
-      '@mptool/file': 0.0.1-beta.1_7c4ts4xlo2jzrt4rtpp4buczgm
+      '@mptool/file': 0.0.1-beta.1_qgtt24mejwfqgu6mpcd6mwbi2q
     devDependencies:
       '@mr-hope/gulp-sass': 3.0.2
       '@typescript-eslint/eslint-plugin': 5.33.0_6woyj77ugjlpgjyaujyqav4b5y
@@ -51,7 +51,7 @@ importers:
       gulp-typescript: 6.0.0-alpha.1_typescript@4.7.4
       husky: 8.0.1
       lint-staged: 13.0.3
-      miniprogram-api-typings: 3.5.0
+      miniprogram-api-typings: 3.6.0
       npm-check-updates: 16.3.18
       postcss: 8.4.18
       prettier: 2.7.1
@@ -251,12 +251,12 @@ packages:
     resolution: {integrity: sha512-B+2d+sfxlgaha2jVOUm0MYycMfM5YcIMWAMzCZdXlE2rXW8gJ3d80L0AZ9R6TFg0REobKq/YW3LnbzJGY2iqHg==}
     dev: false
 
-  /@mptool/file/0.0.1-beta.1_7c4ts4xlo2jzrt4rtpp4buczgm:
+  /@mptool/file/0.0.1-beta.1_qgtt24mejwfqgu6mpcd6mwbi2q:
     resolution: {integrity: sha512-ZT439fh/j+QI9rnwgyP+xaGLd95CByj04+D9+8e5l9JDUmvTvicBhLF0Q7zmydQ09hh01uRKAd5+78gNLnZz3Q==}
     peerDependencies:
       miniprogram-api-typings: ^3.4.4
     dependencies:
-      miniprogram-api-typings: 3.5.0
+      miniprogram-api-typings: 3.6.0
     dev: false
 
   /@mr-hope/gulp-sass/3.0.2:
@@ -4323,8 +4323,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /miniprogram-api-typings/3.5.0:
-    resolution: {integrity: sha512-cS/uXJTMGKujwoaeEFFFKqpCf7qp3R7iuQZWagZAwhKA3Z7U/xlhOcI3i1wqN+uo4YODg3AG1j2zCe1PDa9Wtg==}
+  /miniprogram-api-typings/3.6.0:
+    resolution: {integrity: sha512-xwK3PzhhxnfWqDfBikHLdAbj7Wy4F887nBcQrzwuF758Fw2qC4ivpKPL9t0uJZk5QYnU28+NqA7Q3lzYGMHQnA==}
 
   /minizlib/2.1.2:
     resolution: {integrity: sha512-bAxsR8BVfj60DWXHE3u30oHzfl4G7khkSuPW+qvpd7jFRHm7dLxOjUk1EHACJ/hxLY8phGJ0YhYHZo7jil7Qdg==}
