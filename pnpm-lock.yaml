@@ -4,7 +4,7 @@ importers:
 
   .:
     specifiers:
-      '@mptool/enhance': 0.0.1-beta.1
+      '@mptool/enhance': 0.1.5
       '@mptool/file': 0.0.1-beta.1
       '@mr-hope/gulp-sass': 3.1.1
       '@typescript-eslint/eslint-plugin': 5.33.0
@@ -33,7 +33,7 @@ importers:
       stylelint-order: 5.0.0
       typescript: 4.7.4
     dependencies:
-      '@mptool/enhance': 0.0.1-beta.1
+      '@mptool/enhance': 0.1.5
       '@mptool/file': 0.0.1-beta.1_qgtt24mejwfqgu6mpcd6mwbi2q
     devDependencies:
       '@mr-hope/gulp-sass': 3.1.1
@@ -247,14 +247,22 @@ packages:
     dev: true
     optional: true
 
-  /@mptool/enhance/0.0.1-beta.1:
-    resolution: {integrity: sha512-B+2d+sfxlgaha2jVOUm0MYycMfM5YcIMWAMzCZdXlE2rXW8gJ3d80L0AZ9R6TFg0REobKq/YW3LnbzJGY2iqHg==}
+  /@mptool/enhance/0.1.5:
+    resolution: {integrity: sha512-pRWalnK7qnTR8CbPDdW7dw9wPYOdcL343FPcFYG9qL1at3OAzOo8MnvC+PaQEtP8lzXKhg7z70yEPJ+bnm2FVA==}
+    dependencies:
+      '@mptool/shared': 0.1.5
     dev: false
 
   /@mptool/file/0.0.1-beta.1_qgtt24mejwfqgu6mpcd6mwbi2q:
     resolution: {integrity: sha512-ZT439fh/j+QI9rnwgyP+xaGLd95CByj04+D9+8e5l9JDUmvTvicBhLF0Q7zmydQ09hh01uRKAd5+78gNLnZz3Q==}
     peerDependencies:
       miniprogram-api-typings: ^3.4.4
+    dependencies:
+      miniprogram-api-typings: 3.6.0
+    dev: false
+
+  /@mptool/shared/0.1.5:
+    resolution: {integrity: sha512-sF8SIOPLZzCwf6ZsLsHMw9TqiJNZNu9D4mA9Ax1UmMfI4uRDVMiaIs1duYN6bOiu5MUsNjGl7W9jrFruv8UJ3w==}
     dependencies:
       miniprogram-api-typings: 3.6.0
     dev: false
