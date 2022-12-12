@@ -54,7 +54,7 @@
   },
   "dependencies": {
     "@mptool/enhance": "0.0.1-beta.1",
-    "@mptool/file": "0.0.1-beta.1"
+    "@mptool/file": "0.1.5"
   },
   "devDependencies": {
     "@mr-hope/gulp-sass": "3.1.1",
