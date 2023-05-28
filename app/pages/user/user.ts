@@ -1,11 +1,11 @@
 import { $Page } from "@mptool/enhance";
 import { put, take } from "@mptool/file";
 
-import { checkResUpdate } from "../../utils/app";
-import { getImagePrefix, getTitle } from "../../utils/config";
+import { tip } from "../../utils/api";
+import { appCoverPrefix, appName, server } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
+import { checkResource } from "../../utils/resource";
 import { refreshPage } from "../../utils/tab";
-import { tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {
@@ -15,17 +15,12 @@ import type {
 } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
-const { appID, version } = globalData;
 
 $Page("user", {
   data: {
-    appID,
-    title: appID === "wx9ce37d9662499df3" ? "东师青年+" : "in 东师",
-    logo: "/frameset/placeholder.png",
-    desc:
-      appID === "wx9ce37d9662499df3"
-        ? "走出半生，归来仍是东师青年"
-        : "in 东师，就用 in 东师",
+    title: "in 东师",
+    logo: `${server}/img/inNENU.png`,
+    desc: "in 东师，就用 in 东师",
     page: <PageDataWithContent>{
       title: "我的东师",
       grey: true,
@@ -35,11 +30,7 @@ $Page("user", {
 
     footer: {
       author: "",
-      desc: `当前版本: ${version}\n${
-        appID === "wx9ce37d9662499df3"
-          ? "Mr.Hope 已授权东北师范大学团委融媒体中心使用小程序代码。\n"
-          : ""
-      }小程序由 Mr.Hope 个人制作，如有错误还请见谅`,
+      desc: `当前版本: ${globalData.version}\n小程序由 Mr.Hope 个人制作，如有错误还请见谅`,
     },
 
     theme: globalData.theme,
@@ -73,7 +64,7 @@ $Page("user", {
     refreshPage("user").then((data) => {
       setPage({ ctx: this, option: { id: "user" } }, data);
     });
-    checkResUpdate();
+    checkResource();
     wx.stopPullDownRefresh();
   },
 
@@ -81,16 +72,16 @@ $Page("user", {
   onPageScroll() {},
 
   onShareAppMessage: () => ({
-    title: getTitle(),
+    title: appName,
     path: "/pages/main/main",
-    imageUrl: `${getImagePrefix()}Share.png`,
+    imageUrl: `${appCoverPrefix}Share.png`,
   }),
 
-  onShareTimeline: () => ({ title: getTitle() }),
+  onShareTimeline: () => ({ title: appName }),
 
   onAddToFavorites: () => ({
-    title: getTitle(),
-    imageUrl: `${getImagePrefix()}.jpg`,
+    title: appName,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   openProfile() {

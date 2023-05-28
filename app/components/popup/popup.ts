@@ -1,4 +1,4 @@
-import { getWindowInfo } from "../../utils/wx";
+import { getWindowInfo } from "../../utils/api";
 
 export interface PopupConfig {
   /** 主标题 */
@@ -44,8 +44,7 @@ Component({
       const { windowHeight, safeArea } = getWindowInfo();
 
       this.setData({
-        // issues in qq where safeArea is not defined
-        paddingBottom: windowHeight - Math.max(safeArea?.bottom, 24),
+        paddingBottom: Math.max(windowHeight - safeArea.bottom, 24),
       });
     },
     // 用户确认

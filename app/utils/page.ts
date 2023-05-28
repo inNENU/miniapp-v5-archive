@@ -1,10 +1,11 @@
 /* eslint-disable max-lines */
 import { logger } from "@mptool/enhance";
 import { readJSON, writeJSON } from "@mptool/file";
+
+import { modal, requestJSON } from "./api";
 import { ensureJSON } from "./json";
 import { id2path } from "./id";
-import { genScopeData } from "./scopeData";
-import { modal, requestJSON } from "./wx";
+import { getScopeData } from "./scopeData";
 
 import type { PageInstance, PageQuery } from "@mptool/enhance";
 import type { AppOption } from "../app";
@@ -59,7 +60,7 @@ const resolveContent = (
   if ("url" in listElement && !listElement.url!.startsWith("plugin://"))
     listElement.url += `?from=${page.title || "返回"}`;
   if ("path" in listElement)
-    listElement.url = `page?from=${
+    listElement.url = `info?from=${
       page.title || "返回"
     }&id=${listElement.path!}`;
 
@@ -142,7 +143,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           component.tag === "ul" ||
           component.tag === "text")
       ) {
-        component.path = `page?from=${
+        component.path = `info?from=${
           page.title || "返回"
         }&id=${component.path!}`;
       }
@@ -170,7 +171,7 @@ const disposePage = (page: PageData, option: PageOption): PageData => {
           | ListComponentItemConfig[];
     });
 
-    page.scopeData = genScopeData(page as PageDataWithContent);
+    page.scopeData = getScopeData(page as PageDataWithContent);
   }
 
   // 调试

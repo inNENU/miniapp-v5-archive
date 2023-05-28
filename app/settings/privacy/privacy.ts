@@ -1,7 +1,7 @@
 import { $Page } from "@mptool/enhance";
 
+import { modal, tip } from "../../utils/api";
 import { popNotice, resolvePage, setPage } from "../../utils/page";
-import { modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type {
@@ -48,7 +48,7 @@ $Page("privacy", {
           items: [
             {
               text: "查看详情",
-              url: `page?path=other/about/${globalData.env}-privacy`,
+              url: `info?path=other/about/${globalData.env}-privacy`,
             },
           ],
         },

@@ -1,0 +1,11 @@
+.action-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 160px !important;
+    margin: 20px auto;
+  }
+}

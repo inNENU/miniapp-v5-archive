@@ -1,10 +1,10 @@
 import { $Page } from "@mptool/enhance";
 import { put, take } from "@mptool/file";
 
-import { checkResUpdate } from "../../utils/app";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getColor, popNotice, resolvePage, setPage } from "../../utils/page";
 import { search } from "../../utils/search";
+import { checkResource } from "../../utils/resource";
 import { refreshPage } from "../../utils/tab";
 
 import type { AppOption } from "../../app";
@@ -64,7 +64,7 @@ $Page("guide", {
     refreshPage("intro").then((data) => {
       setPage({ ctx: this, option: { id: "intro" } }, data);
     });
-    checkResUpdate();
+    checkResource();
     wx.stopPullDownRefresh();
   },
 
@@ -77,7 +77,7 @@ $Page("guide", {
 
   onAddToFavorites: () => ({
     title: "东师介绍",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onUnload() {

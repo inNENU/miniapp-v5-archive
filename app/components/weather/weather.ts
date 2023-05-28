@@ -10,6 +10,7 @@ $Component({
   properties: {
     target: String,
   },
+
   data: {
     /** 提示的索引值 */
     tipIndex: 0,
@@ -17,11 +18,13 @@ $Component({
     weather: <WeatherData>{},
     statusBarHeight: globalData.info.statusBarHeight,
   },
+
   lifetimes: {
     attached() {
       this.getWeather();
     },
   },
+
   methods: {
     /* 获取天气信息 */
     getWeather(): void {

@@ -1,13 +1,8 @@
 import { $Component } from "@mptool/enhance";
-import { addPhoneContact, tip } from "../../../utils/wx";
+import { addPhoneContact } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
-import type { AppOption } from "../../../app";
 import type { PhoneComponentOptions } from "../../../../typings";
-
-const {
-  globalData: { env },
-} = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -18,7 +13,9 @@ $Component({
     },
   },
 
-  data: { env },
+  data: {
+    showInfo: false,
+  },
 
   methods: {
     /** 拨打电话 */
@@ -52,12 +49,9 @@ $Component({
       });
     },
 
-    copyContact() {
-      wx.setClipboardData({
-        data: this.data.config.num,
-        success: () => {
-          tip("号码已复制");
-        },
+    toggleInfo(): void {
+      this.setData({
+        showInfo: !this.data.showInfo,
       });
     },
   },

@@ -2,13 +2,12 @@ import { $Page } from "@mptool/enhance";
 import { readJSON } from "@mptool/file";
 
 import { defaultScroller } from "../../mixins/page-scroll";
-import { getImagePrefix } from "../../utils/config";
+import { appCoverPrefix } from "../../utils/config";
 import { getJSON } from "../../utils/json";
-import { navigation } from "../../utils/location";
 import { resolvePage, setPage } from "../../utils/page";
 
 import type { AppOption } from "../../app";
-import type { PageData } from "../../../typings";
+import type { LocationConfig, PageData } from "../../../typings";
 
 const { globalData } = getApp<AppOption>();
 
@@ -52,7 +51,6 @@ $Page("location", {
     this.setData({
       statusBarHeight: globalData.info.statusBarHeight,
       firstPage: getCurrentPages().length === 1,
-      env: globalData.env,
       point,
     });
   },
@@ -89,7 +87,7 @@ $Page("location", {
 
     return {
       title: page.title,
-      imageUrl: `${getImagePrefix()}.jpg`,
+      imageUrl: `${appCoverPrefix}.jpg`,
       query: `id=${this.state.id}${point ? `&point=${point}` : ""}`,
     };
   },
@@ -98,7 +96,22 @@ $Page("location", {
 
   /** 开启导航 */
   navigate() {
-    navigation(this.data.point);
+    const {
+      latitude,
+      longitude,
+      name = "目的地",
+    } = <LocationConfig>JSON.parse(this.data.point);
+
+    wx.createSelectorQuery()
+      .select("#tool")
+      .context(({ context }) => {
+        (context as WechatMiniprogram.MapContext).openMapApp({
+          latitude,
+          longitude,
+          destination: name,
+        });
+      })
+      .exec();
   },
 
   /** 返回按钮功能 */

@@ -1,8 +1,8 @@
 import { $Page } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
-import { getImagePrefix, server } from "../../utils/config";
-import { modal } from "../../utils/wx";
+import { modal } from "../../utils/api";
+import { appCoverPrefix, server } from "../../utils/config";
 
 import type { AppOption } from "../../app";
 import type { WeatherData } from "../../components/weather/typings";
@@ -97,7 +97,7 @@ $Page("weather", {
 
   onAddToFavorites: () => ({
     title: "体测计算器",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onUnload() {
@@ -376,8 +376,13 @@ $Page("weather", {
   },
 
   /** 贴士详情 */
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  hint(event: WechatMiniprogram.TouchEvent<{}, {}, { id: number }>) {
+  hint(
+    event: WechatMiniprogram.TouchEvent<
+      Record<string, never>,
+      Record<string, never>,
+      { id: number }
+    >
+  ) {
     const hint = this.data.weather.hints[event.currentTarget.dataset.id];
 
     modal(hint.name, hint.detail);

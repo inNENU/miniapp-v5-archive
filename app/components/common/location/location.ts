@@ -1,16 +1,14 @@
 import { $Component } from "@mptool/enhance";
-import { navigation } from "../../../utils/location";
-import { tip } from "../../../utils/wx";
+import { tip } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
+import type { AppOption } from "../../../app";
 import type {
   LocationComponentOptions,
   LocationConfig,
 } from "../../../../typings";
-import type { AppOption } from "../../../app";
 
 const { globalData } = getApp<AppOption>();
-const { appID, env } = globalData;
 
 const getPoint = (point: LocationConfig & { id: number }): string =>
   JSON.stringify({
@@ -29,9 +27,7 @@ $Component({
   },
 
   data: {
-    appID,
     darkmode: globalData.darkmode,
-    env,
     markers: <(LocationConfig & { id: number })[]>[],
     id: -1,
     title: "",
@@ -46,7 +42,7 @@ $Component({
         title: config.title,
         markers: config.points.map((point, index) => ({
           name: config.title,
-          detail: "详情",
+          detail: point.path ? "详情" : "",
           id: index,
           ...point,
         })),
@@ -74,14 +70,31 @@ $Component({
   },
 
   methods: {
+    startNavigation({
+      latitude,
+      longitude,
+      name,
+    }: LocationConfig & { id: number }) {
+      wx.createSelectorQuery()
+        .in(this)
+        .select("#location")
+        .context(({ context }) => {
+          (context as WechatMiniprogram.MapContext).openMapApp({
+            latitude,
+            longitude,
+            destination: name || this.data.config.title,
+          });
+        })
+        .exec();
+    },
+
     navigate() {
       const { config, id, markers } = this.data;
 
       if (config.navigate !== false) {
-        if (id === -1) {
-          if (markers.length === 1) navigation(getPoint(markers[0]));
-          else tip("请选择一个点");
-        } else navigation(getPoint(markers[id]));
+        if (id === -1 && markers.length !== 1) return tip("请选择一个点");
+
+        this.startNavigation(markers[id === -1 ? 0 : id]);
       }
     },
 
@@ -110,8 +123,8 @@ $Component({
 
       if (point.path)
         this.$go(`location?id=${point.path}&point=${getPoint(point)}`);
-      else if (appID === "wx9ce37d9662499df3" && navigate !== false)
-        navigation(getPoint(this.data.markers[detail.markerId]));
+      else if (navigate !== false)
+        this.startNavigation(this.data.markers[detail.markerId]);
     },
   },
 });

@@ -1,10 +1,9 @@
 import { $Page } from "@mptool/enhance";
 
-import { getImagePrefix } from "../../utils/config";
+import { getWindowInfo, modal, tip } from "../../utils/api";
+import { appCoverPrefix } from "../../utils/config";
 import { ensureJSON, getJSON } from "../../utils/json";
-import { navigation } from "../../utils/location";
 import { popNotice } from "../../utils/page";
-import { getWindowInfo, modal, tip } from "../../utils/wx";
 
 import type { AppOption } from "../../app";
 import type { Category, MarkerConfig, MarkerData } from "../../../typings";
@@ -34,9 +33,7 @@ type Area = "benbu" | "jingyue";
 $Page("map", {
   data: {
     /** 夜间模式状态 */
-    appID: globalData.appID,
     darkmode: globalData.darkmode,
-    env: globalData.env,
 
     /** 地图数据 */
     map: {
@@ -144,7 +141,7 @@ $Page("map", {
 
   onAddToFavorites: () => ({
     title: "东师地图",
-    imageUrl: `${getImagePrefix()}.jpg`,
+    imageUrl: `${appCoverPrefix}.jpg`,
   }),
 
   onResize({ size }) {
@@ -159,13 +156,7 @@ $Page("map", {
       success: ({ scale }) => {
         this.context.getCenterLocation({
           success: ({ latitude, longitude }) => {
-            this.setData({
-              map: {
-                scale,
-                latitude,
-                longitude,
-              },
-            });
+            this.setData({ map: { scale, latitude, longitude } });
           },
         });
       },
@@ -312,7 +303,11 @@ $Page("map", {
       (item) => item.id === Number(currentTarget.dataset.id)
     )!;
 
-    navigation(JSON.stringify({ latitude, longitude, name }));
+    this.context.openMapApp({
+      latitude,
+      longitude,
+      destination: name,
+    });
   },
 
   openLocation({ currentTarget }: WechatMiniprogram.TouchEvent) {

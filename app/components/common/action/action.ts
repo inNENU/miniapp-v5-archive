@@ -1,7 +1,8 @@
 import { $Component } from "@mptool/enhance";
+import { modal } from "../../../utils/api";
+
 import type { PropType } from "@mptool/enhance";
 import type { ActionComponentOptions } from "../../../../typings";
-import { modal } from "../../../utils/wx";
 
 $Component({
   properties: {

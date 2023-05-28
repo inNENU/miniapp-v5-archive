@@ -50,7 +50,7 @@ const getImages = (page: PageDataWithContent): string[] =>
       : page.images
     : ["https://mp.innenu.com/img/inNENU.jpg"];
 
-export const genScopeData = (page: PageDataWithContent): GeneralScopeData => ({
+export const getScopeData = (page: PageDataWithContent): GeneralScopeData => ({
   // eslint-disable-next-line @typescript-eslint/naming-convention
   "@type": "general",
   // eslint-disable-next-line

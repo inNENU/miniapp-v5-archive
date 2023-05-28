@@ -1,14 +1,8 @@
 import { $Component } from "@mptool/enhance";
-import { modal } from "../../../utils/wx";
+import { modal } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
-import type { AppOption } from "../../../app";
 import type { FooterComponentOptions } from "../../../../typings";
-
-const {
-  // 获得当前小程序ID
-  globalData: { appID },
-} = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -19,21 +13,12 @@ $Component({
     },
   },
 
-  data: {
-    text:
-      appID === "wx9ce37d9662499df3"
-        ? "走出半生，归来仍是——东师青年"
-        : "in 东师，就用 in 东师",
-  },
-
   methods: {
     copyCite({
       currentTarget,
     }: WechatMiniprogram.TouchEvent<
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
-      // eslint-disable-next-line @typescript-eslint/ban-types
-      {},
+      Record<string, never>,
+      Record<string, never>,
       { index: number }
     >) {
       wx.setClipboardData({

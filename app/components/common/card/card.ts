@@ -1,15 +1,10 @@
 import { $Component } from "@mptool/enhance";
 import { readFile } from "@mptool/file";
 
-import { modal } from "../../../utils/wx";
+import { modal } from "../../../utils/api";
 
 import type { PropType } from "@mptool/enhance";
-import type { AppOption } from "../../../app";
 import type { CardComponentOptions } from "../../../../typings";
-
-const {
-  globalData: { appID, env },
-} = getApp<AppOption>();
 
 $Component({
   properties: {
@@ -19,8 +14,6 @@ $Component({
     },
   },
 
-  data: { env },
-
   methods: {
     /** 点击卡片触发的操作 */
     tap(): void {
@@ -29,18 +22,7 @@ $Component({
       if ("options" in config) wx.navigateToMiniProgram(config.options);
       else {
         // 页面路径
-        if (!config.url.startsWith("http")) this.$go(config.url);
-        // 网页
-        else if (appID === "wx9ce37d9662499df3")
-          // 为企业主体微信小程序
-          this.$go(`/module/web?url=${config.url}&title=${config.title}`);
-        // 判断是否是可以跳转的微信图文
-        else if (
-          appID === "wx33acb831ee1831a5" &&
-          (config.url.startsWith("https://mp.weixin.qq.com") ||
-            config.url.startsWith("http://mp.weixin.qq.com"))
-        )
-          this.$go(`/module/web?url=${config.url}&title=${config.title}`);
+        if (!config.url.match(/^https?:\/\//)) this.$go(config.url);
         // 无法跳转，复制链接到剪切板
         else
           wx.setClipboardData({
@@ -71,6 +53,7 @@ $Component({
       this.setLogo = this.setLogo.bind(this);
       this.$on("inited", this.setLogo);
     },
+
     detached() {
       this.$off("inited", this.setLogo);
     },

@@ -1,9 +1,9 @@
 import { $Page } from "@mptool/enhance";
 import { ls, rm } from "@mptool/file";
 
-import { resourceDownload } from "../../utils/app";
+import { confirmAction, modal, tip } from "../../utils/api";
 import { popNotice, setPage } from "../../utils/page";
-import { confirmAction, modal, tip } from "../../utils/wx";
+import { downloadResource } from "../../utils/resource";
 
 import type { AppOption } from "../../app";
 import type { PageDataWithContent } from "../../../typings";
@@ -23,7 +23,7 @@ $Page("storage", {
           tag: "list",
           header: "空间占用",
           items: [
-            { text: "小程序体积", desc: "487K" },
+            { text: "小程序体积", desc: "489KB" },
             { text: "数据缓存", desc: "获取中..." },
             { text: "文件系统", desc: "获取中..." },
           ],
@@ -85,7 +85,7 @@ $Page("storage", {
         // 写入存储大小
         this.setData({
           // eslint-disable-next-line @typescript-eslint/naming-convention
-          "page.content[0].items[1].desc": `${currentSize}K/10240K`,
+          "page.content[0].items[1].desc": `${currentSize}KB/10240KB`,
         });
       },
     });
@@ -112,7 +112,7 @@ $Page("storage", {
           // eslint-disable-next-line @typescript-eslint/naming-convention
           "page.content[0].items[2].desc": `${Math.ceil(
             fileSize / 1024
-          )}K/10240K`,
+          )}KB/10240KB`,
         });
       },
     });
@@ -121,7 +121,7 @@ $Page("storage", {
   /** 刷新所有资源 */
   updateResource() {
     confirmAction("更新资源文件", () => {
-      resourceDownload("function-guide-icon-intro");
+      downloadResource("function-guide-icon-intro");
     });
   },
 

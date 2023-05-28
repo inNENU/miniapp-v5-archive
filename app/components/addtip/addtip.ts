@@ -10,7 +10,6 @@ Component({
   },
 
   data: {
-    appID: globalData.appID,
     showTop: false,
     showModal: false,
     statusBarHeight: globalData.info.statusBarHeight,
